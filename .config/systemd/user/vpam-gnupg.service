@@ -1,0 +1,9 @@
+[Unit]
+Description=Verify that pam-gnupg is working.
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/lib/timers/vpam-gnupg
+
+[Install]
+WantedBy=default.target

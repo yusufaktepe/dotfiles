@@ -1,0 +1,61 @@
+#!/bin/sh
+# Toggle script that I gathered from various scripts.
+
+# 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
+# https://github.com/yusufaktepe/dotfiles
+
+case "$1" in
+	audio)
+		CURRENT_PROFILE=$(pactl list sinks | grep "Active Port" | cut -d ' ' -f 3-)
+		SINK=$(pacmd list-sinks | awk '/* index:/{print $3}')
+
+		if [ "$CURRENT_PROFILE" = "analog-output-speaker" ]; then
+			pactl set-sink-port "$SINK" "analog-output-headphones"
+			notify-send -i audio-headphones "PulseAudio" "<b>Headphone</b> Activated."
+		else
+			pactl set-sink-port "$SINK" "analog-output-speaker"
+			notify-send -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
+		fi
+	;;
+	net)
+		case "$2" in
+			w|wifi)
+				if [ "$(nmcli radio wifi)" = enabled ]; then
+					nmcli radio wifi off
+				else
+					nmcli radio wifi on
+				fi
+			;;
+			$NULL|*)
+				if [ "$(nmcli networking)" = enabled ]; then
+					nmcli networking off
+				else
+					nmcli networking on
+				fi
+			;;
+		esac
+	;;
+	touchpad)
+		device=$(xinput --list --name-only | grep -i touchpad)
+		state=$(xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$")
+
+		if [ "$state" -eq '1' ]; then
+			xinput disable "$device" && notify-send -a "TouchPad" -i touchpad-disabled-symbolic "TouchPad Disabled"
+		else
+			xinput enable "$device" && notify-send -a "TouchPad" -i touchpad-enabled-symbolic "TouchPad Enabled"
+		fi
+	;;
+	redshift)
+		if ! pgrep -x "redshift" > /dev/null; then
+			redshift > /dev/null 2>&1 &
+			red=$(redshift -p | grep Period | awk '{print $2}')
+			notify-send -a Redshift -i redshift "Redshift" "Status: <b>Started</b>\nPeriod: <b>${red}</b>"
+		else
+			pkill redshift > /dev/null 2>&1 &
+			notify-send -a Redshift -i redshift-status-off "Redshift" "Status: <b>Closed</b>\nPeriod: <b>None</b>"
+		fi
+	;;
+	$NULL|*)
+		printf "Usage: toggle { audio | net (w|wifi|*|NULL) | touchpad | redshift }\n"
+	;;
+esac

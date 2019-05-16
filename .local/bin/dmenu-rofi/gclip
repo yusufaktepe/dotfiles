@@ -1,0 +1,49 @@
+#!/bin/sh
+# A simple shell script to manage clipboard with rofi/fzf.
+# Dependencies: greenclip, rofi/fzf, xclip.
+#
+# 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
+# https://github.com/yusufaktepe/dotfiles
+
+lines="10"
+width="60"
+
+if ! pgrep -x "greenclip" > /dev/null; then
+	nohup greenclip daemon > /dev/null 2>&1 &
+fi
+
+run() {
+	# not always work 0:stdin 1:stdout 2:stderr
+	if [ -t 2 ]; then
+		printf '%s' "$(greenclip print | fzf -e -i)" | xclip -selection clipboard
+	else
+		rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -lines "$lines" -width "$width"
+	fi
+}
+
+case "$1" in
+	cfg)
+		killall greenclip
+		$EDITOR ~/.config/greenclip.cfg
+		nohup greenclip daemon > /dev/null 2>&1 &
+	;;
+	rld)
+		killall greenclip
+		nohup greenclip daemon > /dev/null 2>&1 &
+	;;
+	clear)
+		xsel -bc
+		killall greenclip
+		rm ~/.cache/greenclip.history
+		nohup greenclip daemon > /dev/null 2>&1 &
+	;;
+	keep)
+		$EDITOR ~/.cache/greenclip.staticHistory
+	;;
+	$NULL)
+		run
+	;;
+	*)
+		echo "Usage: $0 {cfg|rld|clear|keep}"
+	;;
+esac

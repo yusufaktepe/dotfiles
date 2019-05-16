@@ -1,0 +1,11 @@
+#!/bin/sh
+# Show notification when Redshift period changes.
+
+if [ "$(uptime | awk '{ print $3 }' | tr -d ':,')" -lt 2 ]; then
+	exit
+else
+	case $1 in
+		period-changed)
+		exec notify-send -a Redshift -i redshift "Redshift" "Period changed to $3"
+	esac
+fi

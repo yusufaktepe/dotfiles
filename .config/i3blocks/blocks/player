@@ -1,0 +1,89 @@
+#!/bin/bash
+# Copyright (C) 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+#---------------------------------------------------------------------
+# TODO: find a better way to cut the text
+#---------------------------------------------------------------------
+
+# Status signal for keyboard-mouse shortcuts
+statussig="SIGRTMIN+6"
+
+# Status icons (requires FontAwesome)
+ICON_PLAY=""
+ICON_PAUSE=""
+ICON_STOP=""
+CUR_ICON=""
+
+# If not running, exit
+[ ! "$(mpc status 2>/dev/null)" ] && [ ! "$(playerctl status 2>/dev/null)" ] && exit
+
+# If mpd is running, it will take priority
+if pgrep -x "cantata" > /dev/null; then
+	instance="playerctl"
+elif pgrep -x "mpd" > /dev/null; then
+	instance="mpd"
+else
+	instance="playerctl"
+fi
+
+output() {
+	# Cut text if it's longer than 20 characters
+	[ "${#ARTIST}" -gt 20 ] && A_O="${ARTIST:0:20}.." && ARTIST_OUT=${A_O// ../..} || ARTIST_OUT="${ARTIST}"
+	[ "${#TITLE}" -gt 20 ] && T_O="${TITLE:0:20}.." && TITLE_OUT=${T_O// ../..} || TITLE_OUT="${TITLE}"
+
+	if [ "${STATUS,,}" = "paused" ]; then
+		CUR_ICON="${ICON_PAUSE}"
+	elif [ "${STATUS,,}" = "playing" ]; then
+		CUR_ICON="${ICON_PLAY}"
+	else
+		CUR_ICON="${ICON_STOP}"
+	fi
+
+	if [ "${TITLE}" != "" ] && [ "${ARTIST}" != "" ]; then
+		echo "${CUR_ICON}  ${ARTIST_OUT} - ${TITLE_OUT}"
+	fi
+}
+
+case "$instance" in
+	mpd)
+		case $BLOCK_BUTTON in
+			1) mpc prev && pkill -$statussig i3blocks ;;
+			2) mpc toggle && pkill -$statussig i3blocks ;;
+			3) mpc next && pkill -$statussig i3blocks ;;
+			4) mpc volume +10 ;;
+			5) mpc volume -10 ;;
+		esac
+
+		STATUS=$(mpc status | awk -v RS='[' -v FS=']' 'END {print $1}')
+		ARTIST=$(mpc current --format=%artist%)
+		TITLE=$(mpc current --format=%title%)
+
+		output
+	;;
+	playerctl)
+		case $BLOCK_BUTTON in
+			1) playerctl previous && pkill -$statussig i3blocks ;;
+			2) playerctl play-pause && pkill -$statussig i3blocks ;;
+			3) playerctl next && pkill -$statussig i3blocks ;;
+			4) playerctl volume 0.01+ ;;
+			5) playerctl volume 0.01- ;;
+		esac
+
+		STATUS=$(playerctl status)
+		ARTIST=$(playerctl metadata artist)
+		TITLE=$(playerctl metadata title)
+
+		output
+	;;
+esac
+

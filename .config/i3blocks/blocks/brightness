@@ -1,0 +1,29 @@
+#!/bin/sh
+# Brightness block using "light"
+
+case $BLOCK_BUTTON in
+	1) light -A 2 ;;			# left click
+	3) light -U 2 ;;			# right click
+	2) sleep 2 && xset dpms force off ;;	# middle click
+	4) light -A 5 ;;			# scroll up
+	5) light -U 5 ;;			# scroll down
+esac
+
+URGENT_VALUE=2
+
+curBrightness=$(light -G)
+
+[ "${curBrightness}" -le 0 ] && exit
+
+percent=$(echo "scale=0;${curBrightness}" | bc -l)
+percent=${percent%.*}
+
+[ "${percent}" -le 0 ] && exit
+
+echo "${percent}%"
+echo "${percent}%"
+echo ""
+
+if [ "${percent}" -le "${URGENT_VALUE}" ]; then
+	exit 33
+fi

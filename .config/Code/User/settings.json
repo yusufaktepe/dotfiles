@@ -1,0 +1,43 @@
+{
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "update.channel": "none",
+    "update.enableWindowsBackgroundUpdates": false,
+    "workbench.colorTheme": "Gruvbox Dark (Hard)",
+    "editor.minimap.enabled": false,
+    "window.openWithoutArgumentsInNewWindow": "off",
+    "diffEditor.renderSideBySide": false,
+    "window.zoomLevel": -1,
+    "wordcounter.readtime": false,
+    "spellright.suggestionsInHints": false,
+    "spellright.language": [
+        "en_PH",
+        "en_US-large",
+        "en_US",
+        "tr_TR"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ],
+    "markdown.extension.toc.githubCompatibility": true,
+    "workbench.activityBar.visible": true,
+    "window.titleBarStyle": "native",
+    "window.menuBarVisibility": "toggle",
+    "files.associations": {
+        // ...
+        "**/.i3/config": "i3",
+        "**/i3/config": "i3",
+        // ...
+    },
+    "editor.fontSize": 16,
+    "breadcrumbs.enabled": true,
+    "terminal.external.linuxExec": "st",
+    "terminal.integrated.fontSize": 16,
+    "git.enableCommitSigning": true,
+    "editor.tabSize": 8,
+    "editor.insertSpaces": false,
+    "files.trimTrailingWhitespace": true,
+    "editor.detectIndentation": false,
+}

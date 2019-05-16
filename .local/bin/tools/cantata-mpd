@@ -1,0 +1,14 @@
+#!/bin/sh
+# If mpd is running start cantata,
+# if not; start both, wait until cantata close and kill mpd.
+
+if ! pgrep -x "mpd" > /dev/null; then
+    echo "::: mpd & cantata starting..."
+    mpd && sleep 1 && cantata
+    wait "$(pidof cantata)"
+    echo "::: Cantata closed, killing mpd"
+    pkill mpd
+else
+    echo "::: mpd is already running. starting cantata..."
+    cantata
+fi
