@@ -1,0 +1,39 @@
+#!/bin/sh
+# Simple media control script.
+# Check mpd first, if mpd is not running; try playerctl.
+#
+# 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
+# https://github.com/yusufaktepe/dotfiles
+
+statussig="SIGRTMIN+6"
+
+case "$1" in
+	prev|p)
+		if pgrep -x "mpd" > /dev/null; then
+			mpc prev && pkill -$statussig i3blocks
+		else
+			playerctl previous && pkill -$statussig i3blocks
+		fi
+	;;
+	next|n)
+		if pgrep -x "mpd" > /dev/null; then
+			mpc next && pkill -$statussig i3blocks
+		else
+			playerctl next && pkill -$statussig i3blocks
+		fi
+	;;
+	toggle|t)
+		if pgrep -x "mpd" > /dev/null; then
+			mpc toggle && pkill -$statussig i3blocks
+		else
+			playerctl play-pause && pkill -$statussig i3blocks
+		fi
+	;;
+	pauseall|pa)
+		mpc pause; playerctl pause;
+		for i in /tmp/mpvsoc*; do
+			[ -e "$i" ] || break
+			echo '{ "command": ["set_property", "pause", true] }' | socat - "$i"
+		done
+	;;
+esac

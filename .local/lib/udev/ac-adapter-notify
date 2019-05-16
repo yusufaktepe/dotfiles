@@ -1,0 +1,26 @@
+#!/bin/sh
+# Script to run with Udev rule.
+
+#	/etc/udev/rules.d/99-battery-plug-unplug.rules ::
+#
+#	SUBSYSTEM=="power_supply", ACTION=="change", \
+#	ENV{POWER_SUPPLY_ONLINE}=="0", ENV{POWER}="off", \
+#	OPTIONS+="last_rule", \
+#	IMPORT{program}="/usr/bin/xpub", \
+#	RUN+="/bin/su $env{XUSER} -c '$HOME/.local/lib/udev/ac-adapter-notify -u'"
+#
+#	SUBSYSTEM=="power_supply", ACTION=="change", \
+#	ENV{POWER_SUPPLY_ONLINE}=="1", ENV{POWER}="on", \
+#	OPTIONS+="last_rule", \
+#	IMPORT{program}="/usr/bin/xpub", \
+#	RUN+="/bin/su $env{XUSER} -c '$HOME/.local/lib/udev/ac-adapter-notify -p'"
+
+case "$1" in
+    -p)
+    /usr/bin/notify-send -i battery-full-charging 'AC Adapter Plugged'
+    ;;
+    -u)
+    /usr/bin/notify-send -i battery-missing 'AC Adapter Unplugged'
+esac
+
+exit 0

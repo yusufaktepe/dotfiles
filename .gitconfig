@@ -1,0 +1,46 @@
+[user]
+	name = yusufaktepe
+	email = yusuf@yusufaktepe.com
+	signingkey = A5FCE8C299E2FA39082C8BBC976029A8BBF9254E
+
+[alias]
+	a = add --all
+	c = commit
+	cs = commit -S
+	br = branch
+	st = status
+	co = checkout
+	up = pull --rebase=preserve
+	g = grep --break --heading --line-number
+	fa = fetch --all
+	p = push
+	pf = push -f
+	reb = rebase
+	last = show --stat HEAD
+	logdel = log --diff-filter=D --summary
+	countcommits = shortlog -sn --no-merges
+	countcommitsall = shortlog -sn
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	signlast = commit -s --amend
+
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	grep = yes
+
+[push]
+	default = simple
+
+[merge]
+#	tool = meld
+	tool = vimdiff
+	log = true
+
+[log]
+	decorate = full
+
+[help]
+	autocorrect = 1
+

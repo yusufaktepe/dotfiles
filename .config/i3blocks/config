@@ -1,0 +1,101 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+command=$HOME/.config/i3blocks/blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[player]
+interval=5
+signal=6
+
+[temperature]
+label=
+interval=1
+color=#9accff
+
+[cpu_usage]
+label=
+interval=5
+min_width=C 100%
+color=#B3B571
+#separator=false
+
+[memory]
+label=
+interval=30
+interval=5
+#separator=false
+color=#ebdbb2
+min_width=I 9.9G (99%)
+align=center
+
+[disk]
+#label=
+label=
+#instance=/mnt/data
+interval=30
+color=#A89984
+
+[bandwidth3]
+command=$HOME/.config/i3blocks/blocks/bandwidth3 -u KB
+interval=persist
+markup=pango
+separator=true
+min_width=B 9999.9 / 99.9 KB/s
+align=center
+color=#3b95a6
+
+[volume]
+label=
+#label=♪
+interval=once
+signal=10
+color=#a64c3b
+min_width=XX100%
+align=center
+
+[battery]
+label=⚡
+#instance=1
+interval=30
+
+[brightness]
+label=
+interval=once
+signal=10
+min_width=X100%
+align=center
+
+[time]
+command=$HOME/.config/i3blocks/blocks/calendar-gsimplecal &>/dev/null; date '+%d/%m   %H:%M'
+interval=1
+color=#6FCEBB
+
+#[keyindicator]
+#command=~/.config/i3blocks/blocks/keyindicator -c "#8EC07C" --hide
+#markup=pango
+#instance=NUM
+#interval=once
+#signal=11
+

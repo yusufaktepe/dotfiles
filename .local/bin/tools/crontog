@@ -1,0 +1,13 @@
+#!/bin/sh
+# Toggles all cronjobs off/on.
+# Stores disabled crontabs in ~/.consaved until restored.
+
+if [ -f ~/.cronsaved ]; then
+	crontab - < ~/.cronsaved &&
+	rm ~/.cronsaved
+	notify-send -a Cron -i clockify "Cronjobs re-enabled."
+else
+	crontab -l > ~/.cronsaved &&
+	crontab -r
+	notify-send -a Cron -i clockify "Cronjobs saved and disabled."
+fi

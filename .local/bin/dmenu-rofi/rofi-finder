@@ -1,0 +1,26 @@
+#!/bin/sh
+# A fuzzy file-finder and opener based on rofi
+# Requires: rofi, xdg-utils, FontAwesome
+
+files="/tmp/.file_list"
+
+update_list() {
+	find \( ! -regex '.*/\..*' \) -type d -not -path '*/\.*' 2> /dev/null | sed -e 's/^\./:~/g' > /tmp/.file_list
+	find \( ! -regex '.*/\..*' \) -not -type d 2> /dev/null | sed -E -e '/png$|jpg$|tiff$|gif$|jpeg$|bmp$/ s/^\./:~/g' -e '/mp3$|pcm$|wav$|aac$|ogg$|wma$/ s/^\./:~/g' -e '/wmv$|webm$|m4v$|mkv$|mov$|flv$|avi$|mp4$/ s/^\./:~/g' -e 's/^\./:~/g' >> /tmp/.file_list
+	find .config 2> /dev/null | sed -E -e 's/^\./:~\/./g' >> /tmp/.file_list
+}
+
+if [ -e $files ]; then
+	input=$(rofi -dmenu -p  < $files)
+	update_list
+else
+	update_list
+	input=$(rofi -dmenu -p  < $files)
+fi
+
+case "$(echo "$input" | cut -d " " -f 1)" in
+	a) exec "$BROWSER" https://wiki.archlinux.org/index.php/"$(echo "$input" | cut -d " " -f2-)" >/dev/null 2>&1 & ;;
+	w) exec "$BROWSER" https://en.wikipedia.org/wiki/"$(echo "$input" | cut -d " " -f2-)" >/dev/null 2>&1 & ;;
+	s) exec "$BROWSER" "https://startpage.com/do/search?query=$(echo "$input" | cut -d " " -f2-)&cat=web&pl=chrome&language=english" >/dev/null 2>&1 & ;;
+	*) exec xdg-open "$(echo "$input" | sed 's/^....//g')" >/dev/null 2>&1 & ;;
+esac

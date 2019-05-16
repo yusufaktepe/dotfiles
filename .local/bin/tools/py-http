@@ -1,0 +1,30 @@
+#!/bin/sh
+# Start/Stop simple http server with python.
+
+# 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
+# https://github.com/yusufaktepe/dotfiles
+
+sep() {
+printf "%s\
+=====================================================================
+		$(date)
+=====================================================================
+"
+}
+
+dir="$HOME"
+cmd="python3 -um http.server --directory $dir"
+log="$HOME/.cache/python-server.log"
+
+if pgrep -f "$cmd" > /dev/null ; then
+	kill "$(pgrep -f "$cmd")"
+		case "$1" in
+			-n) notify-send -i offline "Python Server Stopped" ;;
+		esac
+else
+	sep >> "$log"
+	${cmd} >> "$log" 2>&1 &
+		case "$1" in
+			-n) notify-send -i online "Python Server Started" ;;
+		esac
+fi

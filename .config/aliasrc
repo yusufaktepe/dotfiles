@@ -1,0 +1,161 @@
+#!/bin/sh
+#
+# ~/.config/aliasrc
+#
+
+alias cp="cp -i"
+alias mkdir='mkdir -pv'
+alias mv='timeout 8 mv -i'
+alias rm='timeout 3 rm -I --one-file-system'
+alias df='df -h'
+alias more='less'
+alias nano='nano -w'
+alias info='info --vi-keys'
+alias gitu='git add . && git commit -a -S && git push'
+alias mktree='tree -a -I .git > TREE'
+alias e='$EDITOR' v='$EDITOR'
+alias ep='$EDITOR PKGBUILD'
+alias SS='sudo systemctl'
+alias f='$FILE'
+alias ka='killall'
+alias g='git'
+alias x='sxiv -ft *'
+alias mpv='mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)'
+alias ffmpeg='ffmpeg -hide_banner'
+alias magit='nvim -c MagitOnly'
+alias wget='wget --hsts-file ~/.config/wget-hsts'
+alias ncdu='ncdu --color dark'
+alias newsboat='newsboat -q'
+alias code='code --extensions-dir ~/.config/Code/Ext'
+
+command -v nvim >/dev/null && alias vim='nvim' vimdiff='nvim -d' # Use neovim if installed.
+
+vf() { fzf | xargs -r -I % $EDITOR % ;}
+
+alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias la='ls -lah --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias diff='diff --color=auto'
+alias ccat='highlight --out-format=ansi' # Color cat - print file with syntax highlighting.
+
+#alias cdr='ranger --show-only-dirs --choosedir=/tmp/.dir && $(cat /tmp/.dir)'
+
+# Package Management
+alias upd='yay -Syu'
+alias updw='sudo pacman -Syyuw'
+alias lsp='pacman -Qett --color=always | less'
+alias p='sudo pacman'
+alias pac='sudo pacman -S --needed'
+alias pacu='sudo pacman -U'
+alias pacs='pacman -Ss'
+alias pacr='sudo pacman -Rns'
+alias paci='pacman -Si'
+alias pacqi='pacman -Qi'
+alias paclf='pacman -Ql'
+alias pacc='sudo pacman -Sc'
+alias paclu='sudo pacman -Qu'
+alias pacgen=' pacman -Q'
+alias pacgenaur='pacman -Qm'
+alias paclog='less +G /var/log/pacman.log'
+alias lorph='pacman -Qdt'
+alias rmorph='sudo pacman -Rns $(pacman -Qtdq)'
+alias paclmir='less /etc/pacman.d/mirrorlist'
+alias pacnew='sudo DIFFPROG=/usr/bin/meld pacdiff'
+alias pkglistin='sudo pacman -S --needed - <'
+alias pkglist='pacman -Qqen > pkglist_$(date +%d-%m-%Y) && pacman -Qm > pkglist-aur_$(date +%d-%m-%Y)'
+
+# Applications
+alias wb='$BROWSER'
+
+# Maintanance
+alias cleanb=' clear && truncate -s 0 $HISTFILE && exec $SHELL -l'
+alias cleansysd='sudo journalctl --vacuum-size=50M'
+alias sysdan='systemd-analyze time && systemd-analyze blame'
+alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias resnet='sudo systemctl restart NetworkManager.service'
+alias sysj='journalctl -p 3 -xb'
+alias sysjf='journalctl -f'
+alias sysf='systemctl --failed'
+alias sysl='systemctl list-unit-files'
+alias ws='watch sensors'
+
+# Shutdown
+alias sdh='sudo shutdown -h'  # ( usage: shutdown -h 21:40 )
+alias sdc='shutdown -c'       # cancel shutdown
+
+## i3
+alias lock='betterlockscreen -l dimblur > /dev/null 2>&1 & disown'
+
+# Others
+alias _='sudo'
+alias q=' exit'
+alias rtop='top -o RES'
+alias sue='sudoedit'
+alias gitc='git clone'
+alias mkpkg='makepkg -srci'
+alias mksrci='makepkg --printsrcinfo > .SRCINFO'
+alias xrdbu='xrdb ~/.Xresources'
+alias didi='sudo dd bs=4M oflag=sync status=progress'
+alias lspath='echo -e ${PATH//:/\\n}'
+alias localip="echo "$(ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}')""
+alias ys='ssh yusuf@35.227.93.190'
+alias weather='curl -s wttr.in'
+
+# Configured to run without password:
+alias ps_mem='sudo ps_mem'
+alias nethogs='sudo nethogs'
+
+# YouTube
+alias yt="youtube-dl --add-metadata -i" # Download video link
+alias yta="yt -x -f bestaudio/best" # Download only audio
+alias YT="youtube-viewer"
+
+#
+# # ex - archive extractor
+# # usage: ex <file>
+# ex ()
+# {
+#   if [ -f $1 ] ; then
+#     case $1 in
+#       *.tar.bz2)   tar xjf $1   ;;
+#       *.tar.gz)    tar xzf $1   ;;
+#       *.bz2)       bunzip2 $1   ;;
+#       *.rar)       unrar x $1     ;;
+#       *.gz)        gunzip $1    ;;
+#       *.tar)       tar xf $1    ;;
+#       *.tbz2)      tar xjf $1   ;;
+#       *.tgz)       tar xzf $1   ;;
+#       *.zip)       unzip $1     ;;
+#       *.Z)         uncompress $1;;
+#       *.7z)        7z x $1      ;;
+#       *)           echo "'$1' cannot be extracted via ex()" ;;
+#     esac
+#   else
+#     echo "'$1' is not a valid file"
+#   fi
+# }
+
+#### rpeat something [ rpeat 5 notify-send Hi! ] [ *sleep 3 : Time between the repeats ]
+rpeat() {
+n=$1
+shift
+while [ $(( n -= 1 )) -ge 0 ]
+do
+    "$@"
+sleep 3
+done
+}
+
+##=====
+
+# Create a new directory and cd
+mkd() { mkdir -p $@ && cd ${@:$#} ;}
+# Copy file to clipboard
+cclip() { xclip -sel clip < "$@" ;}
+
+cfg-history() { $EDITOR $HISTFILE ;}
+
