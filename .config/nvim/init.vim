@@ -19,7 +19,7 @@ Plug 'tpope/vim-commentary'
 Plug 'lambdalisue/suda.vim'
 Plug 'vifm/vifm.vim'
 Plug 'ap/vim-css-color'
-Plug 'scrooloose/nerdcommenter'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 "let g:gruvbox_contrast_dark='hard'
@@ -32,6 +32,9 @@ set go=a
 set mouse=a
 set nohlsearch
 set clipboard=unnamedplus
+set ignorecase
+set smartcase
+set scrolloff=3 " keep at least 3 lines below or above cursor
 
 " Some basics:
 	nnoremap c "_c
@@ -79,6 +82,9 @@ set clipboard=unnamedplus
 " Nerd commenter
 	let g:NERDSpaceDelims = 1
 	let g:NERDDefaultAlign = 'left'
+
+" GitGutter
+	let g:gitgutter_enabled = 0 " disabled by default
 
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h

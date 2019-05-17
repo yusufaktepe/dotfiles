@@ -32,9 +32,9 @@
 *color7:        #a89984
 *color15:       #ebdbb2
 
-st.cursorColor: #add8e6
+St.cursorColor: #add8e6
 
 !st.shell:      /bin/tmux
-st.termname:    xterm-256color
-st.alpha:       0.85
-st.font:        Hack-11;
+St.termname:    xterm-256color
+St.alpha:       0.85
+St.font:        Hack-11;
