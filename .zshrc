@@ -209,18 +209,20 @@ bindkey -s '\e9' "!:0 !:2* \t"		# all but the 1st argument (aka 2nd word)
 bindkey -v
 KEYTIMEOUT=1
 
-# Default cursor shape (insert mode)
-zle-line-init() { echo -ne "\e[5 q" ;}
+if [ "$TERM" != "linux" ]; then
+	# Default cursor shape (insert mode)
+	zle-line-init() { echo -ne "\e[5 q" ;}
 
-# Updates editor information when the keymap changes.
-function zle-keymap-select() {
-	[ $KEYMAP = vicmd ] && echo -ne "\e[2 q" || echo -ne "\e[5 q"
-	zle reset-prompt
-	zle -R
-}
+	# Updates editor information when the keymap changes.
+	function zle-keymap-select() {
+		[ $KEYMAP = vicmd ] && echo -ne "\e[2 q" || echo -ne "\e[5 q"
+		zle reset-prompt
+		zle -R
+	}
 
-zle -N zle-line-init
-zle -N zle-keymap-select
+	zle -N zle-line-init
+	zle -N zle-keymap-select
+fi
 
 #=====================================================================
 # Functions
