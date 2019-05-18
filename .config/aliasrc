@@ -101,7 +101,7 @@ alias mksrci='makepkg --printsrcinfo > .SRCINFO'
 alias xrdbu='xrdb ~/.Xresources'
 alias didi='sudo dd bs=4M oflag=sync status=progress'
 alias lspath='echo -e ${PATH//:/\\n}'
-alias localip="echo "$(ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}')""
+alias localip="echo $(ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}')"
 alias ys='ssh yusuf@35.227.93.190'
 alias weather='curl -s wttr.in'
 
@@ -153,9 +153,31 @@ done
 ##=====
 
 # Create a new directory and cd
-mkd() { mkdir -p $@ && cd ${@:$#} ;}
-# Copy file to clipboard
-cclip() { xclip -sel clip < "$@" ;}
+mkd() { mkdir -p "$@" && cd "${@:$#}" ;}
 
-cfg-history() { $EDITOR $HISTFILE ;}
+cfg-history() { $EDITOR "$HISTFILE" ;}
 
+clipcopy() {
+	if command -v xclip >/dev/null; then
+		[ -z "$1" ] && xclip -in -selection clipboard || xclip -selection clipboard "$@"
+	elif command -v xsel >/dev/null; then
+		[ -z "$1" ] && xsel --clipboard --input || xsel --clipboard --input < "$@"
+	else
+		printf "clipcopy: xclip/xsel not installed\n" >&2
+		return 1
+	fi
+}
+
+clippaste() {
+	if command -v xclip >/dev/null; then
+		xclip -out -selection clipboard
+	elif command -v xsel >/dev/null; then
+		xsel --clipboard --output
+	else
+		printf "clipcopy: xclip/xsel not installed\n" >&2
+		return 1
+	fi
+}
+
+copydir() { printf '%s' "$PWD" | clipcopy ;}
+copyfile() { clipcopy "$1" ;}
