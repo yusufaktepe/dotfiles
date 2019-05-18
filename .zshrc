@@ -145,25 +145,25 @@ key[PageDown]="${terminfo[knp]}"
 key[ShiftTab]="${terminfo[kcbt]}"
 
 # setup key accordingly
-[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"	beginning-of-line
-[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"	end-of-line
-[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"	overwrite-mode
-[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"	backward-delete-char
-[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"	delete-char
-[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"		history-substring-search-up
-[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"	history-substring-search-down
-[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"	backward-char
-[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"	forward-char
-[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"	history-beginning-search-backward
-[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"	history-beginning-search-forward
-[[ -n "${key[ShiftTab]}"  ]] && bindkey -- "${key[ShiftTab]}"	reverse-menu-complete
+[ -n "${key[Home]}"      ] && bindkey -- "${key[Home]}"		beginning-of-line
+[ -n "${key[End]}"       ] && bindkey -- "${key[End]}"		end-of-line
+[ -n "${key[Insert]}"    ] && bindkey -- "${key[Insert]}"	overwrite-mode
+[ -n "${key[Backspace]}" ] && bindkey -- "${key[Backspace]}"	backward-delete-char
+[ -n "${key[Delete]}"    ] && bindkey -- "${key[Delete]}"	delete-char
+[ -n "${key[Up]}"        ] && bindkey -- "${key[Up]}"		history-substring-search-up
+[ -n "${key[Down]}"      ] && bindkey -- "${key[Down]}"		history-substring-search-down
+[ -n "${key[Left]}"      ] && bindkey -- "${key[Left]}"		backward-char
+[ -n "${key[Right]}"     ] && bindkey -- "${key[Right]}"	forward-char
+[ -n "${key[PageUp]}"    ] && bindkey -- "${key[PageUp]}"	history-beginning-search-backward
+[ -n "${key[PageDown]}"  ] && bindkey -- "${key[PageDown]}"	history-beginning-search-forward
+[ -n "${key[ShiftTab]}"  ] && bindkey -- "${key[ShiftTab]}"	reverse-menu-complete
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
 if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	autoload -Uz add-zle-hook-widget
-	function zle_application_mode_start () { echoti smkx }
-	function zle_application_mode_stop () { echoti rmkx }
+	zle_application_mode_start() { echoti smkx }
+	zle_application_mode_stop() { echoti rmkx }
 	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
@@ -214,7 +214,7 @@ if [ "$TERM" != "linux" ]; then
 	zle-line-init() { echo -ne "\e[5 q" ;}
 
 	# Updates editor information when the keymap changes.
-	function zle-keymap-select() {
+	zle-keymap-select() {
 		[ $KEYMAP = vicmd ] && echo -ne "\e[2 q" || echo -ne "\e[5 q"
 		zle reset-prompt
 		zle -R
@@ -244,7 +244,7 @@ sudo-command-line() {
 }
 zle -N sudo-command-line
 #bindkey "\e\e" sudo-command-line
-bindkey "^f" sudo-command-line # [Alt+f] to add sudo prefix
+bindkey "^f" sudo-command-line # [Ctrl+f] to add sudo prefix
 
 globalias() {
 	zle _expand_alias
@@ -254,51 +254,6 @@ globalias() {
 zle -N globalias
 bindkey "^[ " globalias	# [Alt+Space] to expand alias
 
-# [ <command> | clipcopy ] - [ clipcopy <file> ]
-function clipcopy() {
-	emulate -L zsh
-	local file=$1
-	if (( $+commands[xclip] )); then
-		if [[ -z $file ]]; then
-			xclip -in -selection clipboard
-		else
-			xclip -in -selection clipboard $file
-		fi
-	elif (( $+commands[xsel] )); then
-		if [[ -z $file ]]; then
-			xsel --clipboard --input
-		else
-			cat "$file" | xsel --clipboard --input
-		fi
-	else
-		print "clipcopy: xclip/xsel not installed" >&2
-		return 1
-	fi
-}
-
-# [ clippaste | <command> ] - [ clippaste > <file> ] - [ clippaste | grep foo ]
-function clippaste() {
-	emulate -L zsh
-	if (( $+commands[xclip] )); then
-		xclip -out -selection clipboard
-	elif (( $+commands[xsel] )); then
-		xsel --clipboard --output
-	else
-		print "clipcopy: xclip/xsel not installed" >&2
-		return 1
-	fi
-}
-
-function copydir {
-	emulate -L zsh
-	print -n $PWD | clipcopy
-}
-
-function copyfile {
-	emulate -L zsh
-	clipcopy $1
-}
-
 # cpv function that uses rsync
 cpv() { rsync -pogbr -hhh --backup-dir=/tmp/rsync -e /dev/null --progress "$@" ;}
 compdef _files cpv
@@ -307,26 +262,20 @@ alias h='history'
 hs() { history | grep $* ;}
 alias hsi='hs -i'
 
-cdUndoKey() {
-	popd
-	zle reset-prompt
-	echo
-	ls
-	zle reset-prompt
-}
+cdUndoKey() { popd; zle reset-prompt; echo; ls; zle reset-prompt ;}
 zle -N cdUndoKey
 bindkey '^[[1;3D' cdUndoKey # [Alt+Left] - go back in directory history
 
 # fzf_history() { zle -I; eval $(history | fzf +s | sed 's/ *[0-9]* *//') ;}; zle -N fzf_history; bindkey '^H' fzf_history
 # fzf_killps() { zle -I; ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9} ;}; zle -N fzf_killps; bindkey '^Q' fzf_killps
 # fzf_cd() { zle -I; DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR" ;}; zle -N fzf_cd; bindkey '^E' fzf_cd
-zle -N copyx; copyx() { echo -E $BUFFER | xsel -ib }; bindkey '^Y' copyx
+zle -N copyx; copyx() { echo -E $BUFFER | xsel -ib ;}; bindkey '^Y' copyx
 
 #=====================================================================
 # Set Terminal Title
 #=====================================================================
 
-function title {
+title() {
 	emulate -L zsh
 
 	: ${2=$1} # if $2 is unset use $1; if it is set and empty, leave it as is
@@ -354,13 +303,13 @@ ZSH_THEME_TERM_TAB_TITLE_IDLE="%15<..<%~%<<"	#15 char left truncated PWD
 ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
 
 # Runs before showing the prompt
-function termsupport_precmd {
+termsupport_precmd() {
 	emulate -L zsh
 	title $ZSH_THEME_TERM_TAB_TITLE_IDLE $ZSH_THEME_TERM_TITLE_IDLE
 }
 
 # Runs before executing the command
-function termsupport_preexec {
+termsupport_preexec() {
 	emulate -L zsh
 	# cmd name only, or if this is sudo or ssh, the next cmd
 	local CMD=${1[(wr)^(*=*|sudo|ssh|mosh|rake|-*)]:gs/%/%%}
