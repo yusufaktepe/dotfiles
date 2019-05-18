@@ -34,7 +34,7 @@
 
 St.cursorColor: #add8e6
 
-!st.shell:      /bin/tmux
-St.termname:    xterm-256color
+!St.shell:      /bin/tmux
+!St.termname:   xterm-256color
 St.alpha:       0.85
 St.font:        Hack-11;
