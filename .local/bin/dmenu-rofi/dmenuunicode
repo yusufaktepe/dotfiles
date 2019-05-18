@@ -5,12 +5,17 @@
 # Give dmenu list of all unicode characters to copy.
 # Shows the selected character in dunst if running.
 
-emoji_file=$HOME/.config/emoji
+emoji_file="$HOME/.config/emoji"
+fa_file="$HOME/.config/fontawesome"
 
 # Must have xclip installed to even show menu.
-xclip -h > /dev/null 2>&1 || exit
+xclip -h >/dev/null || exit
 
-chosen=$(grep -v "#" $emoji_file | dmenu -i -l 20 -fn Monospace-18)
+if [ -e "$fa_file" ]; then
+	chosen=$(grep -v "#" -h "$emoji_file" "$fa_file" | dmenu -i -l 20 -fn Monospace-18)
+else
+	chosen=$(grep -v "#" "$emoji_file" | dmenu -i -l 20 -fn Monospace-18)
+fi
 
 [ "$chosen" != "" ] || exit
 
