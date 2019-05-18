@@ -101,6 +101,128 @@ export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
 
 #=====================================================================
+# Plugins
+#=====================================================================
+
+# Use autosuggestion
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+# Load zsh-syntax-highlighting before history-substring-search.
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Use history substring search
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+# pkgfile "command not found" hook:
+source /usr/share/doc/pkgfile/command-not-found.zsh
+
+# Load alias for thefuck:
+eval $(thefuck --alias)
+
+# Use history-substring-search instead
+#autoload -U up-line-or-beginning-search
+#autoload -U down-line-or-beginning-search
+#zle -N up-line-or-beginning-search
+#zle -N down-line-or-beginning-search
+
+#=====================================================================
+# Keys
+#=====================================================================
+# create a zkbd compatible hash;
+# to add other keys to this hash, see: man 5 terminfo
+# to find keycodes, run 'showkey -a'
+typeset -g -A key
+
+key[Home]="${terminfo[khome]}"
+key[End]="${terminfo[kend]}"
+key[Insert]="${terminfo[kich1]}"
+key[Backspace]="${terminfo[kbs]}"
+key[Delete]="${terminfo[kdch1]}"
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+key[Left]="${terminfo[kcub1]}"
+key[Right]="${terminfo[kcuf1]}"
+key[PageUp]="${terminfo[kpp]}"
+key[PageDown]="${terminfo[knp]}"
+key[ShiftTab]="${terminfo[kcbt]}"
+
+# setup key accordingly
+[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"	beginning-of-line
+[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"	end-of-line
+[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"	overwrite-mode
+[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"	backward-delete-char
+[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"	delete-char
+[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"		history-substring-search-up
+[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"	history-substring-search-down
+[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"	backward-char
+[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"	forward-char
+[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"	history-beginning-search-backward
+[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"	history-beginning-search-forward
+[[ -n "${key[ShiftTab]}"  ]] && bindkey -- "${key[ShiftTab]}"	reverse-menu-complete
+
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+	autoload -Uz add-zle-hook-widget
+	function zle_application_mode_start () { echoti smkx }
+	function zle_application_mode_stop () { echoti rmkx }
+	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
+
+bindkey	"^[[H"	beginning-of-line	# [Home]
+bindkey	"^[[4~"	end-of-line		# [End]
+
+bindkey '^H' backward-kill-word		# [ctrl+backspace] delete previous word with
+bindkey '^[[Z' reverse-menu-complete	# [Shift+tab]
+
+bindkey '\ew' kill-region		# [Esc-w] - Kill from the cursor to the mark
+bindkey -s '\el' 'ls\n'			# [Esc-l] - run command: ls
+bindkey ' ' magic-space			# [Space] - do history expansion
+
+bindkey '^[[1;5C' forward-word		# [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5D' backward-word		# [Ctrl-LeftArrow] - move backward one word
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+autoload -U edit-command-line && zle -N edit-command-line
+bindkey '^Xe' edit-command-line		# hit 'Ctrl+X e' to edit with $EDITOR
+bindkey -M vicmd v edit-command-line	# hit 'v' in normal mode to edit with $EDITOR
+
+# Previous Command Hotkeys Alt+1, Alt+2 ...etc
+bindkey -s '\e1' "!:0 \t"		# last command
+bindkey -s '\e2' "!:0-1 \t"		# last command + 1st argument
+bindkey -s '\e3' "!:0-2 \t"		# last command + 1st-2nd argument
+bindkey -s '\e4' "!:0-3 \t"		# last command + 1st-3rd argument
+bindkey -s '\e5' "!:0-4 \t"		# last command + 1st-4th argument
+bindkey -s '\e"' "!:0- \t"		# all but the last argument
+bindkey -s '\e9' "!:0 !:2* \t"		# all but the 1st argument (aka 2nd word)
+
+#=====================================================================
+# Vim Mode
+#=====================================================================
+
+bindkey -v
+KEYTIMEOUT=1
+
+# Default cursor shape (insert mode)
+zle-line-init() { echo -ne "\e[5 q" ;}
+
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+	[ $KEYMAP = vicmd ] && echo -ne "\e[2 q" || echo -ne "\e[5 q"
+	zle reset-prompt
+	zle -R
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+#=====================================================================
 # Functions
 #=====================================================================
 
@@ -197,124 +319,6 @@ bindkey '^[[1;3D' cdUndoKey # [Alt+Left] - go back in directory history
 # fzf_killps() { zle -I; ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -${1:-9} ;}; zle -N fzf_killps; bindkey '^Q' fzf_killps
 # fzf_cd() { zle -I; DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR" ;}; zle -N fzf_cd; bindkey '^E' fzf_cd
 zle -N copyx; copyx() { echo -E $BUFFER | xsel -ib }; bindkey '^Y' copyx
-
-#=====================================================================
-# Plugins
-#=====================================================================
-
-# Use autosuggestion
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-# Load zsh-syntax-highlighting before history-substring-search.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# Use history substring search
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-# pkgfile "command not found" hook:
-source /usr/share/doc/pkgfile/command-not-found.zsh
-
-# Load alias for thefuck:
-eval $(thefuck --alias)
-
-# Use history-substring-search instead
-#autoload -U up-line-or-beginning-search
-#autoload -U down-line-or-beginning-search
-#zle -N up-line-or-beginning-search
-#zle -N down-line-or-beginning-search
-
-#=====================================================================
-# Keys
-#=====================================================================
-# create a zkbd compatible hash;
-# to add other keys to this hash, see: man 5 terminfo
-typeset -g -A key
-
-key[Home]="${terminfo[khome]}"
-key[End]="${terminfo[kend]}"
-key[Insert]="${terminfo[kich1]}"
-key[Backspace]="${terminfo[kbs]}"
-key[Delete]="${terminfo[kdch1]}"
-key[Up]="${terminfo[kcuu1]}"
-key[Down]="${terminfo[kcud1]}"
-key[Left]="${terminfo[kcub1]}"
-key[Right]="${terminfo[kcuf1]}"
-key[PageUp]="${terminfo[kpp]}"
-key[PageDown]="${terminfo[knp]}"
-key[ShiftTab]="${terminfo[kcbt]}"
-
-# setup key accordingly
-[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"	beginning-of-line
-[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"	end-of-line
-[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"	overwrite-mode
-[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}"	backward-delete-char
-[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"	delete-char
-[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"		history-substring-search-up
-[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"	history-substring-search-down
-[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"	backward-char
-[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"	forward-char
-[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"	history-beginning-search-backward
-[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"	history-beginning-search-forward
-[[ -n "${key[ShiftTab]}"  ]] && bindkey -- "${key[ShiftTab]}"	reverse-menu-complete
-
-# Finally, make sure the terminal is in application mode, when zle is
-# active. Only then are the values from $terminfo valid.
-if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
-	autoload -Uz add-zle-hook-widget
-	function zle_application_mode_start () { echoti smkx }
-	function zle_application_mode_stop () { echoti rmkx }
-	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
-	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
-fi
-
-bindkey '^H' backward-kill-word		# [ctrl+backspace] delete previous word with
-bindkey '^[[Z' reverse-menu-complete	# [Shift+tab]
-
-bindkey '\ew' kill-region		# [Esc-w] - Kill from the cursor to the mark
-bindkey -s '\el' 'ls\n'			# [Esc-l] - run command: ls
-bindkey ' ' magic-space			# [Space] - do history expansion
-
-bindkey '^[[1;5C' forward-word		# [Ctrl-RightArrow] - move forward one word
-bindkey '^[[1;5D' backward-word		# [Ctrl-LeftArrow] - move backward one word
-
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
-
-autoload -U edit-command-line && zle -N edit-command-line
-bindkey '^Xe' edit-command-line		# hit 'Ctrl+X e' to edit with $EDITOR
-bindkey -M vicmd v edit-command-line	# hit 'v' in normal mode to edit with $EDITOR
-
-# Previous Command Hotkeys Alt+1, Alt+2 ...etc
-bindkey -s '\e1' "!:0 \t"		# last command
-bindkey -s '\e2' "!:0-1 \t"		# last command + 1st argument
-bindkey -s '\e3' "!:0-2 \t"		# last command + 1st-2nd argument
-bindkey -s '\e4' "!:0-3 \t"		# last command + 1st-3rd argument
-bindkey -s '\e5' "!:0-4 \t"		# last command + 1st-4th argument
-bindkey -s '\e"' "!:0- \t"		# all but the last argument
-bindkey -s '\e9' "!:0 !:2* \t"		# all but the 1st argument (aka 2nd word)
-
-#=====================================================================
-# Vim Mode
-#=====================================================================
-
-bindkey -v
-KEYTIMEOUT=1
-
-# Default cursor shape (insert mode)
-zle-line-init() { echo -ne "\e[5 q" ;}
-
-# Updates editor information when the keymap changes.
-function zle-keymap-select() {
-	[ $KEYMAP = vicmd ] && echo -ne "\e[2 q" || echo -ne "\e[5 q"
-	zle reset-prompt
-	zle -R
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
 
 #=====================================================================
 # Set Terminal Title
