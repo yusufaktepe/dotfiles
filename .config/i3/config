@@ -1,7 +1,7 @@
 # vim: filetype=i3
 #=====================================================================
 # i3 config by Yusuf Aktepe <yusuf@yusufaktepe.com>
-# https://github.com/YusufAktepe/dotfiles
+# https://github.com/yusufaktepe/dotfiles
 #=====================================================================
 
 # Set mod keys (Mod1=<Alt>, Mod4=<Super>, Mod3=<Hyper_L>, Mod5=<AltGr>)
@@ -54,6 +54,7 @@ bindsym $mod+Shift+Return exec --no-startup-id samedir
 # #---Start program launcher---# #
 bindsym $mod+d exec --no-startup-id rofi -show combi
 bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort"
+bindsym $caps+f exec --no-startup-id rofi-finder
 
 # #---Clipboard management---# #
 bindsym Ctrl+quotedbl exec --no-startup-id gclip
