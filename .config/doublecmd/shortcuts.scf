@@ -400,6 +400,11 @@
         <Param>ToolItemID={FF80C12E-9A79-4361-8660-9C086D0EEFB7}</Param>
       </Hotkey>
       <Hotkey>
+        <Shortcut>Alt+F11</Shortcut>
+        <Command>cm_ExecuteToolbarItem</Command>
+        <Param>ToolItemID={1A54CD30-032C-4832-865E-C7798343D878}</Param>
+      </Hotkey>
+      <Hotkey>
         <Shortcut>Del</Shortcut>
         <Command>cm_Delete</Command>
         <Control>Files Panel</Control>

@@ -301,22 +301,29 @@
           <ID>{1AA04A74-72C7-447A-98C3-8B2945594F4D}</ID>
           <Icon>terminus</Icon>
           <Hint>Run Floating Terminal</Hint>
-          <Command>$TERMINAL</Command>
+          <Command>st</Command>
           <Params>-n dc-term-bttns</Params>
+        </Program>
+        <Program>
+          <ID>{1A54CD30-032C-4832-865E-C7798343D878}</ID>
+          <Icon>diffuse</Icon>
+          <Hint>VimDiff</Hint>
+          <Command>st</Command>
+          <Params>-e nvim -d %pb</Params>
         </Program>
         <Program>
           <ID>{09FB1B40-8A53-4D1F-AFB9-AA5B646F2C2A}</ID>
           <Icon>baobab</Icon>
           <Hint>Disk Usage</Hint>
-          <Command>$TERMINAL</Command>
-          <Params>-n dc-term-bttns -e ncdu %p</Params>
+          <Command>st</Command>
+          <Params>-n dc-term-bttns -e ncdu --color dark %p</Params>
         </Program>
         <Separator/>
         <Program>
           <ID>{835C382E-42F3-4372-9F09-A01D13D9A823}</ID>
           <Icon>pk-package-sources</Icon>
           <Hint>which package a file belongs to</Hint>
-          <Command>$TERMINAL</Command>
+          <Command>st</Command>
           <Params>-n dc-term-bttns -e sh -c "pacman -Qo %f; read -n 1 -s -r -p 'Press any key to continue'"</Params>
         </Program>
         <Separator/>
@@ -355,9 +362,9 @@
       <Maximized>False</Maximized>
       <Splitter>50</Splitter>
       <Left>0</Left>
-      <Top>21</Top>
+      <Top>41</Top>
       <Width>1366</Width>
-      <Height>747</Height>
+      <Height>727</Height>
       <PixelsPerInch>96</PixelsPerInch>
     </Position>
   </MainWindow>
@@ -622,7 +629,7 @@
     <ActionOnDoubleClick>1</ActionOnDoubleClick>
   </Tabs>
   <Log Enabled="True" LogFileWithDateInName="True">
-    <FileName>%DC_CONFIG_PATH%/logs/doublecmd.log</FileName>
+    <FileName>$DC_CONFIG_PATH/logs/doublecmd.log</FileName>
     <Options>1023</Options>
   </Log>
   <History>
