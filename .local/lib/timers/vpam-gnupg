@@ -1,9 +1,4 @@
 #!/bin/sh
 # Verify that pam-gnupg is working.
 
-gtmp=/tmp/gpgdum
-touch $gtmp
-gpg -r yusuf@yusufaktepe.com -e $gtmp >/dev/null 2>&1
-gpg -d $gtmp.gpg >/dev/null 2>&1
-rm $gtmp*
-
+echo ok | gpg -r yusuf@yusufaktepe.com -e -o - | gpg -d - >/dev/null 2>&1
