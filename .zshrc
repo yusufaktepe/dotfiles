@@ -48,12 +48,12 @@ SAVEHIST=10000
 #=====================================================================
 
 #zmodload -i zsh/complist zsh/computil
-autoload -U compinit colors zmv && colors	# zcalc
+autoload -U compinit colors && colors	# zcalc zmv
 compinit -d ~/.cache/zcompdump-${HOST}-${ZSH_VERSION}
 
 # Enable ls colors
 export LSCOLORS="Gxfxcxdxbxegedabagacad"
-[[ -z "$LS_COLORS" ]] && (( $+commands[dircolors] )) && eval "$(dircolors -b)"
+[ -z "$LS_COLORS" ] && (( $+commands[dircolors] )) && eval "$(dircolors -b)"
 ls --color -d . &>/dev/null && alias ls='ls --color=tty' || { ls -G . &>/dev/null && alias ls='ls -G' }
 
 zstyle ':completion:*:default' menu select
@@ -174,8 +174,8 @@ bindkey	"^[[4~"	end-of-line		# [End]
 bindkey '^H' backward-kill-word		# [ctrl+backspace] delete previous word with
 bindkey '^[[Z' reverse-menu-complete	# [Shift+tab]
 
-bindkey '\ew' kill-region		# [Esc-w] - Kill from the cursor to the mark
-bindkey -s '\el' 'ls\n'			# [Esc-l] - run command: ls
+# bindkey '\ew' kill-region		# [Esc-w] - Kill from the cursor to the mark
+# bindkey -s '\el' 'ls\n'		# [Esc-l] - run command: ls
 bindkey ' ' magic-space			# [Space] - do history expansion
 
 bindkey '^[[1;5C' forward-word		# [Ctrl-RightArrow] - move forward one word
@@ -290,7 +290,7 @@ title() {
 		;;
 		*)
 			# Try to use terminfo to set the title
-			if [[ -n "$terminfo[fsl]" ]] && [[ -n "$terminfo[tsl]" ]]; then
+			if [ -n "$terminfo[fsl]" ] && [ -n "$terminfo[tsl]" ]; then
 				echoti tsl
 				print -Pn "$1"
 				echoti fsl
@@ -374,3 +374,4 @@ alias -g N1="1>/dev/null"
 alias -g N2="2>/dev/null"
 
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+

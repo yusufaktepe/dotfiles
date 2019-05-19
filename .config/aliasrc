@@ -101,9 +101,10 @@ alias mksrci='makepkg --printsrcinfo > .SRCINFO'
 alias xrdbu='xrdb ~/.Xresources'
 alias didi='sudo dd bs=4M oflag=sync status=progress'
 alias lspath='echo -e ${PATH//:/\\n}'
-alias localip="echo $(ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}')"
 alias ys='ssh yusuf@35.227.93.190'
 alias weather='curl -s wttr.in'
+alias publicip='curl ifconfig.me'
+localip() { ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}' ;}
 
 # Configured to run without password:
 alias ps_mem='sudo ps_mem'
@@ -114,48 +115,20 @@ alias yt="youtube-dl --add-metadata -i" # Download video link
 alias yta="yt -x -f bestaudio/best" # Download only audio
 alias YT="youtube-viewer"
 
-#
-# # ex - archive extractor
-# # usage: ex <file>
-# ex ()
-# {
-#   if [ -f $1 ] ; then
-#     case $1 in
-#       *.tar.bz2)   tar xjf $1   ;;
-#       *.tar.gz)    tar xzf $1   ;;
-#       *.bz2)       bunzip2 $1   ;;
-#       *.rar)       unrar x $1     ;;
-#       *.gz)        gunzip $1    ;;
-#       *.tar)       tar xf $1    ;;
-#       *.tbz2)      tar xjf $1   ;;
-#       *.tgz)       tar xzf $1   ;;
-#       *.zip)       unzip $1     ;;
-#       *.Z)         uncompress $1;;
-#       *.7z)        7z x $1      ;;
-#       *)           echo "'$1' cannot be extracted via ex()" ;;
-#     esac
-#   else
-#     echo "'$1' is not a valid file"
-#   fi
-# }
-
-#### rpeat something [ rpeat 5 notify-send Hi! ] [ *sleep 3 : Time between the repeats ]
+# repeat something
 rpeat() {
 n=$1
 shift
 while [ $(( n -= 1 )) -ge 0 ]
 do
-    "$@"
-sleep 3
+	"$@"
+	sleep 3
 done
 }
 
-##=====
-
-# Create a new directory and cd
-mkd() { mkdir -p "$@" && cd "${@:$#}" ;}
-
 cfg-history() { $EDITOR "$HISTFILE" ;}
+
+mkd() { mkdir -p "$@" && cd "${@:$#}" ;}
 
 clipcopy() {
 	if command -v xclip >/dev/null; then
@@ -180,4 +153,4 @@ clippaste() {
 }
 
 copydir() { printf '%s' "$PWD" | clipcopy ;}
-copyfile() { clipcopy "$1" ;}
+copyfile() { clipcopy "$@" ;}
