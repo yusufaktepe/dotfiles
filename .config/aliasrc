@@ -27,10 +27,9 @@ alias wget='wget --hsts-file ~/.config/wget-hsts'
 alias ncdu='ncdu --color dark'
 alias newsboat='newsboat -q'
 alias code='code --extensions-dir ~/.config/Code/Ext'
+alias wb='$BROWSER'
 
 command -v nvim >/dev/null && alias vim='nvim' vimdiff='nvim -d' # Use neovim if installed.
-
-vf() { fzf | xargs -r -I % $EDITOR % ;}
 
 alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
@@ -68,11 +67,8 @@ alias pacnew='sudo DIFFPROG=/usr/bin/meld pacdiff'
 alias pkglistin='sudo pacman -S --needed - <'
 alias pkglist='pacman -Qqen > pkglist_$(date +%d-%m-%Y) && pacman -Qm > pkglist-aur_$(date +%d-%m-%Y)'
 
-# Applications
-alias wb='$BROWSER'
-
 # Maintanance
-alias cleanb=' clear && truncate -s 0 $HISTFILE && exec $SHELL -l'
+alias cleanb=' clear && truncate -s 0 $HISTFILE && exec $SHELL'
 alias cleansysd='sudo journalctl --vacuum-size=50M'
 alias sysdan='systemd-analyze time && systemd-analyze blame'
 alias grubup='sudo grub-mkconfig -o /boot/grub/grub.cfg'
@@ -86,9 +82,6 @@ alias ws='watch sensors'
 # Shutdown
 alias sdh='sudo shutdown -h'  # ( usage: shutdown -h 21:40 )
 alias sdc='shutdown -c'       # cancel shutdown
-
-## i3
-alias lock='betterlockscreen -l dimblur > /dev/null 2>&1 & disown'
 
 # Others
 alias _='sudo'
@@ -106,6 +99,8 @@ alias weather='curl -s wttr.in'
 alias publicip='curl ifconfig.me'
 localip() { ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}' ;}
 
+alias lock='betterlockscreen -l dimblur > /dev/null 2>&1 & disown'
+
 # Configured to run without password:
 alias ps_mem='sudo ps_mem'
 alias nethogs='sudo nethogs'
@@ -114,21 +109,6 @@ alias nethogs='sudo nethogs'
 alias yt="youtube-dl --add-metadata -i" # Download video link
 alias yta="yt -x -f bestaudio/best" # Download only audio
 alias YT="youtube-viewer"
-
-# repeat something
-rpeat() {
-n=$1
-shift
-while [ $(( n -= 1 )) -ge 0 ]
-do
-	"$@"
-	sleep 3
-done
-}
-
-cfg-history() { $EDITOR "$HISTFILE" ;}
-
-mkd() { mkdir -p "$@" && cd "${@:$#}" ;}
 
 clipcopy() {
 	if command -v xclip >/dev/null; then
@@ -154,3 +134,19 @@ clippaste() {
 
 copydir() { printf '%s' "$PWD" | clipcopy ;}
 copyfile() { clipcopy "$@" ;}
+
+mkd() { mkdir -p "$@" && cd "${@:$#}" ;}
+
+sh-history() { $EDITOR "$HISTFILE" ;}
+
+rpeat() {
+	n=$1
+	shift
+	while [ $(( n -= 1 )) -ge 0 ]
+	do
+		"$@"
+		sleep 3
+	done
+}
+
+vf() { fzf | xargs -r -I % $EDITOR % ;}
