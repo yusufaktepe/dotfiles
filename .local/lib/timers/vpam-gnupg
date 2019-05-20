@@ -1,4 +1,0 @@
-#!/bin/sh
-# Verify that pam-gnupg is working.
-
-echo ok | gpg -r yusuf@yusufaktepe.com -e -o - | gpg -d - >/dev/null 2>&1
