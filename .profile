@@ -18,6 +18,7 @@ export READER="zathura"
 export FILE="vifm"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenu-rofi/rofipass"
 export LESSHISTFILE="$HOME/.cache/lesshst"
+export INPUTRC="$HOME/.config/inputrc"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 50%"
 
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
