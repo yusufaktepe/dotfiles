@@ -169,8 +169,10 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-bindkey	"^[[H"	beginning-of-line	# [Home]
-bindkey	"^[[4~"	end-of-line		# [End]
+bindkey	"^[[H" beginning-of-line	# [Home]
+bindkey	-M vicmd "^[[H" beginning-of-line
+bindkey	"^[[4~" end-of-line		# [End]
+bindkey	-M vicmd "^[[4~" end-of-line
 
 bindkey '^H' backward-kill-word		# [ctrl+backspace] delete previous word with
 bindkey '^[[Z' reverse-menu-complete	# [Shift+tab]
