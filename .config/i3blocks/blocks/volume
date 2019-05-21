@@ -74,11 +74,11 @@ format() {
 #------------------------------------------------------------------------
 
 case $BLOCK_BUTTON in
-  1) setsid killall pavucontrol || pavucontrol & ;;			 # left click, open pavucontrol
-  2) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;;		 # middle click, mute/unmute
-  3) setsid $TERMINAL -n _blockterm -e pulsemixer & ;;			 # right click, open pulsemixer
-  4) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;; # scroll up, increase
-  5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;; # scroll down, decrease
+  1) killall pavucontrol || pavucontrol && pkill -SIGRTMIN+10 i3blocks & ;;
+  2) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;;
+  3) setsid "$TERMINAL" -n _blockterm -e pulsemixer; pkill -SIGRTMIN+10 i3blocks ;;
+  4) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;;
+  5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;;
 esac
 
 volume | format
