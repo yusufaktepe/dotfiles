@@ -129,7 +129,7 @@ eval $(thefuck --alias)
 #=====================================================================
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
-# to find keycodes, run 'showkey -a'
+# to find keycodes, run 'showkey -a' OR Ctrl+V+keypress
 typeset -g -A key
 
 key[Home]="${terminfo[khome]}"
@@ -141,9 +141,13 @@ key[Up]="${terminfo[kcuu1]}"
 key[Down]="${terminfo[kcud1]}"
 key[Left]="${terminfo[kcub1]}"
 key[Right]="${terminfo[kcuf1]}"
-key[PageUp]="${terminfo[kpp]}"
-key[PageDown]="${terminfo[knp]}"
+key[PgUp]="${terminfo[kpp]}"
+key[PgDown]="${terminfo[knp]}"
 key[ShiftTab]="${terminfo[kcbt]}"
+key[CtrlBacks]="${terminfo[cub1]}"
+key[StHome]="${terminfo[home]}"
+key[StIns]="${terminfo[smir]}"
+key[StDel]="${terminfo[dch1]}"
 
 # setup key accordingly
 [ -n "${key[Home]}"      ] && bindkey -- "${key[Home]}"		beginning-of-line
@@ -155,9 +159,23 @@ key[ShiftTab]="${terminfo[kcbt]}"
 [ -n "${key[Down]}"      ] && bindkey -- "${key[Down]}"		history-substring-search-down
 [ -n "${key[Left]}"      ] && bindkey -- "${key[Left]}"		backward-char
 [ -n "${key[Right]}"     ] && bindkey -- "${key[Right]}"	forward-char
-[ -n "${key[PageUp]}"    ] && bindkey -- "${key[PageUp]}"	history-beginning-search-backward
-[ -n "${key[PageDown]}"  ] && bindkey -- "${key[PageDown]}"	history-beginning-search-forward
+[ -n "${key[PgUp]}"      ] && bindkey -- "${key[PgUp]}"		history-beginning-search-backward
+[ -n "${key[PgDown]}"    ] && bindkey -- "${key[PgDown]}"	history-beginning-search-forward
 [ -n "${key[ShiftTab]}"  ] && bindkey -- "${key[ShiftTab]}"	reverse-menu-complete
+[ -n "${key[CtrlBacks]}" ] && bindkey -- "${key[CtrlBacks]}"	backward-kill-word
+[ -n "${key[StHome]}"    ] && bindkey -- "${key[StHome]}"	beginning-of-line
+[ -n "${key[StIns]}"     ] && bindkey -- "${key[StIns]}"	overwrite-mode
+[ -n "${key[StDel]}"     ] && bindkey -- "${key[StDel]}"	delete-char
+
+[ -n "${key[Home]}"      ] && bindkey -M vicmd "${key[Home]}"	beginning-of-line
+[ -n "${key[End]}"       ] && bindkey -M vicmd "${key[End]}"	end-of-line
+[ -n "${key[Insert]}"    ] && bindkey -M vicmd "${key[Insert]}"	vi-insert
+[ -n "${key[Delete]}"    ] && bindkey -M vicmd "${key[Delete]}"	delete-char
+[ -n "${key[PgUp]}"      ] && bindkey -M vicmd "${key[PgUp]}"	history-beginning-search-backward
+[ -n "${key[PgDown]}"    ] && bindkey -M vicmd "${key[PgDown]}"	history-beginning-search-forward
+[ -n "${key[StHome]}"    ] && bindkey -M vicmd "${key[StHome]}"	beginning-of-line
+[ -n "${key[StIns]}"     ] && bindkey -M vicmd "${key[StIns]}"	vi-insert
+[ -n "${key[StDel]}"     ] && bindkey -M vicmd "${key[StDel]}"	delete-char
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
@@ -169,28 +187,22 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-bindkey	"^[[H" beginning-of-line	# [Home]
-bindkey	-M vicmd "^[[H" beginning-of-line
-bindkey	"^[[4~" end-of-line		# [End]
-bindkey	-M vicmd "^[[4~" end-of-line
-
-bindkey '^H' backward-kill-word		# [ctrl+backspace] delete previous word with
-bindkey '^[[Z' reverse-menu-complete	# [Shift+tab]
-
 # bindkey '\ew' kill-region		# [Esc-w] - Kill from the cursor to the mark
 # bindkey -s '\el' 'ls\n'		# [Esc-l] - run command: ls
 bindkey ' ' magic-space			# [Space] - do history expansion
 
 bindkey '^[[1;5C' forward-word		# [Ctrl-RightArrow] - move forward one word
+bindkey '^[Oc' forward-word
 bindkey '^[[1;5D' backward-word		# [Ctrl-LeftArrow] - move backward one word
+bindkey '^[Od' backward-word
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey '^[[A' history-substring-search-up	# [Up]
+bindkey '^[[B' history-substring-search-down	# [Down]
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
+bindkey '^P' history-substring-search-up	# [Ctrl+p]
+bindkey '^N' history-substring-search-down	# [Ctrl+n]
 
 autoload -U edit-command-line && zle -N edit-command-line
 bindkey '^Xe' edit-command-line		# hit 'Ctrl+X e' to edit with $EDITOR
