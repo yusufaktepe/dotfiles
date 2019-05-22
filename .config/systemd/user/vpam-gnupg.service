@@ -1,9 +1,0 @@
-[Unit]
-Description=Verify that pam-gnupg is working.
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/sh -c "echo ok | gpg -r yusuf@yusufaktepe.com -e - | gpg -d - >/dev/null 2>&1"
-
-[Install]
-WantedBy=default.target
