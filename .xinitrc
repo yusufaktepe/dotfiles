@@ -4,12 +4,12 @@
 #
 # Executed by startx
 
-userxres=$HOME/.Xresources
-usercxres=$HOME/.config/Xresources
-userxdef=$HOME/.Xdefaults
-usermodmap=$HOME/.Xmodmap
-sysres=/etc/X11/xinit/.Xresources
-sysmodmap=/etc/X11/xinit/.Xmodmap
+userxres="$HOME/.Xresources"
+usercxres="$HOME/.config/xresources/Xresources"
+userxdef="$HOME/.Xdefaults"
+usermodmap="$HOME/.Xmodmap"
+sysres="/etc/X11/xinit/.Xresources"
+sysmodmap="/etc/X11/xinit/.Xmodmap"
 
 [ -f "$sysmodmap" ] && xmodmap "$sysmodmap"
 [ -f "$usermodmap" ] && xmodmap "$usermodmap"
