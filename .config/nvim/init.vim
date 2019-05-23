@@ -7,7 +7,12 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-speeddating'
+Plug 'matze/vim-move'
+Plug 'andymass/vim-matchup'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/goyo.vim'
 Plug 'morhetz/gruvbox'
@@ -15,11 +20,14 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
-Plug 'tpope/vim-commentary'
 Plug 'lambdalisue/suda.vim'
 Plug 'vifm/vifm.vim'
 Plug 'ap/vim-css-color'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'chrisbra/Recover.vim'
+Plug 'tpope/vim-eunuch'
 call plug#end()
 
 "let g:gruvbox_contrast_dark='hard'
@@ -30,11 +38,21 @@ set bg=dark
 
 set go=a
 set mouse=a
-set nohlsearch
 set clipboard=unnamedplus
-set ignorecase
-set smartcase
-set scrolloff=3 " keep at least 3 lines below or above cursor
+set hlsearch		" keep matches highlighted after searching
+set ignorecase		" ignore case when searching
+set smartcase		" don't ignore case if user types an uppercase letter
+set scrolloff=3		" keep a minimum of 3 lines between cursor and top/bottom of screen
+set inccommand=nosplit	" when typing a :%s/foo/bar/g command, show live preview
+set title		" set and update terminal title
+set cursorline		" highlight the current cursor line
+set noshowmode		" disable native mode display (use airline instead)
+set showmatch		" highlight matching parens/brackets/etc
+set matchtime=2		" show matching parens/brackets for 200ms
+set termguicolors	" enable true color mode for terminals that support it
+
+set undofile			" save undo history to a file
+set undodir=~/.cache/vim/undo	" set undo directory
 
 " Some basics:
 	nnoremap c "_c
@@ -57,14 +75,6 @@ set scrolloff=3 " keep at least 3 lines below or above cursor
 	cnoremap R!! <bar> :r suda://%<CR>
 	cnoremap E!! <bar> :e suda://%<CR>
 
-" Mappings to move lines
-	nnoremap <C-A-j> :m .+1<CR>==
-	nnoremap <C-A-k> :m .-2<CR>==
-	inoremap <C-A-j> <Esc>:m .+1<CR>==gi
-	inoremap <C-A-k> <Esc>:m .-2<CR>==gi
-	vnoremap <C-A-j> :m '>+1<CR>gv=gv
-	vnoremap <C-A-k> :m '<-2<CR>gv=gv
-
 " Goyo plugin makes text more readable when writing prose:
 	map <leader>f :Goyo \| set linebreak<CR>
 
@@ -79,12 +89,51 @@ set scrolloff=3 " keep at least 3 lines below or above cursor
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 	let NERDTreeShowHidden=1
 
-" Nerd commenter
-	let g:NERDSpaceDelims = 1
-	let g:NERDDefaultAlign = 'left'
-
 " GitGutter
 	let g:gitgutter_enabled = 0 " disabled by default
+
+" Vim-move
+	let g:move_key_modifier = 'C'
+
+" VCoolor
+	let g:vcoolor_disable_mappings = 1
+	nmap <silent> <leader>V :VCoolor<CR>
+
+" Clear search highlight and command-line on Esc
+	nnoremap <silent> <esc> :noh \| echo ""<cr>
+
+" Make j and k treat wrapped lines as independent lines
+	nnoremap <expr> j v:count ? 'j' : 'gj'
+	nnoremap <expr> k v:count ? 'k' : 'gk'
+
+" Indent visual selection without clearing selection
+	vmap > >gv
+	vmap < <gv
+
+" Delete while in insert mode
+	inoremap <C-d> <C-o>dd
+	inoremap <C-c> <C-o>D
+
+" Duplicate selection downwards/upwards
+	vnoremap <C-M-j> "dy`>"dpgv
+	vnoremap <C-M-k> "dy`<"dPjgv
+
+" Yank path of current file to system clipboard
+	nnoremap <silent> <leader>yp :let @+ = expand("%:p")<cr>:echom "Copied " . @+<cr>
+
+" Quickly edit a macro
+" See: https://github.com/mhinz/vim-galore#quickly-edit-your-macros
+	nnoremap <leader>m :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+
+" Force redraw
+" See: https://github.com/mhinz/vim-galore#saner-ctrl-l
+	nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+
+" Reload vim configuration
+	nnoremap <silent> <leader>R :so ~/.config/nvim/init.vim<return><esc>
+
+" goto file under cursor in new tab
+	noremap gF <C-w>gf
 
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
