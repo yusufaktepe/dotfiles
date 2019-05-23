@@ -1,3 +1,5 @@
+! vim: filetype=xdefaults
+
 ! === gruvbox color scheme ===
 ! hard contrast: *background: #1d2021
 !*background: #282828
@@ -34,7 +36,3 @@
 
 St.cursorColor: #add8e6
 
-!St.shell:      /bin/tmux
-!St.termname:   xterm-256color
-St.alpha:       0.85
-St.font:        Hack-11;
