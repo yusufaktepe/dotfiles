@@ -36,7 +36,8 @@ font pango:Hack, Awesome 9
 
 # kill focused window
 bindsym $mod+q		[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
-bindsym $mod+Shift+q	[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
+bindsym $mod+Shift+q	[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+Ctrl+q	[con_id="__focused__" instance="^(?!dropdown_).*$"] exec --no-startup-id kill -9 `xdotool getwindowfocus getwindowpid`
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 
 # Set terminal
