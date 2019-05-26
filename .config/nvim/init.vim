@@ -99,6 +99,12 @@ set undodir=~/.cache/vim/undo	" set undo directory
 	let g:vcoolor_disable_mappings = 1
 	nmap <silent> <leader>V :VCoolor<CR>
 
+" quit active
+	nnoremap <silent> Q :lclose \| pclose \| confirm q<cr>
+
+" quit all, bring up a prompt when buffers have been changed
+	nnoremap ZQ :confirm qall<cr>
+
 " Clear search highlight and command-line on Esc
 	nnoremap <silent> <esc> :noh \| echo ""<cr>
 
