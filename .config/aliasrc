@@ -80,8 +80,8 @@ alias sysl='systemctl list-unit-files'
 alias ws='watch sensors'
 
 # Shutdown
-alias sdh='sudo shutdown -h'  # ( usage: shutdown -h 21:40 )
-alias sdc='shutdown -c'       # cancel shutdown
+alias sdh='sudo shutdown -h'	# ( usage: shutdown -h 21:40 )
+alias sdc='shutdown -c'		# cancel shutdown
 
 # Others
 alias _='sudo'

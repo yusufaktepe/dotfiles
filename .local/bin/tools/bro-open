@@ -27,9 +27,9 @@ normal=$(tput sgr0)
 
 help() {
 	printf "%s${bold}Usage:${normal}
-  bro-open --option1 --option2
-  bro-open --mpv
-  bro-open -o vivaldi-stable --incognito
+	bro-open --option1 --option2
+	bro-open --mpv
+	bro-open -o vivaldi-stable --incognito
 
 --mpv   / -m  Open current page with mpv
 --open  / -o  >Open current page with given program

@@ -150,10 +150,10 @@ bindsym $mod+Right focus right
 #focus_follows_mouse no
 
 # move focused window
-bindsym $mod+Shift+h move left  30
-bindsym $mod+Shift+j move down  30
-bindsym $mod+Shift+k move up    30
-bindsym $mod+Shift+l move right 30
+bindsym $mod+Shift+h move left	30
+bindsym $mod+Shift+j move down	30
+bindsym $mod+Shift+k move up	30
+bindsym $mod+Shift+l move right	30
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -267,15 +267,15 @@ bindsym $mod+Shift+Home		move container to workspace $ws1
 bindsym $mod+Shift+End		move container to workspace $ws10
 bindsym $mod+Prior		workspace prev
 bindsym $mod+Next		workspace next
-bindsym $mod+Shift+Tab          workspace prev
-bindsym $mod+Tab                workspace next
+bindsym $mod+Shift+Tab		workspace prev
+bindsym $mod+Tab		workspace next
 bindsym $mod+Shift+Prior	move container to workspace prev
 bindsym $mod+Shift+Next		move container to workspace next
-bindsym $mod+$alt+Left          move container to workspace prev; workspace prev
+bindsym $mod+$alt+Left		move container to workspace prev; workspace prev
 bindsym $mod+$alt+Right		move container to workspace next; workspace next
 bindsym $mod+Escape		workspace back_and_forth
-bindsym $alt+Tab                workspace back_and_forth
-bindsym $alt+Shift+Tab          move container to workspace back_and_forth; workspace back_and_forth
+bindsym $alt+Tab		workspace back_and_forth
+bindsym $alt+Shift+Tab		move container to workspace back_and_forth; workspace back_and_forth
 
 # Selecting current workspace switches back and forth
 workspace_auto_back_and_forth yes
@@ -291,15 +291,15 @@ bindsym $mod+x [urgent=latest] focus
 for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
-#assign [window_role="browser"]                         $ws1
-assign [class="Firefox|(?i)Vivaldi"]                    $ws1
-assign [class="Pcmanfm|Doublecmd"]                      $ws2
-assign [class="Code"]                                   $ws7
-# assign [class="(?i)thunderbird"]                      $ws9
-assign [class="qBittorrent"]                            $ws10
-for_window [class="Spotify"] move to workspace          $ws11
-assign [class="cantata"]                                $ws12
-assign [class="(?i)VirtualBox" title="(?i)Win7"]        $ws13
+#assign [window_role="browser"]				$ws1
+assign [class="Firefox|(?i)Vivaldi"]			$ws1
+assign [class="Pcmanfm|Doublecmd"]			$ws2
+assign [class="Code"]					$ws7
+# assign [class="(?i)thunderbird"]			$ws9
+assign [class="qBittorrent"]				$ws10
+for_window [class="Spotify"] move to workspace		$ws11
+assign [class="cantata"]				$ws12
+assign [class="(?i)VirtualBox" title="(?i)Win7"]	$ws13
 
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
@@ -374,22 +374,22 @@ exec --no-startup-id unclutter
 # Set Xresources colors:
 set_from_resource $term_background	background
 set_from_resource $term_foreground	foreground
-set_from_resource $darkblack		color0  #000000
-set_from_resource $black		color8  #000000
-set_from_resource $darkred		color1  #000000
-set_from_resource $red			color9  #000000
-set_from_resource $darkgreen		color2  #000000
-set_from_resource $green		color10 #000000
-set_from_resource $darkyellow		color3  #000000
-set_from_resource $yellow		color11 #000000
-set_from_resource $darkblue		color4  #000000
-set_from_resource $blue			color12 #000000
-set_from_resource $darkmagenta		color5  #000000
-set_from_resource $magenta		color13 #000000
-set_from_resource $darkcyan		color6  #000000
-set_from_resource $cyan			color14 #000000
-set_from_resource $darkwhite		color7  #000000
-set_from_resource $white		color15 #000000
+set_from_resource $darkblack		color0	#000000
+set_from_resource $black		color8	#000000
+set_from_resource $darkred		color1	#000000
+set_from_resource $red			color9	#000000
+set_from_resource $darkgreen		color2	#000000
+set_from_resource $green		color10	#000000
+set_from_resource $darkyellow		color3	#000000
+set_from_resource $yellow		color11	#000000
+set_from_resource $darkblue		color4	#000000
+set_from_resource $blue			color12	#000000
+set_from_resource $darkmagenta		color5	#000000
+set_from_resource $magenta		color13	#000000
+set_from_resource $darkcyan		color6	#000000
+set_from_resource $cyan			color14	#000000
+set_from_resource $darkwhite		color7	#000000
+set_from_resource $white		color15	#000000
 set $transparent 			#00000000
 
 # Use custom colors for black
@@ -412,28 +412,28 @@ bar {
 	#separator_symbol ""
 	tray_padding 0
 
-    colors {
-        	background	$darkblack
+	colors {
+		background	$darkblack
 		statusline	$darkwhite
 		#separator	$cyan
 		separator	#454947
 
-#				BORDER  	BACKGR.		TEXT
-        focused_workspace  	$blue		$darkblue	$darkblack
-        active_workspace   	$blue		$blue		$darkwhite
-      	inactive_workspace 	$darkblack	$darkblack	$white
-        urgent_workspace   	$darkred	$darkblack	$darkred
+#				BORDER		BACKGR.		TEXT
+	focused_workspace	$blue		$darkblue	$darkblack
+	active_workspace	$blue		$blue		$darkwhite
+	inactive_workspace 	$darkblack	$darkblack	$white
+	urgent_workspace	$darkred	$darkblack	$darkred
 
-        binding_mode		$blue		$darkblue	$darkblack
-    }
+	binding_mode		$blue		$darkblue	$darkblack
+	}
 }
 
 # hide/unhide i3status bar
 bindsym $mod+b bar mode toggle
 
 # Theme colors
-#                       	BORDER		BACKGROUND	TEXT		INDICATOR       CHILD_BORDER
-client.focused			$darkblue	$darkblue	$white		$darkblack      $darkblue
+#				BORDER		BACKGROUND	TEXT		INDICATOR	CHILD_BORDER
+client.focused			$darkblue	$darkblue	$white		$darkblack	$darkblue
 client.unfocused		$black		$black		$darkwhite	$darkblack	$black
 client.focused_inactive		$black		$black		$white		$darkblack	$black
 client.urgent			$darkred	$darkred	$black		$darkred	$darkred
@@ -466,12 +466,12 @@ smart_gaps on
 smart_borders on
 
 # Current WS gaps
-bindsym $mod+KP_Add             gaps inner current plus 4
-bindsym $mod+KP_Subtract        gaps inner current minus 4
-bindsym $mod+Shift+KP_Add       gaps outer current plus 4
-bindsym $mod+Shift+KP_Subtract  gaps outer current minus 4
-bindsym $mod+Shift+KP_Multiply  gaps inner current set 4; gaps outer current set -4
-bindsym $mod+KP_Multiply        gaps inner current set 0; gaps outer current set 0
+bindsym $mod+KP_Add		gaps inner current plus 4
+bindsym $mod+KP_Subtract	gaps inner current minus 4
+bindsym $mod+Shift+KP_Add	gaps outer current plus 4
+bindsym $mod+Shift+KP_Subtract	gaps outer current minus 4
+bindsym $mod+Shift+KP_Multiply	gaps inner current set 4; gaps outer current set -4
+bindsym $mod+KP_Multiply	gaps inner current set 0; gaps outer current set 0
 
 #=====================================================================
 # Binding Modes
@@ -488,34 +488,34 @@ set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	bindsym o	mode "$mode_gaps_outer"
+	bindsym i	mode "$mode_gaps_inner"
+	bindsym Return	mode "default"
+	bindsym Escape	mode "default"
 }
 mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
+	bindsym plus	gaps inner current plus 5
+	bindsym minus	gaps inner current minus 5
+	bindsym 0	gaps inner current set 0
 
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
+	bindsym Shift+plus	gaps inner all plus 5
+	bindsym Shift+minus	gaps inner all minus 5
+	bindsym Shift+0		gaps inner all set 0
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
+	bindsym plus	gaps outer current plus 5
+	bindsym minus	gaps outer current minus 5
+	bindsym 0	gaps outer current set 0
 
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
+	bindsym Shift+plus	gaps outer all plus 5
+	bindsym Shift+minus	gaps outer all minus 5
+	bindsym Shift+0		gaps outer all set 0
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 ### GAPS Binding mode Ends ###
@@ -525,43 +525,43 @@ bindsym $mod+Delete mode "$mode_system"
 bindsym $caps+Escape mode "$mode_system"
 set $mode_system l:🔒 e:🚪 u:👥 s:🌙 h:💽 r:🔄 S:❎
 mode "$mode_system" {
-    bindsym Delete exec --no-startup-id i3-exit lock, mode "default"
-    bindsym l exec --no-startup-id "smc pauseall; i3-exit lock"; exec --no-startup-id "sleep 0.5 && xset dpms force off", mode "default"
-    bindsym s exec --no-startup-id i3-exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3-exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3-exit logout, mode "default"
-    bindsym h exec --no-startup-id i3-exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3-exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3-exit shutdown, mode "default"
+	bindsym Delete exec --no-startup-id i3-exit lock, mode "default"
+	bindsym l exec --no-startup-id "smc pauseall; i3-exit lock"; exec --no-startup-id "sleep 0.5 && xset dpms force off", mode "default"
+	bindsym s exec --no-startup-id i3-exit suspend, mode "default"
+	bindsym u exec --no-startup-id i3-exit switch_user, mode "default"
+	bindsym e exec --no-startup-id i3-exit logout, mode "default"
+	bindsym h exec --no-startup-id i3-exit hibernate, mode "default"
+	bindsym r exec --no-startup-id i3-exit reboot, mode "default"
+	bindsym Shift+s exec --no-startup-id i3-exit shutdown, mode "default"
 
-    # exit system mode: "Enter" or "Escape"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+	# exit system mode: "Enter" or "Escape"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
 mode "resize" {
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
+	bindsym h resize shrink width 5 px or 5 ppt
+	bindsym j resize grow height 5 px or 5 ppt
+	bindsym k resize shrink height 5 px or 5 ppt
+	bindsym l resize grow width 5 px or 5 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+	# same bindings, but for the arrow keys
+	bindsym Left resize shrink width 10 px or 10 ppt
+	bindsym Down resize grow height 10 px or 10 ppt
+	bindsym Up resize shrink height 10 px or 10 ppt
+	bindsym Right resize grow width 10 px or 10 ppt
 
 		#
 		bindsym 1 mode "default", resize set 900 400
 		bindsym 2 mode "default", resize set 800 500
 		bindsym 3 mode "default", resize set 800 600
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+	# back to normal: Enter or Escape or $mod+r
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+r mode "default"
 }
 
 bindsym $mod+Shift+f mode "$freeze" ;; exec --no-startup-id notify-send "Distraction-free mode." "Press Super+Shift+f to return."
@@ -574,50 +574,50 @@ bindsym $caps+b mode "$broopen"
 set $broopen Open With:  [F3/3]: Vivaldi/P  [F4/4]: Opera/P  [F5/5]: Firefox/P  \
 [F6/6]: Chrome/P  [y]: MPV  [c]: MPV from Clipboard  [d]: dmenuhandler
 mode "$broopen" {
-        bindsym F3 exec --no-startup-id bro-open -o $BROWSER, mode "default"
-        bindsym F4 exec --no-startup-id bro-open -o opera --start-maximized, mode "default"
-        bindsym F5 exec --no-startup-id bro-open -o firefox, mode "default"
-        bindsym F6 exec --no-startup-id bro-open -o google-chrome-stable, mode "default"
-        bindsym 3 exec --no-startup-id bro-open -o $BROWSER --incognito, mode "default"
-        bindsym 4 exec --no-startup-id bro-open -o opera -private --start-maximized, mode "default"
-        bindsym 5 exec --no-startup-id bro-open -o firefox --private-window, mode "default"
-        bindsym 6 exec --no-startup-id bro-open -o google-chrome-stable --incognito, mode "default"
-        bindsym y exec --no-startup-id bro-open --mpv, mode "default"
-        bindsym c exec --no-startup-id bro-open -oc mpv, mode "default"
-        bindsym d exec --no-startup-id bro-open -o dmenuhandler, mode "default"
+	bindsym F3 exec --no-startup-id bro-open -o $BROWSER, mode "default"
+	bindsym F4 exec --no-startup-id bro-open -o opera --start-maximized, mode "default"
+	bindsym F5 exec --no-startup-id bro-open -o firefox, mode "default"
+	bindsym F6 exec --no-startup-id bro-open -o google-chrome-stable, mode "default"
+	bindsym 3 exec --no-startup-id bro-open -o $BROWSER --incognito, mode "default"
+	bindsym 4 exec --no-startup-id bro-open -o opera -private --start-maximized, mode "default"
+	bindsym 5 exec --no-startup-id bro-open -o firefox --private-window, mode "default"
+	bindsym 6 exec --no-startup-id bro-open -o google-chrome-stable --incognito, mode "default"
+	bindsym y exec --no-startup-id bro-open --mpv, mode "default"
+	bindsym c exec --no-startup-id bro-open -oc mpv, mode "default"
+	bindsym d exec --no-startup-id bro-open -o dmenuhandler, mode "default"
 
-                bindsym Return mode "default"
-                bindsym Escape mode "default"
-                bindsym $caps+b mode "default"
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+		bindsym $caps+b mode "default"
 }
 
 bindsym $mod+z mode "$run"
-set $run   Run
+set $run  Run
 mode "$run" {
-        bindsym f exec --no-startup-id firefox, mode "default"
-        bindsym Shift+f exec --no-startup-id firefox --private-window, mode "default"
-        bindsym g exec --no-startup-id google-chrome-stable, mode "default"
-        bindsym Shift+g exec --no-startup-id google-chrome-stable --incognito, mode "default"
-        bindsym m exec --no-startup-id meld, mode "default"
-        bindsym v exec --no-startup-id virtualbox, mode "default"
+	bindsym f exec --no-startup-id firefox, mode "default"
+	bindsym Shift+f exec --no-startup-id firefox --private-window, mode "default"
+	bindsym g exec --no-startup-id google-chrome-stable, mode "default"
+	bindsym Shift+g exec --no-startup-id google-chrome-stable --incognito, mode "default"
+	bindsym m exec --no-startup-id meld, mode "default"
+	bindsym v exec --no-startup-id virtualbox, mode "default"
 
-                # back to normal: Enter or Escape or $mod+z
-                bindsym Return mode "default"
-                bindsym Escape mode "default"
-                bindsym z mode "default"
-                bindsym $mod+z mode "default"
+		# back to normal: Enter or Escape or $mod+z
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+		bindsym z mode "default"
+		bindsym $mod+z mode "default"
 }
 
 bindsym $caps+a mode "$keystroke"
 set $keystroke 🔤
 mode "$keystroke" {
-        bindsym --release q exec --no-startup-id autotype mail, mode "default"
-        bindsym --release minus exec --no-startup-id autotype banner, mode "default"
-        bindsym --release comma exec --no-startup-id autotype mdcode, mode "default"
+	bindsym --release q exec --no-startup-id autotype mail, mode "default"
+	bindsym --release minus exec --no-startup-id autotype banner, mode "default"
+	bindsym --release comma exec --no-startup-id autotype mdcode, mode "default"
 
-                # back to normal: Escape or $caps+a
-                bindsym Escape mode "default"
-                bindsym $caps+a mode "default"
+	# back to normal: Escape or $caps+a
+	bindsym Escape mode "default"
+	bindsym $caps+a mode "default"
 }
 
 #=====================================================================
@@ -628,16 +628,16 @@ set $statuscmd i3blocks
 set $statussig SIGRTMIN+10
 set $volumestep 10
 
-bindsym XF86AudioMute        exec --no-startup-id i3-volume -mn -y -t $statuscmd -u $statussig
-bindsym XF86AudioLowerVolume exec --no-startup-id i3-volume -np -y -d $volumestep -t $statuscmd -u $statussig
-bindsym XF86AudioRaiseVolume exec --no-startup-id i3-volume -np -y -i $volumestep -t $statuscmd -u $statussig
+bindsym XF86AudioMute		exec --no-startup-id i3-volume -mn -y -t $statuscmd -u $statussig
+bindsym XF86AudioLowerVolume	exec --no-startup-id i3-volume -np -y -d $volumestep -t $statuscmd -u $statussig
+bindsym XF86AudioRaiseVolume	exec --no-startup-id i3-volume -np -y -i $volumestep -t $statuscmd -u $statussig
 
 # Switch Output
-bindsym $mod+XF86AudioMute   exec --no-startup-id "toggle audio; pkill -$statussig i3blocks"
+bindsym $mod+XF86AudioMute	exec --no-startup-id "toggle audio; pkill -$statussig i3blocks"
 
 ## Startup/Run
-bindsym $mod+XF86AudioLowerVolume       exec killall pavucontrol || pavucontrol
-bindsym $mod+XF86AudioRaiseVolume       exec $term -e pulsemixer
+bindsym $mod+XF86AudioLowerVolume	exec killall pavucontrol || pavucontrol
+bindsym $mod+XF86AudioRaiseVolume	exec $term -e pulsemixer
 
 #=====================================================================
 

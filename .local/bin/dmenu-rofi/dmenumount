@@ -54,7 +54,7 @@ if [ -z "$usbdrives" ]; then
 else
 	if [ -z "$anddrives" ]; then
 		echo "USB drive(s) detected."
-	       	mountusb
+		mountusb
 	else
 		echo "Mountable USB drive(s) and Android device(s) detected."
 		asktype

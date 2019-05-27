@@ -41,7 +41,7 @@ screencast() { \
 	"$HOME/screencast-$(date '+%y%m%d-%H%M-%S').mkv" &
 	echo $! > /tmp/recordingpid
 	updateicon "⏺️🎙️"
-       	}
+	}
 
 video() { ffmpeg \
 	-f x11grab \
@@ -94,7 +94,7 @@ askrecording() { \
 
 asktoend() { \
 	response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?") &&
-	[ "$response" = "Yes" ] &&  killrecording
+	[ "$response" = "Yes" ] && killrecording
 	}
 
 

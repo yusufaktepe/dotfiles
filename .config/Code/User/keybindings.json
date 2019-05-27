@@ -1,11 +1,11 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
-    {
-        "key": "ctrl+alt+b",
-        "command": "workbench.action.toggleActivityBarVisibility"
-    },
-    {
-        "key": "alt+[Backquote]",
-        "command": "openInTerminal"
-    }
+	{
+		"key": "ctrl+alt+b",
+		"command": "workbench.action.toggleActivityBarVisibility"
+	},
+	{
+		"key": "alt+[Backquote]",
+		"command": "openInTerminal"
+	}
 ]
