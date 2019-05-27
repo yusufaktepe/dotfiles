@@ -5,23 +5,27 @@
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
 export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' | sed 's/:*$//')"
-# export PATH=$PATH:$HOME/.local/bin
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# Defaults:
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export TERMINAL="st"
-# export BROWSER="/usr/bin/xdg-open"
 export BROWSER="vivaldi-stable"
 export READER="zathura"
-export FILE="vifm"
-export SUDO_ASKPASS="$HOME/.local/bin/dmenu-rofi/rofi-askpass"
-export LESSHISTFILE="$HOME/.cache/lesshst"
-export INPUTRC="$HOME/.config/inputrc"
-export FZF_DEFAULT_OPTS="--layout=reverse --height 50%"
+export FILE="vu"
 
+# Keep $HOME clean:
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+export INPUTRC="$HOME/.config/inputrc"
+export LESSHISTFILE="$HOME/.cache/lesshst"
+export NOTMUCH_CONFIG="$HOME/.config/notmuch.conf"
+export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
+
+# Others:
+export SUDO_ASKPASS="$HOME/.local/bin/dmenu-rofi/rofi-askpass"
+export FZF_DEFAULT_OPTS="--layout=reverse --height 50%"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # Start i3 on tty1 login

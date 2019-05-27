@@ -40,7 +40,7 @@ setopt ALWAYS_TO_END
 
 #==================================
 
-HISTFILE=~/.zsh_history
+HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=10000
 
