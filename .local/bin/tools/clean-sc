@@ -1,26 +1,26 @@
-#!/bin/bash
+#!/bin/sh
 # Spotify cache cleaner.
 
 BD=$(tput bold)
 NM=$(tput sgr0)
 
 if [ "$(id -u)" = "0" ]; then
-   printf "${BD}ERROR :: This script must be run as normal user. Exit.${NM}\n" 1>&2
-   exit 1
+	printf '%s' "${BD}ERROR :: This script must be run as normal user. Exit.${NM}\n" 1>&2
+	exit 1
 fi
 
-if [ -d "$HOME/.cache/spotify" ] && [ -d "$HOME/.cache/spotify/Browser/Cache" ] && [ -d "$HOME/.cache/spotify/Data" ] && [ -d "$HOME/.cache/spotify/Storage" ] ; then
-    printf "${BD}INFO :: BEFORE CLEANING${NM}\n"
-    du -h -d 0 $HOME/.cache/spotify
-    printf "${BD}---------------------------------------${NM}\n"
-    printf "${BD}INFO :: CLEANING SPOTIFY CACHE...${NM}\n"
-    rm -rf $HOME/.cache/spotify/Browser/Cache/*
-    rm -rf $HOME/.cache/spotify/Data/*
-    rm -rf $HOME/.cache/spotify/Storage/*
-    printf "${BD}---------------------------------------${NM}\n"
-    printf "${BD}INFO :: AFTER CLEANING${NM}\n"
-    du -h -d 0 $HOME/.cache/spotify
+dir="$HOME/.cache/spotify"
+
+if [ -d "$dir" ] && [ -d "$dir/Browser/Cache" ] && [ -d "$dir/Data" ] && [ -d "$dir/Storage" ]; then
+		printf '%s' "${BD}INFO :: BEFORE CLEANING${NM}\n"
+		du -h -d 0 "$dir"
+		printf '%s' "${BD}---------------------------------------${NM}\n"
+		printf '%s' "${BD}INFO :: CLEANING SPOTIFY CACHE...${NM}\n"
+		rm -rf "$dir/Browser/Cache/*" "$dir/Data/*" "$dir/Storage/*"
+		printf '%s' "${BD}---------------------------------------${NM}\n"
+		printf '%s' "${BD}INFO :: AFTER CLEANING${NM}\n"
+		du -h -d 0 "$dir"
 else
-    printf "${BD}ERROR :: Spotify cache directories were not found. Exit.${NM}\n"
-    exit 1
+		printf '%s' "${BD}ERROR :: Spotify cache directories not found. Exit.${NM}\n"
+		exit 1
 fi

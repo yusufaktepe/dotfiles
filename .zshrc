@@ -72,7 +72,7 @@ zstyle ':completion:*:*:*:users' ignored-patterns \
 	adm amanda apache at avahi avahi-autoipd beaglidx bin cacti canna \
 	clamav daemon dbus distcache dnsmasq dovecot fax ftp games gdm \
 	gkrellmd gopher hacluster haldaemon halt hsqldb ident junkbust kdm \
-	ldap lp mail mailman mailnull man messagebus  mldonkey mysql nagios \
+	ldap lp mail mailman mailnull man messagebus mldonkey mysql nagios \
 	named netdump news nfsnobody nobody nscd ntp nut nx obsrun openvpn \
 	operator pcap polkitd postfix postgres privoxy pulse pvm quagga radvd \
 	rpc rpcuser rpm rtkit scard shutdown squid sshd statd svn sync tftp \
@@ -135,7 +135,7 @@ typeset -g -A key
 key[Home]="${terminfo[khome]}"
 key[End]="${terminfo[kend]}"
 key[Insert]="${terminfo[kich1]}"
-key[Backspace]="${terminfo[kbs]}"
+key[Backs]="${terminfo[kbs]}"
 key[Delete]="${terminfo[kdch1]}"
 key[Up]="${terminfo[kcuu1]}"
 key[Down]="${terminfo[kcud1]}"
@@ -144,38 +144,38 @@ key[Right]="${terminfo[kcuf1]}"
 key[PgUp]="${terminfo[kpp]}"
 key[PgDown]="${terminfo[knp]}"
 key[ShiftTab]="${terminfo[kcbt]}"
-key[CtrlBacks]="${terminfo[cub1]}"
+key[C-Backs]="${terminfo[cub1]}"
 key[StHome]="${terminfo[home]}"
 key[StIns]="${terminfo[smir]}"
 key[StDel]="${terminfo[dch1]}"
 
 # setup key accordingly
-[ -n "${key[Home]}"      ] && bindkey -- "${key[Home]}"		beginning-of-line
-[ -n "${key[End]}"       ] && bindkey -- "${key[End]}"		end-of-line
-[ -n "${key[Insert]}"    ] && bindkey -- "${key[Insert]}"	overwrite-mode
-[ -n "${key[Backspace]}" ] && bindkey -- "${key[Backspace]}"	backward-delete-char
-[ -n "${key[Delete]}"    ] && bindkey -- "${key[Delete]}"	delete-char
-[ -n "${key[Up]}"        ] && bindkey -- "${key[Up]}"		history-substring-search-up
-[ -n "${key[Down]}"      ] && bindkey -- "${key[Down]}"		history-substring-search-down
-[ -n "${key[Left]}"      ] && bindkey -- "${key[Left]}"		backward-char
-[ -n "${key[Right]}"     ] && bindkey -- "${key[Right]}"	forward-char
-[ -n "${key[PgUp]}"      ] && bindkey -- "${key[PgUp]}"		history-beginning-search-backward
-[ -n "${key[PgDown]}"    ] && bindkey -- "${key[PgDown]}"	history-beginning-search-forward
-[ -n "${key[ShiftTab]}"  ] && bindkey -- "${key[ShiftTab]}"	reverse-menu-complete
-[ -n "${key[CtrlBacks]}" ] && bindkey -- "${key[CtrlBacks]}"	backward-kill-word
-[ -n "${key[StHome]}"    ] && bindkey -- "${key[StHome]}"	beginning-of-line
-[ -n "${key[StIns]}"     ] && bindkey -- "${key[StIns]}"	overwrite-mode
-[ -n "${key[StDel]}"     ] && bindkey -- "${key[StDel]}"	delete-char
+[ -n "${key[Home]}"	] && bindkey -- "${key[Home]}"		beginning-of-line
+[ -n "${key[End]}"	] && bindkey -- "${key[End]}"		end-of-line
+[ -n "${key[Insert]}"	] && bindkey -- "${key[Insert]}"	overwrite-mode
+[ -n "${key[Backs]}"	] && bindkey -- "${key[Backs]}"		backward-delete-char
+[ -n "${key[Delete]}"	] && bindkey -- "${key[Delete]}"	delete-char
+[ -n "${key[Up]}"	] && bindkey -- "${key[Up]}"		history-substring-search-up
+[ -n "${key[Down]}"	] && bindkey -- "${key[Down]}"		history-substring-search-down
+[ -n "${key[Left]}"	] && bindkey -- "${key[Left]}"		backward-char
+[ -n "${key[Right]}"	] && bindkey -- "${key[Right]}"		forward-char
+[ -n "${key[PgUp]}"	] && bindkey -- "${key[PgUp]}"		history-beginning-search-backward
+[ -n "${key[PgDown]}"	] && bindkey -- "${key[PgDown]}"	history-beginning-search-forward
+[ -n "${key[ShiftTab]}"	] && bindkey -- "${key[ShiftTab]}"	reverse-menu-complete
+[ -n "${key[C-Backs]}"	] && bindkey -- "${key[C-Backs]}"	backward-kill-word
+[ -n "${key[StHome]}"	] && bindkey -- "${key[StHome]}"	beginning-of-line
+[ -n "${key[StIns]}"	] && bindkey -- "${key[StIns]}"		overwrite-mode
+[ -n "${key[StDel]}"	] && bindkey -- "${key[StDel]}"		delete-char
 
-[ -n "${key[Home]}"      ] && bindkey -M vicmd "${key[Home]}"	beginning-of-line
-[ -n "${key[End]}"       ] && bindkey -M vicmd "${key[End]}"	end-of-line
-[ -n "${key[Insert]}"    ] && bindkey -M vicmd "${key[Insert]}"	vi-insert
-[ -n "${key[Delete]}"    ] && bindkey -M vicmd "${key[Delete]}"	delete-char
-[ -n "${key[PgUp]}"      ] && bindkey -M vicmd "${key[PgUp]}"	history-beginning-search-backward
-[ -n "${key[PgDown]}"    ] && bindkey -M vicmd "${key[PgDown]}"	history-beginning-search-forward
-[ -n "${key[StHome]}"    ] && bindkey -M vicmd "${key[StHome]}"	beginning-of-line
-[ -n "${key[StIns]}"     ] && bindkey -M vicmd "${key[StIns]}"	vi-insert
-[ -n "${key[StDel]}"     ] && bindkey -M vicmd "${key[StDel]}"	delete-char
+[ -n "${key[Home]}"	] && bindkey -M vicmd "${key[Home]}"	beginning-of-line
+[ -n "${key[End]}"	] && bindkey -M vicmd "${key[End]}"	end-of-line
+[ -n "${key[Insert]}"	] && bindkey -M vicmd "${key[Insert]}"	vi-insert
+[ -n "${key[Delete]}"	] && bindkey -M vicmd "${key[Delete]}"	delete-char
+[ -n "${key[PgUp]}"	] && bindkey -M vicmd "${key[PgUp]}"	history-beginning-search-backward
+[ -n "${key[PgDown]}"	] && bindkey -M vicmd "${key[PgDown]}"	history-beginning-search-forward
+[ -n "${key[StHome]}"	] && bindkey -M vicmd "${key[StHome]}"	beginning-of-line
+[ -n "${key[StIns]}"	] && bindkey -M vicmd "${key[StIns]}"	vi-insert
+[ -n "${key[StDel]}"	] && bindkey -M vicmd "${key[StDel]}"	delete-char
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.

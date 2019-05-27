@@ -543,9 +543,9 @@
 #
 #
 #def_key "f"
-#	find
+#  find
 #def_key "f"
-#	find_item_forward
+#  find_item_forward
 
 def_key "+"
     show_clock
