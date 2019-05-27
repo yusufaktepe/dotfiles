@@ -1,3 +1,4 @@
 .config/doublecmd/*[.err,.cache,hist*.xml]
 .config/systemd/user/*.target.wants
+.zsh_history
 
