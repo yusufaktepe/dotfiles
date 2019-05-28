@@ -5,7 +5,7 @@
 # Executed by startx
 
 userxres="$HOME/.Xresources"
-usercxres="$HOME/.config/xresources/Xresources"
+usercxres="$XDG_CONFIG_HOME/X11/Xresources"
 userxdef="$HOME/.Xdefaults"
 usermodmap="$HOME/.Xmodmap"
 sysres="/etc/X11/xinit/.Xresources"
