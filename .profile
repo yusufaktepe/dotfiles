@@ -45,5 +45,5 @@ sudo -n loadkeys ~/.config/ttymaps.kmap 2>/dev/null
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
-# If shell is bash, source .bashrc
-[ -n "$BASH_VERSION" ] && [ -f ~/.bashrc ] && source "$HOME/.bashrc"
+# If login shell is bash, source bashrc
+[ -n "$BASH_VERSION" ] && [ -f "$XDG_CONFIG_HOME/bashrc" ] && . "$XDG_CONFIG_HOME/bashrc"
