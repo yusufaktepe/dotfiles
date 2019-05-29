@@ -21,7 +21,7 @@ export FILE="vu"
 
 # Keep $HOME clean:
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export INPUTRC="$XDG_CONFIG_HOME/inputrc"
+export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch.conf"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
@@ -46,4 +46,4 @@ export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # If login shell is bash, source bashrc
-[ -n "$BASH_VERSION" ] && [ -f "$XDG_CONFIG_HOME/bashrc" ] && . "$XDG_CONFIG_HOME/bashrc"
+[ -n "$BASH_VERSION" ] && [ -f "$BDOTDIR/.bashrc" ] && . "$BDOTDIR/.bashrc"

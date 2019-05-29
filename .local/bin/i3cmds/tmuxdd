@@ -1,7 +1,0 @@
-#!/bin/sh
-# This file originally taken from:
-# https://github.com/LukeSmithxyz/voidrice
-
-# This is the script that i3 runs to either start tmux in
-# the dropdown terminal or log into a previous session.
-tmux a || tmux

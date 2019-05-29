@@ -8,7 +8,7 @@
 
 PS1="\[$(tput bold)\]\[$(tput setaf 1)\][\[$(tput setaf 3)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 4)\]\h \[$(tput setaf 5)\]\W\[$(tput setaf 1)\]]\[$(tput setaf 7)\]\\$ \[$(tput sgr0)\]"
 
-HISTFILE=~/.cache/bash_history
+HISTFILE=$BDOTDIR/.bash_history
 HISTSIZE= HISTFILESIZE= # Infinite history.
 HISTCONTROL=ignoreboth
 
@@ -25,4 +25,4 @@ shopt -s histappend
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 # Source my aliases:
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+[ -f "$HOME/.config/shell/aliasrc" ] && source "$HOME/.config/shell/aliasrc"
