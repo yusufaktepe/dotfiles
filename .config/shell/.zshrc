@@ -82,6 +82,9 @@ zstyle '*' single-ignored show
 
 WORDCHARS=${WORDCHARS//\/[&.;]}
 
+# Enable completion for tmux wrapper
+compdef _tmux tmx
+
 #=====================================================================
 # Prompt
 #=====================================================================
@@ -388,5 +391,5 @@ alias -g N="&>/dev/null"
 alias -g N1="1>/dev/null"
 alias -g N2="2>/dev/null"
 
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+[ -f "$ZDOTDIR/aliasrc" ] && source "$ZDOTDIR/aliasrc"
 

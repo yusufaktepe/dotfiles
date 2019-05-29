@@ -1,0 +1,5 @@
+#!/bin/sh
+# This is the script that either starts
+# tmux or logs into a previous session.
+
+tmux a || tmux -f "$XDG_CONFIG_HOME/shell/tmux.conf"
