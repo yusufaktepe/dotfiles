@@ -29,6 +29,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'chrisbra/Recover.vim'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-unimpaired'
+Plug 'mbbill/undotree'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 "let g:gruvbox_contrast_dark='hard'
@@ -40,17 +44,18 @@ set bg=dark
 set go=a
 set mouse=a
 set clipboard=unnamedplus
-set hlsearch		" keep matches highlighted after searching
-set ignorecase		" ignore case when searching
-set smartcase		" don't ignore case if user types an uppercase letter
-set scrolloff=3		" keep a minimum of 3 lines between cursor and top/bottom of screen
-set inccommand=nosplit	" when typing a :%s/foo/bar/g command, show live preview
-set title		" set and update terminal title
-set cursorline		" highlight the current cursor line
-set noshowmode		" disable native mode display (use airline instead)
-set showmatch		" highlight matching parens/brackets/etc
-set matchtime=2		" show matching parens/brackets for 200ms
-set termguicolors	" enable true color mode for terminals that support it
+set hlsearch			" keep matches highlighted after searching
+set ignorecase			" ignore case when searching
+set smartcase			" don't ignore case if user types an uppercase letter
+set scrolloff=3			" keep a minimum of 3 lines between cursor and top/bottom of screen
+set inccommand=nosplit		" when typing a :%s/foo/bar/g command, show live preview
+set title			" set and update terminal title
+set cursorline			" highlight the current cursor line
+set noshowmode			" disable native mode display (use airline instead)
+set showmatch			" highlight matching parens/brackets/etc
+set matchtime=2			" show matching parens/brackets for 200ms
+set termguicolors		" enable true color mode for terminals that support it
+set splitbelow splitright	" Splits open at the bottom and right
 
 set undofile			" save undo history to a file
 set undodir=~/.cache/vim/undo	" set undo directory
@@ -82,13 +87,16 @@ set undodir=~/.cache/vim/undo	" set undo directory
 " Spell-check set to <leader>o, 'o' for 'orthography':
 	map <leader>o :setlocal spell! spelllang=en_us<CR>
 
-" Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
-	set splitbelow splitright
-
 " Nerd tree
 	map <leader>n :NERDTreeToggle<CR>
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 	let NERDTreeShowHidden=1
+
+" Undo tree
+	nnoremap <F5> :UndotreeToggle<CR>
+	let g:undotree_ShortIndicators = 1
+	let g:undotree_WindowLayout = 2
+	let g:undotree_DiffpanelHeight = 6
 
 " GitGutter
 	let g:gitgutter_enabled = 0 " disabled by default
