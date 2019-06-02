@@ -3,7 +3,7 @@
 # ~/.config/aliasrc
 #
 
-alias cp="cp -i"
+alias cp='cp -i'
 alias mkdir='mkdir -pv'
 alias mv='timeout 8 mv -i'
 alias rm='timeout 3 rm -I --one-file-system'
@@ -14,7 +14,6 @@ alias info='info --vi-keys'
 alias gitu='git add . && git commit -a -S && git push'
 alias mktree='tree -a -I .git > TREE'
 alias e='$EDITOR' v='$EDITOR'
-alias ep='$EDITOR PKGBUILD'
 alias SS='sudo systemctl'
 alias f='$FILE'
 alias ka='killall'
@@ -99,6 +98,7 @@ alias ys='ssh yusuf@35.227.93.190'
 alias weather='curl -s wttr.in'
 alias publicip='curl ifconfig.me'
 localip() { ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}' ;}
+sx() { startx "$XDG_CONFIG_HOME/X11/xinitrc" "$@" -- -quiet > ~/.cache/Xorg.log 2>&1 ;}
 
 alias lock='betterlockscreen -l dimblur > /dev/null 2>&1 & disown'
 
@@ -107,9 +107,9 @@ alias ps_mem='sudo ps_mem'
 alias nethogs='sudo nethogs'
 
 # YouTube
-alias yt="youtube-dl --add-metadata -i" # Download video link
-alias yta="yt -x -f bestaudio/best" # Download only audio
-alias YT="youtube-viewer"
+alias yt='youtube-dl --add-metadata -i' # Download video link
+alias yta='yt -x -f bestaudio/best' # Download only audio
+alias YT='youtube-viewer'
 
 clipcopy() {
 	if command -v xclip >/dev/null; then
