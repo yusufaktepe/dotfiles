@@ -1,4 +1,4 @@
-let mapleader =","
+let mapleader ="\<space>"
 
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -33,6 +33,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 "let g:gruvbox_contrast_dark='hard'
@@ -56,6 +57,8 @@ set showmatch			" highlight matching parens/brackets/etc
 set matchtime=2			" show matching parens/brackets for 200ms
 set termguicolors		" enable true color mode for terminals that support it
 set splitbelow splitright	" Splits open at the bottom and right
+set nofoldenable		" disable folding by default
+set breakindent			" visually indent wrapped line
 
 set undofile			" save undo history to a file
 set undodir=~/.cache/vim/undo	" set undo directory
