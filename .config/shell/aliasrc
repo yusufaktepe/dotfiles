@@ -98,7 +98,7 @@ alias ys='ssh yusuf@35.227.93.190'
 alias weather='curl -s wttr.in'
 alias publicip='curl ifconfig.me'
 localip() { ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}' ;}
-sx() { startx "$XDG_CONFIG_HOME/X11/xinitrc" "$@" -- -quiet > ~/.cache/Xorg.log 2>&1 ;}
+sx() { exec startx "$XDG_CONFIG_HOME/X11/xinitrc" "$@" -- -quiet > ~/.cache/Xorg.log 2>&1 ;}
 
 alias lock='betterlockscreen -l dimblur > /dev/null 2>&1 & disown'
 
