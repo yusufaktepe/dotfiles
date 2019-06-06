@@ -22,26 +22,18 @@
 	countcommits = shortlog -sn --no-merges
 	countcommitsall = shortlog -sn
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	tl = "!f() { git tag | sort -V ;}; f"
+	tl = !git tag | sort -V
 
-[color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
-	grep = yes
+[commit]
+	gpgsign = true
+
+[merge]
+	tool = vimdiff
+	log = true
 
 [push]
 	default = simple
 
-[merge]
-#	tool = meld
-	tool = vimdiff
-	log = true
-
 [log]
 	decorate = full
-
-[help]
-	autocorrect = 1
 
