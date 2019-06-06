@@ -5,9 +5,8 @@
 # This script will compile or run another finishing operation on a document. I
 # have this script run via vim.
 #
-# Compiles .tex. groff (.mom, .ms), .rmd, .md.
-# Opens .sent files as sent presentations.
-# Runs scripts based on extention or shebang
+# Compiles .tex. groff (.mom, .ms), .rmd, .md.  Opens .sent files as sent
+# presentations.  Runs scripts based on extention or shebang
 
 file=$(readlink -f "$1")
 dir=$(dirname "$file")
@@ -26,8 +25,8 @@ textype() { \
 	}
 
 case "$file" in
-	*\.ms) refer -PS -e "$file" | groff -me -ms -kejpt -T pdf > "$base".pdf ;;
-	*\.mom) refer -PS -e "$file" | groff -mom -kejpt -T pdf > "$base".pdf ;;
+	*\.ms) refer -PS -e "$file" | groff -me -ms -kept -T pdf > "$base".pdf ;;
+	*\.mom) refer -PS -e "$file" | groff -mom -kept -T pdf > "$base".pdf ;;
 	*\.[0-9]) refer -PS -e "$file" | groff -mandoc -T pdf > "$base".pdf ;;
 	*\.rmd) echo "require(rmarkdown); render('$file')" | R -q --vanilla ;;
 	*\.tex) textype "$file" ;;
