@@ -57,6 +57,7 @@ bindsym $mod+Shift+Return exec $N samedir
 # #---Start program launcher---# #
 bindsym $mod+d exec $N rofi -show combi
 bindsym $mod+c exec $N "rofi -show calc -modi calc -no-show-match -no-sort"
+bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
 
 # #---Clipboard management---# #
