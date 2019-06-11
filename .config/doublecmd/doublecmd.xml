@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="0.9.2 beta" ConfigVersion="10">
+<doublecmd DCVersion="0.9.3 beta" ConfigVersion="10">
   <Configuration Save="True" SortOrder="0" TreeType="0">
     <UseConfigInProgramDir>False</UseConfigInProgramDir>
     <FolderTabs Save="True"/>
@@ -324,7 +324,7 @@
           <Icon>pk-package-sources</Icon>
           <Hint>which package a file belongs to</Hint>
           <Command>st</Command>
-          <Params>-n dc-term-bttns -e sh -c "pacman -Qo %f; read -n 1 -s -r -p 'Press any key to continue'"</Params>
+          <Params>-n dc-term-bttns -e bash -c "pacman -Qo %f; read -n 1 -s -r -p 'Press any key to continue'"</Params>
         </Program>
         <Separator/>
         <Command>
@@ -362,9 +362,9 @@
       <Maximized>False</Maximized>
       <Splitter>50</Splitter>
       <Left>0</Left>
-      <Top>41</Top>
+      <Top>21</Top>
       <Width>1366</Width>
-      <Height>727</Height>
+      <Height>747</Height>
       <PixelsPerInch>96</PixelsPerInch>
     </Position>
   </MainWindow>
@@ -373,6 +373,7 @@
   </Language>
   <Behaviours>
     <GoToRoot>False</GoToRoot>
+    <ActiveRight>False</ActiveRight>
     <RunInTerminalStayOpenCmd>st</RunInTerminalStayOpenCmd>
     <RunInTerminalStayOpenParams>-e sh -c '{command}; echo -n Press ENTER to exit... ; read a'</RunInTerminalStayOpenParams>
     <RunInTerminalCloseCmd>st</RunInTerminalCloseCmd>
@@ -672,7 +673,7 @@
     <CreateNewEncoding>3</CreateNewEncoding>
   </Description>
   <AutoRefresh>
-    <Options>3</Options>
+    <Options>5</Options>
     <ExcludeDirs/>
     <Mode>1</Mode>
   </AutoRefresh>
@@ -736,7 +737,7 @@
   </DirectoryHotList>
   <Viewer>
     <PreviewVisible>False</PreviewVisible>
-    <ImageStretch>False</ImageStretch>
+    <ImageStretch>True</ImageStretch>
     <ImageExifRotate>True</ImageExifRotate>
     <ImageStretchLargeOnly>False</ImageStretchLargeOnly>
     <ImageCenter>True</ImageCenter>
