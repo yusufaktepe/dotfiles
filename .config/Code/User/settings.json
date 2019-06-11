@@ -33,7 +33,7 @@
 	},
 	"editor.fontSize": 16,
 	"breadcrumbs.enabled": true,
-	"terminal.external.linuxExec": "st",
+	"terminal.external.linuxExec": "$TERMINAL",
 	"terminal.integrated.fontSize": 16,
 	"git.enableCommitSigning": true,
 	"editor.tabSize": 8,

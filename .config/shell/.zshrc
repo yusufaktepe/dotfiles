@@ -201,6 +201,10 @@ bindkey '^[Od' backward-word
 
 bindkey '^[[A' history-substring-search-up	# [Up]
 bindkey '^[[B' history-substring-search-down	# [Down]
+bindkey '^?' backward-delete-char		# [Backspace] - *workaround: xterm..
+
+bindkey '^[[F' end-of-line			# [End] - *workaround: xterm..
+bindkey -M vicmd '^[[F' end-of-line
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down

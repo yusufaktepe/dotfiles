@@ -76,7 +76,7 @@ format() {
 case $BLOCK_BUTTON in
   1) killall pavucontrol || pavucontrol && pkill -SIGRTMIN+10 i3blocks & ;;
   2) amixer -q -D $MIXER sset $SCONTROL $(capability) toggle ;;
-  3) setsid "$TERMINAL" -n _blockterm -e pulsemixer; pkill -SIGRTMIN+10 i3blocks ;;
+  3) setsid $TERMINAL_N _blockterm -e pulsemixer; pkill -SIGRTMIN+10 i3blocks ;;
   4) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}+ unmute ;;
   5) amixer -q -D $MIXER sset $SCONTROL $(capability) ${STEP}- unmute ;;
 esac

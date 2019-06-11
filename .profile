@@ -15,6 +15,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export TERMINAL="st"
+export TERMINAL_N="st -n"
 export BROWSER="vivaldi-stable"
 export READER="zathura"
 export FILE="vu"
@@ -35,7 +36,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # Start i3 on tty1 login
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-	exec startx "$XDG_CONFIG_HOME/X11/xinitrc" -- -quiet > ~/.cache/Xorg.log 2>&1
+	exec startx "$XINITRC" -- -quiet > ~/.cache/Xorg.log 2>&1
 fi
 
 # Switch escape and caps if tty (add to sudoers NOPASSWD):

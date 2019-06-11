@@ -16,7 +16,7 @@
 
 case $BLOCK_BUTTON in
 	1) notify-send -a i3blocks -i NONE "🧠 Memory hogs:" "$(ps axch -o cmd:15,%mem --sort=-%mem | head)" ;;
-	3) setsid "$TERMINAL" -n _blockterm -e sh -c "sudo ps_mem; read a" ;;
+	3) setsid $TERMINAL_N _blockterm -e sh -c "sudo ps_mem; read a" ;;
 esac
 
 TYPE="${BLOCK_INSTANCE:-mem}"

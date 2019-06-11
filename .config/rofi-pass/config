@@ -47,7 +47,7 @@ xdotool_delay=12
 
 ## Programs to be used
 # Editor
-EDITOR='st -n _blockterm -e nvim'
+EDITOR="$TERMINAL_N _blockterm -e nvim"
 
 # Browser
 BROWSER='xdg-open'

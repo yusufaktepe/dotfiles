@@ -15,6 +15,7 @@ floating_modifier $mod
 # Set basic vars
 set $N --no-startup-id
 set $term $N $TERMINAL
+set $termins $N $TERMINAL_N
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -47,7 +48,7 @@ bindsym $mod+Ctrl+x	--release exec $N xkill
 
 # #---Start a terminal---# #
 bindsym $mod+Return exec $term
-bindsym $mod+quotedbl exec $term -n floating
+bindsym $mod+quotedbl exec $termins floating
 bindsym $mod+comma split horizontal ;; exec $term
 bindsym $mod+period split vertical ;; exec $term
 bindsym $mod+udiaeresis exec $N ddspawn tmuxdd
@@ -95,13 +96,13 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 bindsym $mod+Shift+t exec $N pkill compton || compton -b
 bindsym $mod+Shift+z exec $N toggle redshift
 bindsym $mod+Shift+F12 exec $N sudo -A systemctl restart NetworkManager
-bindsym $mod+F12 exec $term -n "_nmtui" -e "nmtui-connect"
+bindsym $mod+F12 exec $termins "_nmtui" -e "nmtui-connect"
 
 # Pause players & switch to ws0:
 bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 
 ## Function Buttons
-bindsym XF86Launch1 exec $term -n htop-floating -e htop
+bindsym XF86Launch1 exec $termins htop-floating -e htop
 bindsym XF86Launch2 exec $N rofi -show combi
 bindsym XF86Launch9 exec $N toggle_crow
 
@@ -640,7 +641,7 @@ bindsym $mod+XF86AudioMute	exec $N "toggle audio; pkill -$statussig i3blocks"
 
 ## Startup/Run
 bindsym $mod+XF86AudioLowerVolume	exec killall pavucontrol || pavucontrol
-bindsym $mod+XF86AudioRaiseVolume	exec $term -e pulsemixer
+bindsym $mod+XF86AudioRaiseVolume	exec $termins _blockterm -e pulsemixer
 
 #=====================================================================
 
