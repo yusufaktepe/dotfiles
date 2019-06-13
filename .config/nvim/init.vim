@@ -64,12 +64,14 @@ set undofile			" save undo history to a file
 set undodir=~/.cache/vim/undo	" set undo directory
 
 " Some basics:
-	nnoremap c "_c
 	set nocompatible
 	filetype plugin on
 	syntax on
 	set encoding=utf-8
 	set number relativenumber
+" Do not copy deleted text with 'c' & 'x'
+	nnoremap c "_c
+	nnoremap x "_x
 " Enable autocompletion:
 	set wildmode=longest,list,full
 " Disables automatic commenting on newline:
