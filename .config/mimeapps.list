@@ -9,6 +9,7 @@ inode/directory=doublecmd-newtab.desktop
 application/pdf=org.pwmt.zathura.desktop
 text/html=vivaldi-stable.desktop
 application/rss+xml=rss.desktop
+application/xhtml+xml=vivaldi-stable.desktop
 
 [Added Associations]
 x-scheme-handler/http=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
@@ -23,3 +24,4 @@ text/plain=nvim.desktop;
 text/html=vivaldi-stable.desktop;vivaldi-snapshot.desktop;
 text/x-systemd-unit=nvim.desktop;
 application/x-shellscript=nvim.desktop;
+application/xhtml+xml=vivaldi-stable.desktop;
