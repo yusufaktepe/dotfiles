@@ -1,7 +1,7 @@
 [user]
 	name = Yusuf Aktepe
 	email = yusuf@yusufaktepe.com
-	signingkey = A5FCE8C299E2FA39082C8BBC976029A8BBF9254E
+	signingkey = BBF9254E
 
 [alias]
 	a = add --all
