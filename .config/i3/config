@@ -14,6 +14,7 @@ floating_modifier $mod
 
 # Set basic vars
 set $N --no-startup-id
+set $C exec $N pkill -0
 set $term $N $TERMINAL
 set $termins $N $TERMINAL_N
 
@@ -70,22 +71,21 @@ bindsym $agr+space exec $N cabl
 
 # #---Start Applications---# #
 bindsym $mod+F1 exec $term -e $FILE
-bindsym $mod+F2 exec doublecmd --no-splash
-bindsym $caps+F2 exec pcmanfm
-bindsym $mod+F3 exec $BROWSER --start-maximized
+bindsym $mod+F2 [class="Doublecmd"] focus ;; $C doublecmd || doublecmd --no-splash
+bindsym $mod+F3 [class="Vivaldi-stable"] focus ;; $C vivaldi-bin || $BROWSER --start-maximized
+bindsym $mod+F4 [class="Opera"] focus ;; $C opera || opera --start-maximized
+bindsym $mod+F5 [class="Firefox"] focus ;; $C firefox || firefox
+bindsym $mod+F6 [class="Google-chrome"] focus ;; $C chrome || google-chrome-stable
 bindsym $mod+Shift+F3 exec $BROWSER --incognito --start-maximized
-bindsym $mod+F4 exec opera --start-maximized
 bindsym $mod+Shift+F4 exec opera --private --start-maximized
-bindsym $mod+F5 exec firefox
 bindsym $mod+Shift+F5 exec firefox --private-window
-bindsym $mod+F6 exec google-chrome-stable
 bindsym $mod+Shift+F6 exec google-chrome-stable --incognito
 
 ## Caps+
-bindsym $caps+c [class="Code"] focus ;; exec $N code --extensions-dir ~/.config/Code/Ext
-bindsym $caps+m [class="cantata"] focus ;; exec $N pkill -0 cantata || cantata-mpd
-bindsym $caps+s [class="Spotify"] focus ;; exec $N pkill -0 spotify || spotify
-bindsym $caps+q [class="qBittorrent"] focus ;; exec $N pkill -0 qbittorrent || qbittorrent
+bindsym $caps+F2 exec pcmanfm
+bindsym $caps+m [class="cantata"] focus ;; $C cantata || cantata-mpd
+bindsym $caps+s [class="Spotify"] focus ;; $C spotify || spotify
+bindsym $caps+q [class="qBittorrent"] focus ;; $C qbittorrent || qbittorrent
 bindsym $caps+v [class="smplayer"] focus ;; exec $N smplayer
 bindsym $caps+7 [class="(?i)VirtualBox" title="(?i)Win7"] focus ;; exec $N VBoxManage startvm Win7
 bindsym $caps+w exec $N libreoffice --writer
@@ -298,7 +298,6 @@ for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 #assign [window_role="browser"]				$ws1
 assign [class="Firefox|(?i)Vivaldi"]			$ws1
 assign [class="Pcmanfm|Doublecmd"]			$ws2
-assign [class="Code"]					$ws7
 # assign [class="(?i)thunderbird"]			$ws9
 assign [class="qBittorrent"]				$ws10
 for_window [class="Spotify"] move to workspace		$ws11
