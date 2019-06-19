@@ -33,10 +33,10 @@ Plug 'tpope/vim-unimpaired'
 Plug 'mbbill/undotree'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'jiangmiao/auto-pairs'
+Plug 'jamessan/vim-gnupg'
 call plug#end()
 
-"let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_dark='hard'
 let g:airline_powerline_fonts=1
 let g:airline_theme='gruvbox'
 colorscheme gruvbox
