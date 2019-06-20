@@ -1,10 +1,14 @@
 #!/bin/sh
-# Notify me if my battery is below 35%.
+# Notify me if my battery is below 25%.
 
 BAT="BAT1"
 
-[ "$(cat /sys/class/power_supply/${BAT}/status)" = "Unknown" ] && exit
-
-[ "$(cat /sys/class/power_supply/${BAT}/capacity)" -lt 35 ] &&
-
-notify-send -u critical "Battery critically low."
+case "$(cat /sys/class/power_supply/${BAT}/status)" in
+	Charging|Unknown)
+		exit
+	;;
+	Discharging|*)
+		[ "$(cat /sys/class/power_supply/${BAT}/capacity)" -lt 25 ] &&
+		notify-send -u critical "Battery critically low." || exit 0
+	;;
+esac
