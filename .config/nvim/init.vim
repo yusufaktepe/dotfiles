@@ -21,6 +21,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'lambdalisue/suda.vim'
 Plug 'vifm/vifm.vim'
 Plug 'ap/vim-css-color'
@@ -36,10 +37,12 @@ Plug 'plasticboy/vim-markdown'
 Plug 'jamessan/vim-gnupg'
 call plug#end()
 
-let g:gruvbox_contrast_dark='hard'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline_powerline_fonts=1
 let g:airline_theme='gruvbox'
 colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
 set bg=dark
 
 set go=a
@@ -65,7 +68,7 @@ set undodir=~/.cache/vim/undo	" set undo directory
 
 " Some basics:
 	set nocompatible
-	filetype plugin on
+	filetype plugin indent on
 	syntax on
 	set encoding=utf-8
 	set number relativenumber
@@ -168,8 +171,8 @@ set undodir=~/.cache/vim/undo	" set undo directory
 	map <leader>b :vsp<space>$BIB<CR>
 	map <leader>r :vsp<space>$REFER<CR>
 
-" Replace all is aliased to S.
-	nnoremap S :%s//g<Left><Left>
+" Replace all with confirmation.
+	nnoremap S :%s//gc<Left><Left><Left>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
 	map <leader>c :w! \| !compiler <c-r>%<CR>
