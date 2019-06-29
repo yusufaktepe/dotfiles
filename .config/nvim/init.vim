@@ -1,4 +1,7 @@
-let mapleader ="\<space>"
+
+"=====================================================================
+" Plugins
+"=====================================================================
 
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -8,43 +11,71 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+
+" Interface
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'junegunn/goyo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'mbbill/undotree'
+
+" Editing & Motion
+Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
 Plug 'matze/vim-move'
 Plug 'andymass/vim-matchup'
-Plug 'scrooloose/nerdtree'
-Plug 'junegunn/goyo.vim'
-Plug 'morhetz/gruvbox'
-Plug 'PotatoesMaster/i3-vim-syntax'
+
+" Git
+Plug 'tpope/vim-fugitive'	" git wrapper
+Plug 'airblade/vim-gitgutter'	" shows git diff in the gutter (sign column)
 Plug 'jreybert/vimagit'
-Plug 'vimwiki/vimwiki'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'lambdalisue/suda.vim'
+
+" Syntax
+Plug 'hail2u/vim-css3-syntax'
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'chr4/nginx.vim'
 Plug 'vifm/vifm.vim'
-Plug 'ap/vim-css-color'
-Plug 'KabbAmine/vCoolor.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'chrisbra/Recover.vim'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-unimpaired'
-Plug 'mbbill/undotree'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'jamessan/vim-gnupg'
+
+" Javascript
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+
+" Misc
+Plug 'ap/vim-css-color'		" color name highlighter
+Plug 'vimwiki/vimwiki'		" personal wiki
+Plug 'KabbAmine/vCoolor.vim'	" color picker
+Plug 'godlygeek/tabular'	" text filtering and alignment
+Plug 'plasticboy/vim-markdown'	" syntax highlighting, matching rules and mappings
+Plug 'tpope/vim-eunuch'		" helpers for unix
+Plug 'tpope/vim-unimpaired'	" bracket mappings
+Plug 'lambdalisue/suda.vim'	" sudo helper
+Plug 'chrisbra/Recover.vim'	" show diff, when recovering a buffer
+Plug 'jamessan/vim-gnupg'	" edit gpg encrypted files
+Plug 'mattn/webapi-vim'		" interface to Web API (for gist-vim)
+Plug 'mattn/gist-vim'		" create gists
+Plug 'editorconfig/editorconfig-vim'
+
+" Themes
+Plug 'morhetz/gruvbox'
+
 call plug#end()
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_min_count = 2
-let g:airline_powerline_fonts=1
-let g:airline_theme='gruvbox'
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='hard'
-set bg=dark
+"=====================================================================
+" Settings
+"=====================================================================
 
+filetype plugin indent on
+syntax on
+
+set nocompatible
+set encoding=utf-8
+set number relativenumber
+set wildmode=longest,list,full	" enable autocompletion
 set go=a
 set mouse=a
 set clipboard=unnamedplus
@@ -62,149 +93,184 @@ set termguicolors		" enable true color mode for terminals that support it
 set splitbelow splitright	" Splits open at the bottom and right
 set nofoldenable		" disable folding by default
 set breakindent			" visually indent wrapped line
-
 set undofile			" save undo history to a file
 set undodir=~/.cache/vim/undo	" set undo directory
 
-" Some basics:
-	set nocompatible
-	filetype plugin indent on
-	syntax on
-	set encoding=utf-8
-	set number relativenumber
-" Do not copy deleted text with 'c' & 'x'
-	nnoremap c "_c
-	nnoremap x "_x
-" Enable autocompletion:
-	set wildmode=longest,list,full
-" Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" Theme
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='hard'
+set bg=dark
 
-" Press F12 to switch to ISO 8859-9 encoding
-	nnoremap <F12> :e ++enc=iso88599<CR>
+"=====================================================================
+" Mappings
+"=====================================================================
 
-" Suda plugin
-	cnoremap W!! <bar> :w suda://%<CR>
-	cnoremap WQ!! <bar> :wq suda://%<CR>
-	cnoremap R!! <bar> :r suda://%<CR>
-	cnoremap E!! <bar> :e suda://%<CR>
+let mapleader ="\<space>"
 
-" Goyo plugin makes text more readable when writing prose:
-	map <leader>f :Goyo \| set linebreak<CR>
+" Do not copy deleted text with 'c' & 'x' in normal mode
+nnoremap c "_c
+nnoremap x "_x
 
-" Spell-check set to <leader>o, 'o' for 'orthography':
-	map <leader>o :setlocal spell! spelllang=en_us<CR>
+" Shortcutting split navigation, saving a keypress:
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
-" Nerd tree
-	map <leader>n :NERDTreeToggle<CR>
-	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-	let NERDTreeShowHidden=1
+" Reload file with ISO 8859-9 encoding
+nnoremap <F12> :e ++enc=iso88599<CR>
 
-" Undo tree
-	nnoremap <F5> :UndotreeToggle<CR>
-	let g:undotree_ShortIndicators = 1
-	let g:undotree_WindowLayout = 2
-	let g:undotree_DiffpanelHeight = 6
+" Quit active
+nnoremap <silent> Q :lclose \| pclose \| confirm q<cr>
 
-" GitGutter
-	let g:gitgutter_enabled = 0 " disabled by default
+" Quit all, bring up a prompt when buffers have been changed
+nnoremap ZQ :confirm qall<cr>
 
-" Vim-move
-	let g:move_key_modifier = 'C'
-
-" VCoolor
-	let g:vcoolor_disable_mappings = 1
-	nmap <silent> <leader>V :VCoolor<CR>
-
-" quit active
-	nnoremap <silent> Q :lclose \| pclose \| confirm q<cr>
-
-" quit all, bring up a prompt when buffers have been changed
-	nnoremap ZQ :confirm qall<cr>
+" Save file
+noremap <C-s> :w<cr>
 
 " Clear search highlight and command-line on Esc
-	nnoremap <silent> <esc> :noh \| echo ""<cr>
+nnoremap <silent> <esc> :noh \| echo ""<cr>
 
 " Make j and k treat wrapped lines as independent lines
-	nnoremap <expr> j v:count ? 'j' : 'gj'
-	nnoremap <expr> k v:count ? 'k' : 'gk'
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
+
+" Enter command mode with substitution command prefilled
+nnoremap S :%s//gc<Left><Left><Left>
 
 " Indent visual selection without clearing selection
-	vmap > >gv
-	vmap < <gv
+vmap > >gv
+vmap < <gv
 
 " Delete while in insert mode
-	inoremap <C-d> <C-o>dd
-	inoremap <C-c> <C-o>D
+inoremap <C-d> <C-o>dd
+inoremap <C-c> <C-o>D
+
+" Duplicate line downwards/upwards
+nnoremap <C-M-j> "dY"dp
+nnoremap <C-M-k> "dY"dPj
 
 " Duplicate selection downwards/upwards
-	vnoremap <C-M-j> "dy`>"dpgv
-	vnoremap <C-M-k> "dy`<"dPjgv
+vnoremap <C-M-j> "dy`>"dpgv
+vnoremap <C-M-k> "dy`<"dPjgv
+
+" Copy selected text to system clipboard (gvim/nvim/vim-x11):
+vnoremap <C-c> "+y
+map <C-p> "+P
 
 " Yank path of current file to system clipboard
-	nnoremap <silent> <leader>yp :let @+ = expand("%:p")<cr>:echom "Copied " . @+<cr>
+nnoremap <silent> <leader>yp :let @+ = expand("%:p")<cr>:echom "Copied " . @+<cr>
 
 " Quickly edit a macro
 " See: https://github.com/mhinz/vim-galore#quickly-edit-your-macros
-	nnoremap <leader>m :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
+nnoremap <leader>m :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<cr><c-f><left>
 
 " Force redraw
 " See: https://github.com/mhinz/vim-galore#saner-ctrl-l
-	nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 " Reload vim configuration
-	nnoremap <silent> <leader>R :so ~/.config/nvim/init.vim<return><esc>
+nnoremap <silent> <leader>R :so ~/.config/nvim/init.vim<return><esc>
 
-" goto file under cursor in new tab
-	noremap gF <C-w>gf
-
-" Shortcutting split navigation, saving a keypress:
-	map <C-h> <C-w>h
-	map <C-j> <C-w>j
-	map <C-k> <C-w>k
-	map <C-l> <C-w>l
+" Goto file under cursor in new tab
+noremap gF <C-w>gf
 
 " Check file in shellcheck:
-	map <leader>s :!clear && shellcheck %<CR>
+map <leader>s :!clear && shellcheck %<CR>
 
-" Open my bibliography file in split
-	map <leader>b :vsp<space>$BIB<CR>
-	map <leader>r :vsp<space>$REFER<CR>
-
-" Replace all with confirmation.
-	nnoremap S :%s//gc<Left><Left><Left>
+" Open bibliography file in split
+map <leader>b :vsp<space>$BIB<CR>
+map <leader>r :vsp<space>$REFER<CR>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-	map <leader>c :w! \| !compiler <c-r>%<CR>
+map <leader>c :w! \| !compiler <c-r>%<CR>
 
 " Open corresponding .pdf/.html or preview
-	map <leader>p :!opout <c-r>%<CR><CR>
+map <leader>p :!opout <c-r>%<CR><CR>
+
+" Spell-check set to <leader>o, 'o' for 'orthography':
+map <leader>o :setlocal spell! spelllang=en_us<CR>
+
+"=====================================================================
+" Plugin Settings
+"=====================================================================
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline_powerline_fonts=1
+let g:airline_theme='gruvbox'
+
+" Editorconfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
+
+" Gist-Vim
+let g:gist_token_file = '~/.config/gist-vim'
+
+" GitGutter
+let g:gitgutter_enabled = 0 " disabled by default
+
+" Goyo plugin makes text more readable when writing prose:
+map <leader>f :Goyo \| set linebreak<CR>
+
+" NerdTree
+map <leader>n :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeShowHidden=1
+
+" Suda
+cnoremap W!! <bar> :w suda://%<CR>
+cnoremap WQ!! <bar> :wq suda://%<CR>
+cnoremap R!! <bar> :r suda://%<CR>
+cnoremap E!! <bar> :e suda://%<CR>
+
+" Undo tree
+nnoremap <F5> :UndotreeToggle<CR>
+let g:undotree_ShortIndicators = 1
+let g:undotree_WindowLayout = 2
+let g:undotree_DiffpanelHeight = 6
+
+" Vim-move
+let g:move_key_modifier = 'C'
+
+" VimWiki
+map <leader>v :VimwikiIndex
+let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+let g:vimwiki_list = [{'path': '~/repos/writings', 'syntax': 'markdown', 'ext': '.md'}]
+
+" VCoolor
+nmap <silent> <leader>V :VCoolor<CR>
+let g:vcoolor_disable_mappings = 1
+
+"=====================================================================
+" autogroups & autocommands
+"=====================================================================
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	autocmd VimLeave *.tex !texclear %
+autocmd VimLeave *.tex !texclear %
 
 " Ensure files are read as what I want:
-	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-	map <leader>v :VimwikiIndex
-	let g:vimwiki_list = [{'path': '~/repos/writings', 'syntax': 'markdown', 'ext': '.md'}]
-	autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-	autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-	autocmd BufRead,BufNewFile *.tex set filetype=tex
-
-" Copy selected text to system clipboard (requires gvim/nvim/vim-x11 installed):
-	vnoremap <C-c> "+y
-	map <C-p> "+P
+autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+autocmd BufRead,BufNewFile *.tex set filetype=tex
 
 " Enable Goyo by default for mutt writting
-	autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-	autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
+autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
+
+" Disable automatic commenting on newline
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Automatically deletes all trailing whitespace on save.
-	autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\s\+$//e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
-	autocmd BufWritePost *bmdirs,*bmfiles !shortcuts
+autocmd BufWritePost *bmdirs,*bmfiles !shortcuts
+
 " Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+
 " Update binds when sxhkdrc is updated.
-	autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+
