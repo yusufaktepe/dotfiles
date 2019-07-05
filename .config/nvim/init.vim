@@ -284,6 +284,7 @@ let g:deoplete#enable_at_startup = 1
 let g:ale_linters = {
 	\ 'c':          ['clangd'],
 	\ 'cpp':        ['clangd'],
+	\ 'javascript': ['eslint'],
 	\ }
 
 let g:ale_fixers = {
@@ -291,6 +292,7 @@ let g:ale_fixers = {
 	\ 'sh':         ['shfmt'],
 	\ 'c':          ['clang-format'],
 	\ 'cpp':        ['clang-format'],
+	\ 'javascript': ['eslint'],
 	\ }
 
 let g:ale_sign_error = '✖'
@@ -318,6 +320,9 @@ let g:LanguageClient_serverCommands = {
 	\ 'sh':             ['bash-language-server', 'start'],
 	\ 'c':              ['clangd'],
 	\ 'cpp':            ['clangd'],
+	\ 'javascript.jsx': ['javascript-typescript-stdio'],
+	\ 'javascript':     ['javascript-typescript-stdio'],
+	\ 'typescript':     ['javascript-typescript-stdio'],
 	\ }
 
 " Let ALE handle linting
@@ -373,7 +378,7 @@ let g:undotree_DiffpanelHeight = 6
 let g:move_key_modifier = 'C-M'
 
 "=== VimWiki
-map <leader>vw :VimwikiIndex
+map <leader>w :VimwikiIndex
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let g:vimwiki_list = [{'path': '~/repos/writings', 'syntax': 'markdown', 'ext': '.md'}]
 
