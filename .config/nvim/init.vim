@@ -164,6 +164,18 @@ noremap <silent> <M-;> :tabp<CR>
 noremap <silent> <M->> :+tabm<CR>
 noremap <silent> <M-<> :-tabm<CR>
 
+" Navigation through tabs by index
+noremap <silent> <M-1> :call Tabnm(1)<CR>
+noremap <silent> <M-2> :call Tabnm(2)<CR>
+noremap <silent> <M-3> :call Tabnm(3)<CR>
+noremap <silent> <M-4> :call Tabnm(4)<CR>
+noremap <silent> <M-5> :call Tabnm(5)<CR>
+noremap <silent> <M-6> :call Tabnm(6)<CR>
+noremap <silent> <M-7> :call Tabnm(7)<CR>
+noremap <silent> <M-8> :call Tabnm(8)<CR>
+noremap <silent> <M-9> :call Tabnm(9)<CR>
+noremap <silent> <M-0> :call Tabnm(10)<CR>
+
 " Autocompletion
 imap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -195,6 +207,10 @@ noremap <silent> <F2> :set paste! nopaste?<CR>
 
 " Enter command mode with substitution command prefilled
 nnoremap S :%s//gc<Left><Left><Left>
+
+" Conceal
+nnoremap <silent> <leader>cl :call ToggleConcealLevel()<cr>
+nnoremap <silent> <leader>cc :call ToggleConcealCursor()<cr>
 
 " Append modeline after last line in buffer
 nnoremap <silent> <leader>ml :call AppendModeline()<CR>
@@ -410,17 +426,25 @@ function! Tabnm(n)
 	endtry
 endfunction
 
-" Navigation through tabs by index
-noremap <silent> <M-1> :call Tabnm(1)<CR>
-noremap <silent> <M-2> :call Tabnm(2)<CR>
-noremap <silent> <M-3> :call Tabnm(3)<CR>
-noremap <silent> <M-4> :call Tabnm(4)<CR>
-noremap <silent> <M-5> :call Tabnm(5)<CR>
-noremap <silent> <M-6> :call Tabnm(6)<CR>
-noremap <silent> <M-7> :call Tabnm(7)<CR>
-noremap <silent> <M-8> :call Tabnm(8)<CR>
-noremap <silent> <M-9> :call Tabnm(9)<CR>
-noremap <silent> <M-0> :call Tabnm(10)<CR>
+" Toggle conceallevel
+function! ToggleConcealLevel()
+	if &conceallevel
+		setlocal conceallevel=0
+	else
+		setlocal conceallevel=2
+	endif
+	echo "conceallevel=" . &conceallevel
+endfunction
+
+" Toggle concealcursor
+function! ToggleConcealCursor()
+	if &concealcursor != ""
+		set concealcursor=""
+	else
+		set concealcursor=niv
+	endif
+	echo "concealcursor=" . &concealcursor
+endfunction
 
 " Append modeline after last line in buffer
 function! AppendModeline()
