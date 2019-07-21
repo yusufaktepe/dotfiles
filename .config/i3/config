@@ -450,19 +450,19 @@ client.background		$black
 #=====================================================================
 
 # Set inner/outer gaps
-gaps inner 4
-gaps outer -4
+# gaps inner 4
+# gaps outer -4
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
 # gaps inner all set 10
 # gaps outer all plus 5
 
-workspace $ws9 gaps inner 0
-workspace $ws9 gaps outer 0
+# workspace $ws9 gaps inner 0
+# workspace $ws9 gaps outer 0
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-smart_gaps on
+# smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
