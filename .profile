@@ -18,7 +18,7 @@ export TERMINAL="st"
 export TERMINAL_N="st -n"
 export BROWSER="vivaldi-stable"
 export READER="zathura"
-export FILE="vu"
+export FILE="lf"
 
 # Keep $HOME clean:
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
