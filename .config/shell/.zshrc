@@ -116,7 +116,10 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # Use history substring search
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 # pkgfile "command not found" hook:
-source /usr/share/doc/pkgfile/command-not-found.zsh
+source /usr/share/doc/pkgfile/command-not-found.zsh 2>/dev/null
+# FZF
+source /usr/share/fzf/completion.zsh 2>/dev/null
+source /usr/share/fzf/key-bindings.zsh 2>/dev/null
 
 # Load alias for thefuck:
 eval $(thefuck --alias)
