@@ -1,6 +1,6 @@
 {
 	"aururl": "https://aur.archlinux.org",
-	"buildDir": "/data/Files/Backup/makepkg/build",
+	"buildDir": "/data/files/backup/makepkg/build",
 	"editor": "",
 	"editorflags": "",
 	"makepkgbin": "makepkg",

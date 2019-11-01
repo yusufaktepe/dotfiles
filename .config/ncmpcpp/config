@@ -18,7 +18,7 @@ ncmpcpp_directory = ~/.config/ncmpcpp
 ## MPD clients (eg. ncmpc) also use that location.
 ##
 #
-lyrics_directory = ~/Music/lyrics
+lyrics_directory = ~/music/lyrics
 #
 ##### connection settings #####
 #
@@ -30,7 +30,7 @@ lyrics_directory = ~/Music/lyrics
 #
 ## Needed for tag editor and file operations to work.
 ##
-mpd_music_dir = "~/Music"
+mpd_music_dir = "~/music"
 #
 #mpd_crossfade_time = 5
 #
