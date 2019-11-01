@@ -29,6 +29,7 @@ export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
 # Others:
 export SUDO_ASKPASS="$HOME/.local/bin/dmenu-rofi/rofi-askpass"
