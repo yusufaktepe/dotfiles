@@ -59,7 +59,7 @@ bindsym $mod+Shift+Return exec $N samedir
 # #---Start program launcher---# #
 bindsym $mod+d exec $N rofi -show combi
 bindsym $mod+c exec $N "rofi -show calc -modi calc -no-show-match -no-sort"
-bindsym $caps+d exec $N rofi-pass
+# bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
 
 # #---Clipboard management---# #
@@ -318,7 +318,8 @@ for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 800
 for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 800 600, move position center
 for_window [instance="Places" class="Firefox"] floating enable border normal, resize set 800 600, move position center
 for_window [instance="Browser|Update" class="Firefox|Tor Browser"] floating enable border normal
-for_window [class="Crow Translate"] floating enable sticky enable, move position +714+20
+for_window [instance="(?i)crx_" class="(?i)Vivaldi|chrome"] floating enable
+for_window [class="Crow Translate"] floating enable sticky enable, resize set 650 290, move position +716+20
 for_window [class="Sunflower" title="(?i)Viewer"] floating enable
 for_window [class="(?i)gsimplecal"] floating enable, move position +1149+20
 #_ Dialogs
