@@ -363,6 +363,7 @@ bindsym $mod+Shift+Escape exec $N dprompt "Exit i3?" "i3-msg exit"
 
 exec $N /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec $N setbg; sleep 1; compton -b
+exec $N dunst
 exec $N nm-applet
 exec $N redshift
 exec $N remaps
@@ -616,6 +617,7 @@ bindsym $caps+a mode "$keystroke"
 set $keystroke 🔤
 mode "$keystroke" {
 	bindsym --release q exec $N autotype mail, mode "default"
+	bindsym --release g exec $N autotype mail2, mode "default"
 	bindsym --release minus exec $N autotype banner, mode "default"
 	bindsym --release comma exec $N autotype mdcode, mode "default"
 
