@@ -30,19 +30,19 @@ interval=5
 signal=6
 
 [temperature]
-label=
+label= 
 interval=1
 color=#9accff
 
 [cpu_usage]
-label=
+label= 
 interval=5
 min_width=C 100%
 color=#B3B571
 #separator=false
 
 [memory]
-label=
+label= 
 interval=30
 interval=5
 #separator=false
@@ -51,9 +51,9 @@ min_width=I 9.9G (99%)
 align=center
 
 [disk]
-#label=
-label=
-#instance=/mnt/data
+label= 
+#label= 
+DIR=/
 interval=30
 color=#A89984
 
@@ -67,7 +67,7 @@ align=center
 color=#3b95a6
 
 [volume]
-label=
+label= 
 #label=♪
 interval=once
 signal=10
@@ -81,14 +81,14 @@ label=⚡
 interval=30
 
 [brightness]
-label=
+label= 
 interval=once
 signal=10
 min_width=X100%
 align=center
 
 [time]
-command=$HOME/.config/i3blocks/blocks/calendar-gsimplecal &>/dev/null; date '+%d/%m   %H:%M'
+command=$HOME/.config/i3blocks/blocks/calendar-gsimplecal &>/dev/null; date '+%d/%m  %H:%M'
 interval=1
 color=#6FCEBB
 

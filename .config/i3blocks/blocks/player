@@ -50,7 +50,7 @@ output() {
 	fi
 
 	if [ "${TITLE}" != "" ] && [ "${ARTIST}" != "" ]; then
-		echo "${CUR_ICON}  ${ARTIST_OUT} - ${TITLE_OUT}"
+		echo "${CUR_ICON} ${ARTIST_OUT} - ${TITLE_OUT}"
 	fi
 }
 

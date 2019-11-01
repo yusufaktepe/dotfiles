@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 case $BLOCK_BUTTON in
-	1) notify-send -a i3blocks -i NONE "💾 Disk Usage:" "$(du -ah --max-depth=1 | sort -hr | head)" ;;
+	1) notify-send -a i3blocks -i NONE "💾 Disk Usage:" "$(du -ah --max-depth=1 / | sort -hr | head)" ;;
 	3) setsid $TERMINAL_N _blockterm -e ncdu --color dark ;;
 esac
 
