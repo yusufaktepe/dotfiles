@@ -23,7 +23,7 @@ xcape -e 'Hyper_L=Escape'
 # xcape -e 'Hyper_L=Super_L|Alt_L|XF86WLAN'
 
 # Super:
-xcape -e 'Super_L=Escape'
+# xcape -e 'Super_L=Escape'
 # xcape -t 200 -e 'Super_L=XF86Launch2'
 
 # Shift_L:
