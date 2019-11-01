@@ -13,6 +13,9 @@ case "$1" in
 	mail)
 		xdotool type --clearmodifiers 'yusuf@yusufaktepe.com'
 	;;
+	mail2)
+		xdotool type --clearmodifiers 'yusufaktepe@gmail.com'
+	;;
 	mdcode)
 		xdotool key --repeat 3 grave key --repeat 2 Return key --repeat 3 grave key Up
 	;;
