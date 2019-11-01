@@ -180,6 +180,9 @@ noremap <silent> <M-0> :call Tabnm(10)<CR>
 imap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+" Remove all trailing whitespace
+nnoremap <silent> <F4> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
 " Reload file with ISO 8859-9 encoding
 nnoremap <F12> :e ++enc=iso88599<CR>
 
@@ -474,7 +477,7 @@ autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Automatically deletes all trailing whitespace on save.
-autocmd BufWritePre * %s/\s\+$//e
+" autocmd BufWritePre * %s/\s\+$//e
 
 " When shortcut files are updated, renew bash and ranger configs with new material:
 autocmd BufWritePost *bmdirs,*bmfiles !shortcuts
