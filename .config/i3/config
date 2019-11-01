@@ -43,8 +43,7 @@ font pango:Hack, Awesome 9
 # kill focused window
 set $killrule [con_id="__focused__" instance="^(?!dropdown_).*$"]
 bindsym $mod+q		$killrule kill
-bindsym $mod+Shift+q	$killrule kill
-bindsym $mod+Ctrl+q	$killrule exec $N kill -9 `xdotool getwindowfocus getwindowpid`
+bindsym $mod+Shift+q	$killrule exec $N kill -9 `xdotool getwindowfocus getwindowpid`
 bindsym $mod+Ctrl+x	--release exec $N xkill
 
 # #---Start a terminal---# #
