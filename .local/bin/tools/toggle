@@ -55,7 +55,18 @@ case "$1" in
 			notify-send -a Redshift -i redshift-status-off "Redshift" "Status: <b>Closed</b>\nPeriod: <b>None</b>"
 		fi
 	;;
+	stimeout)
+		default=$(echo "$(grep OffTime /etc/X11/xorg.conf.d/10-monitor.conf | awk -F'"' '{print $4}')*60" | bc)
+
+		if [ "$(xset q | sed -n '25p' | awk '{print $6}')" = 0 ]; then
+			xset dpms 0 0 "$default"
+			notify-send -a Xorg -i state_shutoff "Xorg" "Screen timeout enabled"
+		else
+			xset dpms 0 0 0
+			notify-send -a Xorg -i state_running "Xorg" "Screen timeout disabled"
+		fi
+	;;
 	$NULL|*)
-		printf "Usage: toggle { audio | net (w|wifi|*|NULL) | touchpad | redshift }\n"
+		printf "Usage: toggle { audio | net (w|wifi|*|NULL) | touchpad | redshift | stimeout }\n"
 	;;
 esac
