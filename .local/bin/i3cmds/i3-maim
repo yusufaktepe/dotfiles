@@ -2,7 +2,7 @@
 # 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
 # https://github.com/yusufaktepe/dotfiles
 
-ss_dir="$HOME/Pictures/Screenshots"
+ss_dir="$HOME/pix/screenshots"
 format="+%Y-%m-%d_%H-%M-%S"
 
 [ ! -d "$ss_dir" ] && mkdir -p "$ss_dir"
