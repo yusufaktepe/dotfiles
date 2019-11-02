@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="0.9.3 beta" ConfigVersion="10">
+<doublecmd DCVersion="0.9.6 beta" ConfigVersion="10">
   <Configuration Save="True" SortOrder="0" TreeType="0">
     <UseConfigInProgramDir>False</UseConfigInProgramDir>
     <FolderTabs Save="True"/>
@@ -362,9 +362,9 @@
       <Maximized>False</Maximized>
       <Splitter>50</Splitter>
       <Left>0</Left>
-      <Top>21</Top>
+      <Top>38</Top>
       <Width>1366</Width>
-      <Height>747</Height>
+      <Height>730</Height>
       <PixelsPerInch>96</PixelsPerInch>
     </Position>
   </MainWindow>
@@ -622,6 +622,9 @@
       <CopyPermissions>False</CopyPermissions>
       <ExcludeEmptyTemplateDirectories>True</ExcludeEmptyTemplateDirectories>
     </Options>
+    <Extract>
+      <Overwrite>False</Overwrite>
+    </Extract>
   </FileOperations>
   <Tabs>
     <Options>49945</Options>
@@ -662,6 +665,7 @@
     <ShowPathInPopup>False</ShowPathInPopup>
     <ShowOnlyValidEnv>True</ShowOnlyValidEnv>
     <WhereToAddNewHotDir>1</WhereToAddNewHotDir>
+    <InplaceRenameButton>False</InplaceRenameButton>
   </Miscellaneous>
   <Thumbnails Save="True">
     <Width>128</Width>
@@ -699,45 +703,54 @@
   </IgnoreList>
   <DirectoryHotList>
     <HotDir Name="Home" Path="$HOME" PathSort="1"/>
-    <HotDir Name="-Dots" Path=""/>
+    <HotDir Name="-dots" Path=""/>
     <HotDir Name=".config" Path="$HOME/.config" PathSort="7"/>
     <HotDir Name=".local" Path="$HOME/.local" PathSort="1"/>
     <HotDir Name=".local/bin" Path="$HOME/.local/bin" PathSort="1"/>
     <HotDir Name=".local/share" Path="$HOME/.local/share" PathSort="7"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="Data" Path="/data" PathSort="1"/>
-    <HotDir Name="Documents" Path="/data/Documents" PathSort="1"/>
-    <HotDir Name="-Downloads" Path=""/>
-    <HotDir Name="./" Path="/data/Downloads" PathSort="1"/>
-    <HotDir Name="Default" Path="$HOME/Downloads/Default" PathSort="7"/>
-    <HotDir Name="Torrents" Path="/data/Downloads/Torrents" PathSort="7"/>
-    <HotDir Name="ISOs" Path="/data/Downloads/ISOs" PathSort="1"/>
+    <HotDir Name="data" Path="/data" PathSort="1"/>
+    <HotDir Name="dox" Path="/data/dox" PathSort="1"/>
+    <HotDir Name="-dl" Path=""/>
+    <HotDir Name="./" Path="/data/dl" PathSort="1"/>
+    <HotDir Name="default" Path="$HOME/dl/default" PathSort="7"/>
+    <HotDir Name="torrents" Path="/data/dl/torrents" PathSort="7"/>
+    <HotDir Name="isos" Path="/data/dl/isos" PathSort="1"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="-Music" Path=""/>
-    <HotDir Name="./" Path="/data/Music" PathSort="1"/>
-    <HotDir Name="staging" Path="/data/Music/_staging" PathSort="1"/>
-    <HotDir Name="Mscroot" Path="/data/Music/Mscroot" PathSort="1"/>
-    <HotDir Name="del" Path="/data/Music/del" PathSort="1"/>
+    <HotDir Name="-music" Path=""/>
+    <HotDir Name="./" Path="/data/music" PathSort="1"/>
+    <HotDir Name="staging" Path="/data/music/_staging" PathSort="1"/>
+    <HotDir Name="mscroot" Path="/data/music/mscroot" PathSort="1"/>
+    <HotDir Name="del" Path="/data/music/del" PathSort="1"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="-Pictures" Path=""/>
-    <HotDir Name="./" Path="/data/Pictures" PathSort="1"/>
-    <HotDir Name="Screenshots" Path="/data/Pictures/Screenshots" PathSort="7"/>
-    <HotDir Name="Wallpapers" Path="/data/Pictures/Wallpapers" PathSort="7"/>
+    <HotDir Name="-pix" Path=""/>
+    <HotDir Name="./" Path="/data/pix" PathSort="1"/>
+    <HotDir Name="screenshots" Path="/data/pictures/screenshots" PathSort="7"/>
+    <HotDir Name="wallpapers" Path="/data/pix/wallpapers" PathSort="7"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="Movies" Path="/data/Videos/Movies" PathSort="7"/>
-    <HotDir Name="TV-Series" Path="/data/Videos/TV-Series" PathSort="1"/>
-    <HotDir Name="-Files" Path=""/>
-    <HotDir Name="./" Path="/data/Files" PathSort="1"/>
-    <HotDir Name="Backup" Path="/data/Files/Backup" PathSort="1"/>
-    <HotDir Name="Linux" Path="/data/Files/Linux" PathSort="1"/>
-    <HotDir Name="Settings" Path="/data/Files/Settings" PathSort="1"/>
-    <HotDir Name="Shared" Path="/data/Files/Shared" PathSort="1"/>
+    <HotDir Name="mov" Path="/data/vids/mov" PathSort="7"/>
+    <HotDir Name="tv" Path="/data/vids/tv" PathSort="1"/>
+    <HotDir Name="-files" Path=""/>
+    <HotDir Name="./" Path="/data/files" PathSort="1"/>
+    <HotDir Name="backup" Path="/data/files/backup" PathSort="1"/>
+    <HotDir Name="linux" Path="/data/files/linux" PathSort="1"/>
+    <HotDir Name="settings" Path="/data/files/backup/settings" PathSort="1"/>
+    <HotDir Name="site" Path="/data/files/site"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="Git" Path="/data/Files/Git" PathSort="1"/>
+    <HotDir Name="-shared" Path=""/>
+    <HotDir Name="./" Path="/data/files/shared"/>
+    <HotDir Name="gdrive" Path="/data/files/shared/gdrive"/>
+    <HotDir Name="mega" Path="/data/files/shared/mega"/>
+    <HotDir Name="syncthing" Path="/data/files/shared/syncthing"/>
+    <HotDir Name="kbfs" Path="/data/files/shared/kbfs"/>
+    <HotDir Name="gcloud (sftp)" Path="sftp://yusuf@34.73.143.104/home/yusuf"/>
+    <HotDir Name="--" Path=""/>
+    <HotDir Name="repos" Path="/data/files/repos" PathSort="1"/>
+    <HotDir Name="git" Path="/data/files/repos/git"/>
   </DirectoryHotList>
   <Viewer>
     <PreviewVisible>False</PreviewVisible>
-    <ImageStretch>True</ImageStretch>
+    <ImageStretch>False</ImageStretch>
     <ImageExifRotate>True</ImageExifRotate>
     <ImageStretchLargeOnly>False</ImageStretchLargeOnly>
     <ImageCenter>True</ImageCenter>
@@ -773,7 +786,7 @@
     <FilterDuplicates>True</FilterDuplicates>
     <FilterSingles>True</FilterSingles>
     <FileMask>*</FileMask>
-    <Asymmetric>False</Asymmetric>
+    <Asymmetric Save="False">False</Asymmetric>
   </SyncDirs>
   <InternalAssociations>
     <OfferToAddNewFileType>False</OfferToAddNewFileType>
