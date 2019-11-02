@@ -331,7 +331,7 @@ for_window [title="^Picture in picture$"] resize set 605 340, move position 761 
 for_window [instance="_blockterm|_nmtui"] floating enable border pixel 2
 for_window [instance="floating"] floating enable, move position mouse
 #_ Doublecmd
-for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|Options|FindDlg|MultiRename)"] floating enable, move position center
+for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|Options|FindDlg)"] floating enable, move position center
 for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 800 600, move position center
 for_window [instance="dc-term-bttns"] floating enable, resize set 800 500, move position center
 #_ Bindings to make the webcam float and stick.
