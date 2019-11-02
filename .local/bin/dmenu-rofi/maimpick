@@ -3,7 +3,7 @@
 # https://github.com/LukeSmithxyz/voidrice
 # Some modifications by me.
 
-ss_dir=~/Pictures/Screenshots
+ss_dir=~/pix/screenshots
 format='+%Y-%m-%d_%H-%M-%S'
 
 case "$(printf "a selected area\\ncurrent window\\nfull screen\\na selected area (copy)\\ncurrent window (copy)\\nfull screen (copy)" | dmenu -l 6 -i -p "Screenshot which area?")" in
