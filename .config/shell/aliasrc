@@ -66,7 +66,7 @@ alias rmorph='sudo pacman -Rns $(pacman -Qtdq)'
 alias paclmir='less /etc/pacman.d/mirrorlist'
 alias pacnew='sudo DIFFPROG=/usr/bin/meld pacdiff'
 alias pkglistin='sudo pacman -S --needed - <'
-alias pkglist='pacman -Qqen > pkglist_$(date +%d-%m-%Y) && pacman -Qm > pkglist-aur_$(date +%d-%m-%Y)'
+alias pkglist='pacman -Qqen > pkglist_$(date +%F) && pacman -Qm > pkglist-aur_$(date +%F)'
 
 # Maintanance
 alias cleanb=' clear && truncate -s 0 $HISTFILE && exec $SHELL'
