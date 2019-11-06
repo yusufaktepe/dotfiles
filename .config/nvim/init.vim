@@ -21,8 +21,10 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mbbill/undotree'
 
 " Editing & Motion
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-swap'
+Plug 'chaoren/vim-wordmotion'
+Plug 'mg979/vim-visual-multi'
+Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
@@ -33,10 +35,11 @@ Plug 'andymass/vim-matchup'
 Plug 'tpope/vim-fugitive'	" git wrapper
 Plug 'airblade/vim-gitgutter'	" shows git diff in the gutter (sign column)
 Plug 'jreybert/vimagit'
+Plug 'christoomey/vim-conflicted'
 
 " Syntax
 Plug 'hail2u/vim-css3-syntax'
-Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'mboughaba/i3config.vim'
 Plug 'chr4/nginx.vim'
 Plug 'vifm/vifm.vim'
 
@@ -94,7 +97,7 @@ set nocompatible
 set encoding=utf-8
 set number relativenumber
 " set signcolumn=yes		" always show sign column
-set wildmode=longest,list,full	" enable autocompletion
+set wildmode=list:longest,list:full " command mode completion behavior
 set completeopt+=noinsert,noselect
 set go=a
 set mouse=a
@@ -139,10 +142,10 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " Create splits
-nnoremap <silent> <leader>s :new<return><esc>
-nnoremap <silent> <leader>S :split<return><esc>
-nnoremap <silent> <leader>v :vnew<return><esc>
-nnoremap <silent> <leader>V :vsplit<return><esc>
+nnoremap <silent> <leader>s  :new<cr>
+nnoremap <silent> <leader>Ss :split<cr>
+nnoremap <silent> <leader>v  :vnew<cr>
+nnoremap <silent> <leader>Vv :vsplit<cr>
 
 " resize splits left/right
 noremap <M-[> <C-w>3<
@@ -155,6 +158,9 @@ noremap <M-}> <C-w>3+
 " Open/close tabs
 noremap <silent> <M-cr> :tabnew<CR>
 noremap <silent> <M-backspace> :tabclose<CR>
+
+" Close window (except last one)
+nnoremap <C-w> :close<cr>
 
 " Navigate left/right through tabs
 noremap <silent> <M-,> :tabn<CR>
@@ -315,10 +321,10 @@ let g:ale_fixers = {
 	\ }
 
 let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
+let g:ale_sign_warning = ''
 let g:ale_sign_info = 'ℹ'
 let g:ale_sign_style_error = '✖'
-let g:ale_sign_style_warning = '⚠'
+let g:ale_sign_style_warning = ''
 
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 'never'
@@ -387,6 +393,11 @@ cnoremap WQ!! <bar> :wq suda://%<CR>
 cnoremap R!! <bar> :r suda://%<CR>
 cnoremap E!! <bar> :e suda://%<CR>
 
+"=== TComment
+call tcomment#type#Define('go', tcomment#GetLineC('// %s'))
+call tcomment#type#Define('go_block', g:tcomment#block_fmt_c)
+call tcomment#type#Define('go_inline', g:tcomment#inline_fmt_c)
+
 "=== Undo tree
 nnoremap <F5> :UndotreeToggle<CR>
 let g:undotree_ShortIndicators = 1
@@ -404,6 +415,10 @@ let g:vimwiki_list = [{'path': '~/repos/writings', 'syntax': 'markdown', 'ext': 
 "=== VCoolor
 nmap <silent> <leader>co :VCoolor<CR>
 let g:vcoolor_disable_mappings = 1
+
+"=== Vim-wordmotion
+" make `W` behave as vanilla `w`
+nnoremap W w
 
 "=====================================================================
 " Functions
