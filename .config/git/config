@@ -1,31 +1,45 @@
 [user]
-	name = Yusuf Aktepe
+	name  = Yusuf Aktepe
 	email = yusuf@yusufaktepe.com
 	signingkey = BBF9254E
 
 [alias]
-	a = add --all
-	c = commit
-	cs = commit -S
-	signlast = commit -S --amend
-	br = branch
-	st = status
-	co = checkout
-	up = pull --rebase=preserve
-	g = grep --break --heading --line-number
-	fa = fetch --all
-	p = push
-	pf = push -f
-	reb = rebase
-	last = show --stat HEAD
-	logdel = log --diff-filter=D --summary
-	countcommits = shortlog -sn --no-merges
-	countcommitsall = shortlog -sn
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	tl = !git tag | sort -V
+	a     = add --all
+	ac    = !git add . && git commit
+	b     = branch
+	bl    = !git --no-pager branch --verbose --all
+	c     = commit
+	ca    = commit --amend
+	cl    = clone
+	co    = checkout
+	cs    = commit -S
+	csa   = commit -S --amend
+	cc    = shortlog -sn --no-merges
+	cca   = shortlog -sn
+	ctr   = shortlog --summary --numbered --email
+	confl = !vim +Conflicted
+	d     = diff --stat=100,100 --patch
+	ds    = diff --stat=100,100 --patch --staged
+	dt    = difftool
+	dts   = difftool --staged
+	f     = fetch
+	g     = grep --break --heading --line-number
+	last  = show --stat HEAD
+	lg    = log --graph --abbrev-commit --date=relative \
+		--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lgdel = log --diff-filter=D --summary
+	p     = push
+	pf    = push -f
+	re    = rebase
+	rem   = remote -v
+	s     = status
+	sm    = submodule
+	tl    = !git tag | sort -V
+	up    = pull --rebase=preserve
 
 [commit]
 	gpgsign = true
+	verbose = true
 
 [merge]
 	tool = vimdiff
@@ -39,3 +53,29 @@
 
 [github]
 	user = yusufaktepe
+
+[url "git@github.com:"]
+	insteadOf = "gh:"
+	pushInsteadOf = "gh:"
+
+[url "git@gitlab.com:"]
+	insteadOf = "gl:"
+	pushInsteadOf = "gl:"
+
+[url "git@gist.github.com:"]
+	insteadOf = "gist:"
+	pushInsteadOf = "gist:"
+
+[url "git@github.com:yusufaktepe/"]
+	insteadOf = "mh:"
+	pushInsteadOf = "mh:"
+
+[url "git@gitlab.com:yusufaktepe/"]
+	insteadOf = "ml:"
+	pushInsteadOf = "ml:"
+
+[url "ssh://aur@aur.archlinux.org/"]
+	insteadOf = "aur:"
+
+[url "ssh://aur@aur.archlinux.org"]
+	insteadOf = "https://aur.archlinux.org"
