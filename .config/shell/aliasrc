@@ -32,9 +32,9 @@ alias wb='$BROWSER'
 
 command -v nvim >/dev/null && alias vim='nvim' vimdiff='nvim -d' # Use neovim if installed.
 
-alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias la='ls -lah --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias ls='ls --group-directories-first --time-style=+"%Y-%m-%d %H:%M" --color=auto -F'
+alias ll='ls -l --group-directories-first --time-style=+"%Y-%m-%d %H:%M" --color=auto -F'
+alias la='ls -lah --group-directories-first --time-style=+"%Y-%m-%d %H:%M" --color=auto -F'
 
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
