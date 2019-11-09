@@ -1,4 +1,4 @@
-# vim: filetype=i3
+# vim: filetype=i3config
 #=====================================================================
 # i3 config by Yusuf Aktepe <yusuf@yusufaktepe.com>
 # https://github.com/yusufaktepe/dotfiles
@@ -58,7 +58,7 @@ bindsym $mod+Shift+Return exec $N samedir
 # #---Start program launcher---# #
 bindsym $mod+d exec $N rofi -show combi
 bindsym $mod+c exec $N "rofi -show calc -modi calc -no-show-match -no-sort"
-# bindsym $caps+d exec $N rofi-pass
+bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
 
 # #---Clipboard management---# #
@@ -212,6 +212,11 @@ bindsym $mod+Shift+o exec $N i3resize right
 
 # put YouTube into fullscreen and execute this for media mode
 bindsym $caps+y fullscreen disable; floating enable; resize set 655 368; sticky enable; move window to position 711 400
+
+# focus on the rightmost window and execute this for grid layout
+set $fl focus left
+set $fr focus right
+bindsym $caps+g $fl;$fl;$fl;split v;$fr;move left;$fr;split v;$fr;move left
 
 # Workspace names
 set $ws1 1
