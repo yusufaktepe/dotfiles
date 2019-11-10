@@ -70,23 +70,23 @@ bindsym $agr+space exec $N cabl
 
 # #---Start Applications---# #
 bindsym $mod+F1 exec $term -e $FILE
-bindsym $mod+F2 [class="Doublecmd"] focus ;; $C doublecmd || doublecmd --no-splash
-bindsym $mod+F3 [class="Vivaldi-stable"] focus ;; $C vivaldi-bin || $BROWSER --start-maximized
-bindsym $mod+F4 [class="Opera"] focus ;; $C opera || opera --start-maximized
-bindsym $mod+F5 [class="Firefox"] focus ;; $C firefox || firefox
-bindsym $mod+F6 [class="Google-chrome"] focus ;; $C chrome || google-chrome-stable
-bindsym $mod+Shift+F3 exec $BROWSER --incognito --start-maximized
+bindsym $mod+F2 exec $N ifwin doublecmd
+bindsym $mod+F3 exec $N ifwin vivaldi
+bindsym $mod+F4 exec $N ifwin opera
+bindsym $mod+F5 exec $N ifwin firefox
+bindsym $mod+F6 exec $N ifwin chrome
+bindsym $mod+Shift+F3 exec vivaldi-stable --incognito --start-maximized
 bindsym $mod+Shift+F4 exec opera --private --start-maximized
 bindsym $mod+Shift+F5 exec firefox --private-window
 bindsym $mod+Shift+F6 exec google-chrome-stable --incognito
 
 ## Caps+
-bindsym $caps+F2 exec pcmanfm
-bindsym $caps+m [class="cantata"] focus ;; $C cantata || cantata-mpd
-bindsym $caps+s [class="Spotify"] focus ;; $C spotify || spotify
-bindsym $caps+q [class="qBittorrent"] focus ;; $C qbittorrent || qbittorrent
-bindsym $caps+v [class="smplayer"] focus ;; exec $N smplayer
-bindsym $caps+7 [class="(?i)VirtualBox" title="(?i)Win7"] focus ;; exec $N VBoxManage startvm Win7
+bindsym $caps+F2 exec $N pcmanfm
+bindsym $caps+m exec $N cantata-mpd
+bindsym $caps+s exec $N ifwin spotify
+bindsym $caps+q exec $N ifwin qbittorrent
+bindsym $caps+v exec $N ifwin smplayer
+bindsym $caps+7 exec $N ifwin VMWin7
 bindsym $caps+w exec $N libreoffice --writer
 bindsym $caps+h exec $N py-http -n
 
@@ -103,7 +103,7 @@ bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 ## Function Buttons
 bindsym XF86Launch1 exec $termins htop-floating -e htop
 bindsym XF86Launch2 exec $N rofi -show combi
-bindsym XF86Launch9 exec $N toggle_crow
+bindsym XF86Launch9 exec $N ifwin crow
 
 bindsym XF86MonBrightnessUp exec $N "light -A 5; pkill -RTMIN+10 i3blocks"
 bindsym XF86MonBrightnessDown exec $N "light -U 5; pkill -RTMIN+10 i3blocks"
@@ -646,7 +646,7 @@ bindsym XF86AudioRaiseVolume	exec $N i3-volume -np -y -i $volumestep -t $statusc
 bindsym $mod+XF86AudioMute	exec $N "toggle audio; pkill -$statussig i3blocks"
 
 ## Startup/Run
-bindsym $mod+XF86AudioLowerVolume	exec killall pavucontrol || pavucontrol
+bindsym $mod+XF86AudioLowerVolume	exec $N ifwin pavucontrol
 bindsym $mod+XF86AudioRaiseVolume	exec $termins _blockterm -e pulsemixer
 
 #=====================================================================

@@ -1,0 +1,140 @@
+#!/bin/sh
+# Context-sensitive launcher script
+# ---
+# 2019 Yusuf Aktepe <yusuf@yusufaktepe.com>
+# https://github.com/yusufaktepe/dotfiles
+# ---
+# IfWinNotExist:  run
+# IfWinNotActive: focus
+# IfWinActive:    previous focus
+
+AW=$(xdotool getactivewindow)
+AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $4}')
+
+case "$1" in
+	chrome)
+		if pgrep -x "chrome" > /dev/null; then
+			if [ "$AW_CLASS" = "Google-chrome" ]; then
+				i3-msg "workspace back_and_forth"
+			else
+				i3-msg '[class="Google-chrome"] focus'
+			fi
+		else
+			exec google-chrome-stable
+		fi
+	;;
+	crow)
+		showcrow="Super_L+ctrl+shift+F1"
+
+		if ! pgrep -x "crow" > /dev/null; then
+			exec crow
+		else
+			if wmctrl -l | grep -q "Crow Translate"; then
+				wmctrl -x -a crow.Crow Translate && i3-msg kill
+			else
+				xdotool key --clearmodifiers $showcrow
+			fi
+		fi
+	;;
+	doublecmd)
+		if pgrep -x "doublecmd" > /dev/null; then
+			if [ "$AW_CLASS" = "Doublecmd" ]; then
+				i3-msg "workspace back_and_forth"
+			else
+				i3-msg '[class="Doublecmd"] focus'
+			fi
+		else
+			exec doublecmd --no-splash
+		fi
+	;;
+	firefox)
+		if pgrep -x "firefox" > /dev/null; then
+			if [ "$AW_CLASS" = "firefox" ]; then
+				i3-msg "workspace back_and_forth"
+			else
+				i3-msg '[class="firefox"] focus'
+			fi
+		else
+			exec firefox
+		fi
+	;;
+	opera)
+		if pgrep -x "opera" > /dev/null; then
+			if [ "$AW_CLASS" = "Opera" ]; then
+				i3-msg "workspace back_and_forth"
+			else
+				i3-msg '[class="Opera"] focus'
+			fi
+		else
+			exec opera --start-maximized
+		fi
+	;;
+	pavucontrol)
+		if pgrep -x "pavucontrol" > /dev/null; then
+			if [ "$AW_CLASS" = "Pavucontrol" ]; then
+				i3-msg kill
+				pkill -SIGRTMIN+10 i3blocks
+			else
+				i3-msg '[class="Pavucontrol"] focus'
+			fi
+		else
+			exec pavucontrol
+		fi
+	;;
+	qbittorrent)
+		if pgrep -x "qbittorrent" > /dev/null; then
+			if [ "$AW_CLASS" = "qBittorrent" ]; then
+				i3-msg "workspace back_and_forth"
+			else
+				i3-msg '[class="qBittorrent"] focus'
+			fi
+		else
+			exec qbittorrent
+		fi
+	;;
+	smplayer)
+		if pgrep -x "smplayer" > /dev/null; then
+			if [ "$AW_CLASS" = "smplayer" ]; then
+				i3-msg "workspace back_and_forth"
+			else
+				i3-msg '[class="smplayer"] focus'
+			fi
+		else
+			exec smplayer
+		fi
+	;;
+	spotify)
+		if pgrep -x "spotify" > /dev/null; then
+			if [ "$AW_CLASS" = "Spotify" ]; then
+				i3-msg "workspace back_and_forth"
+			else
+				i3-msg '[class="Spotify"] focus'
+				# wmctrl -x -a spotify.Spotify
+			fi
+		else
+			exec spotify
+		fi
+	;;
+	VMWin7)
+		if VBoxManage list vms runningvms | grep -q Win7; then
+			if [ "$AW_CLASS" = "VirtualBox Machine" ]; then
+				i3-msg "workspace back_and_forth"
+			else
+				i3-msg '[class="(?i)VirtualBox" title="(?i)Win7"] focus'
+			fi
+		else
+			exec VBoxManage startvm Win7
+		fi
+	;;
+	vivaldi)
+		if pgrep -x "vivaldi-bin" > /dev/null; then
+			if [ "$AW_CLASS" = "Vivaldi-stable" ]; then
+				i3-msg "workspace back_and_forth"
+			else
+				i3-msg '[class="Vivaldi-stable"] focus'
+			fi
+		else
+			exec vivaldi-stable --start-maximized
+		fi
+	;;
+esac
