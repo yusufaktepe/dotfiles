@@ -1,14 +1,21 @@
 #!/bin/sh
-# If mpd is running start cantata,
-# if not; start both, wait until cantata close and kill mpd.
 
-if ! pgrep -x "mpd" > /dev/null; then
-	echo "::: mpd & cantata starting..."
-	mpd && sleep 1 && cantata
-	wait "$(pidof cantata)"
-	echo "::: Cantata closed, killing mpd"
-	pkill mpd
+AW=$(xdotool getactivewindow)
+AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $4}')
+
+if pgrep -x "cantata" > /dev/null; then
+	if [ "$AW_CLASS" = "cantata" ]; then
+		i3-msg "workspace back_and_forth"
+	else
+		i3-msg '[class="cantata"] focus'
+	fi
 else
-	echo "::: mpd is already running. starting cantata..."
-	cantata
+	if ! pgrep -x "mpd" > /dev/null; then
+		mpd && sleep 1 && cantata
+		wait "$(pidof cantata)"
+		pkill mpd
+	else
+		cantata
+	fi
 fi
+
