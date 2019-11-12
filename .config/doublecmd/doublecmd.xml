@@ -746,7 +746,6 @@
     <HotDir Name="gcloud (sftp)" Path="sftp://yusuf@34.73.143.104/home/yusuf"/>
     <HotDir Name="--" Path=""/>
     <HotDir Name="repos" Path="/data/files/repos" PathSort="1"/>
-    <HotDir Name="git" Path="/data/files/repos/git"/>
   </DirectoryHotList>
   <Viewer>
     <PreviewVisible>False</PreviewVisible>
@@ -762,7 +761,7 @@
     <PaintMode>0</PaintMode>
     <PaintWidth>5</PaintWidth>
     <NumberOfColumns>1</NumberOfColumns>
-    <ViewerMode>1</ViewerMode>
+    <ViewerMode>4</ViewerMode>
     <PaintColor>255</PaintColor>
     <BackgroundColor>-2147483643</BackgroundColor>
     <FontColor>-2147483640</FontColor>
