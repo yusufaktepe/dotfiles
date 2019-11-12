@@ -183,8 +183,8 @@ noremap <silent> <M-9> :call Tabnm(9)<CR>
 noremap <silent> <M-0> :call Tabnm(10)<CR>
 
 " Autocompletion
-imap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" imap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Remove all trailing whitespace
 nnoremap <silent> <F4> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
@@ -362,9 +362,9 @@ nnoremap <silent> <leader>gr :call LanguageClient#textDocument_rename()<CR>
 "=== NeoSnippet
 let g:neosnippet#enable_completed_snippet=1
 
-imap <C-e> <Plug>(neosnippet_expand_or_jump)
-smap <C-e> <Plug>(neosnippet_expand_or_jump)
-xmap <C-e> <Plug>(neosnippet_expand_target)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 imap <expr><CR>
 \ (pumvisible() && neosnippet#expandable()) ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
