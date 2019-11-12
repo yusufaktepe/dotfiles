@@ -82,6 +82,7 @@ bindsym $mod+Shift+F6 exec google-chrome-stable --incognito
 
 ## Caps+
 bindsym $caps+F2 exec $N pcmanfm
+bindsym $caps+e exec $term -e $EDITOR
 bindsym $caps+m exec $N cantata-mpd
 bindsym $caps+s exec $N ifwin spotify
 bindsym $caps+q exec $N ifwin qbittorrent
@@ -90,6 +91,7 @@ bindsym $caps+7 exec $N ifwin vbox Win7
 bindsym $caps+w exec $N libreoffice --writer
 bindsym $caps+h exec $N py-http -n
 
+bindsym $mod+Shift+e exec $N cfg
 bindsym $mod+Shift+p exec $N pulseaudio --kill && sleep 2 && pulseaudio --start
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+t exec $N pkill compton || compton -b
