@@ -24,7 +24,7 @@ case "$1" in
 		fi
 	;;
 	crow)
-		showcrow="Super_L+ctrl+shift+F1"
+		showcrow="alt+ctrl+shift+F1"
 
 		if ! pgrep -x "crow" > /dev/null; then
 			exec crow
@@ -115,15 +115,15 @@ case "$1" in
 			exec spotify
 		fi
 	;;
-	VMWin7)
-		if VBoxManage list vms runningvms | grep -q Win7; then
+	vbox)
+		if VBoxManage list vms runningvms | grep -q "$2"; then
 			if [ "$AW_CLASS" = "VirtualBox Machine" ]; then
 				i3-msg "workspace back_and_forth"
 			else
-				i3-msg '[class="(?i)VirtualBox" title="(?i)Win7"] focus'
+				i3-msg "[class=(?i)VirtualBox title=(?i)$2] focus"
 			fi
 		else
-			exec VBoxManage startvm Win7
+			exec VBoxManage startvm "$2"
 		fi
 	;;
 	vivaldi)
