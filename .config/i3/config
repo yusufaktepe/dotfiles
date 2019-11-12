@@ -86,7 +86,7 @@ bindsym $caps+m exec $N cantata-mpd
 bindsym $caps+s exec $N ifwin spotify
 bindsym $caps+q exec $N ifwin qbittorrent
 bindsym $caps+v exec $N ifwin smplayer
-bindsym $caps+7 exec $N ifwin VMWin7
+bindsym $caps+7 exec $N ifwin vbox Win7
 bindsym $caps+w exec $N libreoffice --writer
 bindsym $caps+h exec $N py-http -n
 
@@ -409,6 +409,7 @@ bar {
 	i3bar_command i3bar
 	status_command i3blocks
 	position top
+	modifier none
 
 ## set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
