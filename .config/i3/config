@@ -91,9 +91,10 @@ bindsym $caps+7 exec $N ifwin vbox Win7
 bindsym $caps+w exec $N libreoffice --writer
 bindsym $caps+h exec $N py-http -n
 
+bindsym $mod+Shift+d exec $N cdd
 bindsym $mod+Shift+e exec $N cfg
 bindsym $mod+Shift+p exec $N pulseaudio --kill && sleep 2 && pulseaudio --start
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
+bindsym $mod+Ctrl+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Shift+t exec $N pkill compton || compton -b
 bindsym $mod+Shift+z exec $N toggle redshift
 bindsym $mod+Shift+F12 exec $N sudo -A systemctl restart NetworkManager
@@ -181,6 +182,7 @@ bindsym $mod+w layout stacking
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+bindsym $caps+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -324,7 +326,7 @@ for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 800
 for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 800 600, move position center
 for_window [instance="Places" class="Firefox"] floating enable border normal, resize set 800 600, move position center
 for_window [instance="Browser|Update" class="Firefox|Tor Browser"] floating enable border normal
-for_window [instance="(?i)crx_" class="(?i)Vivaldi|chrome"] floating enable
+for_window [instance="(?i)crx_" class="(?i)Vivaldi|chrome"] floating enable sticky enable
 for_window [class="Crow Translate"] floating enable sticky enable, resize set 650 290, move position +716+20
 for_window [class="Sunflower" title="(?i)Viewer"] floating enable
 for_window [class="(?i)gsimplecal"] floating enable, move position +1149+20

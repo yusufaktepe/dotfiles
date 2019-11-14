@@ -1,0 +1,19 @@
+#!/bin/sh
+# Gives a dmenu/fzf prompt to open selected folder with file manager.
+# ---
+# 2019 Yusuf Aktepe <yusuf@yusufaktepe.com>
+# https://github.com/yusufaktepe/dotfiles
+# ---
+
+list="$HOME/.config/dir.list"
+
+if [ -t 2 ]; then
+	fzf < "$list" | awk '{print $2}' | sed "s|~|$HOME|g" | xargs -r -I '{}' "$FILE" {}
+else
+	choise=$(dmenu -i -l 10 -p "Select config to edit" < "$list" | awk '{print $2}' | sed "s|~|$HOME|g")
+	case "$choise" in
+		"") exit ;;
+		*) i3-msg "exec $N doublecmd --no-splash -C -T $choise" ;;
+	esac
+fi
+
