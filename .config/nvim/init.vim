@@ -408,7 +408,7 @@ let g:undotree_DiffpanelHeight = 6
 let g:move_key_modifier = 'C-M'
 
 "=== VimWiki
-map <leader>w :VimwikiIndex
+map <leader>w :VimwikiIndex<CR>
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let g:vimwiki_list = [{'path': '~/repos/writings', 'syntax': 'markdown', 'ext': '.md'}]
 
@@ -493,9 +493,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Automatically deletes all trailing whitespace on save.
 " autocmd BufWritePre * %s/\s\+$//e
-
-" When shortcut files are updated, renew bash and ranger configs with new material:
-autocmd BufWritePost *bmdirs,*bmfiles !shortcuts
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
