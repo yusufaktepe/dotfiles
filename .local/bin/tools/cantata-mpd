@@ -13,7 +13,7 @@ else
 	if ! pgrep -x "mpd" > /dev/null; then
 		mpd && sleep 1 && cantata
 		wait "$(pidof cantata)"
-		pkill mpd
+		pkill -TERM mpd
 	else
 		cantata
 	fi
