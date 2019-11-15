@@ -36,7 +36,7 @@ cmd open ${{
         audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
         video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
         application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
-        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
 
@@ -64,7 +64,7 @@ cmd trash %trash-put $fx
 cmd moveto ${{
     set -f
     clear; echo "Move to where?"
-    dest="$(cut -d'	' -f2- ~/.config/directories | fzf)" &&
+    dest="$(fzf < $HOME/.config/dir.list | awk '{print $2}' | sed 's|~|$HOME|g')" &&
     eval mv -iv $fx $dest &&
     notify-send "🚚 File(s) moved." "File(s) moved to $dest."
 }}
@@ -72,7 +72,7 @@ cmd moveto ${{
 cmd copyto ${{
     set -f
     clear; echo "Copy to where?"
-    dest="$(cut -d'	' -f2- ~/.config/directories | fzf)" &&
+    dest="$(fzf < $HOME/.config/dir.list | awk '{print $2}' | sed 's|~|$HOME|g')" &&
     eval cp -ivr $fx $dest &&
     notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
@@ -129,5 +129,5 @@ map M moveto
 map D trash
 map <delete> delete
 
-map c $lf -remote "send $id cd $(cut -d'	' -f2 ~/.config/directories | fzf)"
-map J $lf -remote "send $id cd $(cut -d'	' -f2 ~/.config/directories | fzf)"
+map c $lf -remote "send $id cd $(fzf < $HOME/.config/dir.list | awk '{print $2}' | sed 's|~|$HOME|g')"
+map J $lf -remote "send $id cd $(fzf < $HOME/.config/dir.list | awk '{print $2}' | sed 's|~|$HOME|g')"
