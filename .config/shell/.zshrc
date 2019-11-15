@@ -83,7 +83,7 @@ zstyle '*' single-ignored show
 WORDCHARS=${WORDCHARS//\/[&.;]}
 
 # Enable completion for tmux wrapper
-compdef _tmux tmx
+# compdef _tmux tmx
 
 #=====================================================================
 # Prompt
