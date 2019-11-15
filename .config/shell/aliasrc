@@ -24,7 +24,6 @@ alias ncmpcpp='pkill -0 mpd || mpd && ncmpcpp'
 alias ffmpeg='ffmpeg -hide_banner'
 alias ssh='TERM=xterm-256color ssh'
 alias magit='nvim -c MagitOnly'
-alias tmux='tmx'
 alias ncdu='ncdu --color dark'
 alias newsboat='newsboat -q'
 alias code='code --extensions-dir ~/.config/Code/Ext'
@@ -136,6 +135,20 @@ clippaste() {
 
 copydir() { printf '%s' "$PWD" | clipcopy ;}
 copyfile() { clipcopy "$@" ;}
+
+lfcd() {
+	tmp="$(mktemp)"
+	lf -last-dir-path="$tmp" "$@"
+	if [ -f "$tmp" ]; then
+		dir="$(cat "$tmp")"
+		rm -f "$tmp"
+		if [ -d "$dir" ]; then
+			if [ "$dir" != "$(pwd)" ]; then
+				cd "$dir"
+			fi
+		fi
+	fi
+}
 
 mkd() { mkdir -p "$@" && cd "${@:$#}" ;}
 
