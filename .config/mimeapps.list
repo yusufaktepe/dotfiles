@@ -6,6 +6,7 @@ video/mp4=smplayer.desktop
 application/x-subrip=smplayer-sub.desktop
 video/x-matroska=smplayer.desktop
 inode/directory=doublecmd-newtab.desktop
+inode/mount-point=doublecmd-newtab.desktop
 application/pdf=org.pwmt.zathura.desktop
 text/html=vivaldi-stable.desktop
 application/rss+xml=rss.desktop
