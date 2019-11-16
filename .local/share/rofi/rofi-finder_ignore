@@ -1,0 +1,79 @@
+~/
+	(.audacity-data
+	|.cache
+	|.gnupg
+	|.icons
+	|.mozilla
+	|.pki
+	|.ssh
+	|.terminfo
+	)|
+~/.config/
+	(dconf
+	|doublecmd/logs
+	|GIMP
+	|google-chrome
+	|Hardcode-Tray
+	|inkscape
+	|keybase
+	|libreoffice
+	|light
+	|menus
+	|nvim/plugged
+	|pulse
+	|opera
+	|spotify
+	|syncthing
+	|VirtualBox
+	|vivaldi
+	)|
+.local/lib/
+	(node_modules
+	|tor-browser
+	|vivaldi
+	)|
+.local/share/
+	(cantata
+	|data
+	|desktop*
+	|gegl*
+	|gvfs*
+	|icons
+	|key*
+	|lf
+	|meld
+	|newsboat
+	|nvim
+	|pass*
+	|qalc*
+	|rofi
+	|Trash
+	|vlc
+	|xorg
+	|zathura
+	|.viv*
+	|gset*
+	|mime*
+	|recent*
+	)|
+/data/backup/
+	(clonezilla
+	|dotfiles
+	|makepkg
+	|spotify
+	)|
+/data/dl/
+	(isos
+	|torrents
+	)|
+/data/repos/
+	(aur
+	|dots
+	|patches
+	|pkgbuilds
+	|programs
+	|scripts
+	|site
+	|web
+	)|
+.Trash*|lost\+found
