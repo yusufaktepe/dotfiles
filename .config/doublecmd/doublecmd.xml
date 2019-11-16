@@ -320,6 +320,13 @@
         </Program>
         <Separator/>
         <Program>
+          <ID>{E93FC82B-4E19-41D3-B391-949B1021F7DA}</ID>
+          <Icon>catfish</Icon>
+          <Hint>Rofi-Finder</Hint>
+          <Command>sh</Command>
+          <Params>-c "locate '%D' | rofi -dmenu -i -l 20 -width 100 -p 'Open' | ( xargs -r -I '{}' xdg-open {} )"</Params>
+        </Program>
+        <Program>
           <ID>{835C382E-42F3-4372-9F09-A01D13D9A823}</ID>
           <Icon>pk-package-sources</Icon>
           <Hint>which package a file belongs to</Hint>
@@ -869,7 +876,7 @@
     <PathToLibrary>liblua5.1.so.0</PathToLibrary>
   </Lua>
   <NameShortcutFile>shortcuts.scf</NameShortcutFile>
-  <HotKeySortOrder>1</HotKeySortOrder>
+  <HotKeySortOrder>2</HotKeySortOrder>
   <UseEnterToCloseHotKeyEditor>True</UseEnterToCloseHotKeyEditor>
   <LastUsedPacker>gz</LastUsedPacker>
   <UseShellForFileOperations>False</UseShellForFileOperations>
