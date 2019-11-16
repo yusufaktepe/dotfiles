@@ -1,26 +1,104 @@
 #!/bin/sh
-# A fuzzy file-finder and opener based on rofi
-# Requires: rofi, xdg-utils, FontAwesome
+# I have no idea why I wrote this ¯\_(ツ)_/¯
 
-files="/tmp/.file_list"
+ignore="
+$HOME/
+	(.audacity-data
+	|.cache
+	|.gnupg
+	|.icons
+	|.mozilla
+	|.pki
+	|.ssh
+	|.terminfo
+	)|
+$HOME/.config/
+	(dconf
+	|doublecmd/logs
+	|GIMP
+	|google-chrome
+	|Hardcode-Tray
+	|inkscape
+	|keybase
+	|libreoffice
+	|light
+	|menus
+	|nvim/plugged
+	|pulse
+	|opera
+	|spotify
+	|syncthing
+	|VirtualBox
+	|vivaldi
+	)|
+.local/lib/
+	(node_modules
+	|tor-browser
+	|vivaldi
+	)|
+.local/share/
+	(cantata
+	|data
+	|desktop*
+	|gegl*
+	|gvfs*
+	|icons
+	|key*
+	|lf
+	|meld
+	|newsboat
+	|nvim
+	|pass*
+	|qalc*
+	|rofi
+	|Trash
+	|vlc
+	|xorg
+	|zathura
+	|.viv*
+	|gset*
+	|mime*
+	|recent*
+	)|
+/data/backup/
+	(clonezilla
+	|dotfiles
+	|makepkg
+	|spotify
+	)|
+/data/dl/
+	(isos
+	|torrents
+	)|
+/data/repos/
+	(aur
+	|dots
+	|patches
+	|pkgbuilds
+	|programs
+	|scripts
+	|site
+	|web
+	)|
+.Trash*|lost\+found
+"
 
-update_list() {
-	find \( ! -regex '.*/\..*' \) -type d -not -path '*/\.*' 2> /dev/null | sed -e 's/^\./:~/g' > /tmp/.file_list
-	find \( ! -regex '.*/\..*' \) -not -type d 2> /dev/null | sed -E -e '/png$|jpg$|tiff$|gif$|jpeg$|bmp$/ s/^\./:~/g' -e '/mp3$|pcm$|wav$|aac$|ogg$|wma$/ s/^\./:~/g' -e '/wmv$|webm$|m4v$|mkv$|mov$|flv$|avi$|mp4$/ s/^\./:~/g' -e 's/^\./:~/g' >> /tmp/.file_list
-	find .config 2> /dev/null | sed -E -e 's/^\./:~\/./g' >> /tmp/.file_list
+finder() {
+	locate "/home/*" "/data/*" | grep -Ev "("$(echo $ignore | tr -d ' ')")"
+	echo " Search system paths"
+	echo " Update search database"
 }
 
-if [ -e $files ]; then
-	input=$(rofi -dmenu -p  < $files)
-	update_list
-else
-	update_list
-	input=$(rofi -dmenu -p  < $files)
-fi
+choise=$(finder | rofi -dmenu -i -l 20 -width 60 -p "")
 
-case "$(echo "$input" | cut -d " " -f 1)" in
-	a) exec "$BROWSER" https://wiki.archlinux.org/index.php/"$(echo "$input" | cut -d " " -f2-)" >/dev/null 2>&1 & ;;
-	w) exec "$BROWSER" https://en.wikipedia.org/wiki/"$(echo "$input" | cut -d " " -f2-)" >/dev/null 2>&1 & ;;
-	s) exec "$BROWSER" "https://startpage.com/do/search?query=$(echo "$input" | cut -d " " -f2-)&cat=web&pl=chrome&language=english" >/dev/null 2>&1 & ;;
-	*) exec xdg-open "$(echo "$input" | sed 's/^....//g')" >/dev/null 2>&1 & ;;
+case "$choise" in
+	"") exit ;;
+	*) sudo -A updatedb && $0 ;;
+	*) sys_choise=$(locate "/etc/*" "/usr/*" | rofi -dmenu -i -l 20 -width 60 -p "")
+		case "$sys_choise" in
+			"") exit ;;
+			*)  xdg-open "$sys_choise" >/dev/null 2>&1 & ;;
+		esac ;;
+	*) xdg-open "$choise" >/dev/null 2>&1 & ;;
 esac
+
