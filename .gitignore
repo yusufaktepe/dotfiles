@@ -1,4 +1,4 @@
 .config/doublecmd/*[.err,.cache]
 .config/systemd/user/*.target.wants
 *history*
-
+.pam-gnupg
