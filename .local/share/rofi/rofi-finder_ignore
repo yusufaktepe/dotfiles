@@ -60,7 +60,7 @@
 	(clonezilla
 	|dotfiles
 	|makepkg
-	|spotify
+	|spotify/
 	)|
 /data/dl/
 	(isos
