@@ -17,6 +17,7 @@ my $t_crit = $ENV{T_CRIT} // 80;
 my $cpu_usage = -1;
 my $decimals = $ENV{DECIMALS} // 0;
 my $label = $ENV{LABEL} // "";
+my $BLOCK_BUTTON = $ENV{BLOCK_BUTTON} || 0;
 
 sub help {
     print "Usage: cpu_usage [-w <warning>] [-c <critical>] [-d <decimals>]\n";
@@ -26,9 +27,11 @@ sub help {
     exit 0;
 }
 
-if ( $ENV{'BLOCK_BUTTON'} && $ENV{'BLOCK_BUTTON'} == 1 ) {
+if ($BLOCK_BUTTON == 1) {
     my $notify = qx(ps axch -o cmd:15,%cpu --sort=-%cpu | head);
     system("notify-send -a i3blocks -i NONE '🖥 CPU hogs:' '$notify'");
+} elsif ($BLOCK_BUTTON == 3) {
+    system("$ENV{TERMINAL_N} _blockterm -e htop");
 }
 
 GetOptions("help|h" => \&help,
