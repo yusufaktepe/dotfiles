@@ -1,7 +1,6 @@
 aliasrc         ~/.config/shell/aliasrc
 bashrc          ~/.config/shell/.bashrc
 bash_history    ~/.config/shell/.bash_history
-compton         ~/.config/compton.conf
 conf.list       ~/.config/conf.list
 dir.list        ~/.config/dir.list
 dunstrc         ~/.config/dunst/dunstrc
@@ -36,6 +35,7 @@ npmrc           ~/.config/npmrc
 newsboat        ~/.config/newsboat/config
 pam_environment ~/.pam_environment
 pam-gnupg       ~/.pam-gnupg
+picom           ~/.config/picom.conf
 profile         ~/.profile
 redshift        ~/.config/redshift/redshift.conf
 rofi            ~/.config/rofi/config.rasi

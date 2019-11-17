@@ -93,7 +93,7 @@ bindsym $mod+Shift+d exec $N cdd
 bindsym $mod+Shift+e exec $N cfg
 bindsym $mod+Shift+p exec $N pulseaudio --kill && sleep 2 && pulseaudio --start
 bindsym $mod+Ctrl+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym $mod+Shift+t exec $N pkill compton || compton -b
+bindsym $mod+Shift+t exec $N pkill picom || picom -b
 bindsym $mod+Shift+z exec $N toggle redshift
 bindsym $mod+Shift+F12 exec $N sudo -A systemctl restart NetworkManager
 bindsym $mod+F12 exec $termins "_nmtui" -e "nmtui-connect"
@@ -365,7 +365,7 @@ bindsym $mod+Shift+r restart
 #=====================================================================
 
 exec $N /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec $N setbg; sleep 1; compton -b
+exec $N setbg; sleep 1; picom -b
 exec $N dunst
 exec $N nm-applet
 exec $N redshift
