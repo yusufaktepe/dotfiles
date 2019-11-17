@@ -33,9 +33,7 @@ default_floating_border normal
 hide_edge_borders none
 
 # change borders
-bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+idotless border normal
+bindsym $mod+Ctrl+b border toggle
 
 # Font used by titles & bar -unless otherwise stated in the bar{} block-
 font pango:Hack, Awesome 9
@@ -75,13 +73,13 @@ bindsym $mod+F3 exec $N ifwin vivaldi
 bindsym $mod+F4 exec $N ifwin opera
 bindsym $mod+F5 exec $N ifwin firefox
 bindsym $mod+F6 exec $N ifwin chrome
-bindsym $mod+Shift+F3 exec vivaldi-stable --incognito --start-maximized
-bindsym $mod+Shift+F4 exec opera --private --start-maximized
-bindsym $mod+Shift+F5 exec firefox --private-window
-bindsym $mod+Shift+F6 exec google-chrome-stable --incognito
+bindsym $mod+Shift+F2 exec $N pcmanfm
+bindsym $mod+Shift+F3 exec $N vivaldi-stable --incognito --start-maximized
+bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
+bindsym $mod+Shift+F5 exec $N firefox --private-window
+bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
 
 ## Caps+
-bindsym $caps+F2 exec $N pcmanfm
 bindsym $caps+e exec $term -e $EDITOR
 bindsym $caps+m exec $N cantata-mpd
 bindsym $caps+s exec $N ifwin spotify
@@ -362,9 +360,6 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+Escape exec $N dprompt "Exit i3?" "i3-msg exit"
-
 #=====================================================================
 # Autostart applications
 #=====================================================================
@@ -628,7 +623,9 @@ mode "$keystroke" {
 	bindsym --release q exec $N autotype mail, mode "default"
 	bindsym --release g exec $N autotype mail2, mode "default"
 	bindsym --release minus exec $N autotype banner, mode "default"
+	bindsym --release asterisk exec $N autotype banner2, mode "default"
 	bindsym --release comma exec $N autotype mdcode, mode "default"
+	bindsym --release 0 exec $N autotype shrug, mode "default"
 
 	# back to normal: Escape or $caps+a
 	bindsym Escape mode "default"

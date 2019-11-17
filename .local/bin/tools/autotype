@@ -19,4 +19,7 @@ case "$1" in
 	mdcode)
 		xdotool key --repeat 3 grave key --repeat 2 Return key --repeat 3 grave key Up
 	;;
+	shrug)
+		xdotool type --clearmodifiers '¯\_(ツ)_/¯'
+	;;
 esac
