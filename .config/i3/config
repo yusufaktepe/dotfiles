@@ -87,14 +87,9 @@ bindsym $caps+q exec $N ifwin qbittorrent
 bindsym $caps+v exec $N ifwin smplayer
 bindsym $caps+7 exec $N ifwin vbox Win7
 bindsym $caps+w exec $N libreoffice --writer
-bindsym $caps+h exec $N py-http -n
 
 bindsym $mod+Shift+d exec $N cdd
 bindsym $mod+Shift+e exec $N cfg
-bindsym $mod+Shift+p exec $N pulseaudio --kill && sleep 2 && pulseaudio --start
-bindsym $mod+Ctrl+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym $mod+Shift+t exec $N pkill picom || picom -b
-bindsym $mod+Shift+z exec $N toggle redshift
 bindsym $mod+Shift+F12 exec $N sudo -A systemctl restart NetworkManager
 bindsym $mod+F12 exec $termins "_nmtui" -e "nmtui-connect"
 
@@ -600,21 +595,20 @@ mode "$broopen" {
 		bindsym $caps+b mode "default"
 }
 
-bindsym $mod+z mode "$run"
-set $run  Run
-mode "$run" {
-	bindsym f exec $N firefox, mode "default"
-	bindsym Shift+f exec $N firefox --private-window, mode "default"
-	bindsym g exec $N google-chrome-stable, mode "default"
-	bindsym Shift+g exec $N google-chrome-stable --incognito, mode "default"
-	bindsym m exec $N meld, mode "default"
-	bindsym v exec $N virtualbox, mode "default"
+bindsym $mod+Shift+t mode "$toggle"
+set $toggle  pi[c]om py-[h]ttp [k]eybase [r]edshift [s]timeout |  [d]unst [p]ulse
+mode "$toggle" {
+	bindsym c exec $N pkill picom || picom -b, mode "default"
+	bindsym h exec $N py-http -n, mode "default"
+	bindsym k exec $N toggle keybase, mode "default"
+	bindsym r exec $N toggle redshift, mode "default"
+	bindsym s exec $N toggle stimeout, mode "default"
+	bindsym d --release exec "killall dunst; exec notify-send 'restart dunst'", mode "default"
+	bindsym p exec $N pulseaudio -k && sleep 2 && pulseaudio --start, mode "default"
 
-		# back to normal: Enter or Escape or $mod+z
+		# back to normal: Enter or Escape
 		bindsym Return mode "default"
 		bindsym Escape mode "default"
-		bindsym z mode "default"
-		bindsym $mod+z mode "default"
 }
 
 bindsym $caps+a mode "$keystroke"
