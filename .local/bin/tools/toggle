@@ -17,6 +17,15 @@ case "$1" in
 			notify-send -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
 		fi
 	;;
+	keybase)
+		if systemctl -q is-active --user keybase; then
+			systemctl stop --user kbfs && systemctl stop --user keybase
+			notify-send -a keybase -i keybase "Keybase" "Keybase service stopped"
+		else
+			systemctl start --user keybase && systemctl start --user kbfs
+			notify-send -a keybase -i keybase "Keybase" "Keybase service started"
+		fi
+	;;
 	net)
 		case "$2" in
 			w|wifi)
@@ -34,16 +43,6 @@ case "$1" in
 				fi
 			;;
 		esac
-	;;
-	touchpad)
-		device=$(xinput --list --name-only | grep -i touchpad)
-		state=$(xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$")
-
-		if [ "$state" -eq '1' ]; then
-			xinput disable "$device" && notify-send -a "TouchPad" -i touchpad-disabled-symbolic "TouchPad Disabled"
-		else
-			xinput enable "$device" && notify-send -a "TouchPad" -i touchpad-enabled-symbolic "TouchPad Enabled"
-		fi
 	;;
 	redshift)
 		if ! pgrep -x "redshift" > /dev/null; then
@@ -66,7 +65,18 @@ case "$1" in
 			notify-send -a Xorg -i state_running "Xorg" "Screen timeout disabled"
 		fi
 	;;
+	touchpad)
+		device=$(xinput --list --name-only | grep -i touchpad)
+		state=$(xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$")
+
+		if [ "$state" -eq '1' ]; then
+			xinput disable "$device" && notify-send -a "TouchPad" -i touchpad-disabled-symbolic "TouchPad Disabled"
+		else
+			xinput enable "$device" && notify-send -a "TouchPad" -i touchpad-enabled-symbolic "TouchPad Enabled"
+		fi
+	;;
 	$NULL|*)
-		printf "Usage: toggle { audio | net (w|wifi|*|NULL) | touchpad | redshift | stimeout }\n"
+		printf "Options:\n\t"
+		printf "audio\n\tkeybase\n\tnet (w|wifi|NULL)\n\tredshift\n\tstimeout\n\ttouchpad\n"
 	;;
 esac
