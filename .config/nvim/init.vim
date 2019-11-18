@@ -159,9 +159,6 @@ noremap <M-}> <C-w>3+
 noremap <silent> <M-cr> :tabnew<CR>
 noremap <silent> <M-backspace> :tabclose<CR>
 
-" Close window (except last one)
-nnoremap <C-w> :close<cr>
-
 " Navigate left/right through tabs
 noremap <silent> <M-,> :tabn<CR>
 noremap <silent> <M-;> :tabp<CR>
