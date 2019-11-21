@@ -604,7 +604,7 @@ mode "$toggle" {
 	bindsym r exec $N toggle redshift, mode "default"
 	bindsym s exec $N toggle stimeout, mode "default"
 	bindsym d --release exec "killall dunst; exec notify-send 'restart dunst'", mode "default"
-	bindsym p exec $N pulseaudio -k && sleep 2 && pulseaudio --start, mode "default"
+	bindsym p exec $N systemctl --user restart pulseaudio, mode "default"
 
 		# back to normal: Enter or Escape
 		bindsym Return mode "default"
