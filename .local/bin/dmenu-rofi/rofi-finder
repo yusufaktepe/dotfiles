@@ -5,7 +5,7 @@ ignore=$XDG_DATA_HOME/rofi/rofi-finder_ignore
 
 finder() {
 	locate "/home/*" "/data/*" | grep -Ev "($(tr -d '\t\n' < $ignore | sed "s|~|$HOME|g"))"
-	printf " Edit ignore list\n Search system paths\n Update search database"
+	printf " !Edit ignore list\n !System paths\n !Update search database"
 }
 
 choise=$(finder | rofi -dmenu -i -l 20 -width 60 -p "")
