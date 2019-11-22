@@ -109,7 +109,27 @@ cmd zip ${{
     rm -rf $1
 }}
 
-# Bindings
+# bulk rename with $EDITOR
+cmd bulk-rename ${{
+    old=$(mktemp)
+    new=$(mktemp)
+    [ -n $fs ] && fs=$(ls)
+    printf "$fs\n" > $old
+    printf "$fs\n" > $new
+    $EDITOR $new
+    [ $(wc -l < $new) -ne $(wc -l < $old) ] && exit
+    paste $old $new | while read names; do
+        src=$(printf $names | cut -f1)
+        dst=$(printf $names | cut -f2)
+        [ $src = $dst ] && continue
+        [ -e $dst ] && continue
+        mv $src $dst
+    done
+    rm $old $new
+    lf -remote "send $id unselect"
+}}
+
+## Bindings
 
 # use enter for shell commands
 map <enter> shell
@@ -123,7 +143,7 @@ map O $mimeopen --ask $f
 map a push %mkdir<space>
 map r push :rename<space>
 
-map R reload
+map R bulk-rename
 map C copyto
 map M moveto
 map D trash
