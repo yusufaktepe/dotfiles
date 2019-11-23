@@ -296,6 +296,9 @@ bindkey '^[[1;3D' cdUndoKey # [Alt+Left] - go back in directory history
 # fzf_cd() { zle -I; DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR" ;}; zle -N fzf_cd; bindkey '^E' fzf_cd
 zle -N copyx; copyx() { echo -E $BUFFER | xsel -ib ;}; bindkey '^Y' copyx
 
+# lfcd function (defined in aliasrc)
+bindkey -s '^o' 'lfcd\n'
+
 #=====================================================================
 # Set Terminal Title
 #=====================================================================
