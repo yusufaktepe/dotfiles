@@ -47,7 +47,6 @@ bind-key N prev-unread
 bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
-bind-key ^t next-unread
 
 ## Colors
 color listnormal cyan default
@@ -73,4 +72,4 @@ macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open
 macro v set browser "setsid nohup mpv"; open-in-browser ; set browser linkhandler
 macro w set browser "w3m"; open-in-browser ; set browser linkhandler
 macro p set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
-macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkandler
+macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
