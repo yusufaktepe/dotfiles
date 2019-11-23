@@ -3,13 +3,12 @@
 # ~/.profile
 #
 
-# Adds `~/.local/bin` and all subdirectories to $PATH
-export PATH="$PATH:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' | sed 's/:*$//')"
-
 # XDG User Dirs
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_LIB_HOME="$HOME/.local/lib"
 
 # Defaults:
 export EDITOR="nvim"
@@ -30,9 +29,13 @@ export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+export GOPATH="$XDG_LIB_HOME/go"
+
+# Adds `~/.local/bin` and all subdirectories to $PATH
+export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' | sed 's/:*$//')"
 
 # Others:
-export SUDO_ASKPASS="$HOME/.local/bin/dmenu-rofi/rofi-askpass"
+export SUDO_ASKPASS="$XDG_BIN_HOME/dmenu-rofi/rofi-askpass"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 50%"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
