@@ -74,5 +74,5 @@
 	insteadOf = "ml:"
 	pushInsteadOf = "ml:"
 
-[url "https://aur.archlinux.org/"]
+[url "ssh://aur@aur.archlinux.org/"]
 	insteadOf = "aur:"
