@@ -29,6 +29,7 @@
 	)|
 .local/lib/
 	(node_modules
+	|go/src
 	|tor-browser
 	|vivaldi
 	)|
