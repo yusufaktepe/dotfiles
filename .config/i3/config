@@ -53,11 +53,12 @@ bindsym $mod+udiaeresis exec $N ddspawn tmuxdd
 # open terminal in current dir
 bindsym $mod+Shift+Return exec $N samedir
 
-# #---Start program launcher---# #
+# #---Rofi---# #
 bindsym $mod+d exec $N rofi -show combi
 bindsym $mod+c exec $N "rofi -show calc -modi calc -no-show-match -no-sort"
 bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
+bindsym $mod+less exec $N rofi-translate
 
 # #---Clipboard management---# #
 bindsym Ctrl+quotedbl exec $N gclip
