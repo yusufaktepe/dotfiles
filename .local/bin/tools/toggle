@@ -54,6 +54,13 @@ case "$1" in
 			notify-send -a Redshift -i redshift-status-off "Redshift" "Status: <b>Closed</b>\nPeriod: <b>None</b>"
 		fi
 	;;
+	spotifyd)
+		if ! pgrep -x "spotifyd" > /dev/null; then
+			spotifyd
+		else
+			pkill -TERM spotifyd
+		fi
+	;;
 	stimeout)
 		default=$(echo "$(grep OffTime /etc/X11/xorg.conf.d/10-monitor.conf | awk -F'"' '{print $4}')*60" | bc)
 
