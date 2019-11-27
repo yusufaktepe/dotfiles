@@ -30,6 +30,8 @@ export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export GOPATH="$XDG_LIB_HOME/go"
+export RUSTUP_HOME="$XDG_LIB_HOME/rustup"
+export CARGO_HOME="$XDG_LIB_HOME/cargo"
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
 export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' | sed 's/:*$//')"
