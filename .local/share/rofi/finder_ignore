@@ -30,6 +30,8 @@
 .local/lib/
 	(node_modules
 	|go/src
+	|cargo
+	|rustup
 	|tor-browser
 	|vivaldi
 	)|
