@@ -75,8 +75,18 @@ case "$instance" in
 			1) playerctl previous && pkill -$statussig i3blocks ;;
 			2) playerctl play-pause && pkill -$statussig i3blocks ;;
 			3) playerctl next && pkill -$statussig i3blocks ;;
-			4) pgrep -x spotify >/dev/null && spotify-vol + 5 || playerctl volume 0.05+ ;;
-			5) pgrep -x spotify >/dev/null && spotify-vol - 5 || playerctl volume 0.05- ;;
+			4)
+				if pgrep -x spotify >/dev/null || pgrep -x spotifyd >/dev/null; then
+					spotify-vol + 5
+				else
+					playerctl volume 0.05+
+				fi ;;
+			5)
+				if pgrep -x spotify >/dev/null || pgrep -x spotifyd >/dev/null; then
+					spotify-vol - 5
+				else
+					playerctl volume 0.05-
+				fi ;;
 		esac
 
 		STATUS=$(playerctl status)

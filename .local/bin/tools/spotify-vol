@@ -12,7 +12,7 @@ pactl list sink-inputs | while read -r line; do \
 		current_sink_num="$sink_num_check"
 	else
 		app_name_check=$(echo "$line" | sed -rn 's/application.name = "([^"]*)"/\1/p')
-		if [ "$app_name_check" = "Spotify" ]; then
+		if [ "$app_name_check" = "Spotify" ] || [ "$app_name_check" = "librespot" ]; then
 			case $1 in
 				dec|-) pactl set-sink-input-volume "$current_sink_num" -"$2"% ;;
 				inc|+) pactl set-sink-input-volume "$current_sink_num" +"$2"% ;;
