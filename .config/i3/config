@@ -58,7 +58,8 @@ bindsym $mod+d exec $N rofi -show combi
 bindsym $mod+c exec $N "rofi -show calc -modi calc -no-show-match -no-sort"
 bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
-bindsym $mod+less exec $N rofi-translate
+# bindsym XF86Launch2 exec $N rofi -show combi
+bindsym XF86Launch9 exec $N rofi-translate
 
 # #---Clipboard management---# #
 bindsym Ctrl+quotedbl exec $N gclip
@@ -79,6 +80,7 @@ bindsym $mod+Shift+F3 exec $N vivaldi-stable --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
 bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
+bindsym --release $mod+Ctrl+e exec $N ifwin crow
 
 ## Caps+
 bindsym $caps+e exec $term -e $EDITOR
@@ -99,8 +101,6 @@ bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 
 ## Function Buttons
 bindsym XF86Launch1 exec $termins htop-floating -e htop
-bindsym XF86Launch2 exec $N rofi -show combi
-bindsym XF86Launch9 exec $N ifwin crow
 
 bindsym XF86MonBrightnessUp exec $N "light -A 5; pkill -RTMIN+10 i3blocks"
 bindsym XF86MonBrightnessDown exec $N "light -U 5; pkill -RTMIN+10 i3blocks"
