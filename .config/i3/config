@@ -85,6 +85,7 @@ bindsym --release $mod+Ctrl+e exec $N ifwin crow
 ## Caps+
 bindsym $caps+e exec $term -e $EDITOR
 bindsym $caps+m exec $N cantata-mpd
+bindsym $caps+Shift+s exec $N toggle spotifyd
 bindsym $caps+s exec $N ifwin spotify
 bindsym $caps+q exec $N ifwin qbittorrent
 bindsym $caps+v exec $N ifwin smplayer
