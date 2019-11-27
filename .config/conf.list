@@ -40,6 +40,7 @@ profile         ~/.profile
 redshift        ~/.config/redshift/redshift.conf
 rofi            ~/.config/rofi/config.rasi
 rofi-pass       ~/.config/rofi-pass/config
+spotifyd        ~/.config/spotifyd/spotifyd.conf
 ssh             ~/.ssh/config
 sshcontrol      ~/.gnupg/sshcontrol
 sxiv            ~/.config/sxiv/exec/key-handler
