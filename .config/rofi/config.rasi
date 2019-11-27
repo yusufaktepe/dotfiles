@@ -17,7 +17,7 @@ display-window: " ";
 display-combi: " ";
 display-calc: "";
 
-kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2";
+kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2,XF86Launch9,Super_L+XF86MonBrightnessDown";
 
 kb-select-1: "Super+1,Control+1";
 kb-select-2: "Super+2,Control+2";
