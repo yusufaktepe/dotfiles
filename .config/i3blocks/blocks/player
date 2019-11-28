@@ -77,13 +77,13 @@ case "$instance" in
 			3) playerctl next && pkill -$statussig i3blocks ;;
 			4)
 				if pgrep -x spotify >/dev/null || pgrep -x spotifyd >/dev/null; then
-					spotify-vol + 5
+					spotify-vol +5 >/dev/null
 				else
 					playerctl volume 0.05+
 				fi ;;
 			5)
 				if pgrep -x spotify >/dev/null || pgrep -x spotifyd >/dev/null; then
-					spotify-vol - 5
+					spotify-vol -5 >/dev/null
 				else
 					playerctl volume 0.05-
 				fi ;;
