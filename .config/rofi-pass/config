@@ -16,8 +16,10 @@ _pwgen () {
 # qrencode is needed to generate the image and a viewer
 # that can read from pipes. Known viewers to work are feh and display
 _image_viewer () {
-    feh -
+#    feh -
 #    display
+     qr=$(mktemp)
+     tee $qr && sxiv $qr && shred -u $qr
 }
 
 # xdotool needs the keyboard layout to be set using setxkbmap
