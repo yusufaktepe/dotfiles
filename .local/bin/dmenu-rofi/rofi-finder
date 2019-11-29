@@ -8,7 +8,7 @@
 # ---
 
 ignore=$XDG_DATA_HOME/rofi/finder_ignore
-tmp="/tmp/rofi-finder.ls"
+tmp=$XDG_CACHE_HOME/rofi-finder.ls
 
 mklist() {
 	locate "/home/*" "/data/*" | grep -Ev "($(tr -d '\t\n' < $ignore | sed "s|~|$HOME|g"))" > $tmp
