@@ -525,7 +525,7 @@
     <MainMenu>True</MainMenu>
     <ButtonBar Enabled="True">
       <FlatIcons>True</FlatIcons>
-      <ButtonHeight>24</ButtonHeight>
+      <ButtonHeight>22</ButtonHeight>
       <IconSize>16</IconSize>
       <ReportErrorWithCommands>True</ReportErrorWithCommands>
     </ButtonBar>
@@ -744,7 +744,7 @@
     <HotDir Name="gdrive" Path="/data/shared/gdrive"/>
     <HotDir Name="mega" Path="/data/shared/mega"/>
     <HotDir Name="syncthing" Path="/data/shared/syncthing"/>
-    <HotDir Name="kbfs" Path="/data/shared/kbfs"/>
+    <HotDir Name="kbfs" Path="/run/user/1000/keybase/kbfs/"/>
     <HotDir Name="gcloud (sftp)" Path="sftp://yusuf@34.73.143.104/home/yusuf"/>
     <HotDir Name="--" Path=""/>
     <HotDir Name="files" Path="/data/files" PathSort="1"/>
@@ -755,7 +755,7 @@
     <PreviewVisible>False</PreviewVisible>
     <ImageStretch>False</ImageStretch>
     <ImageExifRotate>True</ImageExifRotate>
-    <ImageStretchLargeOnly>False</ImageStretchLargeOnly>
+    <ImageStretchLargeOnly>True</ImageStretchLargeOnly>
     <ImageCenter>True</ImageCenter>
     <CopyMovePath1/>
     <CopyMovePath2/>
