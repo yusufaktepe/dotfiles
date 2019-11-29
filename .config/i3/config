@@ -80,7 +80,6 @@ bindsym $mod+Shift+F3 exec $N vivaldi-stable --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
 bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
-bindsym --release $mod+Ctrl+e exec $N ifwin crow
 
 ## Caps+
 bindsym $caps+e exec $term -e $EDITOR
@@ -91,6 +90,7 @@ bindsym $caps+q exec $N ifwin qbittorrent
 bindsym $caps+v exec $N ifwin smplayer
 bindsym $caps+7 exec $N ifwin vbox Win7
 bindsym $caps+w exec $N libreoffice --writer
+bindsym --release $caps+c exec $N ifwin crow
 
 bindsym $mod+Shift+d exec $N cdd
 bindsym $mod+Shift+e exec $N cfg
