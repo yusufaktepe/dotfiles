@@ -372,6 +372,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 "=== Fugitive
 nnoremap <leader>gb :Gblame<CR>
 vnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>ds :Gvdiffsplit<CR>
 
 "=== Gist-Vim
 let g:gist_token_file = '~/.config/gist-vim'
@@ -381,8 +382,10 @@ map <leader>f :Goyo \| set linebreak<CR>
 
 "=== NerdTree
 map <leader>n :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 let NERDTreeShowHidden=1
+" close vim if NERDTree is the last window
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "=== Suda
 cnoremap W!! <bar> :w suda://%<CR>
