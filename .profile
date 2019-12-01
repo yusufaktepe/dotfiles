@@ -1,7 +1,4 @@
 #!/bin/sh
-#
-# ~/.profile
-#
 
 # XDG User Dirs
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -20,18 +17,24 @@ export READER="zathura"
 export FILE="lf"
 
 # Keep $HOME clean:
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+
+export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
+
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
-export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch.conf"
-export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
-export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
+export XINITRC="$XDG_CONFIG_HOME/X11/xinitrc"
+
+export CARGO_HOME="$XDG_LIB_HOME/cargo"
 export GOPATH="$XDG_LIB_HOME/go"
 export RUSTUP_HOME="$XDG_LIB_HOME/rustup"
-export CARGO_HOME="$XDG_LIB_HOME/cargo"
+
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export TERMINFO="$XDG_DATA_HOME/terminfo"
+export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
 export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' | sed 's/:*$//')"
