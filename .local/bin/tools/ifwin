@@ -15,9 +15,9 @@ case "$1" in
 	chrome)
 		if pgrep -x "chrome" > /dev/null; then
 			if [ "$AW_CLASS" = "Google-chrome" ]; then
-				i3-msg "workspace back_and_forth"
+				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg '[class="Google-chrome"] focus'
+				i3-msg '[class="Google-chrome"] focus' >/dev/null
 			fi
 		else
 			exec google-chrome-stable
@@ -30,7 +30,7 @@ case "$1" in
 			exec crow
 		else
 			if wmctrl -l | grep -q "Crow Translate"; then
-				wmctrl -x -a crow.Crow Translate && i3-msg kill
+				wmctrl -x -a "crow.Crow Translate" && i3-msg kill >/dev/null
 			else
 				xdotool key --clearmodifiers $showcrow
 			fi
@@ -39,9 +39,9 @@ case "$1" in
 	doublecmd)
 		if pgrep -x "doublecmd" > /dev/null; then
 			if [ "$AW_CLASS" = "Doublecmd" ]; then
-				i3-msg "workspace back_and_forth"
+				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg '[class="Doublecmd"] focus'
+				i3-msg '[class="Doublecmd"] focus' >/dev/null
 			fi
 		else
 			exec doublecmd --no-splash
@@ -50,9 +50,9 @@ case "$1" in
 	firefox)
 		if pgrep -x "firefox" > /dev/null; then
 			if [ "$AW_CLASS" = "firefox" ]; then
-				i3-msg "workspace back_and_forth"
+				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg '[class="firefox"] focus'
+				i3-msg '[class="firefox"] focus' >/dev/null
 			fi
 		else
 			exec firefox
@@ -61,9 +61,9 @@ case "$1" in
 	opera)
 		if pgrep -x "opera" > /dev/null; then
 			if [ "$AW_CLASS" = "Opera" ]; then
-				i3-msg "workspace back_and_forth"
+				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg '[class="Opera"] focus'
+				i3-msg '[class="Opera"] focus' >/dev/null
 			fi
 		else
 			exec opera --start-maximized
@@ -72,10 +72,10 @@ case "$1" in
 	pavucontrol)
 		if pgrep -x "pavucontrol" > /dev/null; then
 			if [ "$AW_CLASS" = "Pavucontrol" ]; then
-				i3-msg kill
+				i3-msg kill >/dev/null
 				pkill -SIGRTMIN+10 i3blocks
 			else
-				i3-msg '[class="Pavucontrol"] focus'
+				i3-msg '[class="Pavucontrol"] focus' >/dev/null
 			fi
 		else
 			exec pavucontrol
@@ -84,9 +84,9 @@ case "$1" in
 	qbittorrent)
 		if pgrep -x "qbittorrent" > /dev/null; then
 			if [ "$AW_CLASS" = "qBittorrent" ]; then
-				i3-msg "workspace back_and_forth"
+				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg '[class="qBittorrent"] focus'
+				i3-msg '[class="qBittorrent"] focus' >/dev/null
 			fi
 		else
 			exec qbittorrent
@@ -95,9 +95,9 @@ case "$1" in
 	smplayer)
 		if pgrep -x "smplayer" > /dev/null; then
 			if [ "$AW_CLASS" = "smplayer" ]; then
-				i3-msg "workspace back_and_forth"
+				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg '[class="smplayer"] focus'
+				i3-msg '[class="smplayer"] focus' >/dev/null
 			fi
 		else
 			exec smplayer
@@ -106,9 +106,9 @@ case "$1" in
 	spotify)
 		if pgrep -x "spotify" > /dev/null; then
 			if [ "$AW_CLASS" = "Spotify" ]; then
-				i3-msg "workspace back_and_forth"
+				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg '[class="Spotify"] focus'
+				i3-msg '[class="Spotify"] focus' >/dev/null
 				# wmctrl -x -a spotify.Spotify
 			fi
 		else
@@ -118,9 +118,9 @@ case "$1" in
 	vbox)
 		if VBoxManage list vms runningvms | grep -q "$2"; then
 			if [ "$AW_CLASS" = "VirtualBox Machine" ]; then
-				i3-msg "workspace back_and_forth"
+				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg "[class=(?i)VirtualBox title=(?i)$2] focus"
+				i3-msg "[class=(?i)VirtualBox title=(?i)$2] focus" >/dev/null
 			fi
 		else
 			exec VBoxManage startvm "$2"
@@ -129,9 +129,9 @@ case "$1" in
 	vivaldi)
 		if pgrep -x "vivaldi-bin" > /dev/null; then
 			if [ "$AW_CLASS" = "Vivaldi-stable" ]; then
-				i3-msg "workspace back_and_forth"
+				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg '[class="Vivaldi-stable"] focus'
+				i3-msg '[class="Vivaldi-stable"] focus' >/dev/null
 			fi
 		else
 			exec vivaldi-stable --start-maximized
