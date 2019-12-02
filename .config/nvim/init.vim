@@ -375,7 +375,8 @@ vnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>ds :Gvdiffsplit<CR>
 
 "=== Gist-Vim
-let g:gist_token_file = '~/.config/gist-vim'
+let g:gist_token_file = '/data/backup/secrets/gist_token'
+let g:gist_post_private = 1
 
 "=== Goyo plugin makes text more readable when writing prose:
 map <leader>f :Goyo \| set linebreak<CR>
