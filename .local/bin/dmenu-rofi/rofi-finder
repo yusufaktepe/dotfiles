@@ -11,20 +11,20 @@ ignore=$XDG_DATA_HOME/rofi/finder_ignore
 tmp=$XDG_CACHE_HOME/rofi-finder.ls
 
 mklist() {
-	locate "/home/*" "/data/*" | grep -Ev "($(tr -d '\t\n' < $ignore | sed "s|~|$HOME|g"))" > $tmp
-	printf " !Edit ignore list\n !System paths\n !Update search database" >> $tmp
+	locate "/home/*" "/data/*" | grep -Ev "($(tr -d '\t\n' < "$ignore" | sed "s|~|$HOME|g"))" > "$tmp"
+	printf " !Edit ignore list\n !System paths\n !Update search database" >> "$tmp"
 }
 
-if [ -e $tmp ]; then
-	choise=$(rofi -dmenu -i -l 20 -width 60 -p "" < $tmp)
+if [ -e "$tmp" ]; then
+	choise=$(rofi -dmenu -i -l 20 -width 60 -p "" < "$tmp")
 else
 	mklist
-	choise=$(rofi -dmenu -i -l 20 -width 60 -p "" < $tmp)
+	choise=$(rofi -dmenu -i -l 20 -width 60 -p "" < "$tmp")
 fi
 
 case "$choise" in
 	"") exit ;;
-	*) sudo -A updatedb && mklist && $0 ;;
+	*) sudo -A updatedb && rm "$tmp" && mklist && $0 ;;
 	*) sys_choise=$(locate "/etc/*" "/usr/*" | rofi -dmenu -i -l 20 -width 60 -p "")
 		case "$sys_choise" in
 			"") exit ;;
