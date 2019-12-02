@@ -153,7 +153,7 @@ lfcd() {
 
 mkd() { mkdir -p "$@" && cd "${@:$#}" ;}
 
-sh-history() { $EDITOR "$HISTFILE" ;}
+histopen() { $EDITOR + "$HISTFILE" ;}
 
 rpeat() {
 	n=$1
