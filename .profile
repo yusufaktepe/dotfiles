@@ -46,7 +46,7 @@ export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # Start i3 on tty1 login
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
-	exec startx "$XINITRC" -- -quiet > ~/.cache/Xorg.log 2>&1
+	exec startx "$XINITRC" -- -quiet > "$XDG_DATA_HOME/xorg/Xorg.log" 2>&1
 fi
 
 # Switch escape and caps if tty (add to sudoers NOPASSWD):
