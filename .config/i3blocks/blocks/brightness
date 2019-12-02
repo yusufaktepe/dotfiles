@@ -9,21 +9,14 @@ case $BLOCK_BUTTON in
 	5) light -U 5 ;;			# scroll down
 esac
 
-URGENT_VALUE=2
+urgent=2
 
-curBrightness=$(light -G)
+getBrightness=$(light -G)
+curBrightness=${getBrightness%.*}
 
-[ "${curBrightness}" -le 0 ] && exit
+[ "$curBrightness" -le "$urgent" ] && exit 33
 
-percent=$(echo "scale=0;${curBrightness}" | bc -l)
-percent=${percent%.*}
+echo "$curBrightness%"
+echo "$curBrightness%"
 
-[ "${percent}" -le 0 ] && exit
-
-echo "${percent}%"
-echo "${percent}%"
-echo ""
-
-if [ "${percent}" -le "${URGENT_VALUE}" ]; then
-	exit 33
-fi
+exit 0
