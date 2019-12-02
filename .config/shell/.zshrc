@@ -296,8 +296,9 @@ bindkey '^[[1;3D' cdUndoKey # [Alt+Left] - go back in directory history
 # fzf_cd() { zle -I; DIR=$(find ${1:-*} -path '*/\.*' -prune -o -type d -print 2> /dev/null | fzf) && cd "$DIR" ;}; zle -N fzf_cd; bindkey '^E' fzf_cd
 zle -N copyx; copyx() { echo -E $BUFFER | xsel -ib ;}; bindkey '^Y' copyx
 
-# lfcd function (defined in aliasrc)
+# functions defined in aliasrc
 bindkey -s '^o' 'lfcd\n'
+bindkey -s '^[h' 'histopen\n'
 
 #=====================================================================
 # Set Terminal Title
@@ -397,7 +398,8 @@ alias -g Sn='| sort -n'
 alias -g Snr='| sort -nr'
 
 alias -g NUL="> /dev/null 2>&1"
-alias -g N="&>/dev/null"
+alias -g N=">/dev/null"
+alias -g NA="&>/dev/null"
 alias -g N1="1>/dev/null"
 alias -g N2="2>/dev/null"
 
