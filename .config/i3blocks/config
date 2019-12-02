@@ -33,6 +33,7 @@ signal=6
 label= 
 interval=1
 color=#9accff
+SENSOR_CHIP="coretemp-isa-0000"
 
 [cpu_usage]
 label= 
