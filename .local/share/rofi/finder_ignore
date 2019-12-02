@@ -6,7 +6,6 @@
 	|.mozilla
 	|.pki
 	|.ssh
-	|.terminfo
 	)|
 ~/.config/
 	(dconf
@@ -36,7 +35,8 @@
 	|vivaldi
 	)|
 .local/share/
-	(cantata
+	(applications
+	|cantata
 	|data
 	|desktop*
 	|gegl*
@@ -49,6 +49,7 @@
 	|nvim
 	|pass*
 	|qalc*
+	|terminfo
 	|Trash
 	|vlc
 	|xorg
