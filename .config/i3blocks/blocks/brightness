@@ -14,9 +14,9 @@ urgent=2
 getBrightness=$(light -G)
 curBrightness=${getBrightness%.*}
 
-[ "$curBrightness" -le "$urgent" ] && exit 33
+echo "$curBrightness%"
+echo "$curBrightness%"
 
-echo "$curBrightness%"
-echo "$curBrightness%"
+[ "$curBrightness" -le "$urgent" ] && exit 33
 
 exit 0
