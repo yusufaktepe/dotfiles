@@ -409,7 +409,6 @@ let g:undotree_DiffpanelHeight = 6
 let g:move_key_modifier = 'C-M'
 
 "=== VimWiki
-map <leader>w :VimwikiIndex<CR>
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let g:vimwiki_list = [{'path': '~/repos/writings', 'syntax': 'markdown', 'ext': '.md'}]
 
