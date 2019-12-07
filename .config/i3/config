@@ -59,7 +59,7 @@ bindsym $mod+c exec $N "rofi -show calc -modi calc -no-show-match -no-sort"
 bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
 # bindsym XF86Launch2 exec $N rofi -show combi
-bindsym XF86Launch9 exec $N rofi-translate
+bindsym XF86Launch9 exec $N rofitr
 
 # #---Clipboard management---# #
 bindsym Ctrl+quotedbl exec $N gclip
