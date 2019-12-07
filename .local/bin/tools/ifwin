@@ -44,7 +44,7 @@ case "$1" in
 				i3-msg '[class="Doublecmd"] focus' >/dev/null
 			fi
 		else
-			exec doublecmd --no-splash
+			exec doublecmd --no-splash >/dev/null 2>&1
 		fi
 	;;
 	firefox)
