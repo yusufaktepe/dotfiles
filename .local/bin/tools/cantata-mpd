@@ -5,9 +5,9 @@ AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $4}')
 
 if pgrep -x "cantata" > /dev/null; then
 	if [ "$AW_CLASS" = "cantata" ]; then
-		i3-msg "workspace back_and_forth"
+		i3-msg "workspace back_and_forth" >/dev/null
 	else
-		i3-msg '[class="cantata"] focus'
+		i3-msg '[class="cantata"] focus' >/dev/null
 	fi
 else
 	if ! pgrep -x "mpd" > /dev/null; then
