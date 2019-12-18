@@ -22,7 +22,6 @@ Plug 'mbbill/undotree'
 
 " Editing & Motion
 Plug 'machakann/vim-swap'
-Plug 'chaoren/vim-wordmotion'
 Plug 'mg979/vim-visual-multi'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-repeat'
@@ -39,6 +38,7 @@ Plug 'christoomey/vim-conflicted'
 
 " Syntax
 Plug 'hail2u/vim-css3-syntax'
+Plug 'kchmck/vim-coffee-script'
 Plug 'mboughaba/i3config.vim'
 Plug 'chr4/nginx.vim'
 Plug 'vifm/vifm.vim'
@@ -415,10 +415,6 @@ let g:vimwiki_list = [{'path': '~/repos/writings', 'syntax': 'markdown', 'ext': 
 "=== VCoolor
 nmap <silent> <leader>co :VCoolor<CR>
 let g:vcoolor_disable_mappings = 1
-
-"=== Vim-wordmotion
-" make `W` behave as vanilla `w`
-nnoremap W w
 
 "=====================================================================
 " Functions
