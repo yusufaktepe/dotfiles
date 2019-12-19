@@ -1,99 +1,34 @@
-#!/bin/bash
-# 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
-# https://github.com/yusufaktepe
-# ---
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-# ---
-# Opens current tab with given program.
-# This script requires full address in browser's title
-# You can use "Url in title" extension for this purpose with following format:
-# {title} - [ {protocol}://{hostname}{port}/{path}{args}{hash} ]
+#!/bin/sh
 
-# Dependencies: "xdotool", "Url in title"
-# Optional: "xclip" OR "xsel" > for copying link to/opening from clipboard
-
-# Set mpv options
-mpv_options="--volume=60 --autofit=46% --geometry=-2-2 --keep-open"
-
-# mpv command
-mpv="command mpv --input-ipc-server=/tmp/mpvsoc$(date +%s) --really-quiet"
-
-# text formatting
-bold=$(tput bold)
-normal=$(tput sgr0)
-
-help() {
-	printf "%s${bold}Usage:${normal}
-	bro-open --option1 --option2
-	bro-open --mpv
-	bro-open -o vivaldi-stable --incognito
-
---mpv   / -m  Open current page with mpv
---open  / -o  >Open current page with given program
---openc / -oc >Open link from clipboard
---copy  / -c  >Copy link to clipboard
---help  / -h  Display help
-
-If no argument is given, it will echo the link.
-"
+_mpv() {
+	mpv --input-ipc-server=/tmp/mpvsoc"$(date +%s)" \
+	--really-quiet --volume=60 --autofit=46% --geometry=-2-2 --keep-open "$@"
 }
 
-# Get url from active browser:
-url="$(xdotool getactivewindow getwindowname | grep -Eo '(http|https)://[^ "]+')"
-# Get url from browser:
-# url="$(wmctrl -l | grep -Eo '(http|https)://[^ "]+')"
-
-if command -v xclip >/dev/null; then
-	clip="$(xclip -out -selection clipboard)"
-elif command -v xsel >/dev/null; then
-	clip="$(xsel -ob | head -n 1)"
-else
-	printf "\nError! No clipboard tool found.\n\n" && exit 1
-fi
+url() {
+	AW_CLASS=$(xprop -id "$(xdotool getactivewindow)" | awk -F'"' '/WM_CLASS/{print $4}')
+	case "$AW_CLASS" in
+		Vivaldi*|*chrom*|Opera*|firefox*)
+			xdotool key --clearmodifiers Ctrl+l \
+				key --clearmodifiers Right \
+				keydown --clearmodifiers Shift \
+				key Home \
+				keyup Shift \
+				key Escape
+			xclip -o -selection primary | grep -Eo '(http|https)://[^ "]+' ;;
+		*)
+			xclip -o -selection clipboard | grep -Eo '(http|https)://[^ "]+'
+	esac
+}
 
 case "$1" in
-	--open|-o)
-		if [ "$2" ]; then
-			"${@:2}" "$url"
-		else
-			printf "%sPlease give program name to open link with:
-				\r\tbro-open -o ${bold}PROGRAM${normal}\n" && exit 1
-		fi
-	;;
-	--openc|-oc)
-		if [ "$2" = "mpv" ]; then
-			$mpv $mpv_options "${clip}" && exit 0
-		elif [ "$2" ]; then
-			"${@:2}" "${clip}" && exit 0
-		else
-			printf "%sPlease give program name to open link with:
-				\r\tbro-open -oc ${bold}PROGRAM${normal}\n" && exit 1
-		fi
-	;;
-	--copy|-c)
-		if command -v xclip >/dev/null ; then
-			echo "$url" | tr -d '\n' | xclip -selection clipboard
-		elif command -v xsel >/dev/null ; then
-			echo "$url" | tr -d '\n' | xsel --clipboard
-		else
-			printf "%sThis function requires '${bold}xclip${normal}' OR '${bold}xsel${normal}' to be installed.\n" && exit 1
-		fi
-	;;
-	--mpv|-m)
-		$mpv $mpv_options "$url"
-	;;
-	$NULL)
-		echo "$url"
-	;;
-	--help|-h)
-		help
-	;;
+	mpv)
+		case "$2" in
+			-c) _mpv "$(xclip -o -selection clipboard)" & ;;
+			*) [ -n "$(url)" ] && _mpv "$(url)" & ;;
+		esac ;;
+	"")
+		exit ;;
 	*)
-		echo "Invalid argument: $1"
-		echo
-		help
-	exit 1
+		[ -n "$(url)" ] && "$@" "$(url)"
 esac
