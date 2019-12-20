@@ -60,6 +60,7 @@ bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
 # bindsym XF86Launch2 exec $N rofi -show combi
 bindsym XF86Launch9 exec $N rofitr
+bindsym $caps+t exec $N rofitr -s
 
 # #---Clipboard management---# #
 bindsym Ctrl+quotedbl exec $N gclip
