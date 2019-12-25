@@ -449,19 +449,19 @@
   </Tools>
   <Fonts>
     <Main>
-      <Name>Noto Sans</Name>
+      <Name>sans</Name>
       <Size>10</Size>
       <Style>0</Style>
       <Quality>0</Quality>
     </Main>
     <Editor>
-      <Name>Hack</Name>
+      <Name>mono</Name>
       <Size>10</Size>
       <Style>0</Style>
       <Quality>0</Quality>
     </Editor>
     <Viewer>
-      <Name>Hack</Name>
+      <Name>mono</Name>
       <Size>8</Size>
       <Style>0</Style>
       <Quality>0</Quality>
@@ -485,7 +485,7 @@
       <Quality>0</Quality>
     </SearchResults>
     <PathEdit>
-      <Name>Hack</Name>
+      <Name>mono</Name>
       <Size>8</Size>
       <Style>0</Style>
       <Quality>0</Quality>
@@ -497,19 +497,19 @@
       <Quality>0</Quality>
     </FunctionButtons>
     <Log>
-      <Name>Hack</Name>
+      <Name>mono</Name>
       <Size>9</Size>
       <Style>0</Style>
       <Quality>0</Quality>
     </Log>
     <ViewerBook>
-      <Name>Noto Sans</Name>
+      <Name>sans</Name>
       <Size>10</Size>
       <Style>0</Style>
       <Quality>0</Quality>
     </ViewerBook>
     <Console>
-      <Name>Hack</Name>
+      <Name>mono</Name>
       <Size>9</Size>
       <Style>0</Style>
       <Quality>0</Quality>
@@ -744,8 +744,8 @@
     <HotDir Name="gdrive" Path="/data/shared/gdrive"/>
     <HotDir Name="mega" Path="/data/shared/mega"/>
     <HotDir Name="syncthing" Path="/data/shared/syncthing"/>
-    <HotDir Name="kbfs" Path="/run/user/1000/keybase/kbfs/"/>
-    <HotDir Name="gcloud (sftp)" Path="sftp://yusuf@34.73.143.104/home/yusuf"/>
+    <HotDir Name="kbfs" Path="/run/user/1000/keybase/kbfs"/>
+    <HotDir Name="gcloud (sftp)" Path="sftp://yusuf@34.82.93.240/home/yusuf"/>
     <HotDir Name="--" Path=""/>
     <HotDir Name="files" Path="/data/files" PathSort="1"/>
     <HotDir Name="backup" Path="/data/backup" PathSort="1"/>
