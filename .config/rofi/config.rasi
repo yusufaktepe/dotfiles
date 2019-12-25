@@ -4,7 +4,7 @@ combi-modi: "drun,run";
 show-icons: true;
 //theme: "solarized";
 icon-theme: "Papirus-Dark" ;
-font: "Hack 12";
+font: "mono 11";
 separator-style: "solid";
 hide-scrollbar: true;
 me-select-entry: "MouseSecondary";
@@ -31,7 +31,7 @@ kb-select-9: "Super+9,Control+9";
 kb-select-10: "Super+0,Control+0";
 
 location: 2;
-yoffset: 21;
+yoffset: 20;
 lines: 10;
 width: 40;
 

@@ -2,6 +2,6 @@
 
 !St.shell:	/bin/tmux
 !St.termname:	xterm-256color
+!St.font:	Hack-11;
 St.alpha:	0.92
-St.font:	Hack-11;
 
