@@ -8,7 +8,7 @@ _mpv() {
 url() {
 	AW_CLASS=$(xprop -id "$(xdotool getactivewindow)" | awk -F'"' '/WM_CLASS/{print $4}')
 	case "$AW_CLASS" in
-		Vivaldi*|*chrom*|Opera*|firefox*)
+		Vivaldi*|*chrom*|Opera*|firefox*|Tor*)
 			xdotool key --clearmodifiers Ctrl+l \
 				key --clearmodifiers Right \
 				keydown --clearmodifiers Shift \

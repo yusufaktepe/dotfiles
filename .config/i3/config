@@ -579,7 +579,7 @@ mode "$freeze" { bindsym $mod+Shift+f mode "default"
 # Open link with X
 bindsym $caps+b mode "$broopen"
 set $broopen Open With:  [F3/3]: Vivaldi/P  [F4/4]: Opera/P  [F5/5]: Firefox/P  \
-[F6/6]: Chrome/P  [y]: MPV  [c]: MPV from Clipboard  [d]: dmenuhandler
+[F6/6]: Chrome/P  [t]: Tor  [y]: MPV  [c]: MPV from Clipboard  [d]: dmenuhandler
 mode "$broopen" {
 	bindsym F3 --release exec $N bro-open $BROWSER, mode "default"
 	bindsym F4 --release exec $N bro-open opera --start-maximized, mode "default"
@@ -589,6 +589,7 @@ mode "$broopen" {
 	bindsym 4 --release exec $N bro-open opera -private --start-maximized, mode "default"
 	bindsym 5 --release exec $N bro-open firefox --private-window, mode "default"
 	bindsym 6 --release exec $N bro-open google-chrome-stable --incognito, mode "default"
+	bindsym t --release exec $N bro-open start-tor-browser --allow-remote, mode "default"
 	bindsym y --release exec $N bro-open mpv, mode "default"
 	bindsym c --release exec $N bro-open mpv -c, mode "default"
 	bindsym d --release exec $N bro-open dmenuhandler, mode "default"
