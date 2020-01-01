@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 case $BLOCK_BUTTON in
-	1) notify-send -a i3blocks -i NONE "🧠 Memory hogs:" "$(ps axch -o cmd:15,%mem --sort=-%mem | head)" ;;
+	1) ./rofi_notify mem ;;
 	3) setsid $TERMINAL_N _blockterm -e sh -c "sudo ps_mem; read a" ;;
 esac
 
