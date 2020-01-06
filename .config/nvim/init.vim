@@ -22,7 +22,7 @@ Plug 'mbbill/undotree'
 
 " Editing & Motion
 Plug 'machakann/vim-swap'
-Plug 'mg979/vim-visual-multi'
+Plug 'mg979/vim-visual-multi', { 'branch': 'master' }
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -257,6 +257,11 @@ nnoremap <silent> <leader>R :so ~/.config/nvim/init.vim<return><esc>
 
 " Goto file under cursor in new tab
 noremap gF <C-w>gf
+
+" Ignore my lazy shift finger
+command! WQ wq
+command! Wq wq
+command! Q q
 
 " Make c-n and c-p behave like up/down arrows, i.e. take into account the
 " beginning of the text entered in the command line when jumping
