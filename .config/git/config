@@ -22,6 +22,7 @@
 	ds    = diff --stat=100,100 --patch --staged
 	dt    = difftool
 	dts   = difftool --staged
+	edmod = !vim $(git ls-files -m) -p
 	f     = fetch
 	g     = grep --break --heading --line-number
 	last  = show --stat HEAD
