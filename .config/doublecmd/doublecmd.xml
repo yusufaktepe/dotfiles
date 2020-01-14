@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="0.9.6 beta" ConfigVersion="10">
+<doublecmd DCVersion="0.9.7 beta" ConfigVersion="10">
   <Configuration Save="True" SortOrder="0" TreeType="0">
     <UseConfigInProgramDir>False</UseConfigInProgramDir>
     <FolderTabs Save="True"/>
@@ -311,28 +311,6 @@
           <Command>st</Command>
           <Params>-e nvim -d %pb</Params>
         </Program>
-        <Program>
-          <ID>{09FB1B40-8A53-4D1F-AFB9-AA5B646F2C2A}</ID>
-          <Icon>baobab</Icon>
-          <Hint>Disk Usage</Hint>
-          <Command>st</Command>
-          <Params>-n dc-term-bttns -e ncdu --color dark %p</Params>
-        </Program>
-        <Separator/>
-        <Program>
-          <ID>{E93FC82B-4E19-41D3-B391-949B1021F7DA}</ID>
-          <Icon>catfish</Icon>
-          <Hint>Rofi-Finder</Hint>
-          <Command>sh</Command>
-          <Params>-c "locate '%D' | rofi -dmenu -i -l 20 -width 100 -p 'Open' | ( xargs -r -I '{}' xdg-open {} )"</Params>
-        </Program>
-        <Program>
-          <ID>{835C382E-42F3-4372-9F09-A01D13D9A823}</ID>
-          <Icon>pk-package-sources</Icon>
-          <Hint>which package a file belongs to</Hint>
-          <Command>st</Command>
-          <Params>-n dc-term-bttns -e bash -c "pacman -Qo %f; read -n 1 -s -r -p 'Press any key to continue'"</Params>
-        </Program>
         <Separator/>
         <Command>
           <ID>{1F4057D9-34BB-4D6D-9D07-CDD2069363B7}</ID>
@@ -356,6 +334,41 @@
           <Params>-c "if (zenity --question --text=\"Empty trash?\") then (echo \"1\" ; sleep 1; gio trash --empty; echo \"99\" ; sleep 1) | (zenity --progress --auto-close --title=\"Processing\" --percentage=1) fi"</Params>
         </Program>
         <Separator/>
+        <Menu>
+          <ID>{3E99AEE9-B8CB-4E74-B85C-C1F5AB9F597F}</ID>
+          <Icon>tools-wizard</Icon>
+          <Hint>External</Hint>
+          <MenuItems>
+            <Program>
+              <ID>{1F3C974C-F97D-4FDC-86CA-92E538065D73}</ID>
+              <Icon>cm_search</Icon>
+              <Hint>Rofi-Finder</Hint>
+              <Command>sh</Command>
+              <Params>-c "locate '%D/*' | rofi -dmenu -i -l 20 -width 100 -p 'Open' | ( xargs -r -I '{}' xdg-open {} )"</Params>
+            </Program>
+            <Program>
+              <ID>{40FDB0DE-FBB1-49EA-BC47-7F0318AA1336}</ID>
+              <Icon>cm_packfiles</Icon>
+              <Hint>Pack Files (Engrampa)</Hint>
+              <Command>engrampa</Command>
+              <Params>--add %f</Params>
+            </Program>
+            <Program>
+              <ID>{FD28C3D3-28AF-4234-AA33-DA0E6CCEA064}</ID>
+              <Icon>cm_extractfiles</Icon>
+              <Hint>Extract Files (Engrampa)</Hint>
+              <Command>engrampa</Command>
+              <Params>--extract %f</Params>
+            </Program>
+            <Program>
+              <ID>{48AF1F97-F2C3-4EEE-BACE-B2A6D2755463}</ID>
+              <Icon>pk-package-sources</Icon>
+              <Hint>Pacman (belongs to ?)</Hint>
+              <Command>sh</Command>
+              <Params>-c 'rofi -e "$(pacman -Qo %f)"'</Params>
+            </Program>
+          </MenuItems>
+        </Menu>
         <Command>
           <ID>{B54834AF-6245-4816-BFF6-DA6C9F2AD8D4}</ID>
           <Icon>cm_options</Icon>
