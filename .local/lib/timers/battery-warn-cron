@@ -9,4 +9,4 @@ BAT="BAT1"
 
 [ "$(cat /sys/class/power_supply/${BAT}/capacity)" -lt 35 ] &&
 
-notify-send-cron -u critical "Battery critically low."
+notify-send-cron -a system -u critical "Battery critically low."
