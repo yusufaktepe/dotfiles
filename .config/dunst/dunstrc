@@ -418,16 +418,23 @@
     summary = "*Windscribe*"
     format = ""
 
-[histignore-restartdunst]
+[restartdunst]
     summary = "restart dunst*"
     history_ignore = yes
 
-[histignore-redshift]
-    appname = "Redshift"
-    history_ignore = yes
-
 [i3-volume]
-    appname = "i3-volume"
+    appname = i3-volume
     history_ignore = yes
     fullscreen = show
+
+[toggle]
+    appname = toggle
+    history_ignore = yes
+    fullscreen = show
+
+[system]
+    appname = system
+    history_ignore = yes
+    fullscreen = show
+
 # vim: ft=cfg

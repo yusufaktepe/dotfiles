@@ -9,6 +9,6 @@ case "$(cat /sys/class/power_supply/${BAT}/status)" in
 	;;
 	Discharging|*)
 		[ "$(cat /sys/class/power_supply/${BAT}/capacity)" -lt 25 ] &&
-		notify-send -u critical "Battery critically low." || exit 0
+		notify-send -a system -u critical "Battery critically low." || exit 0
 	;;
 esac

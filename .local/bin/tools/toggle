@@ -11,19 +11,19 @@ case "$1" in
 
 		if [ "$CURRENT_PROFILE" = "analog-output-speaker" ]; then
 			pactl set-sink-port "$SINK" "analog-output-headphones"
-			notify-send -i audio-headphones "PulseAudio" "<b>Headphone</b> Activated."
+			notify-send -a toggle -i audio-headphones "PulseAudio" "<b>Headphone</b> Activated."
 		else
 			pactl set-sink-port "$SINK" "analog-output-speaker"
-			notify-send -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
+			notify-send -a toggle -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
 		fi
 	;;
 	keybase)
 		if systemctl -q is-active --user keybase; then
 			systemctl stop --user kbfs && systemctl stop --user keybase
-			notify-send -a keybase -i keybase "Keybase" "Keybase service stopped"
+			notify-send -a toggle -i keybase "Keybase" "Keybase service stopped"
 		else
 			systemctl start --user keybase && systemctl start --user kbfs
-			notify-send -a keybase -i keybase "Keybase" "Keybase service started"
+			notify-send -a toggle -i keybase "Keybase" "Keybase service started"
 		fi
 	;;
 	net)
@@ -48,10 +48,10 @@ case "$1" in
 		if ! pgrep -x "redshift" > /dev/null; then
 			redshift > /dev/null 2>&1 &
 			red=$(redshift -p | grep Period | awk '{print $2}')
-			notify-send -a Redshift -i redshift "Redshift" "Status: <b>Started</b>\nPeriod: <b>${red}</b>"
+			notify-send -a toggle -i redshift "Redshift" "Status: <b>Started</b>\nPeriod: <b>${red}</b>"
 		else
 			pkill redshift > /dev/null 2>&1 &
-			notify-send -a Redshift -i redshift-status-off "Redshift" "Status: <b>Closed</b>\nPeriod: <b>None</b>"
+			notify-send -a toggle -i redshift-status-off "Redshift" "Status: <b>Closed</b>\nPeriod: <b>None</b>"
 		fi
 	;;
 	spotifyd)
@@ -66,10 +66,10 @@ case "$1" in
 
 		if [ "$(xset q | sed -n '25p' | awk '{print $6}')" = 0 ]; then
 			xset dpms 0 0 "$default"
-			notify-send -a Xorg -i state_shutoff "Xorg" "Screen timeout enabled"
+			notify-send -a toggle -i state_shutoff "Xorg" "Screen timeout enabled"
 		else
 			xset dpms 0 0 0
-			notify-send -a Xorg -i state_running "Xorg" "Screen timeout disabled"
+			notify-send -a toggle -i state_running "Xorg" "Screen timeout disabled"
 		fi
 	;;
 	touchpad)
@@ -77,9 +77,9 @@ case "$1" in
 		state=$(xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$")
 
 		if [ "$state" -eq '1' ]; then
-			xinput disable "$device" && notify-send -a "TouchPad" -i touchpad-disabled-symbolic "TouchPad Disabled"
+			xinput disable "$device" && notify-send -a toggle -i touchpad-disabled-symbolic "TouchPad Disabled"
 		else
-			xinput enable "$device" && notify-send -a "TouchPad" -i touchpad-enabled-symbolic "TouchPad Enabled"
+			xinput enable "$device" && notify-send -a toggle -i touchpad-enabled-symbolic "TouchPad Enabled"
 		fi
 	;;
 	$NULL|*)
