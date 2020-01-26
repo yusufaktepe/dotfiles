@@ -1,9 +1,8 @@
-## Sync with Inoreader
-urls-source "inoreader"
-inoreader-login "yusufaktepe"
-inoreader-passwordeval "pass services/inoreader.com"
-inoreader-flag-star "b"
-inoreader-show-special-feeds "no"
+## Sync with NewsBlur
+urls-source "newsblur"
+newsblur-login "yusufaktepe"
+newsblur-passwordeval "pass services/newsblur.com"
+cookie-cache "~/.local/share/newsboat/newsboat.cookie"
 
 ## General
 # show-read-feeds no
