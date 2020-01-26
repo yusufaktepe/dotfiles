@@ -20,6 +20,7 @@ audio/mp4=mpv.desktop
 audio/x-wav=mpv.desktop
 audio/x-opus+ogg=mpv.desktop
 audio/aac=mpv.desktop
+application/vnd.rar=engrampa.desktop
 
 [Added Associations]
 x-scheme-handler/http=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
