@@ -104,7 +104,6 @@ alias lock='betterlockscreen -l dimblur > /dev/null 2>&1 & disown'
 
 # Configured to run without password:
 alias ps_mem='sudo ps_mem'
-alias nethogs='sudo nethogs'
 alias updatedb='sudo updatedb'
 
 # YouTube
