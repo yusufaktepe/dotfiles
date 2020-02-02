@@ -95,7 +95,6 @@ alias xrdbu='xrdb ~/.Xresources'
 alias didi='sudo dd bs=4M oflag=sync status=progress'
 alias lspath='echo -e ${PATH//:/\\n}'
 alias ys='ssh yusuf@34.82.93.240'
-alias weather='curl -s wttr.in'
 alias publicip='curl ifconfig.me'
 localip() { ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}' ;}
 sx() { exec startx "$XINITRC" "$@" -- -quiet > ~/.cache/Xorg.log 2>&1 ;}
@@ -165,3 +164,5 @@ rpeat() {
 }
 
 vf() { fzf | xargs -r -I % $EDITOR % ;}
+
+wttr() { curl -s wttr.in/"${1:-}" ;}
