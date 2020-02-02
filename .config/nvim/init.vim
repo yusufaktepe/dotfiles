@@ -1,4 +1,3 @@
-
 "=====================================================================
 " Plugins
 "=====================================================================
@@ -82,6 +81,7 @@ Plug 'mattn/webapi-vim'		" interface to Web API (for gist-vim)
 Plug 'mattn/gist-vim'		" create gists
 Plug 'junegunn/fzf.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 " Themes
 Plug 'morhetz/gruvbox'
@@ -380,6 +380,9 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 nnoremap <leader>gb :Gblame<CR>
 vnoremap <leader>gb :Gblame<CR>
 nnoremap <leader>ds :Gvdiffsplit<CR>
+
+"=== MarkdownPreview
+nmap <leader>mp <Plug>MarkdownPreviewToggle
 
 "=== Gist-Vim
 let g:gist_token_file = '/data/backup/secrets/gist_token'
