@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="0.9.6 beta">
+<doublecmd DCVersion="0.9.7 beta">
   <Hotkeys Version="46">
     <Form Name="Main">
       <Hotkey>
@@ -407,7 +407,22 @@
       <Hotkey>
         <Shortcut>Shift+Alt+S</Shortcut>
         <Command>cm_ExecuteToolbarItem</Command>
-        <Param>ToolItemID={E93FC82B-4E19-41D3-B391-949B1021F7DA}</Param>
+        <Param>ToolItemID={1F3C974C-F97D-4FDC-86CA-92E538065D73}</Param>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Ctrl+Shift+F5</Shortcut>
+        <Command>cm_ExecuteToolbarItem</Command>
+        <Param>ToolItemID={40FDB0DE-FBB1-49EA-BC47-7F0318AA1336}</Param>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Ctrl+Shift+F9</Shortcut>
+        <Command>cm_ExecuteToolbarItem</Command>
+        <Param>ToolItemID={FD28C3D3-28AF-4234-AA33-DA0E6CCEA064}</Param>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Shift+Alt+P</Shortcut>
+        <Command>cm_ExecuteToolbarItem</Command>
+        <Param>ToolItemID={48AF1F97-F2C3-4EEE-BACE-B2A6D2755463}</Param>
       </Hotkey>
       <Hotkey>
         <Shortcut>Del</Shortcut>
