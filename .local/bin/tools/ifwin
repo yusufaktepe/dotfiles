@@ -12,6 +12,17 @@ AW=$(xdotool getactivewindow)
 AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $4}')
 
 case "$1" in
+	brave)
+		if pgrep -x "brave" > /dev/null; then
+			if [ "$AW_CLASS" = "Brave-browser" ]; then
+				i3-msg "workspace back_and_forth" >/dev/null
+			else
+				i3-msg '[class="Brave-browser"] focus' >/dev/null
+			fi
+		else
+			exec brave
+		fi
+	;;
 	chrome)
 		if pgrep -x "chrome" > /dev/null; then
 			if [ "$AW_CLASS" = "Google-chrome" ]; then
