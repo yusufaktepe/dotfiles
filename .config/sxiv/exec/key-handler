@@ -6,24 +6,24 @@ do
 	"c")
 		[ -z "$destdir" ] && destdir="$(sed "s/\s.*#.*$//;/^\s*$/d" ~/.config/dir.list | awk '{print $2}' | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")"
 		[ -z "$destdir" ] && exit
-		cp "$file" "$destdir" && notify-send -i "$(readlink -f "$file")" "$file copied to $destdir." &
+		cp "$file" "$destdir" && notify-send -a system -i "$(readlink -f "$file")" "$file copied to $destdir." &
 		;;
 	"m")
 		[ -z "$destdir" ] && destdir="$(sed "s/\s.*#.*$//;/^\s*$/d" ~/.config/dir.list | awk '{print $2}' | dmenu -l 20 -i -p "Move file(s) to where?" | sed "s|~|$HOME|g")"
 		[ -z "$destdir" ] && exit
-		mv "$file" "$destdir" && notify-send -i "$(readlink -f "$file")" "$file moved to $destdir." &
+		mv "$file" "$destdir" && notify-send -a system -i "$(readlink -f "$file")" "$file moved to $destdir." &
 		;;
 	"r")	convert -rotate 90 "$file" "$file" ;;
 	"R")	convert -rotate -90 "$file" "$file" ;;
 	"f")	convert -flop "$file" "$file" ;;
 	"y")
 		echo -n "$file" | xclip -selection clipboard &&
-		notify-send "$file copied to clipboard" & ;;
+		notify-send -a system "$file copied to clipboard" & ;;
 	"Y")
 		readlink -f "$file" | xclip -selection clipboard &&
-			notify-send "$(readlink -f "$file") copied to clipboard" & ;;
+			notify-send -a system "$(readlink -f "$file") copied to clipboard" & ;;
 	"d")
-		[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send "$file deleted." ;;
+		[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] && rm "$file" && notify-send -a system "$file deleted." ;;
 	"g")	gimp "$file" & ;;
 	esac
 done
