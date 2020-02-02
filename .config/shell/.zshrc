@@ -24,7 +24,7 @@ setopt EXTENDED_GLOB
 unsetopt CASE_GLOB
 setopt NUMERIC_GLOB_SORT
 setopt RC_EXPAND_PARAM
-setopt CORRECT_ALL
+# setopt CORRECT_ALL
 setopt PROMPT_SUBST
 setopt AUTO_CD
 setopt AUTO_PUSHD
