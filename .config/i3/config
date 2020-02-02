@@ -67,7 +67,6 @@ bindsym Ctrl+quotedbl exec $N gclip
 bindsym $caps+quotedbl exec $N gclip clear
 bindsym Ctrl+$caps+quotedbl exec $N gclip rld
 bindsym $caps+Insert exec $N showclip
-bindsym $agr+space exec $N cabl
 
 # #---Start Applications---# #
 bindsym $mod+F1 exec $term -e $FILE
@@ -76,11 +75,13 @@ bindsym $mod+F3 exec $N ifwin vivaldi
 bindsym $mod+F4 exec $N ifwin opera
 bindsym $mod+F5 exec $N ifwin firefox
 bindsym $mod+F6 exec $N ifwin chrome
+bindsym $mod+F7 exec $N ifwin brave
 bindsym $mod+Shift+F2 exec $N pcmanfm
 bindsym $mod+Shift+F3 exec $N vivaldi-stable --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
 bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
+bindsym $mod+Shift+F7 exec $N brave --incognito
 
 ## Caps+
 bindsym $caps+e exec $term -e $EDITOR
@@ -90,7 +91,7 @@ bindsym $caps+s exec $N ifwin spotify
 bindsym $caps+q exec $N ifwin qbittorrent
 bindsym $caps+v exec $N ifwin smplayer
 bindsym $caps+7 exec $N ifwin vbox Win7
-bindsym $caps+w exec $N libreoffice --writer
+# bindsym $caps+w exec $N libreoffice --writer
 bindsym --release $caps+c exec $N ifwin crow
 
 bindsym $mod+Shift+d exec $N cdd
@@ -164,8 +165,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+g split h; exec notify-send 'tile horizontally'
-bindsym $mod+v split v; exec notify-send 'tile vertically'
+bindsym $mod+g split h; exec notify-send -a system 'tile horizontally'
+bindsym $mod+v split v; exec notify-send -a system 'tile vertically'
 bindsym $mod+t split toggle
 
 # toggle fullscreen mode for the focused container
@@ -310,7 +311,7 @@ assign [class="(?i)VirtualBox" title="(?i)Win7"]	$ws13
 
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
-for_window [class="Catfish|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|(?i)telegram|Yad|Tor Browser"] floating enable
+for_window [class="Catfish|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|(?i)telegram|Yad"] floating enable
 for_window [class="Lxappearance|qt5ct|Lightdm-settings|Arandr|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
 for_window [class="(?i)pavucontrol"] floating enable, resize set 502 402, move position +864+20
 for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
@@ -336,7 +337,7 @@ for_window [title="^Picture in picture$"] resize set 420 236, move position 945 
 for_window [instance="_blockterm|_nmtui"] floating enable border pixel 2
 for_window [instance="floating"] floating enable, move position mouse
 #_ Doublecmd
-for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|Options|FindDlg)"] floating enable, move position center
+for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center
 for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 800 600, move position center
 for_window [instance="dc-term-bttns"] floating enable, resize set 800 500, move position center
 #_ Bindings to make the webcam float and stick.
@@ -371,6 +372,10 @@ exec $N remaps
 exec $N numlockx
 exec $N greenclip daemon
 exec $N unclutter
+exec $N sleep 2; vivaldi-stable --start-maximized
+exec $N sleep 5; doublecmd --no-splash
+exec $N sleep 9; wmctrl -x -r Doublecmd -b toggle,demands_attention
+exec $N sleep 7; spotify
 #exec $N xautolock -time 10 -locker "betterlockscreen -l dimblur"
 
 #=====================================================================
@@ -572,24 +577,26 @@ mode "$resize" {
 	bindsym $mod+r mode "default"
 }
 
-bindsym $mod+Shift+f mode "$freeze" ;; exec $N notify-send "Distraction-free mode." "Press Super+Shift+f to return."
+bindsym $mod+Shift+f mode "$freeze" ;; exec $N notify-send -a system "Distraction-free mode." "Press Super+Shift+f to return."
 set $freeze FREEZED
 mode "$freeze" { bindsym $mod+Shift+f mode "default"
 }
 
 # Open link with X
 bindsym $caps+b mode "$broopen"
-set $broopen Open With:  [F3/3]: Vivaldi/P  [F4/4]: Opera/P  [F5/5]: Firefox/P  \
-[F6/6]: Chrome/P  [t]: Tor  [y]: MPV  [c]: MPV from Clipboard  [d]: dmenuhandler
+set $broopen  [F3/3]: Vivaldi  [F4/4]: Opera  [F5/5]: Firefox  [F6/6]: Chrome \
+ [F7/7]: Brave  [t]: Tor  [y]: MPV  [c]: MPV (Clipboard)  [d]: dmenuhandler
 mode "$broopen" {
 	bindsym F3 --release exec $N bro-open $BROWSER, mode "default"
 	bindsym F4 --release exec $N bro-open opera --start-maximized, mode "default"
 	bindsym F5 --release exec $N bro-open firefox, mode "default"
 	bindsym F6 --release exec $N bro-open google-chrome-stable, mode "default"
+	bindsym F7 --release exec $N bro-open brave, mode "default"
 	bindsym 3 --release exec $N bro-open $BROWSER --incognito, mode "default"
 	bindsym 4 --release exec $N bro-open opera -private --start-maximized, mode "default"
 	bindsym 5 --release exec $N bro-open firefox --private-window, mode "default"
 	bindsym 6 --release exec $N bro-open google-chrome-stable --incognito, mode "default"
+	bindsym 7 --release exec $N bro-open brave --incognito, mode "default"
 	bindsym t --release exec $N bro-open tor-browser --allow-remote, mode "default"
 	bindsym y --release exec $N bro-open mpv, mode "default"
 	bindsym c --release exec $N bro-open mpv -c, mode "default"
@@ -608,7 +615,7 @@ mode "$toggle" {
 	bindsym k exec $N toggle keybase, mode "default"
 	bindsym r exec $N toggle redshift, mode "default"
 	bindsym s exec $N toggle stimeout, mode "default"
-	bindsym d --release exec "killall dunst; exec notify-send 'restart dunst'", mode "default"
+	bindsym d --release exec "killall dunst; exec notify-send -a system 'restart dunst'", mode "default"
 	bindsym p exec $N systemctl --user restart pulseaudio, mode "default"
 
 		# back to normal: Enter or Escape
