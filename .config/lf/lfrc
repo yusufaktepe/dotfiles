@@ -66,7 +66,7 @@ cmd moveto ${{
     clear; echo "Move to where?"
     dest="$(fzf < $HOME/.config/dir.list | awk '{print $2}' | sed 's|~|$HOME|g')" &&
     eval mv -iv $fx $dest &&
-    notify-send "🚚 File(s) moved." "File(s) moved to $dest."
+    notify-send -a system "🚚 File(s) moved." "File(s) moved to $dest."
 }}
 
 cmd copyto ${{
@@ -74,7 +74,7 @@ cmd copyto ${{
     clear; echo "Copy to where?"
     dest="$(fzf < $HOME/.config/dir.list | awk '{print $2}' | sed 's|~|$HOME|g')" &&
     eval cp -ivr $fx $dest &&
-    notify-send "📋 File(s) copied." "File(s) copies to $dest."
+    notify-send -a system "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
 # extract the current file with the right command
