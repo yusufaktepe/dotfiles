@@ -36,7 +36,7 @@ hide_edge_borders none
 bindsym $mod+Ctrl+b border toggle
 
 # Font used by titles & bar -unless otherwise stated in the bar{} block-
-font pango:mono 9
+font pango:Hack 9
 
 # kill focused window
 set $killrule [con_id="__focused__" instance="^(?!dropdown_).*$"]
