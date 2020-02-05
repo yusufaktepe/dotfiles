@@ -8,9 +8,8 @@
 iface="${BLOCK_INSTANCE}"
 iface="${IFACE:-$iface}"
 dt="${DT:-3}"
-unit="${UNIT:-Mb}"
-LABEL="${LABEL:-<span font='FontAwesome'>  </span>}" # down arrow up arrow
-printf_command="${PRINTF_COMMAND:-"printf \"${LABEL}%-5.1f/%5.1f %s/s\\n\", rx, wx, unit;"}"
+unit="${UNIT:-KB}"
+printf_command="${PRINTF_COMMAND:-"printf \"%-5.1f/%5.1f %s/s\\n\", rx, wx, unit;"}"
 
 function default_interface {
     ip route | awk '/^default via/ {print $5; exit}'
@@ -44,7 +43,7 @@ Options:
 -u\tUnits to measure bytes in. Default: Mb
 \tAllowed units: Kb, KB, Mb, MB, Gb, GB, Tb, TB
 \tUnits may have optional it/its/yte/ytes on the end, e.g. Mbits, KByte
--p\tAwk command to be called after a measurement is made. 
+-p\tAwk command to be called after a measurement is made.
 \tDefault: printf \"<span font='FontAwesome'>  </span>%%-5.1f/%%5.1f %%s/s\\\\n\", rx, wx, unit;
 \tExposed variables: rx, wx, tx, unit, iface
 -l\tList available interfaces in /proc/net/dev
@@ -75,7 +74,7 @@ case "$unit" in
 esac
 
 scalar=$((bytes_per_unit * dt))
-init_line=$(cat /proc/net/dev | grep "^[ ]*$iface:")
+init_line=$(grep "^[ ]*$iface:" /proc/net/dev)
 if [ -z "$init_line" ]; then
     echo Interface not found in /proc/net/dev: "$iface"
     exit 1
