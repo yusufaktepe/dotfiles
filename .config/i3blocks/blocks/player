@@ -1,33 +1,19 @@
 #!/bin/bash
 # Copyright (C) 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
 #---------------------------------------------------------------------
 # TODO: find a better way to cut the text
 #---------------------------------------------------------------------
 
-# Status signal for keyboard-mouse shortcuts
+[ ! "$(mpc status 2>/dev/null)" ] && [ ! "$(playerctl status 2>/dev/null)" ] && exit
+
 statussig="SIGRTMIN+6"
 
-# Status icons (requires FontAwesome)
 ICON_PLAY=""
 ICON_PAUSE=""
 ICON_STOP=""
 CUR_ICON=""
 
-# If not running, exit
-[ ! "$(mpc status 2>/dev/null)" ] && [ ! "$(playerctl status 2>/dev/null)" ] && exit
-
-# If mpd is running, it will take priority
 if pgrep -x "cantata" > /dev/null; then
 	instance="playerctl"
 elif pgrep -x "mpd" > /dev/null; then
@@ -60,13 +46,13 @@ case "$instance" in
 			1) mpc prev && pkill -$statussig i3blocks ;;
 			2) mpc toggle && pkill -$statussig i3blocks ;;
 			3) mpc next && pkill -$statussig i3blocks ;;
-			4) mpc volume +10 ;;
-			5) mpc volume -10 ;;
+			4) smc volup ;;
+			5) smc voldown ;;
 		esac
 
-		STATUS=$(mpc status | awk -v RS='[' -v FS=']' 'END {print $1}')
-		ARTIST=$(mpc current --format=%artist%)
-		TITLE=$(mpc current --format=%title%)
+		STATUS=$(mpc status 2>/dev/null | awk -v RS='[' -v FS=']' 'END {print $1}')
+		ARTIST=$(mpc current --format=%artist% 2>/dev/null)
+		TITLE=$(mpc current --format=%title% 2>/dev/null)
 
 		output
 	;;
@@ -75,23 +61,13 @@ case "$instance" in
 			1) playerctl previous && pkill -$statussig i3blocks ;;
 			2) playerctl play-pause && pkill -$statussig i3blocks ;;
 			3) playerctl next && pkill -$statussig i3blocks ;;
-			4)
-				if pgrep -x spotify >/dev/null || pgrep -x spotifyd >/dev/null; then
-					spotify-vol +5 >/dev/null
-				else
-					playerctl volume 0.05+
-				fi ;;
-			5)
-				if pgrep -x spotify >/dev/null || pgrep -x spotifyd >/dev/null; then
-					spotify-vol -5 >/dev/null
-				else
-					playerctl volume 0.05-
-				fi ;;
+			4) smc volup ;;
+			5) smc voldown ;;
 		esac
 
-		STATUS=$(playerctl status)
-		ARTIST=$(playerctl metadata artist)
-		TITLE=$(playerctl metadata title)
+		STATUS=$(playerctl status 2>/dev/null)
+		ARTIST=$(playerctl metadata artist 2>/dev/null)
+		TITLE=$(playerctl metadata title 2>/dev/null)
 
 		output
 	;;

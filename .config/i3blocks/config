@@ -58,8 +58,9 @@ DIR=/
 interval=30
 color=#A89984
 
-[bandwidth3]
-command=$HOME/.config/i3blocks/blocks/bandwidth3 -u KB
+[bandwidth]
+label= 
+command=$HOME/.config/i3blocks/blocks/bandwidth
 interval=persist
 markup=pango
 separator=true
