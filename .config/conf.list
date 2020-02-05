@@ -23,6 +23,8 @@ i3block_mem     ~/.config/i3blocks/blocks/memory
 i3block_player  ~/.config/i3blocks/blocks/player
 i3block_temp    ~/.config/i3blocks/blocks/temperature
 i3block_vol     ~/.config/i3blocks/blocks/volume
+polybar         ~/.config/polybar/config
+polybar_player  ~/.config/polybar/modules/polyplayer
 inputrc         ~/.config/shell/inputrc
 lfrc            ~/.config/lf/lfrc
 lfscope         ~/.config/lf/lfscope

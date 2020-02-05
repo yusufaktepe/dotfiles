@@ -105,8 +105,8 @@ bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 ## Function Buttons
 bindsym XF86Launch1 exec $termins htop-floating -e htop
 
-bindsym XF86MonBrightnessUp exec $N "light -A 5; pkill -RTMIN+10 i3blocks"
-bindsym XF86MonBrightnessDown exec $N "light -U 5; pkill -RTMIN+10 i3blocks"
+bindsym XF86MonBrightnessUp exec $N brightness inc 5
+bindsym XF86MonBrightnessDown exec $N brightness dec 5
 bindsym $mod+XF86MonBrightnessDown --release exec $N sleep 1 && xset dpms force off
 
 bindsym XF86Display exec $N displayselect
@@ -365,6 +365,7 @@ bindsym $mod+Shift+r restart
 
 exec $N /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec $N setbg; sleep 1; picom -b
+exec_always launch_polybar
 exec $N dunst
 exec $N nm-applet
 exec $N redshift
@@ -379,7 +380,7 @@ exec $N sleep 7; spotify
 #exec $N xautolock -time 10 -locker "betterlockscreen -l dimblur"
 
 #=====================================================================
-# i3wm & bar customization
+# Colors
 #=====================================================================
 
 # Set Xresources colors:
@@ -406,43 +407,6 @@ set $transparent 			#00000000
 # Use custom colors for black
 set $black				#282828
 
-# Start i3bar to display a workspace bar (plus the system information i3status if available)
-bar {
-	i3bar_command i3bar
-	status_command i3blocks
-	position top
-	modifier none
-
-## set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
-
-	bindsym button4 nop
-	bindsym button5 nop
-	#font pango:Hack, FontAwesome 9
-	strip_workspace_numbers yes
-	#separator_symbol ""
-	tray_padding 0
-
-	colors {
-		background	$darkblack
-		statusline	$darkwhite
-		#separator	$cyan
-		separator	#454947
-
-#				BORDER		BACKGR.		TEXT
-	focused_workspace	$blue		$darkblue	$darkblack
-	active_workspace	$blue		$blue		$darkwhite
-	inactive_workspace 	$darkblack	$darkblack	$white
-	urgent_workspace	$darkred	$darkblack	$darkred
-
-	binding_mode		$blue		$darkblue	$darkblack
-	}
-}
-
-# hide/unhide i3status bar
-bindsym $mod+b bar mode toggle
-
 # Theme colors
 #				BORDER		BACKGROUND	TEXT		INDICATOR	CHILD_BORDER
 client.focused			$darkblue	$darkblue	$white		$darkblack	$darkblue
@@ -453,6 +417,47 @@ client.urgent			$darkred	$darkred	$black		$darkred	$darkred
 client.placeholder		#000000		#0c0c0c		#ffffff		#000000
 
 client.background		$black
+
+#=====================================================================
+# Bar
+#=====================================================================
+
+# bar {
+# 	i3bar_command i3bar
+# 	status_command i3blocks
+# 	position top
+# 	modifier none
+#
+# ## set your primary output first. Example: 'xrandr --output eDP1 --primary'
+# #	tray_output primary
+# #	tray_output eDP1
+#
+# 	bindsym button4 nop
+# 	bindsym button5 nop
+# 	#font pango:Hack, FontAwesome 9
+# 	strip_workspace_numbers yes
+# 	#separator_symbol ""
+# 	tray_padding 0
+#
+# 	colors {
+# 		background	$darkblack
+# 		statusline	$darkwhite
+# 		#separator	$cyan
+# 		separator	#454947
+#
+# #				BORDER		BACKGR.		TEXT
+# 	focused_workspace	$blue		$darkblue	$darkblack
+# 	active_workspace	$blue		$blue		$darkwhite
+# 	inactive_workspace 	$darkblack	$darkblack	$white
+# 	urgent_workspace	$darkred	$darkblack	$darkred
+#
+# 	binding_mode		$blue		$darkblue	$darkblack
+# 	}
+# }
+#
+# # hide/unhide the bar
+# bindsym $mod+b bar mode toggle
+bindsym $mod+b exec $N polybar-msg cmd toggle
 
 #=====================================================================
 # settings for i3-gaps:
