@@ -1,0 +1,40 @@
+#!/bin/bash
+
+ICON_PLAY=""
+ICON_PAUSE=""
+ICON_STOP=""
+CUR_ICON=""
+
+output() {
+	[ ! "$(playerctl status 2>/dev/null)" ] && exit
+
+	STATUS=$(playerctl status 2>/dev/null)
+	ARTIST=$(playerctl metadata artist 2>/dev/null)
+	TITLE=$(playerctl metadata title 2>/dev/null)
+
+	[ "${#ARTIST}" -gt 20 ] && A_O="${ARTIST:0:20}.." && ARTIST_OUT=${A_O// ../..} || ARTIST_OUT="${ARTIST}"
+	[ "${#TITLE}" -gt 20 ] && T_O="${TITLE:0:20}.." && TITLE_OUT=${T_O// ../..} || TITLE_OUT="${TITLE}"
+
+	if [ "${STATUS}" = "Paused" ]; then
+		CUR_ICON="${ICON_PAUSE}"
+	elif [ "${STATUS}" = "Playing" ]; then
+		CUR_ICON="${ICON_PLAY}"
+	else
+		CUR_ICON="${ICON_STOP}"
+	fi
+
+	if [ "${TITLE}" != "" ] && [ "${ARTIST}" != "" ]; then
+		echo "${CUR_ICON} ${ARTIST_OUT} - ${TITLE_OUT}"
+	else
+		echo ""
+	fi
+}
+
+trap "output" USR1
+
+while :; do
+	output
+	sleep 5 &
+	wait
+done
+

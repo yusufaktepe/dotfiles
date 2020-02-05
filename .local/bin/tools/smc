@@ -6,10 +6,10 @@
 # https://github.com/yusufaktepe/dotfiles
 
 update_bar() {
-	if pgrep -x "i3blocks" > /dev/null; then
+	if pgrep -x i3blocks > /dev/null; then
 		pkill -SIGRTMIN+6 i3blocks
-	elif pgrep -x "polybar" > /dev/null; then
-		pkill -USR1 player
+	elif pgrep -x polybar > /dev/null; then
+		pkill -USR1 polyplayer
 	else
 		return
 	fi
