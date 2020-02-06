@@ -355,7 +355,7 @@ for_window [instance="dropdown_*"] move position center
 #=====================================================================
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+c reload ;; exec $N notify-send -a system -i configuration i3 "Config reloaded"
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -648,14 +648,13 @@ mode "$keystroke" {
 # Volume control
 #=====================================================================
 
-set $volumestep 10
-# set $statuscmd i3blocks
-# set $statussig SIGRTMIN+10
-## i3blocks options: -t $statuscmd -u $statussig
+set $volstep 10
+set $statuscmd i3blocks
+set $statussig SIGRTMIN+10
 
-bindsym XF86AudioMute		exec $N volume -lmn -y
-bindsym XF86AudioLowerVolume	exec $N volume -lnp -y -d $volumestep -x 100
-bindsym XF86AudioRaiseVolume	exec $N volume -lnp -y -i $volumestep -x 100
+bindsym XF86AudioMute		exec $N volume -lmn -y -t $statuscmd -u $statussig
+bindsym XF86AudioLowerVolume	exec $N volume -lnp -y -d $volstep -x 100 -t $statuscmd -u $statussig
+bindsym XF86AudioRaiseVolume	exec $N volume -lnp -y -i $volstep -x 100 -t $statuscmd -u $statussig
 
 # Switch Output
 bindsym $mod+XF86AudioMute	exec $N "toggle audio; pkill -$statussig i3blocks"
