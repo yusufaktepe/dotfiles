@@ -10,25 +10,18 @@ foreground-alt = #555
 
 black = ${xrdb:color0:#1d2021}
 darkgrey = ${xrdb:color8:#928374}
-
 darkred = ${xrdb:color1:#cc241d}
 red = ${xrdb:color9:#fb4934}
-
 darkgreen = ${xrdb:color2:#98971a}
 green = ${xrdb:color10:#b8bb26}
-
 darkyellow = ${xrdb:color3:#d79921}
 yellow = ${xrdb:color11:#fabd2f}
-
 darkblue = ${xrdb:color4:#458588}
 blue = ${xrdb:color12:#83a598}
-
 darkmagenta = ${xrdb:color5:#b16286}
 magenta = ${xrdb:color13:#d3869b}
-
 darkcyan = ${xrdb:color6:#689d6a}
 cyan = ${xrdb:color14:#8ec07c}
-
 lightgray = ${xrdb:color7:#a89984}
 white = ${xrdb:color15:#ebdbb2}
 
@@ -61,14 +54,14 @@ module-margin-right = 1
 
 font-0 = mono:pixelsize=10;2
 font-1 = Font Awesome 5 Brands Regular:size=9;2
-font-2 = FontAwesome:size=8;2
+font-2 = FontAwesome:size=9;2
 font-3 = NotoColorEmoji:fontformat=truetype:scale=12:antialias=false;2
-font-4 = Font Awesome 5 Free Regular:size=10;2
-font-5 = Font Awesome 5 Free Solid:size=10;2
+font-4 = Font Awesome 5 Free Regular:size=9;2
+font-5 = Font Awesome 5 Free Solid:size=9;2
 font-6 = Hack Nerd Font Mono:pixelsize=10;2
 
-modules-left = i3 player
-; modules-center =
+modules-left = i3
+modules-center = player
 modules-right = temperature cpu memory bandwidth pulseaudio battery brightness xkeyboard time
 
 tray-position = right
@@ -98,9 +91,10 @@ cursor-scroll = ns-resize
 type = custom/script
 exec = $XDG_CONFIG_HOME/polybar/modules/polyplayer
 ; exec-if = pgrep -x spotify
-; label = %output:0:47:...%
-format-foreground = ${colors.lightgray}
 tail = true
+; label = %output:0:47:...%
+
+format-foreground = ${colors.lightgray}
 
 click-left = smc p
 click-right = smc n
@@ -112,12 +106,13 @@ scroll-down = smc voldown
 type = custom/script
 exec = $XDG_CONFIG_HOME/i3blocks/blocks/bandwidth
 exec-if = nm-online -x
+tail = true
 label = %output:18%
+
 format-prefix = ""
 format-prefix-foreground = ${colors.icon}
-format-underline = ${colors.lightgray}
+format-underline = ${colors.darkblue}
 ; format-padding = 1
-tail = true
 
 click-right = $TERMINAL_N _blockterm -e nethogs &
 
@@ -125,12 +120,13 @@ click-right = $TERMINAL_N _blockterm -e nethogs &
 type = custom/ipc
 hook-0 = $XDG_CONFIG_HOME/i3blocks/blocks/brightness
 hook-1 = light -G | sed 's/\.[0-9]*//'
+initial = 1
+
 format-prefix = " "
 format-prefix-foreground = ${colors.icon}
-format-foreground = ${colors.lightgray}
 format-underline = ${colors.lightgray}
+; format-foreground = ${colors.lightgray}
 ; format-padding = 1
-initial = 2
 
 click-left = brightness inc 2
 click-right = brightness dec 2
@@ -140,13 +136,13 @@ scroll-down = brightness dec 5
 
 [module/time]
 type = custom/script
-exec = date '+%d/%m %{F#BDAE93}%{F-} %H:%M'
+exec = date '+%d/%m %{T6}%{F#BDAE93}%{F- T-} %H:%M'
 interval = 60
 ; label = "%output%"
 
 ; format-prefix = " "
 format-prefix-foreground = ${colors.icon}
-format-underline = #268bd2
+format-underline = ${colors.darkgreen}
 ; format-background = ${colors.background-alt}
 ; format-padding = 1
 
@@ -158,8 +154,9 @@ exec = curl -s "wttr.in/?format=%c+%t"
 exec-if = nm-online -x
 interval = 3600
 ; label = %output%
-; format-padding = 1
+
 format-underline = ${colors.blue}
+; format-padding = 1
 
 click-left = $TERMINAL_N _Blockterm -e sh -c "curl -s 'wttr.in/' | less -RS" &
 
@@ -182,10 +179,10 @@ format = <label-layout><label-indicator>
 format-spacing = 0
 
 label-layout = %layout%
-; label-layout-padding = 2
 label-layout-underline = ${colors.darkmagenta}
+; label-layout-padding = 2
 
-label-indicator-on-capslock = CAPS
+label-indicator-on-capslock = ^A
 label-indicator-on-capslock-padding = 1
 label-indicator-on-capslock-margin = 1
 label-indicator-on-capslock-background = ${colors.darkmagenta}
@@ -328,7 +325,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.icon}
-format-underline = ${colors.red}
+format-underline = #B3B571
 label = %percentage:2%%
 
 [module/memory]
@@ -402,10 +399,10 @@ format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage:3%%
 label-volume-foreground = ${root.foreground}
 
-format-volume-underline = ${colors.darkblue}
-format-muted-underline = ${colors.darkgrey}
+format-volume-underline = ${colors.magenta}
+format-muted-underline = ${colors.darkmagenta}
 
-label-muted =  muted
+label-muted = %{T6}%{T-} muted
 label-muted-foreground = ${colors.darkgrey}
 
 bar-volume-width = 8
@@ -425,17 +422,17 @@ bar-volume-empty = ─
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.darkgrey}
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-ramp-volume-3 = 
-ramp-volume-4 = 
-ramp-volume-5 = 
-ramp-volume-6 = 
-ramp-volume-7 = 
-ramp-volume-8 = 
-ramp-volume-9 = 
-ramp-volume-10 = 
+ramp-volume-0 = %{T6}%{T-}
+ramp-volume-1 = %{T6}%{T-}
+ramp-volume-2 = %{T6}%{T-}
+ramp-volume-3 = %{T6}%{T-}
+ramp-volume-4 = %{T6}%{T-}
+ramp-volume-5 = %{T6}%{T-}
+ramp-volume-6 = %{T6}%{T-}
+ramp-volume-7 = %{T6}%{T-}
+ramp-volume-8 = %{T6}%{T-}
+ramp-volume-9 = %{T6}%{T-}
+ramp-volume-10 = %{T6}%{T-}
 
 ramp-volume-foreground = ${colors.icon}
 
@@ -497,7 +494,7 @@ format-charging = <animation-charging> <label-charging>
 format-charging-underline = ${colors.darkyellow}
 
 format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+format-discharging-underline = ${colors.darkred}
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.icon}
@@ -516,7 +513,7 @@ animation-discharging-1 = 
 animation-discharging-2 = 
 animation-discharging-3 = 
 animation-discharging-4 = 
-animation-discharging-foreground = ${colors.darkyellow}
+animation-discharging-foreground = ${colors.darkred}
 animation-discharging-framerate = 750
 
 [module/temperature]
@@ -525,7 +522,7 @@ thermal-zone = 0
 warn-temperature = 70
 
 format = <ramp> <label>
-format-underline = #D65D0E
+format-underline = ${colors.blue}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
