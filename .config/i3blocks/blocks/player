@@ -14,9 +14,7 @@ ICON_PAUSE=""
 ICON_STOP=""
 CUR_ICON=""
 
-if pgrep -x "cantata" > /dev/null; then
-	instance="playerctl"
-elif pgrep -x "mpd" > /dev/null; then
+if pgrep -x mpd > /dev/null; then
 	instance="mpd"
 else
 	instance="playerctl"
