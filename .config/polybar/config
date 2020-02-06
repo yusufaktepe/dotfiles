@@ -54,7 +54,7 @@ border-size = 0
 border-color = #00000000
 
 padding-left = 0
-padding-right = 2
+padding-right = 1
 
 module-margin-left = 0
 module-margin-right = 1
@@ -69,7 +69,7 @@ font-6 = Hack Nerd Font Mono:pixelsize=10;2
 
 modules-left = i3 player
 ; modules-center =
-modules-right = temperature cpu memory filesystem bandwidth pulseaudio battery brightness xkeyboard date
+modules-right = temperature cpu memory bandwidth pulseaudio battery brightness xkeyboard time
 
 tray-position = right
 tray-padding = 1
@@ -108,23 +108,6 @@ click-middle = smc t
 scroll-up = smc volup
 scroll-down = smc voldown
 
-[module/brightness]
-type = custom/ipc
-hook-0 = $XDG_CONFIG_HOME/i3blocks/blocks/brightness
-hook-1 = light -G | sed 's/\.[0-9]*//'
-format-prefix = " "
-format-prefix-foreground = ${colors.icon}
-format-foreground = ${colors.lightgray}
-format-underline = ${colors.lightgray}
-format-padding = 1
-initial = 2
-
-click-left = brightness inc 2
-click-right = brightness dec 2
-click-middle = sleep 1 && brightness off
-scroll-up = brightness inc 5
-scroll-down = brightness dec 5
-
 [module/bandwidth]
 type = custom/script
 exec = $XDG_CONFIG_HOME/i3blocks/blocks/bandwidth
@@ -136,6 +119,50 @@ format-underline = ${colors.lightgray}
 ; format-padding = 1
 tail = true
 
+click-right = $TERMINAL_N _blockterm -e nethogs &
+
+[module/brightness]
+type = custom/ipc
+hook-0 = $XDG_CONFIG_HOME/i3blocks/blocks/brightness
+hook-1 = light -G | sed 's/\.[0-9]*//'
+format-prefix = " "
+format-prefix-foreground = ${colors.icon}
+format-foreground = ${colors.lightgray}
+format-underline = ${colors.lightgray}
+; format-padding = 1
+initial = 2
+
+click-left = brightness inc 2
+click-right = brightness dec 2
+click-middle = sleep 1 && brightness off
+scroll-up = brightness inc 5
+scroll-down = brightness dec 5
+
+[module/time]
+type = custom/script
+exec = date '+%d/%m %{F#BDAE93}%{F-} %H:%M'
+interval = 60
+; label = "%output%"
+
+; format-prefix = " "
+format-prefix-foreground = ${colors.icon}
+format-underline = #268bd2
+; format-background = ${colors.background-alt}
+; format-padding = 1
+
+click-left = [ "$(pidof gsimplecal)" ] && pkill gsimplecal || gsimplecal &
+
+[module/weather]
+type = custom/script
+exec = curl -s "wttr.in/?format=%c+%t"
+exec-if = nm-online -x
+interval = 3600
+; label = %output%
+; format-padding = 1
+format-underline = ${colors.blue}
+
+click-left = $TERMINAL_N _Blockterm -e sh -c "curl -s 'wttr.in/' | less -RS" &
+
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:45:...%
@@ -144,18 +171,25 @@ format-foreground = ${colors.blue}
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
+blacklist-1 = scroll lock
+; blacklist-2 = caps lock
 
 format-prefix = " "
 format-prefix-foreground = ${colors.icon}
 format-prefix-underline = ${colors.darkmagenta}
 
+format = <label-layout><label-indicator>
+format-spacing = 0
+
 label-layout = %layout%
+; label-layout-padding = 2
 label-layout-underline = ${colors.darkmagenta}
 
-label-indicator-padding = 1
-label-indicator-margin = 1
-label-indicator-background = ${colors.darkmagenta}
-label-indicator-underline = ${colors.darkmagenta}
+label-indicator-on-capslock = CAPS
+label-indicator-on-capslock-padding = 1
+label-indicator-on-capslock-margin = 1
+label-indicator-on-capslock-background = ${colors.darkmagenta}
+label-indicator-on-capslock-underline = ${colors.darkmagenta}
 
 [module/filesystem]
 type = internal/fs
@@ -456,7 +490,8 @@ battery = BAT1
 adapter = ACAD
 full-at = 77
 
-label-discharging = %percentage%% (%time:0:5%)
+label-discharging = %percentage%%
+; label-discharging = %percentage%% (%time:0:5%)
 
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = ${colors.darkyellow}
