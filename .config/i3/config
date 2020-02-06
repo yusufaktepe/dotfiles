@@ -335,6 +335,7 @@ for_window [title="^Confirm File Replacing$"] move position center
 for_window [title="^Picture in picture$"] resize set 420 236, move position 945 531
 #_ Floating instances
 for_window [instance="_blockterm|_nmtui"] floating enable border pixel 2
+for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1129 706, move position center
 for_window [instance="floating"] floating enable, move position mouse
 #_ Doublecmd
 for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center
@@ -647,13 +648,14 @@ mode "$keystroke" {
 # Volume control
 #=====================================================================
 
-set $statuscmd i3blocks
-set $statussig SIGRTMIN+10
 set $volumestep 10
+# set $statuscmd i3blocks
+# set $statussig SIGRTMIN+10
+## i3blocks options: -t $statuscmd -u $statussig
 
-bindsym XF86AudioMute		exec $N i3-volume -mn -y -t $statuscmd -u $statussig
-bindsym XF86AudioLowerVolume	exec $N i3-volume -np -y -d $volumestep -t $statuscmd -u $statussig
-bindsym XF86AudioRaiseVolume	exec $N i3-volume -np -y -i $volumestep -t $statuscmd -u $statussig
+bindsym XF86AudioMute		exec $N volume -lmn -y
+bindsym XF86AudioLowerVolume	exec $N volume -lnp -y -d $volumestep -x 100
+bindsym XF86AudioRaiseVolume	exec $N volume -lnp -y -i $volumestep -x 100
 
 # Switch Output
 bindsym $mod+XF86AudioMute	exec $N "toggle audio; pkill -$statussig i3blocks"

@@ -422,8 +422,8 @@
     summary = "restart dunst*"
     history_ignore = yes
 
-[i3-volume]
-    appname = i3-volume
+[volume]
+    appname = volume
     history_ignore = yes
     fullscreen = show
 
