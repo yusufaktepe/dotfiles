@@ -6,18 +6,24 @@ ICON_STOP=""
 CUR_ICON=""
 
 output() {
-	[ ! "$(playerctl status 2>/dev/null)" ] && exit
+	[ ! "$(mpc status 2>/dev/null)" ] && [ ! "$(playerctl status 2>/dev/null)" ] && echo "" && exit
 
-	STATUS=$(playerctl status 2>/dev/null)
-	ARTIST=$(playerctl metadata artist 2>/dev/null)
-	TITLE=$(playerctl metadata title 2>/dev/null)
+	if pgrep -x mpd > /dev/null; then
+		STATUS=$(mpc status 2>/dev/null | awk -v RS='[' -v FS=']' 'END {print $1}')
+		ARTIST=$(mpc current --format=%artist% 2>/dev/null)
+		TITLE=$(mpc current --format=%title% 2>/dev/null)
+	else
+		STATUS=$(playerctl status 2>/dev/null)
+		ARTIST=$(playerctl metadata artist 2>/dev/null)
+		TITLE=$(playerctl metadata title 2>/dev/null)
+	fi
 
 	[ "${#ARTIST}" -gt 20 ] && A_O="${ARTIST:0:20}.." && ARTIST_OUT=${A_O// ../..} || ARTIST_OUT="${ARTIST}"
 	[ "${#TITLE}" -gt 20 ] && T_O="${TITLE:0:20}.." && TITLE_OUT=${T_O// ../..} || TITLE_OUT="${TITLE}"
 
-	if [ "${STATUS}" = "Paused" ]; then
+	if [ "${STATUS,,}" = "paused" ]; then
 		CUR_ICON="${ICON_PAUSE}"
-	elif [ "${STATUS}" = "Playing" ]; then
+	elif [ "${STATUS,,}" = "playing" ]; then
 		CUR_ICON="${ICON_PLAY}"
 	else
 		CUR_ICON="${ICON_STOP}"
@@ -25,8 +31,6 @@ output() {
 
 	if [ "${TITLE}" != "" ] && [ "${ARTIST}" != "" ]; then
 		echo "${CUR_ICON} ${ARTIST_OUT} - ${TITLE_OUT}"
-	else
-		echo ""
 	fi
 }
 
