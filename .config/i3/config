@@ -102,9 +102,12 @@ bindsym $mod+F12 exec $termins "_nmtui" -e "nmtui-connect"
 # Pause players & switch to ws0:
 bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 
-## Function Buttons
-bindsym XF86Launch1 exec $termins htop-floating -e htop
+## System Monitor
+bindsym XF86Launch1 exec $termins _blockterm -e htop
+bindsym $mod+XF86Launch1 exec $termins _blockterm -e sh -c "sudo -A ps_mem | less -RS +G"
+bindsym $caps+F1 exec $termins _blockterm -e ncdu --color dark ~/
 
+## Function Buttons
 bindsym XF86MonBrightnessUp exec $N brightness inc 5
 bindsym XF86MonBrightnessDown exec $N brightness dec 5
 bindsym $mod+XF86MonBrightnessDown --release exec $N sleep 1 && xset dpms force off
