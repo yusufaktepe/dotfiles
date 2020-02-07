@@ -37,6 +37,7 @@
 	sm    = submodule
 	tl    = !git tag | sort -V
 	up    = pull --rebase=preserve
+	cld   = "!f() { git clone $1 $(printf '%s_%s' $(echo $1 | cut -d':' -f2 | cut -d'/' -f1) $(echo $1 | cut -d':' -f2 | cut -d'/' -f2 | cut -d'.' -f1)) ;}; f"
 
 [commit]
 	gpgsign = true
