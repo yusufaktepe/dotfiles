@@ -7,21 +7,22 @@
 
 [ ! "$(mpc status 2>/dev/null)" ] && [ ! "$(playerctl status 2>/dev/null)" ] && exit
 
-statussig="SIGRTMIN+6"
-
 ICON_PLAY=""
 ICON_PAUSE=""
 ICON_STOP=""
 CUR_ICON=""
 
 if pgrep -x mpd > /dev/null; then
-	instance="mpd"
+	STATUS=$(mpc status 2>/dev/null | awk -v RS='[' -v FS=']' 'END {print $1}')
+	ARTIST=$(mpc current --format=%artist% 2>/dev/null)
+	TITLE=$(mpc current --format=%title% 2>/dev/null)
 else
-	instance="playerctl"
+	STATUS=$(playerctl status 2>/dev/null)
+	ARTIST=$(playerctl metadata artist 2>/dev/null)
+	TITLE=$(playerctl metadata title 2>/dev/null)
 fi
 
 output() {
-	# Cut text if it's longer than 20 characters
 	[ "${#ARTIST}" -gt 20 ] && A_O="${ARTIST:0:20}.." && ARTIST_OUT=${A_O// ../..} || ARTIST_OUT="${ARTIST}"
 	[ "${#TITLE}" -gt 20 ] && T_O="${TITLE:0:20}.." && TITLE_OUT=${T_O// ../..} || TITLE_OUT="${TITLE}"
 
@@ -38,36 +39,12 @@ output() {
 	fi
 }
 
-case "$instance" in
-	mpd)
-		case $BLOCK_BUTTON in
-			1) mpc prev && pkill -$statussig i3blocks ;;
-			2) mpc toggle && pkill -$statussig i3blocks ;;
-			3) mpc next && pkill -$statussig i3blocks ;;
-			4) smc volup ;;
-			5) smc voldown ;;
-		esac
-
-		STATUS=$(mpc status 2>/dev/null | awk -v RS='[' -v FS=']' 'END {print $1}')
-		ARTIST=$(mpc current --format=%artist% 2>/dev/null)
-		TITLE=$(mpc current --format=%title% 2>/dev/null)
-
-		output
-	;;
-	playerctl)
-		case $BLOCK_BUTTON in
-			1) playerctl previous && pkill -$statussig i3blocks ;;
-			2) playerctl play-pause && pkill -$statussig i3blocks ;;
-			3) playerctl next && pkill -$statussig i3blocks ;;
-			4) smc volup ;;
-			5) smc voldown ;;
-		esac
-
-		STATUS=$(playerctl status 2>/dev/null)
-		ARTIST=$(playerctl metadata artist 2>/dev/null)
-		TITLE=$(playerctl metadata title 2>/dev/null)
-
-		output
-	;;
+case $BLOCK_BUTTON in
+	1) smc t ;;
+	2) smc p ;;
+	3) smc n ;;
+	4) smc volup ;;
+	5) smc voldown ;;
 esac
 
+output
