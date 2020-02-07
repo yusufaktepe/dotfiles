@@ -96,9 +96,9 @@ tail = true
 
 format-foreground = ${colors.lightgray}
 
-click-left = smc p
+click-left = smc t
 click-right = smc n
-click-middle = smc t
+click-middle = smc p
 scroll-up = smc volup
 scroll-down = smc voldown
 
@@ -114,6 +114,7 @@ format-prefix-foreground = ${colors.icon}
 format-underline = ${colors.darkblue}
 ; format-padding = 1
 
+click-left = toggle net wifi
 click-right = $TERMINAL_N _blockterm -e nethogs &
 
 [module/brightness]
