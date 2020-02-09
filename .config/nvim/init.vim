@@ -20,6 +20,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mbbill/undotree'
+Plug 'psliwka/vim-smoothie'
 
 " Editing & Motion
 Plug 'machakann/vim-swap'
@@ -42,7 +43,6 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mboughaba/i3config.vim'
 Plug 'chr4/nginx.vim'
-Plug 'vifm/vifm.vim'
 
 " Auto Completion, linting, etc
 Plug 'w0rp/ale'
