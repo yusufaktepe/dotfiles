@@ -239,10 +239,6 @@ inoremap <C-c> <C-o>D
 " vnoremap <C-M-j> "dy`>"dpgv
 " vnoremap <C-M-k> "dy`<"dPjgv
 
-" Copy selected text to system clipboard (gvim/nvim/vim-x11):
-vnoremap <C-c> "+y
-map <C-p> "+P
-
 " Yank path of current file to system clipboard
 nnoremap <silent> <leader>yp :let @+ = expand("%:p")<CR>:echom "Copied " . @+<CR>
 
