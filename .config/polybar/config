@@ -1,11 +1,11 @@
 [colors]
-; background = #282828
 background = ${xrdb:background:#1d2021}
 foreground = ${xrdb:foreground:#ebdbb2}
 primary = ${xrdb:color4:#458588}
 alert = #bd2c40
 icon = #BDAE93
-background-alt = #444
+background-alt = #282828
+background-focused = #444
 foreground-alt = #555
 
 black = ${xrdb:color0:#1d2021}
@@ -24,6 +24,8 @@ darkcyan = ${xrdb:color6:#689d6a}
 cyan = ${xrdb:color14:#8ec07c}
 lightgray = ${xrdb:color7:#a89984}
 white = ${xrdb:color15:#ebdbb2}
+orange = #FE8019
+darkorange = #D65D0E
 
 [bar/default]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -40,14 +42,16 @@ fixed-center = false
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 2
+line-size = 0
 line-color = ${colors.red}
+; overline-size = 2
 
 border-size = 0
 border-color = #00000000
 
 padding-left = 0
-padding-right = 1
+padding-right = 0
+module-padding = 1
 
 module-margin-left = 0
 module-margin-right = 1
@@ -62,11 +66,11 @@ font-6 = Hack Nerd Font Mono:pixelsize=9;2
 
 modules-left = i3
 modules-center = player
-modules-right = temperature cpu memory bandwidth pulseaudio battery brightness xkeyboard time
+modules-right = temperature cpu memory bandwidth pulseaudio battery brightness time
 
 tray-position = right
 tray-padding = 1
-;tray-background = #0063ff
+tray-background = ${colors.background-alt}
 ; tray-maxsize = 16
 
 ;wm-restack = bspwm
@@ -111,8 +115,9 @@ label = %output:18%
 
 format-prefix = ""
 format-prefix-foreground = ${colors.icon}
+format-background = ${colors.background-alt}
 format-underline = ${colors.darkblue}
-; format-padding = 1
+format-padding = ${bar/default.module-padding}
 
 ; click-right = $TERMINAL_N _blockterm -e nethogs &
 ; click-middle = toggle net wifi
@@ -125,9 +130,10 @@ initial = 1
 
 format-prefix = " "
 format-prefix-foreground = ${colors.icon}
-format-underline = ${colors.lightgray}
+format-background = ${colors.background-alt}
 ; format-foreground = ${colors.lightgray}
-; format-padding = 1
+format-underline = ${colors.lightgray}
+format-padding = ${bar/default.module-padding}
 
 click-left = brightness inc 2
 click-right = brightness dec 2
@@ -144,8 +150,8 @@ interval = 60
 ; format-prefix = " "
 format-prefix-foreground = ${colors.icon}
 format-underline = ${colors.darkgreen}
-; format-background = ${colors.background-alt}
-; format-padding = 1
+format-background = ${colors.background-alt}
+format-padding = ${bar/default.module-padding}
 
 click-left = [ "$(pidof gsimplecal)" ] && pkill gsimplecal || gsimplecal &
 
@@ -156,8 +162,9 @@ exec-if = nm-online -x
 interval = 3600
 ; label = %output%
 
+; format-background = ${colors.background-alt}
 format-underline = ${colors.blue}
-; format-padding = 1
+format-padding = ${bar/default.module-padding}
 
 click-left = $TERMINAL_N _Blockterm -e sh -c "curl -s 'wttr.in/' | less -RS" &
 
@@ -173,19 +180,22 @@ blacklist-1 = scroll lock
 ; blacklist-2 = caps lock
 
 format-prefix = " "
+format-prefix-background = ${colors.background-alt}
 format-prefix-foreground = ${colors.icon}
 format-prefix-underline = ${colors.darkmagenta}
+format-prefix-padding-left = ${bar/default.module-padding}
 
 format = <label-layout><label-indicator>
 format-spacing = 0
 
 label-layout = %layout%
+label-layout-background = ${colors.background-alt}
 label-layout-underline = ${colors.darkmagenta}
-; label-layout-padding = 2
+label-layout-padding-right = ${bar/default.module-padding}
 
 label-indicator-on-capslock = ^A
 label-indicator-on-capslock-padding = 1
-label-indicator-on-capslock-margin = 1
+label-indicator-on-capslock-margin-right = 0
 label-indicator-on-capslock-background = ${colors.darkmagenta}
 label-indicator-on-capslock-underline = ${colors.darkmagenta}
 
@@ -209,7 +219,7 @@ label-unmounted-foreground = ${colors.darkgrey}
 type = internal/bspwm
 
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.background-focused}
 label-focused-underline= ${colors.primary}
 label-focused-padding = 1
 
@@ -254,8 +264,9 @@ strip-wsnumbers = true
 
 ; focused = Active workspace on focused monitor
 label-focused = %name%
-label-focused-background = ${colors.background-alt}
+label-focused-background = ${colors.background-focused}
 label-focused-underline= ${colors.primary}
+; label-focused-overline= ${colors.primary}
 label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
@@ -324,18 +335,55 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.icon}
+
+format = <ramp-load> <label>
+; format-prefix = " "
+; format-prefix-foreground = ${colors.icon}
+format-background = ${colors.background-alt}
 format-underline = #B3B571
+format-padding = ${bar/default.module-padding}
 label = %percentage:2%%
+
+ramp-load-0 = 
+ramp-load-1 = 
+ramp-load-2 = 
+ramp-load-3 = 
+ramp-load-4 = 
+ramp-load-5 = 
+ramp-load-6 = 
+ramp-load-7 = 
+ramp-load-foreground = ${colors.icon}
+ramp-load-4-foreground = ${colors.yellow}
+ramp-load-5-foreground = ${colors.darkyellow}
+ramp-load-6-foreground = ${colors.orange}
+ramp-load-7-foreground = ${colors.red}
 
 [module/memory]
 type = internal/memory
 interval = 5
-format-prefix = " "
-format-prefix-foreground = ${colors.icon}
+
+format = <ramp-used> <label>
+; format-prefix = " "
+; format-prefix-foreground = ${colors.icon}
+format-background = ${colors.background-alt}
 format-underline = ${colors.darkcyan}
+format-padding = ${bar/default.module-padding}
 label = %gb_used:0:3%G (%percentage_used%%)
+
+ramp-used-0 = 
+ramp-used-1 = 
+ramp-used-2 = 
+ramp-used-3 = 
+ramp-used-4 = 
+ramp-used-5 = 
+ramp-used-6 = 
+ramp-used-7 = 
+ramp-used-8 = 
+ramp-used-foreground = ${colors.icon}
+ramp-used-5-foreground = ${colors.yellow}
+ramp-used-6-foreground = ${colors.darkyellow}
+ramp-used-7-foreground = ${colors.orange}
+ramp-used-8-foreground = ${colors.red}
 
 [module/wlan]
 type = internal/network
@@ -394,14 +442,20 @@ label = %date% %time%
 [module/pulseaudio]
 type = internal/pulseaudio
 use-ui-max = false
-; interval = 5
+
+; Interval for volume increase/decrease (in percent points)
+interval = 5
 
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage:3%%
 label-volume-foreground = ${root.foreground}
 
+format-volume-background = ${colors.background-alt}
+format-muted-background = ${colors.background-alt}
 format-volume-underline = ${colors.magenta}
 format-muted-underline = ${colors.darkmagenta}
+format-volume-padding = ${bar/default.module-padding}
+format-muted-padding = ${bar/default.module-padding}
 
 label-muted = %{T6}%{T-} muted
 label-muted-foreground = ${colors.darkgrey}
@@ -492,14 +546,20 @@ label-discharging = %percentage%%
 ; label-discharging = %percentage%% (%time:0:5%)
 
 format-charging = <animation-charging> <label-charging>
+format-charging-background = ${colors.background-alt}
 format-charging-underline = ${colors.darkyellow}
+format-charging-padding = ${bar/default.module-padding}
 
-format-discharging = <animation-discharging> <label-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-background = ${colors.background-alt}
 format-discharging-underline = ${colors.darkred}
+format-discharging-padding = ${bar/default.module-padding}
 
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.icon}
+format-full-background = ${colors.background-alt}
 format-full-underline = ${self.format-charging-underline}
+format-full-padding = ${bar/default.module-padding}
 
 animation-charging-0 = 
 animation-charging-1 = 
@@ -509,13 +569,18 @@ animation-charging-4 = 
 animation-charging-foreground = ${colors.darkcyan}
 animation-charging-framerate = 750
 
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-3 = 
-animation-discharging-4 = 
-animation-discharging-foreground = ${colors.darkred}
-animation-discharging-framerate = 750
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-foreground = ${colors.icon}
+ramp-capacity-0-foreground = ${colors.darkred}
+ramp-capacity-1-foreground = ${colors.darkorange}
+ramp-capacity-2-foreground = ${colors.orange}
+ramp-capacity-3-foreground = ${colors.darkyellow}
+ramp-capacity-4-foreground = ${colors.yellow}
 
 [module/temperature]
 type = internal/temperature
@@ -523,20 +588,27 @@ thermal-zone = 0
 warn-temperature = 70
 
 format = <ramp> <label>
+format-background = ${colors.background-alt}
 format-underline = ${colors.blue}
+format-padding = ${bar/default.module-padding}
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
+format-warn-background = ${self.format-background}
+format-warn-underline = ${self.label-warn-foreground}
+format-warn-padding = ${bar/default.module-padding}
 
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.darkmagenta}
+label-warn-foreground = ${colors.orange}
 
+base-temperature = 40
 ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-3 = 
-ramp-4 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-5 = 
 ramp-foreground = ${colors.icon}
+ramp-5-foreground = ${self.label-warn-foreground}
 
 [module/powermenu]
 type = custom/menu
