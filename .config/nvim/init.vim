@@ -52,8 +52,8 @@ Plug 'Shougo/neco-vim'
 Plug 'deoplete-plugins/deoplete-zsh'
 
 " Snippets
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Multi-language completions
 Plug 'autozimu/LanguageClient-neovim', {
@@ -361,15 +361,14 @@ nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> gD :call LanguageClient#textDocument_definition({"gotoCmd": "tabedit"})<CR>
 nnoremap <silent> <leader>gr :call LanguageClient#textDocument_rename()<CR>
 
-"=== NeoSnippet
-let g:neosnippet#enable_completed_snippet=1
+"=== UltiSnips
+let g:UltiSnipsExpandTrigger       = "<C-k>"
+let g:UltiSnipsJumpForwardTrigger  = "<C-k>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-p>"
 
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+let g:UltiSnipsEditSplit = "vertical"
 
-imap <expr><CR>
-\ (pumvisible() && neosnippet#expandable()) ? "\<Plug>(neosnippet_expand_or_jump)" : "\<CR>"
+map <silent> <leader>Sn :UltiSnipsEdit<cr>
 
 "=== Editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
