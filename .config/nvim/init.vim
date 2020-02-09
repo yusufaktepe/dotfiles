@@ -498,6 +498,9 @@ autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 " Disable automatic commenting on newline
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" Enable spell-check for gitcommit; set textwidth to 72
+au Filetype gitcommit setlocal spell | setlocal tw=72
+
 " Automatically deletes all trailing whitespace on save.
 " autocmd BufWritePre * %s/\s\+$//e
 
