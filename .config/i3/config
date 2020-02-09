@@ -357,8 +357,10 @@ for_window [instance="dropdown_*"] move position center
 
 #=====================================================================
 
+set $reloadpoly pgrep -x polybar && polybar-msg cmd restart
+
 # reload the configuration file
-bindsym $mod+Shift+c reload ;; exec $N notify-send -a system -i configuration i3 "Config reloaded"
+bindsym $mod+Shift+c reload ;; exec $N "$reloadpoly; notify-send -a system -i configuration i3 'Config reloaded'"
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -369,7 +371,6 @@ bindsym $mod+Shift+r restart
 
 exec $N /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec $N setbg; sleep 1; picom -b
-exec_always launch_polybar
 exec $N dunst
 exec $N nm-applet
 exec $N redshift
@@ -377,6 +378,7 @@ exec $N remaps
 exec $N numlockx
 exec $N greenclip daemon
 exec $N unclutter
+exec_always launch_polybar
 exec $N sleep 2; vivaldi-stable --start-maximized
 exec $N sleep 5; doublecmd --no-splash
 exec $N sleep 9; wmctrl -x -r Doublecmd -b toggle,demands_attention
