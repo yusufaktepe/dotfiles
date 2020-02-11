@@ -23,20 +23,23 @@ else
 fi
 
 output() {
-	[ "${#ARTIST}" -gt 20 ] && A_O="${ARTIST:0:20}.." && ARTIST_OUT=${A_O// ../..} || ARTIST_OUT="${ARTIST}"
-	[ "${#TITLE}" -gt 20 ] && T_O="${TITLE:0:20}.." && TITLE_OUT=${T_O// ../..} || TITLE_OUT="${TITLE}"
+	[ "${#ARTIST}" -gt 20 ] && AO="${ARTIST:0:20}.." && \
+		AO=${AO/% ../..} && AO=${AO/%.../..} && \
+		AO=${AO/% ?../..} && AO=${AO/%-../..} && AO=${AO/% \(?../..} || AO=$ARTIST
+
+	[ "${#TITLE}" -gt 20 ] && TO="${TITLE:0:20}.." && \
+		TO=${TO/% ../..} && TO=${TO/%.../..} && \
+		TO=${TO/% ?../..} && TO=${TO/%-../..} && TO=${TO/% \(?../..} || TO=$TITLE
 
 	if [ "${STATUS,,}" = "paused" ]; then
-		CUR_ICON="${ICON_PAUSE}"
+		CUR_ICON="$ICON_PAUSE"
 	elif [ "${STATUS,,}" = "playing" ]; then
-		CUR_ICON="${ICON_PLAY}"
+		CUR_ICON="$ICON_PLAY"
 	else
-		CUR_ICON="${ICON_STOP}"
+		CUR_ICON="$ICON_STOP"
 	fi
 
-	if [ "${TITLE}" != "" ] && [ "${ARTIST}" != "" ]; then
-		echo "${CUR_ICON} ${ARTIST_OUT} - ${TITLE_OUT}"
-	fi
+	[ "$TITLE" != "" ] && [ "$ARTIST" != "" ] && echo "$CUR_ICON $AO - $TO"
 }
 
 case $BLOCK_BUTTON in
