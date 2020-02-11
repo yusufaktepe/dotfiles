@@ -418,10 +418,6 @@
     summary = "*Windscribe*"
     format = ""
 
-[restartdunst]
-    summary = "restart dunst*"
-    history_ignore = yes
-
 [volume]
     appname = volume
     history_ignore = yes
