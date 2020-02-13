@@ -106,7 +106,7 @@ case "$1" in
 	smplayer)
 		if pgrep -x "smplayer" > /dev/null; then
 			if [ "$AW_CLASS" = "smplayer" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
+				i3-msg '[class="smplayer"] move scratchpad' >/dev/null
 			else
 				i3-msg '[class="smplayer"] focus' >/dev/null
 			fi
@@ -137,15 +137,15 @@ case "$1" in
 			exec VBoxManage startvm "$2"
 		fi
 	;;
-	vivaldi)
+	vivaldi*)
 		if pgrep -x "vivaldi-bin" > /dev/null; then
-			if [ "$AW_CLASS" = "Vivaldi-stable" ]; then
+			if [ "$AW_CLASS" = "Vivaldi-${2:-stable}" ]; then
 				i3-msg "workspace back_and_forth" >/dev/null
 			else
-				i3-msg '[class="Vivaldi-stable"] focus' >/dev/null
+				i3-msg "[class=\"Vivaldi-${2:-stable}\"] focus" >/dev/null
 			fi
 		else
-			exec vivaldi-stable --start-maximized
+			exec vivaldi-"${2:-stable}" --start-maximized
 		fi
 	;;
 esac
