@@ -162,7 +162,7 @@ exec-if = nm-online -x
 interval = 3600
 ; label = %output%
 
-; format-background = ${colors.background-alt}
+format-background = ${colors.background-alt}
 format-underline = ${colors.blue}
 format-padding = ${bar/default.module-padding}
 
@@ -368,7 +368,8 @@ format = <ramp-used> <label>
 format-background = ${colors.background-alt}
 format-underline = ${colors.darkcyan}
 format-padding = ${bar/default.module-padding}
-label = %gb_used:0:3%G (%percentage_used%%)
+label = %gb_used:0:3%G
+; label = %gb_used:0:3%G (%percentage_used%%)
 
 ramp-used-0 = 
 ramp-used-1 = 
