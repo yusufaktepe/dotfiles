@@ -232,10 +232,10 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 set $ws9 9
-set $ws10 10
-set $ws11 "11:"
-set $ws12 "12:"
-set $ws13 "13:"
+set $ws10 10:0
+set $ws11 11:
+set $ws12 12:
+set $ws13 13:
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -321,6 +321,7 @@ for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $heigh
 for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
 #for_window [class="(?i)VirtualBox"] floating enable
 for_window [class="mpv|vlc"] floating enable sticky enable
+for_window [class="mpv"] resize set 629 354, move position +737+414
 for_window [class="smplayer" title="^( - |)SMPlayer$"] floating enable sticky enable,resize set 670 457, move position +696+311
 for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 800 600, move position center
 for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 800 600, move position center
@@ -345,8 +346,8 @@ for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating
 for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 800 600, move position center
 for_window [instance="dc-term-bttns"] floating enable, resize set 800 500, move position center
 #_ Bindings to make the webcam float and stick.
-for_window [title="mpvfloat"] floating enable sticky enable border pixel 0
-no_focus [title="mpvfloat"]
+for_window [instance="mpvfloat"] floating enable sticky enable border pixel 0, resize set 408 306, move position +958+462
+no_focus [instance="mpvfloat"]
 #_ General dropdown window traits. The order can matter.
 for_window [instance="dropdown_*"] floating enable, move scratchpad, sticky enable, scratchpad show
 for_window [instance="dropdown_tmuxdd"] border pixel 3, resize set 625 450
