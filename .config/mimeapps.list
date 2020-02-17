@@ -22,6 +22,8 @@ audio/x-opus+ogg=mpv.desktop
 audio/aac=mpv.desktop
 application/vnd.rar=engrampa.desktop
 application/json=nvim.desktop
+application/xml=nvim.desktop
+audio/flac=mpv.desktop
 
 [Added Associations]
 x-scheme-handler/http=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
