@@ -547,16 +547,14 @@ mode "$mode_gaps_outer" {
 # Set shut down, restart and locking features
 bindsym $mod+Delete mode "$mode_system"
 bindsym $caps+Escape mode "$mode_system"
-set $mode_system l:🔒 e:🚪 u:👥 s:🌙 h:💽 r:🔄 S:❎
+set $mode_system l:🔒 e:👥 s:🌙 h:💽 r:🔄 S:❎
 mode "$mode_system" {
-	bindsym Delete exec $N i3-exit lock, mode "default"
-	bindsym l exec $N "smc pauseall; i3-exit lock"; exec $N "sleep 0.5 && xset dpms force off", mode "default"
-	bindsym s exec $N i3-exit suspend, mode "default"
-	bindsym u exec $N i3-exit switch_user, mode "default"
-	bindsym e exec $N i3-exit logout, mode "default"
-	bindsym h exec $N i3-exit hibernate, mode "default"
-	bindsym r exec $N i3-exit reboot, mode "default"
-	bindsym Shift+s exec $N i3-exit shutdown, mode "default"
+	bindsym l exec $N "smc pauseall; lockscreen"; exec $N "sleep 0.5 && xset dpms force off", mode "default"
+	bindsym s exec $N "smc pauseall; systemctl suspend", mode "default"
+	bindsym h exec $N "smc pauseall; systemctl hibernate", mode "default"
+	bindsym e exec $N i3-msg exit, mode "default"
+	bindsym r exec $N systemctl reboot, mode "default"
+	bindsym Shift+s exec $N systemctl poweroff, mode "default"
 
 	# exit system mode: "Enter" or "Escape"
 	bindsym Return mode "default"

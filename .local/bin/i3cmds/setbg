@@ -1,7 +1,0 @@
-#!/bin/sh
-# Sets the background.If given an argument, will set file as desktop/lock background.
-# Based on: https://github.com/LukeSmithxyz/voidrice/blob/master/.scripts/tools/setbg
-
-wall=$HOME/.config/wall.png
-[ ! -z "$1" ] && cp "$1" $wall && betterlockscreen -u $wall && notify-send -i "$wall" "Wallpaper changed."
-xwallpaper --zoom $wall
