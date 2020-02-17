@@ -1,5 +1,3 @@
 #!/bin/sh
-# This file originally taken from:
-# https://github.com/LukeSmithxyz/voidrice
 
-pkill -f /dev/video || mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-0-0 --autofit=30%  --title="mpvfloat" /dev/video0
+pkill -f /dev/video || mpv --no-osc --no-input-default-bindings --input-conf=/dev/null --geometry=-0-0 --autofit=30%  --x11-name="mpvfloat" /dev/video0
