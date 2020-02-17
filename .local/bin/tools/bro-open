@@ -1,9 +1,6 @@
 #!/bin/sh
 
-_mpv() {
-	mpv --input-ipc-server=/tmp/mpvsoc"$(date +%s)" \
-	--really-quiet --volume=60 --autofit=46% --geometry=-2-2 --keep-open "$@"
-}
+_mpv() { mpv --really-quiet --volume=60 --autofit=46% --geometry=-2-2 --keep-open "$@" ;}
 
 url() {
 	AW_CLASS=$(xprop -id "$(xdotool getactivewindow)" | awk -F'"' '/WM_CLASS/{print $4}')
