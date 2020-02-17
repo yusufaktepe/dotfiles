@@ -1,5 +1,0 @@
-#!/bin/sh
-# This file originally taken from:
-# https://github.com/LukeSmithxyz/voidrice
-
-echo "📐" | dmenu -p "Give width and height:" | xargs xdotool windowsize "$(xdotool getwindowfocus)"

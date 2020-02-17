@@ -1,0 +1,6 @@
+#!/bin/sh
+
+wall=$XDG_DATA_HOME/backgrounds/wall.png
+
+[ -n "$1" ] && cp "$1" "$wall" && notify-send -a system -i "$wall" "Wallpaper changed."
+xwallpaper --zoom "$wall"

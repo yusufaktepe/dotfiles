@@ -1,0 +1,52 @@
+#!/bin/sh
+
+lock_timeout=15
+
+default_timeout=$(xset q | awk '/^  Standby/ {print $2}')
+
+prelock() {
+	xset dpms $lock_timeout
+	pkill -USR1 dunst # pause dunst
+
+	# clear gpg password cache
+	gpg-connect-agent --no-autostart reloadagent /bye >/dev/null
+}
+
+postlock() {
+	xset dpms "$default_timeout"
+	pkill -USR2 dunst # resume dunst
+}
+
+lock() {
+	i3lock \
+		-t -i "${1:-$HOME/.local/share/backgrounds/wall.png}" \
+		--color=#1D2021 \
+		--insidecolor=#00000033 \
+		--insidevercolor=#00000080 \
+		--insidewrongcolor=#00000033 \
+		--ringcolor=#00000000 \
+		--ringvercolor=#00000000 \
+		--ringwrongcolor=#fb493466 \
+		--wrongcolor=#00000000 \
+		--linecolor=#ebdbb2ff \
+		--separatorcolor=#ebdbb24d \
+		--keyhlcolor=#b8bb2666 \
+		--bshlcolor=#fb493466 \
+		--timecolor=#ebdbb2ff \
+		--datecolor=#ebdbb2ff \
+		--line-uses-ring \
+		--ignore-empty-password \
+		--indicator \
+		--force-clock \
+		--timestr="%H:%M" \
+		--datestr="%A, %d/%m" \
+		--timesize=40 \
+		--veriftext="" \
+		--wrongtext="" \
+		--noinputtext="" \
+		--locktext="" \
+		--pass-media-keys \
+		--nofork
+}
+
+prelock; lock "$@"; postlock
