@@ -94,7 +94,7 @@ cursor-scroll = ns-resize
 [module/player]
 type = custom/script
 exec = $XDG_CONFIG_HOME/polybar/modules/polyplayer
-; exec-if = pgrep -x spotify
+exec-if = pgrep -x mpd || pgrep -x spotify
 tail = true
 ; label = %output:0:47:...%
 
@@ -334,7 +334,7 @@ card = intel_backlight
 
 [module/cpu]
 type = internal/cpu
-interval = 2
+interval = 5
 
 format = <ramp-load> <label>
 ; format-prefix = " "
@@ -541,7 +541,8 @@ ramp-volume-foreground = ${colors.icon}
 type = internal/battery
 battery = BAT1
 adapter = ACAD
-full-at = 77
+full-at = 76
+poll-interval = 30
 
 label-discharging = %percentage%%
 ; label-discharging = %percentage%% (%time:0:5%)
