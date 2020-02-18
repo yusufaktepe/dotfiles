@@ -346,7 +346,7 @@ for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating
 for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 800 600, move position center
 for_window [instance="dc-term-bttns"] floating enable, resize set 800 500, move position center
 #_ Bindings to make the webcam float and stick.
-for_window [instance="mpvfloat"] floating enable sticky enable border pixel 0, resize set 408 306, move position +958+462
+for_window [instance="mpvfloat"] border pixel 0, resize set 408 306, move position +958+462
 no_focus [instance="mpvfloat"]
 #_ General dropdown window traits. The order can matter.
 for_window [instance="dropdown_*"] floating enable, move scratchpad, sticky enable, scratchpad show
