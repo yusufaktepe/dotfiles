@@ -23,13 +23,23 @@ else
 fi
 
 output() {
-	[ "${#ARTIST}" -gt 20 ] && AO="${ARTIST:0:20}.." && \
-		AO=${AO/% ../..} && AO=${AO/%.../..} && \
-		AO=${AO/% ?../..} && AO=${AO/%-../..} && AO=${AO/% \(?../..} || AO=$ARTIST
+	trunc() {
+		if [ "${#1}" -gt 20 ]; then
+			V="${1:0:20}.."
+			V=${V/% ../..}
+			V=${V/%.../..}
+			V=${V/% ?../..}
+			V=${V/%-../..}
+			V=${V/% \[../..}
+			V=${V/% \(?../..}
+		else
+			return 1
+		fi
 
-	[ "${#TITLE}" -gt 20 ] && TO="${TITLE:0:20}.." && \
-		TO=${TO/% ../..} && TO=${TO/%.../..} && \
-		TO=${TO/% ?../..} && TO=${TO/%-../..} && TO=${TO/% \(?../..} || TO=$TITLE
+	}
+
+	trunc "$ARTIST" && ARTIST="$V"
+	trunc "$TITLE" && TITLE="$V"
 
 	if [ "${STATUS,,}" = "paused" ]; then
 		CUR_ICON="$ICON_PAUSE"
@@ -39,7 +49,7 @@ output() {
 		CUR_ICON="$ICON_STOP"
 	fi
 
-	[ "$TITLE" != "" ] && [ "$ARTIST" != "" ] && echo "$CUR_ICON $AO - $TO"
+	[ "$TITLE" != "" ] && [ "$ARTIST" != "" ] && echo "$CUR_ICON $ARTIST - $TITLE"
 }
 
 case $BLOCK_BUTTON in
