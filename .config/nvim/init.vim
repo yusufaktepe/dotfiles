@@ -67,7 +67,6 @@ Plug 'mxw/vim-jsx'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 " Misc
-Plug 'ap/vim-css-color'		" color name highlighter
 Plug 'vimwiki/vimwiki'		" personal wiki
 Plug 'KabbAmine/vCoolor.vim'	" color picker
 Plug 'godlygeek/tabular'	" text filtering and alignment
@@ -81,6 +80,7 @@ Plug 'mattn/webapi-vim'		" interface to Web API (for gist-vim)
 Plug 'mattn/gist-vim'		" create gists
 Plug 'junegunn/fzf.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 " Themes
@@ -417,11 +417,15 @@ let g:move_key_modifier = 'C-M'
 
 "=== VimWiki
 let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-let g:vimwiki_list = [{'path': '~/repos/writings', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/repos/notes', 'syntax': 'markdown', 'ext': '.md'}]
 
 "=== VCoolor
 nmap <silent> <leader>co :VCoolor<CR>
 let g:vcoolor_disable_mappings = 1
+
+"=== Hexokinase
+nmap <silent> <leader>ch :HexokinaseToggle<CR>
+let g:Hexokinase_ftEnabled = ['css', 'html', 'scss', 'javascript.jsx']
 
 "=====================================================================
 " Functions
