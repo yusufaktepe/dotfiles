@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=mpv Media Player (Subtitle)
+Comment=Load subtitle(s) in mpv
+Icon=mpv
+TryExec=mpvc
+Exec=mpvc sub %U
+Terminal=false
+Categories=AudioVideo;Audio;Video;Player;TV;
+NoDisplay=true

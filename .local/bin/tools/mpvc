@@ -1,6 +1,7 @@
 #!/bin/sh
+# Control mpv using IPC protocol.
+# Options interact with last opened instance except 'pauseall'.
 
-# Use last opened instance
 socket=$(ls -1 /tmp/mpvsocket* | tail -n1)
 
 ipc_send() {
@@ -49,11 +50,22 @@ case $1 in
 			[ -z "$1" ] && exit
 			if [ -t 2 ]; then
 				ipc_send 'loadfile' "$(realpath "$1")" 'replace'
-
 			else
 				ipc_send 'loadfile' "$1" 'replace'
 			fi
 		fi
+	;;
+	sub)
+		shift
+		pgrep -x mpv >/dev/null || exit
+		[ -z "$1" ] && exit
+		for f in "$@"; do
+			if [ -t 2 ]; then
+				ipc_send 'sub-add' "$(realpath "$f")"
+			else
+				ipc_send 'sub-add' "$f"
+			fi
+		done
 	;;
 esac
 
