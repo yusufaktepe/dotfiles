@@ -11,8 +11,8 @@ if pgrep -x "cantata" > /dev/null; then
 	fi
 else
 	if ! pgrep -x "mpd" > /dev/null; then
-		mpd && sleep 1 && cantata
-		wait "$(pidof cantata)"
+		mpd; sleep .4; cantata
+		wait
 		pkill -TERM mpd
 	else
 		cantata
