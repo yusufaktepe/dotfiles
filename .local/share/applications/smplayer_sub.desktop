@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=SMPlayer (Subtitle)
+Comment=Load subtitle in SMPlayer
+Icon=smplayer
+Exec=smplayer -sub %U
+Categories=Qt;KDE;AudioVideo;Player;Video;
+NoDisplay=true
