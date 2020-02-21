@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# Use last opened instance
+socket=$(ls -1 /tmp/mpvsocket* | tail -n1)
+
+ipc_send() {
+	cmd='{ "command": ['
+
+	for arg in "$@"; do
+		cmd="$cmd \"$arg\","
+	done
+
+	cmd=${cmd%?}' ] }'
+
+	echo "$cmd" | socat - "$socket" >/dev/null
+}
+
+case $1 in
+	prev|p) ipc_send 'playlist_prev' ;;
+	next|n) ipc_send 'playlist_next' ;;
+	toggle|t) ipc_send 'cycle' 'pause' ;;
+	pauseall|pa)
+		for i in /tmp/mpvsoc*; do
+			[ -e "$i" ] || break
+			socket=$i
+			ipc_send 'set' 'pause' 'yes'
+		done
+	;;
+	add)
+		shift
+		if ! pgrep -x mpv >/dev/null; then
+			mpv --player-operation-mode=pseudo-gui "$@" >/dev/null 2>&1
+		else
+			[ -z "$*" ] && exit
+			for f in "$@"; do
+				if [ -t 2 ]; then
+					ipc_send 'loadfile' "$(realpath "$f")" 'append-play'
+				else
+					ipc_send 'loadfile' "$f" 'append-play'
+				fi
+			done
+		fi
+	;;
+	replace)
+		shift
+		if ! pgrep -x mpv >/dev/null; then
+			mpv --player-operation-mode=pseudo-gui "$@" >/dev/null 2>&1
+		else
+			[ -z "$1" ] && exit
+			if [ -t 2 ]; then
+				ipc_send 'loadfile' "$(realpath "$1")" 'replace'
+
+			else
+				ipc_send 'loadfile' "$1" 'replace'
+			fi
+		fi
+	;;
+esac
+
