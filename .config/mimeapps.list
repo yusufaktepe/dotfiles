@@ -1,10 +1,10 @@
 [Default Applications]
 x-scheme-handler/http=vivaldi-stable.desktop
 x-scheme-handler/https=vivaldi-stable.desktop
-video/x-msvideo=smplayer.desktop
-video/mp4=smplayer.desktop
+video/x-msvideo=mpv.desktop
+video/mp4=mpv.desktop
 application/x-subrip=smplayer-sub.desktop
-video/x-matroska=smplayer.desktop
+video/x-matroska=mpv.desktop
 inode/directory=doublecmd-newtab.desktop
 inode/mount-point=doublecmd-newtab.desktop
 application/pdf=org.pwmt.zathura.desktop
