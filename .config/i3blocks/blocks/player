@@ -13,7 +13,7 @@ ICON_STOP=""
 CUR_ICON=""
 
 if pgrep -x mpd > /dev/null; then
-	STATUS=$(mpc status 2>/dev/null | awk -v RS='[' -v FS=']' 'END {print $1}')
+	STATUS=$(mpc status 2>/dev/null); STATUS=${STATUS##*\[}; STATUS=${STATUS%%\]*}
 	ARTIST=$(mpc current --format=%artist% 2>/dev/null)
 	TITLE=$(mpc current --format=%title% 2>/dev/null)
 else
