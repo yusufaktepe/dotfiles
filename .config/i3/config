@@ -380,10 +380,10 @@ exec $N numlockx
 exec $N greenclip daemon
 exec $N unclutter
 exec_always launch_polybar
-exec $N sleep 2; vivaldi-stable --start-maximized
-exec $N sleep 5; doublecmd --no-splash
-exec $N sleep 9; wmctrl -x -r Doublecmd -b toggle,demands_attention
-exec $N sleep 7; spotify
+exec $N "sleep 2; ifwin vivaldi"
+exec $N "sleep 5; ifwin doublecmd"
+exec $N "sleep 7; ifwin spotify"
+exec $N "sleep 9; wmctrl -x -r 'Doublecmd' -b remove,demands_attention"
 #exec $N xautolock -time 10 -locker "betterlockscreen -l dimblur"
 
 #=====================================================================
