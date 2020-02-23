@@ -18,17 +18,17 @@ case $1 in
 	*) list=$1
 esac
 
-path() {
-	awk -v chosen="^$chosen " -v home="$HOME/" \
-		'$0 ~ chosen { gsub("~/", home); print $2 }' "$list"
-}
-
 if [ -t 2 ]; then
 	chosen=$(cut -d' ' -f1 "$list" | fzf)
 	termexec=true
 else
 	chosen=$(cut -d' ' -f1 "$list" | dmenu -i -l 10 -p "Open")
 fi
+
+path() {
+	awk -v chosen="^$chosen " -v home="$HOME/" \
+		'$0 ~ chosen { gsub("~/", home); print $2 }' "$1"
+}
 
 chosen=$(path "$list")
 
