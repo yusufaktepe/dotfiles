@@ -74,10 +74,6 @@ alias sysf='systemctl --failed'
 alias sysl='systemctl list-unit-files'
 alias ws='watch sensors'
 
-# Shutdown
-alias sdh='sudo shutdown -h'	# ( usage: shutdown -h 21:40 )
-alias sdc='shutdown -c'		# cancel shutdown
-
 # Others
 alias _='sudo'
 alias q=' exit'
@@ -93,8 +89,6 @@ alias ys='ssh yusuf@34.82.93.240'
 alias publicip='curl ifconfig.me'
 localip() { ip -o addr show scope global | awk '{split($4, a, "/"); print a[1]}' ;}
 sx() { exec startx "$XINITRC" "$@" -- -quiet > ~/.cache/Xorg.log 2>&1 ;}
-
-alias lock='betterlockscreen -l dimblur > /dev/null 2>&1 & disown'
 
 # Configured to run without password:
 alias ps_mem='sudo ps_mem'
