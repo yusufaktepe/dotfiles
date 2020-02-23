@@ -1,20 +1,36 @@
 #!/bin/sh
 
-[ -z "$1" ] && exit 1
+dirlist=$HOME/.config/dir.list
+conflist=$HOME/.config/conf.list
+
+case $1 in
+	c) list=$conflist ;;
+	d) list=$dirlist ;;
+	"")
+		if [ -t 2 ]; then
+			list=$(printf '%s\n%s' "$conflist" "$dirlist" | fzf)
+			[ -z "$list" ] && exit
+		else
+			list=$(printf '%s\n%s' "$conflist" "$dirlist" | dmenu -i -l 10)
+			[ -z "$list" ] && exit
+		fi
+	;;
+	*) list=$1
+esac
 
 path() {
 	awk -v chosen="^$chosen " -v home="$HOME/" \
-		'$0 ~ chosen { gsub("~/", home); print $2 }' "$1"
+		'$0 ~ chosen { gsub("~/", home); print $2 }' "$list"
 }
 
 if [ -t 2 ]; then
-	chosen=$(cut -d' ' -f1 "$1" | fzf)
+	chosen=$(cut -d' ' -f1 "$list" | fzf)
 	termexec=true
 else
-	chosen=$(cut -d' ' -f1 "$1" | dmenu -i -l 10 -p "Open")
+	chosen=$(cut -d' ' -f1 "$list" | dmenu -i -l 10 -p "Open")
 fi
 
-chosen=$(path "$1")
+chosen=$(path "$list")
 
 if [ -d "$chosen" ]; then
 	if [ -n "$termexec" ]; then
@@ -31,3 +47,4 @@ elif [ -f "$chosen" ]; then
 else
 	exit
 fi
+
