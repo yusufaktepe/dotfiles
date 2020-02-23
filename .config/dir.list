@@ -12,12 +12,16 @@ movies          /data/vids/mov
 tv              /data/vids/tv
 vids            /data/vids
 repos           /data/repos
+notes           /data/repos/notes
+homepage        /data/repos/site/00-homepage
 shared          /data/shared
 files           /data/files
 backup          /data/backup
-etc             /etc
 cache           ~/.cache
 config          ~/.config
 bin             ~/.local/bin
 lib             ~/.local/lib
 share           ~/.local/share
+root            /
+etc             /etc
+usr             /usr
