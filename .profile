@@ -40,7 +40,7 @@ export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' | sed 's/:*$//')"
 
 # Others:
-export SUDO_ASKPASS="$XDG_BIN_HOME/dmenu-rofi/rofi-askpass"
+export SUDO_ASKPASS="$XDG_BIN_HOME/dmenu-rofi/askpass-rofi"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 50%"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
