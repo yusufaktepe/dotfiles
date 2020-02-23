@@ -1,0 +1,33 @@
+#!/bin/sh
+
+[ -z "$1" ] && exit 1
+
+path() {
+	awk -v chosen="^$chosen " -v home="$HOME/" \
+		'$0 ~ chosen { gsub("~/", home); print $2 }' "$1"
+}
+
+if [ -t 2 ]; then
+	chosen=$(cut -d' ' -f1 "$1" | fzf)
+	termexec=true
+else
+	chosen=$(cut -d' ' -f1 "$1" | dmenu -i -l 10 -p "Open")
+fi
+
+chosen=$(path "$1")
+
+if [ -d "$chosen" ]; then
+	if [ -n "$termexec" ]; then
+		$FILE "$chosen"
+	else
+		doublecmd --no-splash -C -T "$chosen" >/dev/null 2>&1
+	fi
+elif [ -f "$chosen" ]; then
+	if [ -n "$termexec" ]; then
+		$EDITOR "$chosen"
+	else
+		$TERMINAL -e "$EDITOR" "$chosen"
+	fi
+else
+	exit
+fi

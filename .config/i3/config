@@ -94,8 +94,8 @@ bindsym $caps+7 exec $N ifwin vbox Win7
 # bindsym $caps+w exec $N libreoffice --writer
 bindsym --release $caps+c exec $N ifwin crow
 
-bindsym $mod+Shift+d exec $N cdd
-bindsym $mod+Shift+e exec $N cfg
+bindsym $mod+Shift+d exec $N xo ~/.config/dir.list
+bindsym $mod+Shift+e exec $N xo ~/.config/conf.list
 bindsym $mod+Shift+F12 exec $N sudo -A systemctl restart NetworkManager
 bindsym $mod+F12 exec $termins "_nmtui" -e "nmtui-connect"
 
