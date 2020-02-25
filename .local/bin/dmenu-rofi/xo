@@ -36,7 +36,7 @@ if [ -d "$chosen" ]; then
 	if [ -n "$termexec" ]; then
 		$FILE "$chosen"
 	else
-		doublecmd --no-splash -C -T "$chosen" >/dev/null 2>&1
+		xdg-open "$chosen" >/dev/null 2>&1
 	fi
 elif [ -f "$chosen" ]; then
 	if [ -n "$termexec" ]; then
