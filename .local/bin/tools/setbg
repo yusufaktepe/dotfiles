@@ -1,6 +1,20 @@
 #!/bin/sh
 
 wall=$XDG_DATA_HOME/backgrounds/wall.png
+lock=$XDG_DATA_HOME/backgrounds/lock.png
 
-[ -n "$1" ] && cp "$1" "$wall" && notify-send -a system -i "$wall" "Wallpaper changed."
+if [ -n "$1" ]; then
+	cp "$1" "$wall"
+
+	# resize
+	res=$(xdpyinfo | awk '/dimensions:/ {print $2}')
+	[ "$(identify -format "%wx%h" "$1")" != "$res" ] && \
+		convert "$wall" -resize "$res"\! "$wall"
+
+	# dim for lockscreen
+	convert "$wall" -fill black -colorize 40% "$lock"
+
+	notify-send -a system -i "$wall" "Wallpaper changed."
+fi
+
 xwallpaper --zoom "$wall"

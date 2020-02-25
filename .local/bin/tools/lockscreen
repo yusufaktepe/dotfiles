@@ -19,7 +19,7 @@ postlock() {
 
 lock() {
 	i3lock \
-		-t -i "${1:-$HOME/.local/share/backgrounds/wall.png}" \
+		-t -i "${1:-$HOME/.local/share/backgrounds/lock.png}" \
 		--color=#1D2021 \
 		--insidecolor=#00000033 \
 		--insidevercolor=#00000080 \
