@@ -45,20 +45,6 @@ case $1 in
 			[ $? -eq 1 ] && rm /tmp/mpvsocket[0-9]* && _mpv "$@" &
 		fi
 	;;
-	replace)
-		shift
-		if [ -z "$socket" ]; then
-			_mpv "$@" &
-		else
-			[ -z "$1" ] && exit
-			if [ -t 2 ]; then
-				ipc_send 'loadfile' "$(realpath "$1")" 'replace'
-			else
-				ipc_send 'loadfile' "$1" 'replace'
-			fi
-			[ $? -eq 1 ] && rm /tmp/mpvsocket[0-9]* && _mpv "$1" &
-		fi
-	;;
 	sub)
 		shift
 		[ -z "$socket" ] && exit
@@ -70,6 +56,20 @@ case $1 in
 				ipc_send 'sub-add' "$f"
 			fi
 		done
+	;;
+	replace|*)
+		[ "$1" = "replace" ] && shift
+		if [ -z "$socket" ]; then
+			_mpv "$@" &
+		else
+			[ -z "$1" ] && exit
+			if [ -t 2 ]; then
+				ipc_send 'loadfile' "$(realpath "$1")" 'replace'
+			else
+				ipc_send 'loadfile' "$1" 'replace'
+			fi
+			[ $? -eq 1 ] && rm /tmp/mpvsocket[0-9]* && _mpv "$1" &
+		fi
 	;;
 esac
 
