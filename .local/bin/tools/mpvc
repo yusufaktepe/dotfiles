@@ -16,7 +16,9 @@ ipc_send() {
 	echo "$cmd" | socat - "$socket" >/dev/null
 }
 
-_mpv() { mpv --player-operation-mode=pseudo-gui "$@" >/dev/null 2>&1 ;}
+_mpv() {
+	setsid mpv --player-operation-mode=pseudo-gui "$@" >/dev/null 2>&1 &
+}
 
 case $1 in
 	prev|p) ipc_send 'playlist_prev' ;;
@@ -32,7 +34,7 @@ case $1 in
 	add)
 		shift
 		if [ -z "$socket" ]; then
-			_mpv "$@" &
+			_mpv "$@"
 		else
 			[ -z "$*" ] && exit
 			for f in "$@"; do
@@ -42,7 +44,7 @@ case $1 in
 					ipc_send 'loadfile' "$f" 'append-play'
 				fi
 			done
-			[ $? -eq 1 ] && rm /tmp/mpvsocket[0-9]* && _mpv "$@" &
+			[ $? -eq 1 ] && rm /tmp/mpvsocket[0-9]* && _mpv "$@"
 		fi
 	;;
 	sub)
@@ -60,7 +62,7 @@ case $1 in
 	replace|*)
 		[ "$1" = "replace" ] && shift
 		if [ -z "$socket" ]; then
-			_mpv "$@" &
+			_mpv "$@"
 		else
 			[ -z "$1" ] && exit
 			if [ -t 2 ]; then
@@ -68,7 +70,7 @@ case $1 in
 			else
 				ipc_send 'loadfile' "$1" 'replace'
 			fi
-			[ $? -eq 1 ] && rm /tmp/mpvsocket[0-9]* && _mpv "$1" &
+			[ $? -eq 1 ] && rm /tmp/mpvsocket[0-9]* && _mpv "$1"
 		fi
 	;;
 esac
