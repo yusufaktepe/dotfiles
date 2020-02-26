@@ -1,10 +1,5 @@
 #!/bin/sh
 
-_mpv() {
-	mpv --load-scripts=no --input-ipc-server=/tmp/mpvsocketYT \
-		--really-quiet --volume=60 "$@" >/dev/null 2>&1
-}
-
 url() {
 	AW_CLASS=$(xprop -id "$(xdotool getactivewindow)" | awk -F'"' '/WM_CLASS/{print $4}')
 	case "$AW_CLASS" in
@@ -21,14 +16,14 @@ url() {
 	esac
 }
 
+url=$(url)
+
 case "$1" in
-	mpv)
-		case "$2" in
-			-c) _mpv "$(xclip -o -selection clipboard)" & ;;
-			*) [ -n "$(url)" ] && _mpv "$(url)" & ;;
+	mpv) shift
+		case $1 in
+			-c) ym "$(xclip -o -selection clipboard)" ;;
+			*) [ -n "$url" ] && ym "$url" ;;
 		esac ;;
-	"")
-		exit ;;
-	*)
-		[ -n "$(url)" ] && "$@" "$(url)" >/dev/null 2>&1 &
+	"") exit ;;
+	*) [ -n "$url" ] && "$@" "$url" >/dev/null 2>&1 &
 esac
