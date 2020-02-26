@@ -1,6 +1,9 @@
 #!/bin/sh
 
-_mpv() { mpv --really-quiet --volume=60 --autofit=46% --geometry=-2-2 --keep-open "$@" ;}
+_mpv() {
+	mpv --load-scripts=no --input-ipc-server=/tmp/mpvsocketYT \
+		--really-quiet --volume=60 "$@" >/dev/null 2>&1
+}
 
 url() {
 	AW_CLASS=$(xprop -id "$(xdotool getactivewindow)" | awk -F'"' '/WM_CLASS/{print $4}')
@@ -27,5 +30,5 @@ case "$1" in
 	"")
 		exit ;;
 	*)
-		[ -n "$(url)" ] && "$@" "$(url)"
+		[ -n "$(url)" ] && "$@" "$(url)" >/dev/null 2>&1 &
 esac
