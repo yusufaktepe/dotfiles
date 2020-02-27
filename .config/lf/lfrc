@@ -33,8 +33,8 @@ cmd open ${{
         image/x-xcf) setsid gimp $f >/dev/null 2>&1 & ;;
         image/svg+xml) setsid inkscape $f >/dev/null 2>&1 & ;;
         image/*) setsid sxiv -ao $f 2>/dev/null | lf-select & ;;
-        audio/*) mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f ;;
-        video/*) setsid mpv --input-ipc-server=/tmp/mpvsoc$(date +%%s) $f -quiet >/dev/null 2>&1 & ;;
+        audio/*) mpvc $f ;;
+        video/*) mpvc $f ;;
         application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
         *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
