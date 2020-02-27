@@ -128,10 +128,10 @@ bindsym $caps+z exec $N smc p
 bindsym $caps+x exec $N smc n
 
 ## Screenshots
-bindsym Print exec $N i3-maim
-bindsym $mod+Print --release exec $N i3-maim -w
-bindsym Ctrl+Print --release exec $N i3-maim -s
-bindsym Shift+Print exec $N maimpick
+bindsym Print exec $N maimshot
+bindsym $mod+Print --release exec $N maimshot -w
+bindsym Ctrl+Print --release exec $N maimshot -s
+bindsym Shift+Print exec $N dmaim
 
 ## Set temporary transparency
 bindsym $mod+Ctrl+KP_Divide exec transset-df -a 1
