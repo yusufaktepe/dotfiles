@@ -28,7 +28,7 @@ set scrolloff 10
 # text files and a file opener for the rest.
 cmd open ${{
     case $(file --mime-type $f -b) in
-        text/troff) man ./ $f;;
+        text/troff) man $f;;
         text/*) $EDITOR $fx;;
         image/x-xcf) setsid gimp $f >/dev/null 2>&1 & ;;
         image/svg+xml) setsid inkscape $f >/dev/null 2>&1 & ;;
