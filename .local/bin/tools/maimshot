@@ -1,0 +1,33 @@
+#!/bin/sh
+
+ss_dir="$HOME/pix/screenshots"
+datef=$(date +%Y-%m-%d_%H-%M-%S)
+
+[ ! -d "$ss_dir" ] && mkdir -p "$ss_dir"
+
+[ -n "$2" ] && cmd="maim -d $2" || cmd="maim"
+
+notify() {
+	dunstify -a system -i "$shot" -A "$shot",Open "Screenshot captured." | \
+		xargs -r -I '{}' xdg-open {} >/dev/null 2>&1 &
+}
+
+case "$1" in
+	--desk|-d|$NULL)
+		shot="$ss_dir/ss-full-$datef.png"
+		$cmd "$shot"
+		notify
+	;;
+	--window|-w)
+		shot="$ss_dir/ss-window-$datef.png"
+		$cmd -i "$(xdotool getactivewindow)" "$shot"
+		notify
+	;;
+	--select|-s)
+		shot="$ss_dir/ss-selected-$datef.png"
+		notify-send -a system -t 2000 "Select an area for the screenshot"
+		$cmd -s "$shot"
+		notify
+	;;
+esac
+
