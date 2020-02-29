@@ -66,7 +66,6 @@ bindsym $caps+t exec $N rofitr -s
 bindsym Ctrl+quotedbl exec $N gclip
 bindsym $caps+quotedbl exec $N gclip clear
 bindsym Ctrl+$caps+quotedbl exec $N gclip rld
-bindsym $caps+Insert exec $N showclip
 
 # #---Start Applications---# #
 bindsym $mod+F1 exec $term -e $FILE
@@ -358,10 +357,8 @@ for_window [instance="dropdown_*"] move position center
 
 #=====================================================================
 
-set $reloadpoly pgrep -x polybar && polybar-msg cmd restart
-
 # reload the configuration file
-bindsym $mod+Shift+c reload ;; exec $N "$reloadpoly; notify-send -a system -i configuration i3 'Config reloaded'"
+bindsym $mod+Shift+c reload ;; exec $N "notify-send -a system -i configuration i3 'Config reloaded'"
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
