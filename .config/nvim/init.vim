@@ -210,6 +210,9 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 " Toggle line wrapping
 nnoremap <silent> <leader>W :setlocal wrap!<CR>:setlocal wrap?<CR>
 
+" Toggle colorcolumn
+nnoremap <silent> <leader>CC :execute "set cc=" . (&cc == "" ? "80" : "")<CR>
+
 " Toggle paste mode
 noremap <silent> <F2> :set paste! nopaste?<CR>
 
