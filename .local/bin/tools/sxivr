@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case $1 in
+	-d) list="ls -t"; shift ;;
+	*) list="ls"
+esac
+
+[ -z "$1" ] && printf "Usage:\n\tsxivr [-d] image.png [sxiv options]\n" && exit 1
+
+base=$(basename "$1")
+
+cd "$(dirname "$1")" || exit
+
+shift
+$list "$PWD" | awk "BEGIN { lines = \"\"; m = 0; } /^$base$/ { m = 1; } \
+	{ if (!m) { if (lines) { lines = lines\"\n\"; } lines = lines\"\"\$0; } \
+	else { print \$0; } } END { print lines; }" | sxiv -ai "$@" 2>/dev/null

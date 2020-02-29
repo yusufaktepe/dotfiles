@@ -32,7 +32,7 @@ cmd open ${{
         text/*) $EDITOR $fx;;
         image/x-xcf) setsid gimp $f >/dev/null 2>&1 & ;;
         image/svg+xml) setsid inkscape $f >/dev/null 2>&1 & ;;
-        image/*) setsid sxiv -ao $f 2>/dev/null | lf-select & ;;
+        image/*) sxivr $f -o | lf-select & ;;
         audio/*) mpvc $f ;;
         video/*) mpvc $f ;;
         application/pdf) setsid zathura $fx >/dev/null 2>&1 & ;;
