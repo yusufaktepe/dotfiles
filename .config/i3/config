@@ -320,7 +320,6 @@ for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $heigh
 for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
 #for_window [class="(?i)VirtualBox"] floating enable
 for_window [class="mpv|vlc"] floating enable sticky enable
-for_window [class="mpv"] resize set 629 355, move position +737+413
 for_window [class="smplayer" title="^( - |)SMPlayer$"] floating enable sticky enable,resize set 670 457, move position +696+311
 for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 800 600, move position center
 for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 800 600, move position center
