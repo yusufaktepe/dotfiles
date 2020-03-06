@@ -1,0 +1,180 @@
+{
+  "profiles" : [
+    {
+      "profile-name" : "Default",
+      "hostname" : "localhost",
+      "port" : 9091,
+      "rpc-url-path" : "/transmission/rpc",
+      "username" : "yusuf",
+      "password" : "",
+      "auto-connect" : true,
+      "ssl" : false,
+      "ssl-validate" : false,
+      "timeout" : 40,
+      "retries" : 3,
+      "update-active-only" : false,
+      "activeonly-fullsync-enabled" : false,
+      "activeonly-fullsync-every" : 2,
+      "update-interval" : 3,
+      "min-update-interval" : 3,
+      "session-update-interval" : 60,
+      "last-add-destination" : "/data/vids/tv",
+      "exec-commands" : [
+      ],
+      "destinations" : [
+        {
+          "label" : "tv",
+          "dir" : "/data/vids/tv"
+        },
+        {
+          "label" : "mov",
+          "dir" : "/data/vids/mov"
+        },
+        {
+          "label" : "vids",
+          "dir" : "/data/vids"
+        },
+        {
+          "label" : "music",
+          "dir" : "/data/music"
+        },
+        {
+          "label" : "isos",
+          "dir" : "/data/dl/isos"
+        }
+      ]
+    }
+  ],
+  "profile-id" : 0,
+  "tree-views" : {
+    "TrgTorrentTreeView" : {
+      "sort-col" : 23,
+      "sort-type" : 0,
+      "widths" : [
+        56,
+        77,
+        66,
+        74,
+        81,
+        77,
+        95,
+        106,
+        115,
+        97,
+        64,
+        73,
+        97,
+        115,
+        79,
+        92
+      ],
+      "columns" : [
+        "id",
+        "name",
+        "size",
+        "done",
+        "status",
+        "seeds",
+        "leechers",
+        "connected-peers",
+        "down-speed",
+        "up-speed",
+        "eta",
+        "ratio",
+        "uploaded",
+        "downloaded",
+        "added",
+        "download-dir"
+      ]
+    },
+    "TrgTrackersTreeView" : {
+      "sort-col" : -2,
+      "sort-type" : 0,
+      "widths" : [
+        127,
+        191,
+        137,
+        184,
+        190,
+        192,
+        169,
+        172
+      ],
+      "columns" : [
+        "tier",
+        "announce-url",
+        "last-announce-peer-count",
+        "seeder-count",
+        "leecher-count",
+        "last-announce-time",
+        "last-result",
+        "scrape-url"
+      ]
+    },
+    "TrgFilesTreeView" : {
+      "sort-col" : -2,
+      "sort-type" : 0,
+      "widths" : [
+        265,
+        254,
+        281,
+        289,
+        273
+      ],
+      "columns" : [
+        "name",
+        "size",
+        "progress",
+        "wanted",
+        "priority"
+      ]
+    },
+    "TrgPeersTreeView" : {
+      "sort-col" : 6,
+      "sort-type" : 1,
+      "widths" : [
+        143,
+        154,
+        174,
+        199,
+        181,
+        195,
+        156,
+        160
+      ],
+      "columns" : [
+        "ip",
+        "host",
+        "country",
+        "down-speed",
+        "up-speed",
+        "progress",
+        "flags",
+        "client"
+      ]
+    }
+  },
+  "start-paused" : true,
+  "add-options-dialog" : true,
+  "delete-local-torrent" : false,
+  "show-state-selector" : false,
+  "filter-dirs" : true,
+  "filter-trackers" : true,
+  "directories-first" : true,
+  "show-notebook" : true,
+  "system-tray" : false,
+  "system-tray-minimise" : false,
+  "add-notify" : false,
+  "complete-notify" : true,
+  "exec-commands" : [
+  ],
+  "destinations" : [
+  ],
+  "window-height" : 748,
+  "window-width" : 1366,
+  "notebook-paned-pos" : 390,
+  "states-paned-pos" : 120,
+  "style" : 1,
+  "last-torrent-dir" : "/data/dl/default",
+  "state-selector-last" : 0
+}
