@@ -1,35 +1,44 @@
 #!/bin/sh
 
 opts="\
-copy url
-mpv
-mpv (loop)
-queue download
-queue youtube-dl
-queue youtube-dl (audio)
-browser
-sxiv
-w3m
+ copy url
+ mpv
+ mpv (loop)
+ download
+ youtube-dl
+ youtube-dl (audio)
+ browser
+ sxiv
+ w3m
+ youtube:  add to favorites
+ youtube:  like
+ youtube:  dislike
 "
-case "$(printf '%s' "$opts" | dmenu -i -p "Open link with what program?")" in
-	"copy url")
+case "$(printf '%s' "$opts" | dmenu -i -p "Open link with...?")" in
+	" copy url")
 		echo "$1" | xclip -selection clipboard ;;
-	mpv)
+	" mpv")
 		ym "$1" >/dev/null 2>&1 & ;;
-	"mpv (loop)")
+	" mpv (loop)")
 		ym --loop "$1" >/dev/null 2>&1 & ;;
-	"queue download")
+	" download")
 		tsp curl -LO "$1" >/dev/null 2>&1 ;;
-	"queue youtube-dl")
+	" youtube-dl")
 		tsp youtube-dl --write-metadata -ic "$1" >/dev/null 2>&1 ;;
-	"queue youtube-dl (audio)")
+	" youtube-dl (audio)")
 		tsp youtube-dl --add-metadata -xic -f bestaudio/best "$1" >/dev/null 2>&1 ;;
-	browser)
+	" browser")
 		setsid "$BROWSER" "$1" >/dev/null 2>&1 & ;;
-	sxiv)
+	" sxiv")
 		tmp=/tmp/$(basename "$1")
 		curl -sL "$1" > "$tmp" && setsid sxiv -a "$tmp" >/dev/null 2>&1 &
 		wait; rm "$tmp" ;;
-	w3m)
-		w3m "$1" 2>/dev/null ;;
+	" w3m")
+		{ [ -t 2 ] && w3m "$1" 2>/dev/null ;} || $TERMINAL -e w3m "$1" 2>/dev/null ;;
+	" youtube:  add to favorites")
+		youtube-viewer --no-interactive --favorite="$1" ;;
+	" youtube:  like")
+		youtube-viewer --no-interactive --like="$1" ;;
+	" youtube:  dislike")
+		youtube-viewer --no-interactive --dislike="$1" ;;
 esac
