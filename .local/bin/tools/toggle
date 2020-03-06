@@ -4,30 +4,32 @@
 # 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
 # https://github.com/yusufaktepe/dotfiles
 
-case "$1" in
+ns() { notify-send -a toggle "$@" ;}
+
+case $1 in
 	audio)
-		CURRENT_PROFILE=$(pactl list sinks | grep "Active Port" | cut -d ' ' -f 3-)
+		CURRENT_PROFILE=$(pactl list sinks | awk '/Active Port:/{print $3}')
 		SINK=$(pacmd list-sinks | awk '/* index:/{print $3}')
 
 		if [ "$CURRENT_PROFILE" = "analog-output-speaker" ]; then
 			pactl set-sink-port "$SINK" "analog-output-headphones"
-			notify-send -a toggle -i audio-headphones "PulseAudio" "<b>Headphone</b> Activated."
+			ns -i audio-headphones "PulseAudio" "<b>Headphone</b> Activated."
 		else
 			pactl set-sink-port "$SINK" "analog-output-speaker"
-			notify-send -a toggle -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
+			ns -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
 		fi
 	;;
 	keybase)
 		if systemctl -q is-active --user keybase; then
 			systemctl stop --user kbfs && systemctl stop --user keybase
-			notify-send -a toggle -i keybase "Keybase" "Keybase service stopped"
+			ns -i keybase "Keybase" "Keybase service stopped"
 		else
 			systemctl start --user keybase && systemctl start --user kbfs
-			notify-send -a toggle -i keybase "Keybase" "Keybase service started"
+			ns -i keybase "Keybase" "Keybase service started"
 		fi
 	;;
 	net)
-		case "$2" in
+		case $2 in
 			w|wifi)
 				if [ "$(nmcli radio wifi)" = enabled ]; then
 					nmcli radio wifi off
@@ -45,20 +47,20 @@ case "$1" in
 		esac
 	;;
 	redshift)
-		if ! pgrep -x "redshift" > /dev/null; then
-			redshift > /dev/null 2>&1 &
-			red=$(redshift -p | grep Period | awk '{print $2}')
-			notify-send -a toggle -i redshift "Redshift" "Status: <b>Started</b>\nPeriod: <b>${red}</b>"
+		if pgrep -x redshift >/dev/null; then
+			pkill redshift
+			ns -i redshift-status-off "Redshift" "Status: <b>Closed</b>\nPeriod: <b>None</b>"
 		else
-			pkill redshift > /dev/null 2>&1 &
-			notify-send -a toggle -i redshift-status-off "Redshift" "Status: <b>Closed</b>\nPeriod: <b>None</b>"
+			redshift >/dev/null 2>&1 &
+			per=$(redshift -p 2>/dev/null | awk '/Period:/ {print $2}')
+			ns -i redshift "Redshift" "Status: <b>Started</b>\nPeriod: <b>$per</b>"
 		fi
 	;;
 	spotifyd)
-		if ! pgrep -x "spotifyd" > /dev/null; then
-			spotifyd
+		if pgrep -x spotifyd >/dev/null; then
+			pkill spotifyd
 		else
-			pkill -TERM spotifyd
+			spotifyd
 		fi
 	;;
 	stimeout)
@@ -66,24 +68,35 @@ case "$1" in
 
 		if [ "$(xset q | awk '/^  Standby/ {print $6}')" = 0 ]; then
 			xset dpms 0 0 "$default"
-			notify-send -a toggle -i state_shutoff "Xorg" "Screen timeout enabled"
+			ns -i state_shutoff "Xorg" "Screen timeout enabled"
 		else
 			xset dpms 0 0 0
-			notify-send -a toggle -i state_running "Xorg" "Screen timeout disabled"
+			ns -i state_running "Xorg" "Screen timeout disabled"
 		fi
 	;;
 	touchpad)
 		device=$(xinput --list --name-only | grep -i touchpad)
 		state=$(xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$")
 
-		if [ "$state" -eq '1' ]; then
-			xinput disable "$device" && notify-send -a toggle -i touchpad-disabled-symbolic "TouchPad Disabled"
+		if [ "$state" = 1 ]; then
+			xinput disable "$device"
+			ns -i touchpad-disabled-symbolic "TouchPad Disabled"
 		else
-			xinput enable "$device" && notify-send -a toggle -i touchpad-enabled-symbolic "TouchPad Enabled"
+			xinput enable "$device"
+			ns -i touchpad-enabled-symbolic "TouchPad Enabled"
+		fi
+	;;
+	transmission|td)
+		if pgrep -x transmission-da >/dev/null; then
+			transmission-remote --exit >/dev/null
+			ns -i transmission "Transmission" "Daemon killed."
+		else
+			transmission-daemon --logfile /dev/null
+			ns -i transmission "Transmission" "Daemon started."
 		fi
 	;;
 	$NULL|*)
-		printf "Options:\n\t"
-		printf "audio\n\tkeybase\n\tnet (w|wifi|NULL)\n\tredshift\n\tstimeout\n\ttouchpad\n"
+		printf "Options:\n\taudio\n\tkeybase\n\tnet {w|wifi|NULL}\n\tredshift
+			\r\tstimeout\n\ttouchpad\n\ttransmission|td\n"
 	;;
 esac
