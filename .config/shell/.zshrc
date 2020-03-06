@@ -297,7 +297,7 @@ bindkey '^[[1;3D' cdUndoKey # [Alt+Left] - go back in directory history
 zle -N copyx; copyx() { echo -E $BUFFER | xsel -ib ;}; bindkey '^Y' copyx
 
 # functions defined in aliasrc
-bindkey -s '^o' 'lfcd\n'
+bindkey -s '^o' 'cdr\n'
 bindkey -s '^[h' 'histopen\n'
 
 #=====================================================================

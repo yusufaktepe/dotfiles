@@ -14,7 +14,7 @@ export TERMINAL="st"
 export TERMINAL_N="st -n"
 export BROWSER="vivaldi-stable"
 export READER="zathura"
-export FILE="lf"
+export FILE="ranger"
 
 # Keep $HOME clean:
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
@@ -42,6 +42,7 @@ export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' 
 # Others:
 export SUDO_ASKPASS="$XDG_BIN_HOME/dmenu-rofi/askpass-rofi"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 50%"
+export RANGER_LOAD_DEFAULT_RC="false"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # Start i3 on tty1 login

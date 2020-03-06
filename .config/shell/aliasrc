@@ -36,7 +36,7 @@ alias fgrep='fgrep --color=auto'
 alias diff='diff --color=auto'
 alias ccat='highlight --out-format=ansi' # Color cat - print file with syntax highlighting.
 
-#alias cdr='ranger --show-only-dirs --choosedir=/tmp/.dir && $(cat /tmp/.dir)'
+alias cdr='. ranger'
 
 # Package Management
 alias upd='yay -Syu'
@@ -124,23 +124,14 @@ clippaste() {
 copydir() { printf '%s' "$PWD" | clipcopy ;}
 copyfile() { clipcopy "$@" ;}
 
-lfcd() {
-	tmp="$(mktemp)"
-	lf -last-dir-path="$tmp" "$@"
-	if [ -f "$tmp" ]; then
-		dir="$(cat "$tmp")"
-		rm -f "$tmp"
-		if [ -d "$dir" ]; then
-			if [ "$dir" != "$(pwd)" ]; then
-				cd "$dir"
-			fi
-		fi
-	fi
-}
-
 mkd() { mkdir -p "$@" && cd "${@:$#}" ;}
 
 histopen() { $EDITOR + "$HISTFILE" ;}
+
+ranger() {
+	[ -z "$RANGER_LEVEL" ] && /usr/bin/ranger "$@" || \
+		echo "Shell is already running inside ranger!"
+}
 
 rpeat() {
 	n=$1
