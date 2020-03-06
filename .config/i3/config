@@ -590,8 +590,7 @@ mode "$freeze" { bindsym $mod+Shift+f mode "default"
 
 # Open link with X
 bindsym $caps+b mode "$broopen"
-set $broopen  [F3/3]: Vivaldi  [F4/4]: Opera  [F5/5]: Firefox  [F6/6]: Chrome \
- [F7/7]: Brave  [t]: Tor  [y]: MPV  [c]: MPV (Clipboard)  [d]: dmenuhandler
+set $broopen : F3/3 | : F4/4 | : F5/5 | : F6/6 | : F7/7 | 﨩: t | : y/c | : d
 mode "$broopen" {
 	bindsym F3 --release exec $N bro-open $BROWSER, mode "default"
 	bindsym F4 --release exec $N bro-open opera --start-maximized, mode "default"
@@ -614,13 +613,14 @@ mode "$broopen" {
 }
 
 bindsym $mod+Shift+t mode "$toggle"
-set $toggle  pi[c]om py-[h]ttp [k]eybase [r]edshift [s]timeout |  [d]unst [p]ulse
+set $toggle  pi[c]om py-[h]ttp [k]eybase [r]edshift [s]timeout [t]ransmission |  [d]unst [p]ulse
 mode "$toggle" {
 	bindsym c exec $N pkill picom || picom -b, mode "default"
 	bindsym h exec $N py-http -n, mode "default"
 	bindsym k exec $N toggle keybase, mode "default"
 	bindsym r exec $N toggle redshift, mode "default"
 	bindsym s exec $N toggle stimeout, mode "default"
+	bindsym t exec $N toggle transmission, mode "default"
 	bindsym d --release exec "killall dunst; exec notify-send -a system 'restart dunst'", mode "default"
 	bindsym p exec $N systemctl --user restart pulseaudio, mode "default"
 
