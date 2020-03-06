@@ -25,6 +25,8 @@ application/xml=nvim.desktop
 application/pdf=org.pwmt.zathura.desktop
 application/rss+xml=rss.desktop
 application/vnd.rar=engrampa.desktop
+x-scheme-handler/magnet=org.qbittorrent.qBittorrent.desktop
+application/x-bittorrent=org.qbittorrent.qBittorrent.desktop
 
 [Added Associations]
 x-scheme-handler/http=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
