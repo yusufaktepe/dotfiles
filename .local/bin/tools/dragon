@@ -14,9 +14,7 @@ target() {
 }
 
 case $1 in
-	cp) target cp ;;
-	mv) target mv ;;
-	dl) target dl ;;
+	cp|mv|dl) target $1 ;;
 	-h|--help|"")
 		$dnd --help
 		printf "\n\tScript Usage: dragon [OPTION]
