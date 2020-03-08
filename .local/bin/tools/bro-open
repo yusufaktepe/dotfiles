@@ -11,6 +11,10 @@ url() {
 				keyup Shift \
 				key Escape
 			xclip -o -selection primary | grep -Eo '(http|https)://[^ "]+' ;;
+		mpv)
+			PID=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
+			PID=$(xprop -id "$PID" | grep -m 1 PID | cut -d " " -f 3)
+			ps -o cmd --no-headers -p "$PID" | grep -Eo '(http|https)://[^ "]+' ;;
 		*)
 			xclip -o -selection clipboard | grep -Eo '(http|https)://[^ "]+'
 	esac
