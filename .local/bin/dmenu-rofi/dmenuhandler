@@ -36,6 +36,8 @@ case "$(printf '%s' "$opts" | dmenu -i -p "Open link with...?")" in
 	" w3m")
 		{ [ -t 2 ] && w3m "$1" 2>/dev/null ;} || $TERMINAL -e w3m "$1" 2>/dev/null ;;
 	" youtube:  add to favorites")
+		youtube-viewer --no-interactive --likes=mine >/dev/null
+
 		if youtube-viewer --no-interactive --favorite="$1"; then
 			notify-send -a dmenuhandler -i youtube "YouTube" \
 				"Video has been <b>added to favorites</b>.\n$1"
@@ -44,6 +46,8 @@ case "$(printf '%s' "$opts" | dmenu -i -p "Open link with...?")" in
 				"<b>Can't favorite video!</b>\n$1"
 		fi ;;
 	" youtube:  like")
+		youtube-viewer --no-interactive --likes=mine >/dev/null
+
 		if youtube-viewer --no-interactive --like="$1"; then
 			notify-send -a dmenuhandler -i youtube "YouTube" \
 				"Video has been successfully <b>liked</b>.\n$1"
@@ -52,6 +56,8 @@ case "$(printf '%s' "$opts" | dmenu -i -p "Open link with...?")" in
 				"<b>Can't like video!</b>\n$1"
 		fi ;;
 	" youtube:  dislike")
+		youtube-viewer --no-interactive --likes=mine >/dev/null
+
 		if youtube-viewer --no-interactive --dislike="$1"; then
 			notify-send -a dmenuhandler -i youtube "YouTube" \
 				"Video has been successfully <b>disliked</b>.\n$1"
