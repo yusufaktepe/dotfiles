@@ -22,12 +22,13 @@ wrofi() {
 }
 
 wdmenu() {
-	greenclip print | dmenu -i -l 10 -p Clipboard | \
+	greenclip print | sed '/^$/d'| dmenu -i -l 10 -p Clipboard | \
 		xargs -r -d'\n' -I '{}' greenclip print '{}'
 }
 
 wfzf() {
-	greenclip print | fzf -e -i | xclip -selection clipboard
+	greenclip print | sed '/^$/d' | fzf -e | \
+		xargs -r -d'\n' -I '{}' greenclip print '{}'
 }
 
 case $1 in
