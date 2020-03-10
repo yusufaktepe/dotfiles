@@ -69,12 +69,12 @@ bindsym Ctrl+$caps+quotedbl exec $N gclip rld
 
 # #---Start Applications---# #
 bindsym $mod+F1 exec $term -e $FILE
-bindsym $mod+F2 exec $N ifwin doublecmd
-bindsym $mod+F3 exec $N ifwin vivaldi
-bindsym $mod+F4 exec $N ifwin opera
-bindsym $mod+F5 exec $N ifwin firefox
-bindsym $mod+F6 exec $N ifwin chrome
-bindsym $mod+F7 exec $N ifwin brave
+bindsym $mod+F2 exec $N ifwin -e doublecmd
+bindsym $mod+F3 exec $N ifwin -e vivaldi-stable
+bindsym $mod+F4 exec $N ifwin -e opera
+bindsym $mod+F5 exec $N ifwin -e firefox
+bindsym $mod+F6 exec $N ifwin -e google-chrome-stable
+bindsym $mod+F7 exec $N ifwin -e brave
 bindsym $mod+Shift+F2 exec $N pcmanfm
 bindsym $mod+Shift+F3 exec $N vivaldi-stable --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
@@ -86,9 +86,9 @@ bindsym $mod+Shift+F7 exec $N brave --incognito
 bindsym $caps+e exec $term -e $EDITOR
 bindsym $caps+m exec $N cantata-mpd
 bindsym $caps+Shift+s exec $N toggle spotifyd
-bindsym $caps+s exec $N ifwin spotify
-bindsym $caps+q exec $N ifwin qbittorrent
-bindsym $caps+v exec $N ifwin smplayer
+bindsym $caps+s exec $N ifwin -e spotify
+bindsym $caps+q exec $N ifwin -e qbittorrent
+bindsym $caps+v exec $N ifwin -e smplayer --toggle scratchpad
 bindsym $caps+7 exec $N ifwin vbox Win7
 # bindsym $caps+w exec $N libreoffice --writer
 bindsym --release $caps+c exec $N ifwin crow
@@ -377,9 +377,9 @@ exec $N numlockx
 exec $N greenclip daemon
 exec $N unclutter
 exec_always launch_polybar
-exec $N "sleep 2; ifwin vivaldi"
-exec $N "sleep 5; ifwin doublecmd"
-exec $N "sleep 7; ifwin spotify"
+exec $N "sleep 2; ifwin -e vivaldi-stable"
+exec $N "sleep 5; ifwin -e doublecmd"
+exec $N "sleep 7; ifwin -e spotify"
 exec $N "sleep 9; wmctrl -x -r 'Doublecmd' -b remove,demands_attention"
 #exec $N xautolock -time 10 -locker "betterlockscreen -l dimblur"
 
@@ -653,16 +653,16 @@ set $volstep 10
 set $statuscmd i3blocks
 set $statussig SIGRTMIN+10
 
-bindsym XF86AudioMute		exec $N volume -lmn -y -t $statuscmd -u $statussig
-bindsym XF86AudioLowerVolume	exec $N volume -lnp -y -d $volstep -x 100 -t $statuscmd -u $statussig
-bindsym XF86AudioRaiseVolume	exec $N volume -lnp -y -i $volstep -x 100 -t $statuscmd -u $statussig
+bindsym XF86AudioMute        exec $N volume -lmn -y -t $statuscmd -u $statussig
+bindsym XF86AudioLowerVolume exec $N volume -lnp -y -d $volstep -x 100 -t $statuscmd -u $statussig
+bindsym XF86AudioRaiseVolume exec $N volume -lnp -y -i $volstep -x 100 -t $statuscmd -u $statussig
 
 # Switch Output
-bindsym $mod+XF86AudioMute	exec $N "toggle audio; pkill -$statussig i3blocks"
+bindsym $mod+XF86AudioMute   exec $N "toggle audio; pkill -$statussig i3blocks"
 
 ## Startup/Run
-bindsym $mod+XF86AudioLowerVolume	exec $N ifwin pavucontrol
-bindsym $mod+XF86AudioRaiseVolume	exec $termins _blockterm -e pulsemixer
+bindsym $mod+XF86AudioLowerVolume exec $N ifwin -e pavucontrol --toggle
+bindsym $mod+XF86AudioRaiseVolume exec $termins _blockterm -e pulsemixer
 
 #=====================================================================
 
