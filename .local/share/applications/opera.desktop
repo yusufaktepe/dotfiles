@@ -1,0 +1,23 @@
+[Desktop Entry]
+Version=1.0
+Name=Opera
+GenericName=Web browser
+Comment=Fast and secure web browser
+TryExec=opera
+Exec=opera --start-maximized %U
+Terminal=false
+Icon=opera
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml_xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp;application/x-opera-download;
+Actions=new-window;new-private-window;
+
+[Desktop Action new-window]
+Name=New Window
+Exec=opera --start-maximized --new-window
+TargetEnvironment=Unity
+
+[Desktop Action new-private-window]
+Name=New Private Window
+Exec=opera --start-maximized --private
+TargetEnvironment=Unity
