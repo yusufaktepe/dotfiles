@@ -1,151 +1,76 @@
 #!/bin/sh
-# Context-sensitive launcher script
-# ---
-# 2019 Yusuf Aktepe <yusuf@yusufaktepe.com>
-# https://github.com/yusufaktepe/dotfiles
-# ---
-# IfWinNotExist:  run
-# IfWinNotActive: focus
-# IfWinActive:    previous focus
 
 AW=$(xdotool getactivewindow)
 AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $4}')
+AW_CLASS=$(echo "$AW_CLASS" | tr '[:upper:]' '[:lower:]')
 
-case "$1" in
-	brave)
-		if pgrep -x "brave" > /dev/null; then
-			if [ "$AW_CLASS" = "Brave-browser" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
-			else
-				i3-msg '[class="Brave-browser"] focus' >/dev/null
-			fi
-		else
-			exec brave
-		fi
-	;;
-	chrome)
-		if pgrep -x "chrome" > /dev/null; then
-			if [ "$AW_CLASS" = "Google-chrome" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
-			else
-				i3-msg '[class="Google-chrome"] focus' >/dev/null
-			fi
-		else
-			exec google-chrome-stable
-		fi
-	;;
-	crow)
-		showcrow="alt+ctrl+shift+F1"
+_crow() {
+	showcrow="alt+ctrl+shift+F1"
 
-		if ! pgrep -x "crow" > /dev/null; then
-			exec crow
+	if pgrep -x crow >/dev/null; then
+		if wmctrl -l | grep -q "Crow Translate"; then
+			wmctrl -x -a "crow.Crow Translate" && i3-msg kill >/dev/null
 		else
-			if wmctrl -l | grep -q "Crow Translate"; then
-				wmctrl -x -a "crow.Crow Translate" && i3-msg kill >/dev/null
-			else
-				xdotool key --clearmodifiers $showcrow
-			fi
+			xdotool key --clearmodifiers $showcrow
 		fi
-	;;
-	doublecmd)
-		if pgrep -x "doublecmd" > /dev/null; then
-			if [ "$AW_CLASS" = "Doublecmd" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
-			else
-				i3-msg '[class="Doublecmd"] focus' >/dev/null
-			fi
+	else
+		crow >/dev/null 2>&1 &
+	fi
+}
+
+_vbox() {
+	if VBoxManage list vms runningvms | grep -q "$1"; then
+		if [ "$AW_CLASS" = "virtualbox machine" ]; then
+			i3-msg "workspace back_and_forth" >/dev/null
 		else
-			exec doublecmd --no-splash >/dev/null 2>&1
+			i3-msg "[class=(?i)VirtualBox title=(?i)$1] focus" >/dev/null
 		fi
-	;;
-	firefox)
-		if pgrep -x "firefox" > /dev/null; then
-			if [ "$AW_CLASS" = "firefox" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
-			else
-				i3-msg '[class="firefox"] focus' >/dev/null
-			fi
-		else
-			exec firefox
-		fi
-	;;
-	opera)
-		if pgrep -x "opera" > /dev/null; then
-			if [ "$AW_CLASS" = "Opera" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
-			else
-				i3-msg '[class="Opera"] focus' >/dev/null
-			fi
-		else
-			exec opera --start-maximized
-		fi
-	;;
-	pavucontrol)
-		if pgrep -x "pavucontrol" > /dev/null; then
-			if [ "$AW_CLASS" = "Pavucontrol" ]; then
-				i3-msg kill >/dev/null
-				pkill -SIGRTMIN+10 i3blocks
-			else
-				i3-msg '[class="Pavucontrol"] focus' >/dev/null
-			fi
-		else
-			exec pavucontrol
-		fi
-	;;
-	qbittorrent)
-		if pgrep -x "qbittorrent" > /dev/null; then
-			if [ "$AW_CLASS" = "qBittorrent" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
-			else
-				i3-msg '[class="qBittorrent"] focus' >/dev/null
-			fi
-		else
-			exec qbittorrent
-		fi
-	;;
-	smplayer)
-		if pgrep -x "smplayer" > /dev/null; then
-			if [ "$AW_CLASS" = "smplayer" ]; then
-				i3-msg '[class="smplayer"] move scratchpad' >/dev/null
-			else
-				i3-msg '[class="smplayer"] focus' >/dev/null
-			fi
-		else
-			exec smplayer
-		fi
-	;;
-	spotify)
-		if pgrep -x "spotify" > /dev/null; then
-			if [ "$AW_CLASS" = "Spotify" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
-			else
-				i3-msg '[class="Spotify"] focus' >/dev/null
-				# wmctrl -x -a spotify.Spotify
-			fi
-		else
-			exec spotify
-		fi
-	;;
-	vbox)
-		if VBoxManage list vms runningvms | grep -q "$2"; then
-			if [ "$AW_CLASS" = "VirtualBox Machine" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
-			else
-				i3-msg "[class=(?i)VirtualBox title=(?i)$2] focus" >/dev/null
-			fi
-		else
-			exec VBoxManage startvm "$2"
-		fi
-	;;
-	vivaldi*)
-		if pgrep -x "vivaldi-bin" > /dev/null; then
-			if [ "$AW_CLASS" = "Vivaldi-${2:-stable}" ]; then
-				i3-msg "workspace back_and_forth" >/dev/null
-			else
-				i3-msg "[class=\"Vivaldi-${2:-stable}\"] focus" >/dev/null
-			fi
-		else
-			exec vivaldi-"${2:-stable}" --start-maximized
-		fi
-	;;
+	else
+		VBoxManage startvm "$1" >/dev/null 2>&1 &
+	fi
+}
+
+for arg in "$@"; do
+	case $arg in
+		-c) opt_class=$2 ;;
+		-e) opt_exec=$2 ;;
+		-f) opt_flags=$2 ;;
+		-p) opt_proc=$2 ;;
+		--toggle) opt_toggle=${2:-true} ;;
+		crow) _crow; exit ;;
+		vbox) _vbox "$2"; exit ;;
+	esac
+	shift
+done
+
+case $opt_exec in
+	brave*) opt_class=brave-browser ;;
+	*chrome*) opt_proc=chrome; opt_class=google-chrome ;;
+	doublecmd) opt_flags=--no-splash ;;
+	opera*) opt_flags=--start-maximized ;;
+	vivaldi*) opt_proc=vivaldi-bin; opt_flags=--start-maximized ;;
 esac
+
+[ -n "$opt_proc" ] && proc=$opt_proc || proc=$opt_exec
+[ -z "$opt_class" ] && opt_class=$opt_exec
+[ -n "$opt_flags" ] && opt_exec="$opt_exec $opt_flags"
+
+if [ -n "$opt_class" ] && [ -n "$opt_exec" ]; then
+	if pgrep -x "$proc" >/dev/null; then
+		if [ "$AW_CLASS" = "$opt_class" ]; then
+			if [ "$opt_toggle" = scratchpad ]; then
+				i3-msg "[class=\"(?i)$opt_class\"] move scratchpad" >/dev/null
+			elif [ "$opt_toggle" ]; then
+				i3-msg kill >/dev/null
+				[ "$opt_class" = pavucontrol ] && pkill -SIGRTMIN+10 i3blocks
+			else
+				i3-msg "workspace back_and_forth" >/dev/null
+			fi
+		else
+			i3-msg "[class=\"(?i)$opt_class\"] focus" >/dev/null
+		fi
+	else
+			$opt_exec >/dev/null 2>&1 &
+	fi
+fi
+
