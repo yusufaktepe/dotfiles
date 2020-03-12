@@ -1,6 +1,5 @@
-aliasrc          ~/.config/shell/aliasrc
-bash_history     ~/.config/shell/.bash_history
-bashrc           ~/.config/shell/.bashrc
+bash_history     ~/.config/bash/.bash_history
+bashrc           ~/.config/bash/.bashrc
 conf.list        ~/.config/conf.list
 dir.list         ~/.config/dir.list
 dunstrc          ~/.config/dunst/dunstrc
@@ -13,7 +12,7 @@ gtk3_css         ~/.config/gtk-3.0/gtk.css
 gtk3_settings    ~/.config/gtk-3.0/settings.ini
 i3               ~/.config/i3/config
 i3blocks         ~/.config/i3blocks/config
-inputrc          ~/.config/shell/inputrc
+inputrc          ~/.config/bash/inputrc
 lf_scope         ~/.config/lf/scope
 lfrc             ~/.config/lf/lfrc
 makepkg          ~/.config/pacman/makepkg.conf
@@ -45,5 +44,14 @@ xres_colors      ~/.config/X11/colors/gruvbox
 xresources       ~/.config/X11/Xresources
 yay              ~/.config/yay/config.json
 zathura          ~/.config/zathura/zathurarc
-zsh_history      ~/.config/shell/.zsh_history
-zshrc            ~/.config/shell/.zshrc
+zsh_history      ~/.config/zsh/history
+zsh_aliases      ~/.config/zsh/conf.d/aliases.zsh
+zsh_appearance   ~/.config/zsh/conf.d/appearance.zsh
+zsh_completion   ~/.config/zsh/conf.d/completion.zsh
+zsh_functions    ~/.config/zsh/conf.d/functions.zsh
+zsh_keys         ~/.config/zsh/conf.d/keys.zsh
+zsh_options      ~/.config/zsh/conf.d/options.zsh
+zsh_plugins      ~/.config/zsh/conf.d/plugins.zsh
+zsh_termtitle    ~/.config/zsh/conf.d/termtitle.zsh
+zsh_widgets      ~/.config/zsh/conf.d/widgets.zsh
+zshrc            ~/.config/zsh/.zshrc

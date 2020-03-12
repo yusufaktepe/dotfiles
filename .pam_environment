@@ -2,6 +2,6 @@
 
 #SSH_AGENT_PID	DEFAULT=
 SSH_AUTH_SOCK	DEFAULT="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
-ZDOTDIR		DEFAULT="@{HOME}/.config/shell"
-BDOTDIR		DEFAULT="@{HOME}/.config/shell"
+ZDOTDIR		DEFAULT="@{HOME}/.config/zsh"
+BDOTDIR		DEFAULT="@{HOME}/.config/bash"
 

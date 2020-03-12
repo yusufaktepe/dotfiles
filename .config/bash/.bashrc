@@ -1,7 +1,4 @@
 #!/bin/bash
-#
-# ~/.bashrc
-#
 
 [[ $- != *i* ]] && return
 [[ $DISPLAY ]] && shopt -s checkwinsize
@@ -25,4 +22,4 @@ shopt -s histappend
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 # Source my aliases:
-[ -f "$HOME/.config/shell/aliasrc" ] && source "$HOME/.config/shell/aliasrc"
+[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
