@@ -23,7 +23,7 @@ export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
+export INPUTRC="$XDG_CONFIG_HOME/bash/inputrc"
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch.conf"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"

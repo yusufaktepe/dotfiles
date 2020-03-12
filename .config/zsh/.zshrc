@@ -121,9 +121,6 @@ source /usr/share/doc/pkgfile/command-not-found.zsh 2>/dev/null
 source /usr/share/fzf/completion.zsh 2>/dev/null
 source /usr/share/fzf/key-bindings.zsh 2>/dev/null
 
-# Load alias for thefuck:
-eval $(thefuck --alias)
-
 # Use history-substring-search instead
 #autoload -U up-line-or-beginning-search
 #autoload -U down-line-or-beginning-search
@@ -403,5 +400,5 @@ alias -g NA="&>/dev/null"
 alias -g N1="1>/dev/null"
 alias -g N2="2>/dev/null"
 
-[ -f "$ZDOTDIR/aliasrc" ] && source "$ZDOTDIR/aliasrc"
+[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
