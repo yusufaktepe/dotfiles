@@ -44,7 +44,7 @@ xres_colors      ~/.config/X11/colors/gruvbox
 xresources       ~/.config/X11/Xresources
 yay              ~/.config/yay/config.json
 zathura          ~/.config/zathura/zathurarc
-zsh_history      ~/.config/zsh/history
+zsh_history      ~/.config/zsh/.zsh_history
 zsh_aliases      ~/.config/zsh/conf.d/aliases.zsh
 zsh_appearance   ~/.config/zsh/conf.d/appearance.zsh
 zsh_completion   ~/.config/zsh/conf.d/completion.zsh
