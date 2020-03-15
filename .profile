@@ -46,6 +46,16 @@ export FZF_DEFAULT_OPTS="--layout=reverse --height 50%"
 export RANGER_LOAD_DEFAULT_RC="false"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 
+# Man Colors
+export LESS=-R
+export LESS_TERMCAP_mb=$(printf "\e[1;31m")
+export LESS_TERMCAP_md=$(printf "\e[1;31m")
+export LESS_TERMCAP_me=$(printf "\e[0m")
+export LESS_TERMCAP_se=$(printf "\e[0m")
+export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
+export LESS_TERMCAP_ue=$(printf "\e[0m")
+export LESS_TERMCAP_us=$(printf "\e[1;32m")
+
 # Start i3 on tty1 login
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
 	exec startx "$XINITRC" -- -quiet > "$XDG_DATA_HOME/xorg/Xorg.log" 2>&1
