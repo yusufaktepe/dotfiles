@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exec startx "$XINITRC" "$@" -- -quiet > ~/.cache/Xorg.log 2>&1
+

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rsync -pogbr -hhh --backup-dir=/tmp/rsync -e /dev/null --progress "$@"
+

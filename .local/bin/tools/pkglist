@@ -1,0 +1,15 @@
+#!/bin/sh
+
+date=$(date +%F)
+dir=/data/backup/pkglists
+
+pacman -Qqen > $dir/pkglist_"$date"
+pacman -Qm   > $dir/pkglist-aur_"$date"
+pacman -Qqn  > $dir/pkglist_full_"$date"
+
+case $1 in
+	*aur*|*full*) yay -S --needed - < "$1" ;;
+	"") exit ;;
+	*) sudo pacman -S --needed - < "$1" ;;
+esac
+
