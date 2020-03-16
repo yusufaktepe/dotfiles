@@ -23,9 +23,6 @@ key[ShiftTab]="${terminfo[kcbt]}"
 key[C-Backs]="${terminfo[cub1]}"
 key[C-Left]="${terminfo[kLFT5]}"
 key[C-Right]="${terminfo[kRIT5]}"
-key[StHome]="${terminfo[home]}"
-key[StIns]="${terminfo[smir]}"
-key[StDel]="${terminfo[dch1]}"
 
 # Setup keys accordingly
 [[ -n "${key[Home]}"     ]] && bindkey -- "${key[Home]}"     beginning-of-line
@@ -43,9 +40,6 @@ key[StDel]="${terminfo[dch1]}"
 [[ -n "${key[C-Left]}"   ]] && bindkey -- "${key[C-Left]}"   backward-word
 [[ -n "${key[C-Right]}"  ]] && bindkey -- "${key[C-Right]}"  forward-word
 [[ -n "${key[C-Backs]}"  ]] && bindkey -- "${key[C-Backs]}"  backward-kill-word
-[[ -n "${key[StHome]}"   ]] && bindkey -- "${key[StHome]}"   beginning-of-line
-[[ -n "${key[StIns]}"    ]] && bindkey -- "${key[StIns]}"    overwrite-mode
-[[ -n "${key[StDel]}"    ]] && bindkey -- "${key[StDel]}"    delete-char
 
 [[ -n "${key[Home]}"   ]] && bindkey -M vicmd "${key[Home]}"   beginning-of-line
 [[ -n "${key[End]}"    ]] && bindkey -M vicmd "${key[End]}"    end-of-line
