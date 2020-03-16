@@ -49,7 +49,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+quotedbl exec $termins floating
 bindsym $mod+comma split horizontal ;; exec $term
 bindsym $mod+period split vertical ;; exec $term
-bindsym $mod+udiaeresis exec $N ddspawn tmuxdd
+bindsym $mod+udiaeresis exec $N ddspawn tmuxi
 # open terminal in current dir
 bindsym $mod+Shift+Return exec $N samedir
 
@@ -349,7 +349,7 @@ for_window [instance="mpvfloat"] border pixel 0, resize set 408 306, move positi
 no_focus [instance="mpvfloat"]
 #_ General dropdown window traits. The order can matter.
 for_window [instance="dropdown_*"] floating enable, move scratchpad, sticky enable, scratchpad show
-for_window [instance="dropdown_tmuxdd"] border pixel 3, resize set 625 450
+for_window [instance="dropdown_tmuxi"] border pixel 3, resize set 625 450
 for_window [instance="dropdown_*"] move position center
 
 # switch to workspace with urgent window automatically
