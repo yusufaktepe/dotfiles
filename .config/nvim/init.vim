@@ -208,7 +208,7 @@ nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " Toggle line wrapping
-nnoremap <silent> <leader>W :setlocal wrap!<CR>:setlocal wrap?<CR>
+nnoremap <silent> <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
 " Toggle colorcolumn
 nnoremap <silent> <leader>CC :execute "set cc=" . (&cc == "" ? "80" : "")<CR>
@@ -217,11 +217,11 @@ nnoremap <silent> <leader>CC :execute "set cc=" . (&cc == "" ? "80" : "")<CR>
 noremap <silent> <F2> :set paste! nopaste?<CR>
 
 " Enter command mode with substitution command prefilled
-nnoremap S :%s//gc<Left><Left><Left>
+nnoremap S :%s///gc<Left><Left><Left><Left>
 
-" Conceal
-nnoremap <silent> <leader>cl :call ToggleConcealLevel()<cr>
-nnoremap <silent> <leader>cc :call ToggleConcealCursor()<cr>
+" Toggle conceal(level|cursor)
+nnoremap <silent> <leader>cl :exe "set cole=" . (&cole == "0" ? "2" : "0") \| set cole<CR>
+nnoremap <silent> <leader>cc :exe "set cocu=" . (&cocu == "" ? "n" : "") \| set cocu<CR>
 
 " Append modeline after last line in buffer
 nnoremap <silent> <leader>ml :call AppendModeline()<CR>
@@ -229,10 +229,6 @@ nnoremap <silent> <leader>ml :call AppendModeline()<CR>
 " Indent visual selection without clearing selection
 vmap > >gv
 vmap < <gv
-
-" Delete while in insert mode
-inoremap <C-d> <C-o>dd
-inoremap <C-c> <C-o>D
 
 " Duplicate line downwards/upwards [ ! CONFLICT: vim-move ]
 " nnoremap <C-M-j> "dY"dp
@@ -254,7 +250,7 @@ nnoremap <leader>m :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:
 nnoremap <leader>l :nohlsearch<CR>:diffupdate<CR>:syntax sync fromstart<CR><c-l>
 
 " Reload vim configuration
-nnoremap <silent> <leader>R :so ~/.config/nvim/init.vim<return><esc>
+nnoremap <silent> <leader>R :so ~/.config/nvim/init.vim \| echom 'Reload config.'<CR>
 
 " Goto file under cursor in new tab
 noremap gF <C-w>gf
@@ -264,20 +260,18 @@ command! WQ wq
 command! Wq wq
 command! Q q
 
-" Make c-n and c-p behave like up/down arrows, i.e. take into account the
-" beginning of the text entered in the command line when jumping
-" See: https://github.com/mhinz/vim-galore#saner-command-line-history
-cnoremap <c-n>  <down>
-cnoremap <c-p>  <up>
+" emacs-style movements in command mode
+cnoremap <C-a> <Home>
+cnoremap <C-b> <Left>
+cnoremap <C-d> <Delete>
+cnoremap <C-f> <Right>
+cnoremap <M-b> <S-Left>
+cnoremap <M-f> <S-Right>
+cnoremap <C-g> <C-c>
 
-" emacs-style movements
-cnoremap <C-a>  <Home>
-cnoremap <C-b>  <Left>
-cnoremap <C-f>  <Right>
-cnoremap <C-d>  <Delete>
-cnoremap <M-b>  <S-Left>
-cnoremap <M-f>  <S-Right>
-cnoremap <C-g>  <C-c>
+" Make <C-n> and <C-p> behave like up/down arrows
+cnoremap <C-n> <down>
+cnoremap <C-p> <up>
 
 " Check file in shellcheck:
 map <leader>cs :!clear && shellcheck %<CR>
@@ -292,7 +286,7 @@ map <leader>C :w! \| !compiler <c-r>%<CR>
 " Open corresponding .pdf/.html or preview
 map <leader>op :!opout <c-r>%<CR><CR>
 
-" Spell-check set to <leader>o, 'o' for 'orthography':
+" Spell-check
 map <leader>or :setlocal spell! spelllang=en_us<CR>
 
 "=====================================================================
@@ -377,8 +371,8 @@ map <silent> <leader>Sn :UltiSnipsEdit<cr>
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 
 "=== Fugitive
-nnoremap <leader>gb :Gblame<CR>
-vnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gb :G blame<CR>
+vnoremap <leader>gb :G blame<CR>
 nnoremap <leader>ds :Gvdiffsplit<CR>
 
 "=== MarkdownPreview
@@ -452,26 +446,6 @@ function! Tabnm(n)
 	catch
 		$tabnew
 	endtry
-endfunction
-
-" Toggle conceallevel
-function! ToggleConcealLevel()
-	if &conceallevel
-		setlocal conceallevel=0
-	else
-		setlocal conceallevel=2
-	endif
-	echo "conceallevel=" . &conceallevel
-endfunction
-
-" Toggle concealcursor
-function! ToggleConcealCursor()
-	if &concealcursor != ""
-		set concealcursor=""
-	else
-		set concealcursor=niv
-	endif
-	echo "concealcursor=" . &concealcursor
 endfunction
 
 " Append modeline after last line in buffer
