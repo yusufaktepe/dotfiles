@@ -63,6 +63,7 @@ font-3 = NotoColorEmoji:fontformat=truetype:scale=12:antialias=false;2
 font-4 = Font Awesome 5 Free Regular:size=9;2
 font-5 = Font Awesome 5 Free Solid:size=9;2
 font-6 = Hack Nerd Font Mono:pixelsize=9;2
+font-7 = AR PL New Sung Mono:pixelsize=9;2
 
 modules-left = i3
 modules-center = player
