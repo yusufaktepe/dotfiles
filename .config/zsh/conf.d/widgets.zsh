@@ -12,6 +12,7 @@ foreach widget (
 	cdParentKey
 	copybuffer
 	exit_zsh
+	fzf-history-widget
 ) {
 	zle -N $widget
 }
@@ -56,4 +57,32 @@ copybuffer() { printf '%s' "$BUFFER" | xclip -selection clipboard ;}
 
 # Exit; even if the command line is full
 exit_zsh() { exit }
+
+# Select command from history into the command line
+fzf-history-widget() {
+	(( $+commands[fzf] )) || return 1
+
+	local selected num
+
+	setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2>/dev/null
+
+	selected=( $(fc -rl 1 |
+		fzf \
+		--nth='2..,..' \
+		--tiebreak='index' \
+		--query="${LBUFFER}" \
+		--exact \
+		--no-multi \
+		--prompt='$ ')
+	)
+	local ret=$?
+
+	if [[ -n "$selected" ]]; then
+		num=$selected[1]
+		[[ -n "$num" ]] && zle vi-fetch-history -n $num
+	fi
+
+	zle reset-prompt
+	return $ret
+}
 
