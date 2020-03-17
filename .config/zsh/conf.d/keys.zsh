@@ -91,6 +91,7 @@ bindkey '^[[1;3D' cdUndoKey             # [Alt-Left] - go back in directory hist
 bindkey '^[[1;3A' cdParentKey           # [Alt-Up] - go to the parent directory
 bindkey '^Y' copybuffer                 # [Ctrl-y] - copy current BUFFER to clipboard
 bindkey '^D' exit_zsh                   # [Ctrl-d] - exit; even if the command line is full
+bindkey '^R' fzf-history-widget         # [Ctrl-r] - select command from history into the command line
 # bindkey -M vicmd v edit-command-line  # [VI|v] - edit command line with $EDITOR
 bindkey -M vicmd '^f' prefix-sudo       # [VI|Ctrl-f] to add sudo prefix
 bindkey -M vicmd "^[ " globalias        # [VI|Alt-Space] to expand alias
