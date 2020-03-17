@@ -63,17 +63,17 @@ fi
 
 bindkey ' ' magic-space # [Space] - do history expansion
 
-bindkey '^[[1;5C' forward-word    # st:[Ctrl-RightArrow] - move forward one word
-bindkey '^[[1;5D' backward-word   # st:[Ctrl-LeftArrow] - move backward one word
+bindkey '^[[1;5C' forward-word    # st:[Ctrl-Right] - move forward one word
+bindkey '^[[1;5D' backward-word   # st:[Ctrl-Left] - move backward one word
 
-bindkey '^P' history-substring-search-up   # [Ctrl+p]
-bindkey '^N' history-substring-search-down # [Ctrl+n]
+bindkey '^P' history-substring-search-up   # [Ctrl-p]
+bindkey '^N' history-substring-search-down # [Ctrl-n]
 
 bindkey -M vicmd 'k' history-substring-search-up   # [VI|k]
 bindkey -M vicmd 'j' history-substring-search-down # [VI|j]
 
-bindkey -M vicmd 'H' vi-beginning-of-line # [Shift-h] - move cursor to beginning of line
-bindkey -M vicmd 'L' vi-end-of-line       # [Shift-l] - move cursor to end of line
+bindkey -M vicmd 'H' vi-beginning-of-line # [VI|Shift-h] - move cursor to beginning of line
+bindkey -M vicmd 'L' vi-end-of-line       # [VI|Shift-l] - move cursor to end of line
 
 #== Completion Mode (requires `complist` module)
 bindkey -M menuselect '^?' undo                 # [Backspace] - undo inserted match
@@ -84,17 +84,17 @@ bindkey -M menuselect '^H' backward-char        # [Ctrl-h] - navigate left compl
 bindkey -M menuselect '^L' forward-char         # [Ctrl-l] - navigate right completion
 
 #== Widget bindings
-bindkey '^Xe' edit-command-line         # [Ctrl+X e] - edit command line with $EDITOR
-bindkey "^f" prefix-sudo                # [Ctrl+f] to add sudo prefix
-bindkey "^[ " globalias                 # [Alt+Space] to expand alias
-bindkey '^[[1;3D' cdUndoKey             # [Alt+Left] - go back in directory history
-bindkey '^[[1;3A' cdParentKey           # [Alt+Up] - go to the parent directory
-bindkey '^Y' copybuffer                 # [Ctrl+y] - copy current BUFFER to clipboard
-bindkey '^D' exit_zsh                   # [Ctrl+d] - exit; even if the command line is full
-# bindkey -M vicmd v edit-command-line  # [v] - edit command line with $EDITOR
-bindkey -M vicmd '^f' prefix-sudo       # [VI|Ctrl+f] to add sudo prefix
-bindkey -M vicmd "^[ " globalias        # [VI|Alt+Space] to expand alias
-bindkey -M vicmd '^D' exit_zsh          # [VI|Ctrl+d] - exit; even if the command line is full
+bindkey '^Xe' edit-command-line         # [Ctrl-x+e] - edit command line with $EDITOR
+bindkey "^f" prefix-sudo                # [Ctrl-f] to add sudo prefix
+bindkey "^[ " globalias                 # [Alt-Space] to expand alias
+bindkey '^[[1;3D' cdUndoKey             # [Alt-Left] - go back in directory history
+bindkey '^[[1;3A' cdParentKey           # [Alt-Up] - go to the parent directory
+bindkey '^Y' copybuffer                 # [Ctrl-y] - copy current BUFFER to clipboard
+bindkey '^D' exit_zsh                   # [Ctrl-d] - exit; even if the command line is full
+# bindkey -M vicmd v edit-command-line  # [VI|v] - edit command line with $EDITOR
+bindkey -M vicmd '^f' prefix-sudo       # [VI|Ctrl-f] to add sudo prefix
+bindkey -M vicmd "^[ " globalias        # [VI|Alt-Space] to expand alias
+bindkey -M vicmd '^D' exit_zsh          # [VI|Ctrl-d] - exit; even if the command line is full
 
 #== Alias bindings
 bindkey -s '^[h' 'vH\n'
