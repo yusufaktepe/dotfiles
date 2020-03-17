@@ -87,8 +87,8 @@ bindkey -M menuselect '^L' forward-char         # [Ctrl-l] - navigate right comp
 bindkey '^Xe' edit-command-line         # [Ctrl-x+e] - edit command line with $EDITOR
 bindkey "^f" prefix-sudo                # [Ctrl-f] to add sudo prefix
 bindkey "^[ " globalias                 # [Alt-Space] to expand alias
-bindkey '^[[1;3D' cdUndoKey             # [Alt-Left] - go back in directory history
-bindkey '^[[1;3A' cdParentKey           # [Alt-Up] - go to the parent directory
+bindkey '^[[1;3D' cdPrev                # [Alt-Left] - go back in directory history
+bindkey '^[[1;3A' cdParent              # [Alt-Up] - go to the parent directory
 bindkey '^Y' copybuffer                 # [Ctrl-y] - copy current BUFFER to clipboard
 bindkey '^D' exit_zsh                   # [Ctrl-d] - exit; even if the command line is full
 bindkey '^R' fzf-history-widget         # [Ctrl-r] - select command from history into the command line

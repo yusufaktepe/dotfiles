@@ -8,8 +8,8 @@ foreach widget (
 	edit-command-line
 	prefix-sudo
 	globalias
-	cdUndoKey
-	cdParentKey
+	cdPrev
+	cdParent
 	copybuffer
 	exit_zsh
 	fzf-history-widget
@@ -49,8 +49,8 @@ globalias() {
 }
 
 # FileManager-like key bindings
-cdUndoKey() { popd; zle reset-prompt; echo; ls; zle reset-prompt ;}
-cdParentKey() { pushd ..; zle reset-prompt; echo; ls; zle reset-prompt ;}
+cdPrev() { popd; zle reset-prompt; echo; ls; zle reset-prompt ;}
+cdParent() { pushd ..; zle reset-prompt; echo; ls; zle reset-prompt ;}
 
 # Copy current BUFFER to clipboard
 copybuffer() { printf '%s' "$BUFFER" | xclip -selection clipboard ;}
