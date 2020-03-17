@@ -14,10 +14,6 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 # pkgfile: "command not found" hook
 source /usr/share/doc/pkgfile/command-not-found.zsh 2>/dev/null
 
-# fzf
-source /usr/share/fzf/completion.zsh 2>/dev/null
-source /usr/share/fzf/key-bindings.zsh 2>/dev/null
-
 # zsh-system-clipboard
-source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh
+source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh 2>/dev/null
 
