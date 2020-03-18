@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="0.9.7 beta">
+<doublecmd DCVersion="0.9.8 beta">
   <Hotkeys Version="46">
     <Form Name="Main">
       <Hotkey>
@@ -508,6 +508,12 @@
       <Hotkey>
         <Shortcut>Ctrl+X</Shortcut>
         <Command>cm_CutToClipboard</Command>
+        <Control>Files Panel</Control>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Ctrl+Shift+Del</Shortcut>
+        <Command>cm_ExecuteToolbarItem</Command>
+        <Param>ToolItemID={DB9F9883-04F3-452E-AD4F-1A5F54DFB040}</Param>
         <Control>Files Panel</Control>
       </Hotkey>
     </Form>
