@@ -1,4 +1,4 @@
 #!/bin/sh
 
-{ [ -n "$1" ] && xclip -selection c "$@" ;} || xclip -i -selection c
+{ [ -n "$1" ] && xclip -selection c "$@" ;} || xclip -selection c
 
