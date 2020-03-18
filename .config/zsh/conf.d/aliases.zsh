@@ -39,9 +39,9 @@ alias mksrci='makepkg --printsrcinfo > .SRCINFO'
 alias paclog='less +G /var/log/pacman.log'
 
 # Colorize commands
-alias ls='ls --group-directories-first --time-style=+"%Y-%m-%d %H:%M" --color=auto -AF'
-alias ll='ls -l --group-directories-first --time-style=+"%Y-%m-%d %H:%M" --color=auto -F'
-alias la='ls -lah --group-directories-first --time-style=+"%Y-%m-%d %H:%M" --color=auto -F'
+alias ls='ls --group-directories-first --time-style=+"%Y-%m-%d %H:%M" --color=auto -F'
+alias ll='ls -l'
+alias la='ls -lah'
 alias grep='grep --color=auto --exclude-dir=".git" --exclude-dir="node_modules"'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
