@@ -66,6 +66,8 @@ bindsym $caps+t exec $N rofitr -s
 bindsym Ctrl+quotedbl exec $N gclip
 bindsym $caps+quotedbl exec $N gclip clear
 bindsym Ctrl+$caps+quotedbl exec $N gclip rld
+bindsym --release $mod+Insert exec $N gclip selpaste
+bindsym $mod+Shift+Insert exec $N gclip seltoclip
 
 # #---Start Applications---# #
 bindsym $mod+F1 exec $term -e $FILE

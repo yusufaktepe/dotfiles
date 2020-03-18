@@ -50,13 +50,20 @@ case $1 in
 	keep)
 		$EDITOR ~/.cache/greenclip.staticHistory
 	;;
+	selpaste|sp)
+		xdotool type --clearmodifiers "$(xclip -o -selection)"
+	;;
+	seltoclip|sc)
+		xclip -o -selection | xclip -selection clipboard
+	;;
 	"")
-		if [ -t 2 ]; then
-			wfzf
-		else
-			wrofi
-		fi
+		{ [ -t 2 ] && wfzf ;} || wrofi
 	;;
 	*)
-		printf 'Usage:\n\t%s [ ] [cfg] [rld] [clear] [keep]\n' "$(basename "$0")"
+		cat <<-EOF
+		Usage:
+		‎  $(basename "$0") [] [OPTION]
+		‎        [cfg, clear, keep, rld, selpaste|sp, seltoclip|sc]
+		EOF
 esac
+
