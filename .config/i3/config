@@ -5,10 +5,10 @@
 #=====================================================================
 
 # Set mod keys (Mod1=<Alt>, Mod4=<Super>, Mod3=<Hyper_L>, Mod5=<AltGr>)
-set $mod	Mod4
-set $alt	Mod1
-set $caps	Mod3
-set $agr	Mod5
+set $mod  Mod4
+set $alt  Mod1
+set $caps Mod3
+set $agr  Mod5
 
 floating_modifier $mod
 
@@ -40,9 +40,9 @@ font pango:mono 9
 
 # kill focused window
 set $killrule [con_id="__focused__" instance="^(?!dropdown_).*$"]
-bindsym $mod+q		$killrule kill
-bindsym $mod+Shift+q	$killrule exec $N kill -9 `xdotool getwindowfocus getwindowpid`
-bindsym $mod+Ctrl+x	--release exec $N xkill
+bindsym $mod+q $killrule kill
+bindsym $mod+Shift+q $killrule exec $N kill -9 `xdotool getwindowfocus getwindowpid`
+bindsym --release $mod+Ctrl+x exec $N xkill
 
 # #---Start a terminal---# #
 bindsym $mod+Return exec $term
@@ -55,7 +55,7 @@ bindsym $mod+Shift+Return exec $N samedir
 
 # #---Rofi---# #
 bindsym $mod+d exec $N rofi -show combi
-bindsym $mod+c exec $N "rofi -show calc -modi calc -no-show-match -no-sort"
+bindsym $mod+c exec $N rofi -show calc -modi calc -no-show-match -no-sort
 bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
 # bindsym XF86Launch2 exec $N rofi -show combi
@@ -155,10 +155,10 @@ bindsym $mod+Right focus right
 #focus_follows_mouse no
 
 # move focused window
-bindsym $mod+Shift+h move left	30
-bindsym $mod+Shift+j move down	30
-bindsym $mod+Shift+k move up	30
-bindsym $mod+Shift+l move right	30
+bindsym $mod+Shift+h move left  30
+bindsym $mod+Shift+j move down  30
+bindsym $mod+Shift+k move up    30
+bindsym $mod+Shift+l move right 30
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -272,21 +272,21 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
-bindsym $mod+Home		workspace $ws1
-bindsym $mod+End		workspace $ws10
-bindsym $mod+Shift+Home		move container to workspace $ws1
-bindsym $mod+Shift+End		move container to workspace $ws10
-bindsym $mod+Prior		workspace prev
-bindsym $mod+Next		workspace next
-bindsym $mod+Shift+Tab		workspace prev
-bindsym $mod+Tab		workspace next
-bindsym $mod+Shift+Prior	move container to workspace prev
-bindsym $mod+Shift+Next		move container to workspace next
-bindsym $mod+$alt+Left		move container to workspace prev; workspace prev
-bindsym $mod+$alt+Right		move container to workspace next; workspace next
-bindsym $mod+Escape		workspace back_and_forth
-bindsym $alt+Tab		workspace back_and_forth
-bindsym $alt+Shift+Tab		move container to workspace back_and_forth; workspace back_and_forth
+bindsym $mod+Home        workspace $ws1
+bindsym $mod+End         workspace $ws10
+bindsym $mod+Shift+Home  move container to workspace $ws1
+bindsym $mod+Shift+End   move container to workspace $ws10
+bindsym $mod+Prior       workspace prev
+bindsym $mod+Next        workspace next
+bindsym $mod+Shift+Tab   workspace prev
+bindsym $mod+Tab         workspace next
+bindsym $mod+Shift+Prior move container to workspace prev
+bindsym $mod+Shift+Next  move container to workspace next
+bindsym $mod+$alt+Left   move container to workspace prev; workspace prev
+bindsym $mod+$alt+Right  move container to workspace next; workspace next
+bindsym $mod+Escape      workspace back_and_forth
+bindsym $alt+Tab         workspace back_and_forth
+bindsym $alt+Shift+Tab   move container to workspace back_and_forth; workspace back_and_forth
 
 # Selecting current workspace switches back and forth
 workspace_auto_back_and_forth yes
@@ -302,14 +302,14 @@ bindsym $mod+x [urgent=latest] focus
 for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
-#assign [window_role="browser"]				$ws1
-assign [class="Firefox|(?i)Vivaldi"]			$ws1
-assign [class="Pcmanfm|Doublecmd"]			$ws2
-# assign [class="(?i)thunderbird"]			$ws9
-assign [class="qBittorrent"]				$ws10
-for_window [class="Spotify"] move to workspace		$ws11
-assign [class="cantata"]				$ws12
-assign [class="(?i)VirtualBox" title="(?i)Win7"]	$ws13
+# assign [window_role="browser"]                 $ws1
+assign [class="Firefox|(?i)Vivaldi"]             $ws1
+assign [class="Pcmanfm|Doublecmd"]               $ws2
+# assign [class="(?i)thunderbird"]               $ws9
+assign [class="qBittorrent"]                     $ws10
+for_window [class="Spotify"] move to workspace   $ws11
+assign [class="cantata"]                         $ws12
+assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws13
 
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
@@ -388,39 +388,39 @@ exec $N "sleep 9; wmctrl -x -r 'Doublecmd' -b remove,demands_attention"
 #=====================================================================
 
 # Set Xresources colors:
-set_from_resource $term_background	background
-set_from_resource $term_foreground	foreground
-set_from_resource $darkblack		color0	#000000
-set_from_resource $black		color8	#000000
-set_from_resource $darkred		color1	#000000
-set_from_resource $red			color9	#000000
-set_from_resource $darkgreen		color2	#000000
-set_from_resource $green		color10	#000000
-set_from_resource $darkyellow		color3	#000000
-set_from_resource $yellow		color11	#000000
-set_from_resource $darkblue		color4	#000000
-set_from_resource $blue			color12	#000000
-set_from_resource $darkmagenta		color5	#000000
-set_from_resource $magenta		color13	#000000
-set_from_resource $darkcyan		color6	#000000
-set_from_resource $cyan			color14	#000000
-set_from_resource $darkwhite		color7	#000000
-set_from_resource $white		color15	#000000
-set $transparent 			#00000000
+set_from_resource $term_background background
+set_from_resource $term_foreground foreground
+set_from_resource $darkblack       color0     #000000
+set_from_resource $black           color8     #000000
+set_from_resource $darkred         color1     #000000
+set_from_resource $red             color9     #000000
+set_from_resource $darkgreen       color2     #000000
+set_from_resource $green           color10    #000000
+set_from_resource $darkyellow      color3     #000000
+set_from_resource $yellow          color11    #000000
+set_from_resource $darkblue        color4     #000000
+set_from_resource $blue            color12    #000000
+set_from_resource $darkmagenta     color5     #000000
+set_from_resource $magenta         color13    #000000
+set_from_resource $darkcyan        color6     #000000
+set_from_resource $cyan            color14    #000000
+set_from_resource $darkwhite       color7     #000000
+set_from_resource $white           color15    #000000
+set $transparent #00000000
 
 # Use custom colors for black
-set $black				#282828
+set $black #282828
 
 # Theme colors
-#				BORDER		BACKGROUND	TEXT		INDICATOR	CHILD_BORDER
-client.focused			$darkblue	$darkblue	$white		$darkblack	$darkblue
-client.unfocused		$black		$black		$darkwhite	$darkblack	$black
-client.focused_inactive		$black		$black		$white		$darkblack	$black
-client.urgent			$darkred	$darkred	$black		$darkred	$darkred
+#                       BORDER     BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
+client.focused          $darkblue  $darkblue   $white      $darkblack  $darkblue
+client.unfocused        $black     $black      $darkwhite  $darkblack  $black
+client.focused_inactive $black     $black      $white      $darkblack  $black
+client.urgent           $darkred   $darkred    $black      $darkred    $darkred
 
-client.placeholder		#000000		#0c0c0c		#ffffff		#000000
+client.placeholder      #000000    #0c0c0c     #ffffff     #000000
 
-client.background		$black
+client.background       $black
 
 #=====================================================================
 # Bar
@@ -444,18 +444,18 @@ client.background		$black
 # 	tray_padding 0
 #
 # 	colors {
-# 		background	$darkblack
-# 		statusline	$darkwhite
-# 		#separator	$cyan
-# 		separator	#454947
+# 		background $darkblack
+# 		statusline $darkwhite
+# 		#separator $cyan
+# 		separator  #454947
 #
-# #				BORDER		BACKGR.		TEXT
-# 	focused_workspace	$blue		$darkblue	$darkblack
-# 	active_workspace	$blue		$blue		$darkwhite
-# 	inactive_workspace 	$darkblack	$darkblack	$white
-# 	urgent_workspace	$darkred	$darkblack	$darkred
+# #                       BORDER      BACKGR.     TEXT
+# 	focused_workspace   $blue       $darkblue   $darkblack
+# 	active_workspace    $blue       $blue       $darkwhite
+# 	inactive_workspace  $darkblack  $darkblack  $white
+# 	urgent_workspace    $darkred    $darkblack  $darkred
 #
-# 	binding_mode		$blue		$darkblue	$darkblack
+# 	binding_mode        $blue       $darkblue   $darkblack
 # 	}
 # }
 #
@@ -487,12 +487,12 @@ bindsym $mod+b exec $N polybar-msg cmd toggle
 smart_borders on
 
 # Current WS gaps
-bindsym $mod+KP_Add		gaps inner current plus 4
-bindsym $mod+KP_Subtract	gaps inner current minus 4
-bindsym $mod+Shift+KP_Add	gaps outer current plus 4
-bindsym $mod+Shift+KP_Subtract	gaps outer current minus 4
-bindsym $mod+Shift+KP_Multiply	gaps inner current set 4; gaps outer current set -4
-bindsym $mod+KP_Multiply	gaps inner current set 0; gaps outer current set 0
+bindsym $mod+KP_Add            gaps inner current plus 4
+bindsym $mod+KP_Subtract       gaps inner current minus 4
+bindsym $mod+Shift+KP_Add      gaps outer current plus 4
+bindsym $mod+Shift+KP_Subtract gaps outer current minus 4
+bindsym $mod+Shift+KP_Multiply gaps inner current set 4; gaps outer current set -4
+bindsym $mod+KP_Multiply       gaps inner current set 0; gaps outer current set 0
 
 #=====================================================================
 # Binding Modes
@@ -509,31 +509,31 @@ set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 bindsym $mod+Shift+g mode "$mode_gaps"
 
 mode "$mode_gaps" {
-	bindsym o	mode "$mode_gaps_outer"
-	bindsym i	mode "$mode_gaps_inner"
-	bindsym Return	mode "default"
-	bindsym Escape	mode "default"
+	bindsym o      mode "$mode_gaps_outer"
+	bindsym i      mode "$mode_gaps_inner"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 mode "$mode_gaps_inner" {
-	bindsym plus	gaps inner current plus 5
-	bindsym minus	gaps inner current minus 5
-	bindsym 0	gaps inner current set 0
+	bindsym plus  gaps inner current plus 5
+	bindsym minus gaps inner current minus 5
+	bindsym 0     gaps inner current set 0
 
-	bindsym Shift+plus	gaps inner all plus 5
-	bindsym Shift+minus	gaps inner all minus 5
-	bindsym Shift+0		gaps inner all set 0
+	bindsym Shift+plus  gaps inner all plus 5
+	bindsym Shift+minus gaps inner all minus 5
+	bindsym Shift+0     gaps inner all set 0
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 mode "$mode_gaps_outer" {
-	bindsym plus	gaps outer current plus 5
-	bindsym minus	gaps outer current minus 5
-	bindsym 0	gaps outer current set 0
+	bindsym plus  gaps outer current plus 5
+	bindsym minus gaps outer current minus 5
+	bindsym 0     gaps outer current set 0
 
-	bindsym Shift+plus	gaps outer all plus 5
-	bindsym Shift+minus	gaps outer all minus 5
-	bindsym Shift+0		gaps outer all set 0
+	bindsym Shift+plus  gaps outer all plus 5
+	bindsym Shift+minus gaps outer all minus 5
+	bindsym Shift+0     gaps outer all set 0
 
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
