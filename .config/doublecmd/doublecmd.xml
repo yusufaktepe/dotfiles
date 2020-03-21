@@ -287,28 +287,28 @@
           <Command>cm_CountDirContent</Command>
         </Command>
         <Command>
+          <ID>{FF80C12E-9A79-4361-8660-9C086D0EEFB7}</ID>
+          <Icon>cm_runterm</Icon>
+          <Command>cm_RunTerm</Command>
+        </Command>
+        <Command>
           <ID>{E698816C-B065-49D3-B9FF-F5D42CDFFAD1}</ID>
           <Icon>kompare</Icon>
           <Command>cm_CompareContents</Command>
         </Command>
         <Separator/>
-        <Command>
-          <ID>{FF80C12E-9A79-4361-8660-9C086D0EEFB7}</ID>
-          <Icon>cm_runterm</Icon>
-          <Command>cm_RunTerm</Command>
-        </Command>
         <Program>
           <ID>{1AA04A74-72C7-447A-98C3-8B2945594F4D}</ID>
           <Icon>terminus</Icon>
           <Hint>Run Floating Terminal</Hint>
-          <Command>st</Command>
+          <Command>terminal</Command>
           <Params>-n dc-term-bttns</Params>
         </Program>
         <Program>
           <ID>{1A54CD30-032C-4832-865E-C7798343D878}</ID>
           <Icon>diffuse</Icon>
           <Hint>VimDiff</Hint>
-          <Command>st</Command>
+          <Command>terminal</Command>
           <Params>-e nvim -d %pb</Params>
         </Program>
         <Separator/>
@@ -401,11 +401,11 @@
   <Behaviours>
     <GoToRoot>False</GoToRoot>
     <ActiveRight>False</ActiveRight>
-    <RunInTerminalStayOpenCmd>st</RunInTerminalStayOpenCmd>
+    <RunInTerminalStayOpenCmd>terminal</RunInTerminalStayOpenCmd>
     <RunInTerminalStayOpenParams>-e sh -c '{command}; echo -n Press ENTER to exit... ; read a'</RunInTerminalStayOpenParams>
-    <RunInTerminalCloseCmd>st</RunInTerminalCloseCmd>
+    <RunInTerminalCloseCmd>terminal</RunInTerminalCloseCmd>
     <RunInTerminalCloseParams>-e sh -c {command}</RunInTerminalCloseParams>
-    <JustRunTerminal>st</JustRunTerminal>
+    <JustRunTerminal>terminal</JustRunTerminal>
     <JustRunTermParams/>
     <OnlyOneAppInstance>True</OnlyOneAppInstance>
     <LynxLike>True</LynxLike>
@@ -454,7 +454,7 @@
       <KeepTerminalOpen>False</KeepTerminalOpen>
     </Viewer>
     <Editor Enabled="True">
-      <Path>st</Path>
+      <Path>terminal</Path>
       <Parameters>-n dc-edit -e nvim</Parameters>
       <RunInTerminal>False</RunInTerminal>
       <KeepTerminalOpen>False</KeepTerminalOpen>

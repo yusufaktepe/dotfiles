@@ -16,7 +16,7 @@
 
 case $BLOCK_BUTTON in
 	1) ./rofi_notify mem ;;
-	3) setsid $TERMINAL_N _blockterm -e sh -c "sudo -A ps_mem | less -RS +G" ;;
+	3) setsid $TERMINS _blockterm -e sh -c "sudo -A ps_mem | less -RS +G" ;;
 esac
 
 TYPE="${BLOCK_INSTANCE:-mem}"

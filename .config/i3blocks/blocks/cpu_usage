@@ -30,7 +30,7 @@ sub help {
 if ($BLOCK_BUTTON == 1) {
     system("./rofi_notify cpu");
 } elsif ($BLOCK_BUTTON == 3) {
-    system("$ENV{TERMINAL_N} _blockterm -e htop");
+    system("$ENV{TERMINS} _blockterm -e htop");
 }
 
 GetOptions("help|h" => \&help,
