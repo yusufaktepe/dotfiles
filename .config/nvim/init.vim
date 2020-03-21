@@ -97,6 +97,7 @@ syntax on
 
 set nocompatible
 set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,default,iso8859-9,latin1
 set number relativenumber
 " set signcolumn=yes		" always show sign column
 set wildmode=list:longest,list:full " command mode completion behavior
@@ -189,7 +190,7 @@ noremap <silent> <M-0> :call Tabnm(10)<CR>
 nnoremap <silent> <F4> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 " Reload file with ISO 8859-9 encoding
-nnoremap <F12> :e ++enc=iso88599<CR>
+nnoremap <F12> :e ++enc=iso8859-9<CR>
 
 " Quit active
 nnoremap <silent> Q :lclose \| pclose \| confirm q<CR>
