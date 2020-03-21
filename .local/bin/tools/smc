@@ -1,14 +1,9 @@
 #!/bin/sh
-# Simple media control script.
-# Check mpd first, if mpd is not running; try playerctl.
-#
-# 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
-# https://github.com/yusufaktepe/dotfiles
 
 update_bar() {
-	if pgrep -x i3blocks > /dev/null; then
+	if pidof i3blocks >/dev/null; then
 		pkill -SIGRTMIN+6 i3blocks
-	elif pgrep -x polybar > /dev/null; then
+	elif pidof polybar >/dev/null; then
 		pkill -USR1 polyplayer
 	else
 		return
@@ -17,21 +12,21 @@ update_bar() {
 
 case "$1" in
 	prev|p)
-		if pgrep -x mpd > /dev/null; then
+		if pidof mpd >/dev/null; then
 			mpc prev && update_bar
 		else
 			playerctl previous && update_bar
 		fi
 	;;
 	next|n)
-		if pgrep -x mpd > /dev/null; then
+		if pidof mpd >/dev/null; then
 			mpc next && update_bar
 		else
 			playerctl next && update_bar
 		fi
 	;;
 	toggle|t)
-		if pgrep -x mpd > /dev/null; then
+		if pidof mpd >/dev/null; then
 			mpc toggle && update_bar
 		else
 			playerctl play-pause && update_bar
@@ -45,18 +40,18 @@ case "$1" in
 		done
 	;;
 	volup)
-		if pgrep -x mpd > /dev/null; then
+		if pidof mpd >/dev/null; then
 			mpc volume +5 >/dev/null
-		elif pgrep -x spotify >/dev/null || pgrep -x spotifyd >/dev/null; then
+		elif pidof spotify >/dev/null || pidof spotifyd >/dev/null; then
 			spotify-vol +5 >/dev/null
 		else
 			playerctl volume 0.05+
 		fi
 	;;
 	voldown)
-		if pgrep -x mpd > /dev/null; then
+		if pidof mpd >/dev/null; then
 			mpc volume -5 >/dev/null
-		elif pgrep -x spotify >/dev/null || pgrep -x spotifyd >/dev/null; then
+		elif pidof spotify >/dev/null || pidof spotifyd >/dev/null; then
 			spotify-vol -5 >/dev/null
 		else
 			playerctl volume 0.05-

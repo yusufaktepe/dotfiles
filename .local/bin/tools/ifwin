@@ -7,7 +7,7 @@ AW_CLASS=$(echo "$AW_CLASS" | tr '[:upper:]' '[:lower:]')
 _crow() {
 	showcrow="alt+ctrl+shift+F1"
 
-	if pgrep -x crow >/dev/null; then
+	if pidof crow >/dev/null; then
 		if wmctrl -l | grep -q "Crow Translate"; then
 			wmctrl -x -a "crow.Crow Translate" && i3-msg kill >/dev/null
 		else
@@ -56,7 +56,7 @@ esac
 [ -n "$opt_flags" ] && opt_exec="$opt_exec $opt_flags"
 
 if [ -n "$opt_class" ] && [ -n "$opt_exec" ]; then
-	if pgrep -x "$proc" >/dev/null; then
+	if pidof "$proc" >/dev/null; then
 		if [ "$AW_CLASS" = "$opt_class" ]; then
 			if [ "$opt_toggle" = scratchpad ]; then
 				i3-msg "[class=\"(?i)$opt_class\"] move scratchpad" >/dev/null
