@@ -39,7 +39,7 @@ setopt HIST_VERIFY            # Don't execute the line directly instead perform 
 unsetopt FLOW_CONTROL         # Disable output flow control via start/stop characters (^S/^Q).
 setopt INTERACTIVE_COMMENTS   # Allow comments even in interactive shells.
 setopt RM_STAR_WAIT           # Before executing `rm *` first wait 10 seconds and ignore anything typed.
-setopt PRINT_EXIT_VALUE       # Print the exit value of programs with non-zero exit status.
+# setopt PRINT_EXIT_VALUE     # Print the exit value of programs with non-zero exit status.
 
 # Prompting
 setopt PROMPT_SUBST           # Enable substitutions in prompt.
