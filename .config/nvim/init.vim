@@ -197,9 +197,6 @@ nnoremap <silent> Q :lclose \| pclose \| confirm q<CR>
 " Quit all, bring up a prompt when buffers have been changed
 nnoremap ZQ :confirm qall<CR>
 
-" Save file
-noremap <C-s> :w<CR>
-
 " Clear search highlight and command-line on Esc
 nnoremap <silent> <esc> :noh \| echo ""<CR>
 
@@ -208,7 +205,7 @@ nnoremap <expr> j v:count ? 'j' : 'gj'
 nnoremap <expr> k v:count ? 'k' : 'gk'
 
 " Toggle line wrapping
-nnoremap <silent> <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
+nnoremap <silent> <leader>W :setlocal wrap!<CR>:setlocal wrap?<CR>
 
 " Toggle colorcolumn
 nnoremap <silent> <leader>CC :execute "set cc=" . (&cc == "" ? "80" : "")<CR>
