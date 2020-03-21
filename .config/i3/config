@@ -16,7 +16,7 @@ floating_modifier $mod
 set $N --no-startup-id
 set $C exec $N pkill -0
 set $term $N $TERMINAL
-set $termins $N $TERMINAL_N
+set $termins $N $TERMINS
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>

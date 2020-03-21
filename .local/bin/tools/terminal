@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case $1 in
+	-n)
+		shift
+		case $TERMINAL in
+			alacritty) $TERMINAL --class "$@" ;;
+			kitty)     $TERMINAL --name "$@" ;;
+			st)        $TERMINAL -n "$@" ;;
+			urxvt*)    $TERMINAL -name "$@" ;;
+		esac
+	;;
+	*)
+		$TERMINAL "$@"
+	;;
+esac
+
