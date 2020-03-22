@@ -1,7 +1,9 @@
 ##== Keys ==##
 
 bindkey -v
-KEYTIMEOUT=1
+
+# The time the shell waits (ms) for another key to be pressed
+KEYTIMEOUT=10
 
 # Create a zkbd compatible hash
 # to add other keys to this hash, see: man 5 terminfo
@@ -69,11 +71,15 @@ bindkey '^[[1;5D' backward-word   # st:[Ctrl-Left] - move backward one word
 bindkey '^P' history-substring-search-up   # [Ctrl-p]
 bindkey '^N' history-substring-search-down # [Ctrl-n]
 
-bindkey -M vicmd 'k' history-substring-search-up   # [VI|k]
-bindkey -M vicmd 'j' history-substring-search-down # [VI|j]
+bindkey -M vicmd 'k' history-substring-search-up   # [VIN|k]
+bindkey -M vicmd 'j' history-substring-search-down # [VIN|j]
 
-bindkey -M vicmd 'H' vi-beginning-of-line # [VI|Shift-h] - move cursor to beginning of line
-bindkey -M vicmd 'L' vi-end-of-line       # [VI|Shift-l] - move cursor to end of line
+bindkey -M vicmd 'H' vi-beginning-of-line  # [VIN|H] - move cursor to beginning of line
+bindkey -M vicmd 'L' vi-end-of-line        # [VIN|L] - move cursor to end of line
+bindkey -M visual 'H' vi-beginning-of-line # [VIS|H]
+bindkey -M visual 'L' vi-end-of-line       # [VIS|L]
+bindkey -M viopp 'H' vi-beginning-of-line  # [VIO|H]
+bindkey -M viopp 'L' vi-end-of-line        # [VIO|L]
 
 #== Completion Mode (requires `complist` module)
 bindkey -M menuselect '^?' undo                 # [Backspace] - undo inserted match
@@ -83,19 +89,35 @@ bindkey -M menuselect '^K' up-line-or-history   # [Ctrl-k] - navigate up complet
 bindkey -M menuselect '^H' backward-char        # [Ctrl-h] - navigate left completion
 bindkey -M menuselect '^L' forward-char         # [Ctrl-l] - navigate right completion
 
-#== Widget bindings
-bindkey '^Xe' edit-command-line         # [Ctrl-x+e] - edit command line with $EDITOR
+#== Function/Widget bindings
+bindkey '^E' edit-command-line          # [Ctrl-e] - edit command line with $EDITOR
 bindkey "^f" prefix-sudo                # [Ctrl-f] to add sudo prefix
 bindkey "^[ " globalias                 # [Alt-Space] to expand alias
 bindkey '^[[1;3D' cdPrev                # [Alt-Left] - go back in directory history
 bindkey '^[[1;3A' cdParent              # [Alt-Up] - go to the parent directory
 bindkey '^Y' copybuffer                 # [Ctrl-y] - copy current BUFFER to clipboard
-bindkey '^D' exit_zsh                   # [Ctrl-d] - exit; even if the command line is full
+# bindkey '^D' exit_zsh                 # [Ctrl-d] - exit; even if the command line is full
 bindkey '^R' fzf-history-widget         # [Ctrl-r] - select command from history into the command line
-# bindkey -M vicmd v edit-command-line  # [VI|v] - edit command line with $EDITOR
-bindkey -M vicmd '^f' prefix-sudo       # [VI|Ctrl-f] to add sudo prefix
-bindkey -M vicmd "^[ " globalias        # [VI|Alt-Space] to expand alias
-bindkey -M vicmd '^D' exit_zsh          # [VI|Ctrl-d] - exit; even if the command line is full
+bindkey -M vicmd '^E' edit-command-line # [VIN|Ctrl-e] - edit command line with $EDITOR
+bindkey -M vicmd '^f' prefix-sudo       # [VIN|Ctrl-f] to add sudo prefix
+bindkey -M vicmd "^[ " globalias        # [VIN|Alt-Space] to expand alias
+# bindkey -M vicmd '^D' exit_zsh        # [VIN|Ctrl-d] - exit; even if the command line is full
+
+# Operate on surroundings
+bindkey -M vicmd 'cs' change-surround   # [VIN|cs?] - change surroundings
+bindkey -M vicmd 'ds' delete-surround   # [VIN|ds?] - delete surroundings
+bindkey -M vicmd 'ys' add-surround      # [VIN|ys?] - add surroundings
+bindkey -M visual 'S' add-surround      # [VIS|S] - add surroundings
+
+# Select characters between matching pairs: [ca?] & [ci?]
+foreach c ({a,i}${(s..)^:-'()[]{}<>bB'}) {
+	bindkey -M visual $c select-bracketed
+	bindkey -M viopp $c select-bracketed
+}
+foreach c ({a,i}{\',\",\`}) {
+	bindkey -M visual $c select-quoted
+	bindkey -M viopp $c select-quoted
+}
 
 #== Alias bindings
 bindkey -s '^[h' 'vH\n'

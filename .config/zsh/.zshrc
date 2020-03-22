@@ -4,7 +4,6 @@ foreach conf (
 	completion.zsh
 	aliases.zsh
 	functions.zsh
-	widgets.zsh
 	plugins.zsh
 	keys.zsh
 	termtitle.zsh
