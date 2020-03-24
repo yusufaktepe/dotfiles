@@ -296,6 +296,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#tabline#show_close_button = 0
 let g:airline_powerline_fonts=1
 let g:airline_theme='gruvbox'
 
@@ -345,6 +346,7 @@ let g:LanguageClient_serverCommands = {
 	\ 'javascript.jsx': ['javascript-typescript-stdio'],
 	\ 'javascript':     ['javascript-typescript-stdio'],
 	\ 'typescript':     ['javascript-typescript-stdio'],
+	\  'vim':           ['vim-language-server', '--stdio'],
 	\ }
 
 " Let ALE handle linting
