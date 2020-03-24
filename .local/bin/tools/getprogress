@@ -1,0 +1,28 @@
+#!/bin/bash
+
+for arg in "$@"; do
+	case $arg in
+		-e) char_empty=$2 ;;
+		-f) char_filled=$2 ;;
+		-p) percent=$2 ;;
+		-w) width=$2 ;;
+	esac
+	shift
+done
+
+# Alternative chars: "■" "□"
+char_filled=${char_filled:- }
+char_empty=${char_empty:- }
+width=${width:-10}
+
+num_filled="width * percent / 100"
+num_filled=$(( num_filled > width ? width : num_filled ))
+num_empty=$(( width - num_filled ))
+
+prog_filled=$(printf "%${num_filled}s")
+prog_filled=${prog_filled// /$char_filled}
+prog_empty=$(printf "%${num_empty}s")
+prog_empty=${prog_empty// /$char_empty}
+
+printf '%s\n' "$prog_filled$prog_empty"
+
