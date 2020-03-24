@@ -120,7 +120,14 @@ bindsym XF86TouchpadOn exec $N toggle touchpad
 bindsym XF86Launch3 exec $N dmenumount
 bindsym Shift+XF86Launch3 exec $N dmenuumount
 
-## Media Control
+## Audio/Media Control
+bindsym XF86AudioMute        exec $N vol toggle
+bindsym XF86AudioLowerVolume exec $N vol down
+bindsym XF86AudioRaiseVolume exec $N vol up
+bindsym $mod+XF86AudioMute   exec $N toggle audio
+bindsym $mod+XF86AudioLowerVolume exec $N ifwin -e pavucontrol --toggle
+bindsym $mod+XF86AudioRaiseVolume exec $termins _blockterm -e pulsemixer
+
 bindsym XF86AudioPlay exec $N smc t
 bindsym XF86AudioPrev exec $N smc p
 bindsym XF86AudioNext exec $N smc n
@@ -646,25 +653,6 @@ mode "$keystroke" {
 	bindsym Escape mode "default"
 	bindsym $caps+a mode "default"
 }
-
-#=====================================================================
-# Volume control
-#=====================================================================
-
-set $volstep 10
-set $statuscmd i3blocks
-set $statussig SIGRTMIN+10
-
-bindsym XF86AudioMute        exec $N volume -lmn -y -t $statuscmd -u $statussig
-bindsym XF86AudioLowerVolume exec $N volume -lnp -y -d $volstep -x 100 -t $statuscmd -u $statussig
-bindsym XF86AudioRaiseVolume exec $N volume -lnp -y -i $volstep -x 100 -t $statuscmd -u $statussig
-
-# Switch Output
-bindsym $mod+XF86AudioMute   exec $N "toggle audio; pkill -$statussig i3blocks"
-
-## Startup/Run
-bindsym $mod+XF86AudioLowerVolume exec $N ifwin -e pavucontrol --toggle
-bindsym $mod+XF86AudioRaiseVolume exec $termins _blockterm -e pulsemixer
 
 #=====================================================================
 
