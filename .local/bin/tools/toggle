@@ -13,9 +13,11 @@ case $1 in
 
 		if [ "$CURRENT_PROFILE" = "analog-output-speaker" ]; then
 			pactl set-sink-port "$SINK" "analog-output-headphones"
+			pidof i3blocks >/dev/null && pkill -SIGRTMIN+10 i3blocks
 			ns -i audio-headphones "PulseAudio" "<b>Headphone</b> Activated."
 		else
 			pactl set-sink-port "$SINK" "analog-output-speaker"
+			pidof i3blocks >/dev/null && pkill -SIGRTMIN+10 i3blocks
 			ns -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
 		fi
 	;;
