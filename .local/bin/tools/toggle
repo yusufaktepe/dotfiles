@@ -32,20 +32,10 @@ case $1 in
 	;;
 	net)
 		case $2 in
-			w|wifi)
-				if [ "$(nmcli radio wifi)" = enabled ]; then
-					nmcli radio wifi off
-				else
-					nmcli radio wifi on
-				fi
-			;;
-			$NULL|*)
-				if [ "$(nmcli networking)" = enabled ]; then
-					nmcli networking off
-				else
-					nmcli networking on
-				fi
-			;;
+			w|wifi) { [ "$(nmcli radio wifi)" = enabled ] &&
+					nmcli radio wifi off ;} || nmcli radio wifi on ;;
+			$NULL|*) { [ "$(nmcli networking)" = enabled ] &&
+					nmcli networking off ;} || nmcli networking on ;;
 		esac
 	;;
 	redshift)
@@ -59,11 +49,7 @@ case $1 in
 		fi
 	;;
 	spotifyd)
-		if pgrep -x spotifyd >/dev/null; then
-			pkill spotifyd
-		else
-			spotifyd
-		fi
+		{ pgrep -x spotifyd >/dev/null && pkill spotifyd ;} || spotifyd
 	;;
 	stimeout)
 		default=$(awk -F'"' '/OffTime/ {print $4*60}' /etc/X11/xorg.conf.d/10-monitor.conf)
