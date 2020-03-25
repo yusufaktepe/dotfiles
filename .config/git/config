@@ -11,9 +11,8 @@
 	c     = commit
 	ca    = commit --amend
 	cl    = clone
+	cld   = cld # for git to recognize git-cld as an alias
 	co    = checkout
-	cs    = commit -S
-	csa   = commit -S --amend
 	cc    = shortlog -sn --no-merges
 	cca   = shortlog -sn
 	ctr   = shortlog --summary --numbered --email
@@ -31,13 +30,13 @@
 	lgdel = log --diff-filter=D --summary
 	p     = push
 	pf    = push -f
+	pl    = pull
 	re    = rebase
 	rem   = remote -v
 	s     = status
 	sm    = submodule
 	tl    = !git tag | sort -V
 	up    = pull --rebase=preserve
-	cld   = "!f() { git clone $1 $(printf '%s_%s' $(echo $1 | cut -d':' -f2 | cut -d'/' -f1) $(echo $1 | cut -d':' -f2 | cut -d'/' -f2 | cut -d'.' -f1)) ;}; f"
 
 [commit]
 	gpgsign = true
