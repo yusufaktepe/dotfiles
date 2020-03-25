@@ -84,25 +84,13 @@ exit_zsh() { exit }
 fzf-history-widget() {
 	(( $+commands[fzf] )) || return 1
 
-	local selected num
-
 	setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2>/dev/null
 
-	selected=( $(fc -rl 1 |
-		fzf \
-		--nth='2..,..' \
-		--tiebreak='index' \
-		--query="${LBUFFER}" \
-		--exact \
-		--no-multi \
-		--prompt='$ ')
-	)
+	local selected
+	selected=$(fc -rl 1 | fzf -e +m -n2..,.. --tiebreak=index -q "$LBUFFER" --prompt='$ ')
 	local ret=$?
 
-	if [[ -n "$selected" ]]; then
-		num=$selected[1]
-		[[ -n "$num" ]] && zle vi-fetch-history -n $num
-	fi
+	[[ -n "$selected" ]] && zle vi-fetch-history -n $selected
 
 	zle reset-prompt
 	return $ret
