@@ -22,14 +22,14 @@ notify() {
 		-h int:value:0 \
 		-h string:synchronous:volume \
 		-r 1000 \
-		"Volume: $vol" "<b>$(getprogress -p "$vol")</b>"
+		"Volume: $vol" "<b>$(getprogress -w 20 -p "$vol")</b>"
 }
 
 case $1 in
-	u*|i*) pamixer -i "${2:-10}"; notify ;;
-	d*) pamixer -d "${2:-10}"; notify ;;
+	u*|i*) pamixer -i "${2:-5}"; notify ;;
+	d*) pamixer -d "${2:-5}"; notify ;;
 	t*) pamixer -t; notify ;;
-	s*) pamixer --set-volume "$2"; notify ;;
+	s*) pamixer --allow-boost --set-volume "$2"; notify ;;
 	g*|"") pamixer --get-volume-human ;;
 esac
 
