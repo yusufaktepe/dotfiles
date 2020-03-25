@@ -28,14 +28,14 @@ foreach widget (
 	'delete-surround surround'
 
 	#= Custom
-	cdPrev
-	cdParent
-	copybuffer
-	# exit_zsh
-	globalias
-	fzf-history-widget
-	prefix-sudo
-	toggle-fg
+	zcw_cdPrev
+	zcw_cdParent
+	zcw_copybuffer
+	# zcw_exit-zsh
+	zcw_globalias
+	zcw_fzf-history
+	zcw_prefix-sudo
+	zcw_toggle-fg
 ) {
 	eval zle -N $widget
 }
@@ -48,41 +48,18 @@ zle-line-init zle-keymap-select() {
 	esac
 }
 
-# Prefix current command line with `sudo`
-prefix-sudo() {
-	[[ -z $BUFFER ]] && zle up-history
-	if [[ $BUFFER == sudo\ * ]]; then
-		LBUFFER="${LBUFFER#sudo }"
-	elif [[ $BUFFER == $EDITOR\ * ]]; then
-		LBUFFER="${LBUFFER#$EDITOR }"
-		LBUFFER="sudoedit $LBUFFER"
-	elif [[ $BUFFER == sudoedit\ * ]]; then
-		LBUFFER="${LBUFFER#sudoedit }"
-		LBUFFER="$EDITOR $LBUFFER"
-	else
-		LBUFFER="sudo $LBUFFER"
-	fi
-}
-
-# Expand aliases
-globalias() {
-	zle _expand_alias
-	zle expand-word
-	zle self-insert
-}
-
 # FileManager-like key bindings
-cdPrev() { popd; zle reset-prompt; echo; ls; zle reset-prompt ;}
-cdParent() { pushd ..; zle reset-prompt; echo; ls; zle reset-prompt ;}
+zcw_cdPrev() { popd; zle reset-prompt; echo; ls; zle reset-prompt ;}
+zcw_cdParent() { pushd ..; zle reset-prompt; echo; ls; zle reset-prompt ;}
 
 # Copy current BUFFER to clipboard
-copybuffer() { printf '%s' "$BUFFER" | xclip -selection clipboard ;}
+zcw_copybuffer() { printf '%s' "$BUFFER" | xclip -selection clipboard ;}
 
 # Exit; even if the command line is full
-exit_zsh() { exit }
+zcw_exit-zsh() { exit }
 
 # Select command from history into the command line
-fzf-history-widget() {
+zcw_fzf-history() {
 	(( $+commands[fzf] )) || return 1
 
 	setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2>/dev/null
@@ -97,8 +74,31 @@ fzf-history-widget() {
 	return $ret
 }
 
+# Expand aliases
+zcw_globalias() {
+	zle _expand_alias
+	zle expand-word
+	zle self-insert
+}
+
+# Prefix current command line with `sudo`
+zcw_prefix-sudo() {
+	[[ -z $BUFFER ]] && zle up-history
+	if [[ $BUFFER == sudo\ * ]]; then
+		LBUFFER="${LBUFFER#sudo }"
+	elif [[ $BUFFER == $EDITOR\ * ]]; then
+		LBUFFER="${LBUFFER#$EDITOR }"
+		LBUFFER="sudoedit $LBUFFER"
+	elif [[ $BUFFER == sudoedit\ * ]]; then
+		LBUFFER="${LBUFFER#sudoedit }"
+		LBUFFER="$EDITOR $LBUFFER"
+	else
+		LBUFFER="sudo $LBUFFER"
+	fi
+}
+
 # Toggle background jobs
-toggle-fg() {
+zcw_toggle-fg() {
 	if [[ $#BUFFER -eq 0 ]]; then
 		BUFFER="fg"
 		zle accept-line -w
@@ -116,7 +116,7 @@ mkcd() { command mkdir -p "$@" && cd "$_" ;}
 
 # Prevent nested ranger instances
 ranger() {
-	[[ -z "$RANGER_LEVEL" ]] && command ranger "$@" || \
+	[[ -z "$RANGER_LEVEL" ]] && command ranger "$@" ||
 		echo "Shell is already running inside ranger!"
 }
 

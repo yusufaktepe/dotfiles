@@ -91,18 +91,18 @@ bindkey -M menuselect '^L' forward-char         # [Ctrl-l] - navigate right comp
 
 #== Function/Widget bindings
 bindkey '^E' edit-command-line          # [Ctrl-e] - edit command line with $EDITOR
-bindkey "^f" prefix-sudo                # [Ctrl-f] to add sudo prefix
-bindkey "^[ " globalias                 # [Alt-Space] to expand alias
-bindkey '^[[1;3D' cdPrev                # [Alt-Left] - go back in directory history
-bindkey '^[[1;3A' cdParent              # [Alt-Up] - go to the parent directory
-bindkey '^Y' copybuffer                 # [Ctrl-y] - copy current BUFFER to clipboard
-# bindkey '^D' exit_zsh                 # [Ctrl-d] - exit; even if the command line is full
-bindkey '^Z' toggle-fg                  # [Ctrl-z] - toggle background jobs
-bindkey '^R' fzf-history-widget         # [Ctrl-r] - select command from history into the command line
+bindkey "^[s" zcw_prefix-sudo           # [Alt-s] to add sudo prefix
+bindkey "^[ " zcw_globalias             # [Alt-Space] to expand alias
+bindkey '^[[1;3D' zcw_cdPrev            # [Alt-Left] - go back in directory history
+bindkey '^[[1;3A' zcw_cdParent          # [Alt-Up] - go to the parent directory
+bindkey '^Y' zcw_copybuffer             # [Ctrl-y] - copy current BUFFER to clipboard
+# bindkey '^D' zcw_exit-zsh             # [Ctrl-d] - exit; even if the command line is full
+bindkey '^Z' zcw_toggle-fg              # [Ctrl-z] - toggle background jobs
+bindkey '^R' zcw_fzf-history            # [Ctrl-r] - select command from history into the command line
 bindkey -M vicmd '^E' edit-command-line # [VIN|Ctrl-e] - edit command line with $EDITOR
-bindkey -M vicmd '^f' prefix-sudo       # [VIN|Ctrl-f] to add sudo prefix
-bindkey -M vicmd "^[ " globalias        # [VIN|Alt-Space] to expand alias
-# bindkey -M vicmd '^D' exit_zsh        # [VIN|Ctrl-d] - exit; even if the command line is full
+bindkey -M vicmd '^[s' zcw_prefix-sudo  # [VIN|Alt-s] to add sudo prefix
+bindkey -M vicmd "^[ " zcw_globalias    # [VIN|Alt-Space] to expand alias
+# bindkey -M vicmd '^D' zcw_exit-zsh    # [VIN|Ctrl-d] - exit; even if the command line is full
 
 # Operate on surroundings
 bindkey -M vicmd 'cs' change-surround   # [VIN|cs?] - change surroundings
@@ -122,5 +122,6 @@ foreach c ({a,i}{\',\",\`}) {
 
 #== Alias bindings
 bindkey -s '^[h' 'vH\n'
+bindkey -s '^f' 'f\n'
 bindkey -s '^o' 'rcd\n'
 
