@@ -35,6 +35,7 @@ foreach widget (
 	globalias
 	fzf-history-widget
 	prefix-sudo
+	toggle-fg
 ) {
 	eval zle -N $widget
 }
@@ -94,6 +95,17 @@ fzf-history-widget() {
 
 	zle reset-prompt
 	return $ret
+}
+
+# Toggle background jobs
+toggle-fg() {
+	if [[ $#BUFFER -eq 0 ]]; then
+		BUFFER="fg"
+		zle accept-line -w
+	else
+		zle push-input -w
+		zle clear-screen -w
+	fi
 }
 
 # List and load onto directory stack
