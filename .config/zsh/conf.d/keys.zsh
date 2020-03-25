@@ -97,6 +97,7 @@ bindkey '^[[1;3D' cdPrev                # [Alt-Left] - go back in directory hist
 bindkey '^[[1;3A' cdParent              # [Alt-Up] - go to the parent directory
 bindkey '^Y' copybuffer                 # [Ctrl-y] - copy current BUFFER to clipboard
 # bindkey '^D' exit_zsh                 # [Ctrl-d] - exit; even if the command line is full
+bindkey '^Z' toggle-fg                  # [Ctrl-z] - toggle background jobs
 bindkey '^R' fzf-history-widget         # [Ctrl-r] - select command from history into the command line
 bindkey -M vicmd '^E' edit-command-line # [VIN|Ctrl-e] - edit command line with $EDITOR
 bindkey -M vicmd '^f' prefix-sudo       # [VIN|Ctrl-f] to add sudo prefix
