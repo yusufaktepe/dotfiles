@@ -4,7 +4,7 @@ ss_dir="$HOME/pix/screenshots"
 datef=$(date +%Y-%m-%d_%H-%M-%S)
 
 notify() {
-	dunstify -a system -i "$shot" -A "$shot",Open "Screenshot captured." | \
+	dunstify -a system -i "$shot" -A "$shot",Open "Screenshot captured." |
 		xargs -r -I '{}' xdg-open {} >/dev/null 2>&1 &
 }
 

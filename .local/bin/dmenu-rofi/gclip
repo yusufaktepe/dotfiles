@@ -8,13 +8,13 @@ fi
 
 wrofi() {
 	# Display content of primary clipboard as rofi message:
-	prim=$(printf 'Primary: %s' "$(xclip -o | sed '/^$/d;s/^[ \t]*//')" | \
+	prim=$(printf 'Primary: %s' "$(xclip -o | sed '/^$/d;s/^[ \t]*//')" |
 		sed 's/\&/\&amp\;/g;s/</\&lt\;/g;s/>/\&gt\;/g' | head -n1 )
 	[ ${#prim} -ge 87 ] && prim=$(printf '%s' "$prim" | cut -c -87)..
 
 	# Because we can't use `-mesg` with `-modi`:
 	greenclip print | sed '/^$/d' | rofi -dmenu -i -l 10 -width 60 \
-		-p Clipboard -mesg "<span color='#a89984'>$prim</span>" | \
+		-p Clipboard -mesg "<span color='#a89984'>$prim</span>" |
 		xargs -r -d'\n' -I '{}' greenclip print '{}'
 
 	# rofi -modi "clipboard:greenclip print" -show clipboard \
@@ -22,7 +22,7 @@ wrofi() {
 }
 
 wdmenu() {
-	greenclip print | sed '/^$/d'| dmenu -i -l 10 -p Clipboard | \
+	greenclip print | sed '/^$/d'| dmenu -i -l 10 -p Clipboard |
 		xargs -r -d'\n' -I '{}' greenclip print '{}'
 }
 

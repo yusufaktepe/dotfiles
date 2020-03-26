@@ -8,7 +8,7 @@ datef=$(date +%Y-%m-%d_%H-%M-%S)
 [ -n "$2" ] && cmd="maim -d $2" || cmd="maim"
 
 notify() {
-	dunstify -a system -i "$shot" -A "$shot",Open "Screenshot captured." | \
+	dunstify -a system -i "$shot" -A "$shot",Open "Screenshot captured." |
 		xargs -r -I '{}' xdg-open {} >/dev/null 2>&1 &
 }
 
