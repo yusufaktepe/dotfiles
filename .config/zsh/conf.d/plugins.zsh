@@ -15,5 +15,6 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 source /usr/share/doc/pkgfile/command-not-found.zsh 2>/dev/null
 
 # zsh-system-clipboard
+ZSH_SYSTEM_CLIPBOARD_SELECTION='PRIMARY'
 source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.zsh 2>/dev/null
 
