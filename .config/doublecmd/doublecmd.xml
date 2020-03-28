@@ -301,14 +301,14 @@
           <ID>{1AA04A74-72C7-447A-98C3-8B2945594F4D}</ID>
           <Icon>terminus</Icon>
           <Hint>Run Floating Terminal</Hint>
-          <Command>terminal</Command>
+          <Command>term</Command>
           <Params>-n dc-term-bttns</Params>
         </Program>
         <Program>
           <ID>{1A54CD30-032C-4832-865E-C7798343D878}</ID>
           <Icon>diffuse</Icon>
           <Hint>VimDiff</Hint>
-          <Command>terminal</Command>
+          <Command>term</Command>
           <Params>-e nvim -d %pb</Params>
         </Program>
         <Separator/>
@@ -344,7 +344,7 @@
               <Icon>cm_search</Icon>
               <Hint>Rofi-Finder</Hint>
               <Command>sh</Command>
-              <Params>-c "find %D | rofi -dmenu -sync -i -l 20 -width 100 -p 'Open' | ( xargs -r -I '{}' xdg-open {} )"</Params>
+              <Params>-c "find %D -path '*/.git' -prune -o -print | rofi -dmenu -sync -i -l 20 -width 100 -p 'Open' | ( xargs -r -I '{}' xdg-open {} )"</Params>
             </Program>
             <Program>
               <ID>{40FDB0DE-FBB1-49EA-BC47-7F0318AA1336}</ID>
@@ -401,11 +401,11 @@
   <Behaviours>
     <GoToRoot>False</GoToRoot>
     <ActiveRight>False</ActiveRight>
-    <RunInTerminalStayOpenCmd>terminal</RunInTerminalStayOpenCmd>
+    <RunInTerminalStayOpenCmd>term</RunInTerminalStayOpenCmd>
     <RunInTerminalStayOpenParams>-e sh -c '{command}; echo -n Press ENTER to exit... ; read a'</RunInTerminalStayOpenParams>
-    <RunInTerminalCloseCmd>terminal</RunInTerminalCloseCmd>
+    <RunInTerminalCloseCmd>term</RunInTerminalCloseCmd>
     <RunInTerminalCloseParams>-e sh -c {command}</RunInTerminalCloseParams>
-    <JustRunTerminal>terminal</JustRunTerminal>
+    <JustRunTerminal>term</JustRunTerminal>
     <JustRunTermParams/>
     <OnlyOneAppInstance>True</OnlyOneAppInstance>
     <LynxLike>True</LynxLike>
@@ -454,7 +454,7 @@
       <KeepTerminalOpen>False</KeepTerminalOpen>
     </Viewer>
     <Editor Enabled="True">
-      <Path>terminal</Path>
+      <Path>term</Path>
       <Parameters>-n dc-edit -e nvim</Parameters>
       <RunInTerminal>False</RunInTerminal>
       <KeepTerminalOpen>False</KeepTerminalOpen>
