@@ -39,22 +39,31 @@ case "$1" in
 			echo '{ "command": ["set_property", "pause", true] }' | socat - "$i"
 		done
 	;;
-	volup)
-		if pidof mpd >/dev/null; then
-			mpc volume +5 >/dev/null
-		elif pidof spotify >/dev/null || pidof spotifyd >/dev/null; then
-			spotify-vol +5 >/dev/null
-		else
-			playerctl volume 0.05+
-		fi
-	;;
-	voldown)
-		if pidof mpd >/dev/null; then
-			mpc volume -5 >/dev/null
-		elif pidof spotify >/dev/null || pidof spotifyd >/dev/null; then
-			spotify-vol -5 >/dev/null
-		else
-			playerctl volume 0.05-
-		fi
+	vol)
+		case $2 in
+			down)
+				if pidof mpd >/dev/null; then
+					vol mpd down
+				elif pidof spotifyd >/dev/null; then
+					vol spotifyd down
+				elif pidof spotify >/dev/null; then
+					vol spotify down
+				else
+					playerctl volume 0.05-
+				fi
+			;;
+			up)
+				if pidof mpd >/dev/null; then
+					vol mpd up
+				elif pidof spotifyd >/dev/null; then
+					vol spotifyd up
+				elif pidof spotify >/dev/null; then
+					vol spotify up
+				else
+					playerctl volume 0.05+
+				fi
+			;;
+		esac
 	;;
 esac
+

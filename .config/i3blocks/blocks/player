@@ -57,8 +57,8 @@ case $BLOCK_BUTTON in
 	1) smc t ;;
 	2) smc p ;;
 	3) smc n ;;
-	4) smc volup ;;
-	5) smc voldown ;;
+	4) smc vol up ;;
+	5) smc vol down ;;
 esac
 
 output

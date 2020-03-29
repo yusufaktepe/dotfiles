@@ -124,6 +124,8 @@ bindsym Shift+XF86Launch3 exec $N dmenuumount
 bindsym XF86AudioMute        exec $N vol toggle
 bindsym XF86AudioLowerVolume exec $N vol down
 bindsym XF86AudioRaiseVolume exec $N vol up
+bindsym Shift+XF86AudioLowerVolume exec $N smc vol down
+bindsym Shift+XF86AudioRaiseVolume exec $N smc vol up
 bindsym $mod+XF86AudioMute   exec $N toggle audio
 bindsym $mod+XF86AudioLowerVolume exec $N ifwin -e pavucontrol --toggle
 bindsym $mod+XF86AudioRaiseVolume exec $termins _blockterm -e pulsemixer
