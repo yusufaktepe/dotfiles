@@ -8,7 +8,7 @@ if [ -n "$1" ]; then
 
 	# resize
 	res=$(xdpyinfo | awk '/dimensions:/ {print $2}')
-	[ "$(identify -format "%wx%h" "$1")" != "$res" ] && \
+	[ "$(identify -format "%wx%h" "$1")" != "$res" ] &&
 		convert "$wall" -resize "$res"\! "$wall"
 
 	# dim for lockscreen
