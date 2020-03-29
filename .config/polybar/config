@@ -104,8 +104,8 @@ format-foreground = ${colors.lightgray}
 click-left = smc t
 click-right = smc n
 click-middle = smc p
-scroll-up = smc volup
-scroll-down = smc voldown
+scroll-up = smc vol up
+scroll-down = smc vol down
 
 [module/bandwidth]
 type = custom/script
