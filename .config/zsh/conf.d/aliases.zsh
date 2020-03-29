@@ -21,6 +21,11 @@ alias magit='nvim -c MagitOnly'
 alias mkd='mkdir -pv'
 alias rcd='. ranger'
 
+alias cpr='rsync -avzz --progress -h'
+alias cpru='cpr -u'
+alias mvr='rsync -avzz --progress -h --remove-source-files'
+alias dirsync='rsync -avzzu --delete --progress -h'
+
 alias e='$EDITOR' v='$EDITOR'
 alias f='$FILE'
 alias g='git'
