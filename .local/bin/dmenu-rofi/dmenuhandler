@@ -24,7 +24,7 @@ case "$(printf '%s' "$opts" | dmenu -i -p "Open link with...?")" in
 	" download")
 		tsp curl -LO "$1" >/dev/null 2>&1 ;;
 	" youtube-dl")
-		tsp youtube-dl --write-metadata -ic "$1" >/dev/null 2>&1 ;;
+		tsp youtube-dl --add-metadata -ic "$1" >/dev/null 2>&1 ;;
 	" youtube-dl (audio)")
 		tsp youtube-dl --add-metadata -xic -f bestaudio/best "$1" >/dev/null 2>&1 ;;
 	" browser")
