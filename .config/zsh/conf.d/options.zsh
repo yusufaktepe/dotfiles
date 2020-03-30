@@ -16,6 +16,7 @@ setopt ALWAYS_TO_END          # After in-word completion, move cursor to end of 
 
 # Expansion and Globbing
 setopt EXTENDED_GLOB          # Treat the `#`, `~` and `^` characters as part of patterns for globbing.
+setopt GLOB_DOTS              # Do not require a leading `.' in a filename to be matched explicitly.
 setopt NUMERIC_GLOB_SORT      # Sort the filenames numerically rather than lexicographically.
 setopt RC_EXPAND_PARAM        # Expand arrays.
 
