@@ -27,7 +27,7 @@ wdmenu() {
 }
 
 wfzf() {
-	greenclip print | sed '/^$/d' | fzf -e | \
+	greenclip print | sed '/^$/d' | fzf -e |
 		xargs -r -d'\n' -I '{}' greenclip print '{}'
 }
 
