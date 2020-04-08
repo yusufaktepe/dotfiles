@@ -10,12 +10,12 @@ export XDG_LIB_HOME="$HOME/.local/lib"
 # Defaults:
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
-export TERMINAL="st"
-export TERMINS="$TERMINAL -n"
+export TERMINAL="alacritty"
+export TERMINS="$TERMINAL --class"
 export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"
 export READER="zathura"
-export FILE="ranger"
+export FILE="vifm-tab"
 
 # Keep $HOME clean:
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
