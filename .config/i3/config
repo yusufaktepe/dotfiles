@@ -15,8 +15,6 @@ floating_modifier $mod
 # Set basic vars
 set $N --no-startup-id
 set $C exec $N pkill -0
-set $term $N $TERMINAL
-set $termins $N $TERMINS
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -45,10 +43,10 @@ bindsym $mod+Shift+q $killrule exec $N kill -9 `xdotool getwindowfocus getwindow
 bindsym --release $mod+Ctrl+x exec $N xkill
 
 # #---Start a terminal---# #
-bindsym $mod+Return exec $term
-bindsym $mod+quotedbl exec $termins floating
-bindsym $mod+comma split horizontal ;; exec $term
-bindsym $mod+period split vertical ;; exec $term
+bindsym $mod+Return exec $N $TERMINAL
+bindsym $mod+quotedbl exec $N $TERMINS floating
+bindsym $mod+comma split horizontal ;; exec $N $TERMINAL
+bindsym $mod+period split vertical ;; exec $N $TERMINAL
 bindsym $mod+udiaeresis exec $N ddspawn tmuxi
 # open terminal in current dir
 bindsym $mod+Shift+Return exec $N samedir
@@ -70,14 +68,13 @@ bindsym --release $mod+Insert exec $N gclip selpaste
 bindsym $mod+Shift+Insert exec $N gclip seltoclip
 
 # #---Start Applications---# #
-bindsym $mod+F1 exec $term -e $FILE
-bindsym $mod+F2 exec $N ifwin -e doublecmd
+bindsym $mod+F2 exec $N ifterm -e vifm
 bindsym $mod+F3 exec $N ifwin -e vivaldi-stable
 bindsym $mod+F4 exec $N ifwin -e opera
 bindsym $mod+F5 exec $N ifwin -e firefox
 bindsym $mod+F6 exec $N ifwin -e google-chrome-stable
 bindsym $mod+F7 exec $N ifwin -e brave
-bindsym $mod+Shift+F2 exec $N pcmanfm
+bindsym $mod+Shift+F2 exec $N ifwin -e doublecmd
 bindsym $mod+Shift+F3 exec $N vivaldi-stable --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
@@ -85,7 +82,7 @@ bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
 bindsym $mod+Shift+F7 exec $N brave --incognito
 
 ## Caps+
-bindsym $caps+e exec $term -e $EDITOR
+bindsym $caps+e exec $N $TERMINAL -e $EDITOR
 bindsym $caps+m exec $N cantata-mpd
 bindsym $caps+Shift+s exec $N toggle spotifyd
 bindsym $caps+s exec $N ifwin -e spotify
@@ -97,16 +94,17 @@ bindsym --release $caps+c exec $N ifwin crow
 
 bindsym $mod+Shift+d exec $N xo d
 bindsym $mod+Shift+e exec $N xo c
+bindsym $mod+Shift+p exec $N mpv-resume
 bindsym $mod+Shift+F12 exec $N sudo -A systemctl restart NetworkManager
-bindsym $mod+F12 exec $termins "_nmtui" -e "nmtui-connect"
+bindsym $mod+F12 exec $N $TERMINS _blockterm -e nmtui-connect
 
 # Pause players & switch to ws0:
 bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 
 ## System Monitor
-bindsym XF86Launch1 exec $termins _blockterm -e htop
-bindsym $mod+XF86Launch1 exec $termins _blockterm -e sh -c "sudo -A ps_mem | less -RS +G"
-bindsym $caps+F1 exec $termins _blockterm -e ncdu --color dark ~/
+bindsym XF86Launch1 exec $N $TERMINS _blockterm -e htop
+bindsym $mod+XF86Launch1 exec $N $TERMINS _blockterm -e sh -c "sudo -A ps_mem | less -RS +G"
+bindsym $caps+F1 exec $N $TERMINS _blockterm -e ncdu --color dark ~/
 
 ## Function Buttons
 bindsym XF86MonBrightnessUp exec $N brightness inc 5
@@ -128,7 +126,7 @@ bindsym Shift+XF86AudioLowerVolume exec $N smc vol down
 bindsym Shift+XF86AudioRaiseVolume exec $N smc vol up
 bindsym $mod+XF86AudioMute   exec $N toggle audio
 bindsym $mod+XF86AudioLowerVolume exec $N ifwin -e pavucontrol --toggle
-bindsym $mod+XF86AudioRaiseVolume exec $termins _blockterm -e pulsemixer
+bindsym $mod+XF86AudioRaiseVolume exec $N $TERMINS _blockterm -e pulsemixer
 
 bindsym XF86AudioPlay exec $N smc t
 bindsym XF86AudioPrev exec $N smc p
@@ -178,8 +176,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+g split h; exec notify-send -a system 'tile horizontally'
-bindsym $mod+v split v; exec notify-send -a system 'tile vertically'
+bindsym $mod+g split h; exec notify-send -a system -i window -t 1000 'tile horizontally'
+bindsym $mod+v split v; exec notify-send -a system -i window -t 1000 'tile vertically'
 bindsym $mod+t split toggle
 
 # toggle fullscreen mode for the focused container
@@ -316,6 +314,7 @@ for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 # assign [window_role="browser"]                 $ws1
 assign [class="Firefox|(?i)Vivaldi"]             $ws1
 assign [class="Pcmanfm|Doublecmd"]               $ws2
+assign [instance="ranger|vifm"]                  $ws2
 # assign [class="(?i)thunderbird"]               $ws9
 assign [class="qBittorrent"]                     $ws10
 for_window [class="Spotify"] move to workspace   $ws11
@@ -348,7 +347,7 @@ for_window [title="^Confirm File Replacing$"] move position center
 for_window [title="^Picture in picture$"] resize set 420 236, move position 945 531
 for_window [class="Dragon-drag-and-drop"] sticky enable
 #_ Floating instances
-for_window [instance="_blockterm|_nmtui"] floating enable border pixel 2
+for_window [instance="_blockterm"] floating enable border pixel 2
 for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1129 706, move position center
 for_window [instance="floating"] floating enable, move position mouse
 #_ Doublecmd
@@ -369,7 +368,7 @@ for_window [instance="dropdown_*"] move position center
 #=====================================================================
 
 # reload the configuration file
-bindsym $mod+Shift+c reload ;; exec $N "notify-send -a system -i configuration i3 'Config reloaded'"
+bindsym $mod+Shift+c reload ;; exec $N "notify-send -a system -i configuration -t 1500 i3 'Config reloaded'"
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -389,9 +388,9 @@ exec $N greenclip daemon
 exec $N unclutter
 exec_always launch_polybar
 exec $N "sleep 2; ifwin -e vivaldi-stable"
-exec $N "sleep 5; ifwin -e doublecmd"
+exec $N "sleep 5; ifterm -e vifm"
 exec $N "sleep 7; ifwin -e spotify"
-exec $N "sleep 9; wmctrl -x -r 'Doublecmd' -b remove,demands_attention"
+exec $N "sleep 9; wmctrl -x -r 'vifm' -b remove,demands_attention"
 #exec $N xautolock -time 10 -locker "betterlockscreen -l dimblur"
 
 #=====================================================================
@@ -522,8 +521,8 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 mode "$mode_gaps" {
 	bindsym o      mode "$mode_gaps_outer"
 	bindsym i      mode "$mode_gaps_inner"
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym Return mode default
+	bindsym Escape mode default
 }
 mode "$mode_gaps_inner" {
 	bindsym plus  gaps inner current plus 5
@@ -534,8 +533,8 @@ mode "$mode_gaps_inner" {
 	bindsym Shift+minus gaps inner all minus 5
 	bindsym Shift+0     gaps inner all set 0
 
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym Return mode default
+	bindsym Escape mode default
 }
 mode "$mode_gaps_outer" {
 	bindsym plus  gaps outer current plus 5
@@ -546,8 +545,8 @@ mode "$mode_gaps_outer" {
 	bindsym Shift+minus gaps outer all minus 5
 	bindsym Shift+0     gaps outer all set 0
 
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym Return mode default
+	bindsym Escape mode default
 }
 
 ### GAPS Binding mode Ends ###
@@ -557,16 +556,16 @@ bindsym $mod+Delete mode "$mode_system"
 bindsym $caps+Escape mode "$mode_system"
 set $mode_system l:🔒 e:👥 s:🌙 h:💽 r:🔄 S:❎
 mode "$mode_system" {
-	bindsym l exec $N "smc pauseall; lockscreen"; exec $N "sleep 0.5 && xset dpms force off", mode "default"
-	bindsym s exec $N "smc pauseall; systemctl suspend", mode "default"
-	bindsym h exec $N "smc pauseall; systemctl hibernate", mode "default"
-	bindsym e exec $N i3-msg exit, mode "default"
-	bindsym r exec $N systemctl reboot, mode "default"
-	bindsym Shift+s exec $N systemctl poweroff, mode "default"
+	bindsym l exec $N "smc pauseall; lockscreen"; exec $N "sleep 0.5 && xset dpms force off", mode default
+	bindsym s exec $N "smc pauseall; systemctl suspend", mode default
+	bindsym h exec $N "smc pauseall; systemctl hibernate", mode default
+	bindsym e exec $N i3-msg exit, mode default
+	bindsym r exec $N systemctl reboot, mode default
+	bindsym Shift+s exec $N systemctl poweroff, mode default
 
 	# exit system mode: "Enter" or "Escape"
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym Return mode default
+	bindsym Escape mode default
 }
 
 # Resize window (you can also use the mouse for that)
@@ -585,75 +584,76 @@ mode "$resize" {
 	bindsym Right resize grow width 10 px or 10 ppt
 
 		#
-		bindsym 1 mode "default", resize set 900 400
-		bindsym 2 mode "default", resize set 800 500
-		bindsym 3 mode "default", resize set 800 600
+		bindsym 1 mode default, resize set 900 400
+		bindsym 2 mode default, resize set 800 500
+		bindsym 3 mode default, resize set 800 600
 
 	# back to normal: Enter or Escape or $mod+r
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-	bindsym $mod+r mode "default"
+	bindsym Return mode default
+	bindsym Escape mode default
+	bindsym $mod+r mode default
 }
 
-bindsym $mod+Shift+f mode "$freeze" ;; exec $N notify-send -a system "Distraction-free mode." "Press Super+Shift+f to return."
+bindsym $mod+Shift+f mode "$freeze"
 set $freeze FREEZED
-mode "$freeze" { bindsym $mod+Shift+f mode "default"
+mode "$freeze" {
+	bindsym $mod+Shift+f mode default
 }
 
 # Open link with X
 bindsym $caps+b mode "$broopen"
 set $broopen : F3/3 | : F4/4 | : F5/5 | : F6/6 | : F7/7 | 﨩: t | : y/c | : d
 mode "$broopen" {
-	bindsym F3 --release exec $N bro-open $BROWSER, mode "default"
-	bindsym F4 --release exec $N bro-open opera --start-maximized, mode "default"
-	bindsym F5 --release exec $N bro-open firefox, mode "default"
-	bindsym F6 --release exec $N bro-open google-chrome-stable, mode "default"
-	bindsym F7 --release exec $N bro-open brave, mode "default"
-	bindsym 3 --release exec $N bro-open $BROWSER --incognito, mode "default"
-	bindsym 4 --release exec $N bro-open opera -private --start-maximized, mode "default"
-	bindsym 5 --release exec $N bro-open firefox --private-window, mode "default"
-	bindsym 6 --release exec $N bro-open google-chrome-stable --incognito, mode "default"
-	bindsym 7 --release exec $N bro-open brave --incognito, mode "default"
-	bindsym t --release exec $N bro-open tor-browser --allow-remote, mode "default"
-	bindsym y --release exec $N bro-open mpv, mode "default"
-	bindsym c --release exec $N bro-open mpv -c, mode "default"
-	bindsym d --release exec $N bro-open dmenuhandler, mode "default"
+	bindsym F3 --release exec $N bro-open $BROWSER, mode default
+	bindsym F4 --release exec $N bro-open opera --start-maximized, mode default
+	bindsym F5 --release exec $N bro-open firefox, mode default
+	bindsym F6 --release exec $N bro-open google-chrome-stable, mode default
+	bindsym F7 --release exec $N bro-open brave, mode default
+	bindsym 3 --release exec $N bro-open $BROWSER --incognito, mode default
+	bindsym 4 --release exec $N bro-open opera -private --start-maximized, mode default
+	bindsym 5 --release exec $N bro-open firefox --private-window, mode default
+	bindsym 6 --release exec $N bro-open google-chrome-stable --incognito, mode default
+	bindsym 7 --release exec $N bro-open brave --incognito, mode default
+	bindsym t --release exec $N bro-open tor-browser --allow-remote, mode default
+	bindsym y --release exec $N bro-open mpv, mode default
+	bindsym c --release exec $N bro-open mpv -c, mode default
+	bindsym d --release exec $N bro-open dmenuhandler, mode default
 
-		bindsym Return mode "default"
-		bindsym Escape mode "default"
-		bindsym $caps+b mode "default"
+		bindsym Return mode default
+		bindsym Escape mode default
+		bindsym $caps+b mode default
 }
 
 bindsym $mod+Shift+t mode "$toggle"
 set $toggle  pi[c]om py-[h]ttp [k]eybase [r]edshift [s]timeout [t]ransmission |  [d]unst [p]ulse
 mode "$toggle" {
-	bindsym c exec $N pkill picom || picom -b, mode "default"
-	bindsym h exec $N py-http -n, mode "default"
-	bindsym k exec $N toggle keybase, mode "default"
-	bindsym r exec $N toggle redshift, mode "default"
-	bindsym s exec $N toggle stimeout, mode "default"
-	bindsym t exec $N toggle transmission, mode "default"
-	bindsym d --release exec "killall dunst; exec notify-send -a system 'restart dunst'", mode "default"
-	bindsym p exec $N systemctl --user restart pulseaudio, mode "default"
+	bindsym c exec $N pkill picom || picom -b, mode default
+	bindsym h exec $N py-http -n, mode default
+	bindsym k exec $N toggle keybase, mode default
+	bindsym r exec $N toggle redshift, mode default
+	bindsym s exec $N toggle stimeout, mode default
+	bindsym t exec $N toggle transmission, mode default
+	bindsym d --release exec "killall dunst; exec notify-send -a system 'restart dunst'", mode default
+	bindsym p exec $N systemctl --user restart pulseaudio, mode default
 
 		# back to normal: Enter or Escape
-		bindsym Return mode "default"
-		bindsym Escape mode "default"
+		bindsym Return mode default
+		bindsym Escape mode default
 }
 
 bindsym $caps+a mode "$keystroke"
 set $keystroke 🔤
 mode "$keystroke" {
-	bindsym --release q exec $N autotype mail, mode "default"
-	bindsym --release g exec $N autotype mail2, mode "default"
-	bindsym --release minus exec $N autotype banner, mode "default"
-	bindsym --release asterisk exec $N autotype banner2, mode "default"
-	bindsym --release comma exec $N autotype mdcode, mode "default"
-	bindsym --release 0 exec $N autotype shrug, mode "default"
+	bindsym --release q exec $N autotype mail, mode default
+	bindsym --release g exec $N autotype mail2, mode default
+	bindsym --release minus exec $N autotype banner, mode default
+	bindsym --release asterisk exec $N autotype banner2, mode default
+	bindsym --release comma exec $N autotype mdcode, mode default
+	bindsym --release 0 exec $N autotype shrug, mode default
 
 	# back to normal: Escape or $caps+a
-	bindsym Escape mode "default"
-	bindsym $caps+a mode "default"
+	bindsym Escape mode default
+	bindsym $caps+a mode default
 }
 
 #=====================================================================
