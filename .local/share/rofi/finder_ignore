@@ -70,14 +70,4 @@
 	(isos
 	|torrents
 	)|
-/data/repos/
-	(aur
-	|dots
-	|patches
-	|pkgbuilds
-	|programs
-	|scripts
-	|site
-	|web
-	)|
-.Trash*|lost\+found
+\.git|.Trash*|lost\+found
