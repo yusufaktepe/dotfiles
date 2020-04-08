@@ -1,0 +1,4 @@
+#!/bin/sh
+
+{ [ -d "$1" ] && vim -c "DirDiff $1 $2" ;} || vim -d "$@"
+
