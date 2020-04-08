@@ -1,6 +1,8 @@
 .config/doublecmd/*[.err,.cache]
 .config/systemd/user/*.target.wants
-.config/vifm/*[.json,.txt]
+.config/vifm/**/*.json
+.config/vifm/**/*.txt
+.config/vifm/**/README
 *history*
 .pam-gnupg
 __pycache__/
