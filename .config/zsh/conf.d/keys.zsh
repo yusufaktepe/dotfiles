@@ -123,5 +123,6 @@ foreach c ({a,i}{\',\",\`}) {
 #== Alias bindings
 bindkey -s '^[h' 'vH\n'
 bindkey -s '^f' 'f\n'
-bindkey -s '^o' 'rcd\n'
+bindkey -s '^o' 'fcd\n'
+bindkey -s '^[f' 'vifm-tab\n'
 
