@@ -309,7 +309,7 @@
           <Icon>diffuse</Icon>
           <Hint>VimDiff</Hint>
           <Command>term</Command>
-          <Params>-e nvim -d %pb</Params>
+          <Params>-d 151 40 -e nvim -d %pb</Params>
         </Program>
         <Separator/>
         <Command>
@@ -389,9 +389,9 @@
       <Maximized>False</Maximized>
       <Splitter>50</Splitter>
       <Left>0</Left>
-      <Top>20</Top>
+      <Top>38</Top>
       <Width>1366</Width>
-      <Height>748</Height>
+      <Height>730</Height>
       <PixelsPerInch>96</PixelsPerInch>
     </Position>
   </MainWindow>
