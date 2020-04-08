@@ -120,6 +120,12 @@ ranger() {
 		echo "Shell is already running inside ranger!"
 }
 
+# Prevent nested vifm instances
+vifm() {
+	[[ -z "$INSIDE_VIFM" ]] && command vifm "$@" ||
+		echo "Shell is already running inside vifm!"
+}
+
 # Repeat given command with ${T:-3} interval
 rpeat() { n=$1; shift; while [[ $(( n -= 1 )) -ge 0 ]]; do "$@"; sleep ${T:-3}; done ;}
 
