@@ -33,8 +33,8 @@ Plug 'matze/vim-move'
 Plug 'andymass/vim-matchup'
 
 " Git
-Plug 'tpope/vim-fugitive'	" git wrapper
-Plug 'airblade/vim-gitgutter'	" shows git diff in the gutter (sign column)
+Plug 'tpope/vim-fugitive'     " git wrapper
+Plug 'airblade/vim-gitgutter' " shows git diff in the gutter (sign column)
 Plug 'jreybert/vimagit'
 Plug 'christoomey/vim-conflicted'
 
@@ -72,12 +72,12 @@ Plug 'vimwiki/vimwiki'         " personal wiki
 Plug 'KabbAmine/vCoolor.vim'   " color picker
 Plug 'godlygeek/tabular'       " text filtering and alignment
 Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mappings
-Plug 'tpope/vim-eunuch'	       " helpers for unix
+Plug 'tpope/vim-eunuch'        " helpers for unix
 Plug 'tpope/vim-unimpaired'    " bracket mappings
 Plug 'lambdalisue/suda.vim'    " sudo helper
 Plug 'chrisbra/Recover.vim'    " show diff, when recovering a buffer
 Plug 'jamessan/vim-gnupg'      " edit gpg encrypted files
-Plug 'mattn/webapi-vim'	       " interface to Web API (for gist-vim)
+Plug 'mattn/webapi-vim'        " interface to Web API (for gist-vim)
 Plug 'mattn/gist-vim'          " create gists
 Plug 'will133/vim-dirdiff'     " diff directories
 Plug 'junegunn/fzf.vim'
@@ -101,28 +101,28 @@ set nocompatible
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,default,iso8859-9,latin1
 set number relativenumber
-" set signcolumn=yes		" always show sign column
+" set signcolumn=yes                " always show sign column
 set wildmode=list:longest,list:full " command mode completion behavior
 set completeopt+=noinsert,noselect
 set go=a
 set mouse=a
 set clipboard+=unnamedplus
-set hlsearch			" keep matches highlighted after searching
-set ignorecase			" ignore case when searching
-set smartcase			" don't ignore case if user types an uppercase letter
-set scrolloff=3			" keep a minimum of 3 lines between cursor and top/bottom of screen
-set inccommand=nosplit		" when typing a :%s/foo/bar/g command, show live preview
-set title			" set and update terminal title
-set cursorline			" highlight the current cursor line
-set noshowmode			" disable native mode display (use airline instead)
-set showmatch			" highlight matching parens/brackets/etc
-set matchtime=2			" show matching parens/brackets for 200ms
-set termguicolors		" enable true color mode for terminals that support it
-set splitbelow splitright	" Splits open at the bottom and right
-set nofoldenable		" disable folding by default
-set breakindent			" visually indent wrapped line
-set undofile			" save undo history to a file
-set undodir=~/.cache/vim/undo	" set undo directory
+set hlsearch                  " keep matches highlighted after searching
+set ignorecase                " ignore case when searching
+set smartcase                 " don't ignore case if user types an uppercase letter
+set scrolloff=3               " keep a minimum of 3 lines between cursor and top/bottom of screen
+set inccommand=nosplit        " when typing a :%s/foo/bar/g command, show live preview
+set title                     " set and update terminal title
+set cursorline                " highlight the current cursor line
+set noshowmode                " disable native mode display (use airline instead)
+set showmatch                 " highlight matching parens/brackets/etc
+set matchtime=2               " show matching parens/brackets for 200ms
+set termguicolors             " enable true color mode for terminals that support it
+set splitbelow splitright     " Splits open at the bottom and right
+set nofoldenable              " disable folding by default
+set breakindent               " visually indent wrapped line
+set undofile                  " save undo history to a file
+set undodir=~/.cache/vim/undo " set undo directory
 
 " Theme
 let g:gruvbox_italic=1
