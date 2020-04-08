@@ -132,11 +132,8 @@ set findprg='find %s %a -print ,
 " It can be used in some shell script that gets run from inside vifm, for
 " example, like this:
 "     vifm --server-name "$VIFM_SERVER_NAME" --remote +"cd '$PWD'"
-"
-" let $VIFM_SERVER_NAME = v:servername
+let $VIFM_SERVER_NAME = v:servername
 
-" Nesting detection
-let $INSIDE_VIFM = 'true'
 " Show info on right prompt, if shell is spawned by vifm
 let $RPS1 = '-- VIFM --'
 

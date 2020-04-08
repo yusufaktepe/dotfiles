@@ -78,7 +78,7 @@ filetype *.[1-8] man ./%c
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm,*.ico
 	\ {View in sxiv}
-	\ sxivr -d %c &,
+	\ sxivr -d %c -o | vifm-select &,
 	\ {View in feh}
 	\ feh %c &,
 

@@ -122,7 +122,7 @@ ranger() {
 
 # Prevent nested vifm instances
 vifm() {
-	[[ -z "$INSIDE_VIFM" ]] && command vifm "$@" ||
+	[[ -z "$VIFM_SERVER_NAME" ]] && command vifm "$@" ||
 		echo "Shell is already running inside vifm!"
 }
 
