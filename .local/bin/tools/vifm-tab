@@ -1,0 +1,9 @@
+#!/bin/sh
+
+[ -n "$*" ] && cmd="tabnew | cd $*" || cmd=redraw
+
+{ [ -n "$(vifm --server-list)" ] &&
+	vifm --server-name vifm --remote -c "$cmd" ;} || {
+	{ [ -t 2 ] && vifm -c "$cmd" ;} ||
+	$TERMINS vifm -e vifm -c "$cmd" >/dev/null 2>&1 ;}
+
