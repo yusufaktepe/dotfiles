@@ -1,0 +1,23 @@
+#!/bin/sh
+
+AW=$(xdotool getactivewindow)
+AW_INS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $2}')
+
+for arg in "$@"; do
+	case $arg in
+		-i) opt_ins=$2 ;;
+		-e) opt_exec=$2 ;;
+	esac
+	shift
+done
+
+[ -z "$opt_ins" ] && opt_ins=$opt_exec
+
+if wmctrl -lx | grep -iq "$opt_ins.$TERMINAL"; then
+	{ [ "$AW_INS" = "$opt_ins" ] &&
+		i3-msg "workspace back_and_forth" >/dev/null ;} ||
+		i3-msg "[instance=\"(?i)$opt_ins\"] focus" >/dev/null
+else
+	$TERMINS "$opt_ins" -e sh -c "$opt_exec; zsh" >/dev/null 2>&1 &
+fi
+
