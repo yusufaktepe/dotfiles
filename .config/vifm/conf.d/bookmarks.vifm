@@ -1,0 +1,54 @@
+map Br :cd /<cr>
+map Be :cd /etc<cr>
+map Bu :cd /usr<cr>
+map Bm :cd /media/$USER<cr>
+
+map bh :cd ~/<cr>
+map bc :cd ~/.config<cr>
+map bb :cd ~/.local/bin<cr>
+map bs :cd ~/.local/share<cr>
+map bw :cd ~/dl/default<cr>
+map bd :cd ~/dox<cr>
+map bp :cd ~/pix<cr>
+map bm :cd ~/music<cr>
+map bV :cd ~/vids<cr>
+map bv :cd ~/vids/mov<cr>
+map bt :cd ~/vids/tv<cr>
+map bD :cd /data<cr>
+map bS :cd /data/shared<cr>
+map brr :cd ~/repos<cr>
+map bra :cd ~/repos/aur<cr>
+map brd :cd ~/repos/dots<cr>
+map brh :cd ~/repos/site<cr>
+map brn :cd ~/repos/notes<cr>
+map brp :cd ~/repos/programs<cr>
+map brs :cd ~/repos/scripts<cr>
+map brw :cd ~/repos/web<cr>
+
+map <wait> Tr :cd /<cr>
+map <wait> Te :cd /etc<cr>
+map <wait> Tu :cd /usr<cr>
+map <wait> Tm :cd /media/$USER<cr>
+
+map <wait> th <tab>:cd ~/<cr>
+map <wait> tc <tab>:cd ~/.config<cr>
+map <wait> tb <tab>:cd ~/.local/bin<cr>
+map <wait> ts <tab>:cd ~/.local/share<cr>
+map <wait> tw <tab>:cd ~/dl/default<cr>
+map <wait> td <tab>:cd ~/dox<cr>
+map <wait> tp <tab>:cd ~/pix<cr>
+map <wait> tm <tab>:cd ~/music<cr>
+map <wait> tV <tab>:cd ~/vids<cr>
+map <wait> tv <tab>:cd ~/vids/mov<cr>
+map <wait> tt <tab>:cd ~/vids/tv<cr>
+map <wait> tD <tab>:cd /data<cr>
+map <wait> tS <tab>:cd /data/shared<cr>
+map <wait> trr <tab>:cd ~/repos<cr>
+map <wait> tra <tab>:cd ~/repos/aur<cr>
+map <wait> trd <tab>:cd ~/repos/dots<cr>
+map <wait> trh <tab>:cd ~/repos/site<cr>
+map <wait> trn <tab>:cd ~/repos/notes<cr>
+map <wait> trp <tab>:cd ~/repos/programs<cr>
+map <wait> trs <tab>:cd ~/repos/scripts<cr>
+map <wait> trw <tab>:cd ~/repos/web<cr>
+

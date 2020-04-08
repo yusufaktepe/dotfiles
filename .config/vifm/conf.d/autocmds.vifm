@@ -1,0 +1,9 @@
+" Directory specific sorting
+au DirEnter '**' set sort=name
+au DirEnter '/tmp' set sort=-mtime
+au DirEnter '**/.cache' set sort=-mtime
+au DirEnter '**/dl/default' set sort=-mtime
+au DirEnter '**/.torrent-files' set sort=-mtime
+au DirEnter '**/vids/mov' set sort=-mtime
+au DirEnter '**/pix/**/**' set sort=-mtime
+

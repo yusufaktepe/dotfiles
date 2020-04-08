@@ -3,8 +3,8 @@ x-scheme-handler/http=vivaldi-stable.desktop
 x-scheme-handler/https=vivaldi-stable.desktop
 application/xhtml+xml=vivaldi-stable.desktop
 text/html=vivaldi-stable.desktop
-inode/directory=doublecmd-newtab.desktop
-inode/mount-point=doublecmd-newtab.desktop
+inode/directory=vifm-tab.desktop
+inode/mount-point=vifm-tab.desktop
 video/mp4=mpv.desktop
 video/x-matroska=mpv.desktop
 video/x-msvideo=mpv.desktop
@@ -21,7 +21,6 @@ image/jpeg=sxivr.desktop
 image/png=sxivr.desktop
 application/json=nvim.desktop
 application/xml=nvim.desktop
-
 application/pdf=org.pwmt.zathura.desktop
 application/rss+xml=rss.desktop
 application/vnd.rar=engrampa.desktop
@@ -49,5 +48,4 @@ image/png=sxiv.desktop;
 text/plain=nvim.desktop;
 text/x-systemd-unit=nvim.desktop;
 application/x-shellscript=nvim.desktop;
-
 application/pdf=org.pwmt.zathura.desktop;
