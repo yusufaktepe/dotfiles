@@ -43,6 +43,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mboughaba/i3config.vim'
 Plug 'chr4/nginx.vim'
+Plug 'vifm/vifm.vim'
 
 " Auto Completion, linting, etc
 Plug 'w0rp/ale'
@@ -67,17 +68,18 @@ Plug 'mxw/vim-jsx'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 " Misc
-Plug 'vimwiki/vimwiki'		" personal wiki
-Plug 'KabbAmine/vCoolor.vim'	" color picker
-Plug 'godlygeek/tabular'	" text filtering and alignment
-Plug 'plasticboy/vim-markdown'	" syntax highlighting, matching rules and mappings
-Plug 'tpope/vim-eunuch'		" helpers for unix
-Plug 'tpope/vim-unimpaired'	" bracket mappings
-Plug 'lambdalisue/suda.vim'	" sudo helper
-Plug 'chrisbra/Recover.vim'	" show diff, when recovering a buffer
-Plug 'jamessan/vim-gnupg'	" edit gpg encrypted files
-Plug 'mattn/webapi-vim'		" interface to Web API (for gist-vim)
-Plug 'mattn/gist-vim'		" create gists
+Plug 'vimwiki/vimwiki'         " personal wiki
+Plug 'KabbAmine/vCoolor.vim'   " color picker
+Plug 'godlygeek/tabular'       " text filtering and alignment
+Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mappings
+Plug 'tpope/vim-eunuch'	       " helpers for unix
+Plug 'tpope/vim-unimpaired'    " bracket mappings
+Plug 'lambdalisue/suda.vim'    " sudo helper
+Plug 'chrisbra/Recover.vim'    " show diff, when recovering a buffer
+Plug 'jamessan/vim-gnupg'      " edit gpg encrypted files
+Plug 'mattn/webapi-vim'	       " interface to Web API (for gist-vim)
+Plug 'mattn/gist-vim'          " create gists
+Plug 'will133/vim-dirdiff'     " diff directories
 Plug 'junegunn/fzf.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -187,7 +189,7 @@ noremap <silent> <M-0> :call Tabnm(10)<CR>
 " imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Remove all trailing whitespace
-nnoremap <silent> <F4> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+nnoremap <silent> <F4> :let _s=@/ \| :%s/\s\+$//e \| :let @/=_s \| :nohl \| :unlet _s <CR>
 
 " Reload file with ISO 8859-9 encoding
 nnoremap <F12> :e ++enc=iso8859-9<CR>
@@ -392,6 +394,11 @@ let NERDTreeShowHidden=1
 " close vim if NERDTree is the last window
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+"=== DirDiff
+let g:DirDiffWindowSize = 10
+" ignore spaces
+" let g:DirDiffAddArgs = "-w"
+
 "=== Suda
 cnoremap W!! <bar> :w suda://%<CR>
 cnoremap WQ!! <bar> :wq suda://%<CR>
@@ -419,6 +426,9 @@ let g:vimwiki_list = [{'path': '~/repos/notes', 'syntax': 'markdown', 'ext': '.m
 "=== VCoolor
 nmap <silent> <leader>co :VCoolor<CR>
 let g:vcoolor_disable_mappings = 1
+
+"=== Vifm
+let g:vifm_exec = 'VIFM=~/.config/vifm/session/shell vifm'
 
 "=== Hexokinase
 nmap <silent> <leader>ch :HexokinaseToggle<CR>
