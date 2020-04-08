@@ -1,4 +1,4 @@
 #!/bin/sh
 
-printf '%s\n' "$(date +%d/%m\ %H:%M) λ $*" >> ~/notes
+printf '%s' "- [ ] $*" >> ~/notes/todo.md
 
