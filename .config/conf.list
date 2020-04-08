@@ -1,4 +1,4 @@
-bash_history     ~/.config/bash/.bash_history
+alacritty        ~/.config/alacritty/alacritty.yml
 bashrc           ~/.config/bash/.bashrc
 conf.list        ~/.config/conf.list
 dir.list         ~/.config/dir.list
@@ -30,6 +30,11 @@ pam_environment  ~/.pam_environment
 picom            ~/.config/picom.conf
 polybar          ~/.config/polybar/config
 profile          ~/.profile
+ranger_bookmarks ~/.config/ranger/bookmarks.conf
+ranger_commands  ~/.config/ranger/commands.py
+ranger_rc        ~/.config/ranger/rc.conf
+ranger_rifle     ~/.config/ranger/rifle.conf
+ranger_scope     ~/.config/ranger/scope.sh
 redshift         ~/.config/redshift/redshift.conf
 rofi             ~/.config/rofi/config.rasi
 rofi-pass        ~/.config/rofi-pass/config
@@ -39,12 +44,18 @@ sshcontrol       ~/.gnupg/sshcontrol
 sxiv             ~/.config/sxiv/exec/key-handler
 tmux             ~/.config/tmux/tmux.conf
 user-dirs        ~/.config/user-dirs.dirs
+vifmrc           ~/.config/vifm/vifmrc
+vifm_autocmds    ~/.config/vifm/conf.d/autocmds.vifm
+vifm_bookmarks   ~/.config/vifm/conf.d/bookmarks.vifm
+vifm_commands    ~/.config/vifm/conf.d/commands.vifm
+vifm_handler     ~/.config/vifm/conf.d/handler.vifm
+vifm_icons       ~/.config/vifm/conf.d/icons.vifm
+vifm_mappings    ~/.config/vifm/conf.d/mappings.vifm
 xinitrc          ~/.config/X11/xinitrc
 xres_colors      ~/.config/X11/colors/gruvbox
 xresources       ~/.config/X11/Xresources
 yay              ~/.config/yay/config.json
 zathura          ~/.config/zathura/zathurarc
-zsh_history      ~/.config/zsh/.zsh_history
 zsh_aliases      ~/.config/zsh/conf.d/aliases.zsh
 zsh_appearance   ~/.config/zsh/conf.d/appearance.zsh
 zsh_completion   ~/.config/zsh/conf.d/completion.zsh
@@ -53,5 +64,4 @@ zsh_keys         ~/.config/zsh/conf.d/keys.zsh
 zsh_options      ~/.config/zsh/conf.d/options.zsh
 zsh_plugins      ~/.config/zsh/conf.d/plugins.zsh
 zsh_termtitle    ~/.config/zsh/conf.d/termtitle.zsh
-zsh_widgets      ~/.config/zsh/conf.d/widgets.zsh
 zshrc            ~/.config/zsh/.zshrc
