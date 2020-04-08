@@ -1,0 +1,10 @@
+#!/bin/sh
+
+wld=~/.config/mpv/watch_later
+
+w=$(sed -n 's/# //p' $wld/* | xargs -rd'\n' -I % basename % | dmenu -i -l 5 -p )
+[ -z "$w" ] && exit
+w=$(grep $wld/* -e "$w" | sed 's/.*# //')
+
+mpvc "$w"
+
