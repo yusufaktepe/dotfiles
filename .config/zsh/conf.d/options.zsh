@@ -37,6 +37,7 @@ setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first when trimming his
 setopt HIST_VERIFY            # Don't execute the line directly instead perform history expansion.
 
 # Input/Output
+stty stop undef               # Disable ^S
 unsetopt FLOW_CONTROL         # Disable output flow control via start/stop characters (^S/^Q).
 setopt INTERACTIVE_COMMENTS   # Allow comments even in interactive shells.
 setopt RM_STAR_WAIT           # Before executing `rm *` first wait 10 seconds and ignore anything typed.
