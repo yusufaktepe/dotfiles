@@ -15,7 +15,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
@@ -75,7 +75,7 @@ Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mapping
 Plug 'tpope/vim-eunuch'        " helpers for unix
 Plug 'tpope/vim-unimpaired'    " bracket mappings
 Plug 'lambdalisue/suda.vim'    " sudo helper
-Plug 'chrisbra/Recover.vim'    " show diff, when recovering a buffer
+" Plug 'chrisbra/Recover.vim'    " show diff, when recovering a buffer
 Plug 'jamessan/vim-gnupg'      " edit gpg encrypted files
 Plug 'mattn/webapi-vim'        " interface to Web API (for gist-vim)
 Plug 'mattn/gist-vim'          " create gists
