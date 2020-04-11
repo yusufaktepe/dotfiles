@@ -55,6 +55,7 @@ export LESS_TERMCAP_se=$(printf "\e[0m")
 export LESS_TERMCAP_so=$(printf "\e[1;44;33m")
 export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
+export LESSOPEN="| highlight -O xterm256 -s pablo %s 2>/dev/null"
 
 # StartX on tty1 login
 [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ] &&
