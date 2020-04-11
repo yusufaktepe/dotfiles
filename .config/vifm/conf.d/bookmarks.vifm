@@ -1,3 +1,5 @@
+"--- Bookmarks ---"
+
 map Br :cd /<cr>
 map Be :cd /etc<cr>
 map Bu :cd /usr<cr>

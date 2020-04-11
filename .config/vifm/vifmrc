@@ -18,6 +18,9 @@ set syscalls
 " files by deleting them and then using p to put the file in the new location.
 set trash
 
+" Only confirm permdelete
+set confirm-=delete
+
 " This is how many directories to store in the directory history.
 set history=100
 
@@ -42,19 +45,22 @@ set vimhelp
 " press return on the file name set this.
 set norunexec
 
-" Selected color scheme
+" Color scheme
 colorscheme custom
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
 " See man date or man strftime for details.
-set timefmt=%m-%d\ %H:%M
+set timefmt=%Y-%m-%d\ %H:%M
 
 " Show list of matches on tab completion in command-line mode
 set wildmenu
 
 " Display completions in a form of popup with descriptions of the matches
 set wildstyle=popup
+
+" Do not consider dot(46) as part of a word (in command-line)
+set wordchars=1-8,14-31,33-45,47-255
 
 " Display suggestions in normal, visual and view modes for keys, marks and
 " registers (at most 5 files).  In other view, when available.
@@ -75,7 +81,7 @@ set incsearch
 set nowrap
 
 " Expand tabulation characters as two spaces
-set tabstop=2
+set tabstop=4
 
 " Hide .. directory everywhere
 set dotdirs=
@@ -91,8 +97,11 @@ endif
 " Display only last directory in tab line
 set shortmess+=L
 
+" Custom ruler format
+set rulerformat='%2l-%S%[ +%x%]'
+
 " Set custom status line look
-set statusline="  Hint: %z%= %A %10u:%-7g %15E %20d  "
+set statusline=" %t%= %A %10u:%-7g %8E %20d "
 
 " What should be saved automatically between vifm sessions.  Drop "savedirs"
 " value if you don't want vifm to remember last visited directories for you.
@@ -138,10 +147,16 @@ let $VIFM_SERVER_NAME = v:servername
 let $RPS1 = '-- VIFM --'
 
 " ------------------------------------------------------------------------------
+" Autocmds
+
+au DirEnter ** set sort=name
+au DirEnter /tmp,**/.cache,**/dl/default,**/.torrent-files,**/vids/mov,**/pix/**/** set sort=-mtime
+
+" ------------------------------------------------------------------------------
+" Source configs
 
 source $VIFM/conf.d/commands.vifm
 source $VIFM/conf.d/mappings.vifm
-source $VIFM/conf.d/autocmds.vifm
 source $VIFM/conf.d/handler.vifm
 source $VIFM/conf.d/icons.vifm
 source $VIFM/conf.d/bookmarks.vifm

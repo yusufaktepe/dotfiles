@@ -1,3 +1,5 @@
+"--- Mappings ---"
+
 " Quit
 nnoremap Q :wqall<cr>
 
@@ -30,74 +32,95 @@ nnoremap <silent> <c-j> <tab>j<tab>
 nnoremap <silent> <c-k> <tab>k<tab>
 
 " Display menu of programs set for the file type of the current file
-nnoremap o :file &<cr>
+nnoremap <silent> o :file &<cr>
 " Pick current item in menu mode
 mmap o <cr>
 
 " Edit file new window
-nnoremap E :edit<cr>
+nnoremap <silent> E :edit<cr>
 
 " Open file in the background using its default program
-nnoremap gb :file &<cr>l
+nnoremap <silent> gb :file &<cr>l
 
-" Tabs
-nnoremap gn :tabnew<cr>
-nnoremap gc :tabclose<cr>
-nnoremap <c-t> :tabnew<cr>
-nnoremap <c-q> :tabclose<cr>
+"" Tabs
+nnoremap <silent> gn :tabnew<cr>
+nnoremap <silent> gc :tabclose<cr>
+nnoremap <silent> <c-t> :tabnew<cr>
+" Close the tab & focus left tab
+nnoremap <silent> <c-q> : <c-u>
+	\| if tabpagenr() == 1
+	\|     execute 'tabclose'
+	\| else
+	\|     execute 'tabclose | tabprevious'
+	\| endif
+	\| <cr>
 
 " Yank current directory path into the clipboard
-nnoremap yd :!echo %d | xclip %i<cr>
+nnoremap <silent> yd :!echo %d | xclip -selection c %i<cr>
 " Yank current file path into the clipboard
-nnoremap yf :!echo %c:p | xclip %i<cr>
+nnoremap <silent> yf :!echo %c:p | xclip -selection c %i<cr>
 
 " Archive
-" nnoremap x :!aunpack -e %f &<cr>
-nnoremap X :!apack  %f &<left><left><left><left><left>
+" nnoremap <silent> x :extract<cr>
+nnoremap <silent> X :!apack %f &<c-a><a-f><space>
 
 " Mappings for faster renaming
 nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
 nnoremap A cw
+nnoremap cn cw<a-b><c-b>
 
 " Faster search of files that start with a particular string
 nnoremap f/ /^
 
 " Substitute file names in current dir
-nnoremap as :%s/
+nnoremap  <silent> as :%s/
 
 " Open console in current directory (Alt+Enter)
-nnoremap <a-c-m> :!unset INSIDE_VIFM RPS1; $TERMINAL &<cr>
+nnoremap <silent> <a-c-m> :!unset INSIDE_VIFM RPS1; $TERMINAL &<cr>
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
-nnoremap <a-e>c :write | edit $MYVIFMRC | restart<cr>
+nnoremap <silent> <a-e>c :write | edit $MYVIFMRC | restart<cr>
 " Open editor in new terminal to edit vifmrc
-nnoremap <a-e>C :!$TERMINAL -e $EDITOR $MYVIFMRC &<cr>
+nnoremap <silent> <a-e>C :!$TERMINAL -e $EDITOR $MYVIFMRC &<cr>
+
+" Find & select with FZF
+nnoremap <silent> <a-f> :FZFfind<cr>
+nnoremap <silent> <a-c-f> :FZFlocate<cr>
+
+" Directory history
+nnoremap <silent> <a-h> :history<cr>
 
 " Drag and drop
-nnoremap <a-d>c :!dragon cp &<cr>
-nnoremap <a-d>d :!dragon dl &<cr>
-nnoremap <a-d>m :!dragon mv &<cr>
-nnoremap yD :!dragon -a -x %f &<cr>
+nnoremap <silent> <a-d>c :!dragon cp &<cr>
+nnoremap <silent> <a-d>d :!dragon dl &<cr>
+nnoremap <silent> <a-d>m :!dragon mv &<cr>
+nnoremap <silent> yD :!dragon -a -x %f &<cr>
 
 " Toggle wrap text in quick view
-nnoremap WW :set wrap!<cr>
+nnoremap <silent> WW :set wrap!<cr>
+
+" Show which package owns a file in status bar
+nnoremap <silent> WP :!pacman -Qo %c %S<cr>
+
+" Show git diff in quick view
+nnoremap <silent> WD :!git diff --color %f %q<cr>
 
 " Toggle tree mode
-nnoremap <a-b> :tree!<cr>
+nnoremap <silent> <a-b> :tree!<cr>
 
 " Toggle between sorting: by name <--> by size <--> by mtime
-nnoremap zs :togglesort<cr>
+nnoremap <silent> zs :togglesort<cr>
 
 " Brief information about files
 nnoremap <silent> cB :set viewcolumns=-{name}..,6{}.<cr>
 
 " Detailed information about files
 nnoremap <silent> cb :set viewcolumns=
-	\-{name}..,11{perms},7{uname},-7{gname},7{size}.,14{mtime}<cr>
+	\-{name}..,11{perms},7{uname},-7{gname},7{size}.,18{mtime}<cr>
 
 " Type cd into command line
-nnoremap cd :cd<space>
+nnoremap <silent> cd :cd<space>
 
 " Go to previous tab page or move current tab to
 " position specified by the count
@@ -119,18 +142,18 @@ nnoremap <c-n> gt
 nnoremap K gt
 
 " *Commander-like mappings
-nnoremap <f1> :help<cr>
+nnoremap <silent> <f1> :help<cr>
 nnoremap <f2> cw
 " TODO: handler script for <f3> preview
-nnoremap <f3> :!bat --style=plain --paging=always %f || less %f<cr>
-nnoremap <f4> :!$TERMINAL -e $EDITOR %f &<cr>
-nnoremap <f5> :copy!<cr>
-nnoremap <f6> :move<cr>
-nnoremap <f7> :mkdir!<space>
-nnoremap <f8> :delete<cr>
-nnoremap <f10> :GDIFF<cr>
-nnoremap <f11> :DIFF<cr>
-nnoremap <f12> :mkcd<space>
+nnoremap <silent> <f3> :!bat --style=plain --paging=always %f || less %f<cr>
+nnoremap <silent> <f4> :!$TERMINAL -e $EDITOR %f &<cr>
+nnoremap <silent> <f5> :copy!<cr>
+nnoremap <silent> <f6> :move<cr>
+nnoremap <silent> <f7> :mkdir!<space>
+nnoremap <silent> <f8> :delete<cr>
+nnoremap <silent> <f10> :GDIFF<cr>
+nnoremap <silent> <f11> :DIFF<cr>
+nnoremap <silent> <f12> :mkcd<space>
 
 " trq fixes
 map ı i
