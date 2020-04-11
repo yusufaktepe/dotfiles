@@ -73,13 +73,11 @@ bindsym $mod+F3 exec $N ifwin -e vivaldi-stable
 bindsym $mod+F4 exec $N ifwin -e opera
 bindsym $mod+F5 exec $N ifwin -e firefox
 bindsym $mod+F6 exec $N ifwin -e google-chrome-stable
-bindsym $mod+F7 exec $N ifwin -e brave
 bindsym $mod+Shift+F2 exec $N ifwin -e doublecmd
 bindsym $mod+Shift+F3 exec $N vivaldi-stable --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
 bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
-bindsym $mod+Shift+F7 exec $N brave --incognito
 
 ## Caps+
 bindsym $caps+e exec $N $TERMINAL -e $EDITOR
@@ -87,7 +85,6 @@ bindsym $caps+m exec $N cantata-mpd
 bindsym $caps+Shift+s exec $N toggle spotifyd
 bindsym $caps+s exec $N ifwin -e spotify
 bindsym $caps+q exec $N ifwin -e qbittorrent
-bindsym $caps+v exec $N ifwin -e smplayer --toggle scratchpad
 bindsym $caps+7 exec $N ifwin vbox Win7
 # bindsym $caps+w exec $N libreoffice --writer
 bindsym --release $caps+c exec $N ifwin crow
@@ -602,18 +599,16 @@ mode "$freeze" {
 
 # Open link with X
 bindsym $caps+b mode "$broopen"
-set $broopen : F3/3 | : F4/4 | : F5/5 | : F6/6 | : F7/7 | 﨩: t | : y/c | : d
+set $broopen : F3/3 | : F4/4 | : F5/5 | : F6/6 | 﨩: t | : y/c | : d
 mode "$broopen" {
 	bindsym F3 --release exec $N bro-open $BROWSER, mode default
 	bindsym F4 --release exec $N bro-open opera --start-maximized, mode default
 	bindsym F5 --release exec $N bro-open firefox, mode default
 	bindsym F6 --release exec $N bro-open google-chrome-stable, mode default
-	bindsym F7 --release exec $N bro-open brave, mode default
 	bindsym 3 --release exec $N bro-open $BROWSER --incognito, mode default
 	bindsym 4 --release exec $N bro-open opera -private --start-maximized, mode default
 	bindsym 5 --release exec $N bro-open firefox --private-window, mode default
 	bindsym 6 --release exec $N bro-open google-chrome-stable --incognito, mode default
-	bindsym 7 --release exec $N bro-open brave --incognito, mode default
 	bindsym t --release exec $N bro-open tor-browser --allow-remote, mode default
 	bindsym y --release exec $N bro-open mpv, mode default
 	bindsym c --release exec $N bro-open mpv -c, mode default
