@@ -33,6 +33,7 @@ foreach widget (
 	zcw_copybuffer
 	# zcw_exit-zsh
 	zcw_globalias
+	zcw_fzf-cd
 	zcw_fzf-history
 	zcw_prefix-sudo
 	zcw_toggle-fg
@@ -58,15 +59,36 @@ zcw_copybuffer() { printf '%s' "$BUFFER" | xclip -selection clipboard ;}
 # Exit; even if the command line is full
 zcw_exit-zsh() { exit }
 
+zcw_fzf-cd() {
+	(( $+commands[fzf] )) || return 1
+
+	setopt localoptions pipefail no_aliases 2>/dev/null
+
+	local cmd dir ret
+	cmd="command find ~/ /data -mindepth 1 \
+		\\( -path '*/\\.git' -o -fstype 'sysfs' -o -fstype 'devfs' \
+		-o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+		-o -type d -print 2>/dev/null"
+
+	dir=$(eval "$cmd" | fzf +m --preview="tree -L 1 -C {}" \
+		--bind=ctrl-space:toggle-preview --preview-window=:hidden)
+
+	[[ -n "$dir" ]] && cd "$dir"
+	ret=$?
+
+	zle reset-prompt
+	return $ret
+}
+
 # Select command from history into the command line
 zcw_fzf-history() {
 	(( $+commands[fzf] )) || return 1
 
 	setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2>/dev/null
 
-	local selected
+	local selected ret
 	selected=$(fc -rl 1 | fzf -e +m -n2..,.. --tiebreak=index -q "$LBUFFER" --prompt='$ ')
-	local ret=$?
+	ret=$?
 
 	[[ -n "$selected" ]] && zle vi-fetch-history -n $selected
 
