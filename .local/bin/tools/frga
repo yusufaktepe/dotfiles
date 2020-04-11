@@ -1,0 +1,7 @@
+#!/bin/sh
+
+doc=$(rga -L --no-messages --rga-adapters=pandoc,poppler "$@" . |
+	fzf +m | awk -F':' '{print $1}')
+
+xdg-open "$doc" >/dev/null 2>&1 &
+
