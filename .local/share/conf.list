@@ -1,7 +1,7 @@
 alacritty        ~/.config/alacritty/alacritty.yml
 bashrc           ~/.config/bash/.bashrc
-conf.list        ~/.config/conf.list
-dir.list         ~/.config/dir.list
+conf.list        ~/.local/share/conf.list
+dir.list         ~/.local/share/dir.list
 dunstrc          ~/.config/dunst/dunstrc
 fonts.conf       ~/.config/fontconfig/fonts.conf
 gitconfig        ~/.config/git/config
