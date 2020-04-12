@@ -27,9 +27,12 @@ nnoremap <silent> S :sort<cr>
 nnoremap <silent> w :view<cr>
 vnoremap <silent> w :view<cr>gv
 
-" Moving cursor in another pane
+" Moving cursor in other pane
 nnoremap <silent> <c-j> <tab>j<tab>
 nnoremap <silent> <c-k> <tab>k<tab>
+
+" Go to same file name in other pane
+nnoremap <silent> <a-s> <tab>:goto %C:t<cr><tab>
 
 " Display menu of programs set for the file type of the current file
 nnoremap <silent> o :file &<cr>
