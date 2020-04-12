@@ -14,7 +14,6 @@ export TERMINAL="alacritty"
 export TERMINS="$TERMINAL --class"
 export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"
-export READER="zathura"
 export FILE="vifm-tab"
 
 # Keep $HOME clean:
