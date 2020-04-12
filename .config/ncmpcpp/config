@@ -30,7 +30,7 @@ lyrics_directory = ~/music/lyrics
 #
 ## Needed for tag editor and file operations to work.
 ##
-mpd_music_dir = "~/music"
+mpd_music_dir = ~/music
 #
 #mpd_crossfade_time = 5
 #
@@ -83,8 +83,6 @@ mpd_music_dir = "~/music"
 visualizer_type = spectrum
 #
 #visualizer_look = ●▮
-#visualizer_look = ●卐
-#visualizer_look = 卐
 #
 #visualizer_color = blue, cyan, green, yellow, magenta, red
 #
@@ -319,8 +317,7 @@ browser_display_mode = columns
 ## Note: You can specify third character which will be used to build 'empty'
 ## part of progressbar.
 ##
-#progressbar_look = =>
-progressbar_look = ->
+progressbar_look = =>
 #
 ## Available values: database, playlist.
 ##
@@ -397,8 +394,7 @@ media_library_albums_split_by_date = no
 ##
 ## Note: You can define startup screen by choosing screen from the list above.
 ##
-#startup_screen = playlist
-startup_screen = media_library
+startup_screen = playlist
 #
 ##
 ## Note: You can define startup slave screen by choosing screen from the list
@@ -526,7 +522,6 @@ empty_tag_color = magenta
 #
 #state_flags_color = default:b
 #
-#main_window_color = yellow
 main_window_color = white
 #
 #color1 = white
