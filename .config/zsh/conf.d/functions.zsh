@@ -71,7 +71,7 @@ zcw_fzf-cd() {
 		-o -type d -print 2>/dev/null"
 
 	dir=$(eval "$cmd" | fzf +m --preview="tree -L 1 -C {}" \
-		--bind=ctrl-space:toggle-preview --preview-window=:hidden)
+		--bind=space:toggle-preview --preview-window=:hidden)
 
 	[[ -n "$dir" ]] && cd "$dir"
 	ret=$?
