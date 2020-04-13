@@ -396,6 +396,7 @@ let NERDTreeShowHidden=1
 
 "=== DirDiff
 let g:DirDiffWindowSize = 10
+let g:DirDiffExcludes = '.*.swp,.git'
 " ignore spaces
 " let g:DirDiffAddArgs = "-w"
 
