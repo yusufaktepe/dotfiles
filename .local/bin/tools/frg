@@ -1,6 +1,6 @@
 #!/bin/sh
 
-f=$(rg --hidden --no-messages "$@" . | fzf +m | awk -F':' '{print $1}')
-
-[ -n "$f" ] && $EDITOR "$f"
+rg --hidden --no-messages --no-heading --color always --line-number "$@" . |
+	fzf --ansi -m -q "${@:-}" | awk -F':' '{print "+" $2,$1}' |
+	xargs -ro -d'\n' "$EDITOR" -p
 
