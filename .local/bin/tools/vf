@@ -1,0 +1,6 @@
+#!/bin/sh
+
+fd -H -t f -c always |
+	fzf --ansi -e -m -q "${@:-}" --preview 'less {}' --preview-window=:hidden |
+	xargs -ro "$EDITOR" -p
+
