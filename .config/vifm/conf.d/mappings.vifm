@@ -32,7 +32,7 @@ nnoremap <silent> <c-j> <tab>j<tab>
 nnoremap <silent> <c-k> <tab>k<tab>
 
 " Go to same file name in other pane
-nnoremap <silent> <a-s> <tab>:goto %C:t<cr><tab>
+nnoremap <silent> <a-s> :winrun , goto %C:t<cr>
 
 " Display menu of programs set for the file type of the current file
 nnoremap <silent> o :file &<cr>
@@ -80,7 +80,7 @@ nnoremap f/ /^
 nnoremap  <silent> as :%s/
 
 " Open console in current directory (Alt+Enter)
-nnoremap <silent> <a-c-m> :!unset INSIDE_VIFM RPS1; $TERMINAL &<cr>
+nnoremap <silent> <a-c-m> :!unset VIFM_SERVER_NAME RPS1; $TERMINAL & disown<cr>
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
 nnoremap <silent> <a-e>c :write | edit $MYVIFMRC | restart<cr>
