@@ -65,7 +65,7 @@ filextype *.ora,*.xcf
 	\ gimp %f %i &,
 
 " Vector Graphics
-filextype *.svg inkscape %f &
+filextype *.svg inkscape %f %i &
 
 " Mindmap
 filextype *.vym

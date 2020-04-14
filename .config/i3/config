@@ -68,6 +68,7 @@ bindsym --release $mod+Insert exec $N gclip selpaste
 bindsym $mod+Shift+Insert exec $N gclip seltoclip
 
 # #---Start Applications---# #
+bindsym $mod+F1 exec $N $TERMINS _blockterm -e sh -c "VIFM=~/.config/vifm/session/shell vifm"
 bindsym $mod+F2 exec $N ifterm -e vifm
 bindsym $mod+F3 exec $N ifwin -e vivaldi-stable
 bindsym $mod+F4 exec $N ifwin -e opera
@@ -311,7 +312,7 @@ for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 # assign [window_role="browser"]                 $ws1
 assign [class="Firefox|(?i)Vivaldi"]             $ws1
 assign [class="Pcmanfm|Doublecmd"]               $ws2
-assign [instance="ranger|vifm"]                  $ws2
+assign [instance="^(ranger|vifm)$"]              $ws2
 # assign [class="(?i)thunderbird"]               $ws9
 assign [class="qBittorrent"]                     $ws10
 for_window [class="Spotify"] move to workspace   $ws11

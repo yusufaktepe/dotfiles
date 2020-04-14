@@ -32,25 +32,25 @@ map <wait> Te :cd /etc<cr>
 map <wait> Tu :cd /usr<cr>
 map <wait> Tm :cd /media/$USER<cr>
 
-map <wait> th <tab>:cd ~/<cr>
-map <wait> tc <tab>:cd ~/.config<cr>
-map <wait> tb <tab>:cd ~/.local/bin<cr>
-map <wait> ts <tab>:cd ~/.local/share<cr>
-map <wait> tw <tab>:cd ~/dl/default<cr>
-map <wait> td <tab>:cd ~/dox<cr>
-map <wait> tp <tab>:cd ~/pix<cr>
-map <wait> tm <tab>:cd ~/music<cr>
-map <wait> tV <tab>:cd ~/vids<cr>
-map <wait> tv <tab>:cd ~/vids/mov<cr>
-map <wait> tt <tab>:cd ~/vids/tv<cr>
-map <wait> tD <tab>:cd /data<cr>
-map <wait> tS <tab>:cd /data/shared<cr>
-map <wait> trr <tab>:cd ~/repos<cr>
-map <wait> tra <tab>:cd ~/repos/aur<cr>
-map <wait> trd <tab>:cd ~/repos/dots<cr>
-map <wait> trh <tab>:cd ~/repos/site<cr>
-map <wait> trn <tab>:cd ~/repos/notes<cr>
-map <wait> trp <tab>:cd ~/repos/programs<cr>
-map <wait> trs <tab>:cd ~/repos/scripts<cr>
-map <wait> trw <tab>:cd ~/repos/web<cr>
+map <wait> th  :winrun , cd ~/<cr>
+map <wait> tc  :winrun , cd ~/.config<cr>
+map <wait> tb  :winrun , cd ~/.local/bin<cr>
+map <wait> ts  :winrun , cd ~/.local/share<cr>
+map <wait> tw  :winrun , cd ~/dl/default<cr>
+map <wait> td  :winrun , cd ~/dox<cr>
+map <wait> tp  :winrun , cd ~/pix<cr>
+map <wait> tm  :winrun , cd ~/music<cr>
+map <wait> tV  :winrun , cd ~/vids<cr>
+map <wait> tv  :winrun , cd ~/vids/mov<cr>
+map <wait> tt  :winrun , cd ~/vids/tv<cr>
+map <wait> tD  :winrun , cd /data<cr>
+map <wait> tS  :winrun , cd /data/shared<cr>
+map <wait> trr :winrun , cd ~/repos<cr>
+map <wait> tra :winrun , cd ~/repos/aur<cr>
+map <wait> trd :winrun , cd ~/repos/dots<cr>
+map <wait> trh :winrun , cd ~/repos/site<cr>
+map <wait> trn :winrun , cd ~/repos/notes<cr>
+map <wait> trp :winrun , cd ~/repos/programs<cr>
+map <wait> trs :winrun , cd ~/repos/scripts<cr>
+map <wait> trw :winrun , cd ~/repos/web<cr>
 

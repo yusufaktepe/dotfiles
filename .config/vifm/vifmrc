@@ -119,9 +119,6 @@ if $TERM != 'linux'
 	set tuioptions+=u
 endif
 
-" TODO: remove when "https://github.com/vifm/vifm/issues/533" is fixed
-set dotfiles
-
 " Ignore .git directory on :find
 set findprg='find %s %a -print ,
 	\ -type d \( ! -readable -o ! -executable -o -path "*/.git" \)
@@ -150,7 +147,8 @@ let $RPS1 = '-- VIFM --'
 " Autocmds
 
 au DirEnter ** set sort=name
-au DirEnter /tmp,**/.cache,**/dl/default,**/.torrent-files,**/vids/mov,**/pix/**/** set sort=-mtime
+au DirEnter /tmp,**/.cache,**/dl/default,**/.torrent-files,
+	\**/vids/mov,**/pix/**/**,**/pkglists set sort=-mtime
 
 " ------------------------------------------------------------------------------
 " Source configs
