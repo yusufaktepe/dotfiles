@@ -2,8 +2,6 @@
 
 pacman -Qq |
 	fzf -q "$1" -m --height 100% --preview 'pacman -Qil {}' \
-		--bind '?:toggle-preview,space:toggle-preview' \
-		--bind 'alt-k:preview-up,alt-p:preview-page-up' \
-		--bind 'alt-j:preview-down,alt-n:preview-page-down' |
+		--bind 'space:toggle-preview' |
 	xargs -ro sudo pacman -Rns
 
