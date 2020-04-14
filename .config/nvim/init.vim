@@ -15,9 +15,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim'
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  'NERDTreeToggle' }
 Plug 'ryanoasis/vim-devicons'
 Plug 'mbbill/undotree'
 Plug 'psliwka/vim-smoothie'
@@ -429,7 +429,7 @@ nmap <silent> <leader>co :VCoolor<CR>
 let g:vcoolor_disable_mappings = 1
 
 "=== Vifm
-let g:vifm_exec = 'VIFM=~/.config/vifm/session/shell vifm'
+let g:vifm_exec = 'VIFM=~/.config/vifm/session/select vifm'
 
 "=== Hexokinase
 nmap <silent> <leader>ch :HexokinaseToggle<CR>
