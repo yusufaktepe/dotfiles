@@ -15,10 +15,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim'
-Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  'NERDTreeToggle' }
-Plug 'ryanoasis/vim-devicons'
 Plug 'mbbill/undotree'
 Plug 'psliwka/vim-smoothie'
 
@@ -386,13 +382,6 @@ let g:gist_post_private = 1
 
 "=== Goyo plugin makes text more readable when writing prose:
 map <leader>f :Goyo \| set linebreak<CR>
-
-"=== NerdTree
-map <leader>n :NERDTreeToggle<CR>
-
-let NERDTreeShowHidden=1
-" close vim if NERDTree is the last window
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "=== DirDiff
 let g:DirDiffWindowSize = 10
