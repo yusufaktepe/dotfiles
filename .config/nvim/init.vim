@@ -419,6 +419,8 @@ let g:vcoolor_disable_mappings = 1
 
 "=== Vifm
 let g:vifm_exec = 'VIFM=~/.config/vifm/session/select vifm'
+map <leader>n :Vifm<CR>
+map <leader>N :TabVifm<CR>
 
 "=== Hexokinase
 nmap <silent> <leader>ch :HexokinaseToggle<CR>
