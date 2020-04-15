@@ -295,6 +295,7 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#show_close_button = 0
+let g:airline#extensions#tabline#fnamemod = ':t:.'
 let g:airline_powerline_fonts=1
 let g:airline_theme='gruvbox'
 
@@ -410,8 +411,13 @@ let g:undotree_DiffpanelHeight = 6
 let g:move_key_modifier = 'C-M'
 
 "=== VimWiki
-let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-let g:vimwiki_list = [{'path': '~/repos/notes', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_ext2syntax = {
+	\ '.Rmd': 'markdown', '.rmd': 'markdown', '.md': 'markdown',
+	\ '.markdown': 'markdown', '.mdown': 'markdown'
+	\ }
+let g:vimwiki_list = [
+	\ {'path': '~/repos/notes', 'syntax': 'markdown', 'ext': '.md'}
+	\ ]
 
 "=== VCoolor
 nmap <silent> <leader>co :VCoolor<CR>
