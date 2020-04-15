@@ -115,12 +115,12 @@ nnoremap <silent> <a-b> :tree!<cr>
 " Toggle between sorting: by name <--> by size <--> by mtime
 nnoremap <silent> zs :togglesort<cr>
 
-" Brief information about files
-nnoremap <silent> cB :set viewcolumns=-{name}..,6{}.<cr>
-
-" Detailed information about files
-nnoremap <silent> cb :set viewcolumns=
-	\-{name}..,11{perms},7{uname},-7{gname},7{size}.,18{mtime}<cr>
+" Toggle viewcolumns
+nnoremap <silent> Of :set viewcolumns=-{name}..,6{}.<cr>
+nnoremap <silent> Od :vcDetails<cr>
+nnoremap <silent> Om :vcMtime<cr>
+nnoremap <silent> Os :vcSizeMtime<cr>
+nnoremap <silent> Op :vcPerms<cr>
 
 " Type cd into command line
 nnoremap <silent> cd :cd<space>
