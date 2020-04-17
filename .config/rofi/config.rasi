@@ -4,17 +4,17 @@ combi-modi: "drun,run";
 show-icons: true;
 //theme: "solarized";
 icon-theme: "Papirus-Dark" ;
-font: "mono 11";
+font: "mono 10";
 separator-style: "solid";
 hide-scrollbar: true;
 me-select-entry: "MouseSecondary";
 me-accept-entry: "MousePrimary";
 scroll-method: 1;
 
-display-run: "#! ";
+display-run: " ";
 display-drun: "";
 display-window: " ";
-display-combi: " ";
+display-combi: " ";
 display-calc: "";
 
 kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2,XF86Launch9,Super_L+XF86MonBrightnessDown";
@@ -33,7 +33,7 @@ kb-select-10: "Super+0,Control+0";
 location: 2;
 yoffset: 20;
 lines: 10;
-width: 40;
+width: 60;
 
 /*	modi: "window,run,ssh";*/
 /*	width: 50;*/
@@ -176,4 +176,4 @@ width: 40;
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
-@import "/home/yusuf/.config/rofi/themes/gruvbox-lb_dev.rasi"
+@import "~/.config/rofi/themes/flat-gruvbox.rasi"

@@ -1,0 +1,22 @@
+@import "flat-gruvbox.rasi"
+
+* {
+  bg:                 #1d202170;
+  bg-normal:          #1d202170;
+  bg-selected:        #504945;
+  font:               "mono 9";
+}
+
+window {
+  transparency:       "real";
+}
+
+message {
+  padding:            1px 0px 2px 2px;
+}
+
+prompt {
+  text-color:         #282828;
+}
+
+/* vim:set ts=2 sw=2 et: */
