@@ -1,0 +1,142 @@
+/* global settings and color variables */
+* {
+  main:               #689d6a;
+  highlight:          bold #689d6a;
+  urgent:             #fb4934;
+
+  fg:                 #ebdbb2;
+  bg:                 #1d2021;
+  bg-normal:          #282828;
+  bg-selected:        #32302f;
+  darkgray:           #a89984;
+  scrollbarcolor:     #505050;
+  font:               "mono 10";
+  background-color:   @bg;
+  border-color:       @main;
+}
+
+window {
+  background-color:   @bg;
+  border:             1;
+}
+
+mainbox {
+  background-color:   @bg;
+  spacing:            0px;
+  children:           [inputbar, message, listview];
+}
+
+message {
+  padding:            6px 10px;
+  background-color:   @bg;
+}
+
+textbox {
+  text-color:         @darkgray;
+  background-color:   @bg;
+}
+
+listview {
+  fixed-height:       false;
+  dynamic:            true;
+  scrollbar:          false;
+  spacing:            0px;
+  padding:            1px 0px 0px 0px;
+  margin:             0px 0px 1px 0px;
+  background:         @bg;
+}
+
+element {
+  padding:            3px 15px;
+}
+
+element normal.normal {
+  padding:            0px 15px;
+  background-color:   @bg-normal;
+  text-color:         @fg;
+}
+
+element normal.urgent {
+  background-color:   @bg-normal;
+  text-color:         @urgent;
+}
+
+element normal.active {
+  background-color:   @bg-normal;
+  text-color:         @main;
+}
+
+element selected.normal {
+  background-color:   @bg-selected;
+  text-color:         @fg;
+}
+
+element selected.urgent {
+  background-color:   @urgent;
+  text-color:         @bg;
+}
+
+element selected.active {
+  background-color:   @main;
+  text-color:         @bg;
+}
+
+element alternate.normal {
+  background-color:   @bg-normal;
+  text-color:         @fg;
+}
+
+element alternate.urgent {
+  background-color:   @bg-normal;
+  text-color:         @urgent;
+}
+
+element alternate.active {
+  background-color:   @bg-normal;
+  text-color:         @main;
+}
+
+scrollbar {
+  background-color:   @bg;
+  handle-color:       @darkgray;
+  handle-width:       15px;
+}
+
+mode-switcher {
+  background-color:   @bg;
+}
+
+button {
+  background-color:   @bg;
+  text-color:         @darkgray;
+}
+
+button selected {
+  text-color:         @main;
+}
+
+inputbar {
+  background-color:   @bg;
+  spacing:            0px;
+  children:           [prompt, entry, case-indicator];
+}
+
+prompt {
+  padding:            6px 9px;
+  background-color:   @main;
+  text-color:         @bg;
+}
+
+entry {
+  padding:            6px 10px;
+  background-color:   @bg;
+  text-color:         @fg;
+}
+
+case-indicator {
+  padding:            6px 10px;
+  text-color:         @main;
+  background-color:   @bg;
+}
+
+/* vim:set ts=2 sw=2 et: */
