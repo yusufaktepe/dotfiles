@@ -475,6 +475,7 @@ autocmd VimLeave *.tex !texclear %
 autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 autocmd BufRead,BufNewFile *.tex set filetype=tex
+autocmd BufRead,BufNewFile *.rasi set filetype=css
 
 " Enable Goyo by default for mutt writting
 autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
