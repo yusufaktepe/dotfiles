@@ -77,7 +77,7 @@ nnoremap cn cw<a-b><c-b>
 nnoremap f/ /^
 
 " Substitute file names in current dir
-nnoremap  <silent> as :%s/
+nnoremap  <silent> cs :%s/
 
 " Open console in current directory (Alt+Enter)
 nnoremap <silent> <a-c-m> :!unset VIFM_SERVER_NAME RPS1; $TERMINAL & disown<cr>
@@ -112,15 +112,20 @@ nnoremap <silent> WD :!git diff --color %f %q<cr>
 " Toggle tree mode
 nnoremap <silent> <a-b> :tree!<cr>
 
-" Toggle between sorting: by name <--> by size <--> by mtime
-nnoremap <silent> zs :togglesort<cr>
+" Set viewcolumns
+nnoremap <silent> aD :setcolumnsDetails<cr>
+nnoremap <silent> aN :setcolumnsName<cr>
+nnoremap <silent> aP :setcolumnsPerms<cr>
+nnoremap <silent> aS :setcolumnsSize<cr>
+nnoremap <silent> aT :setcolumnsTime<cr>
+nnoremap <silent> aA :setcolumnsSizeTime<cr>
 
-" Toggle viewcolumns
-nnoremap <silent> Of :set viewcolumns=-{name}..,6{}.<cr>
-nnoremap <silent> Od :vcDetails<cr>
-nnoremap <silent> Om :vcMtime<cr>
-nnoremap <silent> Os :vcSizeMtime<cr>
-nnoremap <silent> Op :vcPerms<cr>
+" Sort by...
+nnoremap <silent> an :set sort=+name | echo 'Sorted by +name'<cr>
+nnoremap <silent> as :set sort=-size | echo 'Sorted by -size'<cr>
+nnoremap <silent> at :set sort=-mtime | echo 'Sorted by -time'<cr>
+nnoremap <silent> aa :togglesort<cr>
+nnoremap <silent> ar :sortReverse<cr>
 
 " Type cd into command line
 nnoremap <silent> cd :cd<space>
@@ -148,14 +153,14 @@ nnoremap K gt
 nnoremap <silent> <f1> :help<cr>
 nnoremap <f2> cw
 " TODO: handler script for <f3> preview
-nnoremap <silent> <f3> :!bat --style=plain --paging=always %f || less %f<cr>
-nnoremap <silent> <f4> :!$TERMINAL -e $EDITOR %f &<cr>
-nnoremap <silent> <f5> :copy!<cr>
-nnoremap <silent> <f6> :move<cr>
-nnoremap <silent> <f7> :mkdir!<space>
-nnoremap <silent> <f8> :delete<cr>
-nnoremap <silent> <f10> :GDIFF<cr>
-nnoremap <silent> <f11> :DIFF<cr>
+nnoremap <silent> <f3>  :!bat --style=plain --paging=always %f || less %f<cr>
+nnoremap <silent> <f4>  :!$TERMINAL -e $EDITOR %f &<cr>
+noremap  <silent> <f5>  :copy!<cr>
+noremap  <silent> <f6>  :move<cr>
+nnoremap <silent> <f7>  :mkdir!<space>
+noremap  <silent> <f8>  :delete<cr>
+noremap  <silent> <f10> :GDIFF<cr>
+noremap  <silent> <f11> :DIFF<cr>
 nnoremap <silent> <f12> :mkcd<space>
 
 " trq fixes

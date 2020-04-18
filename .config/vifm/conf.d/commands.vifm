@@ -51,7 +51,7 @@ command! send :!vifm --server-name vifm --remote -c "tabnew | cd %d %D"
 " Toggle between sorting: by name <--> by size <--> by mtime
 command! togglesort
 	\ : if &sort == '-size,+name'
-	\ |     set sort=+mtime
+	\ |     set sort=-mtime
 	\ |     echo 'Sorted by modification date'
 	\ | elseif &sort == '+name'
 	\ |     set sort=-size
@@ -61,32 +61,20 @@ command! togglesort
 	\ |     echo 'Sorted by name'
 	\ | endif
 
-" Toggle viewcolumns
-command! vcMtime
-	\ : if &viewcolumns == '-{name}..,18{mtime}'
-	\ |     set viewcolumns=-{name}..,6{}.
+" Reverse sort
+command! sortReverse
+	\ : if &sortorder == 'ascending'
+	\ |     set sortorder=descending
 	\ | else
-	\ |     set viewcolumns=-{name}..,18{mtime}
+	\ |     set sortorder=ascending
 	\ | endif
+	\ | set sortorder?
 
-command! vcSizeMtime
-	\ : if &viewcolumns == '-{name}..,7{size}.,18{mtime}'
-	\ |     set viewcolumns=-{name}..,6{}.
-	\ | else
-	\ |     set viewcolumns=-{name}..,7{size}.,18{mtime}
-	\ | endif
-
-command! vcDetails
-	\ : if &viewcolumns == '-{name}..,11{perms},7{uname},-7{gname},7{size}.,18{mtime}'
-	\ |     set viewcolumns=-{name}..,6{}.
-	\ | else
-	\ |     set viewcolumns=-{name}..,11{perms},7{uname},-7{gname},7{size}.,18{mtime}
-	\ | endif
-
-command! vcPerms
-	\ : if &viewcolumns == '-{name}..,11{perms}'
-	\ |     set viewcolumns=-{name}..,6{}.
-	\ | else
-	\ |     set viewcolumns=-{name}..,11{perms}
-	\ | endif
+" Set viewcolumns
+command! setcolumnsDetails  :set viewcolumns=-{name}..,11{perms},7{uname},-7{gname},6{size}.,18{mtime}
+command! setcolumnsName     :set viewcolumns=-{name}..,6{}.
+command! setcolumnsPerms    :set viewcolumns=-{name}..,11{perms}
+command! setcolumnsSize     :set viewcolumns=-{name}..,6{size}.
+command! setcolumnsTime     :set viewcolumns=-{name}..,18{mtime}
+command! setcolumnsSizeTime :set viewcolumns=-{name}..,6{size}.,18{mtime}
 
