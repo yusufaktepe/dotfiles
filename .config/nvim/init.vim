@@ -39,7 +39,6 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mboughaba/i3config.vim'
 Plug 'chr4/nginx.vim'
-Plug 'vifm/vifm.vim'
 
 " Auto Completion, linting, etc
 Plug 'w0rp/ale'
@@ -77,6 +76,7 @@ Plug 'mattn/webapi-vim'        " interface to Web API (for gist-vim)
 Plug 'mattn/gist-vim'          " create gists
 Plug 'will133/vim-dirdiff'     " diff directories
 Plug 'junegunn/fzf.vim'
+Plug 'vifm/vifm.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
