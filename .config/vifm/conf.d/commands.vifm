@@ -8,12 +8,14 @@ command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir! %a | cd %a
 command! vgrep vim "+grep %a"
-command! reload :write | restart | windo set dotfiles
 command! extract aunpack -e %f &
 command! compress apack
 command! link ln -s %d/%f %D
 command! vidir vidir %a
 command! EDIT $TERMINAL -e vim %a &
+
+" Restart Vifm, preserve everything?
+command! reload :tabnew | write | restart | tabclose | tabprevious
 
 command! mks touch %a | chmod +x %a
 	\ | printf "#!/bin/sh\n\n\n" >> %a | $TERMINAL -e vim +$ %a &
