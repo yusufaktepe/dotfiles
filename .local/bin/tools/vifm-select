@@ -2,6 +2,11 @@
 
 while read -r file; do
 	[ -z "$file" ] && continue
+
+	# Make sure the file is in the current directory.
+	[ -z "$filepath" ] && filepath=$(realpath "$file") &&
+		vifm --server-name "$VIFM_SERVER_NAME" --remote --select "$filepath"
+
 	vifm --server-name "$VIFM_SERVER_NAME" --remote -c "select $file"
 done
 
