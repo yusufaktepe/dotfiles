@@ -1,9 +1,12 @@
 "--- Bookmarks ---"
 
-map Br :cd /<cr>
-map Be :cd /etc<cr>
-map Bu :cd /usr<cr>
-map Bm :cd /media/$USER<cr>
+" Current pane
+map b/ :cd /<cr>
+map bE :cd /etc<cr>
+map bU :cd /usr<cr>
+map bM :cd /media/$USER<cr>
+map bD :cd /data<cr>
+map bS :cd /data/shared<cr>
 
 map bh :cd ~/<cr>
 map bc :cd ~/.config<cr>
@@ -13,11 +16,8 @@ map bw :cd ~/dl/default<cr>
 map bd :cd ~/dox<cr>
 map bp :cd ~/pix<cr>
 map bm :cd ~/music<cr>
-map bV :cd ~/vids<cr>
 map bv :cd ~/vids/mov<cr>
 map bt :cd ~/vids/tv<cr>
-map bD :cd /data<cr>
-map bS :cd /data/shared<cr>
 map brr :cd ~/repos<cr>
 map bra :cd ~/repos/aur<cr>
 map brd :cd ~/repos/dots<cr>
@@ -27,30 +27,30 @@ map brp :cd ~/repos/programs<cr>
 map brs :cd ~/repos/scripts<cr>
 map brw :cd ~/repos/web<cr>
 
-map <wait> Tr :cd /<cr>
-map <wait> Te :cd /etc<cr>
-map <wait> Tu :cd /usr<cr>
-map <wait> Tm :cd /media/$USER<cr>
+" Other pane
+map B/  :winrun , cd /<cr>
+map BE  :winrun , cd /etc<cr>
+map BU  :winrun , cd /usr<cr>
+map BM  :winrun , cd /media/$USER<cr>
+map BD  :winrun , cd /data<cr>
+map BS  :winrun , cd /data/shared<cr>
 
-map <wait> th  :winrun , cd ~/<cr>
-map <wait> tc  :winrun , cd ~/.config<cr>
-map <wait> tb  :winrun , cd ~/.local/bin<cr>
-map <wait> ts  :winrun , cd ~/.local/share<cr>
-map <wait> tw  :winrun , cd ~/dl/default<cr>
-map <wait> td  :winrun , cd ~/dox<cr>
-map <wait> tp  :winrun , cd ~/pix<cr>
-map <wait> tm  :winrun , cd ~/music<cr>
-map <wait> tV  :winrun , cd ~/vids<cr>
-map <wait> tv  :winrun , cd ~/vids/mov<cr>
-map <wait> tt  :winrun , cd ~/vids/tv<cr>
-map <wait> tD  :winrun , cd /data<cr>
-map <wait> tS  :winrun , cd /data/shared<cr>
-map <wait> trr :winrun , cd ~/repos<cr>
-map <wait> tra :winrun , cd ~/repos/aur<cr>
-map <wait> trd :winrun , cd ~/repos/dots<cr>
-map <wait> trh :winrun , cd ~/repos/site<cr>
-map <wait> trn :winrun , cd ~/repos/notes<cr>
-map <wait> trp :winrun , cd ~/repos/programs<cr>
-map <wait> trs :winrun , cd ~/repos/scripts<cr>
-map <wait> trw :winrun , cd ~/repos/web<cr>
+map Bh  :winrun , cd ~/<cr>
+map Bc  :winrun , cd ~/.config<cr>
+map Bb  :winrun , cd ~/.local/bin<cr>
+map Bs  :winrun , cd ~/.local/share<cr>
+map Bw  :winrun , cd ~/dl/default<cr>
+map Bd  :winrun , cd ~/dox<cr>
+map Bp  :winrun , cd ~/pix<cr>
+map Bm  :winrun , cd ~/music<cr>
+map Bv  :winrun , cd ~/vids/mov<cr>
+map Bt  :winrun , cd ~/vids/tv<cr>
+map Brr :winrun , cd ~/repos<cr>
+map Bra :winrun , cd ~/repos/aur<cr>
+map Brd :winrun , cd ~/repos/dots<cr>
+map Brh :winrun , cd ~/repos/site<cr>
+map Brn :winrun , cd ~/repos/notes<cr>
+map Brp :winrun , cd ~/repos/programs<cr>
+map Brs :winrun , cd ~/repos/scripts<cr>
+map Brw :winrun , cd ~/repos/web<cr>
 
