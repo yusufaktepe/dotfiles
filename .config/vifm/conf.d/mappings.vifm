@@ -152,6 +152,20 @@ nnoremap <c-p> gT
 nnoremap <c-n> gt
 nnoremap K gt
 
+" Switch to n-th tab
+nnoremap <c-f1> 1gt
+nnoremap <c-f2> 2gt
+nnoremap <c-f3> 3gt
+nnoremap <c-f4> 4gt
+nnoremap <c-f5> 5gt
+nnoremap <c-f6> 6gt
+nnoremap <c-f7> 7gt
+nnoremap <c-f8> 8gt
+nnoremap <c-f9> 9gt
+nnoremap <c-f10> 10gt
+nnoremap <c-f11> 11gt
+nnoremap <c-f12> 12gt
+
 " *Commander-like mappings
 nnoremap <silent> <f1> :help<cr>
 nnoremap <f2> cw
