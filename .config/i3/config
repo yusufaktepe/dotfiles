@@ -109,7 +109,7 @@ bindsym XF86MonBrightnessUp exec $N brightness inc 5
 bindsym XF86MonBrightnessDown exec $N brightness dec 5
 bindsym $mod+XF86MonBrightnessDown --release exec $N sleep 1 && xset dpms force off
 
-bindsym XF86Display exec $N displayselect
+bindsym XF86Display exec $N arandr
 bindsym XF86TouchpadOff exec $N toggle touchpad
 bindsym XF86TouchpadOn exec $N toggle touchpad
 
