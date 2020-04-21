@@ -14,7 +14,7 @@ export TERMINAL="alacritty"
 export TERMINS="$TERMINAL --class"
 export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"
-export FILE="vifm-tab"
+export FM="vifm-tab"
 
 # Keep $HOME clean:
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
