@@ -33,17 +33,11 @@ path() {
 chosen=$(path "$list")
 
 if [ -d "$chosen" ]; then
-	if [ -n "$termexec" ]; then
-		$FILE "$chosen"
-	else
+	{ [ -n "$termexec" ] && $FM "$chosen" ;} ||
 		xdg-open "$chosen" >/dev/null 2>&1
-	fi
 elif [ -f "$chosen" ]; then
-	if [ -n "$termexec" ]; then
-		$EDITOR "$chosen"
-	else
-		$TERMINAL -e "$EDITOR" "$chosen"
-	fi
+	{ [ -n "$termexec" ] && $EDITOR "$chosen" ;} ||
+		$TERMINAL -e "$EDITOR" "$chosen" >/dev/null 2>&1 &
 else
 	exit
 fi
