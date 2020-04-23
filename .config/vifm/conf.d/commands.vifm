@@ -20,23 +20,40 @@ command! reload :tabnew | write | restart | tabclose | tabprevious
 command! mks touch %a | chmod +x %a
 	\ | printf "#!/bin/sh\n\n\n" >> %a | $TERMINAL -e vim +$ %a &
 
+" Diff files & folders
+" uses selection of current pane when it contains more than one file
+" otherwise uses left and right pane file/folder keeping order inside diff window
 command! diff
-	\ : if paneisat('right') && paneisat('bottom')
-	\ |     execute '!vdiff %%C %%c'
+	\ : if expand('%%c') == expand('%%f')
+	\ |     if paneisat('right') && paneisat('bottom')
+	\ |         execute '!vdiff %%C %%c'
+	\ |     else
+	\ |         execute '!vdiff %%c %%C'
+	\ |     endif
 	\ | else
-	\ |     execute '!vdiff %%c %%C'
+	\ |     execute '!vdiff %%f'
 	\ | endif
+
 command! DIFF
-	\ : if paneisat('right') && paneisat('bottom')
-	\ |     execute '!alacritty -d 151 40 -e vdiff %%C %%c &'
+	\ : if expand('%%c') == expand('%%f')
+	\ |     if paneisat('right') && paneisat('bottom')
+	\ |         execute '!alacritty -d 151 40 -e vdiff %%C %%c &'
+	\ |     else
+	\ |         execute '!alacritty -d 151 40 -e vdiff %%c %%C &'
+	\ |     endif
 	\ | else
-	\ |     execute '!alacritty -d 151 40 -e vdiff %%c %%C &'
+	\ |     execute '!alacritty -d 151 40 -e vdiff %%f'
 	\ | endif
+
 command! GDIFF
-	\ : if paneisat('right') && paneisat('bottom')
-	\ |     execute '!meld -n %%C %%c &'
+	\ : if expand('%%c') == expand('%%f')
+	\ |     if paneisat('right') && paneisat('bottom')
+	\ |         execute '!meld -n %%C %%c &'
+	\ |     else
+	\ |         execute '!meld -n %%c %%C &'
+	\ |     endif
 	\ | else
-	\ |     execute '!meld -n %%c %%C &'
+	\ |     execute '!meld -n %%f'
 	\ | endif
 
 command! FZFfind
