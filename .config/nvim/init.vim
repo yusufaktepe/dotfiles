@@ -345,7 +345,7 @@ let g:LanguageClient_serverCommands = {
 	\ 'javascript.jsx': ['javascript-typescript-stdio'],
 	\ 'javascript':     ['javascript-typescript-stdio'],
 	\ 'typescript':     ['javascript-typescript-stdio'],
-	\  'vim':           ['vim-language-server', '--stdio'],
+	\ 'vim':           ['vim-language-server', '--stdio'],
 	\ }
 
 " Let ALE handle linting
@@ -439,7 +439,7 @@ let g:Hexokinase_ftEnabled = ['css', 'html', 'scss', 'javascript.jsx']
 " Open help in full-window view (empty buffer OR new tab)
 function! HelpTab(...)
 	let cmd = 'tab help %s'
-	if bufname('%') == "" && getline(1) == ""
+	if bufname('%') ==# '' && getline(1) ==# ''
 		let cmd = 'help %s | only'
 	endif
 	exec printf(cmd, join(a:000, ' '))
@@ -450,7 +450,7 @@ command! -nargs=* -complete=help H call HelpTab(<q-args>)
 " Open or create a tab at the given tab index
 function! Tabnm(n)
 	try
-		exec "tabn " . a:n
+		exec 'tabn ' . a:n
 	catch
 		$tabnew
 	endtry
@@ -458,10 +458,10 @@ endfunction
 
 " Append modeline after last line in buffer
 function! AppendModeline()
-	let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+	let l:modeline = printf(' vim: set ts=%d sw=%d tw=%d %set :',
 		\ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
-	let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-	call append(line("$"), l:modeline)
+	let l:modeline = substitute(&commentstring, '%s', l:modeline, '')
+	call append(line('$'), l:modeline)
 endfunction
 
 "=====================================================================
