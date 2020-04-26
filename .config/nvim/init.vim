@@ -98,7 +98,6 @@ set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,default,iso8859-9,latin1
 set number relativenumber
 " set signcolumn=yes                " always show sign column
-set wildmode=list:longest,list:full " command mode completion behavior
 set completeopt+=noinsert,noselect
 set go=a
 set mouse=a
@@ -267,8 +266,8 @@ cnoremap <M-f> <S-Right>
 cnoremap <C-g> <C-c>
 
 " Make <C-n> and <C-p> behave like up/down arrows
-cnoremap <C-n> <down>
-cnoremap <C-p> <up>
+cnoremap <expr> <c-p> pumvisible() ? "\<C-p>" : "\<up>"
+cnoremap <expr> <c-n> pumvisible() ? "\<C-n>" : "\<down>"
 
 " Check file in shellcheck:
 map <leader>cs :!clear && shellcheck %<CR>
