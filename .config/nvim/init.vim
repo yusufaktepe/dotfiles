@@ -114,8 +114,9 @@ set noshowmode                " disable native mode display (use airline instead
 set showmatch                 " highlight matching parens/brackets/etc
 set matchtime=2               " show matching parens/brackets for 200ms
 set termguicolors             " enable true color mode for terminals that support it
-set splitbelow splitright     " Splits open at the bottom and right
-set nofoldenable              " disable folding by default
+set splitbelow splitright     " splits open at the bottom and right
+set foldmethod=marker         " use markers to specify folds
+set foldlevel=1
 set breakindent               " visually indent wrapped line
 set undofile                  " save undo history to a file
 set undodir=~/.cache/vim/undo " set undo directory
