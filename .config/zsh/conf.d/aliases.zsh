@@ -28,7 +28,7 @@ alias mvr='rsync -avzz --progress -h --remove-source-files'
 alias dirsync='rsync -avzzu --delete --progress -h'
 
 alias e='$EDITOR' v='$EDITOR'
-alias f='VIFM=~/.config/vifm/session/shell vifm'
+alias f='VIFM=~/.config/vifm/session/shell vifm .'
 alias g='git'
 alias p='sudo pacman'
 alias se='sudoedit'
