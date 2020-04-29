@@ -1,87 +1,87 @@
 " Filetypes/directories
 set classify=' :dir:/, :exe:, :reg:, :link:,? :?:, ::../::'
 
-set classify+=' ::dl/::, ::dox/::, ::music/::, ::pix/::, ::vids/::, ::repos/::'
-set classify+=' ::.git/::, ::Desktop/::, ::Downloads/::, ::Documents/::, ::Music/::'
-set classify+=' ::Pictures/::, ::Videos/::, ::Public/::, ::Templates/::, ::notes/::'
+set classify+=' ::dl/::, ::dox/::, ::music/::, ::pix/::, ::vids/::, ::repos/::,
+             \  ::.git/::, ::Desktop/::, ::Downloads/::, ::Documents/::, ::Music/::,
+             \  ::Pictures/::, ::Videos/::, ::Public/::, ::Templates/::, ::notes/::,
+             \  ::dropbox::, ::gdrive/::, ::node_modules::'
 
 " Specific files
-set classify+=' ::.Xdefaults,,.Xresources,,.bashprofile,,.bash_profile,,.bashrc::'
-set classify+=' ::.dmrc,,.d_store,,.fasd,,.gitconfig,,.gitignore,,.jack-settings::'
-set classify+=' ::.mime.types,,.nvidia-settings-rc,,.pam_environment,,.profile::'
-set classify+=' ::.recently-used,,.selected_editor,,.xinitrc,,.inputrc,,.zprofile::'
-set classify+=' ::.yarnc,,.snclirc,,.tmux.conf,,.urlview,,.config,,.ini,,.user-dirs.dirs::'
-set classify+=' ::.mimeapps.list,,.offlineimaprc,,.msmtprc,,.Xauthority,,config::'
-set classify+=' ::Xresources,,xinitrc,,inputrc::'
-set classify+=' ::dropbox::'
-set classify+=' ::favicon.*,,README,,readme::'
-set classify+=' ::.vim,,.vimrc,,.gvimrc,,.vifm::'
-set classify+=' ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::'
-set classify+=' ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::'
-set classify+=' ::ledger::'
-set classify+=' ::license,,copyright,,copying,,LICENSE,,COPYRIGHT,,COPYING::'
-set classify+=' ::node_modules::'
-set classify+=' ::react.jsx::'
+set classify+=' ::.Xdefaults,,.Xresources,,.bashprofile,,.bash_profile,,.bashrc,,
+             \ .dmrc,,.d_store,,.fasd,,.gitconfig,,.gitignore,,.jack-settings,,
+             \ .mime.types,,.nvidia-settings-rc,,.pam_environment,,.profile,,
+             \ .recently-used,,.selected_editor,,.xinitrc,,.inputrc,,.zprofile,,
+             \ .yarnc,,.snclirc,,.tmux.conf,,.urlview,,.config,,.ini,,.user-dirs.dirs,,
+             \ .mimeapps.list,,.offlineimaprc,,.msmtprc,,.Xauthority,,config,,
+             \ Xresources,,xinitrc,,inputrc::,
+             \  ::favicon.*,,README,,readme::,
+             \  ::.vim,,.vimrc,,.gvimrc,,.vifm::,
+             \  ::gruntfile.coffee,,gruntfile.js,,gruntfile.ls::,
+             \  ::gulpfile.coffee,,gulpfile.js,,gulpfile.ls::,
+             \  ::ledger::,
+             \  ::license,,copyright,,copying,,LICENSE,,COPYRIGHT,,COPYING::,
+             \  ::react.jsx::'
 
 " File extensions
-set classify+='λ ::*.ml,,*.mli::'
-set classify+=' ::*.styl::'
-set classify+=' ::*.scss::'
-set classify+=' ::*.py,,*.pyc,,*.pyd,,*.pyo::'
-set classify+=' ::*.php::'
-set classify+=' ::*.markdown,,*.md::'
-set classify+=' ::*.json::'
-set classify+=' ::*.js::'
-set classify+=' ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.svg,,*.svgz::'
-set classify+=' ::*.tga,,*.tiff,,*.xmb,,*.xcf,,*.xpm,,*.xspf,,*.xwd,,*.cr2::'
-set classify+=' ::*.dng,,*.3fr,,*.ari,,*.arw,,*.bay,,*.crw,,*.cr3,,*.cap::'
-set classify+=' ::*.data,,*.dcs,,*.dcr,,*drf,,*.eip,,*.erf,,*.fff,,*.gpr::'
-set classify+=' ::*.iiq,,*.k25,,*.kdc,,*.mdc,,.*mef,,*.mos,,.*.mrw,,.*.obm::'
-set classify+=' ::*.orf,,*.pef,,*.ptx,,*.pxn,,*.r3d,,*.raf,,*.raw,,*.rwl::'
-set classify+=' ::*.rw2,,*.rwz,,*.sr2,,*.srf,,*.srf,,*.srw,,*.tif,,*.x3f::'
-set classify+=' ::*.ejs,,*.htm,,*.html,,*.slim,,*.xml::'
-set classify+=' ::*.mustasche::'
-set classify+=' ::*.css,,*.less,,*.bat,,*.conf,,*.ini,,*.rc,,*.yml,,*.cfg,,*.rc::'
-set classify+=' ::*.rss::'
-set classify+=' ::*.coffee::'
-set classify+=' ::*.twig::'
-set classify+=' ::*.c++,,*.cc,,*.c,,*.cpp,,*.cxx,,*.c,,*.h::'
-set classify+=' ::*.hs,,*.lhs::'
-set classify+=' ::*.lua::'
-set classify+=' ::*.jl::'
-set classify+=' ::*.go::'
-set classify+=' ::*.ts::'
-set classify+=' ::*.db,,*.dump,,*.sql::'
-set classify+=' ::*.sln,,*.suo::'
-set classify+=' ::*.exe::'
-set classify+=' ::*.diff,,*.sum,,*.md5,,*.sha512::'
-set classify+=' ::*.scala::'
-set classify+=' ::*.java,,*.jar::'
-set classify+=' ::*.xul::'
-set classify+=' ::*.clj,,*.cljc::'
-set classify+=' ::*.pl,,*.pm,,*.t::'
-set classify+=' ::*.cljs,,*.edn::'
-set classify+=' ::*.rb::'
-set classify+=' ::*.fish,,*.sh,,*.bash,,*.zsh::'
-set classify+=' ::*.dart::'
-set classify+=' ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::'
-set classify+=' ::*.rlib,,*.rs::'
-set classify+=' ::*.d::'
-set classify+=' ::*.erl,,*.hrl::'
-set classify+=' ::*.ai::'
-set classify+=' ::*.psb,,*.psd::'
-set classify+=' ::*.jsx::'
-set classify+=' ::*.vim,,*.vimrc::'
-set classify+=' ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a::'
-set classify+=' ::*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra::'
-set classify+=' ::*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::'
-set classify+=' ::*.avi,,*.flv,,*.mkv,,*.mov,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.webm::'
-set classify+=' ::*.epub,,*.pdf,,*.fb2,,*.djvu::'
-set classify+=' ::*.7z,,*.apk,,*.bz2,,*.cab,,*.cpio,,*.deb,,*.gem,,*.gz,,*.gzip::'
-set classify+=' ::*.lh,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xz,,*.zip::'
-set classify+=' ::*.cbr,,*.cbz::'
-set classify+=' ::*.log::'
-set classify+=' ::*.doc,,*.docx,,*.adoc::'
-set classify+=' ::*.xls,,*.xls,,*.xlsmx::'
-set classify+=' ::*.pptx,,*.ppt::'
+set classify+='λ ::*.ml,,*.mli::,
+             \  ::*.styl::,
+             \  ::*.scss::,
+             \  ::*.py,,*.pyc,,*.pyd,,*.pyo::,
+             \  ::*.php::,
+             \  ::*.markdown,,*.md::,
+             \  ::*.json::,
+             \  ::*.js::,
+             \  ::*.bmp,,*.gif,,*.ico,,*.jpeg,,*.jpg,,*.png,,*.svg,,*.svgz::,
+             \  ::*.tga,,*.tiff,,*.xmb,,*.xcf,,*.xpm,,*.xspf,,*.xwd,,*.cr2::,
+             \  ::*.dng,,*.3fr,,*.ari,,*.arw,,*.bay,,*.crw,,*.cr3,,*.cap::,
+             \  ::*.data,,*.dcs,,*.dcr,,*drf,,*.eip,,*.erf,,*.fff,,*.gpr::,
+             \  ::*.iiq,,*.k25,,*.kdc,,*.mdc,,.*mef,,*.mos,,.*.mrw,,.*.obm::,
+             \  ::*.orf,,*.pef,,*.ptx,,*.pxn,,*.r3d,,*.raf,,*.raw,,*.rwl::,
+             \  ::*.rw2,,*.rwz,,*.sr2,,*.srf,,*.srf,,*.srw,,*.tif,,*.x3f::,
+             \  ::*.ejs,,*.htm,,*.html,,*.slim,,*.xml::,
+             \  ::*.mustasche::,
+             \  ::*.css,,*.less,,*.bat,,*.conf,,*.ini,,*.rc,,*.yml,,*.cfg,,*.rc::,
+             \  ::*.rss::,
+             \  ::*.coffee::,
+             \  ::*.twig::,
+             \  ::*.c++,,*.cc,,*.c,,*.cpp,,*.cxx,,*.c,,*.h::,
+             \  ::*.hs,,*.lhs::,
+             \  ::*.lua::,
+             \  ::*.jl::,
+             \  ::*.go::,
+             \  ::*.ts::,
+             \  ::*.db,,*.dump,,*.sql::,
+             \  ::*.sln,,*.suo::,
+             \  ::*.exe::,
+             \  ::*.diff,,*.sum,,*.md5,,*.sha512::,
+             \  ::*.scala::,
+             \  ::*.java,,*.jar::,
+             \  ::*.xul::,
+             \  ::*.clj,,*.cljc::,
+             \  ::*.pl,,*.pm,,*.t::,
+             \  ::*.cljs,,*.edn::,
+             \  ::*.rb::,
+             \  ::*.fish,,*.sh,,*.bash,,*.zsh::,
+             \  ::*.dart::,
+             \  ::*.f#,,*.fs,,*.fsi,,*.fsscript,,*.fsx::,
+             \  ::*.rlib,,*.rs::,
+             \  ::*.d::,
+             \  ::*.erl,,*.hrl::,
+             \  ::*.ai::,
+             \  ::*.psb,,*.psd::,
+             \  ::*.jsx::,
+             \  ::*.vim,,*.vimrc::,
+             \  ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a::,
+             \  ::*.mid,,*.midi,,*.mp3,,*.mpc,,*.oga,,*.ogg,,*.ogx,,*.ra::,
+             \  ::*.ram,,*.rm,,*.spx,,*.wav,,*.wma,,*.ac3::,
+             \  ::*.avi,,*.flv,,*.mkv,,*.mov,,*.mov,,*.mp4,,*.mpeg,,*.mpg,,*.webm::,
+             \  ::*.epub,,*.pdf,,*.fb2,,*.djvu::,
+             \  ::*.7z,,*.apk,,*.bz2,,*.cab,,*.cpio,,*.deb,,*.gem,,*.gz,,*.gzip::,
+             \  ::*.lh,,*.lzh,,*.lzma,,*.rar,,*.rpm,,*.tar,,*.tgz,,*.xz,,*.zip::,
+             \  ::*.cbr,,*.cbz::,
+             \  ::*.log::,
+             \  ::*.doc,,*.docx,,*.adoc::,
+             \  ::*.xls,,*.xls,,*.xlsmx::,
+             \  ::*.pptx,,*.ppt::'
 
+" vim: set ts=2 sw=2 et :
