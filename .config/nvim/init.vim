@@ -1,5 +1,5 @@
 "=====================================================================
-" Plugins
+" Plugins {{{
 "=====================================================================
 
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
@@ -86,8 +86,9 @@ Plug 'morhetz/gruvbox'
 
 call plug#end()
 
+" }}}
 "=====================================================================
-" Settings
+" Settings {{{
 "=====================================================================
 
 filetype plugin indent on
@@ -126,8 +127,9 @@ let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 set bg=dark
 
+" }}}
 "=====================================================================
-" Mappings
+" Mappings {{{
 "=====================================================================
 
 let mapleader ="\<space>"
@@ -286,7 +288,7 @@ map <leader>op :!opout <c-r>%<CR><CR>
 map <leader>or :setlocal spell! spelllang=en_us<CR>
 
 "=====================================================================
-" Plugin Settings
+" Plugin Settings {{{
 "=====================================================================
 
 "=== Airline
@@ -432,8 +434,9 @@ map <leader>N :TabVifm<CR>
 nmap <silent> <leader>ch :HexokinaseToggle<CR>
 let g:Hexokinase_ftEnabled = ['css', 'html', 'scss', 'javascript.jsx']
 
+" }}}
 "=====================================================================
-" Functions
+" Functions {{{
 "=====================================================================
 
 " Open help in full-window view (empty buffer OR new tab)
@@ -464,8 +467,9 @@ function! AppendModeline()
 	call append(line('$'), l:modeline)
 endfunction
 
+" }}}
 "=====================================================================
-" autogroups & autocommands
+" autogroups & autocommands {{{
 "=====================================================================
 
 " Runs a script that cleans out tex build files whenever I close out of a .tex file.
@@ -497,4 +501,6 @@ au Filetype gitcommit setlocal spell | setlocal tw=72
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 autocmd BufWritePost ~/.config/fontconfig/* !fc-cache
 autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+
+" }}}
 
