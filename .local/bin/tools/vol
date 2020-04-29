@@ -26,7 +26,7 @@ notify() {
 		-h int:value:0 \
 		-h string:synchronous:volume \
 		-r 1000 \
-		"${2:-Volume}: $vol%" "<b>$(getprogress -w 20 -p "$vol")</b>"
+		"${2:-Volume}: $vol" "<b>$(getprogress -w 20 -p "$vol")</b>"
 }
 
 app() {
