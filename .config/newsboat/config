@@ -49,15 +49,25 @@ bind-key U show-urls
 bind-key x pb-delete
 
 ## Colors
-color listnormal cyan default
+color listnormal white default
 color listnormal_unread blue default
 color listfocus black yellow standout
 color listfocus_unread black yellow standout bold
-color info red black bold
-color article cyan default
+color info cyan black bold
+color article default default
 
 ## Highlight Rules
+highlight all "---.*---" yellow
+highlight article "^(Feed|Author|Link|Links|Date):.*" white default bold
+highlight article "^(Title):.*$" yellow default bold
 highlight article "^(Feed|Title|Author|Link|Links|Date):" cyan default bold
+highlight article "https?://[^ ]+" green default
+highlight article "\\[[0-9][0-9]*\\]" magenta default bold
+highlight article "\\[image\\ [0-9]+\\]" green default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
+highlight article "\\(link\\)$" cyan default
+highlight article "\\(image\\)$" white default
+highlight article "\\(embedded flash\\)$" magenta default
 # highlight articlelist "[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}" white default
 
 ## Ignore Rules
@@ -71,5 +81,5 @@ macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set b
 macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser linkhandler
 macro v set browser "ym"; open-in-browser ; set browser linkhandler
 macro w set browser "w3m"; open-in-browser ; set browser linkhandler
-macro p set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
+macro d set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
 macro c set browser "echo %u | xsel -b" ; open-in-browser ; set browser linkhandler
