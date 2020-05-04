@@ -124,9 +124,9 @@ nnoremap <silent> aT :setcolumnsTime<cr>
 nnoremap <silent> aA :setcolumnsSizeTime<cr>
 
 " Sort by...
-nnoremap <silent> an :set sort=+name | echo 'Sorted by +name'<cr>
-nnoremap <silent> as :set sort=-size | echo 'Sorted by -size'<cr>
-nnoremap <silent> at :set sort=-mtime | echo 'Sorted by -time'<cr>
+nnoremap <silent> an :set sort=+name | echo 'Sorted by +name'<cr>gg
+nnoremap <silent> as :set sort=-size | echo 'Sorted by -size'<cr>gg
+nnoremap <silent> at :set sort=-mtime | echo 'Sorted by -time'<cr>gg
 nnoremap <silent> aa :togglesort<cr>
 nnoremap <silent> ar :sortReverse<cr>
 
