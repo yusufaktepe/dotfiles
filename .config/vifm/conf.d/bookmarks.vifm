@@ -6,6 +6,7 @@ map bE :cd /etc<cr>
 map bU :cd /usr<cr>
 map bM :cd /media/$USER<cr>
 map bD :cd /data<cr>
+map bP :cd /data/backup/makepkg<cr>
 map bS :cd /data/shared<cr>
 
 map bh :cd ~/<cr>
@@ -33,6 +34,7 @@ map BE  :winrun , cd /etc<cr>
 map BU  :winrun , cd /usr<cr>
 map BM  :winrun , cd /media/$USER<cr>
 map BD  :winrun , cd /data<cr>
+map BP  :winrun , cd /data/backup/makepkg<cr>
 map BS  :winrun , cd /data/shared<cr>
 
 map Bh  :winrun , cd ~/<cr>
