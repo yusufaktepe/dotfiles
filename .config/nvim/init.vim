@@ -298,6 +298,9 @@ let g:airline#extensions#tabline#tab_min_count = 2
 let g:airline#extensions#tabline#buffer_min_count = 2
 let g:airline#extensions#tabline#show_close_button = 0
 let g:airline#extensions#tabline#fnamemod = ':t:.'
+let g:airline#extensions#whitespace#trailing_format = 'Tr·[%s]'
+let g:airline#extensions#whitespace#mixed_indent_format = 'MI:L[%s]'
+let g:airline#extensions#whitespace#mixed_indent_file_format = 'MI:F[%s]'
 let g:airline_powerline_fonts=1
 let g:airline_theme='gruvbox'
 
