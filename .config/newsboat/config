@@ -12,6 +12,7 @@ external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 datetime-format "%Y-%m-%d"
 feed-sort-order firsttag title
 text-width 80
+goto-next-feed no
 
 ## Dialog Titles
 feedlist-title-format "%N: (%u) Feeds"
