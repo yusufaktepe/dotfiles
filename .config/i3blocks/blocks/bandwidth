@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #
 # Copyright (C) 2015 James Murphy
 # Licensed under the terms of the GNU GPL v2 only.
@@ -11,18 +11,18 @@ dt="${DT:-3}"
 unit="${UNIT:-KB}"
 printf_command="${PRINTF_COMMAND:-"printf \"%-5.1f/%5.1f %s/s\\n\", rx, wx, unit;"}"
 
-function default_interface {
+default_interface() {
     ip route | awk '/^default via/ {print $5; exit}'
 }
 
-function check_proc_net_dev {
+check_proc_net_dev() {
     if [ ! -f "/proc/net/dev" ]; then
         echo "/proc/net/dev not found"
         exit 1
     fi
 }
 
-function list_interfaces {
+list_interfaces() {
     check_proc_net_dev
     echo "Interfaces in /proc/net/dev:"
     grep -o "^[^:]\\+:" /proc/net/dev | tr -d " :"
@@ -80,11 +80,11 @@ if [ -z "$init_line" ]; then
     exit 1
 fi
 
-init_received=$(awk '{print $2}' <<< $init_line)
-init_sent=$(awk '{print $10}' <<< $init_line)
+init_received=$(echo "$init_line" | awk '{print $2}')
+init_sent=$(echo "$init_line" | awk '{print $10}')
 
-(while true; do cat /proc/net/dev; sleep "$dt"; done) |\
-    stdbuf -oL grep "^[ ]*$iface:" |\
+(while :; do cat /proc/net/dev; sleep "$dt"; done) |
+    stdbuf -oL grep "^[ ]*$iface:" |
     awk -v scalar="$scalar" -v unit="$unit" -v iface="$iface" '
 BEGIN{old_received='"$init_received"';old_sent='"$init_sent"'}
 {
