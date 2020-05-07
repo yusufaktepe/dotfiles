@@ -207,8 +207,8 @@ bindsym $mod+asterisk move scratchpad
 bindsym $mod+Shift+asterisk scratchpad show; floating disable
 bindsym $mod+Shift+minus [instance="^(?!dropdown_*)"] scratchpad show
 bindsym $caps+minus [class=".*"] scratchpad show
-bindsym $mod+Shift+udiaeresis [class="Alacritty|St" instance="^(?!dropdown_*)"] scratchpad show
-bindsym $mod+Shift+gbreve [class="^(?!Alacritty|St|smplayer|mpv)"] scratchpad show
+bindsym $mod+Shift+udiaeresis [class="(?i)Alacritty|St" instance="^(?!dropdown_*)"] scratchpad show
+bindsym $mod+Shift+gbreve [class="^(?i)(?!Alacritty|St|smplayer|mpv)"] scratchpad show
 
 # Bottom left-right with script
 bindsym $mod+Shift+b floating toggle; sticky toggle; exec $N hover left
