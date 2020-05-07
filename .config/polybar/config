@@ -95,7 +95,7 @@ cursor-scroll = ns-resize
 [module/player]
 type = custom/script
 exec = $XDG_CONFIG_HOME/polybar/modules/polyplayer
-exec-if = pgrep -x mpd || pgrep -x spotify
+exec-if = pidof mpd || pidof spotify
 tail = true
 ; label = %output:0:47:...%
 
