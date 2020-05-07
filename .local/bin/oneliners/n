@@ -1,4 +1,4 @@
 #!/bin/sh
 
-printf '%s' "- [ ] $*" >> ~/notes/todo.md
+printf '%s\n' "- [ ] $*" >> ~/notes/todo.md
 
