@@ -7,16 +7,16 @@ export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_LIB_HOME="$HOME/.local/lib"
 
-# Defaults:
+# Defaults
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
-export TERMINAL="alacritty"
-export TERMINS="$TERMINAL --class"
+export TERMINAL="st"
+export TERMINS="$TERMINAL -n"
 export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"
 export FM="vifm-tab"
 
-# Keep $HOME clean:
+# Keep $HOME clean
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
@@ -37,9 +37,9 @@ export TERMINFO="$XDG_DATA_HOME/terminfo"
 export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
-export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -type d | tr '\n' ':' | sed 's/:*$//')"
+export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -type d | paste -sd:)"
 
-# Others:
+# Others
 export SUDO_ASKPASS="$XDG_BIN_HOME/dmenu-rofi/askpass-rofi"
 export FZF_DEFAULT_OPTS="
 	--layout=reverse --height 50%
@@ -64,10 +64,10 @@ export LESSOPEN="| highlight -O xterm256 -s pablo %s 2>/dev/null"
 [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ] &&
 	exec startx "$XINITRC" -- -quiet > "$XDG_DATA_HOME/xorg/Xorg.log" 2>&1
 
-# Switch escape and caps if tty (add to sudoers NOPASSWD):
+# Switch escape and caps if tty (add to sudoers NOPASSWD)
 sudo -n loadkeys ~/.config/ttymaps.kmap 2>/dev/null
 
-# Required for using ssh with gpg agent:
+# Required for using ssh with gpg agent
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
