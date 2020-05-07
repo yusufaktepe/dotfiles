@@ -375,15 +375,6 @@ bindsym $mod+Shift+r restart
 # Autostart applications
 #=====================================================================
 
-exec $N /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec $N setbg; sleep 1; picom -b
-exec $N dunst
-exec $N nm-applet
-exec $N redshift
-exec $N remaps
-exec $N numlockx
-exec $N greenclip daemon
-exec $N unclutter
 exec_always launch_polybar
 exec $N "sleep 2; ifwin -e vivaldi-stable"
 exec $N "sleep 5; ifterm -e vifm"
