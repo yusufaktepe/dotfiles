@@ -1,22 +1,11 @@
 #!/bin/sh
-#
-# ~/.xinitrc
-#
 # Executed by startx
 
-userxres="$HOME/.Xresources"
-usercxres="$XDG_CONFIG_HOME/X11/Xresources"
-userxdef="$HOME/.Xdefaults"
-usermodmap="$HOME/.Xmodmap"
-sysres="/etc/X11/xinit/.Xresources"
-sysmodmap="/etc/X11/xinit/.Xmodmap"
+uXmodmap="$XDG_CONFIG_HOME/X11/Xmodmap"
+uXresources="$XDG_CONFIG_HOME/X11/Xresources"
 
-[ -f "$sysmodmap" ] && xmodmap "$sysmodmap"
-[ -f "$usermodmap" ] && xmodmap "$usermodmap"
-[ -f "$sysres" ] && xrdb -merge "$sysres"
-[ -f "$userxdef" ] && xrdb -merge "$userxdef"
-[ -f "$userxres" ] && xrdb -merge "$userxres"
-[ -f "$usercxres" ] && xrdb -merge "$usercxres"
+[ -f "$uXmodmap" ] && xmodmap "$uXmodmap"
+[ -f "$uXresources" ] && xrdb -merge "$uXresources"
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 	for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
@@ -25,4 +14,15 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 	unset f
 fi
 
-exec i3
+# Autostart
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+(setbg; sleep 1; picom -b) &
+dunst &
+nm-applet &
+redshift &
+remaps &
+numlockx &
+greenclip daemon &
+unclutter &
+
+exec "${1:-i3}"
