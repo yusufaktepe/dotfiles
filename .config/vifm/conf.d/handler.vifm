@@ -41,9 +41,9 @@ filextype *.srt
 " Web
 filextype *.html,*.htm
 	\ {Open with BROWSER}
-	\ xdg-open %f &,
+	\ xdg-open %f %i &,
 	\ {Open with Firefox}
-	\ firefox %f &,
+	\ firefox %f %i &,
 filetype *.html,*.htm links, lynx
 
 " Object

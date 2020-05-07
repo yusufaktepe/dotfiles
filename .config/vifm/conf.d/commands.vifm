@@ -3,22 +3,22 @@
 cnoreabbrev Q q
 cnoreabbrev W w
 
-command! df df -h %m 2> /dev/null
+command! df df -h %m 2>/dev/null
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir! %a | cd %a
-command! vgrep vim "+grep %a"
+command! vgrep $EDITOR "+grep %a"
 command! extract aunpack -e %f &
 command! compress apack
 command! link ln -s %d/%f %D
 command! vidir vidir %a
-command! EDIT $TERMINAL -e vim %a &
+command! EDIT $TERMINAL -e $EDITOR %a 2>/dev/null &
 
 " Restart Vifm, preserve everything?
 command! reload :tabnew | write | restart | tabclose | tabprevious
 
-command! mks touch %a | chmod +x %a
-	\ | printf "#!/bin/sh\n\n\n" >> %a | $TERMINAL -e vim +$ %a &
+command! mks :![ ! -f %a ] && touch %a && chmod +x %a &&
+	\ printf "#!/bin/sh\n\n\n" >> %a && $TERMINAL -e $EDITOR +$ %a 2>/dev/null &
 
 " Diff files & folders
 " uses selection of current pane when it contains more than one file
@@ -37,23 +37,23 @@ command! diff
 command! DIFF
 	\ : if expand('%%c') == expand('%%f')
 	\ |     if paneisat('right') && paneisat('bottom')
-	\ |         execute '!alacritty -d 151 40 -e vdiff %%C %%c &'
+	\ |         execute '!$TERMINAL -e vdiff %%C %%c 2>/dev/null &'
 	\ |     else
-	\ |         execute '!alacritty -d 151 40 -e vdiff %%c %%C &'
+	\ |         execute '!$TERMINAL -e vdiff %%c %%C 2>/dev/null &'
 	\ |     endif
 	\ | else
-	\ |     execute '!alacritty -d 151 40 -e vdiff %%f'
+	\ |     execute '!$TERMINAL -e vdiff %%f 2>/dev/null &'
 	\ | endif
 
 command! GDIFF
 	\ : if expand('%%c') == expand('%%f')
 	\ |     if paneisat('right') && paneisat('bottom')
-	\ |         execute '!meld -n %%C %%c &'
+	\ |         execute '!meld -n %%C %%c 2>/dev/null &'
 	\ |     else
-	\ |         execute '!meld -n %%c %%C &'
+	\ |         execute '!meld -n %%c %%C 2>/dev/null &'
 	\ |     endif
 	\ | else
-	\ |     execute '!meld -n %%f'
+	\ |     execute '!meld -n %%f 2>/dev/null &'
 	\ | endif
 
 command! FZFfind
