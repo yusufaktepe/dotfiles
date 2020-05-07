@@ -83,12 +83,12 @@ nnoremap f/ /^
 nnoremap  <silent> cs :%s/
 
 " Open console in current directory (Alt+Enter)
-nnoremap <silent> <a-c-m> :!unset VIFM_SERVER_NAME RPS1; $TERMINAL & disown<cr>
+nnoremap <silent> <a-c-m> :!unset VIFM_SERVER_NAME RPS1; $TERMINAL 2>/dev/null & disown<cr>
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
 nnoremap <silent> <a-e>c :write | edit $MYVIFMRC | restart<cr>
 " Open editor in new terminal to edit vifmrc
-nnoremap <silent> <a-e>C :!$TERMINAL -e $EDITOR $MYVIFMRC &<cr>
+nnoremap <silent> <a-e>C :!$TERMINAL -e $EDITOR $MYVIFMRC 2>/dev/null &<cr>
 
 " Find & select with FZF
 nnoremap <silent> <a-f> :FZFfind<cr>
@@ -171,7 +171,7 @@ nnoremap <silent> <f1> :help<cr>
 nnoremap <f2> cw
 " TODO: handler script for <f3> preview
 nnoremap <silent> <f3>  :!bat --style=plain --paging=always %f || less %f<cr>
-nnoremap <silent> <f4>  :!$TERMINAL -e $EDITOR %f &<cr>
+nnoremap <silent> <f4>  :!$TERMINAL -e $EDITOR %f 2>/dev/null &<cr>
 noremap  <silent> <f5>  :copy!<cr>
 noremap  <silent> <f6>  :move<cr>
 nnoremap <silent> <f7>  :mkdir!<space>
