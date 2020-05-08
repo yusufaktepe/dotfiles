@@ -17,8 +17,8 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # zstyle ':completion:*' rehash true
 
 # Enable caching
-zstyle ':completion::complete:*' use-cache 1
-zstyle ':completion::complete:*' cache-path $ZDOTDIR
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path $ZDOTDIR
 
 # Complete processes in "pid, user, command" format
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
