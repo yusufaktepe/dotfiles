@@ -9,12 +9,12 @@ mklist() {
 }
 
 [ -e "$tmp" ] || mklist
-choise=$(rofi -dmenu -i -l 20 -width 60 -p "" < "$tmp")
+choise=$(rofi -dmenu -i -width 60 -p "" < "$tmp")
 
 case "$choise" in
 	"") exit ;;
 	*) sudo -A updatedb && rm "$tmp" && mklist && $0 ;;
-	*) sys_choise=$(locate "/etc/*" "/usr/*" | rofi -dmenu -i -l 20 -width 60 -p "")
+	*) sys_choise=$(locate "/etc/*" "/usr/*" | rofi -dmenu -i -width 60 -p "")
 		case "$sys_choise" in
 			"") exit ;;
 			*)  xdg-open "$sys_choise" >/dev/null 2>&1 & ;;
