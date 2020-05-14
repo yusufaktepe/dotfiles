@@ -501,6 +501,13 @@ au Filetype gitcommit setlocal spell | setlocal tw=72
 " Automatically deletes all trailing whitespace on save.
 " autocmd BufWritePre * %s/\s\+$//e
 
+" Equalize diff splits as the window size changes
+if exists("##VimResized")
+	if &diff
+		au VimResized * wincmd =
+	endif
+endif
+
 " Run command whenever these files are updated.
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 autocmd BufWritePost ~/.config/fontconfig/* !fc-cache
