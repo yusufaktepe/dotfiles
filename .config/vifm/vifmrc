@@ -146,9 +146,9 @@ let $RPS1 = '-- VIFM --'
 " ------------------------------------------------------------------------------
 " Autocmds
 
-au DirEnter ** set sort=name
 au DirEnter /tmp,**/.cache,**/dl/default,**/.torrent-files,**/vids/mov,
-	\**/pix/**/**,**/pkglists,**/backup/makepkg/** set sort=-mtime
+	\**/pix/**/**,**/pkglists,**/backup/makepkg/**
+	\ setlocal sort=-mtime | setlocal viewcolumns=-{name}..,6{size}.,18{mtime}
 
 " ------------------------------------------------------------------------------
 " Source configs
