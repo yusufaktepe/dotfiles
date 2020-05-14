@@ -118,6 +118,7 @@ set splitbelow splitright     " splits open at the bottom and right
 set foldmethod=marker         " use markers to specify folds
 set foldlevel=1
 set breakindent               " visually indent wrapped line
+set shortmess+=ITc
 set undofile                  " save undo history to a file
 set undodir=~/.cache/vim/undo " set undo directory
 
@@ -350,7 +351,7 @@ let g:LanguageClient_serverCommands = {
 	\ 'javascript.jsx': ['javascript-typescript-stdio'],
 	\ 'javascript':     ['javascript-typescript-stdio'],
 	\ 'typescript':     ['javascript-typescript-stdio'],
-	\ 'vim':           ['vim-language-server', '--stdio'],
+	\ 'vim':            ['vim-language-server', '--stdio'],
 	\ }
 
 " Let ALE handle linting
