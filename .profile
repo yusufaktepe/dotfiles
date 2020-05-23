@@ -10,8 +10,8 @@ export XDG_LIB_HOME="$HOME/.local/lib"
 # Defaults
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
-export TERMINAL="st"
-export TERMINS="$TERMINAL -n"
+export TERMINAL="alacritty"
+export TERMINS="$TERMINAL --class"
 export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"
 export FM="vifm-tab"
@@ -20,6 +20,7 @@ export FM="vifm-tab"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
+export PYLINTHOME="$XDG_CACHE_HOME/pylint"
 
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
 export INPUTRC="$XDG_CONFIG_HOME/bash/inputrc"
