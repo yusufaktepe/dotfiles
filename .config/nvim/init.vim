@@ -328,6 +328,7 @@ let g:ale_linters = {
 	\ 'c':          ['clangd'],
 	\ 'cpp':        ['clangd'],
 	\ 'javascript': ['eslint'],
+	\ 'vim':        ['vint'],
 	\ }
 
 let g:ale_fixers = {
