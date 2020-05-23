@@ -50,12 +50,24 @@
 	gpgsign = true
 	verbose = true
 
+[tag]
+	forceSignAnnotated = true
+
 [merge]
 	tool = vimdiff
 	log = true
 
 [push]
 	default = simple
+
+[pager]
+	# diff-highlight is script provided by git that shows word-by-word diff
+	log  = /usr/share/git/diff-highlight/diff-highlight | less
+	show = /usr/share/git/diff-highlight/diff-highlight | less
+	diff = /usr/share/git/diff-highlight/diff-highlight | less
+
+[format]
+	pretty = fuller
 
 [log]
 	decorate = full
@@ -85,3 +97,4 @@
 
 [url "ssh://aur@aur.archlinux.org/"]
 	insteadOf = "aur:"
+
