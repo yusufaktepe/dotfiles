@@ -52,8 +52,8 @@ bind-key x pb-delete
 ## Colors
 color listnormal white default
 color listnormal_unread blue default
-color listfocus black yellow standout
-color listfocus_unread black yellow standout bold
+color listfocus color236 yellow standout
+color listfocus_unread color236 yellow standout bold
 color info cyan black bold
 color article default default
 
@@ -82,5 +82,5 @@ macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set b
 macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser linkhandler
 macro v set browser "ym"; open-in-browser ; set browser linkhandler
 macro w set browser "w3m"; open-in-browser ; set browser linkhandler
-macro d set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
+macro p set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
 macro c set browser "echo %u | xsel -b" ; open-in-browser ; set browser linkhandler
