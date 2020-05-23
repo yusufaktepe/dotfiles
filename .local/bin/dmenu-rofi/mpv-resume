@@ -2,7 +2,7 @@
 
 wld=~/.config/mpv/watch_later
 
-w=$(sed -n 's/# //p' $wld/* | xargs -rd'\n' -I % basename % | dmenu -i -l 5 -p )
+w=$(sed -n 's/# //p' $wld/* | xargs -rd'\n' -I % basename % | sort -V | dmenu -i -l 5 -p )
 [ -z "$w" ] && exit
 w=$(grep $wld/* -e "$(echo "$w" | sed 's|[][]|\\&|g')" | sed 's/.*# //')
 
