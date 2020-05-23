@@ -323,6 +323,7 @@ assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws13
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
 for_window [class="Catfish|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|(?i)telegram|Yad"] floating enable
 for_window [class="Lxappearance|qt5ct|Lightdm-settings|Arandr|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
+for_window [class="(?i)megasync" window_type=normal title="^(?!Stream*|Transfer*)"] floating enable, move position +964+20
 for_window [class="(?i)pavucontrol"] floating enable, resize set 502 402, move position +864+20
 for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
 for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
@@ -333,7 +334,7 @@ for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 800
 for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 800 600, move position center
 for_window [instance="Places" class="Firefox"] floating enable border normal, resize set 800 600, move position center
 for_window [instance="Browser|Update" class="Firefox|Tor Browser"] floating enable border normal
-for_window [instance="(?i)crx_" class="(?i)Vivaldi|-chrome"] floating enable sticky enable
+# for_window [instance="(?i)crx_" class="(?i)Vivaldi|-chrome"] floating enable sticky enable
 for_window [class="Crow Translate"] floating enable sticky enable, resize set 650 290, move position +716+20
 for_window [class="Sunflower" title="(?i)Viewer"] floating enable
 for_window [class="(?i)gsimplecal"] floating enable, move position +1149+20
@@ -380,7 +381,6 @@ exec $N "sleep 2; ifwin -e vivaldi-stable"
 exec $N "sleep 5; ifterm -e vifm"
 exec $N "sleep 7; ifwin -e spotify"
 exec $N "sleep 9; wmctrl -x -r 'vifm' -b remove,demands_attention"
-#exec $N xautolock -time 10 -locker "betterlockscreen -l dimblur"
 
 #=====================================================================
 # Colors
@@ -612,7 +612,7 @@ mode "$broopen" {
 }
 
 bindsym $mod+Shift+t mode "$toggle"
-set $toggle  pi[c]om py-[h]ttp [k]eybase [r]edshift [s]timeout [t]ransmission |  [d]unst [p]ulse
+set $toggle  pi[c]om py-[h]ttp [k]eybase [r]edshift [s]timeout [t]ransmission |  pi[C]om [d]unst [p]ulse
 mode "$toggle" {
 	bindsym c exec $N pkill picom || picom -b, mode default
 	bindsym h exec $N py-http -n, mode default
@@ -620,7 +620,8 @@ mode "$toggle" {
 	bindsym r exec $N toggle redshift, mode default
 	bindsym s exec $N toggle stimeout, mode default
 	bindsym t exec $N toggle transmission, mode default
-	bindsym d --release exec "killall dunst; exec notify-send -a system 'restart dunst'", mode default
+	bindsym Shift+c exec $N "pkill picom; sleep .4; picom -b", mode default
+	bindsym d --release exec "pkill dunst; exec notify-send -a system 'restart dunst'", mode default
 	bindsym p exec $N systemctl --user restart pulseaudio, mode default
 
 		# back to normal: Enter or Escape
