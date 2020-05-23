@@ -3,7 +3,7 @@
 "=====================================================================
 
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-	echo "Downloading junegunn/vim-plug to manage plugins..."
+	echo 'Downloading junegunn/vim-plug to manage plugins...'
 	silent !mkdir -p ~/.config/nvim/autoload/
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
@@ -100,7 +100,7 @@ set fileencodings=ucs-bom,utf-8,default,iso8859-9,latin1
 set number relativenumber
 " set signcolumn=yes                " always show sign column
 set completeopt+=noinsert,noselect
-set go=a
+set guioptions=a
 set mouse=a
 set clipboard+=unnamedplus
 set hlsearch                  " keep matches highlighted after searching
@@ -126,7 +126,7 @@ set undodir=~/.cache/vim/undo " set undo directory
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
-set bg=dark
+set background=dark
 
 " }}}
 "=====================================================================
@@ -146,10 +146,10 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " Create splits
-nnoremap <silent> <leader>s  :new<cr>
-nnoremap <silent> <leader>Ss :split<cr>
-nnoremap <silent> <leader>v  :vnew<cr>
-nnoremap <silent> <leader>Vv :vsplit<cr>
+nnoremap <silent> <leader>s  :new<CR>
+nnoremap <silent> <leader>Ss :split<CR>
+nnoremap <silent> <leader>v  :vnew<CR>
+nnoremap <silent> <leader>Vv :vsplit<CR>
 
 " resize splits left/right
 noremap <M-[> <C-w>3<
@@ -242,11 +242,11 @@ nnoremap <silent> <leader>yp :let @+ = expand("%:p")<CR>:echom "Copied " . @+<CR
 
 " Quickly edit a macro
 " See: https://github.com/mhinz/vim-galore#quickly-edit-your-macros
-nnoremap <leader>m :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:register))<CR><c-f><left>
+nnoremap <leader>m :<C-u><C-r><C-r>='let @'. v:register .' = '. string(getreg(v:register))<CR><C-f><left>
 
 " Force redraw
 " See: https://github.com/mhinz/vim-galore#saner-ctrl-l
-nnoremap <leader>l :nohlsearch<CR>:diffupdate<CR>:syntax sync fromstart<CR><c-l>
+nnoremap <leader>l :nohlsearch<CR>:diffupdate<CR>:syntax sync fromstart<CR><C-l>
 
 " Reload vim configuration
 nnoremap <silent> <leader>R :so ~/.config/nvim/init.vim \| echom 'Reload config.'<CR>
@@ -269,8 +269,8 @@ cnoremap <M-f> <S-Right>
 cnoremap <C-g> <C-c>
 
 " Make <C-n> and <C-p> behave like up/down arrows
-cnoremap <expr> <c-p> pumvisible() ? "\<C-p>" : "\<up>"
-cnoremap <expr> <c-n> pumvisible() ? "\<C-n>" : "\<down>"
+cnoremap <expr> <C-p> pumvisible() ? "\<C-p>" : "\<up>"
+cnoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<down>"
 
 " Check file in shellcheck:
 map <leader>cs :!clear && shellcheck %<CR>
@@ -280,14 +280,29 @@ map <leader>bi :vsp<space>$BIB<CR>
 map <leader>re :vsp<space>$REFER<CR>
 
 " Compile document, be it groff/LaTeX/markdown/etc.
-map <leader>C :w! \| !compiler <c-r>%<CR>
+map <leader>C :w! \| !compiler <C-r>%<CR>
 
 " Open corresponding .pdf/.html or preview
-map <leader>op :!opout <c-r>%<CR><CR>
+map <leader>op :!opout <C-r>%<CR><CR>
 
 " Spell-check
 map <leader>or :setlocal spell! spelllang=en_us<CR>
 
+" trq fixes
+map ı i
+map İ I
+map ş ;
+map Ş :
+map ö ,
+map Ö <
+map ç .
+map Ç >
+map ğ [
+map Ğ {
+map ü ]
+map Ü }
+
+" }}}
 "=====================================================================
 " Plugin Settings {{{
 "=====================================================================
@@ -338,7 +353,7 @@ let g:ale_fix_on_save = 0
 "  -kp: keep column alignment paddings
 "  -bn: binary ops like && and | may start a line
 "  -sr: redirect operators will be followed by a space
-let g:ale_sh_shfmt_options = "-kp -bn -sr"
+let g:ale_sh_shfmt_options = '-kp -bn -sr'
 
 map <leader>af :ALEFix<CR>
 map <leader>al :ALELint<CR>
@@ -356,7 +371,7 @@ let g:LanguageClient_serverCommands = {
 
 " Let ALE handle linting
 let g:LanguageClient_diagnosticsEnable = 0
-let g:LanguageClient_diagnosticsList = "Disabled"
+let g:LanguageClient_diagnosticsList = 'Disabled'
 
 nnoremap <silent> <leader>k :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
@@ -364,13 +379,13 @@ nnoremap <silent> gD :call LanguageClient#textDocument_definition({"gotoCmd": "t
 nnoremap <silent> <leader>gr :call LanguageClient#textDocument_rename()<CR>
 
 "=== UltiSnips
-let g:UltiSnipsExpandTrigger       = "<C-k>"
-let g:UltiSnipsJumpForwardTrigger  = "<C-k>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-p>"
+let g:UltiSnipsExpandTrigger       = '<C-k>'
+let g:UltiSnipsJumpForwardTrigger  = '<C-k>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-p>'
 
-let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsEditSplit = 'vertical'
 
-map <silent> <leader>Sn :UltiSnipsEdit<cr>
+map <silent> <leader>Sn :UltiSnipsEdit<CR>
 
 "=== Editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
@@ -437,6 +452,7 @@ map <leader>N :TabVifm<CR>
 "=== Hexokinase
 nmap <silent> <leader>ch :HexokinaseToggle<CR>
 let g:Hexokinase_ftEnabled = ['css', 'html', 'scss', 'javascript.jsx']
+let g:Hexokinase_highlighters = ['backgroundfull']
 
 " }}}
 "=====================================================================
