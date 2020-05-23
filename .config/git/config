@@ -4,39 +4,47 @@
 	signingkey = BBF9254E
 
 [alias]
-	a     = add --all
-	ac    = !git add . && git commit
-	b     = branch
-	bl    = !git --no-pager branch --verbose --all
-	c     = commit
-	ca    = commit --amend
-	cl    = clone
-	cld   = cld # for git to recognize git-cld as an alias
-	co    = checkout
-	cc    = shortlog -sn --no-merges
-	cca   = shortlog -sn
-	ctr   = shortlog --summary --numbered --email
-	confl = !vim +Conflicted
-	d     = diff --stat=100,100 --patch
-	ds    = diff --stat=100,100 --patch --staged
-	dt    = difftool
-	dts   = difftool --staged
-	edmod = !vim $(git ls-files -m) -p
-	f     = fetch
-	g     = grep --break --heading --line-number
-	last  = show --stat HEAD
-	lg    = log --graph --abbrev-commit --date=relative \
-		--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-	lgdel = log --diff-filter=D --summary
-	p     = push
-	pf    = push -f
-	pl    = pull
-	re    = rebase
-	rem   = remote -v
-	s     = status
-	sm    = submodule
-	tl    = !git tag | sort -V
-	up    = pull --rebase=preserve
+	alias       = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+	a           = add --all
+	ac          = !git add . && git commit
+	b           = branch
+	bl          = !git --no-pager branch --verbose --all
+	c           = commit
+	ca          = commit --amend
+	cl          = clone
+	cld         = cld # for git to recognize git-cld as an alias
+	co          = checkout
+	cc          = shortlog -sn --no-merges
+	cca         = shortlog -sn
+	ctr         = shortlog --summary --numbered --email
+	confl       = !vim +Conflicted
+	d           = diff --stat=100,100 --patch
+	ds          = diff --stat=100,100 --patch --staged
+	dt          = difftool
+	dts         = difftool --staged
+	edmod       = !vim $(git ls-files -m) -p
+	f           = fetch
+	g           = grep --break --heading --line-number
+	last        = show --stat HEAD
+	lg          = log --graph --abbrev-commit --date=relative \
+			--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset \
+			%s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lgdel       = log --diff-filter=D --summary
+	ls          = ls-files
+	p           = push
+	pf          = push -f
+	pl          = pull
+	re          = rebase
+	rem         = remote -v
+	refs        = for-each-ref
+	s           = status
+	sm          = submodule
+	tl          = !git tag | sort -V
+	up          = pull --rebase=preserve
+	unstage     = reset HEAD --
+	undo-commit = reset --soft HEAD^
+	diff-copy   = !git diff | xclip -selection c
+	diff-paste  = !xclip -selection c -o | git apply -3
 
 [commit]
 	gpgsign = true
