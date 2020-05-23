@@ -328,6 +328,7 @@ let g:ale_linters = {
 	\ 'c':          ['clangd'],
 	\ 'cpp':        ['clangd'],
 	\ 'javascript': ['eslint'],
+	\ 'python':     ['pylint'],
 	\ 'vim':        ['vint'],
 	\ }
 
@@ -337,6 +338,7 @@ let g:ale_fixers = {
 	\ 'c':          ['clang-format'],
 	\ 'cpp':        ['clang-format'],
 	\ 'javascript': ['eslint'],
+	\ 'python':     ['yapf', 'isort'],
 	\ }
 
 let g:ale_sign_error = '✖'
@@ -367,6 +369,7 @@ let g:LanguageClient_serverCommands = {
 	\ 'javascript.jsx': ['javascript-typescript-stdio'],
 	\ 'javascript':     ['javascript-typescript-stdio'],
 	\ 'typescript':     ['javascript-typescript-stdio'],
+	\ 'python':         ['pyls'],
 	\ 'vim':            ['vim-language-server', '--stdio'],
 	\ }
 
