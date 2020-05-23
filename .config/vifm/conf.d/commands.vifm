@@ -13,6 +13,8 @@ command! compress apack
 command! link ln -s %d/%f %D
 command! vidir vidir %a
 command! EDIT $TERMINAL -e $EDITOR %a 2>/dev/null &
+command! COPY :yank | winrun , put
+command! MOVE :yank | winrun , put!
 
 " Restart Vifm, preserve everything?
 command! reload :tabnew | write | restart | tabclose | tabprevious

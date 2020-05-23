@@ -172,8 +172,8 @@ nnoremap <f2> cw
 " TODO: handler script for <f3> preview
 nnoremap <silent> <f3>  :!bat --style=plain --paging=always %f || less %f<cr>
 nnoremap <silent> <f4>  :!$TERMINAL -e $EDITOR %f 2>/dev/null &<cr>
-noremap  <silent> <f5>  :copy!<cr>
-noremap  <silent> <f6>  :move<cr>
+noremap  <silent> <f5>  :COPY<cr>
+noremap  <silent> <f6>  :MOVE<cr>
 nnoremap <silent> <f7>  :mkdir!<space>
 noremap  <silent> <f8>  :delete<cr>
 noremap  <silent> <f10> :GDIFF<cr>
