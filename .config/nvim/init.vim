@@ -399,6 +399,11 @@ nnoremap <leader>gb :G blame<CR>
 vnoremap <leader>gb :G blame<CR>
 nnoremap <leader>ds :Gvdiffsplit<CR>
 
+"=== GitGutter
+if &diff
+	let g:gitgutter_enabled = 0
+endif
+
 "=== MarkdownPreview
 nmap <leader>mp <Plug>MarkdownPreviewToggle
 
