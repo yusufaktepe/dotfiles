@@ -34,8 +34,8 @@ nnoremap <silent> <c-k> <tab>k<tab>
 " Go to same file name in other pane
 nnoremap <silent> <a-s> :winrun , goto %C:t<cr>
 
-" Cd into the directory under cursor in other pane
-nnoremap <silent> T :winrun , cd %C:p<cr>
+" Open directory under cursor in the other pane
+nnoremap <silent> T :sync %c<cr>
 
 " Display menu of programs set for the file type of the current file
 nnoremap <silent> o :file &<cr>
@@ -179,6 +179,14 @@ noremap  <silent> <f8>  :delete<cr>
 noremap  <silent> <f10> :GDIFF<cr>
 noremap  <silent> <f11> :DIFF<cr>
 nnoremap <silent> <f12> :mkcd<space>
+
+" Midnight commander alike mappings
+" Open current directory in the other pane
+nnoremap <silent> <a-i> :sync<cr>
+" Open directory under cursor in the other pane
+nnoremap <silent> <a-o> :sync %c<cr>
+" Swap panes
+nnoremap <c-u> <c-w>x
 
 " trq fixes
 map ı i
