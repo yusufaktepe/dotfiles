@@ -8,7 +8,7 @@ fi
 
 wrofi() {
 	# Display content of primary clipboard as rofi message:
-	prim=$(printf 'Primary:   %s' "$(xclip -o | sed '/^$/d;s/^[ \t]*//')" |
+	prim=$(printf ' Primary:   %s' "$(xclip -o | sed '/^$/d;s/^[ \t]*//')" |
 		sed 's/\&/\&amp\;/g;s/</\&lt\;/g;s/>/\&gt\;/g' | head -n1 )
 	[ ${#prim} -ge 87 ] && prim=$(printf '%s' "$prim" | cut -c -85)..
 
