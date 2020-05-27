@@ -122,7 +122,7 @@ inputbar {
 }
 
 prompt {
-  padding:            6px 9px;
+  padding:            6px 14px;
   background-color:   @main;
   text-color:         @bg;
 }

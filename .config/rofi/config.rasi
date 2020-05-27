@@ -11,10 +11,10 @@ me-select-entry: "MouseSecondary";
 me-accept-entry: "MousePrimary";
 scroll-method: 1;
 
-display-run: " ";
+display-run: "";
 display-drun: "";
-display-window: " ";
-display-combi: " ";
+display-window: "";
+display-combi: "";
 display-calc: "";
 
 kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2,XF86Launch9,Super_L+XF86MonBrightnessDown";
