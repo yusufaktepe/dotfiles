@@ -17,7 +17,7 @@ ipc_send() {
 }
 
 _mpv() {
-	setsid mpv --player-operation-mode=pseudo-gui "$@" >/dev/null 2>&1 &
+	setsid -f mpv --player-operation-mode=pseudo-gui "$@" >/dev/null 2>&1
 }
 
 case $1 in

@@ -5,16 +5,16 @@ case "$1" in
 		ym "$1" ;;
 	*png|*jpg|*jpe|*jpeg|*gif)
 		tmp=/tmp/$(basename "$1")
-		curl -sL "$1" > "$tmp" && setsid sxiv -a "$tmp" >/dev/null 2>&1 &
+		curl -sL "$1" > "$tmp" && setsid -f sxiv -a "$tmp" >/dev/null 2>&1
 		wait; rm "$tmp" ;;
 	*mp3|*flac|*opus|*mp3?source*)
-		setsid tsp curl -LO "$1" >/dev/null 2>&1 & ;;
+		setsid -f tsp curl -LO "$1" >/dev/null 2>&1 ;;
 	"")
 		ifwin -e "$BROWSER" ;;
 	*)
 		if [ -f "$1" ]; then
 			"$TERMINAL" -e "$EDITOR $1"
 		else
-			setsid "$BROWSER" "$1" >/dev/null 2>&1 &
+			setsid "$BROWSER" "$1" >/dev/null 2>&1
 		fi ;;
 esac
