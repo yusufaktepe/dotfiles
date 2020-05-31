@@ -24,5 +24,6 @@ remaps &
 numlockx &
 greenclip daemon &
 unclutter &
+# syncthing -no-browser &
 
 exec "${1:-i3}"
