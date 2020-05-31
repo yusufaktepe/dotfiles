@@ -1,8 +1,8 @@
 #!/bin/sh
 
-setsid mpv \
+setsid -f mpv \
 	--load-scripts=no \
 	--input-ipc-server=/tmp/mpvsocketYT \
 	--really-quiet \
 	--volume=60 \
-	"$@" >/dev/null 2>&1 &
+	"$@" >/dev/null 2>&1

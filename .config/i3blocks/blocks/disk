@@ -15,8 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 case $BLOCK_BUTTON in
-	1) setsid $TERMINS _blockterm -e ncdu --color dark ~/ ;;
-	3) setsid $TERMINS _blockterm -e ncdu --color dark -x / ;;
+	1) setsid -f $TERMINS _blockterm -e ncdu --color dark ~/ ;;
+	3) setsid -f $TERMINS _blockterm -e ncdu --color dark -x / ;;
 esac
 
 DIR="${DIR:-$BLOCK_INSTANCE}"
