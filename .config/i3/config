@@ -612,7 +612,7 @@ mode "$broopen" {
 }
 
 bindsym $mod+Shift+t mode "$toggle"
-set $toggle  pi[c]om py-[h]ttp [k]eybase [r]edshift [s]timeout [t]ransmission |  pi[C]om [d]unst [p]ulse
+set $toggle  pi[c]om py-[h]ttp [k]eybase [r]edshift [s]timeout [t]ransmission [S]yncthing |  pi[C]om [d]unst [p]ulse
 mode "$toggle" {
 	bindsym c exec $N pkill picom || picom -b, mode default
 	bindsym h exec $N py-http -n, mode default
@@ -620,6 +620,7 @@ mode "$toggle" {
 	bindsym r exec $N toggle redshift, mode default
 	bindsym s exec $N toggle stimeout, mode default
 	bindsym t exec $N toggle transmission, mode default
+	bindsym Shift+s exec $N toggle syncthing, mode default
 	bindsym Shift+c exec $N "pkill picom; sleep .4; picom -b", mode default
 	bindsym d --release exec "pkill dunst; exec notify-send -a system 'restart dunst'", mode default
 	bindsym p exec $N systemctl --user restart pulseaudio, mode default
@@ -642,6 +643,17 @@ mode "$keystroke" {
 	# back to normal: Escape or $caps+a
 	bindsym Escape mode default
 	bindsym $caps+a mode default
+}
+
+bindsym $caps+w mode "$vimwiki"
+set $vimwiki 
+mode "$vimwiki" {
+	bindsym w exec $N $TERMINAL -e $EDITOR -c 'VimwikiIndex', mode default
+	bindsym t exec $N $TERMINAL -e $EDITOR +$ /data/repos/notes/todo.md, mode default
+
+	# back to normal: Escape or $caps+w
+	bindsym Escape mode default
+	bindsym $caps+w mode default
 }
 
 #=====================================================================
