@@ -405,6 +405,7 @@ if &diff
 endif
 
 "=== MarkdownPreview
+let g:mkdp_refresh_slow = 1
 nmap <leader>mp <Plug>MarkdownPreviewToggle
 
 "=== Gist-Vim
@@ -457,6 +458,12 @@ let g:vcoolor_disable_mappings = 1
 let g:vifm_exec = 'VIFM=~/.config/vifm/session/select vifm'
 map <leader>n :Vifm<CR>
 map <leader>N :TabVifm<CR>
+
+" Disable loading netrw
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
+" Replace netrw with Vifm
+let g:vifm_replace_netrw = 1
 
 "=== Hexokinase
 nmap <silent> <leader>ch :HexokinaseToggle<CR>
