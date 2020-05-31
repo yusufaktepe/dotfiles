@@ -1,12 +1,12 @@
 "=====================================================================
-" Plugins {{{
+" PLUGINS {{{
 "=====================================================================
 
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	echo 'Downloading junegunn/vim-plug to manage plugins...'
 	silent !mkdir -p ~/.config/nvim/autoload/
 	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
-	autocmd VimEnter * PlugInstall
+	au VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.config/nvim/plugged')
@@ -88,7 +88,7 @@ call plug#end()
 
 " }}}
 "=====================================================================
-" Settings {{{
+" SETTINGS {{{
 "=====================================================================
 
 filetype plugin indent on
@@ -130,7 +130,7 @@ set background=dark
 
 " }}}
 "=====================================================================
-" Mappings {{{
+" MAPPINGS {{{
 "=====================================================================
 
 let mapleader ="\<space>"
@@ -304,7 +304,7 @@ map Ü }
 
 " }}}
 "=====================================================================
-" Plugin Settings {{{
+" PLUGIN SETTINGS {{{
 "=====================================================================
 
 "=== Airline
@@ -465,7 +465,7 @@ let g:Hexokinase_highlighters = ['backgroundfull']
 
 " }}}
 "=====================================================================
-" Functions {{{
+" FUNCTIONS {{{
 "=====================================================================
 
 " Open help in full-window view (empty buffer OR new tab)
@@ -498,48 +498,50 @@ endfunction
 
 " }}}
 "=====================================================================
-" autogroups & autocommands {{{
+" AUTOCMD {{{
 "=====================================================================
 
-" Runs a script that cleans out tex build files whenever I close out of a .tex file.
-autocmd VimLeave *.tex !texclear %
+augroup vimrc
+	" Ensure files are read as what I want:
+	au BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+	au BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+	au BufRead,BufNewFile *.tex set filetype=tex
+	au BufRead,BufNewFile *.rasi set filetype=css
 
-" Ensure files are read as what I want:
-autocmd BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-autocmd BufRead,BufNewFile *.tex set filetype=tex
-autocmd BufRead,BufNewFile *.rasi set filetype=css
+	" Enable Goyo by default for mutt writting
+	au BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+	au BufRead,BufNewFile /tmp/neomutt* :Goyo
+	au BufRead,BufNewFile /tmp/neomutt* map Q :Goyo\|:confirm qall<CR>
+	au BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
+	au BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
-" Enable Goyo by default for mutt writting
-autocmd BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-autocmd BufRead,BufNewFile /tmp/neomutt* :Goyo
-autocmd BufRead,BufNewFile /tmp/neomutt* map Q :Goyo\|:confirm qall<CR>
-autocmd BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
-autocmd BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
+	" Disable automatic commenting on newline
+	au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Disable automatic commenting on newline
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+	" Enable spell-check for gitcommit; set textwidth to 72
+	au Filetype gitcommit setlocal spell | setlocal tw=72
 
-" Enable spell-check for gitcommit; set textwidth to 72
-au Filetype gitcommit setlocal spell | setlocal tw=72
+	" Disable folding for some files
+	au Filetype gitcommit,vimwiki setlocal nofoldenable
 
-" Disable folding for markdown files
-au Filetype vimwiki setlocal nofoldenable
+	" Automatically deletes all trailing whitespace on save.
+	" au BufWritePre * %s/\s\+$//e
 
-" Automatically deletes all trailing whitespace on save.
-" autocmd BufWritePre * %s/\s\+$//e
-
-" Equalize diff splits as the window size changes
-if exists("##VimResized")
-	if &diff
-		au VimResized * wincmd =
+	" Equalize diff splits as the window size changes
+	if exists('##VimResized')
+		if &diff
+			au VimResized * wincmd =
+		endif
 	endif
-endif
 
-" Run command whenever these files are updated.
-autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
-autocmd BufWritePost ~/.config/fontconfig/* !fc-cache
-autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+	" Run command whenever these files are updated.
+	au BufWritePost *Xresources,*Xdefaults !xrdb %
+	au BufWritePost ~/.config/fontconfig/* !fc-cache
+	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+
+	" Runs a script that cleans out tex build files whenever I close out of a .tex file.
+	au VimLeave *.tex !texclear %
+augroup END
 
 " }}}
-
+"=====================================================================
