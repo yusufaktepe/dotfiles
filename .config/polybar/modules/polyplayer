@@ -6,6 +6,25 @@ ICON_PAUSE=""
 ICON_STOP=""
 CUR_ICON=""
 
+trunc() {
+	if [ "${#1}" -gt 22 ]; then
+		V="${1:0:20}.."
+		V=${V/% ?../..}
+		V=${V/% \(?../..}
+		V=${V/% \[?../..}
+		V=${V/% -?../..}
+		V=${V/% ../..}
+		V=${V/%.../..}
+		V=${V/%:../..}
+		V=${V/%-../..}
+		V=${V/%,../..}
+		V=${V/%;../..}
+		V=${V/% ../..}
+	else
+		return 1
+	fi
+}
+
 output() {
 	[ ! "$(mpc status 2>/dev/null)" ] && [ ! "$(playerctl status 2>/dev/null)" ] && echo "" && exit
 
@@ -18,22 +37,6 @@ output() {
 		ARTIST=$(playerctl metadata artist 2>/dev/null)
 		TITLE=$(playerctl metadata title 2>/dev/null)
 	fi
-
-	trunc() {
-		if [ "${#1}" -gt 20 ]; then
-			V="${1:0:20}.."
-			V=${V/% ../..}
-			V=${V/%.../..}
-			V=${V/% ?../..}
-			V=${V/%-../..}
-			V=${V/% \[../..}
-			V=${V/% \(?../..}
-			V=${V/% ../..}
-		else
-			return 1
-		fi
-
-	}
 
 	trunc "$ARTIST" && ARTIST="$V"
 	trunc "$TITLE" && TITLE="$V"
