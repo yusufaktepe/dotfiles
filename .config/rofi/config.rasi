@@ -1,65 +1,30 @@
 configuration {
-modi: "window,combi,run";
-combi-modi: "drun,run";
-show-icons: true;
-//theme: "solarized";
-icon-theme: "Papirus-Dark" ;
-font: "mono 10";
-separator-style: "solid";
-hide-scrollbar: true;
-me-select-entry: "MouseSecondary";
-me-accept-entry: "MousePrimary";
-scroll-method: 1;
-
-display-run: "";
-display-drun: "";
-display-window: "";
-display-combi: "";
-display-calc: "";
-
-kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2,XF86Launch9,Super_L+XF86MonBrightnessDown";
-
-kb-select-1: "Super+1,Control+1";
-kb-select-2: "Super+2,Control+2";
-kb-select-3: "Super+3,Control+3";
-kb-select-4: "Super+4,Control+4";
-kb-select-5: "Super+5,Control+5";
-kb-select-6: "Super+6,Control+6";
-kb-select-7: "Super+7,Control+7";
-kb-select-8: "Super+8,Control+8";
-kb-select-9: "Super+9,Control+9";
-kb-select-10: "Super+0,Control+0";
-
-location: 2;
-yoffset: 20;
-lines: 10;
-width: 60;
-
-/*	modi: "window,run,ssh";*/
-/*	width: 50;*/
-/*	lines: 15;*/
+	modi: "window,combi,run";
+	width: 60;
+	lines: 10;
 /*	columns: 1;*/
-/*	font: "mono 12";*/
+	font: "mono 10";
 /*	bw: 1;*/
-/*	location: 0;*/
+	location: 2;
 /*	padding: 5;*/
-/*	yoffset: 0;*/
+	yoffset: 20;
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
-/*	show-icons: false;*/
+	show-icons: true;
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
-/*	ssh-command: "{terminal} -e {ssh-client} {host}";*/
+/*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
 /*	run-command: "{cmd}";*/
 /*	run-list-command: "";*/
 /*	run-shell-command: "{terminal} -e {cmd}";*/
-/*	window-command: "xkill -id {window}";*/
+/*	window-command: "wmctrl -i -R {window}";*/
 /*	window-match-fields: "all";*/
-/*	icon-theme: ;*/
+	icon-theme: "Papirus-Dark";
 /*	drun-match-fields: "name,generic,exec,categories";*/
 /*	drun-show-actions: false;*/
 /*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
 /*	disable-history: false;*/
+/*	ignored-prefixes: "";*/
 /*	sort: false;*/
 /*	sorting-method: ;*/
 /*	case-sensitive: false;*/
@@ -69,23 +34,23 @@ width: 60;
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-/*	combi-modi: "window,run";*/
+	combi-modi: "drun,run";
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
 /*	line-margin: 2;*/
 /*	line-padding: 1;*/
 /*	filter: ;*/
-/*	separator-style: "dash";*/
-/*	hide-scrollbar: false;*/
+	separator-style: "solid";
+	hide-scrollbar: true;
 /*	fullscreen: false;*/
 /*	fake-transparency: false;*/
 /*	dpi: -1;*/
 /*	threads: 0;*/
 /*	scrollbar-width: 8;*/
-/*	scroll-method: 0;*/
+	scroll-method: 1;
 /*	fake-background: "screenshot";*/
-/*	window-format: "{w}    {i}{c}   {t}";*/
+/*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
 /*	theme: ;*/
@@ -96,14 +61,17 @@ width: 60;
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	matching-negate-char: '-' /* unsupported */;*/
+/*	cache-dir: ;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
-/*	display-window: ;*/
+	display-window: "";
 /*	display-windowcd: ;*/
-/*	display-run: ;*/
+	display-run: "";
 /*	display-ssh: ;*/
-/*	display-drun: ;*/
-/*	display-combi: ;*/
+	display-drun: "";
+	display-combi: "";
 /*	display-keys: ;*/
+/*	display-blocks: ;*/
+	display-calc: "";
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
 /*	kb-secondary-paste: "Control+v,Insert";*/
 /*	kb-clear-line: "Control+w";*/
@@ -119,7 +87,7 @@ width: 60;
 /*	kb-remove-char-back: "BackSpace,Shift+BackSpace,Control+h";*/
 /*	kb-remove-to-eol: "Control+k";*/
 /*	kb-remove-to-sol: "Control+u";*/
-/*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
+	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter,Super+l";
 /*	kb-accept-custom: "Control+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
@@ -127,8 +95,8 @@ width: 60;
 /*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
-/*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
-/*	kb-row-down: "Down,Control+n";*/
+	kb-row-up: "Up,Control+p,ISO_Left_Tab,Super+k";
+	kb-row-down: "Down,Control+n,Super+j";
 /*	kb-row-tab: "Tab";*/
 /*	kb-page-prev: "Page_Up";*/
 /*	kb-page-next: "Page_Down";*/
@@ -136,9 +104,10 @@ width: 60;
 /*	kb-row-last: "End,KP_End";*/
 /*	kb-row-select: "Control+space";*/
 /*	kb-screenshot: "Alt+S";*/
+/*	kb-ellipsize: "Alt+period";*/
 /*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
 /*	kb-toggle-sort: "Alt+grave";*/
-/*	kb-cancel: "Escape,Control+g,Control+bracketleft";*/
+	kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2,XF86Launch9,Super_L+XF86MonBrightnessDown";
 /*	kb-custom-1: "Alt+1";*/
 /*	kb-custom-2: "Alt+2";*/
 /*	kb-custom-3: "Alt+3";*/
@@ -158,22 +127,22 @@ width: 60;
 /*	kb-custom-17: "Alt+ampersand";*/
 /*	kb-custom-18: "Alt+asterisk";*/
 /*	kb-custom-19: "Alt+parenleft";*/
-/*	kb-select-1: "Super+1";*/
-/*	kb-select-2: "Super+2";*/
-/*	kb-select-3: "Super+3";*/
-/*	kb-select-4: "Super+4";*/
-/*	kb-select-5: "Super+5";*/
-/*	kb-select-6: "Super+6";*/
-/*	kb-select-7: "Super+7";*/
-/*	kb-select-8: "Super+8";*/
-/*	kb-select-9: "Super+9";*/
-/*	kb-select-10: "Super+0";*/
+	kb-select-1:  "Super+1,Control+1";
+	kb-select-2:  "Super+2,Control+2";
+	kb-select-3:  "Super+3,Control+3";
+	kb-select-4:  "Super+4,Control+4";
+	kb-select-5:  "Super+5,Control+5";
+	kb-select-6:  "Super+6,Control+6";
+	kb-select-7:  "Super+7,Control+7";
+	kb-select-8:  "Super+8,Control+8";
+	kb-select-9:  "Super+9,Control+9";
+	kb-select-10: "Super+0,Control+0";
 /*	ml-row-left: "ScrollLeft";*/
 /*	ml-row-right: "ScrollRight";*/
 /*	ml-row-up: "ScrollUp";*/
 /*	ml-row-down: "ScrollDown";*/
-/*	me-select-entry: "MousePrimary";*/
-/*	me-accept-entry: "MouseDPrimary";*/
+	me-select-entry: "MouseSecondary";
+	me-accept-entry: "MousePrimary";
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
 @import "~/.config/rofi/themes/flat-gruvbox.rasi"
