@@ -11,10 +11,10 @@ filextype *.pdf,*.ps,*.eps,*.ps.gz,*.djvu
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
 	\ {Play using mpv}
 	\ mpv --no-audio-display %f,
-	\ {Play using MPlayer}
-	\ mplayer %f,
-	\ {Play using ffplay}
-	\ ffplay -nodisp -autoexit %c,
+	" \ {Play using MPlayer}
+	" \ mplayer %f,
+	" \ {Play using ffplay}
+	" \ ffplay -nodisp -autoexit %c,
 
 " Video
 filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
@@ -26,10 +26,10 @@ filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 	\ smplayer %f %i &,
 	\ {Play using VLC}
 	\ vlc %f %i &,
-	\ {Play using mplayer}
-	\ mplayer %f %i &,
-	\ {Play using ffplay}
-	\ ffplay -fs -autoexit %f %i &,
+	" \ {Play using mplayer}
+	" \ mplayer %f %i &,
+	" \ {Play using ffplay}
+	" \ ffplay -fs -autoexit %f %i &,
 
 " Subtitle
 filextype *.srt
@@ -104,12 +104,18 @@ filetype *.torrent qbittorrent %f &
 filetype *.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz
 	\ {View contents}
 	\ atool --list %f | less,
-	\ {Extract here (atool)}
-	\ aunpack -e %f &,
-	\ {Extract into new directory}
-	\ ext %f,
 	\ {Extract here}
-	\ ext -c %f,
+	\ aunpack -e %f &,
+	\ {Extract into new dir}
+	\ aunpack -e --subdir %f &,
+
+filextype *.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz
+	\ {GUI: View contents}
+	\ engrampa %f %i &,
+	\ {GUI: Extract here}
+	\ engrampa --extract-here %f %i &,
+	\ {GUI: Extract into...}
+	\ engrampa --extract %f %i &,
 
 " IsoMount
 filetype *.iso
