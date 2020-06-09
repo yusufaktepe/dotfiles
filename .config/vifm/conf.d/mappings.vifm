@@ -27,6 +27,10 @@ nnoremap <silent> S :sort<cr>
 nnoremap <silent> w :view<cr>
 vnoremap <silent> w :view<cr>gv
 
+" Moving though sibling directories
+nnoremap <silent> <a-j> ]R
+nnoremap <silent> <a-k> [R
+
 " Moving cursor in other pane
 nnoremap <silent> <c-j> <tab>j<tab>
 nnoremap <silent> <c-k> <tab>k<tab>
@@ -68,7 +72,8 @@ nnoremap <silent> yf :!echo %c:p | xclip -selection c %i<cr>
 
 " Archive
 " nnoremap <silent> x :extract<cr>
-nnoremap <silent> X :!apack %f &<c-a><a-f><space>
+" nnoremap <silent> X :!apack %f &<c-a><a-f><space>
+nnoremap <silent> X :!engrampa --add %f %i &<cr>
 
 " Mappings for faster renaming
 nnoremap I cw<c-a>
