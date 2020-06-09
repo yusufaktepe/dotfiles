@@ -57,6 +57,9 @@
 	tool = vimdiff
 	log = true
 
+[pull]
+	ff = only
+
 [push]
 	default = simple
 
