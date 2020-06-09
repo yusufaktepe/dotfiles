@@ -238,10 +238,7 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 set $ws9 9
-set $ws10 10:0
-set $ws11 11:
-set $ws12 12:
-set $ws13 13:
+set $ws10 10:
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -287,6 +284,8 @@ bindsym $mod+Prior       workspace prev
 bindsym $mod+Next        workspace next
 bindsym $mod+Shift+Tab   workspace prev
 bindsym $mod+Tab         workspace next
+bindsym $caps+j          workspace prev
+bindsym $caps+k          workspace next
 bindsym $mod+Shift+Prior move container to workspace prev
 bindsym $mod+Shift+Next  move container to workspace next
 bindsym $mod+$alt+Left   move container to workspace prev; workspace prev
@@ -310,14 +309,14 @@ for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
 # assign [window_role="browser"]                 $ws1
-assign [class="Firefox|(?i)Vivaldi"]             $ws1
+assign [class="firefox|(?i)Vivaldi"]             $ws1
 assign [class="Pcmanfm|Doublecmd"]               $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
+assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
 # assign [class="(?i)thunderbird"]               $ws9
-assign [class="qBittorrent"]                     $ws10
-for_window [class="Spotify"] move to workspace   $ws11
-assign [class="cantata"]                         $ws12
-assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws13
+assign [class="qBittorrent"]                     $ws9
+assign [class="cantata"]                         $ws10
+for_window [class="Spotify"] move to workspace   $ws10
 
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
@@ -332,8 +331,8 @@ for_window [class="mpv|vlc"] floating enable sticky enable
 for_window [class="smplayer" title="^( - |)SMPlayer$"] floating enable sticky enable,resize set 670 457, move position +696+311
 for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 800 600, move position center
 for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 800 600, move position center
-for_window [instance="Places" class="Firefox"] floating enable border normal, resize set 800 600, move position center
-for_window [instance="Browser|Update" class="Firefox|Tor Browser"] floating enable border normal
+for_window [instance="Places" class="firefox"] floating enable border normal, resize set 800 600, move position center
+for_window [instance="Browser|Update" class="firefox|Tor Browser"] floating enable border normal
 # for_window [instance="(?i)crx_" class="(?i)Vivaldi|-chrome"] floating enable sticky enable
 for_window [class="Crow Translate"] floating enable sticky enable, resize set 650 290, move position +716+20
 for_window [class="Sunflower" title="(?i)Viewer"] floating enable
