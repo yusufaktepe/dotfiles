@@ -1,10 +1,9 @@
 #!/bin/sh
-# Remap script for my keyboard.
 
 # Increase key speed via a rate change
 xset r rate 300 50
 
-# Both Shift together enable CapsLock; one Shift disables it (this should come first)
+# Both Shift enables CapsLock; one disables it (this should come first)
 setxkbmap -option caps:none
 setxkbmap -option 'shift:both_capslock_cancel'
 
@@ -12,55 +11,19 @@ setxkbmap -option 'shift:both_capslock_cancel'
 setxkbmap -layout tr,us -option grp:ctrls_toggle
 
 # map Caps_Lock to Hyper_L
-xmodmap -e 'clear lock' -e 'remove mod4 = Hyper_L' -e 'add mod3 = Hyper_L' -e 'keycode 66 = Hyper_L'
+xmodmap -e 'clear lock' -e 'remove mod4 = Hyper_L' \
+	-e 'add mod3 = Hyper_L' -e 'keycode 66 = Hyper_L'
 
-killall xcape 2>/dev/null
-
-mods() {
+killall -q xcape
 
 # CapsLock
 xcape -e 'Hyper_L=Escape'
-# xcape -e 'Hyper_L=Super_L|Alt_L|XF86WLAN'
-
-# Super:
-# xcape -e 'Super_L=Escape'
-# xcape -t 200 -e 'Super_L=XF86Launch2'
-
-# Shift_L:
-# xcape -t 200 -e 'Shift_L=XF86AudioPrev'
-
-# Control_L:
-# xcape -t 200 -e 'Control_L=XF86AudioNext'
-
-# Alt_L:
-# xcape -t 200 -e 'Alt_L=XF86AudioPlay'
-
-# Alt Gr:
+# Super
+xcape -t 200 -e 'Super_L=Escape'
+# Alt Gr
 xcape -t 200 -e 'ISO_Level3_Shift=XF86Launch9'
-
-# Control_R:
+# Control_R
 xcape -t 200 -e 'Control_R=Super_L|XF86MonBrightnessDown'
-
-# Shift_R:
+# Shift_R
 xcape -t 200 -e 'Shift_R=Menu'
-}
 
-case "$1" in
-	tr|def)
-		if [ "$2" = "mod" ]; then
-			setxkbmap -layout tr && mods
-		else
-			setxkbmap -layout tr
-		fi
-	;;
-	en|us)
-		if [ "$2" = "mod" ]; then
-			setxkbmap -layout us && mods
-		else
-			setxkbmap -layout us
-		fi
-		;;
-	$NULL|*)
-		mods
-	;;
-esac
