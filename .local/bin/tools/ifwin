@@ -1,8 +1,7 @@
 #!/bin/sh
 
 AW=$(xdotool getactivewindow)
-AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $4}')
-AW_CLASS=$(echo "$AW_CLASS" | tr '[:upper:]' '[:lower:]')
+AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print tolower($4)}')
 
 _crow() {
 	showcrow="alt+ctrl+shift+F1"
