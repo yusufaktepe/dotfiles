@@ -2,9 +2,9 @@
 # A simple shell script to manage clipboard with rofi/fzf.
 # Dependencies: greenclip, rofi/dmenu, fzf, xclip, xsel.
 
-if ! pgrep -x greenclip >/dev/null; then
-	nohup greenclip daemon >/dev/null 2>&1 &
-fi
+pidof greenclip >/dev/null || setsid -f greenclip daemon >/dev/null 2>&1
+
+clipin() { xargs -r -d'\n' -I '{}' greenclip print '{}' ;}
 
 wrofi() {
 	# Display content of primary clipboard as rofi message:
@@ -14,38 +14,35 @@ wrofi() {
 
 	# Because we can't use `-mesg` with `-modi`:
 	greenclip print | sed '/^$/d' | rofi -dmenu -i -l 10 -width 60 \
-		-p Clipboard -mesg "<span color='#a89984'>$prim</span>" |
-		xargs -r -d'\n' -I '{}' greenclip print '{}'
+		-p Clipboard -mesg "<span color='#a89984'>$prim</span>" | clipin
 
 	# rofi -modi "clipboard:greenclip print" -show clipboard \
 	# -run-command '{cmd}' -lines 10 -width 60
 }
 
 wdmenu() {
-	greenclip print | sed '/^$/d'| dmenu -i -l 10 -p Clipboard |
-		xargs -r -d'\n' -I '{}' greenclip print '{}'
+	greenclip print | sed '/^$/d'| dmenu -i -l 10 -p Clipboard | clipin
 }
 
 wfzf() {
-	greenclip print | sed '/^$/d' | fzf -e |
-		xargs -r -d'\n' -I '{}' greenclip print '{}'
+	greenclip print | sed '/^$/d' | fzf -e | clipin
 }
 
 case $1 in
 	cfg)
 		killall greenclip
 		$EDITOR ~/.config/greenclip.cfg
-		nohup greenclip daemon >/dev/null 2>&1 &
+		setsid -f greenclip daemon >/dev/null 2>&1
 	;;
 	rld)
 		killall greenclip
-		nohup greenclip daemon >/dev/null 2>&1 &
+		setsid -f greenclip daemon >/dev/null 2>&1
 	;;
 	clear)
 		xsel -bc; xsel -c
 		killall greenclip
 		rm ~/.cache/greenclip.history
-		nohup greenclip daemon >/dev/null 2>&1 &
+		setsid -f greenclip daemon >/dev/null 2>&1
 	;;
 	keep)
 		$EDITOR ~/.cache/greenclip.staticHistory

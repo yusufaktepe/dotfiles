@@ -14,7 +14,6 @@ floating_modifier $mod
 
 # Set basic vars
 set $N --no-startup-id
-set $C exec $N pkill -0
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -107,9 +106,9 @@ bindsym $caps+F1 exec $N $TERMINS _blockterm -e ncdu --color dark ~/
 ## Function Buttons
 bindsym XF86MonBrightnessUp exec $N brightness inc 5
 bindsym XF86MonBrightnessDown exec $N brightness dec 5
-bindsym $mod+XF86MonBrightnessDown --release exec $N sleep 1 && xset dpms force off
+bindsym --release $mod+XF86MonBrightnessDown exec $N sleep 1 && xset dpms force off
 
-bindsym XF86Display exec $N arandr
+bindsym XF86Display exec $N ifwin -e arandr --toggle
 bindsym XF86TouchpadOff exec $N toggle touchpad
 bindsym XF86TouchpadOn exec $N toggle touchpad
 
@@ -135,8 +134,8 @@ bindsym $caps+x exec $N smc n
 
 ## Screenshots
 bindsym Print exec $N maimshot
-bindsym $mod+Print --release exec $N maimshot -w
-bindsym Ctrl+Print --release exec $N maimshot -s
+bindsym --release $mod+Print exec $N maimshot -w
+bindsym --release Ctrl+Print exec $N maimshot -s
 bindsym Shift+Print exec $N dmaim
 
 ## Set temporary transparency
@@ -592,18 +591,18 @@ mode "$freeze" {
 bindsym $caps+b mode "$broopen"
 set $broopen : F3/3 | : F4/4 | : F5/5 | : F6/6 | 﨩: t | : y/c | : d
 mode "$broopen" {
-	bindsym F3 --release exec $N bro-open $BROWSER, mode default
-	bindsym F4 --release exec $N bro-open opera --start-maximized, mode default
-	bindsym F5 --release exec $N bro-open firefox, mode default
-	bindsym F6 --release exec $N bro-open google-chrome-stable, mode default
-	bindsym 3 --release exec $N bro-open $BROWSER --incognito, mode default
-	bindsym 4 --release exec $N bro-open opera -private --start-maximized, mode default
-	bindsym 5 --release exec $N bro-open firefox --private-window, mode default
-	bindsym 6 --release exec $N bro-open google-chrome-stable --incognito, mode default
-	bindsym t --release exec $N bro-open tor-browser --allow-remote, mode default
-	bindsym y --release exec $N bro-open mpv, mode default
-	bindsym c --release exec $N bro-open mpv -c, mode default
-	bindsym d --release exec $N bro-open dmenuhandler, mode default
+	bindsym --release F3 exec $N bro-open $BROWSER, mode default
+	bindsym --release F4 exec $N bro-open opera --start-maximized, mode default
+	bindsym --release F5 exec $N bro-open firefox, mode default
+	bindsym --release F6 exec $N bro-open google-chrome-stable, mode default
+	bindsym --release 3 exec $N bro-open $BROWSER --incognito, mode default
+	bindsym --release 4 exec $N bro-open opera -private --start-maximized, mode default
+	bindsym --release 5 exec $N bro-open firefox --private-window, mode default
+	bindsym --release 6 exec $N bro-open google-chrome-stable --incognito, mode default
+	bindsym --release t exec $N bro-open tor-browser --allow-remote, mode default
+	bindsym --release y exec $N bro-open mpv, mode default
+	bindsym --release c exec $N bro-open mpv -c, mode default
+	bindsym --release d exec $N bro-open dmenuhandler, mode default
 
 		bindsym Return mode default
 		bindsym Escape mode default
@@ -621,7 +620,7 @@ mode "$toggle" {
 	bindsym t exec $N toggle transmission, mode default
 	bindsym Shift+s exec $N toggle syncthing, mode default
 	bindsym Shift+c exec $N "pkill picom; sleep .4; picom -b", mode default
-	bindsym d --release exec "pkill dunst; exec notify-send -a system 'restart dunst'", mode default
+	bindsym --release d exec "pkill dunst; exec notify-send -a system 'restart dunst'", mode default
 	bindsym p exec $N systemctl --user restart pulseaudio, mode default
 
 		# back to normal: Enter or Escape
