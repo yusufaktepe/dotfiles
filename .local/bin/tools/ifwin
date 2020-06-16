@@ -55,7 +55,7 @@ esac
 [ -n "$opt_flags" ] && opt_exec="$opt_exec $opt_flags"
 
 if [ -n "$opt_class" ] && [ -n "$opt_exec" ]; then
-	if pidof "$proc" >/dev/null; then
+	if pgrep -x "$proc" >/dev/null; then
 		if [ "$AW_CLASS" = "$opt_class" ]; then
 			if [ "$opt_toggle" = scratchpad ]; then
 				i3-msg "[class=\"(?i)$opt_class\"] move scratchpad" >/dev/null
