@@ -41,7 +41,7 @@ Plug 'mboughaba/i3config.vim'
 Plug 'chr4/nginx.vim'
 
 " Auto Completion, linting, etc
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
@@ -160,8 +160,8 @@ noremap <M-{> <C-w>3-
 noremap <M-}> <C-w>3+
 
 " Open/close tabs
-noremap <silent> <M-cr> :tabnew<CR>
-noremap <silent> <M-backspace> :tabclose<CR>
+noremap <silent> <M-Cr> :tabnew<CR>
+noremap <silent> <M-Backspace> :tabclose<CR>
 
 " Navigate left/right through tabs
 noremap <silent> <M-,> :tabn<CR>
@@ -288,6 +288,9 @@ map <leader>op :!opout <C-r>%<CR><CR>
 " Spell-check
 map <leader>or :setlocal spell! spelllang=en_us<CR>
 
+" Disable C-c warning
+map <C-c> <Nop>
+
 " trq fixes
 map ı i
 map İ I
@@ -379,6 +382,7 @@ let g:LanguageClient_diagnosticsList = 'Disabled'
 
 nnoremap <silent> <leader>k :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> gD :call LanguageClient#textDocument_definition({"gotoCmd": "tabedit"})<CR>
 nnoremap <silent> <leader>gr :call LanguageClient#textDocument_rename()<CR>
 
