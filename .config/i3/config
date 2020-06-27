@@ -308,7 +308,7 @@ for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
 # assign [window_role="browser"]                 $ws1
-assign [class="firefox|(?i)Vivaldi"]             $ws1
+assign [class="(?i)Vivaldi"]                     $ws1
 assign [class="Pcmanfm|Doublecmd"]               $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
 assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
@@ -320,7 +320,7 @@ for_window [class="Spotify"] move to workspace   $ws10
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
 for_window [class="Catfish|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|(?i)telegram|Yad"] floating enable
-for_window [class="Lxappearance|qt5ct|Lightdm-settings|Arandr|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
+for_window [class="Lxappearance|qt5ct|Lightdm-settings|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
 for_window [class="(?i)megasync" window_type=normal title="^(?!Stream*|Transfer*)"] floating enable, move position +964+20
 for_window [class="(?i)pavucontrol"] floating enable, resize set 502 402, move position +864+20
 for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
