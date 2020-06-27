@@ -62,6 +62,7 @@ if [ -n "$opt_class" ] && [ -n "$opt_exec" ]; then
 			elif [ "$opt_toggle" ]; then
 				i3-msg kill >/dev/null
 				[ "$opt_class" = pavucontrol ] && pkill -SIGRTMIN+10 i3blocks
+				[ "$opt_class" = arandr ] && setbg
 			else
 				i3-msg "workspace back_and_forth" >/dev/null
 			fi
