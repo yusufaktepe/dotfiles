@@ -11,6 +11,7 @@ command! vgrep $EDITOR "+grep %a"
 command! extract aunpack -e %f &
 command! compress apack
 command! link ln -s %d/%f %D
+command! shred shred -u %f &
 command! vidir vidir %a
 command! EDIT $TERMINAL -e $EDITOR %a 2>/dev/null &
 command! COPY :yank | winrun , put
