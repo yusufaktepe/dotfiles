@@ -103,10 +103,16 @@ set rulerformat='%2l-%S%[ +%x%]'
 " Set custom status line look
 set statusline=" %t%= %A %10u:%-7g %8E %20d "
 
-" What should be saved automatically between vifm sessions.  Drop "savedirs"
-" value if you don't want vifm to remember last visited directories for you.
-set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
-	\phistory,fhistory,dirstack,registers,bookmarks,bmarks,tabs
+" Controls what will be saved in the $VIFM/vifminfo file
+set vifminfo=bmarks,bookmarks,tui,dhistory,state,savedirs,chistory,shistory,
+	\phistory,fhistory,dirstack,registers,tabs
+
+" An equivalent of 'vifminfo' for sessions
+set sessionoptions=tui,dhistory,state,savedirs,chistory,shistory,
+	\phistory,fhistory,dirstack,tabs
+
+" Specifies identifier for group of instances that share registers
+set syncregs=1
 
 " Customize view columns a bit (enable ellipsis for truncated file names)
 set viewcolumns=-{name}..,6{}.
@@ -158,4 +164,10 @@ source $VIFM/conf.d/mappings.vifm
 source $VIFM/conf.d/handler.vifm
 source $VIFM/conf.d/icons.vifm
 source $VIFM/conf.d/bookmarks.vifm
+
+" ------------------------------------------------------------------------------
+" Initialize default session
+if v:session == ''
+	session default
+endif
 

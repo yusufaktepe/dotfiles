@@ -67,7 +67,7 @@ bindsym --release $mod+Insert exec $N gclip selpaste
 bindsym $mod+Shift+Insert exec $N gclip seltoclip
 
 # #---Start Applications---# #
-bindsym $mod+F1 exec $N $TERMINS _blockterm -e sh -c "VIFM=~/.config/vifm/session/shell vifm"
+bindsym $mod+F1 exec $N $TERMINS _blockterm -e sh -c 'vifm -c "session shell"'
 bindsym $mod+F2 exec $N ifterm -e vifm
 bindsym $mod+F3 exec $N ifwin -e vivaldi-stable
 bindsym $mod+F4 exec $N ifwin -e opera
