@@ -2,6 +2,7 @@
 
 " Quit
 nnoremap Q :wqall<cr>
+nnoremap qq :wqall<cr>
 
 " Restart vifm
 map R :reload<cr>
