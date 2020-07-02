@@ -459,7 +459,7 @@ nmap <silent> <leader>co :VCoolor<CR>
 let g:vcoolor_disable_mappings = 1
 
 "=== Vifm
-let g:vifm_exec = 'VIFM=~/.config/vifm/session/select vifm'
+let g:vifm_exec = 'VIFM=~/.config/vifm/sessions/select vifm'
 map <leader>n :Vifm<CR>
 map <leader>N :TabVifm<CR>
 

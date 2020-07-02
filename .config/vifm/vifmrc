@@ -167,7 +167,7 @@ source $VIFM/conf.d/bookmarks.vifm
 
 " ------------------------------------------------------------------------------
 " Initialize default session
-if v:session == ''
-	session default
-endif
+" if v:session == ''
+" 	session default
+" endif
 
