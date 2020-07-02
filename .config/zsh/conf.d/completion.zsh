@@ -50,11 +50,7 @@ zstyle '*' single-ignored show
 WORDCHARS=${WORDCHARS//\/[&.;]}
 
 # Automatically find new executables after pacman transaction. (Requires alpm-hook)
-catch_signal_usr1() {
-	trap catch_signal_usr1 USR1
-	rehash
-}
-trap catch_signal_usr1 USR1
+trap 'rehash' USR1
 
 # Enable completions for functions/scripts.
 compdef _files cpv
