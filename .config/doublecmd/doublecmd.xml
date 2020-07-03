@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="0.9.8 beta" ConfigVersion="10">
+<doublecmd DCVersion="0.9.9 beta" ConfigVersion="10">
   <Configuration Save="True" SortOrder="0" TreeType="0">
     <UseConfigInProgramDir>False</UseConfigInProgramDir>
     <FolderTabs Save="True"/>
@@ -595,6 +595,8 @@
       </Columns>
     </BriefView>
     <ExtraLineSpan>2</ExtraLineSpan>
+    <FolderPrefix>[</FolderPrefix>
+    <FolderPostfix>]</FolderPostfix>
   </FilesViews>
   <Keyboard>
     <Typing>
@@ -737,12 +739,12 @@
     <HotDir Name=".local/share" Path="$HOME/.local/share" PathSort="7"/>
     <HotDir Name="--" Path=""/>
     <HotDir Name="data" Path="/data" PathSort="1"/>
-    <HotDir Name="dox" Path="/data/dox" PathSort="1"/>
-    <HotDir Name="-dl" Path=""/>
-    <HotDir Name="./" Path="/data/dl" PathSort="1"/>
-    <HotDir Name="default" Path="$HOME/dl/default" PathSort="7"/>
-    <HotDir Name="torrents" Path="/data/dl/torrents" PathSort="7"/>
-    <HotDir Name="isos" Path="/data/dl/isos" PathSort="1"/>
+    <HotDir Name="documents" Path="/data/documents" PathSort="1"/>
+    <HotDir Name="-downloads" Path=""/>
+    <HotDir Name="./" Path="/data/downloads" PathSort="1"/>
+    <HotDir Name="default" Path="/data/downloads/default" PathSort="7"/>
+    <HotDir Name="torrents" Path="/data/downloads/torrents" PathSort="7"/>
+    <HotDir Name="isos" Path="/data/downloads/isos" PathSort="1"/>
     <HotDir Name="--" Path=""/>
     <HotDir Name="-music" Path=""/>
     <HotDir Name="./" Path="/data/music" PathSort="1"/>
@@ -750,13 +752,13 @@
     <HotDir Name="mscroot" Path="/data/music/mscroot" PathSort="1"/>
     <HotDir Name="del" Path="/data/music/del" PathSort="1"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="-pix" Path=""/>
-    <HotDir Name="./" Path="/data/pix" PathSort="1"/>
+    <HotDir Name="-pictures" Path=""/>
+    <HotDir Name="./" Path="/data/pictures" PathSort="1"/>
     <HotDir Name="screenshots" Path="/data/pictures/screenshots" PathSort="7"/>
-    <HotDir Name="wallpapers" Path="/data/pix/wallpapers" PathSort="7"/>
+    <HotDir Name="wallpapers" Path="/data/pictures/wallpapers" PathSort="7"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="mov" Path="/data/vids/mov" PathSort="7"/>
-    <HotDir Name="tv" Path="/data/vids/tv" PathSort="1"/>
+    <HotDir Name="mov" Path="/data/videos/mov" PathSort="7"/>
+    <HotDir Name="tv" Path="/data/videos/tv" PathSort="1"/>
     <HotDir Name="repos" Path="/data/repos" PathSort="1"/>
     <HotDir Name="site" Path="/data/repos/site"/>
     <HotDir Name="-shared" Path=""/>
@@ -1189,4 +1191,11 @@
     <LastPreset/>
     <Presets/>
   </MultiRenamePresets>
+  <Differ>
+    <Colors>
+      <Added>11206570</Added>
+      <Deleted>11184895</Deleted>
+      <Modified>16755370</Modified>
+    </Colors>
+  </Differ>
 </doublecmd>
