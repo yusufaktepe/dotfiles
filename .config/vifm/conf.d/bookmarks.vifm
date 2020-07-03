@@ -13,12 +13,12 @@ map bh :cd ~/<cr>
 map bc :cd ~/.config<cr>
 map bb :cd ~/.local/bin<cr>
 map bs :cd ~/.local/share<cr>
-map bw :cd ~/dl/default<cr>
-map bd :cd ~/dox<cr>
-map bp :cd ~/pix<cr>
+map bw :cd ~/downloads/default<cr>
+map bd :cd ~/documents<cr>
+map bp :cd ~/pictures<cr>
 map bm :cd ~/music<cr>
-map bv :cd ~/vids/mov<cr>
-map bt :cd ~/vids/tv<cr>
+map bv :cd ~/videos/mov<cr>
+map bt :cd ~/videos/tv<cr>
 map brr :cd ~/repos<cr>
 map bra :cd ~/repos/aur<cr>
 map brd :cd ~/repos/dots<cr>
@@ -41,12 +41,12 @@ map Bh  :winrun , cd ~/<cr>
 map Bc  :winrun , cd ~/.config<cr>
 map Bb  :winrun , cd ~/.local/bin<cr>
 map Bs  :winrun , cd ~/.local/share<cr>
-map Bw  :winrun , cd ~/dl/default<cr>
-map Bd  :winrun , cd ~/dox<cr>
-map Bp  :winrun , cd ~/pix<cr>
+map Bw  :winrun , cd ~/downloads/default<cr>
+map Bd  :winrun , cd ~/documents<cr>
+map Bp  :winrun , cd ~/pictures<cr>
 map Bm  :winrun , cd ~/music<cr>
-map Bv  :winrun , cd ~/vids/mov<cr>
-map Bt  :winrun , cd ~/vids/tv<cr>
+map Bv  :winrun , cd ~/videos/mov<cr>
+map Bt  :winrun , cd ~/videos/tv<cr>
 map Brr :winrun , cd ~/repos<cr>
 map Bra :winrun , cd ~/repos/aur<cr>
 map Brd :winrun , cd ~/repos/dots<cr>
