@@ -1,10 +1,10 @@
 " Filetypes/directories
 set classify=' :dir:/, :exe:, :reg:, :link:,? :?:, ::../::'
 
-set classify+=' ::dl/::, ::dox/::, ::music/::, ::pix/::, ::vids/::, ::repos/::,
-             \  ::.git/::, ::Desktop/::, ::Downloads/::, ::Documents/::, ::Music/::,
-             \  ::Pictures/::, ::Videos/::, ::Public/::, ::Templates/::, ::notes/::,
-             \  ::dropbox::, ::gdrive/::, ::node_modules::'
+set classify+=' ::Desktop/::, ::Downloads/::, ::Documents/::, ::Music/::,
+             \  ::Pictures/::, ::Videos/::, ::Public/::, ::Templates/::,
+             \  ::repos/::, ::notes/::, ::dropbox::, ::gdrive/::,
+             \  ::node_modules::, ::.git/::'
 
 " Specific files
 set classify+=' ::.Xdefaults,,.Xresources,,.bashprofile,,.bash_profile,,.bashrc,,
