@@ -38,11 +38,12 @@ alias yt='youtube-dl --add-metadata -i'
 alias yta='yt -x -f bestaudio/best'
 alias YT='youtube-viewer'
 
+alias publicip='curl -sf ifconfig.co'
 alias lspath='printf "%b\n" "${PATH//:/\\n}"'
 alias mktree='tree -a -I .git > TREE'
 alias mkpkg='makepkg -srci'
 alias mksrci='makepkg --printsrcinfo > .SRCINFO'
-alias paclog="grep -E '\] (install|upgrad|remov)ed' /var/log/pacman.log | less +G"
+alias paclog='grep -E "\] (install|upgrad|remov)ed" /var/log/pacman.log | less +G'
 
 # Colorize commands
 alias ls='ls --group-directories-first --time-style=long-iso --color=auto -F'
