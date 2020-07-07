@@ -70,6 +70,8 @@ nnoremap <silent> <c-q> : <c-u>
 nnoremap <silent> yd :!echo %d | xclip -selection c %i<cr>
 " Yank current file path into the clipboard
 nnoremap <silent> yf :!echo %c:p | xclip -selection c %i<cr>
+" Yank current file name into the clipboard
+nnoremap <silent> yn :!echo %c | xclip -selection c %i<cr>
 
 " Archive
 " nnoremap <silent> x :extract<cr>
@@ -91,17 +93,15 @@ nnoremap  <silent> cs :%s/
 " Open console in current directory (Alt+Enter)
 nnoremap <silent> <a-c-m> :!unset VIFM_SERVER_NAME RPS1; $TERMINAL 2>/dev/null & disown<cr>
 
-" Open editor to edit vifmrc and apply settings after returning to vifm
-nnoremap <silent> <a-e>c :write | edit $MYVIFMRC | restart<cr>
-" Open editor in new terminal to edit vifmrc
-nnoremap <silent> <a-e>C :!$TERMINAL -e $EDITOR $MYVIFMRC 2>/dev/null &<cr>
-
 " Find & select with FZF
 nnoremap <silent> <a-f> :FZFfind<cr>
 nnoremap <silent> <a-c-f> :FZFlocate<cr>
 
 " Directory history
 nnoremap <silent> <a-h> :history<cr>
+
+" Execute
+nnoremap <silent> <a-r> :run<cr>
 
 " Drag and drop
 nnoremap <silent> <a-d>c :!dragon cp &<cr>
@@ -132,7 +132,7 @@ nnoremap <silent> aA :setcolumnsSizeTime<cr>
 " Sort by...
 nnoremap <silent> an :set sort=+name | echo 'Sorted by +name'<cr>gg
 nnoremap <silent> as :set sort=-size | echo 'Sorted by -size'<cr>gg
-nnoremap <silent> at :set sort=-mtime | echo 'Sorted by -time'<cr>gg
+nnoremap <silent> at :set sort=-mtime | setcolumnsSizeTime | echo 'Sorted by -time'<cr>gg
 nnoremap <silent> aa :togglesort<cr>
 nnoremap <silent> ar :sortReverse<cr>
 
