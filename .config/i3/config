@@ -345,7 +345,7 @@ for_window [title="^Picture in picture$"] resize set 420 236, move position 945 
 for_window [class="Dragon-drag-and-drop"] sticky enable
 #_ Floating instances
 for_window [instance="_blockterm"] floating enable border pixel 2
-for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1129 706, move position center
+for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1135 706, move position center
 for_window [instance="floating"] floating enable, move position mouse
 #_ Doublecmd
 for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center
