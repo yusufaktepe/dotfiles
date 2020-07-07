@@ -22,6 +22,8 @@ filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 	\*.as[fx]
 	\ {Play using mpv}
 	\ mpvc %c:p &,
+	\ {Enqueue in mpv}
+	\ mpvc add %c:p &,
 	\ {Play using SMPlayer}
 	\ smplayer %f %i &,
 	\ {Play using VLC}
