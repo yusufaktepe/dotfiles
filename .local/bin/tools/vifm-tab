@@ -2,8 +2,14 @@
 
 [ -n "$*" ] && cmd="tabnew | cd $*" || cmd=redraw
 
-{ [ -n "$(vifm --server-list)" ] &&
-	vifm --server-name vifm --remote -c "$cmd" ;} ||
-	{ [ -t 2 ] && vifm -c "$cmd" ;} ||
-	$TERMINS vifm -e vifm -c "$cmd" >/dev/null 2>&1
+if [ -n "$(vifm --server-list)" ]; then
+	vifm --server-name vifm --remote -c "$cmd"
+else
+	if [ -t 2 ]; then
+		xdotool getactivewindow set_window --classname vifm &
+		vifm -c "$cmd"
+	else
+		$TERMINS vifm -e vifm -c "$cmd" >/dev/null 2>&1
+	fi
+fi
 
