@@ -80,6 +80,7 @@ Plug 'vifm/vifm.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'cespare/vim-toml'
 
 " Themes
 Plug 'morhetz/gruvbox'
