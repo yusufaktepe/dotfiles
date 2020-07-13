@@ -18,12 +18,11 @@ killall -q xcape
 
 # CapsLock
 xcape -e 'Hyper_L=Escape'
-# Super
-xcape -t 200 -e 'Super_L=Escape'
-# Alt Gr
-xcape -t 200 -e 'ISO_Level3_Shift=XF86Launch9'
-# Control_R
-xcape -t 200 -e 'Control_R=Super_L|XF86MonBrightnessDown'
-# Shift_R
-xcape -t 200 -e 'Shift_R=Menu'
+
+Super_L="Escape"
+AltGr="XF86Launch9"
+Control_R="Super_L|XF86MonBrightnessDown"
+Shift_R="Menu"
+
+xcape -t 200 -e "Super_L=$Super_L;ISO_Level3_Shift=$AltGr;Control_R=$Control_R;Shift_R=$Shift_R"
 
