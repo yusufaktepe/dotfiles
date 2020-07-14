@@ -6,6 +6,7 @@ dunstrc          ~/.config/dunst/dunstrc
 fonts.conf       ~/.config/fontconfig/fonts.conf
 gitconfig        ~/.config/git/config
 gpg-agent        ~/.gnupg/gpg-agent.conf
+gpg.conf         ~/.gnupg/gpg.conf
 greenclip        ~/.config/greenclip.cfg
 gtk2rc           ~/.config/gtk-2.0/gtkrc
 gtk3_css         ~/.config/gtk-3.0/gtk.css
