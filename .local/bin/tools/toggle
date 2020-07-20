@@ -21,15 +21,6 @@ case $1 in
 			ns -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
 		fi
 	;;
-	keybase)
-		if systemctl -q is-active --user keybase; then
-			systemctl stop --user kbfs && systemctl stop --user keybase
-			ns -i keybase "Keybase" "Keybase service stopped"
-		else
-			systemctl start --user keybase && systemctl start --user kbfs
-			ns -i keybase "Keybase" "Keybase service started"
-		fi
-	;;
 	net)
 		case $2 in
 			w|wifi) { [ "$(nmcli radio wifi)" = enabled ] &&
@@ -93,7 +84,7 @@ case $1 in
 		fi
 	;;
 	$NULL|*)
-		printf "Options:\n\taudio\n\tkeybase\n\tnet {w|wifi|NULL}\n\tredshift
+		printf "Options:\n\taudio\n\tnet {w|wifi|NULL}\n\tredshift
 			\r\tstimeout\n\tsyncthing\n\ttouchpad\n\ttransmission|td\n"
 	;;
 esac

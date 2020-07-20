@@ -48,7 +48,7 @@ bindsym $mod+comma split horizontal ;; exec $N $TERMINAL
 bindsym $mod+period split vertical ;; exec $N $TERMINAL
 bindsym $mod+udiaeresis exec $N ddspawn tmuxi
 # open terminal in current dir
-bindsym $mod+Shift+Return exec $N samedir
+# bindsym $mod+Shift+Return exec $N samedir
 
 # #---Rofi---# #
 bindsym $mod+d exec $N rofi -show combi
@@ -218,6 +218,10 @@ bindsym $mod+Shift+y exec $N i3resize left
 bindsym $mod+Shift+u exec $N i3resize down
 bindsym $mod+Shift+idotless exec $N i3resize up
 bindsym $mod+Shift+o exec $N i3resize right
+
+# Maximize a floating window
+set $floatmax xdotool getactivewindow windowsize $(xdpyinfo | awk '/dimensions:/ {print $2}' | tr x ' ') windowmove 0 0
+bindsym $mod+Ctrl+f floating enable; exec $N "polybar-msg cmd hide; $floatmax"
 
 # put YouTube into fullscreen and execute this for media mode
 bindsym $caps+y fullscreen disable; floating enable; resize set 655 368; sticky enable; move window to position 711 400
@@ -610,11 +614,9 @@ mode "$broopen" {
 }
 
 bindsym $mod+Shift+t mode "$toggle"
-set $toggle  pi[c]om py-[h]ttp [k]eybase [r]edshift [s]timeout [t]ransmission [S]yncthing |  pi[C]om [d]unst [p]ulse
+set $toggle  pi[c]om [r]edshift [s]timeout [t]ransmission [S]yncthing |  pi[C]om [d]unst [p]ulse
 mode "$toggle" {
 	bindsym c exec $N pkill picom || picom -b, mode default
-	bindsym h exec $N py-http -n, mode default
-	bindsym k exec $N toggle keybase, mode default
 	bindsym r exec $N toggle redshift, mode default
 	bindsym s exec $N toggle stimeout, mode default
 	bindsym t exec $N toggle transmission, mode default
