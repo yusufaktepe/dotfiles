@@ -39,6 +39,7 @@ ranger_scope     ~/.config/ranger/scope.sh
 redshift         ~/.config/redshift/redshift.conf
 rofi             ~/.config/rofi/config.rasi
 rofi-pass        ~/.config/rofi-pass/config
+secrets          ~/.config/secrets.env
 spotifyd         ~/.config/spotifyd/spotifyd.conf
 ssh              ~/.ssh/config
 sshcontrol       ~/.gnupg/sshcontrol

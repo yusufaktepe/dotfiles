@@ -62,17 +62,20 @@ export LESS_TERMCAP_ue=$(printf "\e[0m")
 export LESS_TERMCAP_us=$(printf "\e[1;32m")
 export LESSOPEN="| highlight -O xterm256 -s pablo %s 2>/dev/null"
 
-# StartX on tty1 login
-[ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ] &&
-	exec startx "$XINITRC" -- -quiet > "$XDG_DATA_HOME/xorg/Xorg.log" 2>&1
-
 # Switch escape and caps if tty (add to sudoers NOPASSWD)
 sudo -n loadkeys ~/.config/ttymaps.kmap 2>/dev/null
 
-# Required for using ssh with gpg agent
+# GPG - refresh on tty changes
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
 
 # If login shell is bash, source bashrc
 [ -n "$BASH_VERSION" ] && [ -f "$BDOTDIR/.bashrc" ] && . "$BDOTDIR/.bashrc"
+
+# Source secrets
+[ -f "$XDG_CONFIG_HOME/secrets.env" ] && . "$XDG_CONFIG_HOME/secrets.env"
+
+# StartX on tty1 login
+[ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ] &&
+	exec startx "$XINITRC" -- -quiet > "$XDG_DATA_HOME/xorg/Xorg.log" 2>&1
 
