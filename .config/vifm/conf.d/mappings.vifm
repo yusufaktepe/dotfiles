@@ -9,7 +9,6 @@ map R :reload<cr>
 
 " (un)select (tag) the current file
 nnoremap <space> t
-" nnoremap t <nop>
 
 " Move up one directory
 nnoremap <bs> h
@@ -39,9 +38,6 @@ nnoremap <silent> <c-k> <tab>k<tab>
 " Go to same file name in other pane
 nnoremap <silent> <a-s> :winrun , goto %C:t<cr>
 
-" Open directory under cursor in the other pane
-nnoremap <silent> T :sync %c<cr>
-
 " Display menu of programs set for the file type of the current file
 nnoremap <silent> o :file &<cr>
 " Pick current item in menu mode
@@ -67,11 +63,11 @@ nnoremap <silent> <c-q> : <c-u>
 	\| <cr>
 
 " Yank current directory path into the clipboard
-nnoremap <silent> yd :!echo %d | xclip -selection c %i<cr>
+nnoremap <silent> yd :!echo %d | xclip -r -selection c %i<cr>
 " Yank current file path into the clipboard
-nnoremap <silent> yf :!echo %c:p | xclip -selection c %i<cr>
+nnoremap <silent> yf :!echo %c:p | xclip -r -selection c %i<cr>
 " Yank current file name into the clipboard
-nnoremap <silent> yn :!echo %c | xclip -selection c %i<cr>
+nnoremap <silent> yn :!echo %c | xclip -r -selection c %i<cr>
 
 " Archive
 " nnoremap <silent> x :extract<cr>
@@ -156,6 +152,8 @@ nnoremap <silent> J : <c-u>
 " Switch to the previous/next tab
 nnoremap <c-p> gT
 nnoremap <c-n> gt
+nnoremap T gT
+nnoremap t gt
 nnoremap K gt
 
 " Switch to n-th tab
