@@ -73,7 +73,7 @@ bindsym $mod+F3 exec $N ifwin -e vivaldi-stable
 bindsym $mod+F4 exec $N ifwin -e opera
 bindsym $mod+F5 exec $N ifwin -e firefox
 bindsym $mod+F6 exec $N ifwin -e google-chrome-stable
-bindsym $mod+Shift+F2 exec $N ifwin -e doublecmd
+bindsym $mod+Shift+F2 exec $N ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 exec $N vivaldi-stable --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
@@ -313,7 +313,7 @@ for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 ## Assign applications to workspaces
 # assign [window_role="browser"]                 $ws1
 assign [class="(?i)Vivaldi"]                     $ws1
-assign [class="Pcmanfm|Doublecmd"]               $ws2
+assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
 assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
 # assign [class="(?i)thunderbird"]               $ws9

@@ -1,6 +1,7 @@
 ~/
 	(.audacity-data
 	|.cache
+	|.cert
 	|.gnupg
 	|.icons
 	|.mozilla
@@ -31,6 +32,7 @@
 	(node_modules
 	|go/src
 	|cargo
+	|python*
 	|rustup
 	|tor-browser
 	|vivaldi
@@ -50,7 +52,9 @@
 	|nvim
 	|pass*
 	|qalc*
+	|syncthing
 	|terminfo
+	|Telegram*
 	|Trash
 	|vlc
 	|xorg
@@ -60,11 +64,11 @@
 	|mime*
 	|recent*
 	)|
+/data/.cache/|
 /data/backup/
 	(clonezilla
 	|dotfiles
 	|makepkg
-	|spotify/
 	)|
 /data/downloads/
 	(isos
