@@ -1,11 +1,13 @@
 #!/bin/sh
+# shellcheck disable=SC2024
 
-date=$(date +%F)
-dir=/data/backup/pkglists
+cd /data/backup/pkglists || return
 
-pacman -Qqen > $dir/pkglist_"$date"
-pacman -Qm   > $dir/pkglist-aur_"$date"
-pacman -Qqn  > $dir/pkglist_full_"$date"
+pacman -Qqen > pkglist
+pacman -Qm   > pkglist-aur
+pacman -Qqn  > pkglist_full
+
+git add --all . && git commit -m "$(date +%F)" && git push
 
 case $1 in
 	*aur*|*full*) yay -S --needed - < "$1" ;;
