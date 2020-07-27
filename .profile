@@ -47,6 +47,7 @@ export FZF_DEFAULT_OPTS="
 	--layout=reverse --height 50%
 	--bind '?:toggle-preview,alt-k:preview-up,alt-p:preview-page-up'
 	--bind 'alt-j:preview-down,alt-n:preview-page-down'
+	--bind 'alt-w:toggle-preview-wrap'
 	"
 export RANGER_LOAD_DEFAULT_RC="false"
 export QT_QPA_PLATFORMTHEME="qt5ct"

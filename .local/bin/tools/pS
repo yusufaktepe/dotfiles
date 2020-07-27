@@ -2,6 +2,6 @@
 
 yay -Slq |
 	fzf -q "$1" -m --height 100% --preview 'yay -Si {}' \
-		--preview-window=:hidden --bind 'space:toggle-preview' |
+		--preview-window=65%:wrap:hidden --bind 'space:toggle-preview' |
 	xargs -ro yay -S --needed
 
