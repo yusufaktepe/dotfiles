@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ -n "$*" ] && cmd="tabnew | cd $*" || cmd=redraw
+[ -n "$*" ] && cmd="tabnew | cd \"$*\"" || cmd=redraw
 
 if [ -n "$(vifm --server-list)" ]; then
 	vifm --server-name vifm --remote -c "$cmd"
