@@ -120,7 +120,8 @@ format-background = ${colors.background-alt}
 format-underline = ${colors.darkblue}
 format-padding = ${bar/default.module-padding}
 
-; click-right = $TERMINS _blockterm -e nethogs &
+click-left = dunstify -a system -t 7000 -r 1001 -i network "Network Usage" "<b>Total Rx: </b>$(numfmt --to=iec-i --suffix=B --padding=7 < /sys/class/net/wlp3s0/statistics/rx_bytes)\n<b>Total Tx: </b>$(numfmt --to=iec-i --suffix=B --padding=7 < /sys/class/net/wlp3s0/statistics/tx_bytes)" &
+click-right = $TERMINS _Blockterm -e bandwhich &
 ; click-middle = toggle net wifi
 
 [module/brightness]
