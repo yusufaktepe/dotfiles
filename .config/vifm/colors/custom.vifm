@@ -42,43 +42,42 @@
 
 highlight clear
 
-hi  Win          cterm=none                                    ctermfg=015      ctermbg=default
-hi  OtherWin     cterm=none                                    ctermfg=default  ctermbg=default
-hi  AuxWin       cterm=bold,underline,reverse,standout,italic  ctermfg=default  ctermbg=default
-hi  OddLine      ctermfg=default                               ctermbg=default
+hi Win          cterm=none                                    ctermfg=015      ctermbg=default
+hi OtherWin     cterm=none                                    ctermfg=default  ctermbg=default
+hi AuxWin       cterm=bold,underline,reverse,standout,italic  ctermfg=default  ctermbg=default
+hi OddLine                                                    ctermfg=default  ctermbg=default
 
-hi  TopLine      cterm=none                                    ctermfg=white    ctermbg=237
-hi  TopLineSel   cterm=bold                                    ctermfg=white    ctermbg=237
+hi TopLine      cterm=none                                    ctermfg=white    ctermbg=237
+hi TopLineSel   cterm=bold                                    ctermfg=white    ctermbg=237
 
-hi  TabLine      cterm=none                                    ctermfg=white    ctermbg=black
-hi  TabLineSel   cterm=bold,standout                           ctermfg=cyan     ctermbg=default
-hi  TabNr        ctermfg=default                               ctermbg=default
+hi TabLine      cterm=none                                    ctermfg=white    ctermbg=black
+hi TabLineSel   cterm=bold,standout                           ctermfg=cyan     ctermbg=default
 
-hi  JobLine      cterm=bold,reverse                            ctermfg=black    ctermbg=white
-hi  StatusLine   cterm=none                                    ctermfg=white    ctermbg=237
-hi  Border       cterm=none                                    ctermfg=default  ctermbg=default
+hi JobLine      cterm=bold,reverse                            ctermfg=black    ctermbg=white
+hi StatusLine   cterm=none                                    ctermfg=white    ctermbg=237
+hi Border       cterm=none                                    ctermfg=default  ctermbg=default
 
-hi  CurrLine     cterm=bold,reverse                            ctermfg=default  ctermbg=default
-" hi  OtherLine    cterm=reverse                                 ctermfg=234      ctermbg=white
-hi  LineNr       ctermfg=default                               ctermbg=default
+hi CurrLine     cterm=bold,reverse                            ctermfg=default  ctermbg=default
+" hi OtherLine    cterm=reverse                                 ctermfg=234      ctermbg=white
+hi LineNr                                                     ctermfg=default  ctermbg=default
 
-hi  Selected     cterm=bold,italic                             ctermfg=003      ctermbg=default
-hi  CmpMismatch  cterm=bold                                    ctermfg=white    ctermbg=red
+hi Selected     cterm=bold,italic                             ctermfg=003      ctermbg=default
+hi CmpMismatch  cterm=bold                                    ctermfg=white    ctermbg=red
 
-hi  SuggestBox   cterm=bold                                    ctermfg=default  ctermbg=default
-hi  WildMenu     cterm=underline,bold                          ctermfg=blue     ctermbg=237
+hi SuggestBox   cterm=bold                                    ctermfg=default  ctermbg=default
+hi WildMenu     cterm=underline,bold                          ctermfg=blue     ctermbg=237
 
-hi  CmdLine      cterm=none                                    ctermfg=white    ctermbg=black
-hi  ErrorMsg     cterm=bold                                    ctermfg=red      ctermbg=black
+hi CmdLine      cterm=none                                    ctermfg=white    ctermbg=black
+hi ErrorMsg     cterm=bold                                    ctermfg=red      ctermbg=black
 
-hi  Directory    cterm=bold                                    ctermfg=blue     ctermbg=default
-hi  Executable   cterm=bold                                    ctermfg=green    ctermbg=default
-hi  Socket       cterm=bold                                    ctermfg=magenta  ctermbg=default
-hi  Device       cterm=bold                                    ctermfg=yellow   ctermbg=default
-hi  Fifo         cterm=none                                    ctermfg=yellow   ctermbg=black
-hi  Link         cterm=bold                                    ctermfg=cyan     ctermbg=default
-hi  BrokenLink   cterm=bold                                    ctermfg=red      ctermbg=default
-hi  HardLink     cterm=bold                                    ctermfg=36       ctermbg=default
+hi Directory    cterm=bold                                    ctermfg=blue     ctermbg=default
+hi Executable   cterm=bold                                    ctermfg=green    ctermbg=default
+hi Socket       cterm=bold                                    ctermfg=magenta  ctermbg=default
+hi Device       cterm=bold                                    ctermfg=yellow   ctermbg=default
+hi Fifo         cterm=none                                    ctermfg=yellow   ctermbg=black
+hi Link         cterm=bold                                    ctermfg=cyan     ctermbg=default
+hi BrokenLink   cterm=bold                                    ctermfg=red      ctermbg=default
+hi HardLink     cterm=bold                                    ctermfg=36       ctermbg=default
 
 " ------------------------------------------------------------------------------
 " Converted from $LS_COLORS
