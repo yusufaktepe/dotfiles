@@ -4,9 +4,10 @@
 cd /data/backup/pkglists || return
 
 pacman -Qqen > pkglist
-pacman -Qm   > pkglist-aur
+pacman -Qqm  > pkglist-aur
 pacman -Qqn  > pkglist_full
 
+git --no-pager diff --stat=100,100 --patch
 git add --all . && git commit -m "$(date +%F)" && git push
 
 case $1 in

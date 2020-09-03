@@ -6,7 +6,7 @@ cnoreabbrev W w
 command! df df -h %m 2>/dev/null
 command! run !! ./%f
 command! make !!make %a
-command! mkcd :mkdir! %a | cd %a
+command! mkcd :mkdir! "%a" | cd "%a"
 command! vgrep $EDITOR "+grep %a"
 command! extract aunpack -e %f &
 command! compress apack
