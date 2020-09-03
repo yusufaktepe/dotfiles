@@ -12,8 +12,8 @@ base=$(basename "$1")
 cd "$(dirname "$1")" || exit
 
 shift
-$list "$PWD" | awk "BEGIN { lines = \"\"; m = 0; } /^$base$/ { m = 1; }
-	{ if (!m) { if (lines) { lines = lines\"\n\"; } lines = lines\"\"\$0; }
-	else { print \$0; } } END { print lines; }" |
-	grep -i '\.\(png\|jpg\|jpeg\|gif\|webp\|ico\)\(_large\)*$' |
+$list "$PWD" | awk -v base="$base" 'BEGIN { lines = ""; m = 0; } { if ($0 == base) { m = 1; } }
+	{ if (!m) { if (lines) { lines = lines"\n"; } lines = lines""$0; }
+	else { print $0; } } END { print lines; }' |
+	grep -i '\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$' |
 	sxiv -ai "$@" 2>/dev/null
