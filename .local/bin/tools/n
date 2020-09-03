@@ -1,4 +1,0 @@
-#!/bin/sh
-
-printf '%s\n' "- [ ] $*" >> ~/notes/todo.md
-
