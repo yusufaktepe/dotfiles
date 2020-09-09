@@ -96,6 +96,10 @@ element alternate.active {
   text-color:         @main;
 }
 
+element-icon {
+  size:               1.9000ch;
+}
+
 scrollbar {
   background-color:   @bg;
   handle-color:       @darkgray;

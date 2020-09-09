@@ -20,13 +20,15 @@ configuration {
 /*	window-command: "wmctrl -i -R {window}";*/
 /*	window-match-fields: "all";*/
 	icon-theme: "Papirus-Dark";
-/*	drun-match-fields: "name,generic,exec,categories";*/
+/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
+/*	drun-categories: ;*/
 /*	drun-show-actions: false;*/
 /*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
+/*	drun-url-launcher: "xdg-open";*/
 /*	disable-history: false;*/
 /*	ignored-prefixes: "";*/
 /*	sort: false;*/
-/*	sorting-method: ;*/
+/*	sorting-method: "normal";*/
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
 /*	sidebar-mode: false;*/
@@ -62,6 +64,9 @@ configuration {
 /*	combi-hide-mode-prefix: false;*/
 /*	matching-negate-char: '-' /* unsupported */;*/
 /*	cache-dir: ;*/
+/*	window-thumbnail: false;*/
+/*	drun-use-desktop-cache: false;*/
+/*	drun-reload-desktop-cache: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 	display-window: "";
 /*	display-windowcd: ;*/
