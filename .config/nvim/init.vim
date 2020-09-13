@@ -508,6 +508,11 @@ function! AppendModeline()
 	call append(line('$'), l:modeline)
 endfunction
 
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+	\ | wincmd p | diffthis
+
 " }}}
 "=====================================================================
 " AUTOCMD {{{
