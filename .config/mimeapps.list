@@ -1,8 +1,8 @@
 [Default Applications]
-x-scheme-handler/http=vivaldi-stable.desktop
-x-scheme-handler/https=vivaldi-stable.desktop
-application/xhtml+xml=vivaldi-stable.desktop
-text/html=vivaldi-stable.desktop
+x-scheme-handler/http=vivaldi-snapshot.desktop
+x-scheme-handler/https=vivaldi-snapshot.desktop
+application/xhtml+xml=vivaldi-snapshot.desktop
+text/html=vivaldi-snapshot.desktop
 inode/directory=vifm-tab.desktop
 inode/mount-point=vifm-tab.desktop
 video/mp4=mpv.desktop
@@ -32,8 +32,8 @@ x-scheme-handler/mailto=mailto.desktop
 [Added Associations]
 x-scheme-handler/http=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
 x-scheme-handler/https=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
-application/xhtml+xml=vivaldi-stable.desktop;
-text/html=vivaldi-stable.desktop;vivaldi-snapshot.desktop;
+application/xhtml+xml=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
+text/html=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
 inode/directory=doublecmd-newtab.desktop;pcmanfm.desktop;
 video/mp4=mpv_enqueue.desktop;smplayer.desktop;
 video/x-matroska=mpv_enqueue.desktop;smplayer.desktop;
