@@ -47,7 +47,8 @@ listview {
 }
 
 element {
-  padding:            3px 15px;
+  padding:            2px 15px;
+  spacing:            3px;
 }
 
 element normal.normal {
