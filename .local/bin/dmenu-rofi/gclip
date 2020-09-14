@@ -41,7 +41,7 @@ case $1 in
 	clear)
 		xsel -bc; xsel -c
 		killall greenclip
-		rm ~/.cache/greenclip.history
+		rm -rf ~/.cache/greenclip/history ~/.cache/greenclip/image
 		setsid -f greenclip daemon >/dev/null 2>&1
 	;;
 	keep)
@@ -52,6 +52,10 @@ case $1 in
 	;;
 	seltoclip|sc)
 		xclip -o -selection | xclip -selection clipboard
+	;;
+	[1-9])
+		greenclip print | sed -n "$1"p | clipin
+		xdotool key --clearmodifiers Ctrl+Shift+v
 	;;
 	"")
 		{ [ -t 2 ] && wfzf ;} || wrofi

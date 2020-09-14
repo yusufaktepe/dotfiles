@@ -65,16 +65,21 @@ bindsym $caps+quotedbl exec $N gclip clear
 bindsym Ctrl+$caps+quotedbl exec $N gclip rld
 bindsym --release $mod+Insert exec $N gclip selpaste
 bindsym $mod+Shift+Insert exec $N gclip seltoclip
+bindsym $mod+$caps+1 exec $N gclip 1
+bindsym $mod+$caps+2 exec $N gclip 2
+bindsym $mod+$caps+3 exec $N gclip 3
+bindsym $mod+$caps+4 exec $N gclip 4
+bindsym $mod+$caps+5 exec $N gclip 5
 
 # #---Start Applications---# #
 bindsym $mod+F1 exec $N $TERMINS _blockterm -e sh -c 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 exec $N ifterm -e vifm
-bindsym $mod+F3 exec $N ifwin -e vivaldi-stable
+bindsym $mod+F3 exec $N ifwin -e $BROWSER
 bindsym $mod+F4 exec $N ifwin -e opera
 bindsym $mod+F5 exec $N ifwin -e firefox
 bindsym $mod+F6 exec $N ifwin -e google-chrome-stable
 bindsym $mod+Shift+F2 exec $N ifwin -e pcmanfm-qt
-bindsym $mod+Shift+F3 exec $N vivaldi-stable --incognito --start-maximized
+bindsym $mod+Shift+F3 exec $N $BROWSER --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
 bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
@@ -348,6 +353,7 @@ for_window [window_type="dialog|menu"] floating enable
 for_window [title="^Confirm File Replacing$"] move position center
 for_window [title="^Picture in picture$"] resize set 420 236, move position 945 531
 for_window [class="Dragon-drag-and-drop"] sticky enable
+for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 800 725, move position center
 #_ Floating instances
 for_window [instance="_blockterm"] floating enable border pixel 2
 for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1135 706, move position center
@@ -380,7 +386,7 @@ bindsym $mod+Shift+r restart
 #=====================================================================
 
 exec_always launch_polybar
-exec $N "sleep 2; ifwin -e vivaldi-stable"
+exec $N "sleep 2; ifwin -e $BROWSER"
 exec $N "sleep 5; ifterm -e vifm"
 exec $N "sleep 7; ifwin -e spotify"
 exec $N "sleep 9; wmctrl -x -r 'vifm' -b remove,demands_attention"

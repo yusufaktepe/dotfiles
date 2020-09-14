@@ -131,7 +131,7 @@ set findprg='find %s %a -print ,
 	\ -prune'
 
 " Filter-out build and temporary files
-" filter! /^.*\.(lo|o|d|class|py[co])$|.*~$/
+" filter! {*.lo,*.o,*.d,*.class,*.pyc,*.pyo,.*~}
 
 " Use ag (the silver searcher) instead of grep
 " set grepprg='ag --line-numbers %i %a %s'

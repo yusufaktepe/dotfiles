@@ -12,7 +12,7 @@ command! extract aunpack -e %f &
 command! compress apack
 command! link ln -s %d/%f %D
 command! shred shred -u %f &
-command! vidir vidir %a
+command! vidir $TERMINAL -e vidir %a 2>/dev/null &
 command! EDIT $TERMINAL -e $EDITOR %a 2>/dev/null &
 command! COPY :yank | winrun , put
 command! MOVE :yank | winrun , put!
@@ -59,11 +59,11 @@ command! GDIFF
 
 command! FZFfind
 	\ :set noquickview
-	\ | execute 'goto' fnameescape(term('fd -H | fzf 2>/dev/tty'))
+	\ | execute 'goto' fnameescape(term('fd -H | fzf -e 2>/dev/tty'))
 
 command! FZFlocate
 	\ :set noquickview
-	\ | execute 'goto' fnameescape(term('locate / | fzf 2>/dev/tty'))
+	\ | execute 'goto' fnameescape(term('locate / | fzf -e 2>/dev/tty'))
 
 " Send current directories to default instance
 command! send :!vifm --server-name vifm --remote -c "tabnew | cd %d %D"
