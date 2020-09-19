@@ -1,0 +1,28 @@
+#!/bin/sh -e
+# shellcheck disable=SC2012
+# run in subdirs:
+# find . -type d \( ! -name . \) -exec sh -c 'cd "$0" && yes n | flac2opus' {} \;
+
+BOLD=$(tput bold)
+NORM=$(tput sgr0)
+
+fcount=$(ls -1 ./*.flac 2>/dev/null | wc -l)
+[ "$fcount" -gt 0 ] && printf ':: Encoding %s files...\n\n' "$BOLD$fcount$NORM"
+
+for f in *.flac; do
+	[ -f "$f" ] || return
+	printf '==> %s\n' "$BOLD$f$NORM"
+	opusenc --bitrate "${1:-256}" -- "$f" "${f%.flac}.opus"
+done
+
+printf '>> Total size: %s ==> %s\n\n' \
+	"$BOLD$(du -ch ./*.flac | awk 'END{print $1}')$NORM" \
+	"$BOLD$(du -ch ./*.opus | awk 'END{print $1}')$NORM"
+
+printf ':: Remove (%s) flacs? [y/N] ' "$BOLD$fcount$NORM"
+read -r choice
+case "$choice" in
+	y*|Y*) rm ./*.flac ;;
+	*) return ;;
+esac
+

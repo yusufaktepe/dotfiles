@@ -1,0 +1,5 @@
+#!/bin/sh
+# Removes ID3 tags from FLAC files, which shouldn't be there in the first place.
+
+find . -type f -name '*.flac' -exec id3v2 --delete-all {} \;
+
