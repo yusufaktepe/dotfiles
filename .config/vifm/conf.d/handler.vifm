@@ -108,8 +108,8 @@ filetype {*.torrent},<application/x-bittorrent> qbittorrent %f &
 filetype {*.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz},
 	\<application/zip,application/x-rar,application/x-7z-compressed,
 	\application/java-archive,application/x-tar>
-	\ {View contents}
-	\ atool --list %f | less,
+	" \ {View contents}
+	" \ atool --list %f | less,
 	\ {Extract here}
 	\ aunpack -e %f &,
 	\ {Extract into new dir}
@@ -129,6 +129,22 @@ filextype {*.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz
 filetype {*.iso},<application/x-iso9660-image>
 	\ {Mount with fuseiso}
 	\ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
+	" \ {View contents}
+	" \ 7z l %c | sed '1,,/Scanning the drive for archives:$/d' | less,
+	\ {Extract here}
+	\ 7z x %c &,
+	\ {Extract into new dir}
+	\ 7z x %c -o%c:r &,
+
+filextype {*.iso},<application/x-iso9660-image>
+	\ {Mount with fuseiso}
+	\ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
+	\ {GUI: View contents}
+	\ engrampa %f %i &,
+	\ {GUI: Extract here}
+	\ engrampa --extract-here %f %i &,
+	\ {GUI: Extract into...}
+	\ engrampa --extract %f %i &,
 
 " SshMount
 filetype *.ssh
@@ -154,15 +170,26 @@ filetype *.tudu tudu -f %c
 filextype *.pro qtcreator %f &
 
 " Directories
-filextype */
+filextype <inode/directory,inode/mount-point>
 	\ {Open with Doublecmd}
 	\ dcmd %f &,
 	\ {Open with PCManFM}
 	\ pcmanfm-qt %f &,
 
-filextype *,.*
+" Text
+filextype <text/*>
 	\ {Edit in new window}
 	\ $TERMINAL -e $EDITOR %f &,
+
+" filextype */
+" 	\ {Open with Doublecmd}
+" 	\ dcmd %f &,
+" 	\ {Open with PCManFM}
+" 	\ pcmanfm-qt %f &,
+
+" filextype *,.*
+" 	\ {Edit in new window}
+" 	\ $TERMINAL -e $EDITOR %f &,
 
 " Open all other files with default system programs (you can also remove all
 " :file[x]type commands above to ensure they don't interfere with system-wide
@@ -207,7 +234,8 @@ fileviewer {*.a,*.ace,*.alz,*.arc,*.arj,*.bz,*.bz2,*.cab,*.cpio,*.deb,*.gz,
 
 fileviewer {*.rar},<application/x-rar> unrar lt -p- %c
 
-fileviewer {*.7z},<application/x-7z-compressed> 7z l -p -- %c
+fileviewer {*.7z,*.iso},<application/x-7z-compressed,application/x-iso9660-image>
+	\ 7z l -p -- %c | sed '1,,/Scanning the drive for archives:$/d',
 
 fileviewer *.odt,*.ods,*.odp,*.sxw
 	\ odt2txt %c,
