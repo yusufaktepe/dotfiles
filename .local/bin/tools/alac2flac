@@ -1,0 +1,24 @@
+#!/bin/sh -e
+# shellcheck disable=SC2012
+
+BOLD=$(tput bold)
+UL=$(tput smul)
+GREEN=$(tput setaf 2)
+NORM=$(tput sgr0)
+
+fcount=$(ls -1 ./*.m4a 2>/dev/null | wc -l)
+[ "$fcount" -gt 0 ] && printf ':: Converting %s files...\n' "$BOLD$fcount$NORM"
+
+for f in *.m4a; do
+	[ -f "$f" ] || return
+	printf '\n%s\n' "$GREEN==> $BOLD$UL$f$NORM"
+	ffmpeg -i "$f" -c:a flac -vsync 0 -- "${f%.m4a}.flac"
+done
+
+printf '\n:: Remove (%s) alacs? [y/N] ' "$BOLD$fcount$NORM"
+read -r choice
+case "$choice" in
+	y*|Y*) rm ./*.m4a ;;
+	*) return ;;
+esac
+
