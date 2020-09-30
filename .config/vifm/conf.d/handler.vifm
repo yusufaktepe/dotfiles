@@ -128,7 +128,7 @@ filextype {*.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz
 " IsoMount
 filetype {*.iso},<application/x-iso9660-image>
 	\ {Mount with fuseiso}
-	\ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
+	\ FUSE_MOUNT|fuseiso -n %SOURCE_FILE %DESTINATION_DIR,
 	" \ {View contents}
 	" \ 7z l %c | sed '1,,/Scanning the drive for archives:$/d' | less,
 	\ {Extract here}
