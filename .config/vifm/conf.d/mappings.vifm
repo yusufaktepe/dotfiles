@@ -87,7 +87,7 @@ nnoremap f/ /^
 nnoremap  <silent> cs :%s/
 
 " Open console in current directory (Alt+Enter)
-nnoremap <silent> <a-c-m> :!unset VIFM_SERVER_NAME RPS1; $TERMINAL 2>/dev/null & disown<cr>
+nnoremap <silent> <a-c-m> :!unset VIFM_SERVER_NAME RPS1; setsid -f $TERMINAL 2>/dev/null<cr>
 
 " Find & select with FZF
 nnoremap <silent> <a-f> :FZFfind<cr>
