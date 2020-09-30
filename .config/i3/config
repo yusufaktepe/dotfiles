@@ -320,6 +320,7 @@ for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 assign [class="(?i)Vivaldi"]                     $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
+assign [class="Audacity"]                        $ws7
 assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
 # assign [class="(?i)thunderbird"]               $ws9
 assign [class="qBittorrent"]                     $ws9
@@ -384,11 +385,12 @@ bindsym $mod+Shift+r restart
 #=====================================================================
 # Autostart applications
 #=====================================================================
+# See ../X11/xinitrc for rest of the autostarts
 
 exec_always launch_polybar
 exec $N "sleep 2; ifwin -e $BROWSER"
 exec $N "sleep 5; ifterm -e vifm"
-exec $N "sleep 7; ifwin -e spotify"
+# exec $N "sleep 7; ifwin -e spotify"
 exec $N "sleep 9; wmctrl -x -r 'vifm' -b remove,demands_attention"
 
 #=====================================================================
