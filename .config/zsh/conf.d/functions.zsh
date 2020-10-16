@@ -151,3 +151,6 @@ vifm() {
 # Repeat given command with ${T:-3} interval
 rpeat() { n=$1; shift; while [[ $(( n -= 1 )) -ge 0 ]]; do "$@"; sleep ${T:-3}; done ;}
 
+tyco() { [ -n "$1" ] && find . -type f -name "*.$1" | wc -l ;}
+tyrm() { [ -n "$1" ] && find . -type f -name "*.$1" -exec trash-put {} \; ;}
+
