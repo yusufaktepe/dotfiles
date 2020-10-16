@@ -111,9 +111,9 @@ filetype {*.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz}
 	" \ {View contents}
 	" \ atool --list %f | less,
 	\ {Extract here}
-	\ aunpack -e %f &,
+	\ !!aunpack -e %f,
 	\ {Extract into new dir}
-	\ aunpack -e --subdir %f &,
+	\ !!aunpack -e --subdir %f,
 
 filextype {*.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz},
 	\<application/zip,application/x-rar,application/x-7z-compressed,

@@ -1,8 +1,8 @@
 [Default Applications]
-x-scheme-handler/http=vivaldi-snapshot.desktop
-x-scheme-handler/https=vivaldi-snapshot.desktop
-application/xhtml+xml=vivaldi-snapshot.desktop
-text/html=vivaldi-snapshot.desktop
+x-scheme-handler/http=vivaldi-stable.desktop
+x-scheme-handler/https=vivaldi-stable.desktop
+application/xhtml+xml=vivaldi-stable.desktop
+text/html=vivaldi-stable.desktop
 inode/directory=vifm-tab.desktop
 inode/mount-point=vifm-tab.desktop
 video/mp4=mpv.desktop

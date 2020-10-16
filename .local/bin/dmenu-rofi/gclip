@@ -45,7 +45,7 @@ case $1 in
 		setsid -f greenclip daemon >/dev/null 2>&1
 	;;
 	keep)
-		$EDITOR ~/.cache/greenclip.staticHistory
+		$EDITOR ~/.cache/greenclip/staticHistory
 	;;
 	selpaste|sp)
 		xdotool type --clearmodifiers "$(xclip -o -selection)"
@@ -62,9 +62,8 @@ case $1 in
 	;;
 	*)
 		cat <<-EOF
-		Usage:
-		‎  $(basename "$0") [] [OPTION]
-		‎        [cfg, clear, keep, rld, selpaste|sp, seltoclip|sc]
+		Usage: $(basename "$0") []
+		[]   ==>     [cfg, clear, keep, rld, selpaste|sp, seltoclip|sc]
 		EOF
 esac
 

@@ -12,24 +12,24 @@ while read -r file; do
 		"f") convert -flop "$file" "$file" ;;
 		"g") gimp "$file" & ;;
 		"c")
-				destdir=$(_dirs | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")
-				[ -z "$destdir" ] && exit
-				cp "$file" "$destdir" &&
-						notify-send -a system -i "$(readlink -f "$file")" "$file copied to $destdir" & ;;
+			destdir=$(_dirs | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")
+			[ -z "$destdir" ] && exit
+			cp "$file" "$destdir" &&
+				notify-send -a system -i "$(readlink -f "$file")" "$file copied to $destdir" & ;;
 		"m")
-				destdir=$(_dirs | dmenu -l 20 -i -p "Move file(s) to where?" | sed "s|~|$HOME|g")
-				[ -z "$destdir" ] && exit
-				mv "$file" "$destdir" &&
-						notify-send -a system -i "$(readlink -f "$file")" "$file moved to $destdir" & ;;
+			destdir=$(_dirs | dmenu -l 20 -i -p "Move file(s) to where?" | sed "s|~|$HOME|g")
+			[ -z "$destdir" ] && exit
+			mv "$file" "$destdir" &&
+				notify-send -a system -i "$(readlink -f "$file")" "$file moved to $destdir" & ;;
 		"y")
-				printf '%s' "$file" | xclip -selection clipboard &&
-						notify-send -a system "$file copied to clipboard" & ;;
+			printf '%s' "$file" | xclip -selection clipboard &&
+				notify-send -a system "$file copied to clipboard" & ;;
 		"Y")
-				readlink -f "$file" | xclip -selection clipboard &&
-						notify-send -a system "$(readlink -f "$file") copied to clipboard" & ;;
+			readlink -f "$file" | xclip -selection clipboard &&
+				notify-send -a system "$(readlink -f "$file") copied to clipboard" & ;;
 		"d")
-				[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] &&
-						rm "$file" && notify-send -a system "$file deleted." ;;
+			[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] &&
+				rm "$file" && notify-send -a system "$file deleted." ;;
 	esac
 done
 
