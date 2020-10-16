@@ -7,12 +7,12 @@ title() {
 	: ${2=$1} # if $2 is unset use $1; if it is set and empty, leave it as is
 
 	case "$TERM" in
-		xterm*|rxvt*|konsole*|ansi)
-			print -Pn "\e]2;$2:q\a" # set window name
-			print -Pn "\e]1;$1:q\a" # set tab name
+		xterm*|rxvt*|konsole*|ansi|alacritty|st*)
+			print -Pn "\e]2;${2:q}\a" # set window name
+			print -Pn "\e]1;${1:q}\a" # set tab name
 		;;
 		screen*|tmux*)
-			print -Pn "\ek$1:q\e\\" # set screen hardstatus
+			print -Pn "\ek${1:q}\e\\" # set screen hardstatus
 		;;
 		*)
 			# Try to use terminfo to set the title
@@ -26,7 +26,7 @@ title() {
 }
 
 TERM_TAB_TITLE_IDLE="%15<..<%~%<<" #15 char left truncated PWD
-TERM_TITLE_IDLE="%n@%m: %~"
+TERM_TITLE_IDLE="%~"
 
 # Runs before showing the prompt
 termtitle_precmd() {
