@@ -15,5 +15,5 @@ shift
 $list "$PWD" | awk -v base="$base" 'BEGIN { lines = ""; m = 0; } { if ($0 == base) { m = 1; } }
 	{ if (!m) { if (lines) { lines = lines"\n"; } lines = lines""$0; }
 	else { print $0; } } END { print lines; }' |
-	grep -i '\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$' |
+	grep -Ei '.(png|jp(e|)g|gif|webp|tif(f|)|ico)(_large)*$' |
 	sxiv -ai "$@" 2>/dev/null

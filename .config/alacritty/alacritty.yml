@@ -440,9 +440,9 @@ live_config_reload: false
 # And optionally:
 #
 # - `mods` (see key bindings)
-mouse_bindings:
+# mouse_bindings:
 #  - { mouse: Middle, action: PasteSelection }
-  - { mouse: Right, action: Paste }
+#  - { mouse: Right, action: Paste }
 
 # Key bindings
 #
