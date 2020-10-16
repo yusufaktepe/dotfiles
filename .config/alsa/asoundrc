@@ -1,0 +1,21 @@
+# Default to PulseAudio
+
+# pcm.!default {
+#     type pulse
+#     fallback "sysdefault"
+#     hint {
+#         show on
+#         description "Default ALSA Output (currently PulseAudio Sound Server)"
+#     }
+# }
+
+# Use PulseAudio plugin hw
+pcm.!default {
+    type plug
+    slave.pcm hw
+}
+
+ctl.!default {
+    type pulse
+    fallback "sysdefault"
+}
