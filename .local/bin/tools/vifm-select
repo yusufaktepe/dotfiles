@@ -7,6 +7,6 @@ while read -r file; do
 	[ -z "$filepath" ] && filepath=$(dirname "$(realpath "$file")") &&
 		vifm --server-name "$VIFM_SERVER_NAME" --remote -c "cd \"$filepath\""
 
-	vifm --server-name "$VIFM_SERVER_NAME" --remote -c "select $file"
+	vifm --server-name "$VIFM_SERVER_NAME" --remote -c "select !printf \"$file\""
 done
 
