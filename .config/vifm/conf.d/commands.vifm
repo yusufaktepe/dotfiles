@@ -17,6 +17,7 @@ command! EDIT $TERMINAL -e $EDITOR %a 2>/dev/null &
 command! COPY :yank | winrun , put
 command! MOVE :yank | winrun , put!
 command! reload :write | restart full
+command! gs git -c color.ui=always status %q
 
 command! mks :![ ! -f %a ] && touch %a && chmod +x %a &&
 	\ printf "#!/bin/sh\n\n\n" >> %a && $TERMINAL -e $EDITOR +$ %a 2>/dev/null &

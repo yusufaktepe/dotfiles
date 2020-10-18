@@ -39,7 +39,7 @@ export TERMINFO="$XDG_DATA_HOME/terminfo"
 export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
-export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -type d | paste -sd:)"
+export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -name '.*' -prune -o -type d -print | paste -sd:)"
 
 # Others
 export SUDO_ASKPASS="$XDG_BIN_HOME/dmenu-rofi/askpass-rofi"

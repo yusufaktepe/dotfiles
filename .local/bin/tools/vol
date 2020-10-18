@@ -54,6 +54,8 @@ case $1 in
 	down)   pamixer -d "${2:-5}"; notify ;;
 	up)     pamixer -i "${2:-5}"; notify ;;
 	toggle) pamixer -t; notify ;;
+	mute)   pamixer -m; notify ;;
+	unmute) pamixer -u; notify ;;
 	set)    pamixer --allow-boost --set-volume "$2"; notify ;;
 	get|"") pamixer --get-volume-human ;;
 	*)      app "$@" ;;
