@@ -9,7 +9,9 @@ command! make !!make %a
 command! mkcd :mkdir! "%a" | cd "%a"
 command! vgrep $EDITOR "+grep %a"
 command! extract aunpack -e %f &
+command! gextract engrampa --extract %f %i &
 command! compress apack
+command! gcompress engrampa --add %f %i &
 command! link ln -s %d/%f %D
 command! shred shred -u %f &
 command! vidir $TERMINAL -e vidir %a 2>/dev/null &
@@ -18,6 +20,7 @@ command! COPY :yank | winrun , put
 command! MOVE :yank | winrun , put!
 command! reload :write | restart full
 command! gs git -c color.ui=always status %q
+command! cover convert %c -resize 500x500\> -quality 80%  cover.jpg &
 
 command! mks :![ ! -f %a ] && touch %a && chmod +x %a &&
 	\ printf "#!/bin/sh\n\n\n" >> %a && $TERMINAL -e $EDITOR +$ %a 2>/dev/null &
