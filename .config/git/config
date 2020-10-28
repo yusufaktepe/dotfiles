@@ -9,10 +9,11 @@
 	ac          = !git add . && git commit
 	b           = branch
 	bl          = !git --no-pager branch --verbose --all
+	browse      = browse # git-browse script
 	c           = commit
 	ca          = commit --amend
 	cl          = clone
-	cld         = cld # for git to recognize git-cld as an alias
+	cld         = cld # git-cld script
 	co          = checkout
 	cc          = shortlog -sn --no-merges
 	cca         = shortlog -sn
