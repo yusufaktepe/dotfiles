@@ -1,6 +1,6 @@
 ##== Aliases ==##
 
-alias cp='cp -iv'
+alias cp='cp -riv'
 alias mv='timeout 8 mv -iv'
 alias rm='timeout 3 rm -Iv --one-file-system'
 alias mkdir='mkdir -pv'
