@@ -11,39 +11,39 @@ notify() {
 notify_clip() { notify-send -a system -i clipboard "Screenshot copied to clipboard." ;}
 
 opts="\
-selected area
-current window
-full screen
-selected area (copy)
-current window (copy)
-full screen (copy)
+[1] Selected area
+[2] Current window
+[3] Fullscreen
+[4] Selected area (copy)
+[5] Current window (copy)
+[6] Fullscreen (copy)
 "
 
-case "$(printf '%s' "$opts" | dmenu -l 6 -i -p "Screenshot which area?")" in
-	"selected area")
+case "$(printf '%s' "$opts" | dmenu -l 6 -i -p "Screenshot")" in
+	"[1] Selected area")
 		shot="$ss_dir/ss-selected-$datef.png"
-		maim -s "$shot"
+		maim -s "$shot" &&
 		notify
 	;;
-	"current window")
+	"[2] Current window")
 		shot="$ss_dir/ss-window-$datef.png"
 		maim -i "$(xdotool getactivewindow)" "$shot"
 		notify
 	;;
-	"full screen")
+	"[3] Fullscreen")
 		shot="$ss_dir/ss-full-$datef.png"
 		maim "$shot"
 		notify
 	;;
-	"selected area (copy)")
-		maim -s | xclip -selection clipboard -t image/png
+	"[4] Selected area (copy)")
+		mispipe "maim -s" "xclip -selection clipboard -t image/png" &&
 		notify_clip
 	;;
-	"current window (copy)")
+	"[5] Current window (copy)")
 		maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png
 		notify_clip
 	;;
-	"full screen (copy)")
+	"[6] Fullscreen (copy)")
 		maim | xclip -selection clipboard -t image/png
 		notify_clip
 	;;
