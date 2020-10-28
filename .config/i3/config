@@ -329,7 +329,7 @@ for_window [class="Spotify"] move to workspace   $ws10
 
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
-for_window [class="Catfish|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|Yad"] floating enable
+for_window [class="Catfish|flameshot|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|Yad"] floating enable
 for_window [class="Lxappearance|qt5ct|Lightdm-settings|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
 for_window [class="(?i)megasync" window_type=normal title="^(?!Stream*|Transfer*)"] floating enable, move position +964+20
 for_window [class="(?i)telegram"] floating enable sticky enable, resize set 800 480, move position center
@@ -351,6 +351,7 @@ for_window [class="(?i)gsimplecal"] floating enable, move position +1149+20
 for_window [window_role="GtkFileChooserDialog"] resize set 800 665, move position center
 for_window [window_role="pop-up|bubble|task_dialog|Preferences"] floating enable
 for_window [window_type="dialog|menu"] floating enable
+for_window [window_role="PictureInPicture"] floating enable border none
 for_window [title="^Confirm File Replacing$"] move position center
 for_window [title="^Picture in picture$"] resize set 420 236, move position 945 531
 for_window [class="Dragon-drag-and-drop"] sticky enable
