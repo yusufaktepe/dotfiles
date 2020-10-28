@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then
+	f=$(which "$1")
+	[ -e "$f" ] && $EDITOR "$f"
+else
+	fd . "$XDG_BIN_HOME" -t f | fzf | xargs -ro "$EDITOR"
+fi
+
