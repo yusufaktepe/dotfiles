@@ -92,7 +92,7 @@ bindsym $caps+s exec $N ifwin -e spotify
 bindsym $caps+q exec $N ifwin -e qbittorrent
 bindsym $caps+7 exec $N ifwin vbox Win7
 # bindsym $caps+w exec $N libreoffice --writer
-bindsym --release $caps+c exec $N ifwin crow
+bindsym $caps+c exec $N ifwin crow
 
 bindsym $mod+Shift+d exec $N xo d
 bindsym $mod+Shift+e exec $N xo c
