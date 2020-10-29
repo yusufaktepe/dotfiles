@@ -130,8 +130,6 @@ set findprg='find %s %a -print ,
 	\ -type d \( ! -readable -o ! -executable -o -path "*/.git" \)
 	\ -prune'
 
-set mediaprg='~/.config/vifm/vifm-media'
-
 " Filter-out build and temporary files
 " filter! {*.lo,*.o,*.d,*.class,*.pyc,*.pyo,.*~}
 
