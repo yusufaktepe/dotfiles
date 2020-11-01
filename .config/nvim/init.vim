@@ -103,7 +103,7 @@ set number relativenumber
 set completeopt+=noinsert,noselect
 set guioptions=a
 set mouse=a
-set clipboard+=unnamedplus
+set clipboard=unnamed,unnamedplus
 set hlsearch                  " keep matches highlighted after searching
 set ignorecase                " ignore case when searching
 set smartcase                 " don't ignore case if user types an uppercase letter
@@ -256,9 +256,9 @@ nnoremap <silent> <leader>R :so ~/.config/nvim/init.vim \| echom 'Reload config.
 noremap gF <C-w>gf
 
 " Ignore my lazy shift finger
-command! WQ wq
-command! Wq wq
-command! Q q
+cnoreabbrev WQ wq
+cnoreabbrev Wq wq
+cnoreabbrev Q q
 
 " emacs-style movements in command mode
 cnoremap <C-a> <Home>
