@@ -58,6 +58,8 @@ filetype {*.[1-8]},<text/troff> man ./%c
 
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.xpm,*.ico},<image/*>
+	\ {View in qimgv}
+	\ qimgv %c 2>/dev/null | vifm-select &,
 	\ {View in sxiv}
 	\ sxivr -d %c -o | vifm-select &,
 	\ {Edit with GIMP}

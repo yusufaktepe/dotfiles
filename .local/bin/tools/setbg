@@ -3,7 +3,7 @@
 wall=$XDG_DATA_HOME/backgrounds/wall.png
 lock=$XDG_DATA_HOME/backgrounds/lock.png
 
-if [ -n "$1" ]; then
+[ -n "$1" ] && {
 	cp "$1" "$wall"
 
 	# resize
@@ -15,6 +15,7 @@ if [ -n "$1" ]; then
 	convert "$wall" -fill black -colorize 40% "$lock"
 
 	notify-send -a system -i "$wall" "Wallpaper changed."
-fi
+}
 
 xwallpaper --zoom "$wall"
+

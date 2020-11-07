@@ -78,7 +78,7 @@ nnoremap <silent> X :!engrampa --add %f %i &<cr>
 nnoremap I cw<c-a>
 nnoremap cc cw<c-u>
 nnoremap A cw
-nnoremap cn cw<a-b><c-b>
+nnoremap cn cw<a-b><c-b><c-u>
 
 " Faster search of files that start with a particular string
 nnoremap f/ /^
@@ -92,6 +92,8 @@ nnoremap <silent> <a-c-m> :!unset VIFM_SERVER_NAME RPS1; setsid -f $TERMINAL 2>/
 " Find & select with FZF
 nnoremap <silent> <a-f> :FZFfind<cr>
 nnoremap <silent> <a-c-f> :FZFlocate<cr>
+
+nnoremap <silent> <a-g> :!gimp %f %i &<cr>
 
 " Directory history
 nnoremap <silent> <a-h> :history<cr>

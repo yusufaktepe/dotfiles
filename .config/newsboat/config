@@ -42,6 +42,9 @@ bind-key d pagedown
 bind-key u pageup
 bind-key l open
 bind-key h quit
+bind-key RIGHT open
+bind-key LEFT quit
+bind-key BACKSPACE quit
 bind-key a toggle-article-read
 bind-key n next-unread
 bind-key N prev-unread

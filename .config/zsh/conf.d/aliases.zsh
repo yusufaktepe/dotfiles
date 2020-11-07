@@ -17,6 +17,7 @@ alias ssh='TERM=xterm-256color ssh'
 alias tree='tree -aI .git --dirsfirst'
 alias ps_mem='sudo ps_mem'
 alias updatedb='sudo updatedb'
+alias vidir='vidir -v'
 
 alias didi='sudo dd bs=4M oflag=sync status=progress'
 alias magit='nvim -c MagitOnly'
