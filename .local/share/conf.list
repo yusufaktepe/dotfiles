@@ -49,7 +49,6 @@ tmux                 ~/.config/tmux/tmux.conf
 user-dirs            ~/.config/user-dirs.dirs
 vifmrc               ~/.config/vifm/vifmrc
 vifm_colors          ~/.config/vifm/colors/custom.vifm
-vifm_autocmds        ~/.config/vifm/conf.d/autocmds.vifm
 vifm_bookmarks       ~/.config/vifm/conf.d/bookmarks.vifm
 vifm_commands        ~/.config/vifm/conf.d/commands.vifm
 vifm_handler         ~/.config/vifm/conf.d/handler.vifm

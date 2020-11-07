@@ -4,8 +4,8 @@ while read -r file; do
 	[ -z "$file" ] && continue
 
 	# Make sure the file is in the current directory.
-	[ -z "$filepath" ] && filepath=$(dirname "$(realpath "$file")") &&
-		vifm --server-name "$VIFM_SERVER_NAME" --remote -c "cd \"$filepath\""
+	[ -z "$filepath" ] && filepath=$(realpath "$file") &&
+		vifm --server-name "$VIFM_SERVER_NAME" --remote -c "goto \"$filepath\""
 
 	vifm --server-name "$VIFM_SERVER_NAME" --remote -c "select !printf \"$file\""
 done
