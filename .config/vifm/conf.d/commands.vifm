@@ -72,6 +72,14 @@ command! FZFlocate
 " Send current directories to default instance
 command! send :!vifm --server-name vifm --remote -c "tabnew | cd %d %D"
 
+" Toggle hlsearch
+command! th
+	\ : if &hlsearch == 0
+	\ |     set hlsearch | echo 'hlsearch'
+	\ | else
+	\ |     set nohlsearch | echo 'nohlsearch'
+	\ | endif
+
 " Toggle between sorting: by name <--> by size <--> by mtime
 command! togglesort
 	\ : if &sort == '-size,+name'

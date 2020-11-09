@@ -83,6 +83,9 @@ nnoremap cn cw<a-b><c-b><c-u>
 " Faster search of files that start with a particular string
 nnoremap f/ /^
 
+" Toggle hlsearch
+nnoremap <silent> <c-h> :th<cr>
+
 " Substitute file names in current dir
 nnoremap  <silent> cs :%s/
 
