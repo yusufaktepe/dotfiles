@@ -552,7 +552,7 @@ augroup vimrc
 	endif
 
 	" Run command whenever these files are updated.
-	au BufWritePost *Xresources,*Xdefaults !xrdb %
+	au BufWritePost *Xresources,*Xdefaults,~/.config/X11/colors/* !xrdb %
 	au BufWritePost ~/.config/fontconfig/* !fc-cache
 	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 
