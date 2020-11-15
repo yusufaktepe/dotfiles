@@ -36,3 +36,8 @@
 
 *cursorColor: #add8e6
 
+! Sxiv.background: #1B1B1C
+! Sxiv.foreground: #D2D2D2
+Sxiv.bar_background: #282828
+Sxiv.bar_foreground: #ebdbb2
+
