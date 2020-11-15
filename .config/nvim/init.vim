@@ -259,6 +259,7 @@ noremap gF <C-w>gf
 cnoreabbrev WQ wq
 cnoreabbrev Wq wq
 cnoreabbrev Q q
+cnoreabbrev X x
 
 " emacs-style movements in command mode
 cnoremap <C-a> <Home>
@@ -403,6 +404,9 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 nnoremap <leader>gb :G blame<CR>
 vnoremap <leader>gb :G blame<CR>
 nnoremap <leader>ds :Gvdiffsplit<CR>
+
+"=== FZF
+nnoremap <M-h> :History<CR>
 
 "=== GitGutter
 if &diff
