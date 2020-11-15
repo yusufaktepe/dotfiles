@@ -223,6 +223,9 @@ nnoremap S :%s///gc<Left><Left><Left><Left>
 nnoremap <silent> <leader>cl :exe "set cole=" . (&cole == "0" ? "2" : "0") \| set cole<CR>
 nnoremap <silent> <leader>cc :exe "set cocu=" . (&cocu == "" ? "n" : "") \| set cocu<CR>
 
+" Toggle between tabs and spaces
+nnoremap <silent> <F9> mz:call ToggleTab()<CR>'z
+
 " Append modeline after last line in buffer
 nnoremap <silent> <leader>ml :call AppendModeline()<CR>
 
@@ -502,6 +505,20 @@ function! Tabnm(n)
 	catch
 		$tabnew
 	endtry
+endfunction
+
+" Toggle between tabs and spaces
+let my_tab=4
+function! ToggleTab()
+	if &expandtab
+		set shiftwidth=8 softtabstop=0 noexpandtab
+		echom 'Using TABs to insert a <Tab>'
+	else
+		exe 'set shiftwidth='.g:my_tab
+		exe 'set softtabstop='.g:my_tab
+		set expandtab
+		echom 'Using'g:my_tab'SPACEs to insert a <Tab>'
+	endif
 endfunction
 
 " Append modeline after last line in buffer
