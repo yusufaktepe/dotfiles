@@ -18,6 +18,7 @@ alias tree='tree -aI .git --dirsfirst'
 alias ps_mem='sudo ps_mem'
 alias updatedb='sudo updatedb'
 alias vidir='vidir -v'
+alias wget='wget -qc --show-progress'
 
 alias didi='sudo dd bs=4M oflag=sync status=progress'
 alias magit='nvim -c MagitOnly'
