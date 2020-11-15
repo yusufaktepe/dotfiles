@@ -1,34 +1,36 @@
 #!/bin/sh
 
 _dirs() {
+	printf '..\n../..\n'
 	sed "s/\s.*#.*$//;/^\s*$/d" "$XDG_DATA_HOME/dir.list" | awk '{print $2}'
 }
 
 while read -r file; do
 	case "$1" in
-		"w") setbg "$file" & ;;
-		"r") convert -rotate 90 "$file" "$file" ;;
-		"R") convert -rotate -90 "$file" "$file" ;;
-		"f") convert -flop "$file" "$file" ;;
-		"g") gimp "$file" & ;;
-		"c")
+		a) convert "$file" -resize 500x500\> -quality 80% cover.jpg ;;
+		w) setbg "$file" & ;;
+		r) convert -rotate 90 "$file" "$file" ;;
+		R) convert -rotate -90 "$file" "$file" ;;
+		f) convert -flop "$file" "$file" ;;
+		g) gimp "$file" & ;;
+		c)
 			destdir=$(_dirs | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")
 			[ -z "$destdir" ] && exit
 			cp "$file" "$destdir" &&
 				notify-send -a system -i "$(readlink -f "$file")" "$file copied to $destdir" & ;;
-		"m")
+		m)
 			destdir=$(_dirs | dmenu -l 20 -i -p "Move file(s) to where?" | sed "s|~|$HOME|g")
 			[ -z "$destdir" ] && exit
 			mv "$file" "$destdir" &&
 				notify-send -a system -i "$(readlink -f "$file")" "$file moved to $destdir" & ;;
-		"y")
+		y)
 			printf '%s' "$file" | xclip -selection clipboard &&
 				notify-send -a system "$file copied to clipboard" & ;;
-		"Y")
+		Y)
 			readlink -f "$file" | xclip -selection clipboard &&
 				notify-send -a system "$(readlink -f "$file") copied to clipboard" & ;;
-		"d")
-			[ "$(printf "No\\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] &&
+		d)
+			[ "$(printf "No\nYes" | dmenu -i -p "Really delete $file?")" = "Yes" ] &&
 				rm "$file" && notify-send -a system "$file deleted." ;;
 	esac
 done
