@@ -1,14 +1,15 @@
 #!/bin/sh
 
+dir=$(xdg-user-dir DOWNLOAD)/default
+
 case "$1" in
 	*mkv|*webm|*mp4|*youtube.com/watch*|*youtube.com/playlist*|*youtu.be*|*hooktube.com*|*bitchute.com*)
 		ym "$1" ;;
-	*png|*jpg|*jpe|*jpeg|*gif)
-		tmp=/tmp/$(basename "$1")
-		curl -sL "$1" > "$tmp" && xdg-open "$tmp" >/dev/null 2>&1
-		wait; rm "$tmp" ;;
-	*mp3|*flac|*opus|*mp3?source*)
-		setsid -f tsp curl -LO "$1" >/dev/null 2>&1 ;;
+	*png|*jp[ge]|*jpeg|*[gt]if|*tiff|*webp|*pdf|*cb[rz]|*doc|*docx|*xls|*xlsx|*ppt|*pptx|*od[tsp]|*rtf)
+		curl -sLO "$1" --output-dir "$dir"
+		xdg-open "$dir/$(basename "$1")" >/dev/null 2>&1 ;;
+	*mp3|*flac|*ogg|*opus|*mp3?source*|*m4a|*wav)
+		setsid -f tsp curl -sLO "$1" --output-dir "$dir" >/dev/null 2>&1 ;;
 	"")
 		ifwin -e "$BROWSER" ;;
 	*)
@@ -18,3 +19,4 @@ case "$1" in
 			setsid "$BROWSER" "$1" >/dev/null 2>&1
 		fi ;;
 esac
+
