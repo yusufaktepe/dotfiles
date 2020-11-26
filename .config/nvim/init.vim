@@ -277,8 +277,11 @@ cnoremap <C-g> <C-c>
 cnoremap <expr> <C-p> pumvisible() ? "\<C-p>" : "\<up>"
 cnoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<down>"
 
+" Ctrl-Backspace to remove last word in insert mode
+inoremap <C-h> <C-w>
+
 " Check file in shellcheck:
-map <leader>cs :!clear && shellcheck %<CR>
+map <leader>cs :!clear && shellcheck -x %<CR>
 
 " Open bibliography file in split
 map <leader>bi :vsp<space>$BIB<CR>

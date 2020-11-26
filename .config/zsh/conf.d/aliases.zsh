@@ -24,7 +24,7 @@ alias didi='sudo dd bs=4M oflag=sync status=progress'
 alias magit='nvim -c MagitOnly'
 alias mkd='mkdir -pv'
 # alias fcd='. ranger'
-alias fcd='cd $(VIFM=~/.config/vifm/sessions/select vifm --choose-dir - .)'
+alias fcd='cd "$(VIFM=~/.config/vifm/sessions/select vifm --choose-dir - .)"'
 
 alias cpr='rsync -avzz --progress -h'
 alias cpru='cpr -u'
