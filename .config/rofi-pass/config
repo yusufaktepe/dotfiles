@@ -19,7 +19,7 @@ _image_viewer () {
 #    feh -
 #    display
      qr=$(mktemp)
-     tee $qr && xdg-open $qr && rm $qr
+     tee $qr && sxiv $qr && rm $qr
 }
 
 # xdotool needs the keyboard layout to be set using setxkbmap

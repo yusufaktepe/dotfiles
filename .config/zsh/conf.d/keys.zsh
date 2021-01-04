@@ -122,6 +122,7 @@ foreach c ({a,i}{\',\",\`}) {
 	bindkey -M visual $c select-quoted
 	bindkey -M viopp $c select-quoted
 }
+unset c
 
 #== Alias bindings
 bindkey -s '^[h' 'vH\n'

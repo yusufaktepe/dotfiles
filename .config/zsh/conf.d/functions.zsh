@@ -1,7 +1,7 @@
 ##== Functions/Widgets ==##
 
 # Load builtin functions
-foreach function (
+foreach func (
 	# Edit command line in $EDITOR
 	edit-command-line
 	# Select characters between matching pairs
@@ -10,8 +10,9 @@ foreach function (
 	# Operate on surroundings
 	surround
 ) {
-	autoload -U $function
+	autoload -U $func
 }
+unset func
 
 # Register functions as widgets
 foreach widget (
@@ -40,6 +41,7 @@ foreach widget (
 ) {
 	eval zle -N $widget
 }
+unset widget
 
 # Change the cursor style depending on keymap mode
 zle-line-init zle-keymap-select() {
