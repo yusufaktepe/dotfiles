@@ -1,69 +1,119 @@
 #!/bin/sh
+# shellcheck disable=SC2086
 # A simple shell script to manage clipboard with rofi/fzf.
-# Dependencies: greenclip, rofi/dmenu, fzf, xclip, xsel.
+# Dependencies: greenclip, rofi/dmenu/fzf, xsel, gkeep.
+
+History="$XDG_CACHE_HOME/greenclip/history"
+StaticHistory="${History%/*}/staticHistory"
 
 pidof greenclip >/dev/null || setsid -f greenclip daemon >/dev/null 2>&1
 
-clipin() { xargs -r -d'\n' -I '{}' greenclip print '{}' ;}
+copy() { xargs -r -d'\n' -I '{}' greenclip print '{}' ;}
 
-wrofi() {
+print_history() { greenclip print | sed '/^$/d' ;}
+
+clipnote() { printf '%s\n\n---\n\n' "$1" >> ~/notes/clipnote.md ;}
+
+paste_clip() {
+	AW=$(xdotool getactivewindow)
+	AW=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print tolower($4)}')
+	sleep .5
+	case $AW in
+		alacritty|kitty|st*)
+			xdotool key --delay 0 --clearmodifiers Ctrl+Shift+v ;;
+		*)
+			xdotool key --delay 0 --clearmodifiers Ctrl+v ;;
+	esac
+}
+
+paste_selection() {
+	sleep .5
+	xdotool type --delay 0 --clearmodifiers -- "$(xsel -o)"
+}
+
+toggle_static() {
+	c=$(printf '%s' "$1" | sed 's|[][\\/.*^$]|\\&|g')
+	if grep -q "^$c$" "$StaticHistory"; then
+		sed -i "/^$c$/d" "$StaticHistory"
+	else
+		printf '%s\n%s' "$1" "$(cat "$StaticHistory")" > "$StaticHistory"
+	fi
+}
+
+w_rofi() {
 	# Display content of primary clipboard as rofi message:
-	prim=$(printf ' Primary:   %s' "$(xclip -o | sed '/^$/d;s/^[ \t]*//')" |
+	prim=$(printf ' Primary:   %s' "$(xsel -o | sed '/^$/d;s/^[ \t]*//')" |
 		sed 's/\&/\&amp\;/g;s/</\&lt\;/g;s/>/\&gt\;/g' | head -n1 )
 	[ ${#prim} -ge 87 ] && prim=$(printf '%s' "$prim" | cut -c -85)..
 
-	# Because we can't use `-mesg` with `-modi`:
-	greenclip print | sed '/^$/d' | rofi -dmenu -i -l 10 -width 60 \
-		-p Clipboard -mesg "<span color='#a89984'>$prim</span>" | clipin
+	clip=$(
+		print_history | rofi -dmenu -i -l 10 -width 60 -p Clipboard \
+			-mesg "<span color='#a89984'>$prim</span>" \
+			-kb-custom-1 'Alt+s' \
+			-kb-custom-2 'Alt+Return' \
+			-kb-custom-3 'Alt+n'
+	)
+	ret=$?
 
-	# rofi -modi "clipboard:greenclip print" -show clipboard \
-	# -run-command '{cmd}' -lines 10 -width 60
+	case $ret in
+		10) toggle_static "$clip" ;;
+		11) printf '%s' "$clip" | copy; paste_clip ;;
+		12) clipnote "$clip" ;;
+		0) printf '%s' "$clip" | copy ;;
+		1) exit 1 ;;
+	esac
 }
 
-wdmenu() {
-	greenclip print | sed '/^$/d'| dmenu -i -l 10 -p Clipboard | clipin
-}
+w_dmenu() { print_history | dmenu -i -l 10 -p Clipboard | copy ;}
 
-wfzf() {
-	greenclip print | sed '/^$/d' | fzf -e | clipin
-}
+w_fzf() { print_history | fzf -e | copy ;}
 
 case $1 in
-	cfg)
+	config)
 		killall greenclip
 		$EDITOR ~/.config/greenclip.cfg
 		setsid -f greenclip daemon >/dev/null 2>&1
 	;;
-	rld)
+	static)
+		$EDITOR "$StaticHistory"
+	;;
+	reload)
 		killall greenclip
 		setsid -f greenclip daemon >/dev/null 2>&1
 	;;
 	clear)
 		xsel -bc; xsel -c
 		killall greenclip
-		rm -rf ~/.cache/greenclip/history ~/.cache/greenclip/image
+		rm -rf "$History" "${History%/*}/image"
 		setsid -f greenclip daemon >/dev/null 2>&1
 	;;
-	keep)
-		$EDITOR ~/.cache/greenclip/staticHistory
-	;;
 	selpaste|sp)
-		xdotool type --clearmodifiers "$(xclip -o -selection)"
+		paste_selection
 	;;
 	seltoclip|sc)
-		xclip -o -selection | xclip -selection clipboard
+		xsel -o | copy
 	;;
 	[1-9])
-		greenclip print | sed -n "$1"p | clipin
-		xdotool key --clearmodifiers Ctrl+Shift+v
+		print_history | sed -n $1p | xsel; paste_selection
+	;;
+	dmenu|rofi|fzf)
+		w_$1
 	;;
 	"")
-		{ [ -t 2 ] && wfzf ;} || wrofi
+		{ [ -t 2 ] && w_fzf ;} || w_rofi
 	;;
 	*)
 		cat <<-EOF
-		Usage: $(basename "$0") []
-		[]   ==>     [cfg, clear, keep, rld, selpaste|sp, seltoclip|sc]
+		Usage: ${0##*/} <options>
+
+		== Options ==
+		config       : open configuration file in \$EDITOR
+		static       : open static history file in \$EDITOR
+		clear        : clear clipboard history
+		reload       : reload greenclip
+		selpaste|sp  : paste selection
+		seltoclip|sc : move selection to clipboard
+		[1-9]        : paste clipboard item 1..9
 		EOF
 esac
 

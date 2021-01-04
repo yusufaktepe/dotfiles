@@ -62,14 +62,8 @@ bindsym $caps+t exec $N rofitr -s
 # #---Clipboard management---# #
 bindsym Ctrl+quotedbl exec $N gclip
 bindsym $caps+quotedbl exec $N gclip clear
-bindsym Ctrl+$caps+quotedbl exec $N gclip rld
-bindsym --release $mod+Insert exec $N gclip selpaste
+bindsym Ctrl+$caps+quotedbl exec $N gclip reload
 bindsym $mod+Shift+Insert exec $N gclip seltoclip
-bindsym $mod+$caps+1 exec $N gclip 1
-bindsym $mod+$caps+2 exec $N gclip 2
-bindsym $mod+$caps+3 exec $N gclip 3
-bindsym $mod+$caps+4 exec $N gclip 4
-bindsym $mod+$caps+5 exec $N gclip 5
 
 # #---Start Applications---# #
 bindsym $mod+F1 exec $N $TERMINS _blockterm -e sh -c 'VIFM=~/.config/vifm/sessions/shell vifm'
@@ -113,7 +107,7 @@ bindsym XF86MonBrightnessUp exec $N brightness inc 5
 bindsym XF86MonBrightnessDown exec $N brightness dec 5
 bindsym --release $mod+XF86MonBrightnessDown exec $N sleep 1 && xset dpms force off
 
-bindsym XF86Display exec $N ifwin -e arandr --toggle
+# bindsym XF86Display exec $N ifwin -e arandr --toggle
 bindsym XF86TouchpadOff exec $N toggle touchpad
 bindsym XF86TouchpadOn exec $N toggle touchpad
 
@@ -391,7 +385,7 @@ bindsym $mod+Shift+r restart
 exec_always launch_polybar
 exec $N "sleep 2; ifwin -e $BROWSER"
 exec $N "sleep 5; ifterm -e vifm"
-# exec $N "sleep 7; ifwin -e spotify"
+exec $N "sleep 7; ifwin -e spotify"
 exec $N "sleep 9; wmctrl -x -r 'vifm' -b remove,demands_attention"
 
 #=====================================================================
@@ -564,7 +558,6 @@ mode "$mode_system" {
 	bindsym r exec $N systemctl reboot, mode default
 	bindsym Shift+s exec $N systemctl poweroff, mode default
 
-	# exit system mode: "Enter" or "Escape"
 	bindsym Return mode default
 	bindsym Escape mode default
 }
@@ -589,7 +582,6 @@ mode "$resize" {
 		bindsym 2 mode default, resize set 800 500
 		bindsym 3 mode default, resize set 800 600
 
-	# back to normal: Enter or Escape or $mod+r
 	bindsym Return mode default
 	bindsym Escape mode default
 	bindsym $mod+r mode default
@@ -618,9 +610,9 @@ mode "$broopen" {
 	bindsym --release c exec $N bro-open mpv -c, mode default
 	bindsym --release d exec $N bro-open dmenuhandler, mode default
 
-		bindsym Return mode default
-		bindsym Escape mode default
-		bindsym $caps+b mode default
+	bindsym Return mode default
+	bindsym Escape mode default
+	bindsym $caps+b mode default
 }
 
 bindsym $mod+Shift+t mode "$toggle"
@@ -635,9 +627,8 @@ mode "$toggle" {
 	bindsym --release d exec "pkill dunst; exec notify-send -a system 'restart dunst'", mode default
 	bindsym p exec $N systemctl --user restart pulseaudio, mode default
 
-		# back to normal: Enter or Escape
-		bindsym Return mode default
-		bindsym Escape mode default
+	bindsym Return mode default
+	bindsym Escape mode default
 }
 
 bindsym $caps+a mode "$keystroke"
@@ -650,7 +641,6 @@ mode "$keystroke" {
 	bindsym --release comma exec $N autotype mdcode, mode default
 	bindsym --release 0 exec $N autotype shrug, mode default
 
-	# back to normal: Escape or $caps+a
 	bindsym Escape mode default
 	bindsym $caps+a mode default
 }
@@ -659,11 +649,24 @@ bindsym $caps+w mode "$vimwiki"
 set $vimwiki 
 mode "$vimwiki" {
 	bindsym w exec $N $TERMINAL -e $EDITOR -c 'VimwikiIndex', mode default
-	bindsym t exec $N $TERMINAL -e $EDITOR +$ /data/repos/notes/todo.md, mode default
+	bindsym t exec $N $TERMINAL -e $EDITOR +$ ~/notes/todo.md, mode default
 
-	# back to normal: Escape or $caps+w
 	bindsym Escape mode default
 	bindsym $caps+w mode default
+}
+
+bindsym $caps+p mode "$paste"
+set $paste 
+mode "$paste" {
+	bindsym 1 exec $N gclip 1, mode default
+	bindsym 2 exec $N gclip 2, mode default
+	bindsym 3 exec $N gclip 3, mode default
+	bindsym 4 exec $N gclip 4, mode default
+	bindsym 5 exec $N gclip 5, mode default
+	bindsym p exec $N gclip selpaste, mode default
+
+	bindsym Escape mode default
+	bindsym $caps+p mode default
 }
 
 #=====================================================================
