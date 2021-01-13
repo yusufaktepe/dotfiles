@@ -32,12 +32,18 @@ paste_selection() {
 }
 
 toggle_static() {
-	c=$(printf '%s' "$1" | sed 's|[][\\/.*^$]|\\&|g')
+	# See: https://github.com/erebe/greenclip/issues/78#issuecomment-594493146
+	c=$(printf '%s' "$1" | sed 's|[][\\/.*^$]|\\&|g' | tr '\n' '\xA0')
+	iconv -f utf-8 -t latin1 $StaticHistory -o $StaticHistory
+
 	if grep -q "^$c$" "$StaticHistory"; then
 		sed -i "/^$c$/d" "$StaticHistory"
 	else
-		printf '%s\n%s' "$1" "$(cat "$StaticHistory")" > "$StaticHistory"
+		printf '%s\n%s' "$(printf '%s' "$1" | tr '\n' '\xA0')" \
+			"$(cat "$StaticHistory")" > "$StaticHistory"
 	fi
+
+	iconv -f latin1 -t utf-8 $StaticHistory -o $StaticHistory
 }
 
 w_rofi() {
