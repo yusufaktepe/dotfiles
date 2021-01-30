@@ -1,0 +1,7 @@
+#!/bin/sh
+
+AD=$(git log -1 --format=%ad)
+CD=$(git log -1 --format=%cd)
+
+GIT_COMMITTER_DATE=$CD git commit --amend --date="$AD"
+

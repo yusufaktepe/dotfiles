@@ -1,5 +1,12 @@
 "--- Mappings ---"
 
+" Ctrl-Backspace to remove last word in command line
+cnoremap <C-h> <C-w>
+
+" Switch ; <> ,
+nnoremap , ;
+nnoremap ; ,
+
 " Quit
 nnoremap Q :wqall<cr>
 nnoremap qq :wqall<cr>

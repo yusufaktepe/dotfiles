@@ -10,3 +10,4 @@ foreach conf (
 ) {
 	source $ZDOTDIR/conf.d/$conf
 }
+unset conf
