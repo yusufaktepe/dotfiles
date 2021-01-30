@@ -1,8 +1,8 @@
 #!/bin/sh
 
 get_url() {
-	AW_CLASS=$(xprop -id "$(xdotool getactivewindow)" | awk -F'"' '/WM_CLASS/{print $4}')
-	case "$AW_CLASS" in
+	AW_CLASS=$(xprop -id "$(xdotool getactivewindow)" | awk -F\" '/WM_CLASS/{print $4}')
+	case $AW_CLASS in
 		Vivaldi*|*chrom*|Opera*|firefox*|Tor*|Brave*)
 			xdotool key --clearmodifiers Ctrl+l \
 				key --clearmodifiers Right \
@@ -10,7 +10,7 @@ get_url() {
 				key Home \
 				keyup Shift \
 				key Escape
-			URL=$(xclip -o -selection primary | grep -Eo '(https?|ftp)://[^ "]+') ;;
+			URL=$(xclip -o -selection primary | sed 's/ /%20/g' | grep -Eo '(https?|ftp)://[^ "]+') ;;
 		mpv)
 			PID=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
 			PID=$(xprop -id "$PID" | grep -m 1 PID | cut -d " " -f 3)

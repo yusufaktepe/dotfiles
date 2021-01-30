@@ -1,5 +1,5 @@
 --format 'bestvideo[height<=?720]+bestaudio/best'
---output ~/downloads/default/%(uploader)s_%(title)s.%(ext)s
+--output ~/videos/yt/%(uploader)s_%(title)s.%(ext)s
 --restrict-filenames
 --ignore-errors
 --cookies ~/.config/youtube-dl/cookies.txt

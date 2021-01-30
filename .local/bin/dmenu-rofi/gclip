@@ -16,7 +16,7 @@ clipnote() { printf '%s\n\n---\n\n' "$1" >> ~/notes/clipnote.md ;}
 
 paste_clip() {
 	AW=$(xdotool getactivewindow)
-	AW=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print tolower($4)}')
+	AW=$(xprop -id "$AW" | awk -F\" '/WM_CLASS/{print tolower($4)}')
 	sleep .5
 	case $AW in
 		alacritty|kitty|st*)
@@ -50,14 +50,15 @@ w_rofi() {
 	# Display content of primary clipboard as rofi message:
 	prim=$(printf ' Primary:   %s' "$(xsel -o | sed '/^$/d;s/^[ \t]*//')" |
 		sed 's/\&/\&amp\;/g;s/</\&lt\;/g;s/>/\&gt\;/g' | head -n1 )
-	[ ${#prim} -ge 87 ] && prim=$(printf '%s' "$prim" | cut -c -85)..
+	[ ${#prim} -ge 87 ] && prim=$(printf '%s' "$prim" | cut -c -85)…
 
 	clip=$(
 		print_history | rofi -dmenu -i -l 10 -width 60 -p Clipboard \
 			-mesg "<span color='#a89984'>$prim</span>" \
 			-kb-custom-1 'Alt+s' \
 			-kb-custom-2 'Alt+Return' \
-			-kb-custom-3 'Alt+n'
+			-kb-custom-3 'Alt+n' \
+			-kb-custom-4 'Alt+d'
 	)
 	ret=$?
 
@@ -65,8 +66,9 @@ w_rofi() {
 		10) toggle_static "$clip" ;;
 		11) printf '%s' "$clip" | copy; paste_clip ;;
 		12) clipnote "$clip" ;;
+		13) dmenuhandler "$clip" ;;
 		0) printf '%s' "$clip" | copy ;;
-		1) exit 1 ;;
+		*) exit $ret ;;
 	esac
 }
 

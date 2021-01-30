@@ -1,9 +1,0 @@
-#!/bin/sh
-# Script to run with Udev rule.
-
-case "$1" in
-	-p) notify-send -a system -i battery-full-charging 'AC Adapter Plugged' ;;
-	-u) notify-send -a system -i battery-missing 'AC Adapter Unplugged' ;;
-esac
-
-exit 0

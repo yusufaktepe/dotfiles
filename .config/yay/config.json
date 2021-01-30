@@ -1,6 +1,6 @@
 {
 	"aururl": "https://aur.archlinux.org",
-	"buildDir": "/data/backup/makepkg/build",
+	"buildDir": "/home/yusuf/.local/share/pacman/build",
 	"absdir": "/home/yusuf/.cache/yay/abs",
 	"editor": "",
 	"editorflags": "",

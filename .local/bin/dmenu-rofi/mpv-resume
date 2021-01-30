@@ -2,6 +2,7 @@
 # shellcheck disable=SC2046,SC2062
 
 cd ~/.config/mpv/watch_later || return
+[ -n "$(ls ~/.config/mpv/watch_later)" ] || return
 
 w=$(sed -n 's/# //p' $(ls -t) | xargs -rd'\n' -I % basename % | dmenu -i -l 5 -p )
 [ -z "$w" ] && exit

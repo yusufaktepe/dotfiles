@@ -3,4 +3,4 @@ Description=Check battery status
 
 [Service]
 Type=oneshot
-ExecStart=%h/.local/lib/timers/battery-warn
+ExecStart=%h/.local/bin/tools/battery-warn

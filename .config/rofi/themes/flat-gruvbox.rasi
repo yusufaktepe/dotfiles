@@ -10,7 +10,7 @@
   bg-selected:        #32302f;
   darkgray:           #a89984;
   scrollbarcolor:     #505050;
-  font:               "mono 10";
+  font:               "mono 13";
   background-color:   @bg;
   border-color:       @main;
 }

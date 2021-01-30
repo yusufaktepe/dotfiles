@@ -11,7 +11,7 @@
 	bl          = !git --no-pager branch --verbose --all
 	browse      = browse # git-browse script
 	c           = commit
-	ca          = commit --amend
+	ca          = ca # git-ca script
 	cl          = clone
 	cld         = cld # git-cld script
 	co          = checkout
@@ -46,6 +46,9 @@
 	undo-commit = reset --soft HEAD^
 	diff-copy   = !git diff | xclip -selection c
 	diff-paste  = !xclip -selection c -o | git apply -3
+
+[init]
+	defaultBranch = master
 
 [commit]
 	gpgsign = true

@@ -4,7 +4,7 @@
   bg:                 #1d202170;
   bg-normal:          #1d202170;
   bg-selected:        #504945;
-  font:               "mono 9";
+  font:               "mono 12";
 }
 
 window {

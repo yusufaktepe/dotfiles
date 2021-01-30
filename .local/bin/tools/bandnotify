@@ -1,0 +1,8 @@
+#!/bin/sh
+
+rx=$(numfmt --to=iec-i --suffix=B --padding=7 </sys/class/net/wlp3s0/statistics/rx_bytes)
+tx=$(numfmt --to=iec-i --suffix=B --padding=7 </sys/class/net/wlp3s0/statistics/tx_bytes)
+
+dunstify -a system -t 7000 -r 1001 -i network "Network Usage" \
+	"<b>Total Rx: </b>$rx\n<b>Total Tx: </b>$tx"
+

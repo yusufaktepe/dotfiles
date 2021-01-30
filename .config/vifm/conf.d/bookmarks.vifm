@@ -4,10 +4,13 @@
 map b/ :cd /<cr>
 map bE :cd /etc<cr>
 map bU :cd /usr<cr>
+map bT :cd /tmp<cr>
 map bM :cd /media<cr>
-map bD :cd /data<cr>
-map bP :cd /data/backup/makepkg<cr>
-map bS :cd /data/shared<cr>
+map bD :cd ~/data<cr>
+map bP :cd ~/.local/share/pacman<cr>
+map bS :cd ~/shared<cr>
+map b1 :goto ~/.config/vifm/mount/tp.ssh | normal l<cr>
+map b2 :goto ~/.config/vifm/mount/sam.ssh | normal l<cr>
 
 map bh :cd ~/<cr>
 map bc :cd ~/.config<cr>
@@ -17,13 +20,13 @@ map bw :cd ~/downloads/default<cr>
 map bd :cd ~/documents<cr>
 map bp :cd ~/pictures<cr>
 map bm :cd ~/music<cr>
+map bn :cd ~/notes<cr>
 map bv :cd ~/videos/mov<cr>
 map bt :cd ~/videos/tv<cr>
 map brr :cd ~/repos<cr>
-map bra :cd ~/repos/aur<cr>
+map bra :cd ~/repos/pkgbuilds<cr>
 map brd :cd ~/repos/dots<cr>
 map brh :cd ~/repos/site<cr>
-map brn :cd ~/repos/notes<cr>
 map brp :cd ~/repos/programs<cr>
 map brs :cd ~/repos/scripts<cr>
 map brw :cd ~/repos/web<cr>
@@ -32,10 +35,11 @@ map brw :cd ~/repos/web<cr>
 map B/  :winrun , cd /<cr>
 map BE  :winrun , cd /etc<cr>
 map BU  :winrun , cd /usr<cr>
+map BT  :winrun , cd /tmp<cr>
 map BM  :winrun , cd /media<cr>
-map BD  :winrun , cd /data<cr>
-map BP  :winrun , cd /data/backup/makepkg<cr>
-map BS  :winrun , cd /data/shared<cr>
+map BD  :winrun , cd ~/data<cr>
+map BP  :winrun , cd ~/.local/share/pacman<cr>
+map BS  :winrun , cd ~/shared<cr>
 
 map Bh  :winrun , cd ~/<cr>
 map Bc  :winrun , cd ~/.config<cr>
@@ -48,10 +52,10 @@ map Bm  :winrun , cd ~/music<cr>
 map Bv  :winrun , cd ~/videos/mov<cr>
 map Bt  :winrun , cd ~/videos/tv<cr>
 map Brr :winrun , cd ~/repos<cr>
-map Bra :winrun , cd ~/repos/aur<cr>
+map Bra :winrun , cd ~/repos/pkgbuilds<cr>
 map Brd :winrun , cd ~/repos/dots<cr>
 map Brh :winrun , cd ~/repos/site<cr>
-map Brn :winrun , cd ~/repos/notes<cr>
+map Brn :winrun , cd ~/notes<cr>
 map Brp :winrun , cd ~/repos/programs<cr>
 map Brs :winrun , cd ~/repos/scripts<cr>
 map Brw :winrun , cd ~/repos/web<cr>

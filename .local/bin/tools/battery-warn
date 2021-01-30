@@ -1,0 +1,28 @@
+#!/bin/sh
+# Notify me if my battery is below $BAT_WARN.
+# Enable the timer with:
+#   $ systemctl --user start battery-check.timer
+# See also: ~/.config/systemd/user/battery-check.timer
+
+BAT=BAT0
+BAT_WARN_LOW=20
+BAT_WARN_CRITICAL=10
+
+read BAT_STATUS </sys/class/power_supply/$BAT/status
+case $BAT_STATUS in
+	Charging|Unknown|"Not charging")
+		exit
+	;;
+	Discharging|*)
+		read BAT_CAP < /sys/class/power_supply/$BAT/capacity
+		if [ "$BAT_CAP" -lt $BAT_WARN_CRITICAL ]; then
+			notify-send -a system -u critical -i battery-empty \
+				"Battery status" "Battery level is <b>CRITICAL</b> at <b>$BAT_CAP%</b>"
+		elif [ "$BAT_CAP" -lt $BAT_WARN_LOW ]; then
+			notify-send -a system -u normal -i battery-caution \
+				"Battery status" "Battery level is getting low at <b>$BAT_CAP%</b>"
+		else
+			exit 0
+		fi
+	;;
+esac
