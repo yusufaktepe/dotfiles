@@ -95,7 +95,7 @@ cursor-scroll = ns-resize
 [module/player]
 type = custom/script
 exec = $XDG_CONFIG_HOME/polybar/modules/polyplayer
-exec-if = pidof mpd || pidof spotify
+exec-if = pidof mpd || pidof spotify || pidof spotifyd
 tail = true
 ; label = %output:0:47:...%
 
@@ -120,7 +120,7 @@ format-background = ${colors.background-alt}
 format-underline = ${colors.darkblue}
 format-padding = ${bar/default.module-padding}
 
-click-left = dunstify -a system -t 7000 -r 1001 -i network "Network Usage" "<b>Total Rx: </b>$(numfmt --to=iec-i --suffix=B --padding=7 < /sys/class/net/wlp3s0/statistics/rx_bytes)\n<b>Total Tx: </b>$(numfmt --to=iec-i --suffix=B --padding=7 < /sys/class/net/wlp3s0/statistics/tx_bytes)" &
+click-left = bandnotify &
 click-right = $TERMINS _Blockterm -e bandwhich &
 ; click-middle = toggle net wifi
 
@@ -130,7 +130,7 @@ hook-0 = $XDG_CONFIG_HOME/i3blocks/blocks/brightness
 hook-1 = light -G | sed 's/\.[0-9]*//'
 initial = 1
 
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.icon}
 format-background = ${colors.background-alt}
 ; format-foreground = ${colors.lightgray}
@@ -156,6 +156,7 @@ format-background = ${colors.background-alt}
 format-padding = ${bar/default.module-padding}
 
 click-left = [ "$(pidof gsimplecal)" ] && pkill gsimplecal || gsimplecal &
+click-right = xdg-open https://calendar.google.com &
 
 [module/weather]
 type = custom/script

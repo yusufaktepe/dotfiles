@@ -12,13 +12,13 @@
     "blocklist-url": "",
     "cache-size-mb": 4,
     "dht-enabled": true,
-    "download-dir": "/data/downloads/torrents",
+    "download-dir": "~/downloads/torrents",
     "download-queue-enabled": true,
     "download-queue-size": 5,
     "encryption": 1,
     "idle-seeding-limit": 30,
     "idle-seeding-limit-enabled": false,
-    "incomplete-dir": "/data/downloads/torrents",
+    "incomplete-dir": "~/downloads/torrents",
     "incomplete-dir-enabled": false,
     "lpd-enabled": false,
     "message-level": 2,
@@ -65,6 +65,6 @@
     "umask": 18,
     "upload-slots-per-torrent": 14,
     "utp-enabled": true,
-    "watch-dir": "/data/downloads/default",
+    "watch-dir": "~/downloads/default",
     "watch-dir-enabled": false
 }

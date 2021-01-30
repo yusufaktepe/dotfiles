@@ -98,9 +98,9 @@ bindsym $mod+F12 exec $N $TERMINS _blockterm -e nmtui-connect
 bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 
 ## System Monitor
-bindsym XF86Launch1 exec $N $TERMINS _blockterm -e htop
-bindsym $mod+XF86Launch1 exec $N $TERMINS _blockterm -e sh -c "sudo -A ps_mem | less -RS +G"
-bindsym $caps+F1 exec $N $TERMINS _blockterm -e ncdu --color dark ~/
+bindsym $caps+F1 exec $N $TERMINS _blockterm -e htop
+bindsym $caps+F2 exec $N $TERMINS _blockterm -e sh -c "sudo -A ps_mem | less -RS +G"
+bindsym $caps+F3 exec $N $TERMINS _blockterm -e ncdu --color dark --exclude vifm/fuse ~/
 
 ## Function Buttons
 bindsym XF86MonBrightnessUp exec $N brightness inc 5
@@ -111,8 +111,9 @@ bindsym --release $mod+XF86MonBrightnessDown exec $N sleep 1 && xset dpms force 
 bindsym XF86TouchpadOff exec $N toggle touchpad
 bindsym XF86TouchpadOn exec $N toggle touchpad
 
-bindsym XF86Launch3 exec $N dmenumount
-bindsym Shift+XF86Launch3 exec $N dmenuumount
+bindsym $mod+F9 exec $N dmenumount
+bindsym $mod+Shift+F9 exec $N dmenuumount
+bindsym $mod+F10 exec $N toggle webcam
 
 ## Audio/Media Control
 bindsym XF86AudioMute        exec $N vol toggle
@@ -172,7 +173,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+g split h; exec notify-send -a system -i window -t 1000 'tile horizontally'
+bindsym $mod+n split h; exec notify-send -a system -i window -t 1000 'tile horizontally'
 bindsym $mod+v split v; exec notify-send -a system -i window -t 1000 'tile vertically'
 bindsym $mod+t split toggle
 
@@ -212,11 +213,12 @@ bindsym $mod+Shift+gbreve [class="^(?i)(?!Alacritty|St|smplayer|mpv)"] scratchpa
 bindsym $mod+Shift+b floating toggle; sticky toggle; exec $N hover left
 bindsym $mod+Shift+n floating toggle; sticky toggle; exec $N hover right
 
-# Resize with script
-bindsym $mod+Shift+y exec $N i3resize left
-bindsym $mod+Shift+u exec $N i3resize down
-bindsym $mod+Shift+idotless exec $N i3resize up
-bindsym $mod+Shift+o exec $N i3resize right
+# Resize
+set $distance 10 px or 10 ppt
+bindsym $mod+Shift+y resize shrink right $distance
+bindsym $mod+Shift+u resize shrink up $distance
+bindsym $mod+Shift+idotless resize grow up $distance
+bindsym $mod+Shift+o resize grow right $distance
 
 # Maximize a floating window
 set $floatmax xdotool getactivewindow windowsize $(xdpyinfo | awk '/dimensions:/ {print $2}' | tr x ' ') windowmove 0 0
@@ -326,7 +328,7 @@ for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordm
 for_window [class="Catfish|flameshot|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|Yad"] floating enable
 for_window [class="Lxappearance|qt5ct|Lightdm-settings|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
 for_window [class="(?i)megasync" window_type=normal title="^(?!Stream*|Transfer*)"] floating enable, move position +964+20
-for_window [class="(?i)telegram"] floating enable sticky enable, resize set 800 480, move position center
+# for_window [class="(?i)telegram"] floating enable sticky enable, resize set 800 480, move position center
 for_window [class="(?i)pavucontrol"] floating enable, resize set 502 402, move position +864+20
 for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
 for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
@@ -339,7 +341,6 @@ for_window [instance="Places" class="firefox"] floating enable border normal, re
 for_window [instance="Browser|Update" class="firefox|Tor Browser"] floating enable border normal
 # for_window [instance="(?i)crx_" class="(?i)Vivaldi|-chrome"] floating enable sticky enable
 for_window [class="Crow Translate"] floating enable sticky enable, resize set 650 290, move position +716+20
-for_window [class="Sunflower" title="(?i)Viewer"] floating enable
 for_window [class="(?i)gsimplecal"] floating enable, move position +1149+20
 #_ Dialogs
 for_window [window_role="GtkFileChooserDialog"] resize set 800 665, move position center
@@ -359,8 +360,8 @@ for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating
 for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 800 600, move position center
 for_window [instance="dc-term-bttns"] floating enable, resize set 800 500, move position center
 #_ Bindings to make the webcam float and stick.
-for_window [instance="mpvfloat"] border pixel 0, resize set 408 306, move position +958+462
-no_focus [instance="mpvfloat"]
+for_window [instance="webcam"] border pixel 0
+no_focus [instance="webcam"]
 #_ General dropdown window traits. The order can matter.
 for_window [instance="dropdown_*"] floating enable, move scratchpad, sticky enable, scratchpad show
 for_window [instance="dropdown_tmuxi"] border pixel 3, resize set 625 450
@@ -552,7 +553,7 @@ bindsym $caps+Escape mode "$mode_system"
 set $mode_system l:🔒 e:👥 s:🌙 h:💽 r:🔄 S:❎
 mode "$mode_system" {
 	bindsym l exec $N "smc pauseall; lockscreen"; exec $N "sleep 0.5 && xset dpms force off", mode default
-	bindsym s exec $N "smc pauseall; systemctl suspend", mode default
+	bindsym s exec $N "smc pauseall; systemctl suspend-then-hibernate", mode default
 	bindsym h exec $N "smc pauseall; systemctl hibernate", mode default
 	bindsym e exec $N i3-msg exit, mode default
 	bindsym r exec $N systemctl reboot, mode default
