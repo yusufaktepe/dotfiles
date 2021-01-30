@@ -14,10 +14,14 @@ case $1 in
 		if [ "$CURRENT_PROFILE" = "analog-output-speaker" ]; then
 			pactl set-sink-port "$SINK" "analog-output-headphones"
 			pidof i3blocks >/dev/null && pkill -SIGRTMIN+10 i3blocks
+			# [ -e /sys/class/leds/platform::micmute/brightness ] &&
+			# 	echo 0 > /sys/class/leds/platform::micmute/brightness
 			ns -i audio-headphones "PulseAudio" "<b>Headphone</b> Activated."
 		else
 			pactl set-sink-port "$SINK" "analog-output-speaker"
 			pidof i3blocks >/dev/null && pkill -SIGRTMIN+10 i3blocks
+			# [ -e /sys/class/leds/platform::micmute/brightness ] &&
+			# 	echo 1 > /sys/class/leds/platform::micmute/brightness
 			ns -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
 		fi
 	;;
@@ -83,8 +87,14 @@ case $1 in
 			ns -i transmission "Transmission" "Daemon started."
 		fi
 	;;
+	webcam)
+		pkill -f /dev/video ||
+			mpv --no-cache --no-osc --no-input-default-bindings \
+				--profile=low-latency --input-conf=/dev/null \
+				--x11-name=webcam --geometry=-0-0 --autofit=30% /dev/video0
+	;;
 	$NULL|*)
 		printf "Options:\n\taudio\n\tnet {w|wifi|NULL}\n\tredshift
-			\r\tstimeout\n\tsyncthing\n\ttouchpad\n\ttransmission|td\n"
+			\r\tstimeout\n\tsyncthing\n\ttouchpad\n\ttransmission|td\n\twebcam\n"
 	;;
 esac

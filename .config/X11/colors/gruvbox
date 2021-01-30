@@ -40,4 +40,5 @@
 ! Sxiv.foreground: #D2D2D2
 Sxiv.bar_background: #282828
 Sxiv.bar_foreground: #ebdbb2
+! Sxiv.font: mono:pixelsize=14:antialias=true:autohint=true
 

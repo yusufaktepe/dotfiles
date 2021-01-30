@@ -15,21 +15,21 @@ case "$1" in
 		if pidof mpd >/dev/null; then
 			mpc prev && update_bar
 		else
-			playerctl previous && update_bar
+			playerctl --ignore-player=smplayer previous && update_bar
 		fi
 	;;
 	next|n)
 		if pidof mpd >/dev/null; then
 			mpc next && update_bar
 		else
-			playerctl next && update_bar
+			playerctl --ignore-player=smplayer next && update_bar
 		fi
 	;;
 	toggle|t)
 		if pidof mpd >/dev/null; then
 			mpc toggle && update_bar
 		else
-			playerctl play-pause && update_bar
+			playerctl --ignore-player=smplayer play-pause && update_bar
 		fi
 	;;
 	pauseall|pa)

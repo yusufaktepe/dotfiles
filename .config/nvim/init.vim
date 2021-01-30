@@ -424,7 +424,7 @@ let g:mkdp_refresh_slow = 1
 nmap <leader>mp <Plug>MarkdownPreviewToggle
 
 "=== Gist-Vim
-let g:gist_token_file = '/data/backup/secrets/gist_token'
+let g:gist_token_file = '~/data/secrets/gist_token'
 let g:gist_post_private = 1
 
 "=== Goyo plugin makes text more readable when writing prose:
@@ -462,7 +462,7 @@ let g:vimwiki_ext2syntax = {
 	\ '.markdown': 'markdown', '.mdown': 'markdown'
 	\ }
 let g:vimwiki_list = [
-	\ {'path': '~/repos/notes', 'syntax': 'markdown', 'ext': '.md'}
+	\ {'path': '~/notes', 'syntax': 'markdown', 'ext': '.md'}
 	\ ]
 
 "=== VCoolor
@@ -543,6 +543,9 @@ command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 "=====================================================================
 
 augroup vimrc
+	" Suppress readonly warning
+	au BufEnter /etc/*,/usr/* set noro
+
 	" Ensure files are read as what I want:
 	au BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
 	au BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
