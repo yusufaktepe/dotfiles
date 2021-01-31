@@ -1,13 +1,13 @@
 /* global settings and color variables */
 * {
-  main:               #689d6a;
-  highlight:          bold #689d6a;
-  urgent:             #fb4934;
+  main:               #406769;
+  highlight:          bold #D65D0E;
+  urgent:             #D79921;
 
   fg:                 #ebdbb2;
   bg:                 #1d2021;
   bg-normal:          #282828;
-  bg-selected:        #32302f;
+  bg-selected:        #406769;
   darkgray:           #a89984;
   scrollbarcolor:     #505050;
   font:               "mono 10";
@@ -129,7 +129,7 @@ inputbar {
 prompt {
   padding:            6px 14px;
   background-color:   @main;
-  text-color:         @bg;
+  text-color:         @fg;
 }
 
 entry {

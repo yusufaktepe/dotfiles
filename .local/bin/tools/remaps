@@ -4,7 +4,7 @@
 setxkbmap -option caps:none
 setxkbmap -option 'shift:both_capslock_cancel'
 
-setxkbmap -layout tr,us -option grp:alt_shift_toggle
+setxkbmap -layout tr,us -option grp:ctrls_toggle
 
 # map Caps_Lock to Hyper_L
 xmodmap -e 'clear lock' -e 'remove mod4 = Hyper_L' \
