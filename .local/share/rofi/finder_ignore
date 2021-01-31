@@ -23,6 +23,7 @@
 	|nvim/plugged
 	|pulse
 	|opera
+	|Signal
 	|spotify
 	|syncthing
 	|VirtualBox
@@ -30,7 +31,7 @@
 	)|
 .local/lib/
 	(node_modules
-	|go/src
+	|go
 	|cargo
 	|python*
 	|rustup
@@ -50,12 +51,15 @@
 	|meld
 	|newsboat
 	|nvim
+	|pacman
 	|pass*
 	|qalc*
+	|qBittorrent
 	|syncthing
 	|terminfo
 	|Telegram*
 	|Trash
+	|vifm
 	|vlc
 	|xorg
 	|zathura
@@ -68,10 +72,10 @@
 /data/backup/
 	(clonezilla
 	|dotfiles
-	|makepkg
+	|pacman
 	)|
 /data/downloads/
 	(isos
 	|torrents
 	)|
-\.git|.Trash*|lost\+found
+\.git|.Trash*|lost\+found|node_modules
