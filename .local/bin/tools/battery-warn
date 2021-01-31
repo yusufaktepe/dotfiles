@@ -16,10 +16,10 @@ case $BAT_STATUS in
 	Discharging|*)
 		read BAT_CAP < /sys/class/power_supply/$BAT/capacity
 		if [ "$BAT_CAP" -lt $BAT_WARN_CRITICAL ]; then
-			notify-send -a system -u critical -i battery-empty \
+			dunstify -r 1002 -a system -u critical -i battery-empty \
 				"Battery status" "Battery level is <b>CRITICAL</b> at <b>$BAT_CAP%</b>"
 		elif [ "$BAT_CAP" -lt $BAT_WARN_LOW ]; then
-			notify-send -a system -u normal -i battery-caution \
+			dunstify -r 1002 -a system -u normal -i battery-caution \
 				"Battery status" "Battery level is getting low at <b>$BAT_CAP%</b>"
 		else
 			exit 0
