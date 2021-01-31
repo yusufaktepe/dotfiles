@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="0.9.8 beta">
+<doublecmd DCVersion="0.9.10 beta">
   <Hotkeys Version="46">
     <Form Name="Main">
       <Hotkey>
@@ -423,6 +423,10 @@
         <Shortcut>Shift+Alt+P</Shortcut>
         <Command>cm_ExecuteToolbarItem</Command>
         <Param>ToolItemID={48AF1F97-F2C3-4EEE-BACE-B2A6D2755463}</Param>
+      </Hotkey>
+      <Hotkey>
+        <Shortcut>Alt+M</Shortcut>
+        <Command>cm_ShowMainMenu</Command>
       </Hotkey>
       <Hotkey>
         <Shortcut>Del</Shortcut>

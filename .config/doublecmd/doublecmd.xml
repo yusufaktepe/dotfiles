@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<doublecmd DCVersion="0.9.9 beta" ConfigVersion="10">
+<doublecmd DCVersion="0.9.10 beta" ConfigVersion="10">
   <Configuration Save="True" SortOrder="0" TreeType="0">
     <UseConfigInProgramDir>False</UseConfigInProgramDir>
     <FolderTabs Save="True"/>
@@ -309,7 +309,7 @@
           <Icon>diffuse</Icon>
           <Hint>VimDiff</Hint>
           <Command>term</Command>
-          <Params>-d 151 40 -e nvim -d %pb</Params>
+          <Params>-e nvim -d %pb</Params>
         </Program>
         <Separator/>
         <Command>
@@ -389,9 +389,9 @@
       <Maximized>False</Maximized>
       <Splitter>50</Splitter>
       <Left>0</Left>
-      <Top>38</Top>
-      <Width>1366</Width>
-      <Height>730</Height>
+      <Top>48</Top>
+      <Width>1920</Width>
+      <Height>1032</Height>
       <PixelsPerInch>96</PixelsPerInch>
     </Position>
   </MainWindow>
@@ -470,19 +470,19 @@
   <Fonts>
     <Main>
       <Name>sans</Name>
-      <Size>10</Size>
+      <Size>12</Size>
       <Style>0</Style>
       <Quality>0</Quality>
     </Main>
     <Editor>
       <Name>mono</Name>
-      <Size>10</Size>
+      <Size>12</Size>
       <Style>0</Style>
       <Quality>0</Quality>
     </Editor>
     <Viewer>
       <Name>mono</Name>
-      <Size>8</Size>
+      <Size>12</Size>
       <Style>0</Style>
       <Quality>0</Quality>
     </Viewer>
@@ -506,7 +506,7 @@
     </SearchResults>
     <PathEdit>
       <Name>mono</Name>
-      <Size>8</Size>
+      <Size>10</Size>
       <Style>0</Style>
       <Quality>0</Quality>
     </PathEdit>
@@ -524,7 +524,7 @@
     </Log>
     <ViewerBook>
       <Name>sans</Name>
-      <Size>10</Size>
+      <Size>12</Size>
       <Style>0</Style>
       <Quality>0</Quality>
     </ViewerBook>
@@ -738,40 +738,41 @@
     <HotDir Name=".local/bin" Path="$HOME/.local/bin" PathSort="1"/>
     <HotDir Name=".local/share" Path="$HOME/.local/share" PathSort="7"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="data" Path="/data" PathSort="1"/>
-    <HotDir Name="documents" Path="/data/documents" PathSort="1"/>
+    <HotDir Name="data" Path="~/data" PathSort="1"/>
+    <HotDir Name="documents" Path="~/documents" PathSort="1"/>
     <HotDir Name="-downloads" Path=""/>
-    <HotDir Name="./" Path="/data/downloads" PathSort="1"/>
-    <HotDir Name="default" Path="/data/downloads/default" PathSort="7"/>
-    <HotDir Name="torrents" Path="/data/downloads/torrents" PathSort="7"/>
-    <HotDir Name="isos" Path="/data/downloads/isos" PathSort="1"/>
+    <HotDir Name="./" Path="~/downloads" PathSort="1"/>
+    <HotDir Name="default" Path="~/downloads/default" PathSort="7"/>
+    <HotDir Name="torrents" Path="~/downloads/torrents" PathSort="7"/>
+    <HotDir Name="isos" Path="~/downloads/isos" PathSort="1"/>
     <HotDir Name="--" Path=""/>
     <HotDir Name="-music" Path=""/>
-    <HotDir Name="./" Path="/data/music" PathSort="1"/>
-    <HotDir Name="staging" Path="/data/music/_staging" PathSort="1"/>
-    <HotDir Name="mscroot" Path="/data/music/mscroot" PathSort="1"/>
-    <HotDir Name="del" Path="/data/music/del" PathSort="1"/>
+    <HotDir Name="./" Path="~/music" PathSort="1"/>
+    <HotDir Name="staging" Path="~/_staging" PathSort="1"/>
+    <HotDir Name="mscroot" Path="~/mscroot" PathSort="1"/>
+    <HotDir Name="del" Path="~/music/del" PathSort="1"/>
     <HotDir Name="--" Path=""/>
     <HotDir Name="-pictures" Path=""/>
-    <HotDir Name="./" Path="/data/pictures" PathSort="1"/>
-    <HotDir Name="screenshots" Path="/data/pictures/screenshots" PathSort="7"/>
-    <HotDir Name="wallpapers" Path="/data/pictures/wallpapers" PathSort="7"/>
+    <HotDir Name="./" Path="~/pictures" PathSort="1"/>
+    <HotDir Name="screenshots" Path="~/pictures/screenshots" PathSort="7"/>
+    <HotDir Name="wallpapers" Path="~/pictures/wallpapers" PathSort="7"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="mov" Path="/data/videos/mov" PathSort="7"/>
-    <HotDir Name="tv" Path="/data/videos/tv" PathSort="1"/>
-    <HotDir Name="repos" Path="/data/repos" PathSort="1"/>
-    <HotDir Name="site" Path="/data/repos/site"/>
+    <HotDir Name="mov" Path="~/videos/mov" PathSort="7"/>
+    <HotDir Name="tv" Path="~/videos/tv" PathSort="1"/>
+    <HotDir Name="repos" Path="~/repos" PathSort="1"/>
+    <HotDir Name="site" Path="~/repos/site"/>
     <HotDir Name="-shared" Path=""/>
-    <HotDir Name="./" Path="/data/shared"/>
-    <HotDir Name="gdrive" Path="/data/shared/gdrive"/>
-    <HotDir Name="mega" Path="/data/shared/mega"/>
-    <HotDir Name="syncthing" Path="/data/shared/syncthing"/>
+    <HotDir Name="./" Path="~/shared"/>
+    <HotDir Name="gdrive" Path="~/shared/gdrive"/>
+    <HotDir Name="mega" Path="~/shared/mega"/>
+    <HotDir Name="syncthing" Path="~/shared/syncthing"/>
     <HotDir Name="kbfs" Path="/run/user/1000/keybase/kbfs"/>
-    <HotDir Name="gcloud (sftp)" Path="sftp://yusuf@34.82.93.240/home/yusuf"/>
+    <HotDir Name="sam (sftp)" Path="sftp://yusuf@2.0.0.10/home/yusuf"/>
+    <HotDir Name="tp (sftp)" Path="sftp://yusuf@2.0.0.11/home/yusuf"/>
     <HotDir Name="--" Path=""/>
-    <HotDir Name="files" Path="/data/files" PathSort="1"/>
-    <HotDir Name="backup" Path="/data/backup" PathSort="1"/>
-    <HotDir Name="settings" Path="/data/backup/settings" PathSort="1"/>
+    <HotDir Name="files" Path="~/data/files" PathSort="1"/>
+    <HotDir Name="backup" Path="~/data/backup" PathSort="1"/>
+    <HotDir Name="settings" Path="~/backup/settings" PathSort="1"/>
   </DirectoryHotList>
   <Viewer>
     <PreviewVisible>False</PreviewVisible>
