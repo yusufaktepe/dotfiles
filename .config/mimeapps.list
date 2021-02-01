@@ -25,8 +25,8 @@ application/xml=nvim.desktop
 application/pdf=org.pwmt.zathura.desktop
 application/rss+xml=rss.desktop
 application/vnd.rar=engrampa.desktop
-x-scheme-handler/magnet=org.qbittorrent.qBittorrent.desktop
-application/x-bittorrent=org.qbittorrent.qBittorrent.desktop
+x-scheme-handler/magnet=qbt-add.desktop
+application/x-bittorrent=qbt-add.desktop
 x-scheme-handler/mailto=mailto.desktop
 
 [Added Associations]

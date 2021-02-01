@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Categories=Network;FileTransfer;P2P;Qt;
+Name=qbt-add
+GenericName=Command line interface for qBittorrent
+Exec=qbt-add %U
+MimeType=application/x-bittorrent;x-scheme-handler/magnet;
+Icon=qbittorrent
+StartupNotify=false
+Keywords=bittorrent;torrent;magnet;download;p2p;
+NoDisplay=true
