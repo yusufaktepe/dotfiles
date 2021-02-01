@@ -105,8 +105,8 @@ bindsym $caps+F2 exec $N $TERMINS _blockterm -e sh -c "sudo -A ps_mem | less -RS
 bindsym $caps+F3 exec $N $TERMINS _blockterm -e ncdu --color dark --exclude vifm/fuse ~/
 
 ## Function Buttons
-bindsym XF86MonBrightnessUp exec $N brightness inc 5
-bindsym XF86MonBrightnessDown exec $N brightness dec 5
+bindsym XF86MonBrightnessUp exec $N brightness inc 2.90
+bindsym XF86MonBrightnessDown exec $N brightness dec 2.90
 # bindsym --release $mod+XF86MonBrightnessDown exec $N sleep 1 && xset dpms force off
 
 # bindsym XF86Display exec $N ifwin -e arandr --toggle
@@ -356,7 +356,7 @@ for_window [class="Dragon-drag-and-drop"] sticky enable
 for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, move position center
 #_ Floating instances
 for_window [instance="_blockterm"] floating enable border pixel 2
-for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1600 960, move position center
+for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1920 1056, move position center
 for_window [instance="floating"] floating enable, move position mouse
 #_ Doublecmd
 for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center

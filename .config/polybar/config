@@ -121,7 +121,7 @@ format-underline = ${colors.darkblue}
 format-padding = ${bar/default.module-padding}
 
 click-left = bandnotify &
-click-right = $TERMINS _Blockterm -e bandwhich &
+click-right = pkill bandwhich || $TERMINS _Blockterm -e bandwhich &
 ; click-middle = toggle net wifi
 
 [module/brightness]
@@ -544,8 +544,8 @@ ramp-volume-foreground = ${colors.icon}
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 45
-poll-interval = 30
+full-at = 40
+poll-interval = 60
 
 label-discharging = %percentage%%
 ; label-discharging = %percentage%% (%time:0:5%)

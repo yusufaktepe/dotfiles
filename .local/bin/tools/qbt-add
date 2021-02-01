@@ -1,0 +1,37 @@
+#!/bin/sh
+
+remote=2.0.0.10
+port=8080
+user=yusuf
+uid=1000
+
+[ -z "$1" ] && { printf 'No file/url specified!\n'; exit 1 ;}
+
+ping -q -W .5 -c 1 $remote >/dev/null || {
+	if [ -n "$DISPLAY" ]; then
+		notify-send -i qbittorrent "qBittorrent" "$remote is <b>down!</b>"
+	else
+		printf '%s\n' "$remote is down!"
+	fi
+	exit 1
+}
+
+torrent_add() {
+	[ -f "$1" ] && FileOrUrl="file" || FileOrUrl="url"
+	qbt torrent add $FileOrUrl "$@" --paused --url http://$remote:$port
+}
+
+check=$(curl -s -w "%{http_code}\n" -L "$remote:$port" -o /dev/null)
+
+if [ "$check" -eq 200 ] || [ "$check" -eq 403 ]; then
+	torrent_add "$@"
+else
+	ssh -f $user@$remote "\
+		export XAUTHORITY=/run/user/$uid/Xauthority
+		export DISPLAY=:0
+		export QT_QPA_PLATFORMTHEME=qt5ct
+		setsid -f qbittorrent"
+
+	torrent_add "$@"
+fi
+

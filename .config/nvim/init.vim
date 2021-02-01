@@ -424,7 +424,7 @@ let g:mkdp_refresh_slow = 1
 nmap <leader>mp <Plug>MarkdownPreviewToggle
 
 "=== Gist-Vim
-let g:gist_token_file = '~/data/secrets/gist_token'
+let g:gist_token_file = '~/data/backup/secrets/gist_token'
 let g:gist_post_private = 1
 
 "=== Goyo plugin makes text more readable when writing prose:
