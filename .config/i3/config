@@ -353,7 +353,7 @@ for_window [class="Dragon-drag-and-drop"] sticky enable
 for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 800 725, move position center
 #_ Floating instances
 for_window [instance="_blockterm"] floating enable border pixel 2
-for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1135 706, move position center
+for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1366 748, move position center
 for_window [instance="floating"] floating enable, move position mouse
 #_ Doublecmd
 for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center
