@@ -9,7 +9,7 @@ lock=$XDG_DATA_HOME/backgrounds/lock.png
 	# resize
 	res=$(xdpyinfo | awk '/dimensions:/ {print $2}')
 	[ "$(identify -format "%wx%h" "$1")" != "$res" ] &&
-		convert "$wall" -resize "$res"\! "$wall"
+		convert "$wall" -resize "$res"\>\! "$wall"
 
 	# dim for lockscreen
 	convert "$wall" -fill black -colorize 40% "$lock"
