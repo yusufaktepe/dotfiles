@@ -13,7 +13,7 @@ font:
   normal:
     family: alacritty
 
-  size: 10.0
+  size: 9.0
 
   offset:
     x: 0

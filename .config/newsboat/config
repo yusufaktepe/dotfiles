@@ -13,7 +13,7 @@ datetime-format "%Y-%m-%d"
 feed-sort-order firsttag title
 text-width 80
 goto-next-feed no
-scrolloff 3
+scrolloff 5
 
 ## Dialog Titles
 feedlist-title-format "%N: (%u) Feeds"

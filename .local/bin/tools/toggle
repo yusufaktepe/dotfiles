@@ -4,7 +4,7 @@
 # 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
 # https://github.com/yusufaktepe/dotfiles
 
-ns() { notify-send -a toggle "$@" ;}
+ns() { dunstify -r 1003 -a toggle "$@" ;}
 
 case $1 in
 	audio)
@@ -16,20 +16,20 @@ case $1 in
 			pidof i3blocks >/dev/null && pkill -SIGRTMIN+10 i3blocks
 			# [ -e /sys/class/leds/platform::micmute/brightness ] &&
 			# 	echo 0 > /sys/class/leds/platform::micmute/brightness
-			ns -i audio-headphones "PulseAudio" "<b>Headphone</b> Activated."
+			ns -i audio-headphones "PulseAudio" "<b>Headphone</b> activated."
 		else
 			pactl set-sink-port "$SINK" "analog-output-speaker"
 			pidof i3blocks >/dev/null && pkill -SIGRTMIN+10 i3blocks
 			# [ -e /sys/class/leds/platform::micmute/brightness ] &&
 			# 	echo 1 > /sys/class/leds/platform::micmute/brightness
-			ns -i audio-speakers "PulseAudio" "<b>Speaker</b> Activated."
+			ns -i audio-speakers "PulseAudio" "<b>Speaker</b> activated."
 		fi
 	;;
 	net)
 		case $2 in
 			w|wifi) { [ "$(nmcli radio wifi)" = enabled ] &&
 					nmcli radio wifi off ;} || nmcli radio wifi on ;;
-			$NULL|*) { [ "$(nmcli networking)" = enabled ] &&
+			""|*) { [ "$(nmcli networking)" = enabled ] &&
 					nmcli networking off ;} || nmcli networking on ;;
 		esac
 	;;
@@ -89,11 +89,11 @@ case $1 in
 	;;
 	webcam)
 		pkill -f /dev/video ||
-			mpv --no-cache --no-osc --no-input-default-bindings \
+			mpv --no-config --no-cache --no-osc --no-input-default-bindings \
 				--profile=low-latency --input-conf=/dev/null \
 				--x11-name=webcam --geometry=-0-0 --autofit=30% /dev/video0
 	;;
-	$NULL|*)
+	""|*)
 		printf "Options:\n\taudio\n\tnet {w|wifi|NULL}\n\tredshift
 			\r\tstimeout\n\tsyncthing\n\ttouchpad\n\ttransmission|td\n\twebcam\n"
 	;;

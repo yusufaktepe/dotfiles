@@ -1,4 +1,4 @@
 #!/bin/sh
 
-rofi -dmenu -password -no-fixed-num-lines -p "$(printf '%s' "$1" | sed s/://)"
+rofi -dmenu -password -no-fixed-num-lines -p "${1%:*}"
 
