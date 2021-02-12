@@ -7,7 +7,7 @@ uid=1000
 
 [ -z "$1" ] && { printf 'No file/url specified!\n'; exit 1 ;}
 
-ping -q -W .5 -c 1 $remote >/dev/null || {
+ping -q -c 1 $remote >/dev/null || {
 	if [ -n "$DISPLAY" ]; then
 		notify-send -i qbittorrent "qBittorrent" "$remote is <b>down!</b>"
 	else
@@ -21,9 +21,12 @@ torrent_add() {
 	qbt torrent add $FileOrUrl "$@" --paused --url http://$remote:$port
 }
 
-check=$(curl -s -w "%{http_code}\n" -L "$remote:$port" -o /dev/null)
+check() {
+	status=$(curl -s -w '%{http_code}\n' -L "$remote:$port" -o /dev/null)
+}
 
-if [ "$check" -eq 200 ] || [ "$check" -eq 403 ]; then
+check
+if [ "$status" -eq 200 ] || [ "$status" -eq 403 ]; then
 	torrent_add "$@"
 else
 	ssh -f $user@$remote "\
@@ -32,6 +35,7 @@ else
 		export QT_QPA_PLATFORMTHEME=qt5ct
 		setsid -f qbittorrent"
 
+	until [ "$status" -eq 200 ] || [ "$status" -eq 403 ]; do sleep .5; check; done
 	torrent_add "$@"
 fi
 

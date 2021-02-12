@@ -16,7 +16,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/goyo.vim'
 Plug 'mbbill/undotree'
-Plug 'psliwka/vim-smoothie'
+" Plug 'psliwka/vim-smoothie'
 
 " Editing & Motion
 Plug 'machakann/vim-swap'
@@ -107,7 +107,7 @@ set clipboard=unnamed,unnamedplus
 set hlsearch                  " keep matches highlighted after searching
 set ignorecase                " ignore case when searching
 set smartcase                 " don't ignore case if user types an uppercase letter
-set scrolloff=3               " keep a minimum of 3 lines between cursor and top/bottom of screen
+set scrolloff=5               " keep a minimum of 5 lines between cursor and top/bottom of screen
 set inccommand=nosplit        " when typing a :%s/foo/bar/g command, show live preview
 set title                     " set and update terminal title
 set cursorline                " highlight the current cursor line

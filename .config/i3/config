@@ -73,12 +73,12 @@ bindsym $mod+F2 exec $N ifterm -e vifm
 bindsym $mod+F3 exec $N ifwin -e $BROWSER
 bindsym $mod+F4 exec $N ifwin -e opera
 bindsym $mod+F5 exec $N ifwin -e firefox
-bindsym $mod+F6 exec $N ifwin -e google-chrome-stable
+bindsym $mod+F6 exec $N ifwin -e google-chrome-stable -f "--enable-features=WebUIDarkMode --force-dark-mode"
 bindsym $mod+Shift+F2 exec $N ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 exec $N $BROWSER --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
-bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
+bindsym $mod+Shift+F6 exec $N google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode --incognito
 
 ## Caps+
 bindsym $caps+e exec $N $TERMINAL -e $EDITOR
@@ -107,7 +107,7 @@ bindsym $caps+F3 exec $N $TERMINS _blockterm -e ncdu --color dark --exclude vifm
 ## Function Buttons
 bindsym XF86MonBrightnessUp exec $N brightness inc 2.90
 bindsym XF86MonBrightnessDown exec $N brightness dec 2.90
-# bindsym --release $mod+XF86MonBrightnessDown exec $N sleep 1 && xset dpms force off
+bindsym --release $mod+BackSpace exec $N sleep 1 && xset dpms force off
 
 # bindsym XF86Display exec $N ifwin -e arandr --toggle
 # bindsym XF86TouchpadOff exec $N toggle touchpad
@@ -417,8 +417,9 @@ set_from_resource $darkwhite       color7     #000000
 set_from_resource $white           color15    #000000
 set $transparent #00000000
 
-# Use custom colors for black
+# Use custom colors
 set $black #282828
+set $darkblue #406769
 
 # Theme colors
 #                       BORDER     BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
@@ -604,11 +605,11 @@ mode "$broopen" {
 	bindsym --release F3 exec $N bro-open $BROWSER, mode default
 	bindsym --release F4 exec $N bro-open opera --start-maximized, mode default
 	bindsym --release F5 exec $N bro-open firefox, mode default
-	bindsym --release F6 exec $N bro-open google-chrome-stable, mode default
+	bindsym --release F6 exec $N bro-open google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode, mode default
 	bindsym --release 3 exec $N bro-open $BROWSER --incognito, mode default
 	bindsym --release 4 exec $N bro-open opera -private --start-maximized, mode default
 	bindsym --release 5 exec $N bro-open firefox --private-window, mode default
-	bindsym --release 6 exec $N bro-open google-chrome-stable --incognito, mode default
+	bindsym --release 6 exec $N bro-open google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode --incognito, mode default
 	bindsym --release t exec $N bro-open tor-browser --allow-remote, mode default
 	bindsym --release y exec $N bro-open mpv, mode default
 	bindsym --release c exec $N bro-open mpv -c, mode default
