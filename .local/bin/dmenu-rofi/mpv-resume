@@ -1,12 +1,40 @@
-#!/bin/sh
-# shellcheck disable=SC2046,SC2062
+#!/usr/bin/env bash
+# For this script to work you need to set
+#   `write-filename-in-watch-later-config`
+# option in the mpv.conf and start videos by specifying the full path.
 
-cd ~/.config/mpv/watch_later || return
-[ -n "$(ls ~/.config/mpv/watch_later)" ] || return
+cd ~/.config/mpv/watch_later || exit
 
-w=$(sed -n 's/# //p' $(ls -t) | xargs -rd'\n' -I % basename % | dmenu -i -l 5 -p )
-[ -z "$w" ] && exit
-w=$(grep ./* -e "$(echo "$w" | sed 's|[][]|\\&|g')" | sed 's/.*# //')
+# TODO: Use find with sort?
+# Using `ls -t` instead of globs to sort by modification time
+for HistFile in $(ls -t); do
+	[ -f "$HistFile" ] || break
 
-mpvc "$w"
+	while read -r Line; do
+		if [[ $Line =~ ^\#.* ]]; then
+			read -ra File <<< "$Line"
+			Hist+=("${File[*]:1}") # ${File[1]} doesn't work if file contains spaces
+			break
+		fi
+	done < "$HistFile"
+done
+
+[ -z "$HistFile" ] && exit
+
+while read -r PlayThis; do
+	[ -n "$PlayThis" ] || break
+
+	for HistItem in "${Hist[@]}"; do
+		if [[  $HistItem == *"$PlayThis" ]]; then
+			if [[ -f "$HistItem" || $HistItem =~ ^http.*"$PlayThis" ]]; then
+				mpvc "$HistItem"
+			else
+				find . -type f -exec grep -Fqm 1 "$HistItem" {} \; -delete
+				notify-send -a system -i mpv 'mpv-resume' \
+					'Unable to access file!\nRemoving from <b>watch_later</b>...'
+			fi
+			break
+		fi
+	done
+done < <(printf '%s\n' "${Hist[@]##*/}" | dmenu -i -l 5 -p )
 
