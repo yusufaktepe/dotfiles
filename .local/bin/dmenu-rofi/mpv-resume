@@ -5,19 +5,17 @@
 
 cd ~/.config/mpv/watch_later || exit
 
-# TODO: Use find with sort?
-# Using `ls -t` instead of globs to sort by modification time
-for HistFile in $(ls -t); do
-	[ -f "$HistFile" ] || break
-
-	while read -r Line; do
-		if [[ $Line =~ ^\#.* ]]; then
-			read -ra File <<< "$Line"
-			Hist+=("${File[*]:1}") # ${File[1]} doesn't work if file contains spaces
-			break
-		fi
-	done < "$HistFile"
-done
+while read -ra HistFiles; do
+	for HistFile in ${HistFiles[1]}; do
+		while read -r Line; do
+			if [[ $Line =~ ^\#.* ]]; then
+				read -ra File <<< "$Line"
+				Hist+=("${File[*]:1}") # ${File[1]} doesn't work if file contains spaces
+				break
+			fi
+		done < "$HistFile"
+	done
+done < <(find . -type f -printf "%T+ %P\n" | sort -r)
 
 [ -z "$HistFile" ] && exit
 
