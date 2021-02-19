@@ -1,0 +1,26 @@
+#!/bin/bash
+# shellcheck disable=2034
+
+PROMPT='Session'
+
+kb_bind[1]='l'
+kb_bind[2]='s'
+kb_bind[3]='h'
+kb_bind[4]='e'
+kb_bind[5]='r'
+kb_bind[6]='S'
+
+kb_act[1]="smc pauseall; lockscreen & sleep 0.5 && xset dpms force off"
+kb_act[2]="smc pauseall; systemctl suspend-then-hibernate"
+kb_act[3]="smc pauseall; systemctl hibernate"
+kb_act[4]="i3-msg exit"
+kb_act[5]="systemctl reboot"
+kb_act[6]="systemctl poweroff"
+
+kb_msg[1]='lock'
+kb_msg[2]='suspend'
+kb_msg[3]='hibernate'
+kb_msg[4]='logout'
+kb_msg[5]='reboot'
+kb_msg[6]='shutdown'
+
