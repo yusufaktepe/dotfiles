@@ -45,7 +45,7 @@ Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
-Plug 'deoplete-plugins/deoplete-zsh'
+" Plug 'deoplete-plugins/deoplete-zsh'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -114,7 +114,6 @@ set cursorline                " highlight the current cursor line
 set noshowmode                " disable native mode display (use airline instead)
 set showmatch                 " highlight matching parens/brackets/etc
 set matchtime=2               " show matching parens/brackets for 200ms
-set termguicolors             " enable true color mode for terminals that support it
 set splitbelow splitright     " splits open at the bottom and right
 set foldmethod=marker         " use markers to specify folds
 set foldlevel=1
@@ -122,6 +121,10 @@ set breakindent               " visually indent wrapped line
 set shortmess+=ITc
 set undofile                  " save undo history to a file
 set undodir=~/.cache/vim/undo " set undo directory
+
+" set list
+set listchars=tab:│·,trail:·,nbsp:·
+set listchars+=precedes:‹,extends:›
 
 " Theme
 let g:gruvbox_italic=1
@@ -211,7 +214,7 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 nnoremap <silent> <leader>W :setlocal wrap!<CR>:setlocal wrap?<CR>
 
 " Toggle colorcolumn
-nnoremap <silent> <leader>CC :execute "set cc=" . (&cc == "" ? "80" : "")<CR>
+nnoremap <silent> <leader>CC :execute "set cc=" . (&cc == "" ? "80" : "") \| set list<CR>
 
 " Toggle paste mode
 noremap <silent> <F2> :set paste! nopaste?<CR>
