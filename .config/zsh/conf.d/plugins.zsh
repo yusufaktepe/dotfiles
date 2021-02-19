@@ -7,6 +7,7 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 # zsh-syntax-highlighting: fish-like syntax highlighting
 # !!! needs to be loaded before history-substring-search
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_STYLES[comment]='fg=white,bold'
 
 # zsh-history-substring-search: fish-like history search
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
