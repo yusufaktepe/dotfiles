@@ -562,6 +562,10 @@ augroup vimrc
 	au BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
 	au BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
+	" Indent rules for specific filetypes
+	au FileType text,html,css,scss,javascript.jsx,yaml,toml,xml,markdown,vimwiki
+		\ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
 	" Disable automatic commenting on newline
 	au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
