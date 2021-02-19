@@ -1,0 +1,19 @@
+@import "flat-gruvbox.rasi"
+
+* {
+  border-color: @bg;
+}
+
+mainbox {
+  children: [inputbar, message];
+}
+
+message {
+  padding: 0px;
+}
+
+inputbar {
+  enabled: false;
+}
+
+/* vim:set ts=2 sw=2 et: */

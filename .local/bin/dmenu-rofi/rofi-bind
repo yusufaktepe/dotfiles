@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Rofi binding mode (similar to i3 binding modes)
+
+# Use custom config/theme to disable everything except message
+RofiConfig=$XDG_CONFIG_HOME/rofi/config_bind.rasi
+
+while getopts ":p:f:q" opt; do
+	case $opt in
+		p) PROMPT=$OPTARG ;;
+		f) FILE=$OPTARG ;;
+		q) DISPLAY_MSG=false ;;
+		*) printf '%s\n' "Option does not exist: -$OPTARG"; exit 1 ;;
+	esac
+done
+shift $((OPTIND-1))
+
+declare -a kb_bind kb_act kb_msg
+
+[ -f "$FILE" ] && source "$FILE" || exit
+
+PRMPT="<span background='#406769' foreground='#ebdbb2'> ${PROMPT:-Bind Mode} </span>"
+sB='<span background="#3C3836" foreground="#BDAE93">'
+sE='</span>'
+
+b=0
+until [ $b -eq ${#kb_bind[@]} ]; do
+	for kbind in "${kb_bind[@]}"; do
+		((b++))
+		kbinds+=(-kb-custom-"$b" "$kbind")
+
+		${DISPLAY_MSG:-true} || continue
+
+		# Check if the key is uppercase and distinguish from lowercase
+		[[ $kbind =~ ^[A-Z]$ ]] && kbind="Shift+${kbind,}"
+
+		[ -n "${kb_msg[$b]}" ] && msg+=("$sB $kbind $sE ${kb_msg[$b]} ")
+	done
+done
+
+rofi -dmenu \
+	-mesg "$PRMPT ${msg[*]}" "${kbinds[@]}" \
+	-config "$RofiConfig" >/dev/null 2>&1
+
+case $? in
+	10) eval "${kb_act[1]}"  ;;
+	11) eval "${kb_act[2]}"  ;;
+	12) eval "${kb_act[3]}"  ;;
+	13) eval "${kb_act[4]}"  ;;
+	14) eval "${kb_act[5]}"  ;;
+	15) eval "${kb_act[6]}"  ;;
+	16) eval "${kb_act[7]}"  ;;
+	17) eval "${kb_act[8]}"  ;;
+	18) eval "${kb_act[9]}"  ;;
+	19) eval "${kb_act[10]}" ;;
+	20) eval "${kb_act[11]}" ;;
+	21) eval "${kb_act[12]}" ;;
+	22) eval "${kb_act[13]}" ;;
+	23) eval "${kb_act[14]}" ;;
+	24) eval "${kb_act[15]}" ;;
+	25) eval "${kb_act[16]}" ;;
+	26) eval "${kb_act[17]}" ;;
+	27) eval "${kb_act[18]}" ;;
+	28) eval "${kb_act[19]}" ;;
+esac
+
