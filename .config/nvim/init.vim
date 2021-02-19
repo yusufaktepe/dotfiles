@@ -126,11 +126,14 @@ set undodir=~/.cache/vim/undo " set undo directory
 set listchars=tab:│·,trail:·,nbsp:·
 set listchars+=precedes:‹,extends:›
 
-" Theme
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
-set background=dark
+" Theme -- Do not set in TTY
+if !empty($DISPLAY)
+	set termguicolors
+	let g:gruvbox_italic=1
+	let g:gruvbox_contrast_dark='medium'
+	colorscheme gruvbox
+	set background=dark
+endif
 
 " }}}
 "=====================================================================
