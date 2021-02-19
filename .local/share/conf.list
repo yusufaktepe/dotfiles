@@ -15,8 +15,6 @@ gtk3_settings        ~/.config/gtk-3.0/settings.ini
 i3                   ~/.config/i3/config
 i3blocks             ~/.config/i3blocks/config
 inputrc              ~/.config/bash/inputrc
-lf_scope             ~/.config/lf/scope
-lfrc                 ~/.config/lf/lfrc
 makepkg              ~/.config/pacman/makepkg.conf
 mimeapps             ~/.config/mimeapps.list
 mpd                  ~/.config/mpd/mpd.conf
@@ -32,11 +30,6 @@ pam_environment      ~/.pam_environment
 picom                ~/.config/picom.conf
 polybar              ~/.config/polybar/config
 profile              ~/.profile
-ranger_bookmarks     ~/.config/ranger/bookmarks.conf
-ranger_commands      ~/.config/ranger/commands.py
-ranger_rc            ~/.config/ranger/rc.conf
-ranger_rifle         ~/.config/ranger/rifle.conf
-ranger_scope         ~/.config/ranger/scope.sh
 redshift             ~/.config/redshift/redshift.conf
 rofi                 ~/.config/rofi/config.rasi
 rofi-pass            ~/.config/rofi-pass/config
