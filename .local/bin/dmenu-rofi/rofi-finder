@@ -14,26 +14,16 @@ menu() {
 	sB='<span background="#3C3836" foreground="#BDAE93">'
 	sE='</span>'
 	kb1='Alt+Return: Open parent dir'
-	kb2='Alt+r: Update'
+	kb2='Alt+s: Toggle sys/user'
 	kb3='Alt+e: Edit ignore list'
-	kb4='Alt+s: Toggle sys/user'
+	kb4='Alt+r: Update'
 
 	rofi -dmenu -i -width 60 -p  \
 		-mesg "$sB $kb1 $sE $sB $kb2 $sE $sB $kb3 $sE $sB $kb4 $sE" \
 		-kb-custom-1 'Alt+Return' \
-		-kb-custom-2 'Alt+r' \
+		-kb-custom-2 'Alt+s' \
 		-kb-custom-3 'Alt+e' \
-		-kb-custom-4 'Alt+s'
-}
-
-ret_handler() {
-	case $ret in
-		10) xdg-open "${choise%/*}" >/dev/null 2>&1 & ;;
-		11) sudo -A updatedb && rm "$tmp" && mklist && exec "$0" ;;
-		12) setsid -f "$TERMINAL" -e "$EDITOR" "$ignore" ;;
-		13) { $sys && exec "$0" ;} || exec "$0" sys ;;
-		0) xdg-open "$choise" >/dev/null 2>&1 & ;;
-	esac
+		-kb-custom-4 'Alt+r'
 }
 
 case $1 in
@@ -44,5 +34,11 @@ ret=$?
 
 [ -z "$choise" ] && exit
 
-ret_handler
+case $ret in
+	10) xdg-open "${choise%/*}" >/dev/null 2>&1 & ;;
+	11) { $sys && exec "$0" ;} || exec "$0" sys ;;
+	12) setsid -f "$TERMINAL" -e "$EDITOR" "$ignore" ;;
+	13) sudo -A updatedb && rm "$tmp" && mklist && exec "$0" ;;
+	0) xdg-open "$choise" >/dev/null 2>&1 & ;;
+esac
 
