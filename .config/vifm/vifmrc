@@ -153,7 +153,7 @@ let $RPS1 = '-- VIFM --'
 " Autocmds
 
 au DirEnter /tmp,**/.cache,**/downloads/default,**/.torrent-files,**/videos/mov,
-	\**/pictures/**/**,**/pkglists,**/backup/makepkg/**
+	\**/pictures/**/**,**/pkglists,**/share/pacman/**/**
 	\ setlocal sort=-mtime | setlocal viewcolumns=-{name}..,6{size}.,18{mtime}
 
 " ------------------------------------------------------------------------------
