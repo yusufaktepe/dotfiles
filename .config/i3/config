@@ -68,17 +68,18 @@ bindsym Ctrl+$caps+quotedbl exec $N gclip reload
 bindsym $mod+Shift+Insert exec $N gclip seltoclip
 
 # #---Start Applications---# #
-bindsym $mod+F1 exec $N $TERMINS _blockterm -e sh -c 'VIFM=~/.config/vifm/sessions/shell vifm'
+bindsym $mod+F1 exec $N ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 exec $N ifterm -e vifm
-bindsym $mod+F3 exec $N ifwin -e $BROWSER
-bindsym $mod+F4 exec $N ifwin -e opera
+bindsym $mod+F3 exec $N ifwin -e "$BROWSER --start-maximized"
+bindsym $mod+F4 exec $N ifwin -e 'opera --start-maximized'
 bindsym $mod+F5 exec $N ifwin -e firefox
-bindsym $mod+F6 exec $N ifwin -e google-chrome-stable -f "--enable-features=WebUIDarkMode --force-dark-mode"
+bindsym $mod+F6 exec $N ifwin -e 'google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode'
 bindsym $mod+Shift+F2 exec $N ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 exec $N $BROWSER --incognito --start-maximized
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
 bindsym $mod+Shift+F6 exec $N google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode --incognito
+bindsym $mod+m exec $N XDG_CURRENT_DESKTOP=gnome ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
 bindsym $caps+e exec $N $TERMINAL -e $EDITOR
@@ -86,30 +87,30 @@ bindsym $caps+m exec $N cantata-mpd
 bindsym $caps+Shift+s exec $N toggle spotifyd
 bindsym $caps+s exec $N ifwin -e spotify
 bindsym $caps+q exec $N ifwin -e qbittorrent
-bindsym $caps+7 exec $N ifwin vbox Win7
+bindsym $caps+7 exec $N vbox_instance Win7
 # bindsym $caps+w exec $N libreoffice --writer
-bindsym $caps+c exec $N ifwin crow
+bindsym $caps+c exec $N crow-translate
 
 bindsym $mod+Shift+d exec $N xo d
 bindsym $mod+Shift+e exec $N xo c
 bindsym $mod+Shift+p exec $N mpv-resume
 bindsym $mod+Shift+F8 exec $N sudo -A systemctl restart NetworkManager
-bindsym $mod+F8 exec $N $TERMINS _blockterm -e nmtui-connect
+bindsym $mod+F8 exec $N $TERMINS blockterm_nmtui -e nmtui-connect
 
 # Pause players & switch to ws0:
 bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 
 ## System Monitor
-bindsym $caps+F1 exec $N $TERMINS _blockterm -e htop
-bindsym $caps+F2 exec $N $TERMINS _blockterm -e sh -c "sudo -A ps_mem | less -RS +G"
-bindsym $caps+F3 exec $N $TERMINS _blockterm -e ncdu --color dark --exclude vifm/fuse ~/
+bindsym $caps+F1 exec $N $TERMINS blockterm_htop -e htop
+bindsym $caps+F2 exec $N $TERMINS blockterm_psmem -e sh -c "sudo -A ps_mem | less -RS +G"
+bindsym $caps+F3 exec $N $TERMINS blockterm_ncdu -e ncdu --color dark --exclude vifm/fuse ~/
 
 ## Function Buttons
 bindsym XF86MonBrightnessUp exec $N brightness inc 2.90
 bindsym XF86MonBrightnessDown exec $N brightness dec 2.90
 bindsym --release $mod+BackSpace exec $N sleep 1 && xset dpms force off
 
-# bindsym XF86Display exec $N ifwin -e arandr --toggle
+# bindsym XF86Display exec $N ifwin -e arandr -t
 # bindsym XF86TouchpadOff exec $N toggle touchpad
 # bindsym XF86TouchpadOn exec $N toggle touchpad
 
@@ -124,8 +125,8 @@ bindsym XF86AudioRaiseVolume exec $N vol up
 bindsym Shift+XF86AudioLowerVolume exec $N smc vol down
 bindsym Shift+XF86AudioRaiseVolume exec $N smc vol up
 bindsym XF86AudioMicMute     exec $N toggle audio
-bindsym $mod+XF86AudioLowerVolume exec $N ifwin -e pavucontrol --toggle
-bindsym $mod+XF86AudioRaiseVolume exec $N $TERMINS _blockterm -e pulsemixer
+bindsym $mod+XF86AudioLowerVolume exec $N ifwin -t -e pavucontrol
+bindsym $mod+XF86AudioRaiseVolume exec $N ifterm -t -i blockterm_pulsemixer -e pulsemixer
 
 bindsym XF86AudioPlay exec $N smc t
 bindsym XF86AudioPrev exec $N smc p
@@ -337,6 +338,7 @@ for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 assign [class="(?i)Vivaldi"]                     $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
+assign [class="(?i)telegram"]                    $ws6
 assign [class="Audacity"]                        $ws7
 assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
 # assign [class="(?i)thunderbird"]               $ws9
@@ -375,8 +377,8 @@ for_window [title="^Picture in picture$"] resize set 850 479, move position 1069
 for_window [class="Dragon-drag-and-drop"] sticky enable
 for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, move position center
 #_ Floating instances
-for_window [instance="_blockterm"] floating enable border pixel 2
-for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1920 1056, move position center
+for_window [instance="blockterm_*"] floating enable border pixel 2
+for_window [instance="Blockterm_*"] floating enable border pixel 3, resize set 1920 1056, move position center
 for_window [instance="floating"] floating enable, move position mouse
 #_ Doublecmd
 for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center

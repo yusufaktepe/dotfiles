@@ -2,7 +2,7 @@
 # Control mpv using IPC protocol.
 # Options interact with last opened instance except 'pauseall'.
 
-socket=$(ls -1 /tmp/mpvsocket[0-9]* 2>/dev/null | sort -V | tail -n1)
+socket=$(find /tmp/mpvsocket[0-9]* -type s 2>/dev/null | tail -n 1)
 
 ipc_send() {
 	cmd='{ "command": ['

@@ -3,21 +3,34 @@
 AW=$(xdotool getactivewindow)
 AW_INS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $2}')
 
-for arg in "$@"; do
-	case $arg in
-		-i) opt_ins=$2 ;;
-		-e) opt_exec=$2 ;;
+while getopts ":e:i:st" opt; do
+	case $opt in
+		e) Exec=$OPTARG ;;
+		i) Ins=$OPTARG ;;
+		s) Scratchpad=true ;;
+		t) Toggle=true ;;
+		*) printf '%s\n' "Incorrect option(s) specified."; exit 1 ;;
 	esac
-	shift
 done
+shift $((OPTIND-1))
 
-[ -z "$opt_ins" ] && opt_ins=$opt_exec
+[ -z "$Exec" ] && exit 1
+[ -z "$Ins" ] && Ins=$Exec
 
-if wmctrl -lx | grep -iq "$opt_ins.$TERMINAL"; then
-	{ [ "$AW_INS" = "$opt_ins" ] &&
-		i3-msg "workspace back_and_forth" >/dev/null ;} ||
-		i3-msg "[instance=\"(?i)$opt_ins\"] focus" >/dev/null
+if wmctrl -lx | grep -iq "$Ins.$TERMINAL"; then
+	if [ "$AW_INS" = "$Ins" ]; then
+		if [ "$Scratchpad" ]; then
+			i3-msg "[instance=\"(?i)$Ins\"] move scratchpad" >/dev/null
+		elif [ "$Toggle" ]; then
+			i3-msg kill >/dev/null
+			# wmctrl -c :ACTIVE:
+		else
+			i3-msg "workspace back_and_forth" >/dev/null
+		fi
+	else
+		i3-msg "[instance=\"(?i)$Ins\"] focus" >/dev/null
+	fi
 else
-	$TERMINS "$opt_ins" -e sh -c "$opt_exec; zsh" >/dev/null 2>&1 &
+	$TERMINS "$Ins" -e sh -c "$Exec; zsh" >/dev/null 2>&1 &
 fi
 

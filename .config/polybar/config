@@ -121,7 +121,7 @@ format-underline = ${colors.darkblue}
 format-padding = ${bar/default.module-padding}
 
 click-left = bandnotify &
-click-right = pkill bandwhich || $TERMINS _Blockterm -e bandwhich &
+click-right = pkill bandwhich || $TERMINS Blockterm_bandwidth -e bandwhich &
 ; click-middle = toggle net wifi
 
 [module/brightness]
@@ -169,7 +169,7 @@ format-background = ${colors.background-alt}
 format-underline = ${colors.blue}
 format-padding = ${bar/default.module-padding}
 
-click-left = $TERMINS _Blockterm -e sh -c "curl -s 'wttr.in/' | less -RS" &
+click-left = $TERMINS Blockterm_weather -e sh -c "curl -s 'wttr.in/' | less -RS" &
 
 [module/xwindow]
 type = internal/xwindow
@@ -496,7 +496,7 @@ ramp-volume-10 = %{T6}%{T-}
 ramp-volume-foreground = ${colors.icon}
 
 click-right = killall pavucontrol || pavucontrol &
-click-middle = $TERMINS _blockterm -e pulsemixer &
+click-middle = ifterm -t -i blockterm_pulsemixer -e pulsemixer &
 
 [module/alsa]
 type = internal/alsa

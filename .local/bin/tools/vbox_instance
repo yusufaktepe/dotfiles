@@ -1,0 +1,15 @@
+#!/bin/sh
+
+AW=$(xdotool getactivewindow)
+AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print tolower($4)}')
+
+if VBoxManage list vms runningvms | grep -q "$1"; then
+	if [ "$AW_CLASS" = "virtualbox machine" ]; then
+		i3-msg "workspace back_and_forth" >/dev/null
+	else
+		i3-msg "[class=(?i)VirtualBox title=(?i)$1] focus" >/dev/null
+	fi
+else
+	setsid -f VBoxManage startvm "$1" >/dev/null 2>&1
+fi
+

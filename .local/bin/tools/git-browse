@@ -1,11 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 remote=$(git ls-remote --get-url 2>/dev/null) || return $?
 
-if echo "$remote" | grep -q '^http'; then
+if [[ $remote =~ ^http ]]; then
 	url=$remote
+elif [[ $remote =~ ^git: ]]; then
+	url=https://${remote#*//}
 else
-	url=https://$(echo "$remote" | awk -F'@' '{gsub(":", "/"); print $2}')
+	url=${remote##*@}
+	url=https://${url/:/\/}
 fi
 
 setsid -f xdg-open "$url" >/dev/null 2>&1

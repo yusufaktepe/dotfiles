@@ -7,13 +7,14 @@ uid=1000
 
 [ -z "$1" ] && { printf 'No file/url specified!\n'; exit 1 ;}
 
-ping -q -c 1 $remote >/dev/null || {
+ping -q -c 1 $remote >/dev/null 2>&1 || {
 	if [ -n "$DISPLAY" ]; then
-		notify-send -i qbittorrent "qBittorrent" "$remote is <b>down!</b>"
+		# notify-send -i qbittorrent "qBittorrent" "$remote is <b>down!</b>"
+		setsid -f qbittorrent "$@"
 	else
 		printf '%s\n' "$remote is down!"
 	fi
-	exit 1
+	exit 0
 }
 
 torrent_add() {
