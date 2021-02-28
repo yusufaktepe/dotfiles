@@ -35,7 +35,7 @@
 	p           = push
 	pf          = push -f
 	pl          = pull
-	re          = rebase
+	re          = rebase --committer-date-is-author-date
 	rem         = remote -v
 	refs        = for-each-ref
 	s           = status
