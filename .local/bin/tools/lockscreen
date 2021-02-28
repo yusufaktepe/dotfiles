@@ -1,8 +1,17 @@
 #!/bin/sh
 
-lock_timeout=15
+lock_timeout=30
 
 default_timeout=$(xset q | awk '/^  Standby/ {print $2}')
+
+IFS=, read -r width height </sys/class/graphics/fb0/virtual_size
+
+case ${width}x${height} in
+	1920x1080)
+		screenOpts='--timesize=55 --datesize=20 --datepos=tx:ty+43 --radius=130 --ring-width=8' ;;
+	1366x768)
+		screenOpts='--timesize=40' ;;
+esac
 
 prelock() {
 	xset dpms $lock_timeout
@@ -40,13 +49,13 @@ lock() {
 		--force-clock \
 		--timestr="%H:%M" \
 		--datestr="%A, %d/%m" \
-		--timesize=40 \
 		--veriftext="" \
 		--wrongtext="" \
 		--noinputtext="" \
 		--locktext="" \
 		--pass-media-keys \
-		--nofork
+		--nofork \
+		$screenOpts
 }
 
 prelock; lock "$@"; postlock

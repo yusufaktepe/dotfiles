@@ -3,74 +3,44 @@
 AW=$(xdotool getactivewindow)
 AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print tolower($4)}')
 
-_crow() {
-	if pidof crow >/dev/null; then
-		if wmctrl -lx | grep -q "crow.Crow Translate"; then
-			wmctrl -x -a "crow.Crow Translate" && i3-msg kill >/dev/null
-		else
-			dbus-send --type=method_call --dest=io.crow_translate.CrowTranslate \
-				/io/crow_translate/CrowTranslate/MainWindow \
-				io.crow_translate.CrowTranslate.MainWindow.open
-		fi
-	else
-		crow >/dev/null 2>&1 &
-	fi
-}
-
-_vbox() {
-	if VBoxManage list vms runningvms | grep -q "$1"; then
-		if [ "$AW_CLASS" = "virtualbox machine" ]; then
-			i3-msg "workspace back_and_forth" >/dev/null
-		else
-			i3-msg "[class=(?i)VirtualBox title=(?i)$1] focus" >/dev/null
-		fi
-	else
-		VBoxManage startvm "$1" >/dev/null 2>&1 &
-	fi
-}
-
-for arg in "$@"; do
-	case $arg in
-		-c) opt_class=$2 ;;
-		-e) opt_exec=$2 ;;
-		-f) opt_flags=$2 ;;
-		-p) opt_proc=$2 ;;
-		--toggle) opt_toggle=${2:-true} ;;
-		crow) _crow; exit ;;
-		vbox) _vbox "$2"; exit ;;
+while getopts ":c:e:p:st" opt; do
+	case $opt in
+		c) Class=$OPTARG ;;
+		e) Exec=${OPTARG%% *}; ExecArgs=${OPTARG#* } ;;
+		p) Proc=$OPTARG ;;
+		s) Scratchpad=true ;;
+		t) Toggle=true ;;
+		*) printf '%s\n' "Incorrect option(s) specified."; exit 1 ;;
 	esac
-	shift
 done
+shift $((OPTIND-1))
 
-case $opt_exec in
-	brave*) opt_class=brave-browser ;;
-	*chrome*) opt_proc=chrome; opt_class=google-chrome ;;
-	doublecmd) opt_flags=--no-splash ;;
-	opera*) opt_flags=--start-maximized ;;
-	vivaldi*) opt_proc=vivaldi-bin; opt_flags=--start-maximized ;;
+case $Exec in
+	brave*) Class=brave-browser ;;
+	*chrome*) Proc=chrome; Class=google-chrome ;;
+	vivaldi*) Proc=vivaldi-bin ;;
+	"") exit 1 ;;
 esac
 
-[ -n "$opt_proc" ] && proc=$opt_proc || proc=$opt_exec
-[ -z "$opt_class" ] && opt_class=$opt_exec
-[ -n "$opt_flags" ] && opt_exec="$opt_exec $opt_flags"
+[ -z "$Proc" ] && Proc=$Exec
+[ -z "$Class" ] && Class=$Exec
 
-if [ -n "$opt_class" ] && [ -n "$opt_exec" ]; then
-	if pgrep -x "$proc" >/dev/null; then
-		if [ "$AW_CLASS" = "$opt_class" ]; then
-			if [ "$opt_toggle" = scratchpad ]; then
-				i3-msg "[class=\"(?i)$opt_class\"] move scratchpad" >/dev/null
-			elif [ "$opt_toggle" ]; then
-				i3-msg kill >/dev/null
-				[ "$opt_class" = pavucontrol ] && pkill -SIGRTMIN+10 i3blocks
-				[ "$opt_class" = arandr ] && setbg
-			else
-				i3-msg "workspace back_and_forth" >/dev/null
-			fi
+if pgrep -x "$Proc?" >/dev/null; then
+	if [ "$AW_CLASS" = "$Class" ]; then
+		if [ "$Scratchpad" ]; then
+			i3-msg "[class=\"(?i)$Class\"] move scratchpad" >/dev/null
+		elif [ "$Toggle" ]; then
+			i3-msg kill >/dev/null
+			# wmctrl -c :ACTIVE:
+			[ "$Class" = arandr ] && setbg
 		else
-			i3-msg "[class=\"(?i)$opt_class\"] focus" >/dev/null
+			i3-msg 'workspace back_and_forth' >/dev/null
 		fi
 	else
-			$opt_exec >/dev/null 2>&1 &
+		i3-msg "[class=\"(?i)$Class\"] focus" >/dev/null
 	fi
+else
+		[ "$Exec" != "$ExecArgs" ] && Exec="$Exec $ExecArgs"
+		setsid -f $Exec >/dev/null 2>&1
 fi
 

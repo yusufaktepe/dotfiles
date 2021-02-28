@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+cur='BTC|ETH|LINK|XRP'
+to='TRY|USDT'
+api=https://api.binance.com/api/v1/ticker/price
+
+while read -ra Rate; do
+	if [[ ${Rate[*]} =~ ^($cur)($to).*$ ]]; then
+		coin=${Rate[0]}
+		price=${Rate[1]}
+		rates+=("$(printf '%-8s = %s\n' "$coin" "$price")")
+	fi
+done < <(curl -s $api | jq -r '.[] | (.symbol + " " + .price)')
+
+case $1 in
+	-m)
+		rofi -dmenu -p 'Exchange rates' <\
+			<(printf '%s\n' "${rates[@]}" | sort) | clipcopy ;;
+	*)
+		printf '%s\n' "${rates[@]}" | sort ;;
+esac
+

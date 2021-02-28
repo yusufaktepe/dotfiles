@@ -1,10 +1,19 @@
 #!/bin/sh
-# Toggle script that I gathered from various scripts.
-
-# 2018 Yusuf Aktepe <yusuf@yusufaktepe.com>
-# https://github.com/yusufaktepe/dotfiles
 
 ns() { dunstify -r 1003 -a toggle "$@" ;}
+
+input_device() {
+	device=$(xinput --list --name-only | grep -i "$1")
+	state=$(xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$")
+
+	if [ "$state" = 1 ]; then
+		xinput disable "$device"
+		ns -i "$IconDisabled" "$1 Disabled"
+	else
+		xinput enable "$device"
+		ns -i "$IconEnabled" "$1 Enabled"
+	fi
+}
 
 case $1 in
 	audio)
@@ -38,7 +47,7 @@ case $1 in
 			pkill redshift
 			ns -i redshift-status-off "Redshift" "Status: <b>Closed</b>\nPeriod: <b>None</b>"
 		else
-			redshift >/dev/null 2>&1 &
+			setsid -f redshift >/dev/null 2>&1
 			per=$(redshift -p 2>/dev/null | awk '/Period:/ {print $2}')
 			ns -i redshift "Redshift" "Status: <b>Started</b>\nPeriod: <b>$per</b>"
 		fi
@@ -62,21 +71,19 @@ case $1 in
 			pkill syncthing
 			ns -i syncthing "Syncthing" "Sync stopped."
 		else
-			syncthing -no-browser >/dev/null 2>&1 &
+			setsid -f syncthing -no-browser >/dev/null 2>&1
 			ns -i syncthing "Syncthing" "Started to sync."
 		fi
 	;;
 	touchpad)
-		device=$(xinput --list --name-only | grep -i touchpad)
-		state=$(xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$")
-
-		if [ "$state" = 1 ]; then
-			xinput disable "$device"
-			ns -i touchpad-disabled-symbolic "TouchPad Disabled"
-		else
-			xinput enable "$device"
-			ns -i touchpad-enabled-symbolic "TouchPad Enabled"
-		fi
+		IconEnabled=touchpad-enabled-symbolic
+		IconDisabled=touchpad-disabled-symbolic
+		input_device TouchPad
+	;;
+	trackpoint)
+		IconEnabled=followmouse
+		IconDisabled=hidemouse
+		input_device TrackPoint
 	;;
 	transmission|td)
 		if pgrep -x transmission-da >/dev/null; then
@@ -94,7 +101,22 @@ case $1 in
 				--x11-name=webcam --geometry=-0-0 --autofit=30% /dev/video0
 	;;
 	""|*)
-		printf "Options:\n\taudio\n\tnet {w|wifi|NULL}\n\tredshift
-			\r\tstimeout\n\tsyncthing\n\ttouchpad\n\ttransmission|td\n\twebcam\n"
+		while read -r Usage; do
+			printf '%b\n' "$Usage"
+		done <<-EOF
+			Usage: ${0##*/} [OPT]
+
+			\r  audio
+			\r  net (w|wifi|NULL)
+			\r  redshift
+			\r  spotifyd
+			\r  stimeout
+			\r  syncthing
+			\r  touchpad
+			\r  trackpoint
+			\r  transmission|td
+			\r  webcam
+
+		EOF
 	;;
 esac

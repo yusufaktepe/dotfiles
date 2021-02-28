@@ -1,12 +1,19 @@
 #!/bin/sh
 # shellcheck disable=SC2086
 # A simple shell script to manage clipboard with rofi/fzf.
-# Dependencies: greenclip, rofi/dmenu/fzf, xsel, gkeep.
+# Dependencies: greenclip, rofi/dmenu/fzf, xsel.
 
 History="$XDG_CACHE_HOME/greenclip/history"
 StaticHistory="${History%/*}/staticHistory"
 
 pidof greenclip >/dev/null || setsid -f greenclip daemon >/dev/null 2>&1
+
+clear_history() {
+	xsel -bc; xsel -c
+	killall greenclip
+	rm -rf "$History" "${History%/*}/image"
+	setsid -f greenclip daemon >/dev/null 2>&1
+}
 
 copy() { xargs -r -d'\n' -I '{}' greenclip print '{}' ;}
 
@@ -58,7 +65,8 @@ w_rofi() {
 			-kb-custom-1 'Alt+s' \
 			-kb-custom-2 'Alt+Return' \
 			-kb-custom-3 'Alt+n' \
-			-kb-custom-4 'Alt+d'
+			-kb-custom-4 'Alt+d' \
+			-kb-custom-5 'Alt+c'
 	)
 	ret=$?
 
@@ -67,6 +75,7 @@ w_rofi() {
 		11) printf '%s' "$clip" | copy; paste_clip ;;
 		12) clipnote "$clip" ;;
 		13) dmenuhandler "$clip" ;;
+		14) clear_history ;;
 		0) printf '%s' "$clip" | copy ;;
 		*) exit $ret ;;
 	esac
@@ -90,10 +99,7 @@ case $1 in
 		setsid -f greenclip daemon >/dev/null 2>&1
 	;;
 	clear)
-		xsel -bc; xsel -c
-		killall greenclip
-		rm -rf "$History" "${History%/*}/image"
-		setsid -f greenclip daemon >/dev/null 2>&1
+		clear_history
 	;;
 	selpaste|sp)
 		paste_selection
@@ -111,17 +117,18 @@ case $1 in
 		{ [ -t 2 ] && w_fzf ;} || w_rofi
 	;;
 	*)
-		cat <<-EOF
-		Usage: ${0##*/} <options>
+		while read -r Usage; do
+			printf '%b\n' "$Usage"
+		done <<-EOF
+			Usage: ${0##*/} [OPT]
 
-		== Options ==
-		config       : open configuration file in \$EDITOR
-		static       : open static history file in \$EDITOR
-		clear        : clear clipboard history
-		reload       : reload greenclip
-		selpaste|sp  : paste selection
-		seltoclip|sc : move selection to clipboard
-		[1-9]        : paste clipboard item 1..9
+			\r  config        - open configuration file in \$EDITOR
+			\r  static        - open static history file in \$EDITOR
+			\r  clear         - clear clipboard history
+			\r  reload        - reload greenclip
+			\r  selpaste|sp   - paste selection
+			\r  seltoclip|sc  - move selection to clipboard
+			\r  [1-9]         - paste clipboard item 1..9
 		EOF
 esac
 
