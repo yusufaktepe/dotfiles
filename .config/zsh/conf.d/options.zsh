@@ -19,6 +19,7 @@ setopt EXTENDED_GLOB          # Treat the `#`, `~` and `^` characters as part of
 setopt GLOB_DOTS              # Do not require a leading `.' in a filename to be matched explicitly.
 setopt NUMERIC_GLOB_SORT      # Sort the filenames numerically rather than lexicographically.
 setopt RC_EXPAND_PARAM        # Expand arrays.
+unsetopt NOMATCH              # Do not print error if glob has no matches.
 
 # History
 HISTFILE="$ZDOTDIR/.zsh_history"
