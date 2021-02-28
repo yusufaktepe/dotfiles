@@ -67,6 +67,12 @@ bindsym $caps+quotedbl exec $N gclip clear
 bindsym Ctrl+$caps+quotedbl exec $N gclip reload
 bindsym $mod+Shift+Insert exec $N gclip seltoclip
 
+# #---Dunst---# #
+bindsym $caps+space exec $N dunstctl close-all
+bindsym $caps+Shift+space exec $N dunstctl close
+bindsym $caps+Shift+s exec $N dunstctl history-pop
+bindsym $caps+Shift+a exec $N dunstctl context
+
 # #---Start Applications---# #
 bindsym $mod+F1 exec $N ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 exec $N ifterm -e vifm
@@ -84,7 +90,7 @@ bindsym $mod+m exec $N XDG_CURRENT_DESKTOP=gnome ifwin -e telegram-desktop -c te
 ## Caps+
 bindsym $caps+e exec $N $TERMINAL -e $EDITOR
 bindsym $caps+m exec $N cantata-mpd
-bindsym $caps+Shift+s exec $N toggle spotifyd
+# bindsym $caps+Shift+s exec $N toggle spotifyd
 bindsym $caps+s exec $N ifwin -e spotify
 bindsym $caps+q exec $N ifwin -e qbittorrent
 bindsym $caps+7 exec $N vbox_instance Win7
@@ -190,7 +196,6 @@ bindsym $mod+w layout stacking
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-bindsym $caps+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
