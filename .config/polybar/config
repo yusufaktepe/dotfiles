@@ -109,7 +109,7 @@ scroll-down = smc vol down
 
 [module/bandwidth]
 type = custom/script
-exec = $XDG_CONFIG_HOME/i3blocks/blocks/bandwidth
+exec = $XDG_CONFIG_HOME/polybar/modules/bandwidth
 exec-if = nm-online -x
 tail = true
 label = %output:18%
@@ -126,7 +126,7 @@ click-right = pkill bandwhich || $TERMINS _Blockterm -e bandwhich &
 
 [module/brightness]
 type = custom/ipc
-hook-0 = $XDG_CONFIG_HOME/i3blocks/blocks/brightness
+hook-0 = $XDG_CONFIG_HOME/polybar/modules/brightness
 hook-1 = light -G | sed 's/\.[0-9]*//'
 initial = 1
 

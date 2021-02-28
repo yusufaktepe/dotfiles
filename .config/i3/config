@@ -308,6 +308,15 @@ workspace_auto_back_and_forth yes
 # Jump to urgent window
 bindsym $mod+x [urgent=latest] focus
 
+# Hide/unhide the bar
+bindsym $mod+b exec $N polybar-msg cmd toggle
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload ;; exec $N "notify-send -a system -i configuration -t 1500 i3 'Config reloaded'"
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
 ## Mouse bindings
 bindsym --whole-window --border $mod+button4 workspace prev
 bindsym --whole-window --border $mod+button5 workspace next
@@ -385,14 +394,6 @@ for_window [instance="dropdown_*"] move position center
 #for_window [urgent=latest] focus
 
 #=====================================================================
-
-# reload the configuration file
-bindsym $mod+Shift+c reload ;; exec $N "notify-send -a system -i configuration -t 1500 i3 'Config reloaded'"
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-#=====================================================================
 # Autostart applications
 #=====================================================================
 # See ../X11/xinitrc for rest of the autostarts
@@ -442,47 +443,6 @@ client.urgent           $darkred   $darkred    $black      $darkred    $darkred
 client.placeholder      #000000    #0c0c0c     #ffffff     #000000
 
 client.background       $black
-
-#=====================================================================
-# Bar
-#=====================================================================
-
-# bar {
-# 	i3bar_command i3bar
-# 	status_command i3blocks
-# 	position top
-# 	modifier none
-#
-# ## set your primary output first. Example: 'xrandr --output eDP1 --primary'
-# #	tray_output primary
-# #	tray_output eDP1
-#
-# 	bindsym button4 nop
-# 	bindsym button5 nop
-# 	#font pango:Hack, FontAwesome 9
-# 	strip_workspace_numbers yes
-# 	#separator_symbol ""
-# 	tray_padding 0
-#
-# 	colors {
-# 		background $darkblack
-# 		statusline $darkwhite
-# 		#separator $cyan
-# 		separator  #454947
-#
-# #                       BORDER      BACKGR.     TEXT
-# 	focused_workspace   $blue       $darkblue   $darkblack
-# 	active_workspace    $blue       $blue       $darkwhite
-# 	inactive_workspace  $darkblack  $darkblack  $white
-# 	urgent_workspace    $darkred    $darkblack  $darkred
-#
-# 	binding_mode        $blue       $darkblue   $darkblack
-# 	}
-# }
-#
-# # hide/unhide the bar
-# bindsym $mod+b bar mode toggle
-bindsym $mod+b exec $N polybar-msg cmd toggle
 
 #=====================================================================
 # settings for i3-gaps:
