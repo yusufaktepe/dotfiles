@@ -216,8 +216,8 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 " Toggle line wrapping
 nnoremap <silent> <leader>W :setlocal wrap!<CR>:setlocal wrap?<CR>
 
-" Toggle colorcolumn
-nnoremap <silent> <leader>CC :execute "set cc=" . (&cc == "" ? "80" : "") \| set list<CR>
+" Toggle colorcolumn-listchars
+nnoremap <silent> <leader>CC :call ToggleColorColumn()<CR>
 
 " Toggle paste mode
 noremap <silent> <F2> :set paste! nopaste?<CR>
@@ -514,6 +514,14 @@ function! Tabnm(n)
 	catch
 		$tabnew
 	endtry
+endfunction
+
+function! ToggleColorColumn()
+	if &colorcolumn
+		set colorcolumn= | set nolist
+	else
+		set colorcolumn=80 | set list
+	endif
 endfunction
 
 " Toggle between tabs and spaces
