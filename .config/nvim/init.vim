@@ -283,8 +283,9 @@ cnoremap <C-g> <C-c>
 cnoremap <expr> <C-p> pumvisible() ? "\<C-p>" : "\<up>"
 cnoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<down>"
 
-" Ctrl-Backspace to remove last word in insert mode
+" Ctrl-Backspace to remove last word
 inoremap <C-h> <C-w>
+cnoremap <C-h> <C-w>
 
 " Check file in shellcheck:
 map <leader>cs :!clear && shellcheck -x %<CR>
