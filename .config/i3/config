@@ -75,7 +75,7 @@ bindsym $caps+Shift+a exec $N dunstctl context
 
 # #---Start Applications---# #
 bindsym $mod+F1 exec $N ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
-bindsym $mod+F2 exec $N ifterm -e vifm
+bindsym $mod+F2 exec $N ifterm -h -e vifm
 bindsym $mod+F3 exec $N ifwin -e "$BROWSER --start-maximized"
 bindsym $mod+F4 exec $N ifwin -e 'opera --start-maximized'
 bindsym $mod+F5 exec $N ifwin -e firefox
@@ -101,15 +101,15 @@ bindsym $mod+Shift+d exec $N xo d
 bindsym $mod+Shift+e exec $N xo c
 bindsym $mod+Shift+p exec $N mpv-resume
 bindsym $mod+Shift+F8 exec $N sudo -A systemctl restart NetworkManager
-bindsym $mod+F8 exec $N $TERMINS blockterm_nmtui -e nmtui-connect
+bindsym $mod+F8 exec $N ifterm -t -i blockterm_nmtui -e nmtui-connect
 
 # Pause players & switch to ws0:
 bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 
 ## System Monitor
-bindsym $caps+F1 exec $N $TERMINS blockterm_htop -e htop
-bindsym $caps+F2 exec $N $TERMINS blockterm_psmem -e sh -c "sudo -A ps_mem | less -RS +G"
-bindsym $caps+F3 exec $N $TERMINS blockterm_ncdu -e ncdu --color dark --exclude vifm/fuse ~/
+bindsym $caps+F1 exec $N ifterm -t -i blockterm_htop -e htop
+bindsym $caps+F2 exec $N ifterm -t -i blockterm_psmem -e 'sudo -A ps_mem | less -RS +G'
+bindsym $caps+F3 exec $N ifterm -t -i blockterm_ncdu -e 'ncdu --color dark --exclude vifm/fuse ~/'
 
 ## Function Buttons
 bindsym XF86MonBrightnessUp exec $N brightness inc 2.90
@@ -407,7 +407,7 @@ for_window [instance="dropdown_*"] move position center
 
 exec_always launch_polybar
 exec $N "sleep 2; ifwin -e $BROWSER"
-exec $N "sleep 5; ifterm -e vifm"
+exec $N "sleep 5; ifterm -h -e vifm"
 exec $N "sleep 7; ifwin -e spotify"
 exec $N "sleep 9; wmctrl -x -r 'vifm' -b remove,demands_attention"
 
