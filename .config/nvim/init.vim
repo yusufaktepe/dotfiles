@@ -223,7 +223,7 @@ nnoremap <silent> <leader>CC :call ToggleColorColumn()<CR>
 noremap <silent> <F2> :set paste! nopaste?<CR>
 
 " Enter command mode with substitution command prefilled
-nnoremap S :%s///gc<Left><Left><Left><Left>
+nnoremap <M-s> :%s///gc<Left><Left><Left><Left>
 
 " Toggle conceal(level|cursor)
 nnoremap <silent> <leader>cl :exe "set cole=" . (&cole == "0" ? "2" : "0") \| set cole<CR>
