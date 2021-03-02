@@ -1,7 +1,9 @@
 "--- Mappings ---"
 
-" Ctrl-Backspace to remove last word in command line
+" Command-line mode
 cnoremap <C-h> <C-w>
+cnoremap <esc>[1;5C <a-f>
+cnoremap <esc>[1;5D <a-b>
 
 " Switch ; <> ,
 nnoremap , ;
