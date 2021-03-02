@@ -3,12 +3,13 @@
 AW=$(xdotool getactivewindow)
 AW_INS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $2}')
 
-while getopts ":e:i:st" opt; do
+while getopts ":e:i:hst" opt; do
 	case $opt in
 		e) Exec=$OPTARG ;;
 		i) Ins=$OPTARG ;;
 		s) Scratchpad=true ;;
 		t) Toggle=true ;;
+		h) Hold=true ;;
 		*) printf '%s\n' "Incorrect option(s) specified."; exit 1 ;;
 	esac
 done
@@ -31,6 +32,7 @@ if wmctrl -lx | grep -iq "$Ins.$TERMINAL"; then
 		i3-msg "[instance=\"(?i)$Ins\"] focus" >/dev/null
 	fi
 else
-	$TERMINS "$Ins" -e sh -c "$Exec; zsh" >/dev/null 2>&1 &
+	[ $Hold ] && Exec="$Exec; $SHELL"
+	$TERMINS "$Ins" -e sh -c "$Exec" >/dev/null 2>&1 &
 fi
 
