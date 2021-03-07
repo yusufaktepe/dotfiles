@@ -1,12 +1,13 @@
+" vim: set ts=2 sw=2 tw=78 et :
 "=====================================================================
 " PLUGINS {{{
 "=====================================================================
 
 if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
-	echo 'Downloading junegunn/vim-plug to manage plugins...'
-	silent !mkdir -p ~/.config/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
-	au VimEnter * PlugInstall
+  echo 'Downloading junegunn/vim-plug to manage plugins...'
+  silent !mkdir -p ~/.config/nvim/autoload/
+  silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+  au VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.config/nvim/plugged')
@@ -53,9 +54,9 @@ Plug 'honza/vim-snippets'
 
 " Multi-language completions
 Plug 'autozimu/LanguageClient-neovim', {
-	\ 'branch': 'next',
-	\ 'do': 'bash install.sh',
-	\ }
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
 
 " Javascript
 Plug 'pangloss/vim-javascript'
@@ -99,7 +100,7 @@ set nocompatible
 set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,default,iso8859-9,latin1
 set number relativenumber
-" set signcolumn=yes                " always show sign column
+" set signcolumn=yes            " always show sign column
 set completeopt+=noinsert,noselect
 set guioptions=a
 set mouse=a
@@ -128,11 +129,11 @@ set listchars+=precedes:‹,extends:›
 
 " Theme -- Do not set in TTY
 if !empty($DISPLAY)
-	set termguicolors
-	let g:gruvbox_italic=1
-	let g:gruvbox_contrast_dark='medium'
-	colorscheme gruvbox
-	set background=dark
+  set termguicolors
+  let g:gruvbox_italic=1
+  let g:gruvbox_contrast_dark='medium'
+  colorscheme gruvbox
+  set background=dark
 endif
 
 " }}}
@@ -343,21 +344,21 @@ let g:deoplete#enable_at_startup = 1
 
 "=== Ale
 let g:ale_linters = {
-	\ 'c':          ['clangd'],
-	\ 'cpp':        ['clangd'],
-	\ 'javascript': ['eslint'],
-	\ 'python':     ['pylint'],
-	\ 'vim':        ['vint'],
-	\ }
+  \ 'c':          ['clangd'],
+  \ 'cpp':        ['clangd'],
+  \ 'javascript': ['eslint'],
+  \ 'python':     ['pylint'],
+  \ 'vim':        ['vint'],
+  \ }
 
 let g:ale_fixers = {
-	\ 'bash':       ['shfmt'],
-	\ 'sh':         ['shfmt'],
-	\ 'c':          ['clang-format'],
-	\ 'cpp':        ['clang-format'],
-	\ 'javascript': ['eslint'],
-	\ 'python':     ['yapf', 'isort'],
-	\ }
+  \ 'bash':       ['shfmt'],
+  \ 'sh':         ['shfmt'],
+  \ 'c':          ['clang-format'],
+  \ 'cpp':        ['clang-format'],
+  \ 'javascript': ['eslint'],
+  \ 'python':     ['yapf', 'isort'],
+  \ }
 
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = ''
@@ -381,15 +382,15 @@ map <leader>al :ALELint<CR>
 
 "=== LanguageClient
 let g:LanguageClient_serverCommands = {
-	\ 'sh':             ['bash-language-server', 'start'],
-	\ 'c':              ['clangd'],
-	\ 'cpp':            ['clangd'],
-	\ 'javascript.jsx': ['javascript-typescript-stdio'],
-	\ 'javascript':     ['javascript-typescript-stdio'],
-	\ 'typescript':     ['javascript-typescript-stdio'],
-	\ 'python':         ['pyls'],
-	\ 'vim':            ['vim-language-server', '--stdio'],
-	\ }
+  \ 'sh':             ['bash-language-server', 'start'],
+  \ 'c':              ['clangd'],
+  \ 'cpp':            ['clangd'],
+  \ 'javascript.jsx': ['javascript-typescript-stdio'],
+  \ 'javascript':     ['javascript-typescript-stdio'],
+  \ 'typescript':     ['javascript-typescript-stdio'],
+  \ 'python':         ['pyls'],
+  \ 'vim':            ['vim-language-server', '--stdio'],
+  \ }
 
 " Let ALE handle linting
 let g:LanguageClient_diagnosticsEnable = 0
@@ -423,7 +424,7 @@ nnoremap <M-h> :History<CR>
 
 "=== GitGutter
 if &diff
-	let g:gitgutter_enabled = 0
+  let g:gitgutter_enabled = 0
 endif
 
 "=== MarkdownPreview
@@ -465,12 +466,12 @@ let g:move_key_modifier = 'C-M'
 
 "=== VimWiki
 let g:vimwiki_ext2syntax = {
-	\ '.Rmd': 'markdown', '.rmd': 'markdown', '.md': 'markdown',
-	\ '.markdown': 'markdown', '.mdown': 'markdown'
-	\ }
+  \ '.Rmd': 'markdown', '.rmd': 'markdown', '.md': 'markdown',
+  \ '.markdown': 'markdown', '.mdown': 'markdown'
+  \ }
 let g:vimwiki_list = [
-	\ {'path': '~/notes', 'syntax': 'markdown', 'ext': '.md'}
-	\ ]
+  \ {'path': '~/notes', 'syntax': 'markdown', 'ext': '.md'}
+  \ ]
 
 "=== VCoolor
 nmap <silent> <leader>co :VCoolor<CR>
@@ -499,58 +500,58 @@ let g:Hexokinase_highlighters = ['backgroundfull']
 
 " Open help in full-window view (empty buffer OR new tab)
 function! HelpTab(...)
-	let cmd = 'tab help %s'
-	if bufname('%') ==# '' && getline(1) ==# ''
-		let cmd = 'help %s | only'
-	endif
-	exec printf(cmd, join(a:000, ' '))
+  let cmd = 'tab help %s'
+  if bufname('%') ==# '' && getline(1) ==# ''
+    let cmd = 'help %s | only'
+  endif
+  exec printf(cmd, join(a:000, ' '))
 endfunction
 
 command! -nargs=* -complete=help H call HelpTab(<q-args>)
 
 " Open or create a tab at the given tab index
 function! Tabnm(n)
-	try
-		exec 'tabn ' . a:n
-	catch
-		$tabnew
-	endtry
+  try
+    exec 'tabn ' . a:n
+  catch
+    $tabnew
+  endtry
 endfunction
 
 function! ToggleColorColumn()
-	if &colorcolumn
-		set colorcolumn= | set nolist
-	else
-		set colorcolumn=80 | set list
-	endif
+  if &colorcolumn
+    set colorcolumn= | set nolist
+  else
+    set colorcolumn=80 | set list
+  endif
 endfunction
 
 " Toggle between tabs and spaces
 let my_tab=4
 function! ToggleTab()
-	if &expandtab
-		set shiftwidth=8 softtabstop=0 noexpandtab
-		echom 'Using TABs to insert a <Tab>'
-	else
-		exe 'set shiftwidth='.g:my_tab
-		exe 'set softtabstop='.g:my_tab
-		set expandtab
-		echom 'Using'g:my_tab'SPACEs to insert a <Tab>'
-	endif
+  if &expandtab
+    set shiftwidth=8 softtabstop=0 noexpandtab
+    echom 'Using TABs to insert a <Tab>'
+  else
+    exe 'set shiftwidth='.g:my_tab
+    exe 'set softtabstop='.g:my_tab
+    set expandtab
+    echom 'Using'g:my_tab'SPACEs to insert a <Tab>'
+  endif
 endfunction
 
 " Append modeline after last line in buffer
 function! AppendModeline()
-	let l:modeline = printf(' vim: set ts=%d sw=%d tw=%d %set :',
-		\ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
-	let l:modeline = substitute(&commentstring, '%s', l:modeline, '')
-	call append(line('$'), l:modeline)
+  let l:modeline = printf(' vim: set ts=%d sw=%d tw=%d %set :',
+    \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, '%s', l:modeline, '')
+  call append(line('$'), l:modeline)
 endfunction
 
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-	\ | wincmd p | diffthis
+  \ | wincmd p | diffthis
 
 " }}}
 "=====================================================================
@@ -558,52 +559,52 @@ command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 "=====================================================================
 
 augroup vimrc
-	" Suppress readonly warning
-	au BufEnter /etc/*,/usr/* set noro
+  " Suppress readonly warning
+  au BufEnter /etc/*,/usr/* set noro
 
-	" Ensure files are read as what I want:
-	au BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
-	au BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
-	au BufRead,BufNewFile *.tex set filetype=tex
-	au BufRead,BufNewFile *.rasi set filetype=css
+  " Ensure files are read as what I want:
+  au BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
+  au BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+  au BufRead,BufNewFile *.tex set filetype=tex
+  au BufRead,BufNewFile *.rasi set filetype=css
 
-	" Enable Goyo by default for mutt writting
-	au BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
-	au BufRead,BufNewFile /tmp/neomutt* :Goyo
-	au BufRead,BufNewFile /tmp/neomutt* map Q :Goyo\|:confirm qall<CR>
-	au BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
-	au BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
+  " Enable Goyo by default for mutt writting
+  au BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
+  au BufRead,BufNewFile /tmp/neomutt* :Goyo
+  au BufRead,BufNewFile /tmp/neomutt* map Q :Goyo\|:confirm qall<CR>
+  au BufRead,BufNewFile /tmp/neomutt* map ZZ :Goyo\|x!<CR>
+  au BufRead,BufNewFile /tmp/neomutt* map ZQ :Goyo\|q!<CR>
 
-	" Indent rules for specific filetypes
-	au FileType text,html,css,scss,javascript.jsx,yaml,toml,xml,markdown,vimwiki
-		\ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+  " Indent rules for specific filetypes
+  " au FileType text,html,css,scss,javascript.jsx,yaml,toml,xml,markdown,vimwiki
+  "   \ set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
-	" Disable automatic commenting on newline
-	au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+  " Disable automatic commenting on newline
+  au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-	" Enable spell-check for gitcommit; set textwidth to 72
-	au Filetype gitcommit setlocal spell | setlocal tw=72
+  " Enable spell-check for gitcommit; set textwidth to 72
+  au Filetype gitcommit setlocal spell | setlocal tw=72
 
-	" Disable folding for some files
-	au Filetype gitcommit,vimwiki setlocal nofoldenable
+  " Disable folding for some files
+  au Filetype gitcommit,vimwiki setlocal nofoldenable
 
-	" Automatically deletes all trailing whitespace on save.
-	" au BufWritePre * %s/\s\+$//e
+  " Automatically deletes all trailing whitespace on save.
+  " au BufWritePre * %s/\s\+$//e
 
-	" Equalize diff splits as the window size changes
-	if exists('##VimResized')
-		if &diff
-			au VimResized * wincmd =
-		endif
-	endif
+  " Equalize diff splits as the window size changes
+  if exists('##VimResized')
+    if &diff
+      au VimResized * wincmd =
+    endif
+  endif
 
-	" Run command whenever these files are updated.
-	au BufWritePost *Xresources,*Xdefaults,~/.config/X11/colors/* !xrdb %
-	au BufWritePost ~/.config/fontconfig/* !fc-cache
-	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+  " Run command whenever these files are updated.
+  au BufWritePost *Xresources,*Xdefaults,~/.config/X11/colors/* !xrdb %
+  au BufWritePost ~/.config/fontconfig/* !fc-cache
+  au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 
-	" Runs a script that cleans out tex build files whenever I close out of a .tex file.
-	au VimLeave *.tex !texclear %
+  " Runs a script that cleans out tex build files whenever I close out of a .tex file.
+  au VimLeave *.tex !texclear %
 augroup END
 
 " }}}
