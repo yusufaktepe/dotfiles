@@ -134,6 +134,31 @@ if !empty($DISPLAY)
   let g:gruvbox_contrast_dark='medium'
   colorscheme gruvbox
   set background=dark
+  let s:bg_transparent='true'
+
+  if s:bg_transparent ==# 'true'
+    let s:hi_transparent = [
+      \ 'Normal          guibg=NONE ctermbg=NONE',
+      \ 'LineNr          guibg=NONE ctermbg=NONE',
+      \ 'SignColumn      guibg=NONE ctermbg=NONE',
+      \ 'EndOfBuffer     guibg=NONE ctermbg=NONE',
+      \ 'GitGutterAdd    guibg=NONE ctermbg=NONE guifg=#009900 ctermfg=2',
+      \ 'GitGutterChange guibg=NONE ctermbg=NONE guifg=#bbbb00 ctermfg=3',
+      \ 'GitGutterDelete guibg=NONE ctermbg=NONE guifg=#ff2222 ctermfg=1',
+      \ 'ALEErrorSign    guibg=NONE ctermbg=NONE guifg=#fb4934 ctermfg=167',
+      \ 'ALEWarningSign  guibg=NONE ctermbg=NONE guifg=#fabd2f ctermfg=214',
+      \ 'ALEInfoSign     guibg=NONE ctermbg=NONE guifg=#83a598 ctermfg=109']
+
+    if v:vim_did_enter
+      for h in s:hi_transparent
+        exe 'hi ' . h
+      endfor
+    else
+      for h in s:hi_transparent
+        exe 'au VimEnter * hi ' . h
+      endfor
+    endif
+  endif
 endif
 
 " }}}
