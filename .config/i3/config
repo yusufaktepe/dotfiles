@@ -74,17 +74,20 @@ bindsym $caps+Shift+s exec $N dunstctl history-pop
 bindsym $caps+Shift+a exec $N dunstctl context
 
 # #---Start Applications---# #
+# Additional flags for chrome/vivaldi
+set $chromium_flags --enable-features=WebUIDarkMode --force-dark-mode
+
 bindsym $mod+F1 exec $N ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 exec $N ifterm -h -e vifm
-bindsym $mod+F3 exec $N ifwin -e "$BROWSER --start-maximized"
+bindsym $mod+F3 exec $N ifwin -e "$BROWSER $chromium_flags --start-maximized"
 bindsym $mod+F4 exec $N ifwin -e 'opera --start-maximized'
 bindsym $mod+F5 exec $N ifwin -e firefox
-bindsym $mod+F6 exec $N ifwin -e 'google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode'
+bindsym $mod+F6 exec $N ifwin -e 'google-chrome-stable $chromium_flags'
 bindsym $mod+Shift+F2 exec $N ifwin -e pcmanfm-qt
-bindsym $mod+Shift+F3 exec $N $BROWSER --incognito --start-maximized
+bindsym $mod+Shift+F3 exec $N $BROWSER $chromium_flags --start-maximized --incognito
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
-bindsym $mod+Shift+F6 exec $N google-chrome-stable --enable-features=WebUIDarkMode --force-dark-mode --incognito
+bindsym $mod+Shift+F6 exec $N google-chrome-stable $chromium_flags --incognito
 bindsym $mod+m exec $N XDG_CURRENT_DESKTOP=gnome ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
@@ -406,7 +409,7 @@ for_window [instance="dropdown_*"] move position center
 # See ../X11/xinitrc for rest of the autostarts
 
 exec_always launch_polybar
-exec $N "sleep 2; ifwin -e $BROWSER"
+exec $N "sleep 2; $BROWSER $chromium_flags --start-maximized"
 exec $N "sleep 5; ifterm -h -e vifm"
 exec $N "sleep 7; ifwin -e spotify"
 exec $N "sleep 9; wmctrl -x -r 'vifm' -b remove,demands_attention"
