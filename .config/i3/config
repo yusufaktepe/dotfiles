@@ -62,10 +62,10 @@ bindsym XF86Launch9 exec $N rofitr
 bindsym $caps+t exec $N rofitr -s
 
 # #---Clipboard management---# #
-bindsym Ctrl+quotedbl exec $N gclip
-bindsym $caps+quotedbl exec $N gclip clear
-bindsym Ctrl+$caps+quotedbl exec $N gclip reload
-bindsym $mod+Shift+Insert exec $N gclip seltoclip
+bindsym Ctrl+quotedbl exec $N gpaste
+bindsym $caps+quotedbl exec $N gpaste --clear
+bindsym Ctrl+$caps+quotedbl exec $N "pkill gpaste-daemon && gpaste-client daemon"
+bindsym $mod+Shift+Insert exec $N gpaste --seltoclip
 
 # #---Dunst---# #
 bindsym $caps+space exec $N dunstctl close-all
