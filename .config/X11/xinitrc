@@ -22,7 +22,7 @@ nm-applet &
 redshift &
 remaps &
 numlockx &
-greenclip daemon &
+gpaste-client daemon &
 unclutter &
 # (sleep 30; syncthing -no-browser) &
 

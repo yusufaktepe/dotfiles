@@ -55,4 +55,5 @@ trap 'rehash' USR1
 # Enable completions for functions/scripts.
 compdef _files cpv
 compdef _dirs d
+compdef _gpaste-client gpaste
 
