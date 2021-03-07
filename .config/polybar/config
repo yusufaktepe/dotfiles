@@ -384,10 +384,10 @@ ramp-used-6 = 
 ramp-used-7 = 
 ramp-used-8 = 
 ramp-used-foreground = ${colors.icon}
-ramp-used-5-foreground = ${colors.yellow}
-ramp-used-6-foreground = ${colors.darkyellow}
-ramp-used-7-foreground = ${colors.orange}
-ramp-used-8-foreground = ${colors.red}
+ramp-used-6-foreground = ${colors.yellow}
+ramp-used-7-foreground = ${colors.darkyellow}
+ramp-used-8-foreground = ${colors.orange}
+ramp-used-9-foreground = ${colors.red}
 
 [module/wlan]
 type = internal/network
