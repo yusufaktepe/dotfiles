@@ -1,31 +1,34 @@
 #!/bin/sh
 
+grep_url() { sed 's/ /%20/g' | grep -Eo '(https?|ftp)://[^ "]+' ;}
+
 get_url() {
-	AW_CLASS=$(xprop -id "$(xdotool getactivewindow)" | awk -F\" '/WM_CLASS/{print $4}')
+	AW=$(xdotool getactivewindow)
+	AW_CLASS=$(xprop -id "$AW" | awk -F\" '/WM_CLASS/{print $4}')
+
 	case $AW_CLASS in
 		Vivaldi*|*chrom*|Opera*|firefox*|Tor*|Brave*)
-			xdotool key --clearmodifiers Ctrl+l \
-				key --clearmodifiers Right \
-				keydown --clearmodifiers Shift \
-				key Home \
-				keyup Shift \
-				key Escape
-			URL=$(xclip -o -selection primary | sed 's/ /%20/g' | grep -Eo '(https?|ftp)://[^ "]+') ;;
+			echo | xsel
+			xdotool key --delay 100 --clearmodifiers Ctrl+l Right Shift+Home Escape
+			URL=$(xsel -o | grep_url) ;;
 		mpv)
-			PID=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
-			PID=$(xprop -id "$PID" | grep -m 1 PID | cut -d " " -f 3)
-			URL=$(ps -o cmd --no-headers -p "$PID" | grep -Eo '(https?|ftp)://[^ "]+') ;;
+			PID=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/ {print $NF}')
+			PID=$(xprop -id "$PID" | awk '/PID/ {print $3; exit}')
+			URL=$(ps -o cmd --no-headers -p "$PID" | grep_url) ;;
 		*)
-			URL=$(xclip -o -selection clipboard | grep -Eo '(https?|ftp)://[^ "]+')
+			URL=$(xsel -ob | grep_url)
 	esac
+
+	[ -z "$URL" ] && exit
 }
 
 case $1 in
 	mpv) shift
 		case $1 in
-			-c) ym "$(xclip -o -selection clipboard)" ;;
-			*) get_url; [ -n "$URL" ] && ym "$URL" ;;
+			-c) ym "$(xsel -ob)" ;;
+			*)  get_url; ym "$URL" ;;
 		esac ;;
 	"") exit ;;
-	*) get_url; [ -n "$URL" ] && "$@" "$URL" >/dev/null 2>&1 &
+	*) get_url; "$@" "$URL" >/dev/null 2>&1 &
 esac
+
