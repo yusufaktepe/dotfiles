@@ -567,6 +567,7 @@ augroup vimrc
   au BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
   au BufRead,BufNewFile *.tex set filetype=tex
   au BufRead,BufNewFile *.rasi set filetype=css
+  au BufRead,BufNewFile /tmp/zsh* set filetype=sh
 
   " Enable Goyo by default for mutt writting
   au BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80
