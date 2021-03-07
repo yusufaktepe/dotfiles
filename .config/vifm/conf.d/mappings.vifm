@@ -33,8 +33,24 @@ nnoremap <silent> s :shell<cr>
 nnoremap <silent> S :sort<cr>
 
 " Toggle visibility of preview window
-nnoremap <silent> w :view<cr>
+" nnoremap <silent> w :view<cr>
 vnoremap <silent> w :view<cr>gv
+nnoremap <silent> w : <c-u>
+	\| if &quickview && !layoutis('only')
+	\|     view
+	\| else
+	\|     if layoutis('only')
+	\|         if &lines + 50 < &columns | vsplit | else | split | endif
+	\|         execute 'qnoremap w q:view|only|qunmap w<lt>cr>'
+	\|         execute 'qnoremap q q:view|only|qunmap q<lt>cr>'
+	\|         view!
+	\|         execute 'wincmd w'
+	\|     else
+	\|         execute 'qnoremap w q:view|qunmap w<lt>cr>'
+	\|     endif
+	\|     view!
+	\| endif
+	\| <cr>
 
 " Moving though sibling directories
 nnoremap <silent> <a-j> ]R
