@@ -3,7 +3,7 @@ Version=1.0
 Name=Vivaldi
 GenericName=Web Browser
 Comment=Access the Internet
-Exec=/usr/bin/vivaldi-stable --start-maximized %U
+Exec=/usr/bin/vivaldi-stable --enable-features=WebUIDarkMode --force-dark-mode --start-maximized %U
 StartupNotify=true
 Terminal=false
 Icon=vivaldi
@@ -14,8 +14,8 @@ Actions=new-window;new-private-window;
 
 [Desktop Action new-window]
 Name=New Window
-Exec=/usr/bin/vivaldi-stable --start-maximized --new-window
+Exec=/usr/bin/vivaldi-stable --enable-features=WebUIDarkMode --force-dark-mode --start-maximized --new-window
 
 [Desktop Action new-private-window]
 Name=New Private Window
-Exec=/usr/bin/vivaldi-stable --start-maximized --incognito
+Exec=/usr/bin/vivaldi-stable --enable-features=WebUIDarkMode --force-dark-mode --start-maximized --incognito
