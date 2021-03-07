@@ -232,7 +232,7 @@ bindsym $mod+Shift+idotless resize grow up $distance
 bindsym $mod+Shift+o resize grow right $distance
 
 # Maximize a floating window
-set $floatmax xdotool getactivewindow windowsize $(xdpyinfo | awk '/dimensions:/ {print $2}' | tr x ' ') windowmove 0 0
+set $floatmax xdotool getactivewindow windowsize $(tr , ' ' </sys/class/graphics/fb0/virtual_size) windowmove 0 0
 bindsym $mod+Ctrl+f floating enable; exec $N "polybar-msg cmd hide; $floatmax"
 
 # put YouTube into fullscreen and execute this for media mode
