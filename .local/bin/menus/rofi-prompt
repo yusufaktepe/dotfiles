@@ -1,0 +1,11 @@
+#!/bin/sh
+
+[ -z "$2" ] && printf 'Usage: %s [Prompt] [Command]\n' "${0##*/}" && exit
+
+Prompt=$1
+Command=$2
+
+choise=$(printf 'No\nYes' | rofi -dmenu -i -p "$Prompt" -u 0 -selected-row 1)
+
+[ "$choise" = Yes  ] && $Command
+

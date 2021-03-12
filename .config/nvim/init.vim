@@ -131,7 +131,7 @@ set listchars+=precedes:‹,extends:›
 if !empty($DISPLAY)
   set termguicolors
   let g:gruvbox_italic=1
-  let g:gruvbox_contrast_dark='medium'
+  let g:gruvbox_contrast_dark='hard'
   colorscheme gruvbox
   set background=dark
 endif
@@ -567,7 +567,7 @@ augroup vimrc
   au BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
   au BufRead,BufNewFile *.tex set filetype=tex
   au BufRead,BufNewFile *.rasi set filetype=css
-  au BufRead,BufNewFile /tmp/zsh* set filetype=sh
+  au BufRead,BufNewFile /tmp/zsh* set filetype=bash
 
   " Enable Goyo by default for mutt writting
   au BufRead,BufNewFile /tmp/neomutt* let g:goyo_width=80

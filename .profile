@@ -41,7 +41,7 @@ export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -name '.*' -prune -o -type d -print | paste -sd:)"
 
 # Others
-export SUDO_ASKPASS="$XDG_BIN_HOME/dmenu-rofi/askpass-rofi"
+export SUDO_ASKPASS="$XDG_BIN_HOME/menus/rofi-askpass"
 export FZF_DEFAULT_OPTS="
 	--layout=reverse --height 50%
 	--bind '?:toggle-preview,alt-k:preview-up,alt-p:preview-page-up'
