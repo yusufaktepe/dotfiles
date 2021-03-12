@@ -34,11 +34,11 @@ case "$(printf '%s' "$opts" | dmenu -i -p "Open link with...?")" in
 	" browser")
 		setsid -f "$BROWSER" "$1" >/dev/null 2>&1 ;;
 	" set as wallpaper")
-		file=/data/pictures/wallpapers/$(basename "$1")
+		file=~/pictures/wallpapers/${1##*/}
 		curl -sL "$1" > "$file"
 		setbg "$file" ;;
 	" xdg-open file")
-		tmp=/tmp/$(basename "$1")
+		tmp=/tmp/${1##*/}
 		curl -sL "$1" > "$tmp" && xdg-open "$tmp" >/dev/null 2>&1
 		wait; rm "$tmp" ;;
 	" w3m")

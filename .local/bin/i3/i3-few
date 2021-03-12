@@ -1,0 +1,13 @@
+#!/bin/bash
+# Prints out first empty workspace
+
+readarray -t Workspaces < <(printf '%d\n' {1..10})
+
+while read -ra UsedWorkspaces; do
+	for Used in "${UsedWorkspaces[@]}"; do
+		Workspaces=( ${Workspaces[@]/$Used} )
+	done
+done < <(i3-msg -t get_workspaces | jq -r '.[].num')
+
+printf '%s\n' "${Workspaces[0]}"
+
