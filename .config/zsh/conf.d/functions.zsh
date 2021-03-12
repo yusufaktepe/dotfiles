@@ -132,6 +132,8 @@ zcw_toggle-fg() {
 	fi
 }
 
+bak() { for f in "$@"; { cp "$f" "$(realpath "$f").bak" ;} ;}
+
 # List and load onto directory stack
 d() { [[ -n $1 ]] && dirs "$@" || dirs -v | head -10 ;}
 
