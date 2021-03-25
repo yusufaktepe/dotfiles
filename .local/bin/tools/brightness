@@ -1,9 +1,9 @@
 #!/bin/sh
 
 update_bar() {
-	if pidof i3blocks >/dev/null; then
+	if pidof -q i3blocks; then
 		pkill -RTMIN+10 i3blocks
-	elif pidof polybar >/dev/null; then
+	elif pidof -q polybar; then
 		polybar-msg hook brightness 1 >/dev/null
 	else
 		return

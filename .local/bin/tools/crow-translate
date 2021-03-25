@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if pidof crow >/dev/null; then
+if pidof -q crow; then
 	if wmctrl -lx | grep -q "crow.Crow Translate"; then
 		wmctrl -x -a "crow.Crow Translate" && wmctrl -c :ACTIVE:
 	else

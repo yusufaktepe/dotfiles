@@ -6,7 +6,7 @@
 History="$XDG_CACHE_HOME/greenclip/history"
 StaticHistory="${History%/*}/staticHistory"
 
-pidof greenclip >/dev/null || setsid -f greenclip daemon >/dev/null 2>&1
+pidof -q greenclip || setsid -f greenclip daemon >/dev/null 2>&1
 
 clear_history() {
 	xsel -bc; xsel -c

@@ -1,9 +1,9 @@
 #!/bin/sh
 
 update_bar() {
-	if pidof i3blocks >/dev/null; then
+	if pidof -q i3blocks; then
 		pkill -SIGRTMIN+6 i3blocks
-	elif pidof polybar >/dev/null; then
+	elif pidof -q polybar; then
 		pkill -USR1 polyplayer
 	else
 		return
@@ -12,21 +12,21 @@ update_bar() {
 
 case "$1" in
 	prev|p)
-		if pidof mpd >/dev/null; then
+		if pidof -q mpd; then
 			mpc prev && update_bar
 		else
 			playerctl --ignore-player=smplayer previous && update_bar
 		fi
 	;;
 	next|n)
-		if pidof mpd >/dev/null; then
+		if pidof -q mpd; then
 			mpc next && update_bar
 		else
 			playerctl --ignore-player=smplayer next && update_bar
 		fi
 	;;
 	toggle|t)
-		if pidof mpd >/dev/null; then
+		if pidof -q mpd; then
 			mpc toggle && update_bar
 		else
 			playerctl --ignore-player=smplayer play-pause && update_bar
@@ -42,22 +42,22 @@ case "$1" in
 	vol)
 		case $2 in
 			down)
-				if pidof mpd >/dev/null; then
+				if pidof -q mpd; then
 					vol mpd down
-				elif pidof spotifyd >/dev/null; then
+				elif pidof -q spotifyd; then
 					vol spotifyd down
-				elif pidof spotify >/dev/null; then
+				elif pidof -q spotify; then
 					vol spotify down
 				else
 					playerctl volume 0.05-
 				fi
 			;;
 			up)
-				if pidof mpd >/dev/null; then
+				if pidof -q mpd; then
 					vol mpd up
-				elif pidof spotifyd >/dev/null; then
+				elif pidof -q spotifyd; then
 					vol spotifyd up
-				elif pidof spotify >/dev/null; then
+				elif pidof -q spotify; then
 					vol spotify up
 				else
 					playerctl volume 0.05+

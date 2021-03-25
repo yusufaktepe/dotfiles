@@ -22,13 +22,13 @@ case $1 in
 
 		if [ "$CURRENT_PROFILE" = "analog-output-speaker" ]; then
 			pactl set-sink-port "$SINK" "analog-output-headphones"
-			pidof i3blocks >/dev/null && pkill -SIGRTMIN+10 i3blocks
+			pidof -q i3blocks && pkill -SIGRTMIN+10 i3blocks
 			# [ -e /sys/class/leds/platform::micmute/brightness ] &&
 			# 	echo 0 > /sys/class/leds/platform::micmute/brightness
 			ns -i audio-headphones "PulseAudio" "<b>Headphone</b> activated."
 		else
 			pactl set-sink-port "$SINK" "analog-output-speaker"
-			pidof i3blocks >/dev/null && pkill -SIGRTMIN+10 i3blocks
+			pidof -q i3blocks && pkill -SIGRTMIN+10 i3blocks
 			# [ -e /sys/class/leds/platform::micmute/brightness ] &&
 			# 	echo 1 > /sys/class/leds/platform::micmute/brightness
 			ns -i audio-speakers "PulseAudio" "<b>Speaker</b> activated."
