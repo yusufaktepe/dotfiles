@@ -22,29 +22,29 @@ opts="\
 case "$(printf '%s' "$opts" | dmenu -l 6 -i -p "Screenshot")" in
 	"[1] Selected area")
 		shot="$ss_dir/ss-selected-$datef.png"
-		maim -s "$shot" &&
+		maim -us "$shot" &&
 		notify
 	;;
 	"[2] Current window")
 		shot="$ss_dir/ss-window-$datef.png"
-		maim -i "$(xdotool getactivewindow)" "$shot"
+		maim -ui "$(xdotool getactivewindow)" "$shot"
 		notify
 	;;
 	"[3] Fullscreen")
 		shot="$ss_dir/ss-full-$datef.png"
-		maim "$shot"
+		maim -u "$shot"
 		notify
 	;;
 	"[4] Selected area (copy)")
-		mispipe "maim -s" "xclip -selection clipboard -t image/png" &&
+		mispipe "maim -us" "xclip -selection clipboard -t image/png" &&
 		notify_clip
 	;;
 	"[5] Current window (copy)")
-		maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png
+		maim -ui "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png
 		notify_clip
 	;;
 	"[6] Fullscreen (copy)")
-		maim | xclip -selection clipboard -t image/png
+		maim -u | xclip -selection clipboard -t image/png
 		notify_clip
 	;;
 esac

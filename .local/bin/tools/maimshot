@@ -5,7 +5,7 @@ datef=$(date +%Y-%m-%d_%H-%M-%S)
 
 [ ! -d "$ss_dir" ] && mkdir -p "$ss_dir"
 
-[ -n "$2" ] && cmd="maim -d $2" || cmd="maim"
+[ -n "$2" ] && cmd="maim -ud $2" || cmd="maim -u"
 
 notify() {
 	dunstify -a system -i "$shot" -A "$shot",Open "Screenshot captured." |
@@ -13,7 +13,7 @@ notify() {
 }
 
 case "$1" in
-	--desk|-d|$NULL)
+	--desk|-d|"")
 		shot="$ss_dir/ss-full-$datef.png"
 		$cmd "$shot"
 		notify
