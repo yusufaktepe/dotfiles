@@ -322,6 +322,8 @@ bindsym $mod+x [urgent=latest] focus
 
 # Hide/unhide the bar
 bindsym $mod+b exec $N polybar-msg cmd toggle
+bindsym $mod+$caps+b exec $N crypto_bar
+bindsym $mod+$caps+t exec $N crypto_bar top
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload ;; exec $N "notify-send -a system -i configuration -t 1500 i3 'Config reloaded'"

@@ -455,9 +455,14 @@
     history_ignore = yes
     fullscreen = show
 
+[crypto]
+    appname = crypto
+    history_ignore = yes
+    fullscreen = show
+
 [system]
     appname = system
     history_ignore = yes
     fullscreen = show
 
-# vim: ft=cfg
+#  vim: set ts=8 sw=4 tw=0 et ft=cfg :

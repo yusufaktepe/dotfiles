@@ -88,14 +88,106 @@ tray-background = ${colors.background-alt}
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[bar/crypto]
+;monitor = ${env:MONITOR:HDMI-1}
+enable-ipc = true
+width = 24%
+height = 24
+offset-x = 38%
+;offset-y = 1%
+; radius = 6.0
+fixed-center = true
+bottom = true
+; separator =
+
+background = #001d2021
+; background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = ${colors.red}
+; overline-size = 2
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+module-padding = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = mono:pixelsize=12;3
+
+modules-center = crypto
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/crypto_top]
+;monitor = ${env:MONITOR:HDMI-1}
+enable-ipc = true
+width = 5%
+height = 24
+offset-x = 95%
+;offset-y = 1%
+; radius = 6.0
+fixed-center = true
+; bottom = true
+; separator =
+
+background = #001d2021
+; background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = ${colors.red}
+; overline-size = 2
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+module-padding = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = mono:pixelsize=12;3
+
+modules-right = crypto_top
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+override-redirect = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
 ;==========================================================
 ; Modules
 ;==========================================================
 
+[module/crypto]
+type = custom/script
+exec = $XDG_CONFIG_HOME/polybar/modules/crypto
+
+[module/crypto_top]
+type = custom/script
+exec = $XDG_CONFIG_HOME/polybar/modules/crypto BTC
+
 [module/player]
 type = custom/script
 exec = $XDG_CONFIG_HOME/polybar/modules/polyplayer
-exec-if = pidof mpd || pidof spotify || pidof spotifyd
+exec-if = pidof -q mpd || pidof spotify || pidof spotifyd
 tail = true
 ; label = %output:0:47:...%
 
@@ -127,7 +219,6 @@ click-right = pkill bandwhich || $TERMINS Blockterm_bandwidth -e bandwhich &
 [module/brightness]
 type = custom/ipc
 hook-0 = $XDG_CONFIG_HOME/polybar/modules/brightness
-hook-1 = light -G | sed 's/\.[0-9]*//'
 initial = 1
 
 format-prefix = " "
@@ -155,7 +246,7 @@ format-underline = ${colors.darkgreen}
 format-background = ${colors.background-alt}
 format-padding = ${bar/default.module-padding}
 
-click-left = [ "$(pidof gsimplecal)" ] && pkill gsimplecal || gsimplecal &
+click-left = pidof gsimplecal && pkill gsimplecal || gsimplecal &
 click-right = xdg-open https://calendar.google.com &
 
 [module/weather]

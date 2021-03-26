@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+Cur=${1:-BTC|ETH|XMR}
+Fiat=USDT
+Api=https://api.binance.com/api/v1/ticker/price
+
+shopt -s nocasematch extglob
+
+while read -ra Rate; do
+	if [[ ${Rate[*]} =~ ^($Cur)($Fiat).*$ ]]; then
+		Coin=${Rate[0]%USDT}
+		Price=${Rate[1]}
+		Price=${Price%%+(0)}
+
+		Rates+=("$(printf '%s = %8s\n' "$Coin" "${Price/%.}")")
+	fi
+done < <(curl -s $Api | jq -r '.[] | (.symbol + " " + .price)')
+
+BG='%{B#bb406769}'
+BG_Alt='%{B#bb076678}'
+# BG='%{B#375355}'
+# BG_Alt='%{B#0D5361}'
+
+AL='%{A1:xdg-open https\://www.binance.com/en/trade/'
+AR=':}'
+
+while read -r Index; do
+	[ -z "$Index" ] && break
+
+	[ -z "${Rates[1]}" ] && printf '%s%s %s %s%s' \
+		"$AL${Index%% =*}_$Fiat$AR" "$BG" "${Index##*= }" "%{B-}" "%{A}" && break
+
+	printf '%s%s %s %s%s ' "$AL${Index%% =*}_$Fiat$AR" "$BG" "$Index" "%{B-}" "%{A}"
+	read -r Index
+	[ -n "$Index" ] && printf '%s%s %s %s%s ' \
+		"$AL${Index%% =*}_$Fiat$AR" "$BG_Alt" "$Index" "%{B-}" "%{A}"
+done < <(printf '%s\n' "${Rates[@]}")
+

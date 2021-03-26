@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+for arg in "$@"; do
+	case $arg in
+		-c) Cur=$2 ;;
+		-f) Fiat=$2 ;;
+		-le) ExprLE="<= $2" ;;
+		-ge) ExprGE=">= $2" ;;
+		-C) Continuous=true ;;
+	esac
+	shift
+done
+
+while :; do
+	P=$(crypto_prices "$Cur" "${Fiat:-USDT}")
+
+	for Expr in "$ExprLE" "$ExprGE"; do
+		[ -z "$Expr" ] && continue
+		[ -z "$P" ] && break
+		[ "${Expr% *}" = '>=' ] && Color='#2EBD85'
+		[ "${Expr% *}" = '<=' ] && Color='#E0294A'
+
+		if (( $(printf '%s\n' "${P##* } $Expr" | bc -l) )); then
+			Expr=${Expr/<=/▼} Expr=${Expr/>=/▲}
+
+			dunstify -a crypto -t 15000 -r 2001 -i money-manager-ex \
+				-h string:bgcolor:$Color "${P/=*/$Expr}"
+
+			[ -z "$Continuous" ] && break 2
+		fi
+	done
+
+	sleep 5
+done
+

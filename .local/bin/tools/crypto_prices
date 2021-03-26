@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-Cur="${1:-BTC|ETH|LINK|DOT|XMR|LTC|USDT}"
-Fiat="${2:-TRY|USDT}"
+Cur=${1:-BTC|ETH|LINK|DOT|XMR|LTC|ADA|ALGO}
+Fiat=${2:-USDT}
 Api=https://api.binance.com/api/v1/ticker/price
 
 shopt -s nocasematch extglob
@@ -10,10 +10,15 @@ while read -ra Rate; do
 	if [[ ${Rate[*]} =~ ^($Cur)($Fiat).*$ ]]; then
 		Coin=${Rate[0]}
 		Price=${Rate[1]}
-		Price=${Price/%+(0)}
-		Rates+=("$(printf '%-8s = %s\n' "$Coin" "${Price/%.}")")
-	fi
-done < <(curl -s $Api | jq -r '.[] | (.symbol + " " + .price)')
+		Price=${Price%%+(0)}
 
-printf '%s\n' "${Rates[@]}" | sort
+		if [ "$NOTIFICATION" = true ]; then
+			Rates+=("$(printf '%-9s\t= %-10s\t\n' "$Coin" "${Price/%.}")")
+		else
+			Rates+=("$(printf '%-8s = %s\n' "$Coin" "${Price/%.}")")
+		fi
+	fi
+done < <(curl -s $Api | jq -r '.[] | (.symbol + " " + .price)' 2>/dev/null)
+
+printf '%s\n' "${Rates[@]}"
 

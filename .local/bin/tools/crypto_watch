@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+export NOTIFICATION=true
+
+for arg in "$@"; do
+	case $arg in
+		-c) Cur=$2 ;;
+		-f) Fiat=$2 ;;
+		-s) Single=true ;;
+	esac
+	shift
+done
+
+while :; do
+	P=$(crypto_prices "${Cur:-BTC}" "${Fiat:-USDT}")
+	[ -n "$Single" ] && P=$(printf '%-10s\n' "${P##*= }")
+
+	[ -z "${P//[[:space:]]}" ] && sleep 5 && continue
+
+	dunstify -a crypto -t 15000 -r 2000 -i money-manager-ex "$P"
+	sleep 5
+done
+
