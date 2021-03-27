@@ -64,6 +64,8 @@ filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.xpm,*.ico},<image/*>
 	\ qimgv %c 2>/dev/null | vifm-select &,
 	\ {Edit with GIMP}
 	\ gimp %f %i &,
+	\ {Set as wallpaper}
+	\ setbg %c &,
 
 " OpenRaster/XCF
 filextype *.ora,*.xcf
