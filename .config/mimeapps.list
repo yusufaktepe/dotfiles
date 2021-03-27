@@ -2,6 +2,7 @@
 x-scheme-handler/http=vivaldi-stable.desktop
 x-scheme-handler/https=vivaldi-stable.desktop
 application/xhtml+xml=vivaldi-stable.desktop
+application/x-mozilla-bookmarks=vivaldi-stable.desktop
 text/html=vivaldi-stable.desktop
 inode/directory=vifm-tab.desktop
 inode/mount-point=vifm-tab.desktop
