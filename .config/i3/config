@@ -51,7 +51,7 @@ bindsym $mod+udiaeresis exec $N ddspawn tmuxi
 # bindsym $mod+Shift+Return exec $N samedir
 
 # #---Rofi---# #
-set $calc rofi -show calc -modi calc -no-show-match -no-sort
+set $calc LC_NUMERIC=en_US.UTF-8 rofi -show calc -modi calc -no-show-match -no-sort
 bindsym $mod+d exec $N rofi -show combi
 bindsym $mod+c exec $N $calc
 bindsym XF86Calculator exec $N $calc
@@ -351,6 +351,7 @@ for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
 assign [class="(?i)Vivaldi"]                     $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
+assign [class="(?i)Opera"]                       $ws4
 assign [class="(?i)telegram"]                    $ws6
 assign [class="Audacity"]                        $ws7
 assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8

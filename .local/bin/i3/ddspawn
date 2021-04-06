@@ -2,12 +2,13 @@
 
 [ -z "$1" ] && exit
 
-script=$1
+Script=$1
 shift
-if xwininfo -tree -root | grep -q "(\"dropdown_$script\" "; then
-	echo "Window detected."
-	i3 "[instance=\"dropdown_$script\"] scratchpad show; [instance=\"dropdown_$script\"] move position center"
+
+if xwininfo -tree -root | grep -q "(\"dropdown_$Script\" "; then
+	i3-msg -q "[instance=\"dropdown_$Script\"] scratchpad show;
+		[instance=\"dropdown_$Script\"] move position center"
 else
-	echo "Window not detected... spawning."
-	i3 "exec --no-startup-id $TERMINS dropdown_$script $@ -e $script"
+	i3-msg -q "exec --no-startup-id $TERMINS dropdown_$Script $@ -e $Script"
 fi
+

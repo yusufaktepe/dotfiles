@@ -10,6 +10,14 @@ snippet sdir "Script directory"
 ScriptDir=${0%/*}
 endsnippet
 
+snippet pname "Parameter basename"
+${$1##*/}
+endsnippet
+
+snippet pdir "Parameter dirname"
+${$1%/*}
+endsnippet
+
 snippet if "if ... then (if)"
 if [ ${1:condition} ]; then
 	${0:${VISUAL}}

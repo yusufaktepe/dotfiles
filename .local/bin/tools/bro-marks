@@ -1,0 +1,32 @@
+#!/bin/sh
+
+Bookmarks=~/.config/vivaldi/Default/Bookmarks
+Quickmarks=~/.config/browsers/quickmarks
+Separator=''
+sB="<span foreground='#a89984'>"
+sE="</span>"
+
+_rofi() {
+	rofi -dmenu -markup-rows -format 'p' -width 100 -p 
+}
+
+bookmarks() {
+	jq_script='def ancestors: while(. | length >= 2; del(.[-1,-2]));
+		. as $in | paths(.url?) as $key | $in | getpath($key) |
+		{name,url, path: [$key[0:-2] | ancestors as $a |
+		$in | .name?] | reverse | join("/") } |
+		(.name | .[0:90]) + "'$Separator'" + "'$sB'" + .url + "'$sE'"'
+
+	jq -r "$jq_script" < "$Bookmarks" |
+		column -s $Separator -t | grep -v 'javascript:'
+}
+
+quickmarks() {
+	while read -r key url; do
+		printf '%-92s %s\n' "[$key]" "$sB$url$sE"
+	done < $Quickmarks
+}
+
+{ quickmarks; bookmarks ;} | sed 's/\&/\&amp\;/g' |
+	_rofi | awk '{print $NF}' | xargs -r xdg-open
+

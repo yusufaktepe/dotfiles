@@ -2,7 +2,7 @@
 * {
   main:               #406769;
   highlight:          bold #D65D0E;
-  urgent:             #D79921;
+  urgent:             #CC241D;
 
   fg:                 #ebdbb2;
   bg:                 #1d2021;

@@ -21,15 +21,15 @@ shift $((OPTIND-1))
 if wmctrl -lx | grep -iq "$Ins.$TERMINAL"; then
 	if [ "$AW_INS" = "$Ins" ]; then
 		if [ "$Scratchpad" ]; then
-			i3-msg "[instance=\"(?i)$Ins\"] move scratchpad" >/dev/null
+			i3-msg -q "[instance=\"(?i)$Ins\"] move scratchpad"
 		elif [ "$Toggle" ]; then
-			i3-msg kill >/dev/null
+			i3-msg -q kill
 			# wmctrl -c :ACTIVE:
 		else
-			i3-msg "workspace back_and_forth" >/dev/null
+			i3-msg -q 'workspace back_and_forth'
 		fi
 	else
-		i3-msg "[instance=\"(?i)$Ins\"] focus" >/dev/null
+		i3-msg -q "[instance=\"(?i)$Ins\"] focus"
 	fi
 else
 	[ $Hold ] && Exec="$Exec; $SHELL"

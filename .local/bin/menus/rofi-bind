@@ -33,7 +33,9 @@ until [ $b -eq ${#kb_bind[@]} ]; do
 		# Check if the key is uppercase and distinguish from lowercase
 		[[ $kbind =~ ^[A-Z]$ ]] && kbind="Shift+${kbind,}"
 
-		[ -n "${kb_msg[$b]}" ] && msg+=("$sB $kbind $sE ${kb_msg[$b]} ")
+		[ -n "${kb_msg[$b]}" ] &&
+			msg+=("$sB $kbind $sE ${kb_msg[$b]} ") ||
+			msg+=("$sB $kbind $sE")
 	done
 done
 

@@ -134,6 +134,7 @@ if !empty($DISPLAY)
   let g:gruvbox_contrast_dark='hard'
   colorscheme gruvbox
   set background=dark
+  let g:airline_theme='gruvbox'
 endif
 
 " }}}
@@ -225,6 +226,7 @@ noremap <silent> <F2> :set paste! nopaste?<CR>
 
 " Enter command mode with substitution command prefilled
 nnoremap <M-s> :%s///gc<Left><Left><Left><Left>
+vnoremap <M-s> "hy:%s/<C-r>h//gc<Left><Left><Left>
 
 " Toggle conceal(level|cursor)
 nnoremap <silent> <leader>cl :exe "set cole=" . (&cole == "0" ? "2" : "0") \| set cole<CR>
@@ -337,7 +339,6 @@ let g:airline#extensions#whitespace#trailing_format = 'Tr·[%s]'
 let g:airline#extensions#whitespace#mixed_indent_format = 'MI:L[%s]'
 let g:airline#extensions#whitespace#mixed_indent_file_format = 'MI:F[%s]'
 let g:airline_powerline_fonts=1
-let g:airline_theme='gruvbox'
 
 "=== Deoplete
 let g:deoplete#enable_at_startup = 1

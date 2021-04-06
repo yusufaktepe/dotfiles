@@ -236,7 +236,7 @@ scroll-down = brightness dec 5
 
 [module/time]
 type = custom/script
-exec = date '+%d/%m %{T6}%{F#BDAE93}%{F- T-} %H:%M'
+exec = date '+%a, %b %d %{T6}%{F#BDAE93}%{F- T-} %H:%M'
 interval = 60
 ; label = "%output%"
 

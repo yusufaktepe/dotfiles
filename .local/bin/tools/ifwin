@@ -28,16 +28,16 @@ esac
 if pgrep -x "$Proc?" >/dev/null; then
 	if [ "$AW_CLASS" = "$Class" ]; then
 		if [ "$Scratchpad" ]; then
-			i3-msg "[class=\"(?i)$Class\"] move scratchpad" >/dev/null
+			i3-msg -q "[class=\"(?i)$Class\"] move scratchpad"
 		elif [ "$Toggle" ]; then
-			i3-msg kill >/dev/null
+			i3-msg -q kill
 			# wmctrl -c :ACTIVE:
 			[ "$Class" = arandr ] && setbg
 		else
-			i3-msg 'workspace back_and_forth' >/dev/null
+			i3-msg -q 'workspace back_and_forth'
 		fi
 	else
-		i3-msg "[class=\"(?i)$Class\"] focus" >/dev/null
+		i3-msg -q "[class=\"(?i)$Class\"] focus"
 	fi
 else
 		[ "$Exec" != "$ExecArgs" ] && Exec="$Exec $ExecArgs"
