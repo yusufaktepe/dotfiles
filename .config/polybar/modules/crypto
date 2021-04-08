@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-Cur=${1:-BTC|ETH|XMR}
+Cur=${1:-BTC|ETH|BNB|ADA|SOL|TRX|LINK|XMR}
 Fiat=USDT
 Api=https://api.binance.com/api/v1/ticker/price
 

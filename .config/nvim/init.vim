@@ -293,10 +293,6 @@ cnoremap <C-h> <C-w>
 " Check file in shellcheck:
 map <leader>cs :!clear && shellcheck -x %<CR>
 
-" Open bibliography file in split
-map <leader>bi :vsp<space>$BIB<CR>
-map <leader>re :vsp<space>$REFER<CR>
-
 " Compile document, be it groff/LaTeX/markdown/etc.
 map <leader>C :w! \| !compiler <C-r>%<CR>
 

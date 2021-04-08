@@ -97,8 +97,11 @@ case $1 in
 	webcam)
 		pkill -f /dev/video ||
 			mpv --no-config --no-cache --no-osc --no-input-default-bindings \
-				--profile=low-latency --input-conf=/dev/null \
-				--x11-name=webcam --geometry=-0-0 --autofit=30% /dev/video0
+				--input-conf=/dev/null --profile=low-latency \
+				--x11-name=webcam --geometry=-0-0 --autofit=30% \
+				--demuxer-lavf-format=video4linux2 \
+				--demuxer-lavf-o-set=input_format=mjpeg \
+				--untimed --vf=hflip av://v4l2:/dev/video0
 	;;
 	""|*)
 		while read -r Usage; do

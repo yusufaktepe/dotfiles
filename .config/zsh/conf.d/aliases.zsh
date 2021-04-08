@@ -18,7 +18,7 @@ alias tree='tree -aI ".git|node_modules" --dirsfirst'
 alias vidir='vidir -v'
 alias wget='wget -qc --show-progress'
 
-for p in {u,}mount ps_mem updatedb; { alias $p="sudo $p" ;}; unset p
+for p in {u,}mount iotop ps_mem updatedb; { alias $p="sudo $p" ;}; unset p
 
 alias didi='sudo dd bs=4M oflag=sync status=progress'
 alias magit='nvim -c MagitOnly'

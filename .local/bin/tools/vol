@@ -34,7 +34,7 @@ app() {
 		sed -n "/binary = \"$1\"/,/^Sink Input/p")
 	[ -z "$input" ] && exit 1
 
-	sink=$(echo "$input" | grep -oP '^Sink Input #\K[^"]+')
+	sink=$(echo "$input" | grep -m 1 -oP '^Sink Input #\K[^"]+')
 	vol=$(echo "$input" | grep -oP '[0-9]*(\.[0-9]*)?(?=%)' | head -n 1)
 
 	case $2 in

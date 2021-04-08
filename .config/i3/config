@@ -51,7 +51,8 @@ bindsym $mod+udiaeresis exec $N ddspawn tmuxi
 # bindsym $mod+Shift+Return exec $N samedir
 
 # #---Rofi---# #
-set $calc LC_NUMERIC=en_US.UTF-8 rofi -show calc -modi calc -no-show-match -no-sort
+set $calc LC_NUMERIC=en_US.UTF-8 rofi -show calc -modi calc -no-show-match \
+	-no-sort -calc-command "printf '{result}' | xsel -b" >/dev/null
 bindsym $mod+d exec $N rofi -show combi
 bindsym $mod+c exec $N $calc
 bindsym XF86Calculator exec $N $calc
@@ -83,11 +84,13 @@ bindsym $mod+F3 exec $N ifwin -e "$BROWSER $chromium_flags --start-maximized"
 bindsym $mod+F4 exec $N ifwin -e 'opera --start-maximized'
 bindsym $mod+F5 exec $N ifwin -e firefox
 bindsym $mod+F6 exec $N ifwin -e 'google-chrome-stable $chromium_flags'
+bindsym $mod+F7 exec $N ifwin -e brave
 bindsym $mod+Shift+F2 exec $N ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 exec $N $BROWSER $chromium_flags --start-maximized --incognito
 bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N firefox --private-window
 bindsym $mod+Shift+F6 exec $N google-chrome-stable $chromium_flags --incognito
+bindsym $mod+Shift+F7 exec $N brave --incognito
 bindsym $mod+m exec $N XDG_CURRENT_DESKTOP=gnome ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
@@ -220,9 +223,12 @@ bindsym $caps+minus [class=".*"] scratchpad show
 bindsym $mod+Shift+udiaeresis [class="(?i)Alacritty|St" instance="^(?!dropdown_*)"] scratchpad show
 bindsym $mod+Shift+gbreve [class="^(?i)(?!Alacritty|St|smplayer|mpv)"] scratchpad show
 
-# Bottom left-right with script
-bindsym $mod+Shift+b floating toggle; sticky toggle; exec $N hover left
-bindsym $mod+Shift+n floating toggle; sticky toggle; exec $N hover right
+# Floating bottom left-right
+set $AW $(xdotool getactivewindow)
+bindsym $mod+Shift+b floating toggle; sticky toggle; \
+	exec $N "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1 600"
+bindsym $mod+Shift+n floating toggle; sticky toggle; \
+	exec $N "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1069 600"
 
 # Resize
 set $distance 10 px or 10 ppt
@@ -344,7 +350,7 @@ bindsym --whole-window --border $mod+Ctrl+button5 move container to workspace ne
 #=====================================================================
 
 ## Set some workspaces to tabbed by default
-for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
+for_window [workspace="$ws1|$ws2|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
 # assign [window_role="browser"]                 $ws1

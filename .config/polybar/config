@@ -91,9 +91,31 @@ cursor-scroll = ns-resize
 [bar/crypto]
 ;monitor = ${env:MONITOR:HDMI-1}
 enable-ipc = true
-width = 24%
+;3
+; width = 23.5%
+;4
+; width = 31.45%
+;5
+; width = 39.4%
+;6
+; width = 47.8%
+;7
+; width = 55.8%
+;8
+width = 63.82%
 height = 24
-offset-x = 38%
+;3
+; offset-x = 38.28%
+;4
+; offset-x = 34.3%
+;5
+; offset-x = 30.3%
+;6
+; offset-x = 26.1%
+;7
+; offset-x = 22.14%
+;8
+offset-x = 18.1%
 ;offset-y = 1%
 ; radius = 6.0
 fixed-center = true
