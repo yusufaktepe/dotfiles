@@ -1,0 +1,63 @@
+#!/bin/bash
+
+Email=$GMAIL
+Password=$GMAILAP
+Prompt=
+ColorSender=#8EC07C
+ColorSubject=#EBDBB2
+
+Rofi() {
+	rofi -format 'i:s' -dmenu -i -l 10 -width 60 -markup-rows -p "$Prompt" "$@"
+}
+
+Parse() {
+	Feed=$(curl -su "$Email":"$Password" https://mail.google.com/mail/feed/atom | xmllint --format -)
+
+	mapfile -t Sender < <(awk -F '>|<' '/<name>/ {print $3}' <<< "$Feed")
+	[ -z "${Sender[0]}" ] && return
+	mapfile -t Subject < <(awk -F '>|<' '/<title>/ {print $3}' <<< "$Feed" | tail -n +2)
+	mapfile -t Url < <(grep -oP 'message_id=\K[[:alnum:]]+' <<< "$Feed" | sed 's|^|https://mail.google.com/mail/u/0/#inbox/|')
+}
+
+Print() {
+	Parse
+
+	[ -z "$Feed" ] && { printf 'Error connecting to Gmail!\n'; exit ;}
+	[ -z "${Sender[0]}" ] && { printf 'No new mail!\n'; exit ;}
+
+	for ((i=0; i<${#Sender[@]}; i++)); do
+		FSender=$(printf '\e[1;34m%s\e[0m\n' "${Sender[i]}")
+		FSubject=$(printf '\e[1m%s\e[0m\n' "${Subject[i]}")
+		FUrl=$(printf '\e[90m%s\e[0m\n' "${Url[i]}")
+		Inbox+=("$FSender$FSubject$FUrl")
+	done
+
+	Header="\e[1;94m\e[4mSender\e[0m\e[1;94m\e[4mSubject\e[0m\e[1;94m\e[4mUrl\e[0m"
+	printf '%b\n%s\n' "$Header" "${Inbox[@]}" | column -ts ''
+}
+
+Menu() {
+	Parse
+
+	[ -z "$Feed" ] && { Rofi -mesg "Error connecting to Gmail!"; exit ;}
+	[ -z "${Sender[0]}" ] && { Rofi -mesg "No new mail!" >/dev/null; exit ;}
+
+	for ((i=0; i<${#Sender[@]}; i++)); do
+		FSender="<span foreground=\"$ColorSender\">${Sender[i]}</span>"
+		FSubject="<span foreground=\"$ColorSubject\">${Subject[i]}</span>"
+		Inbox+=("<b>$FSender$FSubject</b>")
+	done
+
+	Mail=$(printf '%s\n' "${Inbox[@]}" | column -ts '' | Rofi)
+	Index=${Mail%%:*}
+
+	[ -z "$Index" ] && exit
+
+	setsid -f xdg-open "${Url[Index]}" >/dev/null 2>&1
+}
+
+case $1 in
+	-m|--menu) Menu ;;
+	*) Print ;;
+esac
+

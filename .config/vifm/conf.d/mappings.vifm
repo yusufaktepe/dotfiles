@@ -95,6 +95,9 @@ nnoremap <silent> yf :!echo %c:p | xclip -r -selection c %i<cr>
 nnoremap <silent> yN :!echo %c | xclip -r -selection c %i<cr>
 " Yank current file name (without extension) into the clipboard
 nnoremap <silent> yn :!v="%c"; echo "${v%%.*}" | xclip -r -selection c %i<cr>
+" Copy content of the file
+nnoremap <silent> yc :!clipcopy "%c" %i<cr>
+
 
 " Archive
 " nnoremap <silent> x :extract<cr>

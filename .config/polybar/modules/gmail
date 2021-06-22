@@ -1,0 +1,14 @@
+#!/bin/sh
+
+Unread=$(curl -su "$GMAIL":"$GMAILAP" https://mail.google.com/mail/feed/atom | grep -oP '<fullcount>\K[[:alnum:]]+')
+
+[ -z "$Unread" ] && exit
+
+Icon=''
+
+if [ "$Unread" -gt 0 ]; then
+	printf '%s\n' "%{F#bbFB4934}$Icon%{F-} $Unread"
+else
+	printf '%s\n' "%{F#bbBDAE93}$Icon%{F-} $Unread"
+fi
+

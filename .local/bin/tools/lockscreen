@@ -8,9 +8,9 @@ IFS=, read -r width height </sys/class/graphics/fb0/virtual_size
 
 case ${width}x${height} in
 	1920x1080)
-		screenOpts='--timesize=55 --datesize=20 --datepos=tx:ty+43 --radius=130 --ring-width=8' ;;
+		screenOpts='--time-size=55 --date-size=20 --date-pos=tx:ty+43 --radius=130 --ring-width=8' ;;
 	1366x768)
-		screenOpts='--timesize=40' ;;
+		screenOpts='--time-size=40' ;;
 esac
 
 prelock() {
@@ -30,32 +30,33 @@ lock() {
 	i3lock \
 		-t -i "${1:-$HOME/.local/share/backgrounds/lock.png}" \
 		--color="#1D2021" \
-		--insidecolor="#00000033" \
-		--insidevercolor="#00000080" \
-		--insidewrongcolor="#00000033" \
-		--ringcolor="#00000000" \
-		--ringvercolor="#00000000" \
-		--ringwrongcolor="#fb493466" \
-		--wrongcolor="#00000000" \
-		--linecolor="#ebdbb2ff" \
-		--separatorcolor="#ebdbb24d" \
-		--keyhlcolor="#b8bb2666" \
-		--bshlcolor="#fb493466" \
-		--timecolor="#ebdbb2ff" \
-		--datecolor="#ebdbb2ff" \
+		--inside-color="#00000033" \
+		--insidever-color="#00000080" \
+		--insidewrong-color="#00000033" \
+		--ring-color="#00000000" \
+		--ringver-color="#00000000" \
+		--ringwrong-color="#fb493466" \
+		--wrong-color="#00000000" \
+		--line-color="#ebdbb2ff" \
+		--separator-color="#ebdbb24d" \
+		--keyhl-color="#b8bb2666" \
+		--bshl-color="#fb493466" \
+		--time-color="#ebdbb2ff" \
+		--date-color="#ebdbb2ff" \
 		--line-uses-ring \
 		--ignore-empty-password \
 		--indicator \
 		--force-clock \
-		--timestr="%H:%M" \
-		--datestr="%A, %d/%m" \
-		--veriftext="" \
-		--wrongtext="" \
-		--noinputtext="" \
-		--locktext="" \
+		--time-str="%H:%M" \
+		--date-str="%A, %d/%m" \
+		--verif-text= \
+		--wrong-text= \
+		--noinput-text= \
+		--lock-text= \
 		--pass-media-keys \
 		--nofork \
 		$screenOpts
 }
 
 prelock; lock "$@"; postlock
+

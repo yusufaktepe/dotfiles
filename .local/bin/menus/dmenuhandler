@@ -32,7 +32,7 @@ case "$(printf '%s' "$opts" | dmenu -i -p "Open link with...?")" in
 	" youtube-dl (audio)")
 		tsp youtube-dl --add-metadata -xic -f bestaudio/best "$1" >/dev/null 2>&1 ;;
 	" browser")
-		setsid -f "$BROWSER" "$1" >/dev/null 2>&1 ;;
+		setsid -f xdg-open "$1" >/dev/null 2>&1 ;;
 	" set as wallpaper")
 		file=~/pictures/wallpapers/${1##*/}
 		curl -sL "$1" > "$file"

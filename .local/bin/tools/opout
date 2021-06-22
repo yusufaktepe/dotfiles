@@ -10,6 +10,6 @@ basename="$(echo "$1" | sed 's/\.[^\/.]*$//')"
 
 case "$1" in
 	*.tex|*.m[dse]|*.[rR]md|*.mom|*.[0-9]) setsid -f xdg-open "$basename".pdf >/dev/null 2>&1 ;;
-	*.html) setsid -f "$BROWSER" "$basename".html >/dev/null 2>&1 ;;
+	*.html) setsid -f xdg-open "$basename".html >/dev/null 2>&1 ;;
 	*.sent) setsid -f sent "$1" >/dev/null 2>&1 ;;
 esac

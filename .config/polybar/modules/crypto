@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-Cur=${1:-BTC|ETH|BNB|ADA|SOL|TRX|LINK|XMR}
+Cur=${1:-BTC|ETH|BNB|ADA|SOL|XMR}
 Fiat=USDT
 Api=https://api.binance.com/api/v1/ticker/price
 
@@ -21,8 +21,8 @@ BG_Alt='%{B#bb076678}'
 # BG='%{B#375355}'
 # BG_Alt='%{B#0D5361}'
 
-AL='%{A1:xdg-open https\://www.binance.com/en/trade/'
-AR=':}'
+AL='%{A3:xdg-open https\://www.binance.com/en/trade/'
+AR='?layout=pro\&theme=dark\&type=spot:}'
 
 while read -r Index; do
 	[ -z "$Index" ] && break

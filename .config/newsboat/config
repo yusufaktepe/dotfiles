@@ -10,7 +10,7 @@ auto-reload yes
 browser linkhandler
 external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 datetime-format "%Y-%m-%d"
-feed-sort-order firsttag title
+feed-sort-order firsttag
 text-width 80
 goto-next-feed no
 scrolloff 5

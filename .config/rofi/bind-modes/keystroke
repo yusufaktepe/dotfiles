@@ -7,20 +7,14 @@ kb_bind[1]='q'
 kb_bind[2]='g'
 kb_bind[3]='minus'
 kb_bind[4]='asterisk'
-kb_bind[5]='comma'
-kb_bind[6]='0'
 
 kb_act[1]="autotype mail"
 kb_act[2]="autotype mail2"
 kb_act[3]="autotype banner"
 kb_act[4]="autotype banner2"
-kb_act[5]="autotype mdcode"
-kb_act[6]="autotype shrug"
 
 kb_msg[1]='mail'
 kb_msg[2]='mail2'
 kb_msg[3]='banner'
 kb_msg[4]='banner2'
-kb_msg[5]='mdcode'
-kb_msg[6]='shrug'
 

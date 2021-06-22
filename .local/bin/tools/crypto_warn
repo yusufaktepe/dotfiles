@@ -8,6 +8,7 @@ for arg in "$@"; do
 		-ge) ExprGE=">= $2" ;;
 		-C) Continuous=true ;;
 		-a) Alarm=true ;;
+		-A) Alarm=true CAlarm=true ;;
 	esac
 	shift
 done
@@ -28,10 +29,8 @@ while :; do
 				-h string:bgcolor:$Color "${P/=*/$Expr}"
 
 			if [ -n "$Alarm" ] && [ -z "$Rang" ]; then
-				ffplay -nodisp -loglevel -8 -autoexit ~/music/calling.mp3
-				Rang=true
-			else
-				return
+				ffplay -volume 60 -nodisp -loglevel -8 -autoexit ~/music/calling.mp3
+				[ -z "$CAlarm" ] && Rang=true
 			fi
 
 			[ -z "$Continuous" ] && break 2

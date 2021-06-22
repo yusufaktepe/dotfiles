@@ -1,3 +1,6 @@
+;==========================================================
+; Colors {{{
+;==========================================================
 [colors]
 background = ${xrdb:background:#1d2021}
 foreground = ${xrdb:foreground:#ebdbb2}
@@ -27,6 +30,10 @@ white = ${xrdb:color15:#ebdbb2}
 orange = #FE8019
 darkorange = #D65D0E
 
+; }}}
+;==========================================================
+; Bars {{{
+;==========================================================
 [bar/default]
 ;monitor = ${env:MONITOR:HDMI-1}
 enable-ipc = true
@@ -98,11 +105,11 @@ enable-ipc = true
 ;5
 ; width = 39.4%
 ;6
-; width = 47.8%
+width = 47.8%
 ;7
 ; width = 55.8%
 ;8
-width = 63.82%
+; width = 63.82%
 height = 24
 ;3
 ; offset-x = 38.28%
@@ -111,11 +118,11 @@ height = 24
 ;5
 ; offset-x = 30.3%
 ;6
-; offset-x = 26.1%
+offset-x = 26.1%
 ;7
 ; offset-x = 22.14%
 ;8
-offset-x = 18.1%
+; offset-x = 18.1%
 ;offset-y = 1%
 ; radius = 6.0
 fixed-center = true
@@ -194,13 +201,28 @@ override-redirect = true
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+; }}}
 ;==========================================================
-; Modules
+; Modules {{{
 ;==========================================================
+
+[module/gmail]
+type = custom/script
+exec = $XDG_CONFIG_HOME/polybar/modules/gmail
+exec-if = nm-online -x
+interval = 60
+
+format-background = ${colors.background-alt}
+format-underline = ${colors.blue}
+format-padding = ${bar/default.module-padding}
+
+click-left = gmail -m &
+click-right = xdg-open https://mail.google.com &
 
 [module/crypto]
 type = custom/script
 exec = $XDG_CONFIG_HOME/polybar/modules/crypto
+; interval = 3
 
 [module/crypto_top]
 type = custom/script
@@ -273,7 +295,7 @@ click-right = xdg-open https://calendar.google.com &
 
 [module/weather]
 type = custom/script
-exec = curl -s "wttr.in/?format=%c+%t"
+exec = curl -s "wttr.in/$CITY?format=%c+%t"
 exec-if = nm-online -x
 interval = 3600
 ; label = %output%
@@ -314,44 +336,6 @@ label-indicator-on-capslock-padding = 1
 label-indicator-on-capslock-margin-right = 0
 label-indicator-on-capslock-background = ${colors.darkmagenta}
 label-indicator-on-capslock-underline = ${colors.darkmagenta}
-
-[module/filesystem]
-type = internal/fs
-interval = 180
-
-mount-0 = /
-
-format-mounted-prefix = " "
-format-mounted-prefix-foreground = ${colors.icon}
-format-mounted-prefix-underline = ${colors.blue}
-
-label-mounted = %free:0:2%G
-; label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-mounted-underline = ${colors.blue}
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.darkgrey}
-
-[module/bspwm]
-type = internal/bspwm
-
-label-focused = %index%
-label-focused-background = ${colors.background-focused}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 1
-
-label-occupied = %index%
-label-occupied-padding = 1
-
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 1
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 1
-
-; Separator in between workspaces
-; label-separator = |
 
 [module/i3]
 type = internal/i3
@@ -402,51 +386,6 @@ label-urgent-padding = 1
 
 ; Separator in between workspaces
 ; label-separator = |
-
-[module/mpd]
-type = internal/mpd
-format-online = <toggle> <label-song>
-;format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
-;format-playing = ${self.format-online}
-;format-paused = ${self.format-online}
-;format-stopped = ${self.format-online}
-format-paused-foreground = ${colors.darkgrey}
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
-label-song-maxlen = 45
-label-song-ellipsis = true
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-format-prefix = " "
-format-prefix-foreground = ${colors.icon}
-; label = %percentage%%
-; format-underline = ${colors.darkmagenta}
-
-bar-width = 8
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-enable-scroll = true
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
 
 [module/cpu]
 type = internal/cpu
@@ -501,44 +440,6 @@ ramp-used-7-foreground = ${colors.yellow}
 ramp-used-8-foreground = ${colors.darkyellow}
 ramp-used-9-foreground = ${colors.orange}
 ramp-used-10-foreground = ${colors.red}
-
-[module/wlan]
-type = internal/network
-interface = wlp3s0
-interval = 3.0
-
-format-connected =  <label-connected>
-format-connected-underline = ${colors.darkmagenta}
-label-connected = %essid%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.darkgrey}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
-
-[module/eth]
-type = internal/network
-interface = enp2s0
-interval = 3.0
-
-format-connected-underline = ${colors.darkgreen}
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.icon}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.darkgrey}
 
 [module/date]
 type = internal/date
@@ -610,48 +511,6 @@ ramp-volume-foreground = ${colors.icon}
 
 click-right = killall pavucontrol || pavucontrol &
 click-middle = ifterm -t -i blockterm_pulsemixer -e pulsemixer &
-
-[module/alsa]
-type = internal/alsa
-
-format-volume = <ramp-volume> <label-volume> <bar-volume>
-label-volume = %percentage%%
-label-volume-foreground = ${root.foreground}
-
-format-muted-prefix = " "
-format-muted-foreground = ${colors.darkgrey}
-label-muted = muted
-
-bar-volume-width = 8
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.darkgrey}
-
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-ramp-volume-3 = 
-ramp-volume-4 = 
-ramp-volume-5 = 
-ramp-volume-6 = 
-ramp-volume-7 = 
-ramp-volume-8 = 
-ramp-volume-9 = 
-ramp-volume-10 = 
-
-ramp-volume-foreground = ${colors.icon}
 
 [module/battery]
 type = internal/battery
@@ -728,34 +587,10 @@ ramp-5 = 
 ramp-foreground = ${colors.icon}
 ramp-5-foreground = ${self.label-warn-foreground}
 
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.darkmagenta}
-label-close =  cancel
-label-close-foreground = ${colors.darkmagenta}
-label-separator = |
-label-separator-foreground = ${colors.darkgrey}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+; }}}
+;==========================================================
+; Other settings {{{
+;==========================================================
 
 [settings]
 screenchange-reload = true
@@ -769,4 +604,5 @@ screenchange-reload = true
 margin-top = 5
 margin-bottom = 5
 
+; }}}
 ; vim:ft=dosini

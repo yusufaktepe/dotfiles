@@ -8,25 +8,28 @@ kb_bind[2]='r'
 kb_bind[3]='s'
 kb_bind[4]='t'
 kb_bind[5]='T'
-kb_bind[6]='S'
-kb_bind[7]='C'
-kb_bind[8]='d'
+kb_bind[6]='w'
+kb_bind[7]='S'
+kb_bind[8]='C'
+kb_bind[9]='d'
 
 kb_act[1]="pkill picom || picom -b"
 kb_act[2]="toggle redshift"
 kb_act[3]="toggle stimeout"
 kb_act[4]="toggle touchpad"
 kb_act[5]="toggle trackpoint"
-kb_act[6]="toggle syncthing"
-kb_act[7]="pkill picom; sleep .4; picom -b"
-kb_act[8]="pkill dunst; notify-send -a system 'restart dunst'"
+kb_act[6]="toggle webcam"
+kb_act[7]="toggle syncthing"
+kb_act[8]="pkill picom; sleep .4; picom -b"
+kb_act[9]="pkill dunst; notify-send -a system 'restart dunst'"
 
 kb_msg[1]=' picom'
 kb_msg[2]=' redshift'
 kb_msg[3]=' screen timeout'
 kb_msg[4]=' touchpad'
 kb_msg[5]=' trackpoint'
-kb_msg[6]=' syncthing'
-kb_msg[7]=' picom'
-kb_msg[8]=' dunst'
+kb_msg[6]=' webcam'
+kb_msg[7]=' syncthing'
+kb_msg[8]=' picom'
+kb_msg[9]=' dunst'
 
