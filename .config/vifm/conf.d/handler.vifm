@@ -56,6 +56,14 @@ filetype {*.o},<application/x-object> nm %f | less
 " Man page
 filetype {*.[1-8]},<text/troff> man ./%c
 
+" OpenRaster/XCF
+filextype *.ora,*.xcf
+	\ {Edit with GIMP}
+	\ gimp %f %i &,
+
+" Vector Graphics
+filextype {*.svg},<image/svg+xml> inkscape %f %i &
+
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.xpm,*.ico},<image/*>
 	\ {View in sxiv}
@@ -66,14 +74,6 @@ filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.xpm,*.ico},<image/*>
 	\ gimp %f %i &,
 	\ {Set as wallpaper}
 	\ setbg %c &,
-
-" OpenRaster/XCF
-filextype *.ora,*.xcf
-	\ {Edit with GIMP}
-	\ gimp %f %i &,
-
-" Vector Graphics
-filextype {*.svg},<image/svg+xml> inkscape %f %i &
 
 " Mindmap
 filextype *.vym

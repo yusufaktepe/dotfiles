@@ -80,23 +80,3 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
-alias -g L='| less'
-alias -g C='| wc -l'
-alias -g H='| head'
-alias -g HL='| head -n $(( +LINES ? LINES - 4 : 20 ))'
-alias -g T='| tail'
-alias -g TL='| tail -n $(( +LINES ? LINES - 4 : 20 ))'
-alias -g G='| grep'
-alias -g TRIM='| cut -c 1-$COLUMNS'
-alias -g C='| wc -l'
-alias -g Ss='| sort'
-alias -g Su='| sort -u'
-alias -g Sn='| sort -n'
-alias -g Snr='| sort -nr'
-
-alias -g NUL=">/dev/null 2>&1"
-alias -g N=">/dev/null"
-alias -g NA="&>/dev/null"
-alias -g N1="1>/dev/null"
-alias -g N2="2>/dev/null"
-
