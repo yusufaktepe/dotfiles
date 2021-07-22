@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+Api="https://api.alternative.me/fng/?limit=${1:-7}"
+
+Cyan='\e[0;36m'
+Green='\e[0;32m'
+White='\e[0;37m'
+Yellow='\e[0;33m'
+BRed='\e[1;31m'
+Red='\e[0;31m'
+R='\e[0m'
+
+color() {
+	if [ "$1" -gt 75 ]; then # Extreme Greed
+		printf "[$Cyan%02d$R] $Cyan%s$R" "$1" "${@:2}"
+	elif [ "$1" -gt 54 ]; then # Greed
+		printf "[$Green%02d$R] $Green%s$R" "$1" "${@:2}"
+	elif [ "$1" -gt 46 ]; then # Neutral
+		printf "[$White%02d$R] $White%s$R" "$1" "${@:2}"
+	elif [ "$1" -gt 25 ]; then # Fear
+		printf "[$Yellow%02d$R] $Yellow%s$R" "$1" "${@:2}"
+	elif [ "$1" -gt 15 ]; then # Extreme Fear
+		printf "[$Red%02d$R] $Red%s$R" "$1" "${@:2}"
+	else # Extreme Fear
+		printf "[$BRed%02d$R] $BRed%s$R" "$1" "${@:2}"
+	fi
+}
+
+Today=$(date +%a,\ %b\ %d)
+Yesterday=$(date -d yesterday +%a,\ %b\ %d)
+
+while read -r Timestamp Value Class; do
+	Date=$(date -d @$Timestamp +%a,\ %b\ %d)
+
+	if [ "$Date" = "$Today" ]; then
+		Date=Today
+	elif [ "$Date" = "$Yesterday" ]; then
+		Date=Yesterday
+	fi
+
+	Value=$(color "$Value" "$Class")
+	printf '%s:» %s\n' "$Date" "$Value"
+
+done < <(curl -s "$Api" | jq -r '.data[] | "\(.timestamp) \(.value) \(.value_classification)"') | column -ts:
+
