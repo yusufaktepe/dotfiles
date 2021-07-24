@@ -91,7 +91,7 @@ bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
 bindsym $mod+Shift+F5 exec $N GTK_THEME=Adwaita-dark firefox --private-window
 bindsym $mod+Shift+F6 exec $N google-chrome-stable $chromium_flags --test-type --incognito
 bindsym $mod+Shift+F7 exec $N brave --start-maximized --test-type --incognito
-bindsym $mod+m exec $N XDG_CURRENT_DESKTOP=gnome ifwin -e telegram-desktop -c telegramdesktop
+bindsym $mod+m exec $N ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
 bindsym $caps+e exec $N $TERMINAL -e $EDITOR
@@ -122,7 +122,7 @@ bindsym XF86MonBrightnessUp exec $N brightness inc 2.90
 bindsym XF86MonBrightnessDown exec $N brightness dec 2.90
 bindsym --release $mod+BackSpace exec $N sleep 1 && xset dpms force off
 
-# bindsym XF86Display exec $N ifwin -e arandr -t
+bindsym XF86Display exec $N arandr && setbg
 # bindsym XF86TouchpadOff exec $N toggle touchpad
 # bindsym XF86TouchpadOn exec $N toggle touchpad
 
@@ -229,6 +229,10 @@ bindsym $mod+Shift+b floating enable; sticky enable; \
 	exec $N "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1 600"
 bindsym $mod+Shift+n floating enable; sticky enable; \
 	exec $N "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1069 600"
+bindsym $mod+Ctrl+Shift+b floating enable; sticky enable; \
+	exec $N "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1 797"
+bindsym $mod+Ctrl+Shift+n floating enable; sticky enable; \
+	exec $N "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1418 797"
 
 # Resize
 set $distance 10 px or 10 ppt

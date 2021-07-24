@@ -436,10 +436,10 @@ ramp-used-6 = 
 ramp-used-7 = 
 ramp-used-8 = 
 ramp-used-foreground = ${colors.icon}
-ramp-used-7-foreground = ${colors.yellow}
-ramp-used-8-foreground = ${colors.darkyellow}
-ramp-used-9-foreground = ${colors.orange}
-ramp-used-10-foreground = ${colors.red}
+ramp-used-8-foreground = ${colors.yellow}
+ramp-used-9-foreground = ${colors.darkyellow}
+ramp-used-10-foreground = ${colors.orange}
+ramp-used-11-foreground = ${colors.red}
 
 [module/date]
 type = internal/date
