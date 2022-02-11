@@ -4,7 +4,7 @@ update_bar() {
 	if pidof -q i3blocks; then
 		pkill -RTMIN+10 i3blocks
 	elif pidof -q polybar; then
-		polybar-msg hook brightness 1 >/dev/null
+		polybar-msg action "#brightness.hook.0" >/dev/null
 	else
 		return
 	fi

@@ -3,11 +3,11 @@
 Bookmarks=~/.config/vivaldi/Default/Bookmarks
 Quickmarks=~/.config/browsers/quickmarks
 Separator=''
-sB="<span foreground='#a89984'>"
+sB="<span foreground='#81A1C1'>"
 sE="</span>"
 
 _rofi() {
-	rofi -dmenu -markup-rows -format 'p' -width 100 -p 
+	rofi -dmenu -markup-rows -format 'p' -theme-str 'window {width: 100%;}' -p 
 }
 
 bookmarks() {

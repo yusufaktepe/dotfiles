@@ -3,11 +3,11 @@
 Email=$GMAIL
 Password=$GMAILAP
 Prompt=
-ColorSender=#8EC07C
-ColorSubject=#EBDBB2
+ColorSender=#A3BE8C
+ColorSubject=#D8DEE9
 
 Rofi() {
-	rofi -format 'i:s' -dmenu -i -l 10 -width 60 -markup-rows -p "$Prompt" "$@"
+	rofi -format 'i:s' -dmenu -i -l 10 -theme-str 'window {width: 60%;}' -markup-rows -p "$Prompt" "$@"
 }
 
 Parse() {

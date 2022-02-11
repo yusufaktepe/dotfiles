@@ -2,5 +2,5 @@
 --output ~/Videos/YouTube/%(uploader)s_%(title)s.%(ext)s
 --restrict-filenames
 --ignore-errors
---cookies ~/.config/youtube-dl/cookies.txt
+--cookies-from-browser vivaldi
 --mark-watched

@@ -18,8 +18,8 @@ declare -a kb_bind kb_act kb_msg
 
 [ -f "$FILE" ] && source "$FILE" || exit
 
-PRMPT="<span background='#406769' foreground='#ebdbb2'> ${PROMPT:-Bind Mode} </span>"
-sB='<span background="#3C3836" foreground="#BDAE93">'
+PRMPT="<span background='#4C566A' foreground='#D8DEE9'> ${PROMPT:-Bind Mode} </span>"
+sB='<span background="#3B4252" foreground="#A3BE8C">'
 sE='</span>'
 
 b=0

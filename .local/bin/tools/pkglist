@@ -1,7 +1,7 @@
 #!/bin/sh
 # shellcheck disable=SC2024,2086,2164
 
-PKGLIST_DIR=~/data/backup/pkglists
+PKGLIST_DIR=~/Repos/.backup/pkglists
 
 mklist() {
 	if [ -d "$PKGLIST_DIR" ]; then

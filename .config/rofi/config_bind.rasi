@@ -50,4 +50,4 @@ configuration {
 	kb-select-9:  "";
 	kb-select-10: "";
 }
-@import "~/.config/rofi/themes/flat-gruvbox_bind.rasi"
+@theme "~/.config/rofi/themes/flat-nord_bind.rasi"

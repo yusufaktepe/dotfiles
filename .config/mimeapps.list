@@ -31,7 +31,7 @@ application/vnd.rar=engrampa.desktop
 x-scheme-handler/magnet=org.qbittorrent.qBittorrent.desktop
 application/x-bittorrent=org.qbittorrent.qBittorrent.desktop
 x-scheme-handler/mailto=mailto.desktop
-x-scheme-handler/tg=userapp-Telegram Desktop-1E85X0.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-DICSH1.desktop
 
 [Added Associations]
 x-scheme-handler/http=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
@@ -55,4 +55,4 @@ text/plain=nvim.desktop;
 text/x-systemd-unit=nvim.desktop;
 application/x-shellscript=nvim.desktop;
 application/pdf=org.pwmt.zathura.desktop;org.gnome.Evince.desktop;
-x-scheme-handler/tg=userapp-Telegram Desktop-1E85X0.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-DICSH1.desktop;

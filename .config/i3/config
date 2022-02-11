@@ -95,7 +95,7 @@ bindsym $mod+m exec $N ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
 bindsym $caps+e exec $N $TERMINAL -e $EDITOR
-bindsym $caps+m exec $N cantata-mpd
+bindsym $caps+m exec $N strawberry
 # bindsym $caps+Shift+s exec $N toggle spotifyd
 bindsym $caps+s exec $N ifwin -e spotify
 bindsym $caps+q exec $N ifwin -e qbittorrent
@@ -368,13 +368,13 @@ assign [class="Audacity"]                        $ws7
 assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
 # assign [class="(?i)thunderbird"]               $ws9
 assign [class="qBittorrent"]                     $ws9
-assign [class="cantata"]                         $ws10
+assign [class="cantata|strawberry"]              $ws10
 for_window [class="Spotify"] move to workspace   $ws10
 
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
 for_window [class="Catfish|flameshot|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|Yad"] floating enable
-for_window [class="Lxappearance|qt5ct|Lightdm-settings|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
+for_window [class="Lxappearance|qt5ct|qt6ct|Lightdm-settings|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
 for_window [class="(?i)megasync" window_type=normal title="^(?!Stream*|Transfer*)"] floating enable, move position +964+20
 # for_window [class="(?i)telegram"] floating enable sticky enable, resize set 800 480, move position center
 for_window [class="Lxappearance"] resize set 840 660, move position center
@@ -457,8 +457,8 @@ set_from_resource $white           color15    #000000
 set $transparent #00000000
 
 # Use custom colors
-set $black #282828
-set $darkblue #406769
+set $black #2E3440
+set $darkblue #5E81AC
 
 # Theme colors
 #                       BORDER     BACKGROUND  TEXT        INDICATOR   CHILD_BORDER

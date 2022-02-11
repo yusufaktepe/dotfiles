@@ -5,10 +5,12 @@ Unread=$(curl -su "$GMAIL":"$GMAILAP" https://mail.google.com/mail/feed/atom | g
 [ -z "$Unread" ] && exit
 
 Icon=''
+Color=#bb81A1C1
+ColorUnread=#bbBF616A
 
 if [ "$Unread" -gt 0 ]; then
-	printf '%s\n' "%{F#bbFB4934}$Icon%{F-} $Unread"
+	printf '%s\n' "%{F$ColorUnread}$Icon%{F-} $Unread"
 else
-	printf '%s\n' "%{F#bbBDAE93}$Icon%{F-} $Unread"
+	printf '%s\n' "%{F$Color}$Icon%{F-} $Unread"
 fi
 

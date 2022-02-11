@@ -1,15 +1,14 @@
 /* global settings and color variables */
 * {
-  main:               #406769;
-  highlight:          bold #D65D0E;
-  urgent:             #CC241D;
+  main:               #4C566A;
+  highlight:          bold #D08770;
+  urgent:             #BF616A;
 
-  fg:                 #ebdbb2;
-  bg:                 #1d2021;
-  bg-normal:          #282828;
-  bg-selected:        #406769;
-  darkgray:           #a89984;
-  scrollbarcolor:     #505050;
+  fg:                 #D8DEE9;
+  bg:                 #2e3440;
+  bg-normal:          #3B4252;
+  bg-selected:        #4C566A;
+  darkgray:           #81A1C1;
   font:               "mono 13";
   background-color:   @bg;
   border-color:       @main;
@@ -44,6 +43,7 @@ listview {
   padding:            1px 0px 0px 0px;
   margin:             0px 0px 1px 0px;
   background:         @bg;
+  lines:              10;
 }
 
 element {

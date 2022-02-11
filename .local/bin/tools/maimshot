@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ss_dir="$HOME/pictures/screenshots"
+ss_dir="$HOME/Pictures/Screenshots"
 datef=$(date +%Y-%m-%d_%H-%M-%S)
 
 [ ! -d "$ss_dir" ] && mkdir -p "$ss_dir"

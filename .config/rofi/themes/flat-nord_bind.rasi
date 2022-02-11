@@ -1,4 +1,4 @@
-@theme "flat-gruvbox.rasi"
+@theme "flat-nord.rasi"
 
 * {
   border-color: @bg;

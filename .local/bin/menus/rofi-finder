@@ -11,7 +11,7 @@ mklist() {
 [ -f "$tmp" ] || mklist
 
 menu() {
-	rofi -dmenu -i -width 60 -p  \
+	rofi -dmenu -i -theme-str 'window {width: 60%;}' -p  \
 		-kb-custom-1 'Alt+Return' \
 		-kb-custom-2 'Alt+e' \
 		-kb-custom-3 'Alt+s' \

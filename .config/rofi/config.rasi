@@ -1,12 +1,7 @@
 configuration {
 	modi: "window,combi,run";
-	width: 60;
-	lines: 10;
-/*	columns: 1;*/
 	font: "mono 13";
-/*	bw: 1;*/
 	location: 2;
-/*	padding: 5;*/
 	yoffset: 24;
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
@@ -32,6 +27,7 @@ configuration {
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
 /*	sidebar-mode: false;*/
+/*	hover-select: false;*/
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
@@ -40,43 +36,32 @@ configuration {
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
-/*	line-margin: 2;*/
-/*	line-padding: 1;*/
 /*	filter: ;*/
-	separator-style: "solid";
-	hide-scrollbar: true;
-/*	fullscreen: false;*/
-/*	fake-transparency: false;*/
 /*	dpi: -1;*/
 /*	threads: 0;*/
-/*	scrollbar-width: 8;*/
 	scroll-method: 1;
-/*	fake-background: "screenshot";*/
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
-/*	show-match: true;*/
-/*	theme: ;*/
-/*	color-normal: ;*/
-/*	color-urgent: ;*/
-/*	color-active: ;*/
-/*	color-window: ;*/
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
+/*	combi-display-format: "{mode} {text}";*/
 /*	matching-negate-char: '-' /* unsupported */;*/
 /*	cache-dir: ;*/
 /*	window-thumbnail: false;*/
 /*	drun-use-desktop-cache: false;*/
 /*	drun-reload-desktop-cache: false;*/
 /*	normalize-match: false;*/
+/*	steal-focus: false;*/
+/*	application-fallback-icon: ;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
-	display-window: "";
+	display-window: "";
 /*	display-windowcd: ;*/
 	display-run: "";
 /*	display-ssh: ;*/
 	display-drun: "";
 	display-combi: "";
 /*	display-keys: ;*/
-/*	display-file-browser: ;*/
+/*	display-filebrowser: ;*/
 /*	display-blocks: ;*/
 	display-calc: "";
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
@@ -96,10 +81,12 @@ configuration {
 /*	kb-remove-to-sol: "Control+u";*/
 	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter,Super+l";
 /*	kb-accept-custom: "Control+Return";*/
+/*	kb-accept-custom-alt: "Control+Shift+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
 /*	kb-mode-next: "Shift+Right,Control+Tab";*/
 /*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
+/*	kb-mode-complete: "Control+l";*/
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
 	kb-row-up: "Up,Control+p,ISO_Left_Tab,Super+k";
@@ -151,5 +138,13 @@ configuration {
 	me-select-entry: "MouseSecondary";
 	me-accept-entry: "MousePrimary";
 /*	me-accept-custom: "Control+MouseDPrimary";*/
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
 }
-@import "~/.config/rofi/themes/flat-gruvbox.rasi"
+@theme "~/.config/rofi/themes/flat-nord.rasi"

@@ -1,9 +1,9 @@
-@theme "flat-gruvbox.rasi"
+@theme "flat-nord.rasi"
 
 * {
-  bg:                 #1d202170;
-  bg-normal:          #1d202170;
-  bg-selected:        #406769;
+  bg:                 #2e344070;
+  bg-normal:          #2e344070;
+  bg-selected:        #4C566A;
   font:               "mono 12";
 }
 
