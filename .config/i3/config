@@ -154,10 +154,10 @@ bindsym --release Ctrl+Print exec $N maimshot -s
 bindsym Shift+Print exec $N dmaim
 
 ## Set temporary transparency
-bindsym $mod+Ctrl+KP_Divide exec transset-df -a 1
-bindsym $mod+Ctrl+KP_Multiply exec transset-df -a 0.5
-bindsym $mod+Ctrl+KP_Add exec transset-df -a --inc 0.1
-bindsym $mod+Ctrl+KP_Subtract exec transset-df -a --min 0.2 --dec 0.1
+bindsym $mod+Ctrl+KP_Divide exec picom-trans -c --delete
+bindsym $mod+Ctrl+KP_Multiply exec picom-trans -c --toggle 50
+bindsym --release $mod+Ctrl+KP_Add exec [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c +10
+bindsym --release $mod+Ctrl+KP_Subtract exec [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c -10
 
 #=====================================================================
 
@@ -428,7 +428,7 @@ for_window [instance="dropdown_*"] move position center
 exec_always launch_polybar
 exec $N "sleep 2; vivaldi-stable $chromium_flags --start-maximized"
 exec $N "sleep 5; ifterm -h -e vifm"
-exec $N "sleep 7; ifwin -e spotify"
+# exec $N "sleep 7; ifwin -e spotify"
 exec $N "sleep 9; wmctrl -x -r 'vifm' -b remove,demands_attention"
 
 #=====================================================================
