@@ -1,5 +1,8 @@
 "--- Mappings ---"
 
+" E in menu mode opens selected file in new EDITOR window
+mnoremap E c<c-a><delete>EDIT<space><cr>
+
 " Command-line mode
 cnoremap <C-h> <C-w>
 cnoremap <esc>[1;5C <a-f>

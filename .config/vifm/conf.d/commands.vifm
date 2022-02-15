@@ -20,6 +20,7 @@ command! reload :write | restart full
 command! gs git -c color.ui=always status %q
 command! cover convert %c -resize 500x500\> -quality 80%  cover.jpg &
 command! enc !for f in %f; do gpg -e "$f"; done
+command! dec !for f in %f; do gpg -d "$f" > "${f%%.gpg}"; done
 
 command! mks :![ ! -f %a ] && touch %a && chmod +x %a &&
 	\ printf "#!/bin/sh\n\n\n" >> %a && $TERMINAL -e $EDITOR +$ %a 2>/dev/null &

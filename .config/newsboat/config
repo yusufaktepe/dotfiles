@@ -13,6 +13,7 @@ datetime-format "%Y-%m-%d"
 feed-sort-order firsttag
 text-width 80
 goto-next-feed no
+confirm-mark-feed-read no
 scrolloff 5
 
 ## Dialog Titles
@@ -56,8 +57,8 @@ bind-key x pb-delete
 ## Colors
 color listnormal white default
 color listnormal_unread blue default
-color listfocus color236 yellow standout
-color listfocus_unread color236 yellow standout bold
+color listfocus black yellow standout
+color listfocus_unread black yellow standout bold
 color info cyan black bold
 color article default default
 

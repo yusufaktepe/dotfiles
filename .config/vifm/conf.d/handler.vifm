@@ -267,7 +267,7 @@ fileviewer *.json
 	\ jq --color-output . %c,
 	\ python -m json.tool -- %c,
 
-" fileviewer */,.*/,../ tree -aCL 1 -I .git --dirsfirst %c
+fileviewer */,.*/,../ tree -aCL 1 -I .git --dirsfirst %c
 
 fileviewer .*[!/],*[!/]
 	\ highlight -O xterm256 -s pablo --force %c,

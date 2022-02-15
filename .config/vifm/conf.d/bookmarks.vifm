@@ -8,7 +8,7 @@ map bT :cd /tmp<cr>
 map bM :cd /media<cr>
 map bD :cd ~/Desktop<cr>
 map bP :cd ~/.local/share/pacman<cr>
-map bS :cd ~/shared<cr>
+map bS :cd ~/Shared<cr>
 map b1 :goto ~/.config/vifm/mount/tp.ssh | normal l<cr>
 map b2 :goto ~/.config/vifm/mount/sam.ssh | normal l<cr>
 

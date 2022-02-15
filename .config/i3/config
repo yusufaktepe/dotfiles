@@ -486,6 +486,7 @@ client.background       $black
 
 # workspace $ws9 gaps inner 0
 # workspace $ws9 gaps outer 0
+workspace $ws10 gaps inner 16
 
 # Smart gaps (gaps used if only more than one container on the workspace)
 # smart_gaps on

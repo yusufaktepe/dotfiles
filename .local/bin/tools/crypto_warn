@@ -29,7 +29,7 @@ while :; do
 				-h string:bgcolor:$Color "${P/=*/$Expr}"
 
 			if [ -n "$Alarm" ] && [ -z "$Rang" ]; then
-				ffplay -volume 60 -nodisp -loglevel -8 -autoexit ~/music/calling.mp3
+				ffplay -volume 60 -nodisp -loglevel -8 -autoexit ~/Music/calling.mp3 >/dev/null
 				[ -z "$CAlarm" ] && Rang=true
 			fi
 

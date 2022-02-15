@@ -91,6 +91,7 @@ set completeopt+=noinsert,noselect
 set guioptions=a
 set mouse=a
 set clipboard=unnamed,unnamedplus
+set complete=.,w,b,u,k,kspell,t,i,d
 set omnifunc=syntaxcomplete#Complete
 set dict+=/usr/share/dict/words
 set path+=**

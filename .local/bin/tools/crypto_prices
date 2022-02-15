@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-Cur=${1:-BTC|ETH|LINK|DOT|XMR|LTC|ADA|ALGO}
+Cur=${1:-BTC|ETH|BNB|MATIC|SOL|AVAX|ADA|LUNA}
 Fiat=${2:-USDT}
 Api=https://api.binance.com/api/v1/ticker/price
 
@@ -15,7 +15,7 @@ while read -ra Rate; do
 		if [ "$NOTIFICATION" = true ]; then
 			Rates+=("$(printf '%-9s\t= %-10s\t\n' "$Coin" "${Price/%.}")")
 		else
-			Rates+=("$(printf '%-8s = %s\n' "$Coin" "${Price/%.}")")
+			Rates+=("$(printf '%-9s = %s\n' "$Coin" "${Price/%.}")")
 		fi
 	fi
 done < <(curl -s $Api | jq -r '.[] | (.symbol + " " + .price)' 2>/dev/null)

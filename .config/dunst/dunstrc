@@ -184,7 +184,7 @@
 
     ### Icons ###
 
-    # Align icons left/right/off
+    # Align icons left/right/top/off
     icon_position = left
 
     # Scale small icons up to this size, set to 0 to disable. Helpful
@@ -300,7 +300,7 @@
     highlight = "#D8DEE9"
     timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
-    #icon = /path/to/icon
+    #default_icon = /path/to/icon
 
 [urgency_normal]
     background = "#2E3440"
@@ -308,7 +308,7 @@
     highlight = "#D8DEE9"
     timeout = 5
     # Icon for notifications with normal urgency, uncomment to enable
-    #icon = /path/to/icon
+    #default_icon = /path/to/icon
 
 [urgency_critical]
     background = "#BF616A"
@@ -317,7 +317,7 @@
     frame_color = "#EBCB8B"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
-    #icon = /path/to/icon
+    #default_icon = /path/to/icon
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
@@ -345,12 +345,14 @@
 #    set_category
 #    timeout
 #    urgency
+#    icon_position
 #    skip_display
 #    history_ignore
 #    action_name
 #    word_wrap
 #    ellipsize
 #    alignment
+#    hide_text
 #
 # Shell-like globbing will get expanded.
 #
@@ -461,6 +463,10 @@
 [system]
     appname = system
     history_ignore = yes
+    fullscreen = show
+
+[telegram]
+    desktop_entry: 'telegramdesktop'
     fullscreen = show
 
 #  vim: set ts=8 sw=4 tw=0 et ft=cfg :
