@@ -7,7 +7,7 @@ kb_bind[1]='w'
 kb_bind[2]='t'
 
 kb_act[1]="setsid -f $TERMINAL -e $EDITOR -c 'VimwikiIndex'"
-kb_act[2]="setsid -f $TERMINAL -e $EDITOR +$ ~/notes/todo.md"
+kb_act[2]="setsid -f $TERMINAL -e $EDITOR +$ ~/Repos/notes/todo.md"
 
 kb_msg[1]='VimwikiIndex'
 kb_msg[2]='ToDo'

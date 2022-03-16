@@ -23,7 +23,7 @@ redshift &
 remaps &
 numlockx &
 gpaste-client daemon &
-unclutter &
+# unclutter &
 # (sleep 30; syncthing -no-browser) &
 
 exec "${1:-i3}"

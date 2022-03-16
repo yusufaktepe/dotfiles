@@ -466,7 +466,7 @@
     fullscreen = show
 
 [telegram]
-    desktop_entry: 'telegramdesktop'
+    desktop_entry = "telegramdesktop"
     fullscreen = show
 
 #  vim: set ts=8 sw=4 tw=0 et ft=cfg :

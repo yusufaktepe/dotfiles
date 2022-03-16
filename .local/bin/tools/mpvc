@@ -24,6 +24,7 @@ case $1 in
 	prev|p) ipc_send 'playlist_prev' ;;
 	next|n) ipc_send 'playlist_next' ;;
 	toggle|t) ipc_send 'cycle' 'pause' ;;
+	quit|q) ipc_send 'quit-watch-later' ;;
 	pauseall|pa)
 		for i in /tmp/mpvsoc*; do
 			[ -e "$i" ] || break

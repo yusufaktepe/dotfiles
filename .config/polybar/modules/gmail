@@ -1,6 +1,8 @@
 #!/bin/sh
 
-Unread=$(curl -su "$GMAIL":"$GMAILAP" https://mail.google.com/mail/feed/atom | grep -oP '<fullcount>\K[[:alnum:]]+')
+Feed=$(curl -su "$GMAIL":"$GMAILAP" https://mail.google.com/mail/feed/atom)
+Unread=${Feed##*<fullcount>}
+Unread=${Unread%%<\/fullcount>*}
 
 [ -z "$Unread" ] && exit
 

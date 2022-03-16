@@ -66,7 +66,6 @@ Plug 'will133/vim-dirdiff'     " diff directories
 Plug 'junegunn/fzf.vim'
 Plug 'vifm/vifm.vim'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'cespare/vim-toml'
 
 " Themes
@@ -144,6 +143,8 @@ nnoremap c "_c
 nnoremap C "_C
 nnoremap x "_x
 nnoremap X "_X
+
+nnoremap <leader>dd gg_dG
 
 " Shortcutting split navigation, saving a keypress:
 map <C-h> <C-w>h
@@ -357,10 +358,6 @@ nnoremap <M-h> :History<CR>
 if &diff
   let g:gitgutter_enabled = 0
 endif
-
-"=== MarkdownPreview
-let g:mkdp_refresh_slow = 1
-nmap <leader>mp <Plug>MarkdownPreviewToggle
 
 "=== Gist-Vim
 let g:gist_token_file = '~/Repos/.backup/secrets/gist_token'
