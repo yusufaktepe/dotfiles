@@ -24,8 +24,11 @@ while read -r PlayThis; do
 
 	for HistItem in "${Hist[@]}"; do
 		if [[  $HistItem == *"$PlayThis" ]]; then
-			if [[ -f "$HistItem" || $HistItem =~ ^http.*"$PlayThis" ]]; then
+			if [[ -f "$HistItem" ]]; then
+				find /tmp/mpvsocket[0-9]* -type s 2>/dev/null && mpvc quit
 				mpvc "$HistItem"
+			elif [[ $HistItem =~ ^http.*"$PlayThis" ]]; then
+				ym "$HistItem"
 			else
 				find . -type f -exec grep -Fqm 1 "$HistItem" {} \; -delete
 				notify-send -a system -i mpv 'mpv-resume' \
