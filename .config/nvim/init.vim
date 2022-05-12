@@ -337,6 +337,17 @@ let g:airline#extensions#whitespace#mixed_indent_format = 'MI:L[%s]'
 let g:airline#extensions#whitespace#mixed_indent_file_format = 'MI:F[%s]'
 let g:airline_powerline_fonts=1
 
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_symbols.maxlinenr = ' '
+
 "=== UltiSnips
 let g:UltiSnipsExpandTrigger       = '<C-k>'
 let g:UltiSnipsJumpForwardTrigger  = '<C-k>'

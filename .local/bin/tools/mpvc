@@ -5,6 +5,7 @@
 socket=$(find /tmp/mpvsocket[0-9]* -type s 2>/dev/null | tail -n 1)
 
 ipc_send() {
+	pidof -q mpv || exit
 	[ "$1" = '-a' ] && { ToAll=True; shift ;}
 
 	cmd='{ "command": ['
