@@ -157,6 +157,7 @@ bindsym $mod+Ctrl+KP_Multiply exec picom-trans -c --toggle 50
 bindsym --release $mod+Ctrl+KP_Add exec [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c +10
 bindsym --release $mod+Ctrl+KP_Subtract exec [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c -10
 
+bindsym KP_Insert exec $N mpvscratch
 #=====================================================================
 
 # change focus

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+pidof -q mpv || exit
+
+AW=$(xdotool getactivewindow)
+
+while read -r _ _ _ WM_CLASS; do
+	AW_CLASS=${WM_CLASS//\"}
+done < <(xprop -id "$AW" WM_CLASS)
+
+if [ $AW_CLASS = mpv ]; then
+	mpvc pa
+	i3-msg -q move scratchpad
+else
+	playerctl pause
+	i3-msg -q '[class="mpv)"]' scratchpad show
+	mpvc do set fullscreen yes
+	mpvc do set pause no
+fi
+

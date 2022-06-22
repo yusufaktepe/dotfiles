@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-remote=$(git ls-remote --get-url 2>/dev/null) || return $?
+remote=$(git ls-remote --get-url 2>/dev/null) || exit $?
 
 if [[ $remote =~ ^http ]]; then
 	url=$remote
@@ -11,5 +11,11 @@ else
 	url=https://${url/:/\/}
 fi
 
-setsid -f xdg-open "$url" >/dev/null 2>&1
+case $1 in
+	commit|c)
+		Hash=$(git rev-parse HEAD)
+		setsid -f xdg-open "$url/commit/$Hash" >/dev/null 2>&1 ;;
+	*)
+		setsid -f xdg-open "$url" >/dev/null 2>&1
+esac
 

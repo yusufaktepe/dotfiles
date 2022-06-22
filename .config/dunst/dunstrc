@@ -73,6 +73,7 @@
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
+    # If gap_size is greater than 0, this setting will be ignored.
     separator_height = 1
 
     # Padding between text and separator.
@@ -90,6 +91,12 @@
 
     # Defines color of the frame around the notification window.
     frame_color = "#81A1C1"
+
+    # Size of gap to display between notifications - requires a compositor.
+    # If value is greater than 0, separator_height will be ignored and a border
+    # of size frame_width will be drawn around each notification instead.
+    # Click events on gaps do not currently propagate to applications below.
+    gap_size = 0
 
     # Define a color for the separator.
     # possible values are:
@@ -184,6 +191,15 @@
 
     ### Icons ###
 
+    # Recursive icon lookup. You can set a single theme, instead of having to
+    # define all lookup paths.
+    enable_recursive_icon_lookup = false
+
+    # Set icon theme (only used for recursive icon lookup)
+    icon_theme = Adwaita
+    # You can also set multiple icon themes, with the leftmost one being used first.
+    # icon_theme = "Adwaita, breeze"
+
     # Align icons left/right/top/off
     icon_position = left
 
@@ -195,7 +211,7 @@
     # Scale larger icons down to this size, set to 0 to disable
     max_icon_size = 24
 
-    # Paths to default icons.
+    # Paths to default icons (only neccesary when not using recursive icon lookup)
     # generate the icons with:
     # for theme in Papirus-Dark Adwaita hicolor; do for size in 16 16x16 scalable symbolic; do for type in actions animations apps categories devices emblems emotes mimetypes notifications panel places status; do f=/usr/share/icons/$theme/$size/$type; [ -d "$f" ] && echo -n ${f}: ; done; done; done; echo
     # add before papirus symbolic: /usr/share/icons/Papirus-Dark/32x32/status/
