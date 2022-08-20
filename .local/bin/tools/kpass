@@ -11,9 +11,9 @@ if pidof -q keepassxc; then
 	done < <(xprop -id "$AW" WM_CLASS)
 
 	if [ "$AW_CLASS" = KeePassXC ]; then
-		i3-msg -q kill
+		wmctrl -c :ACTIVE:
 	else
-		keepassxc && i3-msg -q '[class="KeePassXC"] focus'
+		keepassxc && wmctrl -ax KeePassXC
 	fi
 else
 	setsid -f keepassxc \
