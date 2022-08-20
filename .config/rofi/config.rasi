@@ -53,6 +53,8 @@ configuration {
 /*	normalize-match: false;*/
 /*	steal-focus: false;*/
 /*	application-fallback-icon: ;*/
+/*	refilter-timeout-limit: 8192;*/
+/*	xserver-i300-workaround: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 	display-window: "";
 /*	display-windowcd: ;*/
@@ -89,9 +91,11 @@ configuration {
 /*	kb-mode-complete: "Control+l";*/
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
-	kb-row-up: "Up,Control+p,ISO_Left_Tab,Super+k";
+	kb-row-up: "Up,Control+p,Super+k";
 	kb-row-down: "Down,Control+n,Super+j";
-/*	kb-row-tab: "Tab";*/
+/*	kb-row-tab: "";*/
+/*	kb-element-next: "Tab";*/
+/*	kb-element-prev: "ISO_Left_Tab";*/
 /*	kb-page-prev: "Page_Up";*/
 /*	kb-page-next: "Page_Down";*/
 /*	kb-row-first: "Home,KP_Home";*/

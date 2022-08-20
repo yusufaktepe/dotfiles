@@ -11,6 +11,7 @@ map bP :cd ~/.local/share/pacman<cr>
 map bS :cd ~/Shared<cr>
 map b1 :goto ~/.config/vifm/mount/tp.ssh | normal l<cr>
 map b2 :goto ~/.config/vifm/mount/sam.ssh | normal l<cr>
+map b3 :goto ~/.config/vifm/mount/and.ftp | normal l<cr>
 
 map bh :cd ~/<cr>
 map bc :cd ~/.config<cr>
