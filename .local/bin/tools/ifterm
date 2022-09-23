@@ -33,6 +33,6 @@ if wmctrl -lx | grep -iq "$Ins.$TERMINAL"; then
 	fi
 else
 	[ $Hold ] && Exec="$Exec; $SHELL"
-	$TERMINS "$Ins" -e sh -c "$Exec" >/dev/null 2>&1 &
+	$TERMINS "Alacritty,$Ins" -e sh -c "$Exec" >/dev/null 2>&1 &
 fi
 

@@ -19,11 +19,18 @@ prelock() {
 
 	# clear gpg password cache
 	gpg-connect-agent --no-autostart reloadagent /bye >/dev/null
+
+	[ -e "/sys/class/leds/tpacpi::kbd_backlight/brightness" ] && {
+		read led </sys/class/leds/tpacpi::kbd_backlight/brightness
+		light -Srs 'sysfs/leds/tpacpi::kbd_backlight' 0
+	}
 }
 
 postlock() {
 	xset dpms "$default_timeout"
 	killall -USR2 dunst # resume dunst
+
+	[ "$led" -gt 0 ] && light -Srs 'sysfs/leds/tpacpi::kbd_backlight' "$led"
 }
 
 lock() {

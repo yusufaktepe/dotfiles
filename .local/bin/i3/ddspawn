@@ -9,6 +9,6 @@ if xwininfo -tree -root | grep -q "(\"dropdown_$Script\" "; then
 	i3-msg -q "[instance=\"dropdown_$Script\"] scratchpad show;
 		[instance=\"dropdown_$Script\"] move position center"
 else
-	i3-msg -q "exec --no-startup-id $TERMINS dropdown_$Script $@ -e $Script"
+	i3-msg -q "exec --no-startup-id $TERMINS Alacritty,dropdown_$Script $@ -e $Script"
 fi
 

@@ -43,7 +43,7 @@ bindsym --release $mod+Ctrl+x exec $N xkill
 
 # #---Start a terminal---# #
 bindsym $mod+Return exec $N $TERMINAL
-bindsym $mod+quotedbl exec $N $TERMINS floating
+bindsym $mod+quotedbl exec $N "$TERMINS Alacritty,floating"
 bindsym $mod+comma split horizontal ;; exec $N $TERMINAL
 bindsym $mod+period split vertical ;; exec $N $TERMINAL
 bindsym $mod+udiaeresis exec $N ddspawn tmuxi
@@ -55,6 +55,7 @@ set $calc LC_NUMERIC=en_US.UTF-8 rofi -show calc -modi calc -no-show-match \
 	-no-sort -calc-command "printf '{result}' | xsel -b" >/dev/null
 bindsym $mod+d exec $N rofi -show combi
 bindsym $mod+c exec $N $calc
+bindsym $mod+i exec $N rofimoji
 bindsym XF86Calculator exec $N $calc
 bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
@@ -78,16 +79,12 @@ bindsym $caps+Shift+a exec $N dunstctl context
 bindsym $mod+F1 exec $N ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 exec $N ifterm -h -e vifm
 bindsym $mod+F3 exec $N ifwin -e 'vivaldi-stable --start-maximized'
-bindsym $mod+F4 exec $N ifwin -e 'opera --start-maximized'
-bindsym $mod+F5 exec $N ifwin -e firefox
-bindsym $mod+F6 exec $N ifwin -e google-chrome-stable
-bindsym $mod+F7 exec $N ifwin -e 'brave --start-maximized'
+bindsym $mod+F4 exec $N ifwin -e firefox
+bindsym $mod+F5 exec $N ifwin -e google-chrome-stable
 bindsym $mod+Shift+F2 exec $N ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 exec $N vivaldi-stable --start-maximized --incognito
-bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
-bindsym $mod+Shift+F5 exec $N firefox --private-window
-bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
-bindsym $mod+Shift+F7 exec $N brave --start-maximized --incognito
+bindsym $mod+Shift+F4 exec $N firefox --private-window
+bindsym $mod+Shift+F5 exec $N google-chrome-stable --incognito
 bindsym $mod+m exec $N ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
@@ -100,6 +97,8 @@ bindsym $caps+q exec $N ifwin -e qbittorrent
 bindsym $caps+7 exec $N vbox_instance Win7
 # bindsym $caps+w exec $N libreoffice --writer
 bindsym $caps+c exec $N crow-translate
+bindsym $caps+v exec $N ifwin -e code
+bindsym $caps+o exec $N ifwin -p electron -e obsidian
 
 bindsym $mod+Shift+d exec $N xo d
 bindsym $mod+Shift+e exec $N xo c
@@ -118,7 +117,7 @@ bindsym $caps+F3 exec $N ifterm -t -i blockterm_ncdu -e 'ncdu --color dark --exc
 ## Function Buttons
 bindsym XF86MonBrightnessUp exec $N brightness inc 2.90
 bindsym XF86MonBrightnessDown exec $N brightness dec 2.90
-bindsym --release $mod+BackSpace exec $N sleep 1 && xset dpms force off
+bindsym --release $mod+BackSpace exec $N "sleep 1; xset dpms force off; light -Srs 'sysfs/leds/tpacpi::kbd_backlight' 0"
 
 bindsym XF86Display exec $N arandr && setbg
 # bindsym XF86TouchpadOff exec $N toggle touchpad
@@ -349,6 +348,8 @@ bindsym --whole-window --border $mod+Shift+button5 move container to workspace n
 bindsym --whole-window --border $mod+Ctrl+button4 move container to workspace prev
 bindsym --whole-window --border $mod+Ctrl+button5 move container to workspace next
 
+bindsym --whole-window --border $mod+Ctrl+button3 exec $N maimshot -s
+
 #=====================================================================
 # Window/WS Rules
 #=====================================================================
@@ -361,11 +362,12 @@ for_window [workspace="$ws1|$ws2|$ws9|$ws10"] layout tabbed
 assign [class="(?i)Vivaldi|Brave"]               $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
-assign [class="(?i)Opera"]                       $ws4
+assign [class="(?i)Opera|firefox"]               $ws4
+assign [class="Code|obsidian"]                   $ws5
 assign [class="(?i)telegram"]                    $ws6
 assign [class="Audacity"]                        $ws7
 assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
-# assign [class="(?i)thunderbird"]               $ws9
+assign [class="(?i)thunderbird"]                 $ws8
 assign [class="qBittorrent"]                     $ws9
 assign [class="cantata|strawberry"]              $ws10
 for_window [class="Spotify"] move --no-auto-back-and-forth to workspace   $ws10
@@ -388,6 +390,7 @@ for_window [class="qBittorrent"] move position center
 for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 1100 800, move position center
 for_window [instance="Places" class="firefox"] floating enable border normal, resize set 1100 800, move position center
 for_window [instance="Browser|Update" class="firefox|Tor Browser"] floating enable border normal
+for_window [instance="Toolkit" class="firefox"] floating enable sticky enable border none
 # for_window [instance="(?i)crx_" class="(?i)Vivaldi|-chrome"] floating enable sticky enable
 for_window [class="Crow Translate"] floating enable sticky enable, resize set 861 392, move absolute position center
 for_window [class="(?i)gsimplecal"] floating enable, move position +1651+24
@@ -399,7 +402,7 @@ for_window [window_type="dialog|menu"] floating enable
 for_window [window_role="PictureInPicture"] floating enable border none
 for_window [title="^Confirm File Replacing$"] move position center
 for_window [title="^Picture in picture$"] resize set 850 479, move position 1069 601
-for_window [class="Dragon-drag-and-drop"] sticky enable
+for_window [class="Dragon-drop"] sticky enable
 for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, move position center
 #_ Floating instances
 for_window [instance="blockterm_*"] floating enable border pixel 2

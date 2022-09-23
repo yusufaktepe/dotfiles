@@ -66,10 +66,10 @@ filextype {*.svg},<image/svg+xml> inkscape %f %i &
 
 " Images
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.xpm,*.ico},<image/*>
-	\ {View in sxiv}
-	\ sxivr -d %c -o | vifm-select &,
 	\ {View in qimgv}
 	\ qimgv %c 2>/dev/null | vifm-select &,
+	\ {View in sxiv}
+	\ sxivr -d %c -o | vifm-select &,
 	\ {Edit with GIMP}
 	\ gimp %f %i &,
 	\ {Set as wallpaper}
@@ -163,9 +163,10 @@ filetype *.ftp
 " Office files
 filextype {*.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx,*.ppt},
 	\<application/vnd.openxmlformats-officedocument.*,
+	\application/vnd.oasis.opendocument.*,
 	\application/msword,
 	\application/vnd.ms-excel>
-	\ libreoffice %f &
+	\ libreoffice %f %i &,
 
 " TuDu files
 filetype *.tudu tudu -f %c

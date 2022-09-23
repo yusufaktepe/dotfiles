@@ -17,7 +17,7 @@ else
 		xdotool getactivewindow set_window --classname vifm &
 		vifm -c "$cmd"
 	else
-		$TERMINS vifm -e sh -c "vifm -c '$cmd'; zsh" >/dev/null 2>&1 &
+		$TERMINS Alacritty,vifm -e sh -c "vifm -c '$cmd'; zsh" >/dev/null 2>&1 &
 	fi
 fi
 

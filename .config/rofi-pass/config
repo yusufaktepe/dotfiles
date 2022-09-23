@@ -49,7 +49,7 @@ xdotool_delay=12
 
 ## Programs to be used
 # Editor
-EDITOR="$TERMINS blockterm_rofipass -e $EDITOR"
+EDITOR="$TERMINS Alacritty,blockterm_rofipass -e $EDITOR"
 
 # Browser
 BROWSER='xdg-open'

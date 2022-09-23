@@ -138,10 +138,10 @@ nnoremap <silent> <a-h> :history<cr>
 nnoremap <silent> <a-r> :run<cr>
 
 " Drag and drop
-nnoremap <silent> <a-d>c :!dragon cp &<cr>
-nnoremap <silent> <a-d>d :!dragon dl &<cr>
-nnoremap <silent> <a-d>m :!dragon mv &<cr>
-nnoremap <silent> yD :!dragon -a -x %f &<cr>
+nnoremap <silent> <a-d>c :!ddrop cp &<cr>
+nnoremap <silent> <a-d>d :!ddrop dl &<cr>
+nnoremap <silent> <a-d>m :!ddrop mv &<cr>
+nnoremap <silent> yD :!ddrop -a -x %f &<cr>
 
 " Toggle wrap text in quick view
 nnoremap <silent> WW :set wrap!<cr>
