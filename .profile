@@ -66,8 +66,13 @@ export LESSOPEN="| highlight -O xterm256 -s pablo %s 2>/dev/null"
 sudo -n loadkeys ~/.config/ttymaps.kmap 2>/dev/null
 
 # GPG - refresh on tty changes
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh"
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
+
+# Shell
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export BDOTDIR="$XDG_CONFIG_HOME/bash"
 
 # If login shell is bash, source bashrc
 [ -n "$BASH_VERSION" ] && [ -f "$BDOTDIR/.bashrc" ] && . "$BDOTDIR/.bashrc"

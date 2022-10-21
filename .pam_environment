@@ -1,6 +1,0 @@
-# Sourced before ~/.*profile ~/.zshenv
-
-SSH_AUTH_SOCK  DEFAULT="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
-ZDOTDIR        DEFAULT="@{HOME}/.config/zsh"
-BDOTDIR        DEFAULT="@{HOME}/.config/bash"
-
