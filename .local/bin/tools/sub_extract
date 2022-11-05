@@ -1,0 +1,30 @@
+#!/bin/bash
+# TODO: pass langs to script
+
+sid() {
+	n=0
+	while IFS=, read -r _ Lang; do
+		[[ "$Lang" == en? ]] && en=$n
+		[[ "$Lang" == t?r ]] && tr=$n
+		((n++))
+	done < <(
+		ffprobe -loglevel error -select_streams s -show_entries \
+			stream=index:stream_tags=language -of csv=p=0 "$1"
+		)
+}
+
+for f in *.{mkv,mp4}; do
+	[[ -f "$f" ]] || continue
+
+	sid "$f"
+
+	[[ -z $en || -z $tr ]] && break
+
+	[[ -d Subs ]] || mkdir Subs
+	File="Subs/${f%.*}"
+
+	ffmpeg -hide_banner -i "$f" \
+		-c copy -map 0:s:$en "${File}-en.srt" \
+		-c copy -map 0:s:$tr "${File}-tr.srt"
+done
+

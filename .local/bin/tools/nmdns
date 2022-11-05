@@ -1,0 +1,39 @@
+#!/bin/bash
+
+DNS=${1:-1.1.1.1,1.0.0.1}
+
+command -V nmcli >/dev/null || exit 1
+
+Con=$(nmcli -t -f NAME con show --active)
+
+[[ -z $Con ]] && { printf '%s\n' "No active connection!"; exit 1 ;}
+
+[[ "$1" == off ]] && {
+	nmcli con mod "$Con" ipv4.ignore-auto-dns no
+	nmcli con mod "$Con" ipv4.dns ""
+
+	nmcli networking off && nmcli networking on
+
+	printf '%s\n' "Custom DNS disabled."; exit
+}
+
+shopt -s extglob
+
+if [[ ${DNS//+(.|,| )} == +([0-9]) ]]; then
+
+	IFS=: read -r _ ipv4DNS <<< "$(nmcli -t -f ipv4.dns con show "$Con")"
+
+	[[ $ipv4DNS == "$DNS" ]] && {
+		printf '%s\n' "DNS is already set to: '$DNS'"; exit
+	}
+
+	printf '%s\n' "Setting dns for '$Con' to '$DNS'"
+
+	nmcli con mod "$Con" ipv4.ignore-auto-dns yes
+	nmcli con mod "$Con" ipv4.dns "$DNS"
+
+	nmcli networking off && nmcli networking on
+else
+	printf '%s\n' "Invalid DNS: '$*'"; exit 1
+fi
+

@@ -1,1 +1,1 @@
--o follow_symlinks,idmap=user 2.0.0.10:/
+-o follow_symlinks,idmap=user 192.168.1.12:/

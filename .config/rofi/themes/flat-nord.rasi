@@ -152,4 +152,11 @@ case-indicator {
   background-color:   @bg;
 }
 
+/* Fullscreen mode on screens smaller then full HD */
+/* @media (max-width: 1920 ) { */
+/*   window { */
+/*     fullscreen: true; */
+/*   } */
+/* } */
+
 /* vim:set ts=2 sw=2 et: */

@@ -43,12 +43,12 @@ filextype {*.srt},<application/x-subrip>
 	\ smplayer -sub %c,
 
 " Web
-filextype {*.html,*.htm},<text/html>
+filextype {*.html,*.htm}
 	\ {Open with BROWSER}
 	\ xdg-open %f %i &,
 	\ {Open with Firefox}
 	\ firefox %f %i &,
-filetype {*.html,*.htm},<text/html> links, lynx
+filetype {*.html,*.htm} links, lynx
 
 " Object
 filetype {*.o},<application/x-object> nm %f | less
@@ -239,7 +239,7 @@ fileviewer {*.a,*.ace,*.alz,*.arc,*.arj,*.bz,*.bz2,*.cab,*.cpio,*.deb,*.gz,
 
 fileviewer {*.rar},<application/x-rar> unrar lt -p- %c | tail -n +4
 
-fileviewer {*.7z,*.iso},<application/x-7z-compressed,application/x-iso9660-image>
+fileviewer {*.7z,*.iso,*.AppImage},<application/x-7z-compressed,application/x-iso9660-image>
 	\ 7z l -p -- %c | sed '1,,/Scanning the drive for archives:$/d',
 
 fileviewer *.odt,*.ods,*.odp,*.sxw

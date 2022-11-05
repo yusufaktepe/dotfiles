@@ -2,7 +2,7 @@
 # Control mpv using IPC protocol.
 # Options interact with last opened instance unless '-a' flag is present.
 
-socket=$(find /tmp/mpvsocket[0-9]* -type s 2>/dev/null | tail -n 1)
+[ -z "$SOCKET" ] && SOCKET=$(find /tmp/mpvsocket[0-9]* -type s 2>/dev/null | tail -n 1)
 
 ipc_send() {
 	pidof -q mpv || exit
@@ -19,11 +19,11 @@ ipc_send() {
 	if [ -n "$ToAll" ]; then
 		for i in /tmp/mpvsoc*; do
 			[ -e "$i" ] || break
-			socket=$i
-			echo "$cmd" | socat - "$socket" >/dev/null
+			SOCKET=$i
+			echo "$cmd" | socat - "$SOCKET" >/dev/null
 		done
 	else
-		echo "$cmd" | socat - "$socket" >/dev/null
+		echo "$cmd" | socat - "$SOCKET" >/dev/null
 	fi
 }
 
@@ -32,7 +32,7 @@ _mpv() {
 }
 
 case $1 in
-	do) shift; ipc_send "$@" ;;
+	run) shift; ipc_send "$@" ;;
 	prev|p) ipc_send 'playlist_prev' ;;
 	next|n) ipc_send 'playlist_next' ;;
 	toggle|t) ipc_send 'cycle' 'pause' ;;
@@ -40,7 +40,7 @@ case $1 in
 	pauseall|pa) ipc_send -a 'set' 'pause' 'yes' ;;
 	add)
 		shift
-		if [ -z "$socket" ]; then
+		if [ -z "$SOCKET" ]; then
 			_mpv "$@"
 		else
 			[ -z "$*" ] && exit
@@ -56,7 +56,7 @@ case $1 in
 	;;
 	sub)
 		shift
-		[ -z "$socket" ] && exit
+		[ -z "$SOCKET" ] && exit
 		[ -z "$*" ] && exit
 		for f in "$@"; do
 			if [ -t 2 ]; then
@@ -69,7 +69,7 @@ case $1 in
 	replace|*)
 		[ "$1" = "replace" ] && shift
 		[ -e "$1" ] || exit
-		if [ -z "$socket" ]; then
+		if [ -z "$SOCKET" ]; then
 			_mpv "$@"
 		else
 			[ -z "$1" ] && exit

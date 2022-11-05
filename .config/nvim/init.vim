@@ -1,5 +1,4 @@
 " vim: set ts=2 sw=2 tw=78 et :
-"=====================================================================
 " PLUGINS {{{
 "=====================================================================
 
@@ -52,7 +51,6 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 " Misc
 Plug 'vimwiki/vimwiki'         " personal wiki
-Plug 'KabbAmine/vCoolor.vim'   " color picker
 Plug 'godlygeek/tabular'       " text filtering and alignment
 Plug 'plasticboy/vim-markdown' " syntax highlighting, matching rules and mappings
 Plug 'tpope/vim-eunuch'        " helpers for unix
@@ -74,7 +72,6 @@ Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 " }}}
-"=====================================================================
 " SETTINGS {{{
 "=====================================================================
 
@@ -88,7 +85,7 @@ set number relativenumber
 " set signcolumn=yes            " always show sign column
 set completeopt+=noinsert,noselect
 set guioptions=a
-set mouse=a
+set mouse=
 set clipboard=unnamed,unnamedplus
 set complete=.,w,b,u,k,kspell,t,i,d
 set omnifunc=syntaxcomplete#Complete
@@ -132,7 +129,6 @@ if !empty($DISPLAY)
 endif
 
 " }}}
-"=====================================================================
 " MAPPINGS {{{
 "=====================================================================
 
@@ -144,7 +140,7 @@ nnoremap C "_C
 nnoremap x "_x
 nnoremap X "_X
 
-nnoremap <leader>dd gg_dG
+nnoremap <leader>dd gg"_dG
 
 " Shortcutting split navigation, saving a keypress:
 map <C-h> <C-w>h
@@ -321,7 +317,6 @@ map ü ]
 map Ü }
 
 " }}}
-"=====================================================================
 " PLUGIN SETTINGS {{{
 "=====================================================================
 
@@ -412,10 +407,6 @@ let g:vimwiki_list = [
   \ {'path': '~/Repos/notes', 'syntax': 'markdown', 'ext': '.md'}
   \ ]
 
-"=== VCoolor
-nmap <silent> <leader>co :VCoolor<CR>
-let g:vcoolor_disable_mappings = 1
-
 "=== Vifm
 let g:vifm_exec = 'VIFM=~/.config/vifm/sessions/select vifm'
 map <leader>n :Vifm<CR>
@@ -433,7 +424,6 @@ let g:Hexokinase_ftEnabled = ['css', 'html', 'scss', 'javascript.jsx']
 let g:Hexokinase_highlighters = ['backgroundfull']
 
 " }}}
-"=====================================================================
 " FUNCTIONS {{{
 "=====================================================================
 
@@ -493,13 +483,15 @@ command! DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
   \ | wincmd p | diffthis
 
 " }}}
-"=====================================================================
 " AUTOCMD {{{
 "=====================================================================
 
 augroup vimrc
   " Suppress readonly warning
   au BufEnter /etc/*,/usr/* set noro
+
+  au BufEnter *.zsh_history,/tmp/dir* set clipboard=
+  au BufEnter /tmp/gpaste.* set laststatus=0 number notermguicolors | map Q ZZ
 
   " Ensure files are read as what I want:
   au BufRead,BufNewFile /tmp/calcurse*,~/.calcurse/notes/* set filetype=markdown
@@ -548,4 +540,3 @@ augroup vimrc
 augroup END
 
 " }}}
-"=====================================================================

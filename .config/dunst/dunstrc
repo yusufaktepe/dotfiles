@@ -482,7 +482,11 @@
     fullscreen = show
 
 [telegram]
-    desktop_entry = "telegramdesktop"
+    desktop_entry = "org.telegram.desktop"
     fullscreen = show
+
+# [vivaldi]
+#     desktop_entry = "vivaldi-stable"
+#     fullscreen = show
 
 #  vim: set ts=8 sw=4 tw=0 et ft=cfg :

@@ -1,13 +1,13 @@
 #!/bin/bash
 # Copyright (C) 2020 Yusuf Aktepe <yusuf@yusufaktepe.com>
 
-ICON_PLAY=""
-ICON_PAUSE=""
-ICON_STOP=""
-CUR_ICON=""
+ICON_PLAY=''
+ICON_PAUSE=''
+ICON_STOP=''
+CUR_ICON=
 
 trunc() {
-	if [ "${#1}" -gt 22 ]; then
+	if [ ${#1} -gt 22 ]; then
 		V="${1:0:21}…"
 		V=${V/% ?…/…}
 		V=${V/% \(?…/…}
@@ -28,9 +28,9 @@ trunc() {
 }
 
 output() {
-	[ ! "$(mpc status 2>/dev/null)" ] && [ ! "$(playerctl status 2>/dev/null)" ] && echo "" && exit
+	mpc status >/dev/null 2>&1 || playerctl status >/dev/null 2>&1 || { printf ''; exit ;}
 
-	if pidof mpd >/dev/null; then
+	if pidof -q mpd; then
 		STATUS=$(mpc status 2>/dev/null); STATUS=${STATUS##*\[}; STATUS=${STATUS%%\]*}
 		ARTIST=$(mpc current --format=%artist% 2>/dev/null)
 		TITLE=$(mpc current --format=%title% 2>/dev/null)
@@ -44,14 +44,14 @@ output() {
 	trunc "$TITLE" && TITLE="$V"
 
 	if [ "${STATUS,,}" = "paused" ]; then
-		CUR_ICON="$ICON_PAUSE"
+		CUR_ICON=$ICON_PAUSE
 	elif [ "${STATUS,,}" = "playing" ]; then
-		CUR_ICON="$ICON_PLAY"
+		CUR_ICON=$ICON_PLAY
 	else
-		CUR_ICON="$ICON_STOP"
+		CUR_ICON=$ICON_STOP
 	fi
 
-	[ "$TITLE" != "" ] && [ "$ARTIST" != "" ] && echo "$CUR_ICON $ARTIST - $TITLE"
+	[ -n "$TITLE" ] && [ -n "$ARTIST" ] && printf '%s\n' "$CUR_ICON $ARTIST - $TITLE"
 }
 
 trap "output" USR1

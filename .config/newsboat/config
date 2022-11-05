@@ -83,8 +83,8 @@ ignore-article "*" "title =~ \"^Ghacks Deals\""
 
 ## Macros
 macro , open-in-browser ; toggle-article-read "read"
-macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser; set browser linkhandler
-macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser; set browser linkhandler
+macro t set browser "tsp yt-dlp --embed-metadata -ic --restrict-filenames"; open-in-browser; set browser linkhandler
+macro a set browser "tsp yt-dlp --embed-metadata -xic -f bestaudio/best --restrict-filenames"; open-in-browser; set browser linkhandler
 macro v set browser "ym"; open-in-browser; set browser linkhandler
 macro C set browser "youtube-viewer --comments=%u"; open-in-browser; set browser linkhandler
 macro w set browser "w3m"; open-in-browser; set browser linkhandler

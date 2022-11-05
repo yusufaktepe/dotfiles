@@ -14,5 +14,9 @@ case $1 in
 	inc) light -A "${2:-5}" && update_bar ;;
 	dec) light -U "${2:-5}" && update_bar ;;
 	set) light -S "${2:-9}" && update_bar ;;
-	off) xset dpms force off ;;
+	off)
+		xset dpms force off
+		KBL=/sys/class/leds/tpacpi::kbd_backlight/brightness
+		[ -e "$KBL" ] && { printf 0 > $KBL; capsloff ;} ;;
 esac
+

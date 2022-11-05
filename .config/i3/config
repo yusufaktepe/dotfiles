@@ -13,7 +13,7 @@ set $agr  Mod5
 floating_modifier $mod
 
 # Set basic vars
-set $N --no-startup-id
+set $exec exec --no-startup-id
 
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
@@ -38,125 +38,128 @@ font pango:mono 12
 # kill focused window
 set $killrule [con_id="__focused__" instance="^(?!dropdown_).*$"]
 bindsym $mod+q $killrule kill
-bindsym $mod+Shift+q $killrule exec $N kill -9 `xdotool getwindowfocus getwindowpid`
-bindsym --release $mod+Ctrl+x exec $N xkill
+bindsym $mod+Shift+q $killrule $exec kill -9 `xdotool getwindowfocus getwindowpid`
+bindsym --release $mod+Ctrl+x $exec xkill
 
 # #---Start a terminal---# #
-bindsym $mod+Return exec $N $TERMINAL
-bindsym $mod+quotedbl exec $N "$TERMINS Alacritty,floating"
-bindsym $mod+comma split horizontal ;; exec $N $TERMINAL
-bindsym $mod+period split vertical ;; exec $N $TERMINAL
-bindsym $mod+udiaeresis exec $N ddspawn tmuxi
+bindsym $mod+Return $exec $TERMINAL
+bindsym $mod+quotedbl $exec "$TERMINS floating"
+bindsym $mod+comma split horizontal ;; $exec $TERMINAL
+bindsym $mod+period split vertical ;; $exec $TERMINAL
+bindsym $mod+udiaeresis $exec ddspawn tmuxi
 # open terminal in current dir
-# bindsym $mod+Shift+Return exec $N samedir
+# bindsym $mod+Shift+Return $exec samedir
 
 # #---Rofi---# #
 set $calc LC_NUMERIC=en_US.UTF-8 rofi -show calc -modi calc -no-show-match \
 	-no-sort -calc-command "printf '{result}' | xsel -b" >/dev/null
-bindsym $mod+d exec $N rofi -show combi
-bindsym $mod+c exec $N $calc
-bindsym $mod+i exec $N rofimoji
-bindsym XF86Calculator exec $N $calc
-bindsym $caps+d exec $N rofi-pass
-bindsym $caps+f exec $N rofi-finder
-# bindsym XF86Launch2 exec $N rofi -show combi
-bindsym XF86Launch9 exec $N rofitr
-bindsym $caps+t exec $N rofitr -s
+bindsym $mod+d $exec rofi -show combi
+bindsym $mod+c $exec $calc
+bindsym $mod+i $exec rofimoji
+bindsym XF86Calculator $exec $calc
+bindsym $caps+d $exec rofi-pass
+bindsym $caps+f $exec rofi-finder
+# bindsym XF86Launch2 $exec rofi -show combi
+bindsym XF86Launch9 $exec rofitr
+bindsym $caps+t $exec rofitr -s
 
 # #---Clipboard management---# #
-bindsym Ctrl+quotedbl exec $N gpaste
-bindsym $caps+quotedbl exec $N gpaste --clear
-bindsym Ctrl+$caps+quotedbl exec $N "pkill gpaste-daemon && gpaste-client daemon"
-bindsym $mod+Shift+Insert exec $N gpaste --seltoclip
+bindsym Ctrl+quotedbl $exec gpaste
+bindsym $caps+quotedbl $exec gpaste --clear
+bindsym Ctrl+$caps+quotedbl $exec "pkill gpaste-daemon; gpaste-client daemon"
+bindsym $mod+Shift+Insert $exec gpaste --seltoclip
 
 # #---Dunst---# #
-bindsym $caps+space exec $N dunstctl close-all
-bindsym $caps+Shift+space exec $N dunstctl close
-bindsym $caps+Shift+s exec $N dunstctl history-pop
-bindsym $caps+Shift+a exec $N dunstctl context
+bindsym $caps+space $exec dunstctl close-all
+bindsym $caps+Shift+space $exec dunstctl close
+bindsym $caps+Shift+s $exec dunstctl history-pop
+bindsym $caps+Shift+a $exec dunstctl context
 
 # #---Start Applications---# #
-bindsym $mod+F1 exec $N ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
-bindsym $mod+F2 exec $N ifterm -h -e vifm
-bindsym $mod+F3 exec $N ifwin -e 'vivaldi-stable --start-maximized'
-bindsym $mod+F4 exec $N ifwin -e firefox
-bindsym $mod+F5 exec $N ifwin -e google-chrome-stable
-bindsym $mod+Shift+F2 exec $N ifwin -e pcmanfm-qt
-bindsym $mod+Shift+F3 exec $N vivaldi-stable --start-maximized --incognito
-bindsym $mod+Shift+F4 exec $N firefox --private-window
-bindsym $mod+Shift+F5 exec $N google-chrome-stable --incognito
-bindsym $mod+m exec $N ifwin -e telegram-desktop -c telegramdesktop
+bindsym $mod+F1 $exec ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
+bindsym $mod+F2 $exec ifterm -h -e vifm
+bindsym $mod+F3 $exec ifwin -e 'vivaldi-stable --start-maximized'
+bindsym $mod+F4 $exec ifwin -e firefox
+bindsym $mod+F5 $exec ifwin -e brave
+bindsym $mod+F6 $exec ifwin -e google-chrome-stable
+bindsym $mod+Shift+F2 $exec ifwin -e pcmanfm-qt
+bindsym $mod+Shift+F3 $exec vivaldi-stable --start-maximized --incognito
+bindsym $mod+Shift+F4 $exec firefox --private
+bindsym $mod+Shift+F5 $exec brave --incognito
+bindsym $mod+Shift+F6 $exec google-chrome-stable --incognito
+bindsym $mod+m $exec ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
-bindsym $caps+e exec $N $TERMINAL -e $EDITOR
-bindsym $caps+m exec $N ifwin -e strawberry
-# bindsym $caps+Shift+s exec $N toggle spotifyd
-bindsym $caps+r exec $N kpass
-bindsym $caps+s exec $N ifwin -e spotify
-bindsym $caps+q exec $N ifwin -e qbittorrent
-bindsym $caps+7 exec $N vbox_instance Win7
-# bindsym $caps+w exec $N libreoffice --writer
-bindsym $caps+c exec $N crow-translate
-bindsym $caps+v exec $N ifwin -e code
-bindsym $caps+o exec $N ifwin -p electron -e obsidian
+bindsym $caps+e $exec $TERMINAL -e $EDITOR
+bindsym $caps+m $exec ifwin -e strawberry
+# bindsym $caps+Shift+s $exec toggle spotifyd
+bindsym $caps+r $exec kpass
+bindsym $caps+s $exec ifwin -e spotify
+bindsym $caps+q $exec ifwin -e qbittorrent
+bindsym $caps+7 $exec vbox_instance Win7
+# bindsym $caps+w $exec libreoffice --writer
+bindsym $caps+c $exec crow-translate
+bindsym $caps+v $exec ifwin -e code
+bindsym $caps+o $exec ifwin -p electron -e obsidian
+bindsym $mod+$caps+c $exec ifwin -s -e gcolor3
 
-bindsym $mod+Shift+d exec $N xo d
-bindsym $mod+Shift+e exec $N xo c
-bindsym $mod+Shift+p exec $N mpv-resume
-bindsym $mod+Shift+F8 exec $N sudo -A systemctl restart NetworkManager
-bindsym $mod+F8 exec $N ifterm -t -i blockterm_nmtui -e nmtui-connect
+bindsym $mod+Shift+d $exec xo d
+bindsym $mod+Shift+e $exec xo c
+bindsym $mod+Shift+p $exec mpv-resume
+bindsym $mod+Shift+F8 $exec sudo -A systemctl restart NetworkManager
+bindsym $mod+F8 $exec ifterm -t -i blockterm_nmtui -e nmtui-connect
 
 # Pause players & switch to ws0:
-bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
+bindsym $mod+Shift+Delete $exec smc pauseall; workspace 0
 
 ## System Monitor
-bindsym $caps+F1 exec $N ifterm -t -i blockterm_htop -e htop
-bindsym $caps+F2 exec $N ifterm -t -i blockterm_psmem -e 'sudo -A ps_mem | less -RS +G'
-bindsym $caps+F3 exec $N ifterm -t -i blockterm_ncdu -e 'ncdu --color dark --exclude vifm/fuse ~/'
+bindsym $caps+F1 $exec ifterm -t -i blockterm_htop -e htop
+bindsym $caps+F2 $exec ifterm -t -i blockterm_psmem -e 'sudo -A ps_mem | less -RS +G'
+bindsym $caps+F3 $exec ifterm -t -i blockterm_ncdu -e 'ncdu --color dark --exclude vifm/fuse ~/'
 
 ## Function Buttons
-bindsym XF86MonBrightnessUp exec $N brightness inc 2.90
-bindsym XF86MonBrightnessDown exec $N brightness dec 2.90
-bindsym --release $mod+BackSpace exec $N "sleep 1; xset dpms force off; light -Srs 'sysfs/leds/tpacpi::kbd_backlight' 0"
+bindsym XF86MonBrightnessUp $exec brightness inc 2.90
+bindsym XF86MonBrightnessDown $exec brightness dec 2.90
+bindsym --release $mod+BackSpace $exec "sleep 1; brightness off; numlockx off"
 
-bindsym XF86Display exec $N arandr && setbg
-# bindsym XF86TouchpadOff exec $N toggle touchpad
-# bindsym XF86TouchpadOn exec $N toggle touchpad
+bindsym XF86Display $exec arandr && setbg
+# bindsym XF86TouchpadOff $exec toggle touchpad
+# bindsym XF86TouchpadOn $exec toggle touchpad
 
-bindsym $mod+F9 exec $N dmenumount
-bindsym $mod+Shift+F9 exec $N dmenuumount
-bindsym $mod+F10 exec $N toggle webcam
+bindsym $mod+F9 $exec dmenumount
+bindsym $mod+Shift+F9 $exec dmenuumount
+bindsym $mod+F10 $exec toggle webcam
 
 ## Audio/Media Control
-bindsym XF86AudioMute        exec $N vol toggle
-bindsym XF86AudioLowerVolume exec $N vol down
-bindsym XF86AudioRaiseVolume exec $N vol up
-bindsym Shift+XF86AudioLowerVolume exec $N smc vol down
-bindsym Shift+XF86AudioRaiseVolume exec $N smc vol up
-bindsym XF86AudioMicMute     exec $N toggle audio
-bindsym $mod+XF86AudioLowerVolume exec $N ifwin -t -e pavucontrol
-bindsym $mod+XF86AudioRaiseVolume exec $N ifterm -t -i blockterm_pulsemixer -e pulsemixer
+bindsym XF86AudioMute        $exec vol toggle
+bindsym XF86AudioLowerVolume $exec vol down
+bindsym XF86AudioRaiseVolume $exec vol up
+bindsym Shift+XF86AudioLowerVolume $exec smc vol down
+bindsym Shift+XF86AudioRaiseVolume $exec smc vol up
+bindsym XF86AudioMicMute     $exec toggle audio
+bindsym $mod+XF86AudioLowerVolume $exec ifwin -t -e pavucontrol
+bindsym $mod+XF86AudioRaiseVolume $exec ifterm -t -i blockterm_pulsemixer -e pulsemixer
 
-bindsym XF86AudioPlay exec $N smc t
-bindsym XF86AudioPrev exec $N smc p
-bindsym XF86AudioNext exec $N smc n
-bindsym $caps+less exec $N smc t
-bindsym $caps+z exec $N smc p
-bindsym $caps+x exec $N smc n
+bindsym XF86AudioPlay $exec smc t
+bindsym XF86AudioPrev $exec smc p
+bindsym XF86AudioNext $exec smc n
+bindsym $caps+less $exec smc t
+bindsym $caps+z $exec smc p
+bindsym $caps+x $exec smc n
 
 ## Screenshots
-bindsym Print exec $N maimshot
-bindsym --release $mod+Print exec $N maimshot -w
-bindsym --release Ctrl+Print exec $N maimshot -s
-bindsym Shift+Print exec $N dmaim
+bindsym Print $exec maimshot
+bindsym --release $mod+Print $exec maimshot -w
+bindsym --release Ctrl+Print $exec maimshot -s
+bindsym Shift+Print $exec dmaim
 
 ## Set temporary transparency
-bindsym $mod+Ctrl+KP_Divide exec picom-trans -c --delete
-bindsym $mod+Ctrl+KP_Multiply exec picom-trans -c --toggle 50
-bindsym --release $mod+Ctrl+KP_Add exec [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c +10
-bindsym --release $mod+Ctrl+KP_Subtract exec [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c -10
+bindsym $mod+Ctrl+KP_Divide $exec picom-trans -c --delete
+bindsym $mod+Ctrl+KP_Multiply $exec picom-trans -c --toggle 50
+bindsym --release $mod+Ctrl+KP_Add $exec [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c +10
+bindsym --release $mod+Ctrl+KP_Subtract $exec [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c -10
 
-bindsym KP_Insert exec $N mpvscratch
+bindsym --release KP_Insert $exec mpvscratch
 #=====================================================================
 
 # change focus
@@ -186,8 +189,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+n split h; exec notify-send -a system -i window -t 1000 'tile horizontally'
-bindsym $mod+v split v; exec notify-send -a system -i window -t 1000 'tile vertically'
+bindsym $mod+n split h; $exec notify-send -a system -i window -t 1000 'tile horizontally'
+bindsym $mod+v split v; $exec notify-send -a system -i window -t 1000 'tile vertically'
 bindsym $mod+t split toggle
 
 # toggle fullscreen mode for the focused container
@@ -224,13 +227,13 @@ bindsym $mod+Shift+gbreve [class="^(?i)(?!Alacritty|St|smplayer|mpv)"] scratchpa
 # Floating bottom left-right
 set $AW $(xdotool getactivewindow)
 bindsym $mod+Shift+b floating enable; sticky enable; \
-	exec $N "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1 600"
+	$exec "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1 600"
 bindsym $mod+Shift+n floating enable; sticky enable; \
-	exec $N "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1069 600"
+	$exec "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1069 600"
 bindsym $mod+Ctrl+Shift+b floating enable; sticky enable; \
-	exec $N "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1 797"
+	$exec "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1 797"
 bindsym $mod+Ctrl+Shift+n floating enable; sticky enable; \
-	exec $N "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1418 797"
+	$exec "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1418 797"
 
 # Resize
 set $distance 10 px or 10 ppt
@@ -241,7 +244,7 @@ bindsym $mod+Shift+o resize grow right $distance
 
 # Maximize a floating window
 set $floatmax xdotool getactivewindow windowsize $(tr , ' ' </sys/class/graphics/fb0/virtual_size) windowmove 0 0
-bindsym $mod+Ctrl+f floating enable; exec $N "polybar-msg cmd hide; $floatmax"
+bindsym $mod+Ctrl+f floating enable; $exec "polybar-msg cmd hide; $floatmax"
 
 # put YouTube into fullscreen and execute this for media mode
 bindsym $caps+y fullscreen disable; floating enable; resize set 852 481; sticky enable; move window to position 1068 599
@@ -249,7 +252,7 @@ bindsym $caps+y fullscreen disable; floating enable; resize set 852 481; sticky 
 # focus on the rightmost window and execute this for grid layout
 set $fl focus left
 set $fr focus right
-bindsym $caps+g $fl;$fl;$fl;split v;$fr;move left;$fr;split v;$fr;move left
+bindsym $caps+g [workspace="__focused__"] floating disable; [workspace="__focused__"] border none; $fl;$fl;$fl;split v;$fr;move left;$fr;split v;$fr;move left
 
 # Workspace names
 set $ws1 1
@@ -320,7 +323,7 @@ bindsym $alt+Tab         workspace back_and_forth
 bindsym $alt+Shift+Tab   move container to workspace back_and_forth; workspace back_and_forth
 
 # Switch to the first empty workspace
-bindsym $caps+n exec $N "i3-msg workspace $(i3-few)"
+bindsym $caps+n $exec "i3-msg workspace $(i3-few)"
 
 # Selecting current workspace switches back and forth
 workspace_auto_back_and_forth yes
@@ -329,12 +332,12 @@ workspace_auto_back_and_forth yes
 bindsym $mod+x [urgent=latest] focus
 
 # Hide/unhide the bar
-bindsym $mod+b exec $N polybar-msg cmd toggle
-bindsym $mod+$caps+b exec $N crypto_bar
-bindsym $mod+$caps+t exec $N crypto_bar top
+bindsym $mod+b $exec polybar-msg cmd toggle
+bindsym $mod+$caps+b $exec crypto_bar
+bindsym $mod+$caps+t $exec crypto_bar top
 
 # Reload the configuration file
-bindsym $mod+Shift+c reload ;; exec $N "notify-send -a system -i configuration -t 1500 i3 'Config reloaded'"
+bindsym $mod+Shift+c reload ;; $exec "notify-send -a system -i configuration -t 1500 i3 'Config reloaded'"
 
 # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
@@ -348,7 +351,7 @@ bindsym --whole-window --border $mod+Shift+button5 move container to workspace n
 bindsym --whole-window --border $mod+Ctrl+button4 move container to workspace prev
 bindsym --whole-window --border $mod+Ctrl+button5 move container to workspace next
 
-bindsym --whole-window --border $mod+Ctrl+button3 exec $N maimshot -s
+bindsym --whole-window --border $mod+Ctrl+button3 $exec maimshot -s
 
 #=====================================================================
 # Window/WS Rules
@@ -359,7 +362,7 @@ for_window [workspace="$ws1|$ws2|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
 # assign [window_role="browser"]                 $ws1
-assign [class="(?i)Vivaldi|Brave"]               $ws1
+assign [class="(?i)Vivaldi|Brave-browser"]       $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
 assign [class="(?i)Opera|firefox"]               $ws4
@@ -408,6 +411,7 @@ for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, m
 for_window [instance="blockterm_*"] floating enable border pixel 2
 for_window [instance="Blockterm_*"] floating enable border pixel 3, resize set 1920 1056, move position center
 for_window [instance="floating"] floating enable, move position mouse
+for_window [instance="gpaste-editor"] floating enable sticky enable, resize set 1146 328, move position 387 24
 #_ Doublecmd
 for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center
 for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 1100 800, move position center
@@ -428,14 +432,15 @@ for_window [instance="dropdown_*"] move position center
 #=====================================================================
 # See ../X11/xinitrc for rest of the autostarts
 
-exec_always launch_polybar
-exec $N kpass
-exec $N "sleep 2; vivaldi-stable --start-maximized"
-exec $N "sleep 5; ifterm -h -e vifm"
-exec $N "sleep 7; telegram-desktop"
-# exec $N "sleep 7; ifwin -e spotify"
-exec $N "sleep 7; wmctrl -x -r 'vifm' -b remove,demands_attention"
-exec $N "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
+exec_always $N launch_polybar
+$exec kpass
+$exec "sleep 2; vivaldi-stable --start-maximized"
+$exec "sleep 5; ifterm -h -e vifm"
+# $exec "sleep 7; telegram-desktop"
+$exec "sleep 9; crypto_bar"
+$exec "sleep 10; spotify"
+$exec "sleep 7; wmctrl -x -r 'vifm' -b remove,demands_attention"
+# $exec "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
 
 #=====================================================================
 # Colors
@@ -591,13 +596,13 @@ mode "$freeze" {
 
 set $bind-modes $XDG_CONFIG_HOME/rofi/bind-modes
 
-bindsym $mod+Delete  exec $N rofi-bind -f $bind-modes/session
-bindsym $caps+Escape exec $N rofi-bind -f $bind-modes/session
-bindsym $caps+b      exec $N rofi-bind -f $bind-modes/bro-open
-bindsym $mod+Shift+t exec $N rofi-bind -f $bind-modes/toggle
-bindsym $caps+a      exec $N rofi-bind -f $bind-modes/keystroke
-bindsym $caps+w      exec $N rofi-bind -f $bind-modes/vimwiki
-bindsym $caps+p      exec $N rofi-bind -f $bind-modes/paste
+bindsym $mod+Delete  $exec rofi-bind -f $bind-modes/session
+bindsym $caps+Escape $exec rofi-bind -f $bind-modes/session
+bindsym $caps+b      $exec rofi-bind -f $bind-modes/bro-open
+bindsym $mod+Shift+t $exec rofi-bind -f $bind-modes/toggle
+bindsym $caps+a      $exec rofi-bind -f $bind-modes/keystroke
+bindsym $caps+w      $exec rofi-bind -f $bind-modes/vimwiki
+bindsym $caps+p      $exec rofi-bind -f $bind-modes/paste
 
 #=====================================================================
 

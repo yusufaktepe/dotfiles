@@ -5,12 +5,9 @@ KeyFile=$XDG_CONFIG_HOME/browsers/KeePass/KeePass.keyx
 
 if pidof -q keepassxc; then
 	AW=$(xdotool getactivewindow)
+	IFS=\" read -r _ _ _ WM_CLASS <<< "$(xprop -id "$AW" WM_CLASS)"
 
-	while read -r _ _ _ WM_CLASS; do
-		AW_CLASS=${WM_CLASS//\"}
-	done < <(xprop -id "$AW" WM_CLASS)
-
-	if [ "$AW_CLASS" = KeePassXC ]; then
+	if [ "$WM_CLASS" = KeePassXC ]; then
 		wmctrl -c :ACTIVE:
 	else
 		keepassxc && wmctrl -ax KeePassXC

@@ -7,32 +7,32 @@ cd ~/.config/mpv/watch_later || exit
 
 while read -ra HistFiles; do
 	for HistFile in ${HistFiles[1]}; do
-		while read -r Line; do
-			if [[ $Line =~ ^\#.* ]]; then
-				read -ra File <<< "$Line"
-				Hist+=("${File[*]:1}") # ${File[1]} doesn't work if file contains spaces
-				break
+		while IFS='# ' read -r _ File; do
+			if [[ -f "$File" ]]; then
+				Hist+=("$File")
+			elif [[ $File =~ ^http.* ]]; then
+				Hist+=("$File")
+			else
+				rm "$HistFile"
 			fi
+			break
 		done < "$HistFile"
 	done
 done < <(find . -type f -printf "%T+ %P\n" | sort -r)
 
-[ -z "$HistFile" ] && exit
+[[ -z "$HistFile" ]] && exit
 
 while read -r PlayThis; do
-	[ -n "$PlayThis" ] || break
+	[[ -n "$PlayThis" ]] || break
 
 	for HistItem in "${Hist[@]}"; do
 		if [[  $HistItem == *"$PlayThis" ]]; then
 			if [[ -f "$HistItem" ]]; then
 				find /tmp/mpvsocket[0-9]* -type s 2>/dev/null && mpvc quit
+				sleep .2
 				mpvc "$HistItem"
 			elif [[ $HistItem =~ ^http.*"$PlayThis" ]]; then
 				ym "$HistItem"
-			else
-				find . -type f -exec grep -Fqm 1 "$HistItem" {} \; -delete
-				notify-send -a system -i mpv 'mpv-resume' \
-					'Unable to access file!\nRemoving from <b>watch_later</b>...'
 			fi
 			break
 		fi

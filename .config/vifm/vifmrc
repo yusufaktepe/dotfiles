@@ -45,6 +45,9 @@ set vimhelp
 " press return on the file name set this.
 set norunexec
 
+" Color scheme
+colorscheme custom
+
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
 " See man date or man strftime for details.
@@ -98,7 +101,7 @@ set shortmess+=L
 set rulerformat='%2l-%S%[ +%x%]'
 
 " Set custom status line look
-set statusline=" %t%= %A %10u:%-7g %8E %20d "
+set statusline=" %t%= %o %A %10u:%-7g %8E %20d "
 
 " Controls what will be saved in the $VIFM/vifminfo file
 set vifminfo=bmarks,bookmarks,tui,dhistory,state,savedirs,chistory,shistory,
@@ -118,9 +121,6 @@ set viewcolumns=-{name}..,6{}.
 set tuioptions-=s
 
 if $TERM != 'linux'
-	" Color scheme
-	colorscheme custom
-
 	" use Unicode ellipsis
 	set tuioptions+=u
 endif

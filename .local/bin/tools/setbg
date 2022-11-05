@@ -19,5 +19,6 @@ lock=$XDG_DATA_HOME/backgrounds/lock.png
 	notify-send -a system -i "$wall" "Wallpaper changed."
 }
 
-hsetroot -fill "$wall"
+# hsetroot -fill "$wall"
+xwallpaper --stretch "$wall"
 

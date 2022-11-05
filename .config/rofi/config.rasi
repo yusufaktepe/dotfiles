@@ -53,7 +53,7 @@ configuration {
 /*	normalize-match: false;*/
 /*	steal-focus: false;*/
 /*	application-fallback-icon: ;*/
-/*	refilter-timeout-limit: 8192;*/
+/*	refilter-timeout-limit: 300;*/
 /*	xserver-i300-workaround: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 	display-window: "";
@@ -68,6 +68,7 @@ configuration {
 	display-calc: "";
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
 /*	kb-secondary-paste: "Control+v,Insert";*/
+/*	kb-secondary-copy: "Control+c";*/
 /*	kb-clear-line: "Control+w";*/
 /*	kb-move-front: "Control+a";*/
 /*	kb-move-end: "Control+e";*/
@@ -91,11 +92,11 @@ configuration {
 /*	kb-mode-complete: "Control+l";*/
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
-	kb-row-up: "Up,Control+p,Super+k";
+	kb-row-up: "Up,ISO_Left_Tab,Control+p,Super+k";
 	kb-row-down: "Down,Control+n,Super+j";
 /*	kb-row-tab: "";*/
 /*	kb-element-next: "Tab";*/
-/*	kb-element-prev: "ISO_Left_Tab";*/
+	kb-element-prev: "";
 /*	kb-page-prev: "Page_Up";*/
 /*	kb-page-next: "Page_Down";*/
 /*	kb-row-first: "Home,KP_Home";*/
@@ -105,7 +106,7 @@ configuration {
 /*	kb-ellipsize: "Alt+period";*/
 /*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
 /*	kb-toggle-sort: "Alt+grave";*/
-	kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2,XF86Launch9,Super_L+XF86MonBrightnessDown,Alt_L+Escape,XF86Calculator";
+	kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2,XF86Launch9,Super_L+XF86MonBrightnessDown,Alt_L+Escape,XF86Calculator,XF86WakeUp";
 /*	kb-custom-1: "Alt+1";*/
 /*	kb-custom-2: "Alt+2";*/
 /*	kb-custom-3: "Alt+3";*/

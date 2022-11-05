@@ -1,7 +1,7 @@
 #!/bin/sh
 
-AW=$(xdotool getactivewindow)
-AW_INS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print $2}')
+AW=$(xdotool getactivewindow 2>/dev/null)
+AW_INS=$(xprop -id "$AW" WM_CLASS 2>/dev/null | cut -d\" -f2)
 
 while getopts ":e:i:hst" opt; do
 	case $opt in
@@ -18,7 +18,7 @@ shift $((OPTIND-1))
 [ -z "$Exec" ] && exit 1
 [ -z "$Ins" ] && Ins=$Exec
 
-if wmctrl -lx | grep -iq "$Ins.$TERMINAL"; then
+if wmctrl -lx | grep -iq "$Ins.*$TERMINAL"; then
 	if [ "$AW_INS" = "$Ins" ]; then
 		if [ "$Scratchpad" ]; then
 			i3-msg -q "[instance=\"(?i)$Ins\"] move scratchpad"
@@ -33,6 +33,6 @@ if wmctrl -lx | grep -iq "$Ins.$TERMINAL"; then
 	fi
 else
 	[ $Hold ] && Exec="$Exec; $SHELL"
-	$TERMINS "Alacritty,$Ins" -e sh -c "$Exec" >/dev/null 2>&1 &
+	$TERMINS "$Ins" -e sh -c "$Exec" >/dev/null 2>&1 &
 fi
 

@@ -1,8 +1,11 @@
 #!/bin/sh
-# This file originally taken from:
-# https://github.com/LukeSmithxyz/voidrice
 
-PID=$(xprop -id "$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')" | grep -m 1 PID | cut -d " " -f 3)
-PID="$(pstree -lpA "$PID" | tail -n 1 | awk -F'---' '{print $NF}' | sed -re 's/[^0-9]//g')"
-cd "$(readlink /proc/"$PID"/cwd)" || return 1
-"$TERMINAL"
+PID=$(xprop -id "$(xdotool getactivewindow)" _NET_WM_PID)
+PID=${PID##* }
+PID=$(pstree -lpATna "$PID" | sed '$s/.*,\([0-9]\+\).*/\1/;t;d')
+
+CWD=$(readlink /proc/"$PID"/cwd)
+[ "$PWD" != "$CWD" ] && [ -d "$CWD" ] && { cd "$CWD" || exit 1; }
+
+setsid -f "$TERMINAL"
+

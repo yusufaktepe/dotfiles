@@ -17,8 +17,9 @@ alias ssh='TERM=xterm-256color ssh'
 alias tree='tree -aI ".git|node_modules" --dirsfirst'
 alias vidir='vidir -v'
 alias wget='wget -qc --show-progress'
+alias reboot='mpvc quit 2>/dev/null; systemctl reboot'
 
-for p in {u,}mount iotop ps_mem updatedb; { alias $p="sudo $p" ;}; unset p
+for p in iotop ps_mem updatedb; { alias $p="sudo $p" ;}; unset p
 
 alias didi='sudo dd bs=4M oflag=sync status=progress'
 alias magit='nvim -c MagitOnly'
@@ -37,7 +38,7 @@ alias g='git'
 alias p='sudo pacman'
 alias se='sudoedit'
 alias ka='killall'
-alias yt='youtube-dl --add-metadata -i'
+alias yt='yt-dlp --embed-metadata -i'
 alias yta='yt -x -f bestaudio/best'
 alias YT='youtube-viewer'
 
@@ -50,9 +51,11 @@ alias paclog='grep -E "\] (install|upgrad|remov)ed" /var/log/pacman.log | less +
 alias http-serve='python -m http.server'
 
 # Colorize commands
-alias ls='ls --group-directories-first --time-style=long-iso --color=auto -F'
-alias ll='ls -l'
-alias la='ls -lah'
+# alias ls='ls --group-directories-first --time-style=long-iso --color=auto -F'
+# alias la='ls -lah'
+alias ls='exa --group-directories-first --time-style=long-iso --icons -Fg'
+alias ll='ls -l --git'
+alias la='ls -la --git'
 alias grep='grep --color=auto --exclude-dir=".git" --exclude-dir="node_modules"'
 # alias diff='diff --color=auto'
 alias ccat='highlight --out-format=ansi'

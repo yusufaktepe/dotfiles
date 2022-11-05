@@ -1,6 +1,6 @@
 #!/bin/sh
 
-killall -q polybar
+polybar-msg cmd quit >/dev/null 2>&1
 
 while pidof -q polybar; do sleep 1; done
 
@@ -8,4 +8,3 @@ for i in $(polybar -m | awk -F: '{print $1}'); do
 	MONITOR=$i polybar default >/dev/null 2>&1 &
 done
 
-echo "Bars launched..."

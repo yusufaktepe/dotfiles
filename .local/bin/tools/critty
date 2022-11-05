@@ -1,0 +1,8 @@
+#!/bin/bash
+# Workaround for Alacritty's class stupidity
+
+case $1 in
+	--class) exec alacritty --class Alacritty,"$2" "${@:3}" ;;
+	*) exec alacritty "$@" ;;
+esac
+

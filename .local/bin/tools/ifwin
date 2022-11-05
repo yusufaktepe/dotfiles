@@ -1,7 +1,6 @@
 #!/bin/sh
 
-AW=$(xdotool getactivewindow)
-AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/{print tolower($4)}')
+AW_CLASS=$(xdotool getactivewindow getwindowclassname 2>/dev/null | tr '[:upper:]' '[:lower:]')
 
 while getopts ":c:e:p:st" opt; do
 	case $opt in
