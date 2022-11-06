@@ -44,6 +44,8 @@ setopt INTERACTIVE_COMMENTS   # Allow comments even in interactive shells.
 setopt RM_STAR_WAIT           # Before executing `rm *` first wait 10 seconds and ignore anything typed.
 # setopt PRINT_EXIT_VALUE     # Print the exit value of programs with non-zero exit status.
 
+TIMEFMT=$'$ \033[3;31m%J\033[0m\nreal\t%*E\nuser\t%U\nsys\t%S\ncpu\t%P' # The output format of the `time` keyword.
+
 # Prompting
 setopt PROMPT_SUBST           # Enable substitutions in prompt.
 
