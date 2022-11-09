@@ -50,3 +50,5 @@ Sxiv.bar_background: nord0
 Sxiv.bar_foreground: nord4
 Sxiv.font: mono:pixelsize=14:antialias=true:autohint=true
 
+XTerm*borderColor: nord0
+
