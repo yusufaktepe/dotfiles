@@ -47,7 +47,8 @@ alias lspath='printf "%b\n" "${PATH//:/\\n}"'
 alias mktree='tree -a -I .git > TREE'
 alias mkpkg='makepkg -srci'
 alias mksrci='makepkg --printsrcinfo > .SRCINFO'
-alias paclog='grep -E "\] (install|upgrad|remov)ed" /var/log/pacman.log | less +G'
+# alias paclog='grep -E "\] (install|upgrad|remov)ed" /var/log/pacman.log | less +G'
+alias pacmanlog='paclog $(printf " --action %s" {install,{up,down}grade,remove})'
 alias http-serve='python -m http.server'
 
 # Colorize commands
