@@ -1,0 +1,23 @@
+#!/bin/bash
+
+BG_Default=$XDG_DATA_HOME/backgrounds/wall.png
+BG_WS[8]=$HOME/Pictures/wallhaven-k9l6dq_1920x1080.png
+
+setbg() {
+	# hsetroot -fill "$@"
+	xwallpaper --stretch "$@"
+}
+
+while read -r; do
+	Num=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true) | .num')
+	[ "$Num" = "$LastNum" ] && continue
+
+	if [ -n "${BG_WS[$Num]}" ]; then
+		setbg "${BG_WS[$Num]}"
+	else
+		[ -n "${BG_WS[$LastNum]}" ] && setbg "$BG_Default"
+	fi
+
+	LastNum=$Num
+done < <(i3-msg -t subscribe -m '[ "workspace" ]') >/dev/null
+

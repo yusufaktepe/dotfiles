@@ -1,0 +1,9 @@
+#!/bin/sh
+
+_fzf() {
+	fzf -q "$1" -m --height 100% --preview 'pacman -Qil {}' \
+		--preview-window=65%:wrap --bind 'space:toggle-preview'
+}
+
+pacman -Qq | _fzf "$1" | xargs -ro sudo pacman -Rns
+

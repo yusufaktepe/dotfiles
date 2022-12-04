@@ -2,7 +2,7 @@
 * {
   main:               #406769;
   highlight:          bold #D65D0E;
-  urgent:             #D79921;
+  urgent:             #CC241D;
 
   fg:                 #ebdbb2;
   bg:                 #1d2021;
@@ -97,7 +97,15 @@ element alternate.active {
   text-color:         @main;
 }
 
+element-text {
+  background-color: transparent;
+  cursor:           inherit;
+  highlight:        inherit;
+  text-color:       inherit;
+}
+
 element-icon {
+  background-color: transparent;
   size:               1.9000ch;
 }
 

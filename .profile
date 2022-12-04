@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=SC1091,SC2155
 
 # XDG User Dirs
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -6,11 +7,12 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_LIB_HOME="$HOME/.local/lib"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 # Defaults
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
-export TERMINAL="alacritty"
+export TERMINAL="critty"
 export TERMINS="$TERMINAL --class"
 export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"
@@ -19,7 +21,6 @@ export FM="vifm-tab"
 # Keep $HOME clean
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
-export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 export PYLINTHOME="$XDG_CACHE_HOME/pylint"
 
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
@@ -38,10 +39,11 @@ export TERMINFO="$XDG_DATA_HOME/terminfo"
 export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
-export PATH="$PATH:$GOPATH/bin:$(find "$HOME/.local/bin/" -name '.*' -prune -o -type d -print | paste -sd:)"
+Path=$(find "$HOME/.local/bin" -name '.*' -prune -o -type d -printf %p:)
+export PATH="$PATH:$GOPATH/bin:${Path%%:}"
 
 # Others
-export SUDO_ASKPASS="$XDG_BIN_HOME/dmenu-rofi/askpass-rofi"
+export SUDO_ASKPASS="$XDG_BIN_HOME/menus/rofi-askpass"
 export FZF_DEFAULT_OPTS="
 	--layout=reverse --height 50%
 	--bind '?:toggle-preview,alt-k:preview-up,alt-p:preview-page-up'
@@ -50,6 +52,8 @@ export FZF_DEFAULT_OPTS="
 	"
 export RANGER_LOAD_DEFAULT_RC="false"
 export QT_QPA_PLATFORMTHEME="qt5ct"
+export QT_LOGGING_RULES="*=false"
+export MOZ_USE_XINPUT2=1 # Firefox one-to-one trackpad scrolling
 
 # Less Colors
 export LESS=-R
@@ -66,8 +70,13 @@ export LESSOPEN="| highlight -O xterm256 -s pablo %s 2>/dev/null"
 sudo -n loadkeys ~/.config/ttymaps.kmap 2>/dev/null
 
 # GPG - refresh on tty changes
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/gnupg/S.gpg-agent.ssh"
 export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null
+
+# Shell
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export BDOTDIR="$XDG_CONFIG_HOME/bash"
 
 # If login shell is bash, source bashrc
 [ -n "$BASH_VERSION" ] && [ -f "$BDOTDIR/.bashrc" ] && . "$BDOTDIR/.bashrc"

@@ -1,13 +1,8 @@
 #!/bin/sh
 
-downloads=$(xdg-user-dir DOWNLOAD)/default
-
 if [ -n "$*" ]; then
-	if [ -t 2 ] && [ "$1" = . ]; then
+	if [ "$1" = . ]; then
 		cmd="tabnew | cd \"$PWD\""
-	elif [ "$1" = . ]; then
-		# For opening Downloads directory from browsers
-		cmd="tabnew | cd \"$downloads\""
 	else
 		cmd="tabnew | cd \"$*\""
 	fi

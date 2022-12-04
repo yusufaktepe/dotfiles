@@ -1,0 +1,50 @@
+#!/bin/sh
+
+ss_dir=$HOME/Pictures/Screenshots
+datef=$(date +%Y-%m-%d_%H-%M-%S)
+
+notify() {
+	dunstify -a system -i "$shot" -A "$shot",Open "Screenshot captured." |
+		xargs -r -I '{}' xdg-open {} >/dev/null 2>&1 &
+}
+
+notify_clip() { notify-send -a system -i clipboard "Screenshot copied to clipboard." ;}
+
+opts="\
+[1] Selected area
+[2] Current window
+[3] Fullscreen
+[4] Selected area (copy)
+[5] Current window (copy)
+[6] Fullscreen (copy)
+"
+
+case "$(printf '%s' "$opts" | dmenu -l 6 -i -p "Screenshot")" in
+	"[1] Selected area")
+		shot="$ss_dir/ss-selected-$datef.png"
+		maim -usl -b 2 -c 0.35,0.55,0.85,0.25 "$shot" &&
+		notify
+	;;
+	"[2] Current window")
+		shot="$ss_dir/ss-window-$datef.png"
+		maim -ui "$(xdotool getactivewindow)" "$shot"
+		notify
+	;;
+	"[3] Fullscreen")
+		shot="$ss_dir/ss-full-$datef.png"
+		maim -u "$shot"
+		notify
+	;;
+	"[4] Selected area (copy)")
+		mispipe "maim -usl -b 2 -c 0.35,0.55,0.85,0.25" "xclip -selection clipboard -t image/png" &&
+		notify_clip
+	;;
+	"[5] Current window (copy)")
+		maim -ui "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png
+		notify_clip
+	;;
+	"[6] Fullscreen (copy)")
+		maim -u | xclip -selection clipboard -t image/png
+		notify_clip
+	;;
+esac

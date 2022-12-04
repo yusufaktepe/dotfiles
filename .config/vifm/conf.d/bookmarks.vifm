@@ -6,30 +6,33 @@ map bE :cd /etc<cr>
 map bU :cd /usr<cr>
 map bT :cd /tmp<cr>
 map bM :cd /media<cr>
-map bD :cd ~/data<cr>
+map bD :cd ~/Desktop<cr>
 map bP :cd ~/.local/share/pacman<cr>
-map bS :cd ~/shared<cr>
+map bS :cd ~/Shared<cr>
 map b1 :goto ~/.config/vifm/mount/tp.ssh | normal l<cr>
 map b2 :goto ~/.config/vifm/mount/sam.ssh | normal l<cr>
+map b3 :goto ~/.config/vifm/mount/and.ftp | normal l<cr>
 
 map bh :cd ~/<cr>
 map bc :cd ~/.config<cr>
 map bb :cd ~/.local/bin<cr>
 map bs :cd ~/.local/share<cr>
-map bw :cd ~/downloads/default<cr>
-map bd :cd ~/documents<cr>
-map bp :cd ~/pictures<cr>
-map bm :cd ~/music<cr>
-map bn :cd ~/notes<cr>
-map bv :cd ~/videos/mov<cr>
-map bt :cd ~/videos/tv<cr>
-map brr :cd ~/repos<cr>
-map bra :cd ~/repos/pkgbuilds<cr>
-map brd :cd ~/repos/dots<cr>
-map brh :cd ~/repos/site<cr>
-map brp :cd ~/repos/programs<cr>
-map brs :cd ~/repos/scripts<cr>
-map brw :cd ~/repos/web<cr>
+map bd :cd ~/Downloads<cr>
+map bo :cd ~/Documents<cr>
+map bp :cd ~/Pictures<cr>
+map bm :cd ~/Music<cr>
+map bn :cd ~/Repos/notes<cr>
+map bv :cd ~/Videos/Movies<cr>
+map bt :cd ~/Videos/TV<cr>
+map brr :cd ~/Repos<cr>
+map bra :cd ~/Repos/pkgbuilds<cr>
+map brb :cd ~/Repos/.backup<cr>
+map brd :cd ~/Repos/dotfiles<cr>
+map brh :cd ~/Repos/_site<cr>
+map bro :cd ~/Repos/_dots<cr>
+map brp :cd ~/Repos/_programs<cr>
+map brs :cd ~/Repos/_scripts<cr>
+map brw :cd ~/Repos/_web<cr>
 
 " Other pane
 map B/  :winrun , cd /<cr>
@@ -37,7 +40,7 @@ map BE  :winrun , cd /etc<cr>
 map BU  :winrun , cd /usr<cr>
 map BT  :winrun , cd /tmp<cr>
 map BM  :winrun , cd /media<cr>
-map BD  :winrun , cd ~/data<cr>
+map BD  :winrun , cd ~/Desktop<cr>
 map BP  :winrun , cd ~/.local/share/pacman<cr>
 map BS  :winrun , cd ~/shared<cr>
 
@@ -45,18 +48,20 @@ map Bh  :winrun , cd ~/<cr>
 map Bc  :winrun , cd ~/.config<cr>
 map Bb  :winrun , cd ~/.local/bin<cr>
 map Bs  :winrun , cd ~/.local/share<cr>
-map Bw  :winrun , cd ~/downloads/default<cr>
-map Bd  :winrun , cd ~/documents<cr>
-map Bp  :winrun , cd ~/pictures<cr>
-map Bm  :winrun , cd ~/music<cr>
-map Bv  :winrun , cd ~/videos/mov<cr>
-map Bt  :winrun , cd ~/videos/tv<cr>
-map Brr :winrun , cd ~/repos<cr>
-map Bra :winrun , cd ~/repos/pkgbuilds<cr>
-map Brd :winrun , cd ~/repos/dots<cr>
-map Brh :winrun , cd ~/repos/site<cr>
-map Brn :winrun , cd ~/notes<cr>
-map Brp :winrun , cd ~/repos/programs<cr>
-map Brs :winrun , cd ~/repos/scripts<cr>
-map Brw :winrun , cd ~/repos/web<cr>
+map Bd  :winrun , cd ~/Downloads/default<cr>
+map Bo  :winrun , cd ~/Documents<cr>
+map Bp  :winrun , cd ~/Pictures<cr>
+map Bm  :winrun , cd ~/Music<cr>
+map Bv  :winrun , cd ~/Videos/Movies<cr>
+map Bt  :winrun , cd ~/Videos/TV<cr>
+map Brr :winrun , cd ~/Repos<cr>
+map Bra :winrun , cd ~/Repos/pkgbuilds<cr>
+map Brb :winrun , cd ~/Repos/.backup<cr>
+map Brd :winrun , cd ~/Repos/dots<cr>
+map Brh :winrun , cd ~/Repos/_site<cr>
+map Brn :winrun , cd ~/Repos/notes<cr>
+map Bro :winrun , cd ~/Repos/_dots<cr>
+map Brp :winrun , cd ~/Repos/_programs<cr>
+map Brs :winrun , cd ~/Repos/_scripts<cr>
+map Brw :winrun , cd ~/Repos/_web<cr>
 

@@ -1,4 +1,4 @@
-@import "flat-gruvbox.rasi"
+@theme "flat-gruvbox.rasi"
 
 * {
   bg:                 #1d202170;

@@ -1,7 +1,12 @@
 "--- Mappings ---"
 
-" Ctrl-Backspace to remove last word in command line
+" E in menu mode opens selected file in new EDITOR window
+mnoremap E c<c-a><delete>EDIT<space><cr>
+
+" Command-line mode
 cnoremap <C-h> <C-w>
+cnoremap <esc>[1;5C <a-f>
+cnoremap <esc>[1;5D <a-b>
 
 " Switch ; <> ,
 nnoremap , ;
@@ -31,8 +36,24 @@ nnoremap <silent> s :shell<cr>
 nnoremap <silent> S :sort<cr>
 
 " Toggle visibility of preview window
-nnoremap <silent> w :view<cr>
+" nnoremap <silent> w :view<cr>
 vnoremap <silent> w :view<cr>gv
+nnoremap <silent> w : <c-u>
+	\| if &quickview && !layoutis('only')
+	\|     view
+	\| else
+	\|     if layoutis('only')
+	\|         if &lines + 50 < &columns | vsplit | else | split | endif
+	\|         execute 'qnoremap w q:view|only|qunmap w<lt>cr>'
+	\|         execute 'qnoremap q q:view|only|qunmap q<lt>cr>'
+	\|         view!
+	\|         execute 'wincmd w'
+	\|     else
+	\|         execute 'qnoremap w q:view|qunmap w<lt>cr>'
+	\|     endif
+	\|     view!
+	\| endif
+	\| <cr>
 
 " Moving though sibling directories
 nnoremap <silent> <a-j> ]R
@@ -77,6 +98,9 @@ nnoremap <silent> yf :!echo %c:p | xclip -r -selection c %i<cr>
 nnoremap <silent> yN :!echo %c | xclip -r -selection c %i<cr>
 " Yank current file name (without extension) into the clipboard
 nnoremap <silent> yn :!v="%c"; echo "${v%%.*}" | xclip -r -selection c %i<cr>
+" Copy content of the file
+nnoremap <silent> yc :!clip "%c" %i<cr>
+
 
 " Archive
 " nnoremap <silent> x :extract<cr>
@@ -114,10 +138,10 @@ nnoremap <silent> <a-h> :history<cr>
 nnoremap <silent> <a-r> :run<cr>
 
 " Drag and drop
-nnoremap <silent> <a-d>c :!dragon cp &<cr>
-nnoremap <silent> <a-d>d :!dragon dl &<cr>
-nnoremap <silent> <a-d>m :!dragon mv &<cr>
-nnoremap <silent> yD :!dragon -a -x %f &<cr>
+nnoremap <silent> <a-d>c :!ddrop cp &<cr>
+nnoremap <silent> <a-d>d :!ddrop dl &<cr>
+nnoremap <silent> <a-d>m :!ddrop mv &<cr>
+nnoremap <silent> yD :!ddrop -a -x %f &<cr>
 
 " Toggle wrap text in quick view
 nnoremap <silent> WW :set wrap!<cr>

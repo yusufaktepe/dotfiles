@@ -1,0 +1,18 @@
+#!/bin/sh
+
+Feed=$(curl -su "$GMAIL":"$GMAILAP" https://mail.google.com/mail/feed/atom)
+Unread=${Feed##*<fullcount>}
+Unread=${Unread%%<\/fullcount>*}
+
+[ -z "$Unread" ] && exit
+
+Icon=''
+Color=#bb81A1C1
+ColorUnread=#bbBF616A
+
+if [ "$Unread" -gt 0 ]; then
+	printf '%s\n' "%{F$ColorUnread}$Icon%{F-} $Unread"
+else
+	printf '%s\n' "%{F$Color}$Icon%{F-} $Unread"
+fi
+

@@ -3,6 +3,6 @@
 .config/vifm/**/*.json
 .config/vifm/**/*.txt
 .config/vifm/**/README
-*history*
+*history
 .pam-gnupg
 __pycache__/

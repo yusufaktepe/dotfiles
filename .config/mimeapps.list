@@ -1,7 +1,10 @@
 [Default Applications]
 x-scheme-handler/http=vivaldi-stable.desktop
 x-scheme-handler/https=vivaldi-stable.desktop
+x-scheme-handler/about=vivaldi-stable.desktop
+x-scheme-handler/unknown=vivaldi-stable.desktop
 application/xhtml+xml=vivaldi-stable.desktop
+application/x-mozilla-bookmarks=vivaldi-stable.desktop
 text/html=vivaldi-stable.desktop
 inode/directory=vifm-tab.desktop
 inode/mount-point=vifm-tab.desktop
@@ -16,18 +19,23 @@ audio/mpeg=mpv.desktop
 audio/x-opus+ogg=mpv.desktop
 audio/x-vorbis+ogg=mpv.desktop
 audio/x-wav=mpv.desktop
-image/gif=sxivr.desktop
-image/jpeg=sxivr.desktop
-image/png=sxivr.desktop
-image/tiff=sxivr.desktop
+image/gif=qimgv.desktop
+image/jpeg=qimgv.desktop
+image/png=qimgv.desktop
+image/tiff=qimgv.desktop
 application/json=nvim.desktop
 application/xml=nvim.desktop
+application/x-genesis-rom=nvim.desktop
+application/x-shellscript=nvim.desktop
+text/plain=nvim.desktop
 application/pdf=org.pwmt.zathura.desktop
 application/rss+xml=rss.desktop
 application/vnd.rar=engrampa.desktop
 x-scheme-handler/magnet=org.qbittorrent.qBittorrent.desktop
 application/x-bittorrent=org.qbittorrent.qBittorrent.desktop
 x-scheme-handler/mailto=mailto.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-DICSH1.desktop
+x-scheme-handler/whatsapp=whatsapp.desktop
 
 [Added Associations]
 x-scheme-handler/http=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;
@@ -51,3 +59,4 @@ text/plain=nvim.desktop;
 text/x-systemd-unit=nvim.desktop;
 application/x-shellscript=nvim.desktop;
 application/pdf=org.pwmt.zathura.desktop;org.gnome.Evince.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-DICSH1.desktop;

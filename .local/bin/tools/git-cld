@@ -1,4 +1,0 @@
-#!/bin/sh
-
-git clone "$1" "$(echo "$1" | sed 's/.*\(.com\|.org\)\(\/\|:\)//;s/.git$//;s/\//_/')"
-

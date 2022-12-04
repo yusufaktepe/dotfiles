@@ -1,0 +1,39 @@
+#!/bin/sh
+
+ignore=$XDG_DATA_HOME/rofi/finder_ignore
+tmp=$XDG_CACHE_HOME/rofi-finder.list
+
+mklist() {
+	locate "/home/*" "/data/*" |
+		grep -Ev "($(tr -d '\t\n' < "$ignore" | sed "s|~|$HOME|g"))" > "$tmp"
+}
+
+[ -f "$tmp" ] || mklist
+
+menu() {
+	rofi -dmenu -i -theme-str 'window {width: 60%;}' -p  \
+		-kb-custom-1 'Alt+Return' \
+		-kb-custom-2 'Alt+e' \
+		-kb-custom-3 'Alt+s' \
+		-kb-custom-4 'Alt+r' \
+		-kb-custom-5 'Alt+E'
+}
+
+case $1 in
+	sys) choise=$(locate '/etc/*' '/usr/*' | menu) ;;
+	"") sys=false; choise=$(menu < "$tmp") ;;
+esac
+ret=$?
+
+[ -z "$choise" ] && exit
+
+case $ret in
+	10) xdg-open "${choise%/*}" >/dev/null 2>&1 & ;;
+	11) { [ -f "$choise" ] && $TERMINAL -e "$EDITOR" "$choise" ;} ||
+		xdg-open "$choise" >/dev/null 2>&1 & ;;
+	12) { $sys && exec "$0" ;} || exec "$0" sys ;;
+	13) sudo -A updatedb && rm "$tmp" && mklist && exec "$0" ;;
+	14) setsid -f "$TERMINAL" -e "$EDITOR" "$ignore" ;;
+	0) xdg-open "$choise" >/dev/null 2>&1 & ;;
+esac
+

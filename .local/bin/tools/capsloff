@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for f in /sys/class/leds/*capslock/brightness; do
+	printf 1 > "$f"; printf 0 > "$f"
+done
+

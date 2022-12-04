@@ -11,15 +11,9 @@ case "$1" in
 		key --repeat 2 Return key --repeat 69 asterisk key slash Up
 	;;
 	mail)
-		xdotool type --clearmodifiers 'yusuf@yusufaktepe.com'
+		xdotool type --clearmodifiers "$YMAIL"
 	;;
 	mail2)
-		xdotool type --clearmodifiers 'yusufaktepe@gmail.com'
-	;;
-	mdcode)
-		xdotool key --repeat 3 grave key --repeat 2 Return key --repeat 3 grave key Up
-	;;
-	shrug)
-		xdotool type --clearmodifiers '¯\_(ツ)_/¯'
+		xdotool type --clearmodifiers "$GMAIL"
 	;;
 esac

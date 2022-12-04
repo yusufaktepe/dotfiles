@@ -1,0 +1,25 @@
+#!/bin/sh
+
+target() {
+	for p in $(dragon-drop -t -p -x); do
+		case $1 in
+			cp) cp -rv "$p" "$PWD" ;;
+			mv) mv -v "$p" "$PWD" ;;
+			dl) tsp curl -LO "$p" >/dev/null 2>&1 ;;
+		esac
+	done
+
+}
+
+case $1 in
+	cp|mv|dl) target $1 ;;
+	-h|--help|"")
+		dragon-drop --help
+		printf "\n\tScript Usage: dragon [OPTION]
+			\r\t  cp : Copy into target \$PWD
+			\r\t  mv : Move into target \$PWD
+			\r\t  dl : Download into target \$PWD
+			\r\t  *  : Pass option to dragon-drop\n" ;;
+	*) dragon-drop "$@" ;;
+esac
+

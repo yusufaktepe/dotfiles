@@ -43,7 +43,7 @@ bindsym --release $mod+Ctrl+x exec $N xkill
 
 # #---Start a terminal---# #
 bindsym $mod+Return exec $N $TERMINAL
-bindsym $mod+quotedbl exec $N $TERMINS floating
+bindsym $mod+quotedbl exec $N "$TERMINS floating"
 bindsym $mod+comma split horizontal ;; exec $N $TERMINAL
 bindsym $mod+period split vertical ;; exec $N $TERMINAL
 bindsym $mod+udiaeresis exec $N ddspawn tmuxi
@@ -51,8 +51,12 @@ bindsym $mod+udiaeresis exec $N ddspawn tmuxi
 # bindsym $mod+Shift+Return exec $N samedir
 
 # #---Rofi---# #
+set $calc LC_NUMERIC=en_US.UTF-8 rofi -show calc -modi calc -no-show-match \
+	-no-sort -calc-command "printf '{result}' | xsel -b" >/dev/null
 bindsym $mod+d exec $N rofi -show combi
-bindsym $mod+c exec $N rofi -show calc -modi calc -no-show-match -no-sort
+bindsym $mod+c exec $N $calc
+bindsym $mod+i exec $N rofimoji
+bindsym XF86Calculator exec $N $calc
 bindsym $caps+d exec $N rofi-pass
 bindsym $caps+f exec $N rofi-finder
 # bindsym XF86Launch2 exec $N rofi -show combi
@@ -60,56 +64,64 @@ bindsym XF86Launch9 exec $N rofitr
 bindsym $caps+t exec $N rofitr -s
 
 # #---Clipboard management---# #
-bindsym Ctrl+quotedbl exec $N gclip
-bindsym $caps+quotedbl exec $N gclip clear
-bindsym Ctrl+$caps+quotedbl exec $N gclip reload
-bindsym $mod+Shift+Insert exec $N gclip seltoclip
+bindsym Ctrl+quotedbl exec $N gpaste
+bindsym $caps+quotedbl exec $N gpaste --clear
+bindsym Ctrl+$caps+quotedbl exec $N "pkill gpaste-daemon; gpaste-client daemon"
+bindsym $mod+Shift+Insert exec $N gpaste --seltoclip
+
+# #---Dunst---# #
+bindsym $caps+space exec $N dunstctl close-all
+bindsym $caps+Shift+space exec $N dunstctl close
+bindsym $caps+Shift+s exec $N dunstctl history-pop
+bindsym $caps+Shift+a exec $N dunstctl context
 
 # #---Start Applications---# #
-bindsym $mod+F1 exec $N $TERMINS _blockterm -e sh -c 'VIFM=~/.config/vifm/sessions/shell vifm'
-bindsym $mod+F2 exec $N ifterm -e vifm
-bindsym $mod+F3 exec $N ifwin -e $BROWSER
-bindsym $mod+F4 exec $N ifwin -e opera
-bindsym $mod+F5 exec $N ifwin -e firefox
-bindsym $mod+F6 exec $N ifwin -e google-chrome-stable
+bindsym $mod+F1 exec $N ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
+bindsym $mod+F2 exec $N ifterm -h -e vifm
+bindsym $mod+F3 exec $N ifwin -e 'vivaldi-stable --start-maximized'
+bindsym $mod+F4 exec $N ifwin -e firefox
+bindsym $mod+F5 exec $N ifwin -e google-chrome-stable
 bindsym $mod+Shift+F2 exec $N ifwin -e pcmanfm-qt
-bindsym $mod+Shift+F3 exec $N $BROWSER --incognito --start-maximized
-bindsym $mod+Shift+F4 exec $N opera --private --start-maximized
-bindsym $mod+Shift+F5 exec $N firefox --private-window
-bindsym $mod+Shift+F6 exec $N google-chrome-stable --incognito
+bindsym $mod+Shift+F3 exec $N vivaldi-stable --start-maximized --incognito
+bindsym $mod+Shift+F4 exec $N firefox --private
+bindsym $mod+Shift+F5 exec $N google-chrome-stable --incognito
+bindsym $mod+m exec $N ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
 bindsym $caps+e exec $N $TERMINAL -e $EDITOR
-bindsym $caps+m exec $N cantata-mpd
-bindsym $caps+Shift+s exec $N toggle spotifyd
+bindsym $caps+m exec $N ifwin -e strawberry
+# bindsym $caps+Shift+s exec $N toggle spotifyd
+bindsym $caps+r exec $N kpass
 bindsym $caps+s exec $N ifwin -e spotify
 bindsym $caps+q exec $N ifwin -e qbittorrent
-bindsym $caps+7 exec $N ifwin vbox Win7
+bindsym $caps+7 exec $N vbox_instance Win7
 # bindsym $caps+w exec $N libreoffice --writer
-bindsym $caps+c exec $N ifwin crow
+bindsym $caps+c exec $N crow-translate
+bindsym $caps+v exec $N ifwin -e code
+bindsym $caps+o exec $N ifwin -p electron -e obsidian
 
 bindsym $mod+Shift+d exec $N xo d
 bindsym $mod+Shift+e exec $N xo c
 bindsym $mod+Shift+p exec $N mpv-resume
-bindsym $mod+Shift+F12 exec $N sudo -A systemctl restart NetworkManager
-bindsym $mod+F12 exec $N $TERMINS _blockterm -e nmtui-connect
+bindsym $mod+Shift+F8 exec $N sudo -A systemctl restart NetworkManager
+bindsym $mod+F8 exec $N ifterm -t -i blockterm_nmtui -e nmtui-connect
 
 # Pause players & switch to ws0:
 bindsym $mod+Shift+Delete exec $N smc pauseall; workspace 0
 
 ## System Monitor
-bindsym $caps+F1 exec $N $TERMINS _blockterm -e htop
-bindsym $caps+F2 exec $N $TERMINS _blockterm -e sh -c "sudo -A ps_mem | less -RS +G"
-bindsym $caps+F3 exec $N $TERMINS _blockterm -e ncdu --color dark --exclude vifm/fuse ~/
+bindsym $caps+F1 exec $N ifterm -t -i blockterm_htop -e htop
+bindsym $caps+F2 exec $N ifterm -t -i blockterm_psmem -e 'sudo -A ps_mem | less -RS +G'
+bindsym $caps+F3 exec $N ifterm -t -i blockterm_ncdu -e 'ncdu --color dark --exclude vifm/fuse ~/'
 
 ## Function Buttons
-bindsym XF86MonBrightnessUp exec $N brightness inc 5
-bindsym XF86MonBrightnessDown exec $N brightness dec 5
-bindsym --release $mod+XF86MonBrightnessDown exec $N sleep 1 && xset dpms force off
+bindsym XF86MonBrightnessUp exec $N brightness inc 2.90
+bindsym XF86MonBrightnessDown exec $N brightness dec 2.90
+bindsym --release $mod+BackSpace exec $N "sleep 1; brightness off; numlockx off"
 
-# bindsym XF86Display exec $N ifwin -e arandr --toggle
-bindsym XF86TouchpadOff exec $N toggle touchpad
-bindsym XF86TouchpadOn exec $N toggle touchpad
+bindsym XF86Display exec $N arandr && setbg
+# bindsym XF86TouchpadOff exec $N toggle touchpad
+# bindsym XF86TouchpadOn exec $N toggle touchpad
 
 bindsym $mod+F9 exec $N dmenumount
 bindsym $mod+Shift+F9 exec $N dmenuumount
@@ -121,9 +133,9 @@ bindsym XF86AudioLowerVolume exec $N vol down
 bindsym XF86AudioRaiseVolume exec $N vol up
 bindsym Shift+XF86AudioLowerVolume exec $N smc vol down
 bindsym Shift+XF86AudioRaiseVolume exec $N smc vol up
-bindsym $mod+XF86AudioMute   exec $N toggle audio
-bindsym $mod+XF86AudioLowerVolume exec $N ifwin -e pavucontrol --toggle
-bindsym $mod+XF86AudioRaiseVolume exec $N $TERMINS _blockterm -e pulsemixer
+bindsym XF86AudioMicMute     exec $N toggle audio
+bindsym $mod+XF86AudioLowerVolume exec $N ifwin -t -e pavucontrol
+bindsym $mod+XF86AudioRaiseVolume exec $N ifterm -t -i blockterm_pulsemixer -e pulsemixer
 
 bindsym XF86AudioPlay exec $N smc t
 bindsym XF86AudioPrev exec $N smc p
@@ -139,11 +151,12 @@ bindsym --release Ctrl+Print exec $N maimshot -s
 bindsym Shift+Print exec $N dmaim
 
 ## Set temporary transparency
-bindsym $mod+Ctrl+KP_Divide exec transset-df -a 1
-bindsym $mod+Ctrl+KP_Multiply exec transset-df -a 0.5
-bindsym $mod+Ctrl+KP_Add exec transset-df -a --inc 0.1
-bindsym $mod+Ctrl+KP_Subtract exec transset-df -a --min 0.2 --dec 0.1
+bindsym $mod+Ctrl+KP_Divide exec $N picom-trans -c --delete
+bindsym $mod+Ctrl+KP_Multiply exec $N picom-trans -c --toggle 50
+bindsym --release $mod+Ctrl+KP_Add exec $N [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c +10
+bindsym --release $mod+Ctrl+KP_Subtract exec $N [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c -10
 
+bindsym --release KP_Insert exec $N mpvscratch
 #=====================================================================
 
 # change focus
@@ -173,8 +186,8 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split orientation
-bindsym $mod+n split h; exec notify-send -a system -i window -t 1000 'tile horizontally'
-bindsym $mod+v split v; exec notify-send -a system -i window -t 1000 'tile vertically'
+bindsym $mod+n split h; exec $N notify-send -a system -i window -t 1000 'tile horizontally'
+bindsym $mod+v split v; exec $N notify-send -a system -i window -t 1000 'tile vertically'
 bindsym $mod+t split toggle
 
 # toggle fullscreen mode for the focused container
@@ -187,7 +200,6 @@ bindsym $mod+w layout stacking
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-bindsym $caps+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -209,9 +221,16 @@ bindsym $caps+minus [class=".*"] scratchpad show
 bindsym $mod+Shift+udiaeresis [class="(?i)Alacritty|St" instance="^(?!dropdown_*)"] scratchpad show
 bindsym $mod+Shift+gbreve [class="^(?i)(?!Alacritty|St|smplayer|mpv)"] scratchpad show
 
-# Bottom left-right with script
-bindsym $mod+Shift+b floating toggle; sticky toggle; exec $N hover left
-bindsym $mod+Shift+n floating toggle; sticky toggle; exec $N hover right
+# Floating bottom left-right
+set $AW $(xdotool getactivewindow)
+bindsym $mod+Shift+b floating enable; sticky enable; \
+	exec $N "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1 600"
+bindsym $mod+Shift+n floating enable; sticky enable; \
+	exec $N "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1069 600"
+bindsym $mod+Ctrl+Shift+b floating enable; sticky enable; \
+	exec $N "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1 797"
+bindsym $mod+Ctrl+Shift+n floating enable; sticky enable; \
+	exec $N "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1418 797"
 
 # Resize
 set $distance 10 px or 10 ppt
@@ -221,16 +240,16 @@ bindsym $mod+Shift+idotless resize grow up $distance
 bindsym $mod+Shift+o resize grow right $distance
 
 # Maximize a floating window
-set $floatmax xdotool getactivewindow windowsize $(xdpyinfo | awk '/dimensions:/ {print $2}' | tr x ' ') windowmove 0 0
+set $floatmax xdotool getactivewindow windowsize $(tr , ' ' </sys/class/graphics/fb0/virtual_size) windowmove 0 0
 bindsym $mod+Ctrl+f floating enable; exec $N "polybar-msg cmd hide; $floatmax"
 
 # put YouTube into fullscreen and execute this for media mode
-bindsym $caps+y fullscreen disable; floating enable; resize set 655 368; sticky enable; move window to position 711 400
+bindsym $caps+y fullscreen disable; floating enable; resize set 852 481; sticky enable; move window to position 1068 599
 
 # focus on the rightmost window and execute this for grid layout
 set $fl focus left
 set $fr focus right
-bindsym $caps+g $fl;$fl;$fl;split v;$fr;move left;$fr;split v;$fr;move left
+bindsym $caps+g [workspace="__focused__"] floating disable; [workspace="__focused__"] border none; $fl;$fl;$fl;split v;$fr;move left;$fr;split v;$fr;move left
 
 # Workspace names
 set $ws1 1
@@ -290,13 +309,18 @@ bindsym $mod+Shift+Tab   workspace prev
 bindsym $mod+Tab         workspace next
 bindsym $caps+j          workspace prev
 bindsym $caps+k          workspace next
-bindsym $mod+Shift+Prior move container to workspace prev
-bindsym $mod+Shift+Next  move container to workspace next
-bindsym $mod+$alt+Left   move container to workspace prev; workspace prev
-bindsym $mod+$alt+Right  move container to workspace next; workspace next
+bindsym $mod+Shift+Prior move container to workspace prev; workspace prev
+bindsym $mod+Shift+Next  move container to workspace next; workspace next
+bindsym $mod+Ctrl+Prior  move container to workspace prev
+bindsym $mod+Ctrl+Next   move container to workspace next
+bindsym $mod+Ctrl+Left   move container to workspace prev
+bindsym $mod+Ctrl+Right  move container to workspace next
 bindsym $mod+Escape      workspace back_and_forth
 bindsym $alt+Tab         workspace back_and_forth
 bindsym $alt+Shift+Tab   move container to workspace back_and_forth; workspace back_and_forth
+
+# Switch to the first empty workspace
+bindsym $caps+n exec $N "i3-msg workspace $(i3-few)"
 
 # Selecting current workspace switches back and forth
 workspace_auto_back_and_forth yes
@@ -304,79 +328,100 @@ workspace_auto_back_and_forth yes
 # Jump to urgent window
 bindsym $mod+x [urgent=latest] focus
 
+# Hide/unhide the bar
+bindsym $mod+b exec $N polybar-msg cmd toggle
+bindsym $mod+$caps+b exec $N crypto_bar
+bindsym $mod+$caps+t exec $N crypto_bar top
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload ;; exec $N "notify-send -a system -i configuration -t 1500 i3 'Config reloaded'"
+
+# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+## Mouse bindings
+bindsym --whole-window --border $mod+button2 floating toggle sticky enable
+bindsym --whole-window --border $mod+button4 workspace prev
+bindsym --whole-window --border $mod+button5 workspace next
+bindsym --whole-window --border $mod+Shift+button4 move container to workspace prev; workspace prev
+bindsym --whole-window --border $mod+Shift+button5 move container to workspace next; workspace next
+bindsym --whole-window --border $mod+Ctrl+button4 move container to workspace prev
+bindsym --whole-window --border $mod+Ctrl+button5 move container to workspace next
+
+bindsym --whole-window --border $mod+Ctrl+button3 exec $N maimshot -s
+
 #=====================================================================
 # Window/WS Rules
 #=====================================================================
 
 ## Set some workspaces to tabbed by default
-for_window [workspace="$ws2|$ws9|$ws10"] layout tabbed
+for_window [workspace="$ws1|$ws2|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
 # assign [window_role="browser"]                 $ws1
-assign [class="(?i)Vivaldi"]                     $ws1
+assign [class="(?i)Vivaldi|Brave"]               $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
+assign [class="(?i)Opera|firefox"]               $ws4
+assign [class="Code|obsidian"]                   $ws5
+assign [class="(?i)telegram"]                    $ws6
 assign [class="Audacity"]                        $ws7
 assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
-# assign [class="(?i)thunderbird"]               $ws9
+assign [class="(?i)thunderbird"]                 $ws8
 assign [class="qBittorrent"]                     $ws9
-assign [class="cantata"]                         $ws10
-for_window [class="Spotify"] move to workspace   $ws10
+assign [class="cantata|strawberry"]              $ws10
+for_window [class="Spotify"] move --no-auto-back-and-forth to workspace   $ws10
 
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
 for_window [class="Catfish|flameshot|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|Yad"] floating enable
-for_window [class="Lxappearance|qt5ct|Lightdm-settings|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
+for_window [class="Lxappearance|(?i)Qalculate|qt5ct|qt6ct|Lightdm-settings|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
 for_window [class="(?i)megasync" window_type=normal title="^(?!Stream*|Transfer*)"] floating enable, move position +964+20
 # for_window [class="(?i)telegram"] floating enable sticky enable, resize set 800 480, move position center
-for_window [class="(?i)pavucontrol"] floating enable, resize set 502 402, move position +864+20
+for_window [class="Lxappearance"] resize set 840 660, move position center
+for_window [class="(?i)pavucontrol"] floating enable
 for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
 for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
 #for_window [class="(?i)VirtualBox"] floating enable
 for_window [class="mpv|vlc"] floating enable sticky enable
-for_window [class="smplayer" title="^( - |)SMPlayer$"] floating enable sticky enable,resize set 670 457, move position +696+311
-for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 800 600, move position center
-for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 800 600, move position center
-for_window [instance="Places" class="firefox"] floating enable border normal, resize set 800 600, move position center
+for_window [class="smplayer" title="^( - |)SMPlayer$"] floating enable sticky enable,resize set 873 570, move position +1047+510
+for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 1100 800, move position center
+for_window [class="qBittorrent"] move position center
+for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 1100 800, move position center
+for_window [instance="Places" class="firefox"] floating enable border normal, resize set 1100 800, move position center
 for_window [instance="Browser|Update" class="firefox|Tor Browser"] floating enable border normal
+for_window [instance="Toolkit" class="firefox"] floating enable sticky enable border none
 # for_window [instance="(?i)crx_" class="(?i)Vivaldi|-chrome"] floating enable sticky enable
-for_window [class="Crow Translate"] floating enable sticky enable, resize set 650 290, move position +716+20
-for_window [class="(?i)gsimplecal"] floating enable, move position +1149+20
+for_window [class="Crow Translate"] floating enable sticky enable, resize set 861 392, move absolute position center
+for_window [class="(?i)gsimplecal"] floating enable, move position +1651+24
+for_window [class="KeePassXC"] floating enable, move absolute position center
 #_ Dialogs
-for_window [window_role="GtkFileChooserDialog"] resize set 800 665, move position center
+for_window [window_role="GtkFileChooserDialog"] resize set 1100 800, move position center
 for_window [window_role="pop-up|bubble|task_dialog|Preferences"] floating enable
 for_window [window_type="dialog|menu"] floating enable
 for_window [window_role="PictureInPicture"] floating enable border none
 for_window [title="^Confirm File Replacing$"] move position center
-for_window [title="^Picture in picture$"] resize set 420 236, move position 945 531
-for_window [class="Dragon-drag-and-drop"] sticky enable
-for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 800 725, move position center
+for_window [title="^Picture in picture$"] resize set 850 479, move position 1069 601
+for_window [class="Dragon-drop"] sticky enable
+for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, move position center
 #_ Floating instances
-for_window [instance="_blockterm"] floating enable border pixel 2
-for_window [instance="_Blockterm"] floating enable border pixel 3, resize set 1366 748, move position center
+for_window [instance="blockterm_*"] floating enable border pixel 2
+for_window [instance="Blockterm_*"] floating enable border pixel 3, resize set 1920 1056, move position center
 for_window [instance="floating"] floating enable, move position mouse
 #_ Doublecmd
 for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center
-for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 800 600, move position center
-for_window [instance="dc-term-bttns"] floating enable, resize set 800 500, move position center
+for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 1100 800, move position center
+for_window [instance="dc-term-bttns"] floating enable, resize set 970 585, move position center
 #_ Bindings to make the webcam float and stick.
 for_window [instance="webcam"] border pixel 0
 no_focus [instance="webcam"]
 #_ General dropdown window traits. The order can matter.
 for_window [instance="dropdown_*"] floating enable, move scratchpad, sticky enable, scratchpad show
-for_window [instance="dropdown_tmuxi"] border pixel 3, resize set 625 450
+for_window [instance="dropdown_tmuxi"] border pixel 3, resize set 970 585
 for_window [instance="dropdown_*"] move position center
 
 # switch to workspace with urgent window automatically
 #for_window [urgent=latest] focus
-
-#=====================================================================
-
-# reload the configuration file
-bindsym $mod+Shift+c reload ;; exec $N "notify-send -a system -i configuration -t 1500 i3 'Config reloaded'"
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
 
 #=====================================================================
 # Autostart applications
@@ -384,10 +429,14 @@ bindsym $mod+Shift+r restart
 # See ../X11/xinitrc for rest of the autostarts
 
 exec_always launch_polybar
-exec $N "sleep 2; ifwin -e $BROWSER"
-exec $N "sleep 5; ifterm -e vifm"
-exec $N "sleep 7; ifwin -e spotify"
-exec $N "sleep 9; wmctrl -x -r 'vifm' -b remove,demands_attention"
+exec $N kpass
+exec $N "sleep 2; vivaldi-stable --start-maximized"
+exec $N "sleep 5; ifterm -h -e vifm"
+exec $N "sleep 7; telegram-desktop"
+exec $N "sleep 9; crypto_bar"
+# exec $N "sleep 7; ifwin -e spotify"
+exec $N "sleep 7; wmctrl -x -r 'vifm' -b remove,demands_attention"
+exec $N "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
 
 #=====================================================================
 # Colors
@@ -414,8 +463,9 @@ set_from_resource $darkwhite       color7     #000000
 set_from_resource $white           color15    #000000
 set $transparent #00000000
 
-# Use custom colors for black
-set $black #282828
+# Use custom colors
+set $black #2E3440
+set $darkblue #5E81AC
 
 # Theme colors
 #                       BORDER     BACKGROUND  TEXT        INDICATOR   CHILD_BORDER
@@ -427,47 +477,6 @@ client.urgent           $darkred   $darkred    $black      $darkred    $darkred
 client.placeholder      #000000    #0c0c0c     #ffffff     #000000
 
 client.background       $black
-
-#=====================================================================
-# Bar
-#=====================================================================
-
-# bar {
-# 	i3bar_command i3bar
-# 	status_command i3blocks
-# 	position top
-# 	modifier none
-#
-# ## set your primary output first. Example: 'xrandr --output eDP1 --primary'
-# #	tray_output primary
-# #	tray_output eDP1
-#
-# 	bindsym button4 nop
-# 	bindsym button5 nop
-# 	#font pango:Hack, FontAwesome 9
-# 	strip_workspace_numbers yes
-# 	#separator_symbol ""
-# 	tray_padding 0
-#
-# 	colors {
-# 		background $darkblack
-# 		statusline $darkwhite
-# 		#separator $cyan
-# 		separator  #454947
-#
-# #                       BORDER      BACKGR.     TEXT
-# 	focused_workspace   $blue       $darkblue   $darkblack
-# 	active_workspace    $blue       $blue       $darkwhite
-# 	inactive_workspace  $darkblack  $darkblack  $white
-# 	urgent_workspace    $darkred    $darkblack  $darkred
-#
-# 	binding_mode        $blue       $darkblue   $darkblack
-# 	}
-# }
-#
-# # hide/unhide the bar
-# bindsym $mod+b bar mode toggle
-bindsym $mod+b exec $N polybar-msg cmd toggle
 
 #=====================================================================
 # settings for i3-gaps:
@@ -484,6 +493,7 @@ bindsym $mod+b exec $N polybar-msg cmd toggle
 
 # workspace $ws9 gaps inner 0
 # workspace $ws9 gaps outer 0
+workspace $ws10 gaps inner 16
 
 # Smart gaps (gaps used if only more than one container on the workspace)
 # smart_gaps on
@@ -547,22 +557,6 @@ mode "$mode_gaps_outer" {
 
 ### GAPS Binding mode Ends ###
 
-# Set shut down, restart and locking features
-bindsym $mod+Delete mode "$mode_system"
-bindsym $caps+Escape mode "$mode_system"
-set $mode_system l:🔒 e:👥 s:🌙 h:💽 r:🔄 S:❎
-mode "$mode_system" {
-	bindsym l exec $N "smc pauseall; lockscreen"; exec $N "sleep 0.5 && xset dpms force off", mode default
-	bindsym s exec $N "smc pauseall; systemctl suspend-then-hibernate", mode default
-	bindsym h exec $N "smc pauseall; systemctl hibernate", mode default
-	bindsym e exec $N i3-msg exit, mode default
-	bindsym r exec $N systemctl reboot, mode default
-	bindsym Shift+s exec $N systemctl poweroff, mode default
-
-	bindsym Return mode default
-	bindsym Escape mode default
-}
-
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "$resize"
 set $resize resize: {h,j,k,l}: 5px || {,,,}: 10px
@@ -579,9 +573,9 @@ mode "$resize" {
 	bindsym Right resize grow width 10 px or 10 ppt
 
 		#
-		bindsym 1 mode default, resize set 900 400
-		bindsym 2 mode default, resize set 800 500
-		bindsym 3 mode default, resize set 800 600
+		bindsym 1 mode default, resize set 1000 600
+		bindsym 2 mode default, resize set 900 500
+		bindsym 3 mode default, resize set 800 400
 
 	bindsym Return mode default
 	bindsym Escape mode default
@@ -594,81 +588,17 @@ mode "$freeze" {
 	bindsym $mod+Shift+f mode default
 }
 
-# Open link with X
-bindsym $caps+b mode "$broopen"
-set $broopen : F3/3 | : F4/4 | : F5/5 | : F6/6 | 﨩: t | : y/c | : d
-mode "$broopen" {
-	bindsym --release F3 exec $N bro-open $BROWSER, mode default
-	bindsym --release F4 exec $N bro-open opera --start-maximized, mode default
-	bindsym --release F5 exec $N bro-open firefox, mode default
-	bindsym --release F6 exec $N bro-open google-chrome-stable, mode default
-	bindsym --release 3 exec $N bro-open $BROWSER --incognito, mode default
-	bindsym --release 4 exec $N bro-open opera -private --start-maximized, mode default
-	bindsym --release 5 exec $N bro-open firefox --private-window, mode default
-	bindsym --release 6 exec $N bro-open google-chrome-stable --incognito, mode default
-	bindsym --release t exec $N bro-open tor-browser --allow-remote, mode default
-	bindsym --release y exec $N bro-open mpv, mode default
-	bindsym --release c exec $N bro-open mpv -c, mode default
-	bindsym --release d exec $N bro-open dmenuhandler, mode default
+#=====================================================================
 
-	bindsym Return mode default
-	bindsym Escape mode default
-	bindsym $caps+b mode default
-}
+set $bind-modes $XDG_CONFIG_HOME/rofi/bind-modes
 
-bindsym $mod+Shift+t mode "$toggle"
-set $toggle  pi[c]om [r]edshift [s]timeout [t]ransmission [S]yncthing |  pi[C]om [d]unst [p]ulse
-mode "$toggle" {
-	bindsym c exec $N pkill picom || picom -b, mode default
-	bindsym r exec $N toggle redshift, mode default
-	bindsym s exec $N toggle stimeout, mode default
-	bindsym t exec $N toggle transmission, mode default
-	bindsym Shift+s exec $N toggle syncthing, mode default
-	bindsym Shift+c exec $N "pkill picom; sleep .4; picom -b", mode default
-	bindsym --release d exec "pkill dunst; exec notify-send -a system 'restart dunst'", mode default
-	bindsym p exec $N systemctl --user restart pulseaudio, mode default
-
-	bindsym Return mode default
-	bindsym Escape mode default
-}
-
-bindsym $caps+a mode "$keystroke"
-set $keystroke 🔤
-mode "$keystroke" {
-	bindsym --release q exec $N autotype mail, mode default
-	bindsym --release g exec $N autotype mail2, mode default
-	bindsym --release minus exec $N autotype banner, mode default
-	bindsym --release asterisk exec $N autotype banner2, mode default
-	bindsym --release comma exec $N autotype mdcode, mode default
-	bindsym --release 0 exec $N autotype shrug, mode default
-
-	bindsym Escape mode default
-	bindsym $caps+a mode default
-}
-
-bindsym $caps+w mode "$vimwiki"
-set $vimwiki 
-mode "$vimwiki" {
-	bindsym w exec $N $TERMINAL -e $EDITOR -c 'VimwikiIndex', mode default
-	bindsym t exec $N $TERMINAL -e $EDITOR +$ ~/notes/todo.md, mode default
-
-	bindsym Escape mode default
-	bindsym $caps+w mode default
-}
-
-bindsym $caps+p mode "$paste"
-set $paste 
-mode "$paste" {
-	bindsym 1 exec $N gclip 1, mode default
-	bindsym 2 exec $N gclip 2, mode default
-	bindsym 3 exec $N gclip 3, mode default
-	bindsym 4 exec $N gclip 4, mode default
-	bindsym 5 exec $N gclip 5, mode default
-	bindsym p exec $N gclip selpaste, mode default
-
-	bindsym Escape mode default
-	bindsym $caps+p mode default
-}
+bindsym $mod+Delete  exec $N rofi-bind -f $bind-modes/session
+bindsym $caps+Escape exec $N rofi-bind -f $bind-modes/session
+bindsym $caps+b      exec $N rofi-bind -f $bind-modes/bro-open
+bindsym $mod+Shift+t exec $N rofi-bind -f $bind-modes/toggle
+bindsym $caps+a      exec $N rofi-bind -f $bind-modes/keystroke
+bindsym $caps+w      exec $N rofi-bind -f $bind-modes/vimwiki
+bindsym $caps+p      exec $N rofi-bind -f $bind-modes/paste
 
 #=====================================================================
 

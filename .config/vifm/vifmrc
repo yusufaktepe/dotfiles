@@ -45,9 +45,6 @@ set vimhelp
 " press return on the file name set this.
 set norunexec
 
-" Color scheme
-colorscheme custom
-
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
 " See man date or man strftime for details.
@@ -121,6 +118,9 @@ set viewcolumns=-{name}..,6{}.
 set tuioptions-=s
 
 if $TERM != 'linux'
+	" Color scheme
+	colorscheme custom
+
 	" use Unicode ellipsis
 	set tuioptions+=u
 endif
@@ -152,8 +152,8 @@ let $RPS1 = '-- VIFM --'
 " ------------------------------------------------------------------------------
 " Autocmds
 
-au DirEnter /tmp,**/.cache,**/downloads/default,**/.torrent-files,**/videos/mov,
-	\**/pictures/**/**,**/pkglists,**/backup/makepkg/**
+au DirEnter /tmp,**/.cache,**/Downloads,**/.torrent-files,**/Videos/Movies,
+	\**/Pictures/**/**,**/pkglists,**/share/pacman/**/**
 	\ setlocal sort=-mtime | setlocal viewcolumns=-{name}..,6{size}.,18{mtime}
 
 " ------------------------------------------------------------------------------

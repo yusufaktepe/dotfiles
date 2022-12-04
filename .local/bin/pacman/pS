@@ -1,0 +1,9 @@
+#!/bin/sh
+
+_fzf() {
+	fzf -q "$1" -m --height 100% --preview 'yay -Si {}' \
+		--preview-window=65%:wrap:hidden --bind 'space:toggle-preview'
+}
+
+yay -Slq | _fzf "$1" | xargs -ro yay -S --needed
+

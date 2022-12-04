@@ -1,10 +1,13 @@
 #!/bin/sh
 # Control mpv using IPC protocol.
-# Options interact with last opened instance except 'pauseall'.
+# Options interact with last opened instance unless '-a' flag is present.
 
-socket=$(ls -1 /tmp/mpvsocket[0-9]* 2>/dev/null | sort -V | tail -n1)
+socket=$(find /tmp/mpvsocket[0-9]* -type s 2>/dev/null | tail -n 1)
 
 ipc_send() {
+	pidof -q mpv || exit
+	[ "$1" = '-a' ] && { ToAll=True; shift ;}
+
 	cmd='{ "command": ['
 
 	for arg in "$@"; do
@@ -13,7 +16,15 @@ ipc_send() {
 
 	cmd=${cmd%?}' ] }'
 
-	echo "$cmd" | socat - "$socket" >/dev/null
+	if [ -n "$ToAll" ]; then
+		for i in /tmp/mpvsoc*; do
+			[ -e "$i" ] || break
+			socket=$i
+			echo "$cmd" | socat - "$socket" >/dev/null
+		done
+	else
+		echo "$cmd" | socat - "$socket" >/dev/null
+	fi
 }
 
 _mpv() {
@@ -21,16 +32,12 @@ _mpv() {
 }
 
 case $1 in
+	do) shift; ipc_send "$@" ;;
 	prev|p) ipc_send 'playlist_prev' ;;
 	next|n) ipc_send 'playlist_next' ;;
 	toggle|t) ipc_send 'cycle' 'pause' ;;
-	pauseall|pa)
-		for i in /tmp/mpvsoc*; do
-			[ -e "$i" ] || break
-			socket=$i
-			ipc_send 'set' 'pause' 'yes'
-		done
-	;;
+	quit|q) ipc_send -a 'quit-watch-later'; return 0 ;;
+	pauseall|pa) ipc_send -a 'set' 'pause' 'yes' ;;
 	add)
 		shift
 		if [ -z "$socket" ]; then
@@ -61,6 +68,7 @@ case $1 in
 	;;
 	replace|*)
 		[ "$1" = "replace" ] && shift
+		[ -e "$1" ] || exit
 		if [ -z "$socket" ]; then
 			_mpv "$@"
 		else

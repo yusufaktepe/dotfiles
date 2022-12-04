@@ -1,0 +1,33 @@
+#!/bin/bash
+# http://blog.z3bra.org/2014/01/images-in-terminal.html
+
+[[ -z "$1" ]] && exit
+
+w3mimgdisplay=/usr/lib/w3m/w3mimgdisplay
+FileName=$1
+FontH=14 # Size of one terminal row
+FontW=8  # Size of one terminal column
+Columns=$(tput cols)
+Lines=$(tput lines)
+
+read width height <<< "$(printf '%b\n' "5;$FileName" | $w3mimgdisplay)"
+
+max_width=$((FontW * Columns))
+max_height=$((FontH * $((Lines - 2)))) # substract one line for prompt
+
+[[ $width -gt $max_width ]] && {
+	height=$((height * max_width / width))
+	width=$max_width
+}
+
+[[ $height -gt $max_height ]] && {
+	width=$((width * max_height / height))
+	height=$max_height
+}
+
+w3m_command="0;1;0;0;$width;$height;;;;;$FileName\n4;\n3;"
+
+tput cup $((height / FontH)) 0
+
+printf '%b\n' "$w3m_command" | $w3mimgdisplay
+

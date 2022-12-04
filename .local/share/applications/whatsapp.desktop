@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=WhatsApp
+Exec=whatsapp %u
+Icon=whatsapp
+MimeType=x-scheme-handler/whatsapp;
+NoDisplay=true

@@ -3,10 +3,10 @@
 " Pdf
 filextype {*.pdf,*.ps,*.eps,*.ps.gz,*.djvu,*.epub},
 	\<application/pdf,application/postscript,image/vnd.djvu,application/epub*>
-	\ {Open with Zathura}
-	\ zathura %c %i &,
 	\ {Open with Evince}
 	\ evince %c %i &,
+	\ {Open with Zathura}
+	\ zathura %c %i &,
 
 " Audio
 filetype {*.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus},
@@ -56,15 +56,6 @@ filetype {*.o},<application/x-object> nm %f | less
 " Man page
 filetype {*.[1-8]},<text/troff> man ./%c
 
-" Images
-filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.xpm,*.ico},<image/*>
-	\ {View in sxiv}
-	\ sxivr -d %c -o | vifm-select &,
-	\ {View in qimgv}
-	\ qimgv %c 2>/dev/null | vifm-select &,
-	\ {Edit with GIMP}
-	\ gimp %f %i &,
-
 " OpenRaster/XCF
 filextype *.ora,*.xcf
 	\ {Edit with GIMP}
@@ -72,6 +63,17 @@ filextype *.ora,*.xcf
 
 " Vector Graphics
 filextype {*.svg},<image/svg+xml> inkscape %f %i &
+
+" Images
+filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.xpm,*.ico},<image/*>
+	\ {View in qimgv}
+	\ qimgv %c 2>/dev/null | vifm-select &,
+	\ {View in sxiv}
+	\ sxivr -d %c -o | vifm-select &,
+	\ {Edit with GIMP}
+	\ gimp %f %i &,
+	\ {Set as wallpaper}
+	\ setbg %c &,
 
 " Mindmap
 filextype *.vym
@@ -113,9 +115,9 @@ filetype {*.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz}
 	" \ {View contents}
 	" \ atool --list %f | less,
 	\ {Extract here}
-	\ !!aunpack -e %f,
+	\ !!unp %f,
 	\ {Extract into new dir}
-	\ !!aunpack -e --subdir %f,
+	\ !!unp -U %f,
 
 filextype {*.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz},
 	\<application/zip,application/x-rar,application/x-7z-compressed,
@@ -161,9 +163,10 @@ filetype *.ftp
 " Office files
 filextype {*.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx,*.ppt},
 	\<application/vnd.openxmlformats-officedocument.*,
+	\application/vnd.oasis.opendocument.*,
 	\application/msword,
 	\application/vnd.ms-excel>
-	\ libreoffice %f &
+	\ libreoffice %f %i &,
 
 " TuDu files
 filetype *.tudu tudu -f %c
@@ -234,7 +237,7 @@ fileviewer {*.a,*.ace,*.alz,*.arc,*.arj,*.bz,*.bz2,*.cab,*.cpio,*.deb,*.gz,
 	\ atool --list %c,
 	\ bsdtar --list --file %c,
 
-fileviewer {*.rar},<application/x-rar> unrar lt -p- %c
+fileviewer {*.rar},<application/x-rar> unrar lt -p- %c | tail -n +4
 
 fileviewer {*.7z,*.iso},<application/x-7z-compressed,application/x-iso9660-image>
 	\ 7z l -p -- %c | sed '1,,/Scanning the drive for archives:$/d',

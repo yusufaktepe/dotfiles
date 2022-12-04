@@ -3,14 +3,14 @@
 AW=$(xdotool getactivewindow)
 AW_CLASS=$(xprop -id "$AW" | awk -F'"' '/WM_CLASS/ {print $4}')
 
-if pidof cantata >/dev/null; then
-	if [ "$AW_CLASS" = "cantata" ]; then
-		i3-msg "workspace back_and_forth" >/dev/null
+if pidof -q cantata; then
+	if [ "$AW_CLASS" = cantata ]; then
+		i3-msg -q 'workspace back_and_forth'
 	else
-		i3-msg '[class="cantata"] focus' >/dev/null
+		i3-msg -q '[class="cantata"] focus'
 	fi
 else
-	if pidof mpd >/dev/null; then
+	if pidof -q mpd; then
 		cantata
 	else
 		mpd; sleep .4; cantata

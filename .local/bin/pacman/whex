@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if (( $# == 0 )); then
+	echo 'Argument required.'
+	exit 1
+elif (( $# > 1 )); then
+	echo 'Only one argument is valid.'
+	exit 1
+fi
+
+IFS=: read -r -a Paths <<< "$PATH"
+
+while read -r; do
+	[[ -f $REPLY ]] || continue
+
+	for Path in "${Paths[@]}"; {
+		if [[ ${REPLY%/*} == "$Path" ]]; then
+			printf '%s\n' "$REPLY"
+			continue 2
+		fi
+	}
+done <<< "$(pacman -Qql "$1" 2>&-)"
+

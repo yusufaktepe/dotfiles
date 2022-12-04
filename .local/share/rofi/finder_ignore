@@ -14,6 +14,7 @@
 	|GIMP
 	|google-chrome
 	|BraveSoftware
+	|Exodus
 	|Hardcode-Tray
 	|inkscape
 	|keybase
@@ -55,9 +56,11 @@
 	|pass*
 	|qalc*
 	|qBittorrent
+	|strawberry
 	|syncthing
 	|terminfo
 	|Telegram*
+	|torbrowser
 	|Trash
 	|vifm
 	|vlc

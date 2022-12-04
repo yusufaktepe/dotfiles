@@ -55,4 +55,13 @@ trap 'rehash' USR1
 # Enable completions for functions/scripts.
 compdef _files cpv
 compdef _dirs d
+compdef _gpaste-client gpaste
+
+_whex() {
+	local -a packages packages_long
+	packages_long=(/var/lib/pacman/local/*(/))
+	packages=( ${${packages_long#/var/lib/pacman/local/}%-*-*} )
+	compadd "$@" -a packages
+}
+compdef _whex whex
 

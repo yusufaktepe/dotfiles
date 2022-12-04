@@ -1,0 +1,83 @@
+snippet p "printf"
+printf '${1:%s\n}' "${2:$VAR}"
+endsnippet
+
+snippet sname "Script basename"
+Script=${0##*/}
+endsnippet
+
+snippet sdir "Script directory"
+ScriptDir=${0%/*}
+endsnippet
+
+snippet pname "Parameter basename"
+${$1##*/}
+endsnippet
+
+snippet pdir "Parameter dirname"
+${$1%/*}
+endsnippet
+
+snippet if "if ... then (if)"
+if [ ${1:condition} ]; then
+	${0:${VISUAL}}
+fi
+endsnippet
+
+snippet elif "elif .. (elif)"
+elif [ ${1:condition} ]; then
+	${0:${VISUAL}}
+endsnippet
+
+snippet iffd "if TermExec then (if)"
+if [ -t 2 ]; then
+	${1:TermExec=true}
+else
+	${2:TermExec=false}
+fi
+endsnippet
+
+snippet getopt
+while getopts ":${1:o}:" opt; do
+	case $opt in
+		${2:o}) ${3:printf '%s\n' "$OPTARG"; exit 1} ;;
+		*) printf '%s\n' "Incorrect option(s) specified: $OPTARG"; exit 1 ;;
+	esac
+done
+shift $((OPTIND-1))
+endsnippet
+
+snippet wh "while ... (done)"
+while [ ${1:condition} ]; do
+	${0:${VISUAL}}
+done
+endsnippet
+
+snippet whr "while read (done)"
+while read -r ${1:Line}; do
+	printf '%s\n' "$$1"
+done ${2:< }
+endsnippet
+
+snippet wht "while true (done)"
+while :; do
+	${0:${VISUAL}}
+	sleep 5
+done
+endsnippet
+
+snippet usage "usage()"
+usage() {
+	while read -r Usage; do
+		printf '%b\n' "$Usage"
+	done <<-EOF
+		\rUsage: ${1:$Script} [OPT]
+
+		\r  -$2    - $3
+		\r  -h    - Display this help information
+		\r
+		EOF
+		exit 1
+}
+endsnippet
+

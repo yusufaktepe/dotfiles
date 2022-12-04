@@ -1,12 +1,7 @@
 configuration {
 	modi: "window,combi,run";
-	width: 60;
-	lines: 10;
-/*	columns: 1;*/
 	font: "mono 10";
-/*	bw: 1;*/
 	location: 2;
-/*	padding: 5;*/
 	yoffset: 20;
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
@@ -32,6 +27,7 @@ configuration {
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
 /*	sidebar-mode: false;*/
+/*	hover-select: false;*/
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
@@ -40,45 +36,39 @@ configuration {
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
-/*	line-margin: 2;*/
-/*	line-padding: 1;*/
 /*	filter: ;*/
-	separator-style: "solid";
-	hide-scrollbar: true;
-/*	fullscreen: false;*/
-/*	fake-transparency: false;*/
 /*	dpi: -1;*/
 /*	threads: 0;*/
-/*	scrollbar-width: 8;*/
 	scroll-method: 1;
-/*	fake-background: "screenshot";*/
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
-/*	show-match: true;*/
-/*	theme: ;*/
-/*	color-normal: ;*/
-/*	color-urgent: ;*/
-/*	color-active: ;*/
-/*	color-window: ;*/
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
+/*	combi-display-format: "{mode} {text}";*/
 /*	matching-negate-char: '-' /* unsupported */;*/
 /*	cache-dir: ;*/
 /*	window-thumbnail: false;*/
 /*	drun-use-desktop-cache: false;*/
 /*	drun-reload-desktop-cache: false;*/
+/*	normalize-match: false;*/
+/*	steal-focus: false;*/
+/*	application-fallback-icon: ;*/
+/*	refilter-timeout-limit: 300;*/
+/*	xserver-i300-workaround: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
-	display-window: "";
+	display-window: "";
 /*	display-windowcd: ;*/
 	display-run: "";
 /*	display-ssh: ;*/
 	display-drun: "";
 	display-combi: "";
 /*	display-keys: ;*/
+/*	display-filebrowser: ;*/
 /*	display-blocks: ;*/
 	display-calc: "";
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
 /*	kb-secondary-paste: "Control+v,Insert";*/
+/*	kb-secondary-copy: "Control+c";*/
 /*	kb-clear-line: "Control+w";*/
 /*	kb-move-front: "Control+a";*/
 /*	kb-move-end: "Control+e";*/
@@ -94,15 +84,19 @@ configuration {
 /*	kb-remove-to-sol: "Control+u";*/
 	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter,Super+l";
 /*	kb-accept-custom: "Control+Return";*/
+/*	kb-accept-custom-alt: "Control+Shift+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
 /*	kb-mode-next: "Shift+Right,Control+Tab";*/
 /*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
+/*	kb-mode-complete: "Control+l";*/
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
-	kb-row-up: "Up,Control+p,ISO_Left_Tab,Super+k";
+	kb-row-up: "Up,ISO_Left_Tab,Control+p,Super+k";
 	kb-row-down: "Down,Control+n,Super+j";
-/*	kb-row-tab: "Tab";*/
+/*	kb-row-tab: "";*/
+/*	kb-element-next: "Tab";*/
+	kb-element-prev: "";
 /*	kb-page-prev: "Page_Up";*/
 /*	kb-page-next: "Page_Down";*/
 /*	kb-row-first: "Home,KP_Home";*/
@@ -112,7 +106,7 @@ configuration {
 /*	kb-ellipsize: "Alt+period";*/
 /*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
 /*	kb-toggle-sort: "Alt+grave";*/
-	kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2,XF86Launch9,Super_L+XF86MonBrightnessDown,XF86Calculator";
+	kb-cancel: "Escape,Control+g,Control+bracketleft,Super_L+d,Control+quotedbl,XF86Launch2,XF86Launch9,Super_L+XF86MonBrightnessDown,Alt_L+Escape,XF86Calculator";
 /*	kb-custom-1: "Alt+1";*/
 /*	kb-custom-2: "Alt+2";*/
 /*	kb-custom-3: "Alt+3";*/
@@ -149,5 +143,13 @@ configuration {
 	me-select-entry: "MouseSecondary";
 	me-accept-entry: "MousePrimary";
 /*	me-accept-custom: "Control+MouseDPrimary";*/
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
 }
-@import "~/.config/rofi/themes/flat-gruvbox.rasi"
+@theme "~/.config/rofi/themes/flat-nord.rasi"

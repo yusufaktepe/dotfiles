@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DbFile=$XDG_CONFIG_HOME/browsers/KeePass/Passwords.kdbx
+KeyFile=$XDG_CONFIG_HOME/browsers/KeePass/KeePass.keyx
+
+if pidof -q keepassxc; then
+	AW=$(xdotool getactivewindow)
+
+	while read -r _ _ _ WM_CLASS; do
+		AW_CLASS=${WM_CLASS//\"}
+	done < <(xprop -id "$AW" WM_CLASS)
+
+	if [ "$AW_CLASS" = KeePassXC ]; then
+		wmctrl -c :ACTIVE:
+	else
+		keepassxc && wmctrl -ax KeePassXC
+	fi
+else
+	setsid -f keepassxc \
+		--keyfile "$KeyFile" \
+		--pw-stdin \
+		"$DbFile" < <(pass uncategorized/keepassxc) >/dev/null 2>&1
+fi
+

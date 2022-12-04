@@ -132,6 +132,8 @@ zcw_toggle-fg() {
 	fi
 }
 
+bak() { for f in "$@"; { cp "$f" "$(realpath "$f").bak" ;} ;}
+
 # List and load onto directory stack
 d() { [[ -n $1 ]] && dirs "$@" || dirs -v | head -10 ;}
 
@@ -155,4 +157,7 @@ rpeat() { n=$1; shift; while [[ $(( n -= 1 )) -ge 0 ]]; do "$@"; sleep ${T:-3}; 
 
 tyco() { [ -n "$1" ] && find . -type f -name "*.$1" | wc -l ;}
 tyrm() { [ -n "$1" ] && find . -type f -name "*.$1" -exec trash-put {} \; ;}
+
+enc() { for f in "$@"; do gpg -e "$f"; done ;}
+dec() { for f in "$@"; do gpg -d "$f" > "${f%.gpg}"; done ;}
 

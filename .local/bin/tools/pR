@@ -1,7 +1,0 @@
-#!/bin/sh
-
-pacman -Qq |
-	fzf -q "$1" -m --height 100% --preview 'pacman -Qil {}' \
-		--preview-window=65%:wrap --bind 'space:toggle-preview' |
-	xargs -ro sudo pacman -Rns
-

@@ -22,8 +22,8 @@ nm-applet &
 redshift &
 remaps &
 numlockx &
-greenclip daemon &
-unclutter &
+gpaste-client daemon &
+# unclutter &
 # (sleep 30; syncthing -no-browser) &
 
 exec "${1:-i3}"

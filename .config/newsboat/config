@@ -10,10 +10,11 @@ auto-reload yes
 browser linkhandler
 external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 datetime-format "%Y-%m-%d"
-feed-sort-order firsttag title
+feed-sort-order firsttag
 text-width 80
 goto-next-feed no
-scrolloff 3
+confirm-mark-feed-read no
+scrolloff 5
 
 ## Dialog Titles
 feedlist-title-format "%N: (%u) Feeds"
@@ -56,8 +57,8 @@ bind-key x pb-delete
 ## Colors
 color listnormal white default
 color listnormal_unread blue default
-color listfocus color236 yellow standout
-color listfocus_unread color236 yellow standout bold
+color listfocus black yellow standout
+color listfocus_unread black yellow standout bold
 color info cyan black bold
 color article default default
 
@@ -82,9 +83,10 @@ ignore-article "*" "title =~ \"^Ghacks Deals\""
 
 ## Macros
 macro , open-in-browser ; toggle-article-read "read"
-macro t set browser "tsp youtube-dl --add-metadata -ic"; open-in-browser ; set browser linkhandler
-macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best"; open-in-browser ; set browser linkhandler
-macro v set browser "ym"; open-in-browser ; set browser linkhandler
-macro w set browser "w3m"; open-in-browser ; set browser linkhandler
-macro p set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
-macro c set browser "echo %u | xsel -b" ; open-in-browser ; set browser linkhandler
+macro t set browser "tsp yt-dlp --embed-metadata -ic --restrict-filenames"; open-in-browser; set browser linkhandler
+macro a set browser "tsp yt-dlp --embed-metadata -xic -f bestaudio/best --restrict-filenames"; open-in-browser; set browser linkhandler
+macro v set browser "ym"; open-in-browser; set browser linkhandler
+macro C set browser "youtube-viewer --comments=%u"; open-in-browser; set browser linkhandler
+macro w set browser "w3m"; open-in-browser; set browser linkhandler
+macro p set browser "dmenuhandler"; open-in-browser; set browser linkhandler
+macro c set browser "echo %u | xsel -b"; open-in-browser; set browser linkhandler

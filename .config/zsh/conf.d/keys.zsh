@@ -25,6 +25,7 @@ key[ShiftTab]="${terminfo[kcbt]}"
 key[C-Backs]="${terminfo[cub1]}"
 key[C-Left]="${terminfo[kLFT5]}"
 key[C-Right]="${terminfo[kRIT5]}"
+key[KPEnter]="${terminfo[kent]}"
 
 # Setup keys accordingly
 [[ -n "${key[Home]}"     ]] && bindkey -- "${key[Home]}"     beginning-of-line
@@ -42,16 +43,15 @@ key[C-Right]="${terminfo[kRIT5]}"
 [[ -n "${key[C-Left]}"   ]] && bindkey -- "${key[C-Left]}"   backward-word
 [[ -n "${key[C-Right]}"  ]] && bindkey -- "${key[C-Right]}"  forward-word
 [[ -n "${key[C-Backs]}"  ]] && bindkey -- "${key[C-Backs]}"  backward-kill-word
+[[ -n "${key[KPEnter]}"  ]] && bindkey -- "${key[KPEnter]}"  accept-line
 
-[[ -n "${key[Home]}"   ]] && bindkey -M vicmd "${key[Home]}"   beginning-of-line
-[[ -n "${key[End]}"    ]] && bindkey -M vicmd "${key[End]}"    end-of-line
-[[ -n "${key[Insert]}" ]] && bindkey -M vicmd "${key[Insert]}" vi-insert
-[[ -n "${key[Delete]}" ]] && bindkey -M vicmd "${key[Delete]}" delete-char
-[[ -n "${key[PgUp]}"   ]] && bindkey -M vicmd "${key[PgUp]}"   history-beginning-search-backward
-[[ -n "${key[PgDown]}" ]] && bindkey -M vicmd "${key[PgDown]}" history-beginning-search-forward
-[[ -n "${key[StHome]}" ]] && bindkey -M vicmd "${key[StHome]}" beginning-of-line
-[[ -n "${key[StIns]}"  ]] && bindkey -M vicmd "${key[StIns]}"  vi-insert
-[[ -n "${key[StDel]}"  ]] && bindkey -M vicmd "${key[StDel]}"  delete-char
+[[ -n "${key[Home]}"    ]] && bindkey -M vicmd "${key[Home]}"    beginning-of-line
+[[ -n "${key[End]}"     ]] && bindkey -M vicmd "${key[End]}"     end-of-line
+[[ -n "${key[Insert]}"  ]] && bindkey -M vicmd "${key[Insert]}"  vi-insert
+[[ -n "${key[Delete]}"  ]] && bindkey -M vicmd "${key[Delete]}"  delete-char
+[[ -n "${key[PgUp]}"    ]] && bindkey -M vicmd "${key[PgUp]}"    history-beginning-search-backward
+[[ -n "${key[PgDown]}"  ]] && bindkey -M vicmd "${key[PgDown]}"  history-beginning-search-forward
+[[ -n "${key[KPEnter]}" ]] && bindkey -M vicmd "${key[KPEnter]}" accept-line
 
 # Finally, make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.

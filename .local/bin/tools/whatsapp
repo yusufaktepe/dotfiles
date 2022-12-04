@@ -1,0 +1,4 @@
+#!/bin/sh
+
+xdg-open "https://web.whatsapp.com/send?phone=${1}&text&app_absent=0"
+

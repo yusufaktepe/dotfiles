@@ -6,8 +6,10 @@ lock=$XDG_DATA_HOME/backgrounds/lock.png
 [ -n "$1" ] && {
 	cp "$1" "$wall"
 
+	IFS=, read width height </sys/class/graphics/fb0/virtual_size
+	res="${width}x${height}"
+
 	# resize
-	res=$(xdpyinfo | awk '/dimensions:/ {print $2}')
 	[ "$(identify -format "%wx%h" "$1")" != "$res" ] &&
 		convert "$wall" -resize "$res"\>\! "$wall"
 
@@ -17,5 +19,6 @@ lock=$XDG_DATA_HOME/backgrounds/lock.png
 	notify-send -a system -i "$wall" "Wallpaper changed."
 }
 
-xwallpaper --zoom "$wall"
+# hsetroot -fill "$wall"
+xwallpaper --stretch "$wall"
 

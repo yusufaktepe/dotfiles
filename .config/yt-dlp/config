@@ -1,0 +1,6 @@
+--format 'bestvideo[height<=?720]+bestaudio/best'
+--output ~/Videos/YouTube/%(uploader)s_%(title)s.%(ext)s
+--restrict-filenames
+--ignore-errors
+--cookies-from-browser vivaldi
+--mark-watched

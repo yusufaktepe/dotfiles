@@ -1,11 +1,11 @@
 #!/bin/sh
 
-ss_dir="$HOME/pictures/screenshots"
+ss_dir="$HOME/Pictures/Screenshots"
 datef=$(date +%Y-%m-%d_%H-%M-%S)
 
 [ ! -d "$ss_dir" ] && mkdir -p "$ss_dir"
 
-[ -n "$2" ] && cmd="maim -d $2" || cmd="maim"
+[ -n "$2" ] && cmd="maim -ud $2" || cmd="maim -u"
 
 notify() {
 	dunstify -a system -i "$shot" -A "$shot",Open "Screenshot captured." |
@@ -13,7 +13,7 @@ notify() {
 }
 
 case "$1" in
-	--desk|-d|$NULL)
+	--desk|-d|"")
 		shot="$ss_dir/ss-full-$datef.png"
 		$cmd "$shot"
 		notify
@@ -26,8 +26,7 @@ case "$1" in
 	--select|-s)
 		shot="$ss_dir/ss-selected-$datef.png"
 		notify-send -a system -t 2000 "Select an area for the screenshot"
-		$cmd -s "$shot"
-		notify
+		$cmd -usl -b 2 -c 0.35,0.55,0.85,0.25 "$shot" && notify
 	;;
 esac
 

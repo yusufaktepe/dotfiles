@@ -1,0 +1,9 @@
+#!/bin/sh
+
+git ls-remote --get-url 2>/dev/null || exit $?
+
+AD=$(git log -1 --format=%ad)
+CD=$(git log -1 --format=%cd)
+
+GIT_COMMITTER_DATE=$CD git commit --amend --date="$AD"
+

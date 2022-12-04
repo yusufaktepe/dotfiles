@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rofi -dmenu -password -no-fixed-num-lines -p "${1%:*}"
+
