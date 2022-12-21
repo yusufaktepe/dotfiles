@@ -132,19 +132,13 @@ zcw_toggle-fg() {
 	fi
 }
 
-bak() { for f in "$@"; { cp "$f" "$(realpath "$f").bak" ;} ;}
+bashx() { bash -c "set -x; export SHELLOPTS; exec $1" ;}
 
 # List and load onto directory stack
 d() { [[ -n $1 ]] && dirs "$@" || dirs -v | head -10 ;}
 
 # Create directory and cd into it
 mkcd() { command mkdir -p "$@" && cd "$_" ;}
-
-# Prevent nested ranger instances
-ranger() {
-	[[ -z "$RANGER_LEVEL" ]] && command ranger "$@" ||
-		echo "Shell is already running inside ranger!"
-}
 
 # Prevent nested vifm instances
 vifm() {
