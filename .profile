@@ -86,5 +86,5 @@ export BDOTDIR="$XDG_CONFIG_HOME/bash"
 
 # StartX on tty1 login
 [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ] &&
-	exec startx "$XINITRC" -- -quiet > "$XDG_DATA_HOME/xorg/Xorg.log" 2>&1
+	exec startx -- -quiet > "$XDG_DATA_HOME/xorg/Xorg.log" 2>&1
 
