@@ -18,6 +18,9 @@ export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"
 export FM="vifm-tab"
 
+export MANPAGER="nvimpager"
+export MANWIDTH=174
+
 # Keep $HOME clean
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 
