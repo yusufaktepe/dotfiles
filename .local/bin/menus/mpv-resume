@@ -54,21 +54,27 @@ print_hist() {
 	}
 }
 
-while read -r PlayThis; do
-	[[ -n "$PlayThis" ]] || break
+Selected=$(print_hist | rofi -dmenu -i -p '' -kb-custom-1 Alt+d)
+Ret=$?
 
-	shopt -s extglob
-	for HistItem in "${Hist[@]}"; {
-		[[ $HistItem == *"${PlayThis#+(|) }" ]] && {
-			if [[ -f "$HistItem" ]]; then
-				find /tmp/mpvsocket[0-9]* -type s 2>/dev/null && mpvc quit
-				sleep .2
-				mpvc "$HistItem"
-			elif [[ ! $HistItem =~ ^/ ]]; then
-				ym "${HistItem##*⠀}"
-			fi
-			break
+[[ -n "$Selected" ]] || exit
+
+shopt -s extglob
+for HistItem in "${Hist[@]}"; {
+	[[ $HistItem == *"${Selected#+(|) }" ]] && {
+		[[ $Ret -eq 10 ]] && {
+			find . -type f -exec grep -Fqm 1 "$HistItem" {} \; -delete
+			exec $0
 		}
+
+		if [[ -f "$HistItem" ]]; then
+			find /tmp/mpvsocket[0-9]* -type s 2>/dev/null && mpvc quit
+			sleep .2
+			mpvc "$HistItem"
+		elif [[ ! $HistItem =~ ^/ ]]; then
+			ym "${HistItem##*⠀}"
+		fi
+		break
 	}
-done < <(print_hist | rofi -dmenu -i -l 5 -p )
+}
 
