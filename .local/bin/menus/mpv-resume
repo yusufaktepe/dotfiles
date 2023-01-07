@@ -1,41 +1,74 @@
 #!/usr/bin/env bash
-# For this script to work you need to set
-#   `write-filename-in-watch-later-config`
-# option in the mpv.conf and start videos by specifying the full path.
 
 cd ~/.config/mpv/watch_later || exit
 
+quit() {
+	IFS='#' read -r _ ID <<< "$(xprop -root _NET_ACTIVE_WINDOW)"
+	IFS='= ' read -r _ PID <<< "$(xprop -id $ID _NET_WM_PID)"
+	Proc=$(ps -o cmd --no-headers -p "$PID")
+	Path=${Proc##* }
+
+	[[ $Path =~ ^http.* ]] && {
+		export SOCKET=/tmp/mpvsocketYT
+		Title=$(socat - $SOCKET <<< '{ "command": ["get_property", "media-title"] }' | jq -r '.data')
+	} 2>/dev/null
+
+	mpvc run quit-watch-later
+}
+
+[[ $1 == --write-quit ]] && quit
+
 while read -ra HistFiles; do
-	for HistFile in ${HistFiles[1]}; do
+	[[ $1 == --write-quit ]] && {
+		[[ $Path =~ ^http.* ]] || exit 0
+		[[ ${Path##*/} == "$Title" ]] && exit
+
+		Title=${Title//&/\\&}
+		sed -i "s&^# &# ${Title} ⠀&" "${HistFiles[1]}"
+		exit
+	}
+
+	for HistFile in ${HistFiles[1]}; {
 		while IFS='# ' read -r _ File; do
 			if [[ -f "$File" ]]; then
 				Hist+=("$File")
-			elif [[ $File =~ ^http.* ]]; then
+			elif [[ ${File##*⠀} =~ ^http.* ]]; then
 				Hist+=("$File")
 			else
 				rm "$HistFile"
 			fi
 			break
 		done < "$HistFile"
-	done
+	}
 done < <(find . -type f -printf "%T+ %P\n" | sort -r)
 
 [[ -z "$HistFile" ]] && exit
 
+print_hist() {
+	for HistItem in "${Hist[@]}"; {
+		if [[ $HistItem =~ ^/[[:alnum:]] ]]; then
+			printf '%s\n' " ${HistItem##*/}"
+		else
+			printf '%s\n' " $HistItem"
+		fi
+	}
+}
+
 while read -r PlayThis; do
 	[[ -n "$PlayThis" ]] || break
 
-	for HistItem in "${Hist[@]}"; do
-		if [[  $HistItem == *"$PlayThis" ]]; then
+	shopt -s extglob
+	for HistItem in "${Hist[@]}"; {
+		[[ $HistItem == *"${PlayThis#+(|) }" ]] && {
 			if [[ -f "$HistItem" ]]; then
 				find /tmp/mpvsocket[0-9]* -type s 2>/dev/null && mpvc quit
 				sleep .2
 				mpvc "$HistItem"
-			elif [[ $HistItem =~ ^http.*"$PlayThis" ]]; then
-				ym "$HistItem"
+			elif [[ ! $HistItem =~ ^/ ]]; then
+				ym "${HistItem##*⠀}"
 			fi
 			break
-		fi
-	done
-done < <(printf '%s\n' "${Hist[@]##*/}" | dmenu -i -l 5 -p )
+		}
+	}
+done < <(print_hist | rofi -dmenu -i -l 5 -p )
 
