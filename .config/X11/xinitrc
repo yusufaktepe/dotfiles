@@ -23,7 +23,8 @@ redshift &
 remaps &
 numlockx &
 gpaste-client daemon &
-unclutter --ignore-scrolling --jitter 50 -b &
+rbw-unlock &
+# unclutter --ignore-scrolling --jitter 50 --exclude-root --not vivaldi -b &
 # (sleep 30; syncthing -no-browser) &
 
 exec "${1:-i3}"

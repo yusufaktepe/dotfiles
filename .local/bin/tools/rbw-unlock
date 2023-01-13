@@ -1,0 +1,12 @@
+#!/bin/sh
+# Set pinentry to: 'pinentry-tty'
+# $ rbw config set pinentry pinentry-tty
+
+BW_PASS=$(pass services/vault.bitwarden.com | head -n1) \
+expect -c "
+	spawn rbw unlock
+	expect \"Master Password: \"
+	send \"$::env(BW_PASS)\r\"
+	interact
+" >/dev/null
+

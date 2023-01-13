@@ -9,7 +9,7 @@
   bg-normal:          #3B4252;
   bg-selected:        #4C566A;
   darkgray:           #81A1C1;
-  font:               "mono 13";
+  font:               "Hack Nerd Font 12";
   background-color:   @bg;
   border-color:       @main;
 }

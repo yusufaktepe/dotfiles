@@ -14,7 +14,7 @@ fi
 case $1 in
 	commit|c)
 		Hash=$(git rev-parse HEAD)
-		setsid -f xdg-open "$url/commit/$Hash" >/dev/null 2>&1 ;;
+		setsid -f xdg-open "${url%.git}/commit/$Hash" >/dev/null 2>&1 ;;
 	*)
 		setsid -f xdg-open "$url" >/dev/null 2>&1
 esac

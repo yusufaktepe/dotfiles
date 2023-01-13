@@ -18,6 +18,7 @@ alias tree='tree -aI ".git|node_modules" --dirsfirst'
 alias vidir='vidir -v'
 alias wget='wget -qc --show-progress'
 alias reboot='mpvc quit 2>/dev/null; systemctl reboot'
+alias s='sleep 2;'
 
 for p in iotop ps_mem updatedb; { alias $p="sudo $p" ;}; unset p
 

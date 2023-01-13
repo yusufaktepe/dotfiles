@@ -57,7 +57,7 @@ bindsym $mod+d $exec rofi -show combi
 bindsym $mod+c $exec $calc
 bindsym $mod+i $exec rofimoji
 bindsym XF86Calculator $exec $calc
-bindsym $caps+d $exec rofi-pass
+bindsym $caps+d $exec brbw
 bindsym $caps+f $exec rofi-finder
 # bindsym XF86Launch2 $exec rofi -show combi
 bindsym XF86Launch9 $exec rofitr
@@ -411,7 +411,7 @@ for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, m
 for_window [instance="blockterm_*"] floating enable border pixel 2
 for_window [instance="Blockterm_*"] floating enable border pixel 3, resize set 1920 1056, move position center
 for_window [instance="floating"] floating enable, move position mouse
-for_window [instance="gpaste-editor"] floating enable sticky enable, resize set 1146 328, move position 387 24
+for_window [instance="rofi-editor"] floating enable sticky enable, resize set 1146 328, move position 387 24
 #_ Doublecmd
 for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center
 for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 1100 800, move position center
@@ -433,7 +433,7 @@ for_window [instance="dropdown_*"] move position center
 # See ../X11/xinitrc for rest of the autostarts
 
 exec_always $N launch_polybar
-$exec kpass
+# $exec kpass
 $exec "sleep 2; vivaldi-stable --start-maximized"
 $exec "sleep 5; ifterm -h -e vifm"
 # $exec "sleep 7; telegram-desktop"

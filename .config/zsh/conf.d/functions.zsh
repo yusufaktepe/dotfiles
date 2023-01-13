@@ -132,8 +132,6 @@ zcw_toggle-fg() {
 	fi
 }
 
-bashx() { bash -c "set -x; export SHELLOPTS; exec $1" ;}
-
 # List and load onto directory stack
 d() { [[ -n $1 ]] && dirs "$@" || dirs -v | head -10 ;}
 

@@ -1,34 +1,42 @@
 #!/bin/sh
+# shellcheck disable=SC2086
 
 grep_url() { sed 's/ /%20/g' | grep -Eo '(https?|ftp)://[^ "]+' ;}
 
+mpv_url() {
+	ID=$(xprop -root _NET_ACTIVE_WINDOW) ID=${ID##* }
+	PID=$(xprop -id "$ID" _NET_WM_PID)   PID=${PID##* }
+	Proc=$(ps -o cmd --no-headers -p "$PID")
+	URL=${Proc##* }
+}
+
 get_url() {
-	AW=$(xdotool getactivewindow)
-	AW_CLASS=$(xprop -id "$AW" | awk -F\" '/WM_CLASS/{print $4}')
+	AW_CLASS=$(xdotool getactivewindow getwindowclassname 2>/dev/null)
 
 	case $AW_CLASS in
 		Vivaldi*|*chrom*|Opera*|firefox*|Tor*|Brave*)
-			echo | xsel
+			printf '' | xclip
 			xdotool key --delay 100 --clearmodifiers Ctrl+l Right Shift+Home Escape
-			URL=$(xsel -o | grep_url) ;;
+			URL=$(xclip -r -o | grep_url) ;;
 		mpv)
-			PID=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/ {print $NF}')
-			PID=$(xprop -id "$PID" | awk '/PID/ {print $3; exit}')
-			URL=$(ps -o cmd --no-headers -p "$PID" | grep_url) ;;
+			mpv_url ;;
 		*)
-			URL=$(xsel -ob | grep_url)
+			URL=$(xclip -o -sel c | grep_url) ;;
 	esac
 
 	[ -z "$URL" ] && exit
 }
 
 case $1 in
-	mpv) shift
+	mpv)
+		shift
 		case $1 in
-			-c) ym "$(xsel -ob)" ;;
+			-c) ym "$(xclip -r -o -sel c)" ;;
 			*)  get_url; ym "$URL" ;;
 		esac ;;
-	"") exit ;;
-	*) get_url; "$@" "$URL" >/dev/null 2>&1 &
+	"")
+		exit ;;
+	*)
+		get_url; "$@" "$URL" >/dev/null 2>&1 &
 esac
 

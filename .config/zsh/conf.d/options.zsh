@@ -36,6 +36,7 @@ setopt HIST_REDUCE_BLANKS     # Remove superfluous blanks from commands that bei
 setopt HIST_SAVE_NO_DUPS      # When writing out the history file, omit older commands that duplicate newer ones.
 setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries first when trimming history.
 setopt HIST_VERIFY            # Don't execute the line directly instead perform history expansion.
+HISTORY_IGNORE='(ls|ll|la|pwd|exit|cd|..|...|....|vH|f|fcd|vifm-tab)'
 
 # Input/Output
 stty stop undef               # Disable ^S

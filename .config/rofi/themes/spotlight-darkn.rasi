@@ -1,0 +1,94 @@
+/*******************************************************************************
+ * Based on the spotlight-dark theme by lr-tech
+ * https://github.com/lr-tech/rofi-themes-collection
+ *******************************************************************************/
+
+* {
+  bg0:               #242424E6;
+  bg1:               #4b4b4b80;
+  bg2:               #5E81ACE6;
+  fg0:               #DEDEDE;
+  fg1:               #FFFFFF;
+  fg2:               #DEDEDE80;
+  urgent:            #BF616A90;
+
+  font:              "Hack Nerd Font 12";
+  background-color:  transparent;
+  text-color:        @fg0;
+
+  margin:            0;
+  padding:           0;
+  spacing:           0;
+}
+
+window {
+  /* border:            2px; */
+  /* border-color:      @bg1; */
+  background-color:  @bg0;
+  border-radius:     8;
+}
+
+inputbar {
+  padding:           12px;
+  spacing:           18px;
+  children:          [ prompt, entry ];
+}
+
+entry, element-icon, element-text {
+  vertical-align:    0.5;
+}
+
+entry {
+  placeholder-color: @fg2;
+}
+
+message {
+  border:            2px 0 0;
+  border-color:      @bg1;
+  background-color:  @bg1;
+}
+
+textbox {
+  padding:           8px 24px;
+}
+
+listview {
+  fixed-height:      false;
+  lines:             10;
+  columns:           1;
+  border:            1px 0 0;
+  border-color:      @bg1;
+}
+
+element {
+  padding:           8px 0px;
+  spacing:           0px;
+  background-color:  transparent;
+}
+
+element normal active {
+  text-color:        @bg2;
+}
+
+element normal urgent {
+  text-color:        @urgent;
+}
+
+element selected normal, element selected active {
+  background-color:  @bg2;
+  text-color:        @fg1;
+}
+
+element selected urgent {
+  background-color:  @urgent;
+}
+
+element-icon {
+  padding:           0px 14px;
+  size:              1em;
+}
+
+element-text {
+  text-color:        inherit;
+}
+/* vim:set ts=2 sw=2 et: */

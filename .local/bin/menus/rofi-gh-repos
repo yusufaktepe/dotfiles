@@ -1,0 +1,22 @@
+#!/bin/sh
+
+Cache=~/.cache/gh-repos.list
+User=https://github.com/yusufaktepe
+
+[ -f $Cache ] || gh repo list --json name -q '.[].name' > $Cache
+
+Repo=$(
+	rofi -dmenu -p '' -kb-custom-1 Alt+r -kb-custom-2 Alt+i \
+		-kb-custom-3 Alt+p -kb-custom-4 Alt+c < $Cache
+)
+Ret=$?
+[ -z "$Repo" ] && exit
+
+case $Ret in
+	10) gh repo list --json name -q '.[].name' > $Cache; exec $0 ;;
+	11) setsid -f xdg-open "$User/$Repo/issues" >/dev/null 2>&1 ;;
+	12) setsid -f xdg-open "$User/$Repo/pulls" >/dev/null 2>&1 ;;
+	13) printf '%s' "$User/$Repo" | clip ;;
+	0) setsid -f xdg-open "$User/$Repo" >/dev/null 2>&1 ;;
+esac
+

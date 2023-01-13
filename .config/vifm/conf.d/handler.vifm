@@ -268,6 +268,9 @@ fileviewer *.json
 	\ jq --color-output . %c,
 	\ python -m json.tool -- %c,
 
+fileviewer {*.gpg},<application/pgp-encrypted>
+	\ gpg -qd -- %c,
+
 fileviewer */,.*/,../ tree -aCL 1 -I .git --dirsfirst %c
 
 fileviewer .*[!/],*[!/]

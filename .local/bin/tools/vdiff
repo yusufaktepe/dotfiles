@@ -1,4 +1,4 @@
 #!/bin/sh
 
-{ [ -d "$1" ] && vim -c "DirDiff $1 $2" ;} || vim -d "$@"
+{ [ -d "$1" ] && $EDITOR -c "DirDiff $1 $2" ;} || $EDITOR -d "$@"
 

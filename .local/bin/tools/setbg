@@ -1,24 +1,24 @@
 #!/bin/sh
 
-wall=$XDG_DATA_HOME/backgrounds/wall.png
-lock=$XDG_DATA_HOME/backgrounds/lock.png
+Wall=$XDG_DATA_HOME/backgrounds/wall.png
+Lock=$XDG_DATA_HOME/backgrounds/lock.png
 
 [ -n "$1" ] && {
-	cp "$1" "$wall"
+	cp "$1" "$Wall"
 
-	IFS=, read width height </sys/class/graphics/fb0/virtual_size
+	IFS=, read -r width height </sys/class/graphics/fb0/virtual_size
 	res="${width}x${height}"
 
 	# resize
 	[ "$(identify -format "%wx%h" "$1")" != "$res" ] &&
-		convert "$wall" -resize "$res"\>\! "$wall"
+		convert "$Wall" -resize "$res"\>\! "$Wall"
 
 	# dim for lockscreen
-	convert "$wall" -fill black -colorize 40% "$lock"
+	convert "$Wall" -fill black -colorize 40% "$Lock"
 
-	notify-send -a system -i "$wall" "Wallpaper changed."
+	notify-send -a system -i "$Wall" "Wallpaper changed."
 }
 
-# hsetroot -fill "$wall"
-xwallpaper --stretch "$wall"
+# hsetroot -fill "$Wall"
+xwallpaper --stretch "$Wall"
 

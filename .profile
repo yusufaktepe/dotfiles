@@ -18,8 +18,12 @@ export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"
 export FM="vifm-tab"
 
-export MANPAGER="nvimpager"
+# Man Pager
+export MANPAGER="nvimpager -p"
 export MANWIDTH=174
+
+# Output format for GNU time
+export TIME=$'$ \033[3;31m%C\033[0m\nreal\t%e\nuser\t%U\nsys\t%S\ncpu\t%P'
 
 # Keep $HOME clean
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
@@ -57,6 +61,8 @@ export RANGER_LOAD_DEFAULT_RC="false"
 export QT_QPA_PLATFORMTHEME="qt5ct"
 export QT_LOGGING_RULES="*=false"
 export MOZ_USE_XINPUT2=1 # Firefox one-to-one trackpad scrolling
+export XDG_SESSION_TYPE=x11
+export GDK_BACKEND=x11
 
 # Less Colors
 export LESS=-R

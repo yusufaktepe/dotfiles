@@ -18,9 +18,9 @@
 	cc          = shortlog -sn --no-merges
 	cca         = shortlog -sn
 	ctr         = shortlog --summary --numbered --email
-	confl       = !vim +Conflicted
-	d           = diff --stat=100,100 --patch
-	ds          = diff --stat=100,100 --patch --staged
+	confl       = !$EDITOR +Conflicted
+	d           = diff --stat=100,100 --patch -D
+	ds          = diff --stat=100,100 --patch --staged -D
 	dt          = difftool
 	dts         = difftool --staged
 	edmod       = !vim $(git ls-files -m) -p
@@ -69,9 +69,9 @@
 
 [pager]
 	# diff-highlight is script provided by git that shows word-by-word diff
-	log  = /usr/share/git/diff-highlight/diff-highlight | less
-	show = /usr/share/git/diff-highlight/diff-highlight | less
-	diff = /usr/share/git/diff-highlight/diff-highlight | less
+	log  = /usr/share/git/diff-highlight/diff-highlight | less --tabs=4 -FS
+	show = /usr/share/git/diff-highlight/diff-highlight | less --tabs=4 -FS
+	diff = /usr/share/git/diff-highlight/diff-highlight | less --tabs=4 -FS
 
 [format]
 	pretty = fuller

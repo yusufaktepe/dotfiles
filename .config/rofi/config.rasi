@@ -1,6 +1,6 @@
 configuration {
 	modi: "window,combi,run";
-	font: "mono 13";
+	font: "Hack Nerd Font 12";
 	location: 2;
 	yoffset: 24;
 /*	xoffset: 0;*/
@@ -9,7 +9,7 @@ configuration {
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
-/*	run-command: "{cmd}";*/
+	run-command: "sh -c '{cmd}'";
 /*	run-list-command: "";*/
 /*	run-shell-command: "{terminal} -e {cmd}";*/
 /*	window-command: "wmctrl -i -R {window}";*/
@@ -136,6 +136,8 @@ configuration {
 	kb-select-8:  "Super+8,Control+8";
 	kb-select-9:  "Super+9,Control+9";
 	kb-select-10: "Super+0,Control+0";
+/*	kb-entry-history-up: "Control+Up";*/
+/*	kb-entry-history-down: "Control+Down";*/
 /*	ml-row-left: "ScrollLeft";*/
 /*	ml-row-right: "ScrollRight";*/
 /*	ml-row-up: "ScrollUp";*/
@@ -152,4 +154,4 @@ configuration {
       sorting-method:    "name";
   }
 }
-@theme "~/.config/rofi/themes/flat-nord.rasi"
+@theme "~/.config/rofi/themes/spotlight-darkn.rasi"

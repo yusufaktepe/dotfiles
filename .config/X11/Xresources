@@ -50,7 +50,7 @@ XTerm*charClass: 33:48,36-47:48,58-59:48,61:48,63-64:48,95:48,126:48
 XTerm*on3Clicks: regex ([[:alpha:]]+://)?([[:alnum:]!#+,./=?@_~-]|(%[[:xdigit:]][[:xdigit:]]))+
 
 ! Open history in vim
-XTerm*printerCommand: xterm -T History -e sh -c 'vim -R -c "set ft=sh" <&3' 3<&0
+XTerm*printerCommand: xterm -T History -e sh -c "$EDITOR -R -c 'set ft=sh' <&3" 3<&0
 
 ! For sixel
 XTerm*decTerminalID: vt340

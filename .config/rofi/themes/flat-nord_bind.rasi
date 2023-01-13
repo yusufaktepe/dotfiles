@@ -2,6 +2,7 @@
 
 * {
   border-color: @bg;
+  font:         "mono 13";
 }
 
 window {
