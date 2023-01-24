@@ -47,9 +47,9 @@ done < <(find . -type f -printf "%T+ %P\n" | sort -r)
 print_hist() {
 	for HistItem in "${Hist[@]}"; {
 		if [[ $HistItem =~ ^/[[:alnum:]] ]]; then
-			printf '%s\n' " ${HistItem##*/}"
+			printf '%b\n' "${HistItem##*/}\0icon\x1fvideo"
 		else
-			printf '%s\n' " $HistItem"
+			printf '%b\n' "$HistItem\0icon\x1fyoutube"
 		fi
 	}
 }
@@ -59,9 +59,8 @@ Ret=$?
 
 [[ -n "$Selected" ]] || exit
 
-shopt -s extglob
 for HistItem in "${Hist[@]}"; {
-	[[ $HistItem == *"${Selected#+(|) }" ]] && {
+	[[ $HistItem == *"$Selected" ]] && {
 		[[ $Ret -eq 10 ]] && {
 			find . -type f -exec grep -Fqm 1 "$HistItem" {} \; -delete
 			exec $0
