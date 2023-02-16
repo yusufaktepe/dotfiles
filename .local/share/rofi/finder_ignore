@@ -1,6 +1,5 @@
 ~/
-	(.audacity-data
-	|.cache
+	(.cache
 	|.cert
 	|.gnupg
 	|.icons
@@ -9,7 +8,10 @@
 	|.ssh
 	)|
 ~/.config/
-	(dconf
+	(BraveSoftware
+	|Code
+	|chromium
+	|dconf
 	|doublecmd/logs
 	|GIMP
 	|google-chrome
@@ -21,8 +23,8 @@
 	|libreoffice
 	|light
 	|menus
-	|nvim/plugged
 	|pulse
+	|obsidian
 	|opera
 	|Signal
 	|spotify
@@ -30,6 +32,7 @@
 	|VirtualBox
 	|vivaldi
 	)|
+.local/state/|
 .local/lib/
 	(node_modules
 	|go
@@ -40,14 +43,16 @@
 	|vivaldi
 	)|
 .local/share/
-	(applications
+	(audacity
 	|cantata
 	|data
 	|desktop*
 	|gegl*
+	|gh
 	|gvfs*
 	|icons
 	|key*
+	|kdenlive
 	|lf
 	|meld
 	|newsboat
@@ -64,6 +69,7 @@
 	|Trash
 	|vifm
 	|vlc
+	|webkitgtk
 	|xorg
 	|zathura
 	|.viv*

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+Head() { git rev-parse --short HEAD; }
+Prev=$(Head)
+git pull "$@"
+Cur=$(Head)
+[ "$Prev" = "$Cur" ] && exit
+git diff --stat=100,100 --patch -D "$Prev..$Cur"

@@ -88,8 +88,9 @@ return {
             {
               "mode",
               fmt = function(str)
-                return str:sub(1, 1)
+                return "[" .. str:sub(1, 1) .. "]"
               end,
+              color = { gui = "bold" },
             },
           },
           lualine_b = { "branch" },

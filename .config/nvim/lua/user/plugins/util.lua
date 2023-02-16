@@ -28,6 +28,7 @@ return {
   -- makes some plugins dot-repeatable like leap
   { "tpope/vim-repeat", event = "VeryLazy" },
 
-  -- indentation detection - "tpope/vim-sleuth" alternative
-  { "Darazaki/indent-o-matic", dependencies = { "lukas-reineke/indent-blankline.nvim" } },
+  -- indentation detection
+  -- { "Darazaki/indent-o-matic", dependencies = { "lukas-reineke/indent-blankline.nvim" } },
+  { "tpope/vim-sleuth", dependencies = { "lukas-reineke/indent-blankline.nvim" } },
 }

@@ -18,7 +18,6 @@ return {
   -- markdown preview
   {
     "toppair/peek.nvim",
-    -- "hulufei/peek.nvim", branch = "use-browser",
     build = "deno task --quiet build:fast",
     keys = {
       {
@@ -34,7 +33,10 @@ return {
         desc = "Peek (Markdown Preview)",
       },
     },
-    opts = { theme = "dark" },
+    opts = {
+      theme = "dark",
+      app = "browser",
+    },
   },
 
   -- colorizer
@@ -74,6 +76,12 @@ return {
     opts = { use_default_keymaps = false, max_join_length = 150 },
   },
 
+  -- text aligning
+  {
+    "godlygeek/tabular",
+    cmd = { "AddTabularPattern", "AddTabularPipeline", "Tabularize", "GTabularize" },
+  },
+
   -- system
   {
     "tpope/vim-eunuch",
@@ -82,4 +90,14 @@ return {
 
   -- edit gpg encrypted files
   { "jamessan/vim-gnupg" },
+
+  -- vifm
+  {
+    "vifm/vifm.vim",
+    ft = "vifm",
+    cmd = { "EditVifm", "Vifm", "PeditVifm", "SplitVifm", "VsplitVifm", "DiffVifm", "TabVifm", "VifmCs" },
+    config = function()
+      vim.g.vifm_exec = "VIFM=~/.config/vifm/sessions/select vifm"
+    end
+  },
 }

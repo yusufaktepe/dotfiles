@@ -19,11 +19,12 @@
 	cca         = shortlog -sn
 	ctr         = shortlog --summary --numbered --email
 	confl       = !$EDITOR +Conflicted
+	dv          = !$EDITOR +DiffviewOpen
 	d           = diff --stat=100,100 --patch -D
 	ds          = diff --stat=100,100 --patch --staged -D
 	dt          = difftool
 	dts         = difftool --staged
-	edmod       = !vim $(git ls-files -m) -p
+	edmod       = !$EDITOR $(git ls-files -m) -p
 	f           = fetch
 	g           = grep --break --heading --line-number
 	last        = show --stat HEAD
@@ -34,7 +35,7 @@
 	ls          = ls-files
 	p           = push
 	pf          = push -f
-	pl          = pull
+	pl          = pl
 	re          = rebase --committer-date-is-author-date
 	rem         = remote -v
 	refs        = for-each-ref

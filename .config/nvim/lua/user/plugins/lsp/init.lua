@@ -14,8 +14,11 @@ return {
         config = function()
           require("fidget").setup({
             text = {
-              spinner = "moon",
+              spinner = "dots",
               done = "",
+            },
+            fmt = {
+              task = false, --hide tasks
             },
           })
         end,

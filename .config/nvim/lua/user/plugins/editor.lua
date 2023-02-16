@@ -36,6 +36,7 @@ return {
       end
     end,
     opts = {
+      close_if_last_window = true,
       filesystem = {
         bind_to_cwd = false,
         follow_current_file = true,
@@ -143,6 +144,18 @@ return {
         selection_caret = " ",
         mappings = {
           i = {
+            ["<RightMouse>"] = function(...)
+              return require("telescope.actions").close(...)
+            end,
+            ["<LeftMouse>"] = function(...)
+              return require("telescope.actions").select_default(...)
+            end,
+            ["<ScrollWheelDown>"] = function(...)
+              return require("telescope.actions").move_selection_next(...)
+            end,
+            ["<ScrollWheelUp>"] = function(...)
+              return require("telescope.actions").move_selection_previous(...)
+            end,
             ["<C-h>"] = "which_key",
             ["<c-t>"] = function(...)
               return require("trouble.providers.telescope").open_with_trouble(...)
@@ -219,9 +232,24 @@ return {
 
   -- easily jump to any location and enhanced f/t motions for Leap
   {
+    "ggandor/flit.nvim",
+    keys = function()
+      ---@type LazyKeys[]
+      local ret = {}
+      for _, key in ipairs({ "f", "F", "t", "T" }) do
+        ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
+      end
+      return ret
+    end,
+    opts = { labeled_modes = "nx" },
+  },
+  {
     "ggandor/leap.nvim",
-    event = "VeryLazy",
-    dependencies = { { "ggandor/flit.nvim", opts = { labeled_modes = "nv" } } },
+    keys = {
+      { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
+      { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+      { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+    },
     config = function(_, opts)
       local leap = require("leap")
       for k, v in pairs(opts) do
@@ -233,7 +261,6 @@ return {
     end,
   },
 
-  -- TODO: add my groups here
   -- which-key
   {
     "folke/which-key.nvim",
