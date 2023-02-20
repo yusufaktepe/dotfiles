@@ -87,5 +87,7 @@ key_bindings:
   - { key: NumpadDivide,                       mode: Vi,   action: SearchForward    }
   - { key: NumpadDivide,  mods: Shift,         mode: Vi,   action: SearchBackward   }
   - { key: NumpadEnter,                        mode: ~Alt, chars: "\n"              }
+  - { key: Return,        mods: Shift,                     chars: "\x1b[13;2u"      }
+  - { key: Return,        mods: Control,                   chars: "\x1b[13;5u"      }
 
 # vim:set ts=2 sw=2 et:
