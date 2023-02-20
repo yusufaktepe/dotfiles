@@ -1,5 +1,8 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
+env:
+  RPS1: ''
+
 window:
   dimensions:
     columns: 80
