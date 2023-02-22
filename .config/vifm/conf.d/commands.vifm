@@ -7,13 +7,14 @@ command! df df -h %m 2>/dev/null
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir! "%a" | cd "%a"
-command! vgrep $EDITOR "+grep %a"
+command! vgrep $EDITOR "+vimgrep %a"
 command! gextract engrampa --extract %f %i &
 command! gcompress engrampa --add %f %i &
 command! link ln -s %d/%f %D
 command! shred shred -u %f &
 command! vidir $TERMINAL -e vidir %a 2>/dev/null &
-command! EDIT $TERMINAL -e $EDITOR %a 2>/dev/null &
+command! EDIT nv %a 2>/dev/null &
+" command! EDIT $TERMINAL -e $EDITOR %a 2>/dev/null &
 command! COPY :yank | winrun , put
 command! MOVE :yank | winrun , put!
 command! reload :write | restart full
@@ -23,7 +24,7 @@ command! enc !for f in %f; do gpg -e "$f"; done
 command! dec !for f in %f; do gpg -d "$f" > "${f%%.gpg}"; done
 
 command! mks :![ ! -f %a ] && touch %a && chmod +x %a &&
-	\ printf "#!/bin/sh\n\n\n" >> %a && $TERMINAL -e $EDITOR +$ %a 2>/dev/null &
+	\ printf "#!/bin/sh\n\n\n" >> %a && nv +$ %a 2>/dev/null &
 
 " Diff files & folders
 " uses selection of current pane when it contains more than one file
@@ -42,12 +43,12 @@ command! diff
 command! DIFF
 	\ : if expand('%%c') == expand('%%f')
 	\ |     if paneisat('right') && paneisat('bottom')
-	\ |         execute '!$TERMINAL -e vdiff %%C %%c 2>/dev/null &'
+	\ |         execute '!nv -d %%C %%c:p 2>/dev/null &'
 	\ |     else
-	\ |         execute '!$TERMINAL -e vdiff %%c %%C 2>/dev/null &'
+	\ |         execute '!nv -d %%c:p %%C 2>/dev/null &'
 	\ |     endif
 	\ | else
-	\ |     execute '!$TERMINAL -e vdiff %%f 2>/dev/null &'
+	\ |     execute '!nv -d %%f:p 2>/dev/null &'
 	\ | endif
 
 command! GDIFF

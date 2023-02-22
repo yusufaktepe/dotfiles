@@ -77,7 +77,7 @@ bindsym $caps+Shift+a $exec dunstctl context
 
 # #---Start Applications---# #
 bindsym $mod+F1 $exec ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
-bindsym $mod+F2 $exec ifterm -h -e vifm
+bindsym $mod+F2 $exec ifterm -h -i vifm -e vifm-tab
 bindsym $mod+F3 $exec ifwin -e 'vivaldi-stable --start-maximized'
 bindsym $mod+F4 $exec ifwin -e firefox
 bindsym $mod+F5 $exec ifwin -e brave
@@ -90,7 +90,7 @@ bindsym $mod+Shift+F6 $exec google-chrome-stable --incognito
 bindsym $mod+m $exec ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
-bindsym $caps+e $exec $TERMINAL -e $EDITOR
+bindsym $caps+e $exec nv
 bindsym $caps+m $exec ifwin -e strawberry
 # bindsym $caps+Shift+s $exec toggle spotifyd
 bindsym $caps+r $exec kpass
@@ -365,6 +365,7 @@ for_window [workspace="$ws1|$ws2|$ws9|$ws10"] layout tabbed
 assign [class="(?i)Vivaldi|Brave-browser"]       $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
+# assign [instance="Neovim"]                       $ws3
 assign [class="(?i)Opera|firefox"]               $ws4
 assign [class="Code|obsidian"]                   $ws5
 assign [class="(?i)telegram"]                    $ws6
@@ -411,7 +412,7 @@ for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, m
 for_window [instance="blockterm_*"] floating enable border pixel 2
 for_window [instance="Blockterm_*"] floating enable border pixel 3, resize set 1920 1056, move position center
 for_window [instance="floating"] floating enable, move position mouse
-for_window [instance="rofi-editor"] floating enable sticky enable, resize set 1146 328, move position 387 24
+for_window [instance="rofi-editor"] floating enable sticky enable, resize set 1146 428, move position 387 24
 #_ Doublecmd
 for_window [window_role="Tfrm(FileOp|ViewOperations|OpenWith|FindDlg)"] floating enable, move position center
 for_window [window_role="Tfrm(Viewer|Editor)"] floating enable, resize set 1100 800, move position center
@@ -435,11 +436,11 @@ for_window [instance="dropdown_*"] move position center
 exec_always $N launch_polybar
 # $exec kpass
 $exec "sleep 2; vivaldi-stable --start-maximized"
-$exec "sleep 5; ifterm -h -e vifm"
+$exec "sleep 5; ifterm -h -i vifm -e vifm-tab"
 # $exec "sleep 7; telegram-desktop"
 $exec "sleep 9; crypto_bar"
 $exec "sleep 10; spotify"
-$exec "sleep 7; wmctrl -x -r 'vifm' -b remove,demands_attention"
+$exec "sleep 7; wmctrl -x -r 'vifm.Alacritty' -b remove,demands_attention"
 # $exec "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
 
 #=====================================================================

@@ -1,0 +1,41 @@
+#!/bin/sh
+# Open file(s) in existing Neovim instance or launch a new one.
+# shellcheck disable=SC2086,SC2153
+
+Instance=${NVI:+_$NVI}
+Socket=/tmp/nvimsocket$Instance
+
+focus() { wmctrl -x -a "Neovim$Instance" || return 0; }
+
+# Diff directories with Vifm
+# TODO: maybe => https://github.com/sindrets/diffview.nvim/issues/286
+[ "$1" = "-d" ] && [ -d "$2" ] && [ -d "$3" ] && {
+	TermIns=blockterm_vifm
+	VifmCmd='windo filter .git | compare listunique'
+	VifmIns='diff'
+	export VIFM=~/.config/vifm/sessions/diff
+
+	if vifm --server-list | grep -q diff; then
+		vifm --server-name $VifmIns --remote -c "cd '$2' '$3' | $VifmCmd"
+	else
+		setsid -f $TERMINS $TermIns -e sh -c "vifm --server-name $VifmIns -c '$VifmCmd' '$2' '$3'"
+	fi
+	exit
+}
+
+if [ -S "$Socket" ]; then
+	# shellcheck disable=2015
+	[ "$1" = "-d" ] && set -- -c 'wincmd h' "$@" || set -- --remote-tab-silent "$@"
+	# Do not wait for nvim to close when diffing
+	timeout .5 nvr --servername "$Socket" "$@" &
+	focus
+else
+	if [ -t 2 ]; then
+		# xdotool getactivewindow set_window --classname Neovim$Instance &
+		exec nvim --listen "$Socket" "$@"
+	else
+		setsid -f $TERMINS Neovim$Instance -e nvim --listen "$Socket" "$@" >/dev/null 2>&1
+		sleep .2; focus
+	fi
+fi
+

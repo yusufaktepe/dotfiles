@@ -109,7 +109,7 @@ filetype {*.asc},<application/pgp-signature>
 filetype {*.torrent},<application/x-bittorrent> qbittorrent %f &
 
 " Archive
-filetype {*.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz},
+filetype {*.zip,*.rar,*.7z,*.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.tar.zst,*.txz},
 	\<application/zip,application/x-rar,application/x-7z-compressed,
 	\application/java-archive,application/x-tar>
 	" \ {View contents}
@@ -183,6 +183,8 @@ filextype <inode/directory,inode/mount-point>
 
 " Text
 filextype <text/*>
+	\ {Edit in Neovim instance}
+	\ nv %f &,
 	\ {Edit in new window}
 	\ $TERMINAL -e $EDITOR %f &,
 
@@ -231,7 +233,7 @@ fileviewer {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},<image/*>
 fileviewer {*.torrent},<application/x-bittorrent> transmission-show %c
 
 fileviewer {*.a,*.ace,*.alz,*.arc,*.arj,*.bz,*.bz2,*.cab,*.cpio,*.deb,*.gz,
-	\*.jar,*.lha,*.lz,*.lzh,*.lzma,*.lzo,*.rpm,*.rz,*.t7z,*.tar,*.tbz,
+	\*.jar,*.lha,*.lz,*.lzh,*.lzma,*.lzo,*.rpm,*.rz,*.t7z,*.tar,*.tbz,*.tar.zst,
 	\*.tbz2,*.tgz,*.tlz,*.txz,*.tZ,*.tzo,*.war,*.xpi,*.xz,*.Z,*.zip},
 	\<application/zip,application/java-archive,application/x-tar>
 	\ atool --list %c,

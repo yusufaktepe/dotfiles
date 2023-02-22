@@ -71,8 +71,12 @@ nnoremap <silent> o :file &<cr>
 " Pick current item in menu mode
 mmap o <cr>
 
-" Edit file new window
-nnoremap <silent> E :edit<cr>
+" Edit file
+if $DISPLAY
+	nnoremap <silent> E :!nv %f 2>/dev/null &<cr>
+else
+	nnoremap <silent> E :edit<cr>
+endif
 
 " Open file in the background using its default program
 nnoremap <silent> gb :file &<cr>l
