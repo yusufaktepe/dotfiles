@@ -98,10 +98,10 @@ return {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
             { "filename", path = 0 },
             -- stylua: ignore
-            {
-              function() return require("nvim-navic").get_location() end,
-              cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
-            },
+            -- {
+            --   function() return require("nvim-navic").get_location() end,
+            --   cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
+            -- },
           },
           lualine_x = {
             {
@@ -121,7 +121,15 @@ return {
                 info = icons.diagnostics.Info,
                 hint = icons.diagnostics.Hint,
               },
+              separator = ""
             },
+            -- {
+            --   function()
+            --     local space = vim.fn.search([[\s\+$]], "nwc")
+            --     return space ~= 0 and "TW:" .. space or ""
+            --   end,
+            --   color = { fg = "#B48EAD" },
+            -- },
           },
           lualine_y = { "location" },
           lualine_z = { "%P/%L" },
@@ -160,13 +168,15 @@ return {
       symbol = "│",
       options = { try_as_border = true },
     },
-    config = function(_, opts)
+    init = function()
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
         callback = function()
           vim.b.miniindentscope_disable = true
         end,
       })
+    end,
+    config = function(_, opts)
       require("mini.indentscope").setup(opts)
     end,
   },
@@ -192,8 +202,8 @@ return {
         dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
         dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
         dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-        dashboard.button("s", "勒" .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
-        dashboard.button("l", "鈴" .. " Lazy", ":Lazy<CR>"),
+        dashboard.button("s", "󰑓 " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
+        dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
       }
       for _, button in ipairs(dashboard.section.buttons.val) do
@@ -233,26 +243,26 @@ return {
   },
 
   -- lsp symbol navigation for lualine
-  {
-    "SmiteshP/nvim-navic",
-    lazy = true,
-    init = function()
-      vim.g.navic_silence = true
-      require("user.util").on_attach(function(client, buffer)
-        if client.server_capabilities.documentSymbolProvider then
-          require("nvim-navic").attach(client, buffer)
-        end
-      end)
-    end,
-    opts = function()
-      return {
-        separator = " › ",
-        highlight = false,
-        depth_limit = 4,
-        icons = require("user.icons").kinds,
-      }
-    end,
-  },
+  -- {
+  --   "SmiteshP/nvim-navic",
+  --   lazy = true,
+  --   init = function()
+  --     vim.g.navic_silence = true
+  --     require("user.util").on_attach(function(client, buffer)
+  --       if client.server_capabilities.documentSymbolProvider then
+  --         require("nvim-navic").attach(client, buffer)
+  --       end
+  --     end)
+  --   end,
+  --   opts = function()
+  --     return {
+  --       separator = " › ",
+  --       highlight = false,
+  --       depth_limit = 4,
+  --       icons = require("user.icons").kinds,
+  --     }
+  --   end,
+  -- },
 
   -- distraction-free coding
   {
@@ -271,6 +281,21 @@ return {
         gitsigns = true,
         tmux = true,
       },
+      on_open = function()
+          vim.o.list = false
+          vim.g.miniindentscope_disable = true
+      end,
+      on_close = function()
+        if vim.opt.list:get() then
+          vim.o.list = true
+          local Util = require("user.util")
+          if Util.has("mini.indentscope") then
+            vim.g.miniindentscope_disable = false
+            local miniopts = Util.opts("mini.indentscope")
+            require("mini.indentscope").setup(miniopts)
+          end
+        end
+      end,
     },
     keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },

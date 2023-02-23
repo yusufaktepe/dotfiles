@@ -128,23 +128,31 @@ function M.toggle_colorcolumn()
   local value = vim.api.nvim_get_option_value("colorcolumn", {})
   if value == "" then
     vim.api.nvim_set_option_value("colorcolumn", "80", {})
-    -- vim.o.list = true
+    vim.o.list = true
+    vim.g.miniindentscope_disable = false
+    if M.has("mini.indentscope") then
+      local opts = M.opts("mini.indentscope")
+      require("mini.indentscope").setup(opts)
+    end
   else
     vim.api.nvim_set_option_value("colorcolumn", "", {})
-    -- vim.o.list = false
+    vim.o.list = false
+    vim.g.miniindentscope_disable = true
   end
 end
 
 -- Toggle `list` and list plugins
 function M.toggle_list()
   if vim.opt.list:get() then
-    vim.cmd("setlocal nolist")
-    vim.b.miniindentscope_disable = true
+    vim.o.list = false
+    vim.g.miniindentscope_disable = true
   else
-    vim.cmd("setlocal list")
-    vim.b.miniindentscope_disable = false
-    local opts = require("user.util").opts("mini.indentscope")
-    require("mini.indentscope").setup(opts)
+    vim.o.list = true
+    vim.g.miniindentscope_disable = false
+    if M.has("mini.indentscope") then
+      local opts = M.opts("mini.indentscope")
+      require("mini.indentscope").setup(opts)
+    end
   end
 end
 

@@ -135,6 +135,15 @@ zcw_toggle-fg() {
 # List and load onto directory stack
 d() { [[ -n $1 ]] && dirs "$@" || dirs -v | head -10 ;}
 
+lg() {
+	export LAZYGIT_NEW_DIR_FILE=/tmp/.lazygitdir
+	lazygit "$@"
+	[[ -f $LAZYGIT_NEW_DIR_FILE ]] && {
+		cd "$(< $LAZYGIT_NEW_DIR_FILE)"
+		rm -f $LAZYGIT_NEW_DIR_FILE >/dev/null
+	}
+}
+
 # Create directory and cd into it
 mkcd() { command mkdir -p "$@" && cd "$_" ;}
 

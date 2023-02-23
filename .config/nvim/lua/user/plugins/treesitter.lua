@@ -14,7 +14,7 @@ return {
           local enabled = false
           if opts.textobjects then
             for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-              if opts.textobjects[mod].enable then
+              if opts.textobjects[mod] and opts.textobjects[mod].enable then
                 enabled = true
                 break
               end
@@ -33,7 +33,7 @@ return {
     ---@type TSConfig
     opts = {
       highlight = { enable = true },
-      indent = { enable = true },
+      indent = { enable = true, disable = { "python" } },
       context_commentstring = { enable = true, enable_autocmd = false },
       ensure_installed = {
         "bash",

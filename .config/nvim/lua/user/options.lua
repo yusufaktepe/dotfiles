@@ -66,7 +66,9 @@ opt.fillchars = {
   eob = " ",
 }
 
-opt.list = true   -- show some invisible characters (tabs...
+-- if vim.env.DISPLAY ~= nil then
+--   opt.list = true
+-- end
 opt.listchars = {
   -- tab = '│ ',     -- characters to be used to show a tab
   tab = '  ',

@@ -6,8 +6,11 @@ setxkbmap -layout tr,us -option grp:sclk_toggle,shift:both_capslock_cancel,caps:
 # map Caps_Lock to Hyper_L
 # PrtSc (107) is also Super
 # XF86Favorites (164) function is Print
-xmodmap -e 'clear lock' -e 'remove mod4 = Hyper_L' \
-	-e 'add mod3 = Hyper_L' -e 'keycode 66 = Hyper_L' \
+xmodmap \
+	-e 'clear lock' \
+	-e 'remove mod4 = Hyper_L' \
+	-e 'add mod3 = Hyper_L' \
+	-e 'keycode 66 = Hyper_L' \
 	-e 'keycode 107 = Super_R' \
 	-e 'keycode 164 = Print'
 

@@ -3,6 +3,7 @@ return {
   -- snippets
   {
     "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
@@ -129,6 +130,9 @@ return {
         { opts.mappings.replace, desc = "Replace surrounding" },
         { opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
       }
+      mappings = vim.tbl_filter(function(m)
+        return m[1] and #m[1] > 0
+      end, mappings)
       return vim.list_extend(mappings, keys)
     end,
     opts = {

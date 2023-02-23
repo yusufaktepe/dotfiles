@@ -60,9 +60,7 @@ return {
       { '<M-">', "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal" },
       { '<M-">', "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal", mode = "t" },
     },
-    config = function()
-      require("toggleterm").setup()
-    end,
+    config = true,
   },
 
   -- search/replace in multiple files
@@ -86,6 +84,9 @@ return {
       { "<leader><space>", Util.telescope("files"), desc = "Find Files (root dir)" },
       -- find
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "[Find] [b]uffers" },
+      { "<leader>fC", Util.telescope("files", { cwd = "~/.config", prompt_title = 'Find config' }), desc = "[F]ind [C]onfig files" },
+      { "<leader>fB", Util.telescope("files", { cwd = "~/.local/bin", prompt_title = 'Find script' }), desc = "[F]ind [B]in files" },
+      { "<leader>fN", Util.telescope("files", { cwd = "~/Repos/notes", prompt_title = 'Find notes' }), desc = "[F]ind [N]otes" },
       { "<leader>ff", Util.telescope("files"), desc = "[F]ind [f]iles (root dir)" },
       { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "[F]ind [F]iles (cwd)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "[F]ind [r]ecent files" },
@@ -113,6 +114,7 @@ return {
       { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "[S]earch [M]an pages" },
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "[S]earch [m]arks" },
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "[S]earch [o]ptions" },
+      { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "[S]earch [R]esume" },
       { "<leader>sw", Util.telescope("grep_string"), desc = "[S]earch current [w]ord (root dir)" },
       { "<leader>sW", Util.telescope("grep_string", { cwd = false }), desc = "[S]earch current [W]ord (cwd)" },
       { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "[S]earch [C]olorscheme with preview" },
@@ -134,12 +136,45 @@ return {
         }),
         desc = "[S]earch [s]ymbol",
       },
+      {
+        "<leader>sS",
+        Util.telescope("lsp_workspace_symbols", {
+          symbols = {
+            "Class",
+            "Function",
+            "Method",
+            "Constructor",
+            "Interface",
+            "Module",
+            "Struct",
+            "Trait",
+            "Field",
+            "Property",
+          },
+        }),
+        desc = "[S]earch [S]ymbol (Workspace)",
+      },
     },
     opts = {
       defaults = {
-        -- layout_strategy = "horizontal",
-        -- layout_config = { prompt_position = "top" },
-        -- sorting_strategy = "ascending",
+        sorting_strategy = "ascending",
+        layout_strategy = "flex",
+        layout_config = {
+          prompt_position = "top",
+          horizontal = {
+            preview_width = 0.57,
+          },
+          vertical = {
+            preview_height = 0.5,
+            mirror = true,
+          },
+          flex = {
+            flip_columns = 120,
+          },
+        },
+        -- preview = {
+        --   hide_on_startup = true,
+        -- },
         prompt_prefix = " ",
         selection_caret = " ",
         mappings = {
@@ -150,15 +185,18 @@ return {
             ["<LeftMouse>"] = function(...)
               return require("telescope.actions").select_default(...)
             end,
-            ["<ScrollWheelDown>"] = function(...)
+            ["<C-j>"] = function(...)
               return require("telescope.actions").move_selection_next(...)
             end,
-            ["<ScrollWheelUp>"] = function(...)
+            ["<C-k>"] = function(...)
               return require("telescope.actions").move_selection_previous(...)
             end,
             ["<C-h>"] = "which_key",
             ["<c-t>"] = function(...)
               return require("trouble.providers.telescope").open_with_trouble(...)
+            end,
+            ["<a-t>"] = function(...)
+              return require("trouble.providers.telescope").open_selected_with_trouble(...)
             end,
             ["<a-i>"] = function()
               Util.telescope("find_files", { no_ignore = true })()
@@ -178,10 +216,53 @@ return {
             ["<C-b>"] = function(...)
               return require("telescope.actions").preview_scrolling_up(...)
             end,
-            ["<F5>"] = function(...)
+            ["<ScrollWheelDown>"] = function(...)
+              return require("telescope.actions").preview_scrolling_down(...)
+            end,
+            ["<ScrollWheelUp>"] = function(...)
+              return require("telescope.actions").preview_scrolling_up(...)
+            end,
+            ["<C-space>"] = function(...)
+              return require("telescope.actions.layout").toggle_preview(...)
+            end,
+            ["<Esc>"] = function(...)
               return require("telescope.actions").close(...)
             end,
           },
+        },
+      },
+      pickers = {
+        buffers = {
+          ignore_current_buffer = true,
+          sort_lastused = true,
+          sort_mru = true,
+          theme = "dropdown",
+          previewer = false,
+          mappings = {
+            i = { ["<C-d>"] = function(...) return require("telescope.actions").delete_buffer(...) end },
+            n = { ["<C-d>"] = function(...) return require("telescope.actions").delete_buffer(...) end },
+          },
+        },
+        builtin = {
+          theme = "dropdown",
+          previewer = false,
+          include_extensions = true,
+          use_default_opts = true,
+        },
+        git_files = {
+          show_untracked = true,
+        },
+        git_branches = {
+          theme = 'dropdown',
+          layout_config = {
+            width = 0.5,
+          },
+        },
+        grep_string = {
+          path_display = { truncate = 3 },
+        },
+        live_grep = {
+          path_display = { truncate = 3 },
         },
       },
     },
@@ -230,6 +311,13 @@ return {
     },
   },
 
+  -- view all URLs in a buffer
+  {
+    "axieax/urlview.nvim",
+    cmd = "UrlView",
+    config = true
+  },
+
   -- easily jump to any location and enhanced f/t motions for Leap
   {
     "ggandor/flit.nvim",
@@ -245,6 +333,7 @@ return {
   },
   {
     "ggandor/leap.nvim",
+    commit = "9a69feb",
     keys = {
       { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
       { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
@@ -300,8 +389,8 @@ return {
       signs = {
         add = { text = "▎" },
         change = { text = "▎" },
-        delete = { text = "契" },
-        topdelete = { text = "契" },
+        delete = { text = "" },
+        topdelete = { text = "" },
         changedelete = { text = "▎" },
         untracked = { text = "▎" },
       },
@@ -354,18 +443,28 @@ return {
     opts = { delay = 200 },
     config = function(_, opts)
       require("illuminate").configure(opts)
+
+      local function map(key, dir, buffer)
+        vim.keymap.set("n", key, function()
+          require("illuminate")["goto_" .. dir .. "_reference"](false)
+        end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
+      end
+
+      map("]]", "next")
+      map("[[", "prev")
+
+      -- also set it after loading ftplugins, since a lot overwrite [[ and ]]
       vim.api.nvim_create_autocmd("FileType", {
         callback = function()
           local buffer = vim.api.nvim_get_current_buf()
-          pcall(vim.keymap.del, "n", "]]", { buffer = buffer })
-          pcall(vim.keymap.del, "n", "[[", { buffer = buffer })
+          map("]]", "next", buffer)
+          map("[[", "prev", buffer)
         end,
       })
     end,
-    -- stylua: ignore
     keys = {
-      { "]]", function() require("illuminate").goto_next_reference(false) end, desc = "Next Reference", },
-      { "[[", function() require("illuminate").goto_prev_reference(false) end, desc = "Prev Reference" },
+      { "]]", desc = "Next Reference" },
+      { "[[", desc = "Prev Reference" },
     },
   },
 
@@ -404,6 +503,28 @@ return {
       { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble: Workspace Diagnostics" },
       { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Trouble: Location List (Trouble)" },
       { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Trouble: Quickfix List (Trouble)" },
+      {
+        "[q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").previous({ skip_groups = true, jump = true })
+          else
+            vim.cmd.cprev()
+          end
+        end,
+        desc = "Previous trouble/quickfix item",
+      },
+      {
+        "]q",
+        function()
+          if require("trouble").is_open() then
+            require("trouble").next({ skip_groups = true, jump = true })
+          else
+            vim.cmd.cnext()
+          end
+        end,
+        desc = "Next trouble/quickfix item",
+      },
     },
   },
 

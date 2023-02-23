@@ -18,7 +18,8 @@ focus() { wmctrl -x -a "Neovim$Instance" || return 0; }
 	if vifm --server-list | grep -q diff; then
 		vifm --server-name $VifmIns --remote -c "cd '$2' '$3' | $VifmCmd"
 	else
-		setsid -f $TERMINS $TermIns -e sh -c "vifm --server-name $VifmIns -c '$VifmCmd' '$2' '$3'"
+		setsid -f $TERMINS $TermIns -e \
+			sh -c "VIFM=$VIFM vifm --server-name $VifmIns -c '$VifmCmd' '$2' '$3'"
 	fi
 	exit
 }

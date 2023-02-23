@@ -64,6 +64,8 @@ map("t", "<C-h>", "<cmd>wincmd h<CR>")
 map("t", "<C-j>", "<cmd>wincmd j<CR>")
 map("t", "<C-k>", "<cmd>wincmd k<CR>")
 map("t", "<C-l>", "<cmd>wincmd l<CR>")
+map("t", "<C-w>", [[<C-\><C-n><C-w>]])
+map("t", "jk", [[<C-\><C-n>]])
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -92,8 +94,7 @@ map(
 )
 
 -- Highlight other uses of the word under the cursor
-map("n", "gw", "*N")
-map("x", "gw", "*N")
+map({ "n", "x" }, "gw", "*N", { desc = "Highlight under cursor" })
 
 -- Saner behavior of n and N
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
@@ -114,11 +115,17 @@ map("i", ";", ";<c-g>u")
 
 -- Quit
 map("n", "Q", "<cmd>confirm q<cr>", { desc = "Quit with confirm" })
+map("n", "<M-q>", "<cmd>qall<cr>", { desc = "Quit all" })
 map("n", "ZQ", "<cmd>confirm qall<cr>", { desc = "Quit all, bring up a prompt when buffers have been changed" })
 
 -- Quickfix
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })
 map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Open Quickfix List" })
+
+if not Util.has("trouble.nvim") then
+  map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
+  map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
+end
 
 -- stylua: ignore start
 
@@ -162,6 +169,7 @@ map("n", "<M-<>", "<cmd>-tabm<cr>", { desc = "Tab: Move left" })
 map("n", "gF", "<C-w>gf", { desc = "Go to file under cursor (new tab)" })
 
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+map("n", '<leader>"', "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 
 -- Remove all trailing whitespace
 map(
