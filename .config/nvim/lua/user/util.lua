@@ -20,6 +20,13 @@ function M.has(plugin)
   return require("lazy.core.config").plugins[plugin] ~= nil
 end
 
+function M.fg(name)
+  ---@type {foreground?:number}?
+  local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name }) or vim.api.nvim_get_hl_by_name(name, true)
+  local fg = hl and hl.fg or hl.foreground
+  return fg and { fg = string.format("#%06x", fg) }
+end
+
 ---@param fn fun()
 function M.on_very_lazy(fn)
   vim.api.nvim_create_autocmd("User", {
@@ -212,6 +219,23 @@ function M.sudo_write(tmpfile, filepath)
     vim.cmd("e!")
   end
   vim.fn.delete(tmpfile)
+end
+
+function M.lsp_get_config(server)
+  local configs = require("lspconfig.configs")
+  return rawget(configs, server)
+end
+
+---@param server string
+---@param cond fun( root_dir, config): boolean
+function M.lsp_disable(server, cond)
+  local util = require("lspconfig.util")
+  local def = M.lsp_get_config(server)
+  def.document_config.on_new_config = util.add_hook_before(def.document_config.on_new_config, function(config, root_dir)
+    if cond(root_dir, config) then
+      config.enabled = false
+    end
+  end)
 end
 
 return M

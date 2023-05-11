@@ -48,7 +48,26 @@ return {
           ["Z"] = "expand_all_nodes",
         },
       },
+      default_component_configs = {
+        indent = {
+          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+          expander_collapsed = "",
+          expander_expanded = "",
+          expander_highlight = "NeoTreeExpander",
+        },
+      },
     },
+    config = function(_, opts)
+      require("neo-tree").setup(opts)
+      vim.api.nvim_create_autocmd("TermClose", {
+        pattern = "*lazygit",
+        callback = function()
+          if package.loaded["neo-tree.sources.git_status"] then
+            require("neo-tree.sources.git_status").refresh()
+          end
+        end,
+      })
+    end,
   },
 
   -- terminal
@@ -65,7 +84,7 @@ return {
 
   -- search/replace in multiple files
   {
-    "windwp/nvim-spectre",
+    "nvim-pack/nvim-spectre",
     -- stylua: ignore
     keys = {
       { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
@@ -89,6 +108,7 @@ return {
       { "<leader>fN", Util.telescope("files", { cwd = "~/Repos/notes", prompt_title = 'Find notes' }), desc = "[F]ind [N]otes" },
       { "<leader>ff", Util.telescope("files"), desc = "[F]ind [f]iles (root dir)" },
       { "<leader>fF", Util.telescope("files", { cwd = false }), desc = "[F]ind [F]iles (cwd)" },
+      { "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "[F]ind [R]ecent Files (cwd)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "[F]ind [r]ecent files" },
       {
         "<leader>fp",
@@ -105,7 +125,8 @@ return {
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[S]earch [b]uffer" },
       { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "[S]earch [c]ommand history" },
       { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "[S]earch [C]ommands" },
-      { "<leader>sd", "<cmd>Telescope diagnostics<cr>", desc = "[S]earch [d]iagnostics" },
+      { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "[S]earch [d]iagnostics" },
+      { "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "[S]earch Workspace [D]iagnostics" },
       { "<leader>sg", Util.telescope("live_grep"), desc = "[S]earch by [g]rep (root dir)" },
       { "<leader>sG", Util.telescope("live_grep", { cwd = false }), desc = "[S]earch by [G]rep (cwd)" },
       { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "[S]earch [h]elp pages" },
@@ -138,7 +159,7 @@ return {
       },
       {
         "<leader>sS",
-        Util.telescope("lsp_workspace_symbols", {
+        Util.telescope("lsp_dynamic_workspace_symbols", {
           symbols = {
             "Class",
             "Function",
@@ -226,6 +247,11 @@ return {
               return require("telescope.actions.layout").toggle_preview(...)
             end,
             ["<Esc>"] = function(...)
+              return require("telescope.actions").close(...)
+            end,
+          },
+          n = {
+            ["q"] = function(...)
               return require("telescope.actions").close(...)
             end,
           },
@@ -333,7 +359,6 @@ return {
   },
   {
     "ggandor/leap.nvim",
-    commit = "9a69feb",
     keys = {
       { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
       { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
@@ -356,11 +381,7 @@ return {
     event = "VeryLazy",
     opts = {
       plugins = { spelling = true },
-    },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register({
+      defaults = {
         mode = { "n", "v" },
         ["g"] = { name = "+goto" },
         ["<C-s>"] = { name = "+surround" },
@@ -377,7 +398,12 @@ return {
         ["<leader>u"] = { name = "+ui" },
         ["<leader>w"] = { name = "+windows" },
         ["<leader>x"] = { name = "+diagnostics/quickfix" },
-      })
+      },
+    },
+    config = function(_, opts)
+      local wk = require("which-key")
+      wk.setup(opts)
+      wk.register(opts.defaults)
     end,
   },
 
@@ -546,6 +572,7 @@ return {
       { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
       { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
       { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "[S]earch [t]odo" },
+      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "[S]earch [T]odo/Fix/Fixme" },
     },
   },
 }

@@ -5,7 +5,9 @@ M._keys = nil
 
 ---@return (LazyKeys|{has?:string})[]
 function M.get()
-  local format = require("user.plugins.lsp.format").format
+  local format = function()
+    require("user.plugins.lsp.format").format({ force = true })
+  end
   if not M._keys then
   ---@class PluginLspKeys
     -- stylua: ignore
@@ -16,7 +18,7 @@ function M.get()
       { "gr", "<cmd>Telescope lsp_references<cr>", desc = "Lsp: [r]eferences" },
       { "gD", vim.lsp.buf.declaration, desc = "Lsp: Goto [D]eclaration" },
       { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Lsp: Goto [I]mplementation" },
-      { "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Lsp: Goto [t]ype definition" },
+      { "gy", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Lsp: Goto t[y]pe definition" },
       { "K", vim.lsp.buf.hover, desc = "Lsp: Hover" },
       { "gK", vim.lsp.buf.signature_help, desc = "Lsp: Signature Help", has = "signatureHelp" },
       { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Lsp: Signature Help", has = "signatureHelp" },
@@ -26,16 +28,31 @@ function M.get()
       { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Lsp: Prev [e]rror" },
       { "]w", M.diagnostic_goto(true, "WARN"), desc = "Lsp: Next [w]arning" },
       { "[w", M.diagnostic_goto(false, "WARN"), desc = "Lsp: Prev [w]arning" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Lsp: [c]ode [a]ction", mode = { "n", "v" }, has = "codeAction" },
       { "<leader>cf", format, desc = "Lsp: [F]ormat Document", has = "documentFormatting" },
       { "<leader>cf", format, desc = "Lsp: [F]ormat Range", mode = "v", has = "documentRangeFormatting" },
+      { "<leader>ca", vim.lsp.buf.code_action, desc = "Lsp: [c]ode [a]ction", mode = { "n", "v" }, has = "codeAction" },
+      {
+        "<leader>cA",
+        function()
+          vim.lsp.buf.code_action({
+            context = {
+              only = {
+                "source",
+              },
+              diagnostics = {},
+            },
+          })
+        end,
+        desc = "Source Action",
+        has = "codeAction",
+      }
     }
     if require("user.util").has("inc-rename.nvim") then
       M._keys[#M._keys + 1] = {
         "<leader>cr",
         function()
-          require("inc_rename")
-          return ":IncRename " .. vim.fn.expand("<cword>")
+          local inc_rename = require("inc_rename")
+          return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
         end,
         expr = true,
         desc = "Lsp: [R]ename",
@@ -66,7 +83,7 @@ function M.on_attach(client, buffer)
       local opts = Keys.opts(keys)
       ---@diagnostic disable-next-line: no-unknown
       opts.has = nil
-      opts.silent = true
+      opts.silent = opts.silent ~= false
       opts.buffer = buffer
       vim.keymap.set(keys.mode or "n", keys[1], keys[2], opts)
     end

@@ -1,8 +1,15 @@
 return {
+  dap = {
+    Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+    Breakpoint = " ",
+    BreakpointCondition = " ",
+    BreakpointRejected = { " ", "DiagnosticError" },
+    LogPoint = ".>",
+  },
   diagnostics = {
     Error = " ",
     Warn = " ",
-    Hint = " ",
+    Hint = " ",
     Info = " ",
   },
   git = {
@@ -23,7 +30,7 @@ return {
     Event = " ",
     Field = " ",
     File = " ",
-    Folder = " ",
+    Folder = " ",
     Function = " ",
     Interface = " ",
     Key = " ",
@@ -31,7 +38,7 @@ return {
     Method = " ",
     Module = " ",
     Namespace = " ",
-    Null = "ﳠ ",
+    Null = " ",
     Number = " ",
     Object = " ",
     Operator = " ",

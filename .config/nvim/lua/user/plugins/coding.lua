@@ -3,7 +3,9 @@ return {
   -- snippets
   {
     "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
+    build = (not jit.os:find("Windows"))
+        and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
+      or nil,
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
@@ -36,7 +38,6 @@ return {
 
       local luasnip = require("luasnip")
       local cmp = require("cmp")
-
       return {
         completion = {
           completeopt = "menu,menuone,noselect",
@@ -47,11 +48,17 @@ return {
           end,
         },
         mapping = cmp.mapping.preset.insert({
+          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<S-CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+          }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
@@ -277,4 +284,25 @@ return {
 
   -- alignment
   { "junegunn/vim-easy-align", cmd = "EasyAlign" },
+
+  -- create previewable commands
+  {
+    "smjonas/live-command.nvim",
+    event = "CmdlineEnter",
+    config = function()
+      require("live-command").setup {
+        commands = {
+          Norm = { cmd = "norm" },
+          Reg = {
+            cmd = "norm",
+            -- This will transform ":5Reg a" into ":norm 5@a"
+            args = function(opts)
+              return (opts.count == -1 and "" or opts.count) .. "@" .. opts.args
+            end,
+            range = "",
+          },
+        },
+      }
+    end,
+  },
 }

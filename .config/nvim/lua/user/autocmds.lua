@@ -74,15 +74,16 @@ autocmd("FileType", {
 -- Close some filetypes with <q>
 autocmd("FileType", {
   pattern = {
-    "qf",
+    "PlenaryTestPopup",
     "help",
+    "lspinfo",
     "man",
     "notify",
-    "lspinfo",
+    "qf",
     "spectre_panel",
     "startuptime",
     "tsplayground",
-    "PlenaryTestPopup",
+    "checkhealth",
     "fugitiveblame",
     "TelescopePrompt",
   },
@@ -92,6 +93,7 @@ autocmd("FileType", {
   end,
 })
 
+-- Wrap and check for spell in text filetypes
 autocmd("FileType", {
   pattern = { "gitcommit", "markdown" },
   callback = function()
@@ -121,14 +123,13 @@ autocmd({ "InsertEnter", "WinLeave" }, {
   end,
 })
 
--- Create directories when needed, when saving a file
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
 autocmd("BufWritePre", {
   callback = function(event)
+    if event.match:match("^%w%w+://") then
+      return
+    end
     local file = vim.loop.fs_realpath(event.match) or event.match
-
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
-    local backup = vim.fn.fnamemodify(file, ":p:~:h")
-    backup = backup:gsub("[/\\]", "%%")
-    vim.go.backupext = backup
   end,
 })

@@ -38,7 +38,14 @@ return {
       diagnostics = {
         underline = true,
         update_in_insert = false,
-        virtual_text = { spacing = 4, prefix = "●" },
+        virtual_text = {
+          spacing = 4,
+          source = "if_many",
+          prefix = "●",
+          -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+          -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+          -- prefix = "icons",
+        },
         severity_sort = true,
       },
       capabilities = {
@@ -66,7 +73,12 @@ return {
         },
         cssls = {},
         clangd = {},
-        eslint = {},
+        eslint = {
+          settings = {
+            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+            workingDirectory = { mode = "auto" },
+          },
+        },
         html = {},
         gopls = {},
         marksman = {},
@@ -86,7 +98,27 @@ return {
           },
         },
         pyright = {},
-        tsserver = {},
+        tsserver = {
+          settings = {
+            typescript = {
+              format = {
+                indentSize = vim.o.shiftwidth,
+                convertTabsToSpaces = vim.o.expandtab,
+                tabSize = vim.o.tabstop,
+              },
+            },
+            javascript = {
+              format = {
+                indentSize = vim.o.shiftwidth,
+                convertTabsToSpaces = vim.o.expandtab,
+                tabSize = vim.o.tabstop,
+              },
+            },
+            completions = {
+              completeFunctionCalls = true,
+            },
+          },
+        },
         lua_ls = {
           -- mason = false, -- set to false if you don't want this server to be installed with mason
           settings = {
@@ -114,6 +146,15 @@ return {
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
+        eslint = function()
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            callback = function(event)
+              if require("lspconfig.util").get_active_client_by_name(event.buf, "eslint") then
+                vim.cmd("EslintFixAll")
+              end
+            end,
+          })
+        end,
         clangd = function(_, opts)
           opts.capabilities.offsetEncoding = { "utf-16" }
         end,
@@ -122,6 +163,7 @@ return {
             if client.name == "tsserver" then
               -- stylua: ignore
               vim.keymap.set( "n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
+              -- stylua: ignore
               vim.keymap.set("n", "<leader>cR", "<cmd>TypescriptRenameFile<CR>", { desc = "Rename File", buffer = buffer })
             end
           end)
@@ -138,11 +180,12 @@ return {
       },
     },
     ---@param opts PluginLspOpts
-    config = function(plugin, opts)
+    config = function(_, opts)
+      local Util = require("user.util")
       -- setup autoformat
       require("user.plugins.lsp.format").autoformat = opts.autoformat
       -- setup formatting and keymaps
-      require("user.util").on_attach(function(client, buffer)
+      Util.on_attach(function(client, buffer)
         require("user.plugins.lsp.format").on_attach(client, buffer)
         require("user.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
@@ -152,10 +195,29 @@ return {
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
-      vim.diagnostic.config(opts.diagnostics)
+
+      if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
+        opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
+          or function(diagnostic)
+            local icons = require("user.icons").diagnostics
+            for d, icon in pairs(icons) do
+              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                return icon
+              end
+            end
+          end
+      end
+
+      vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
       local servers = opts.servers
-      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities(),
+        opts.capabilities or {}
+      )
 
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
@@ -174,15 +236,19 @@ return {
         require("lspconfig")[server].setup(server_opts)
       end
 
-      local mlsp = require("mason-lspconfig")
-      local available = mlsp.get_available_servers()
+      -- get all the servers that are available thourgh mason-lspconfig
+      local have_mason, mlsp = pcall(require, "mason-lspconfig")
+      local all_mslp_servers = {}
+      if have_mason then
+        all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+      end
 
       local ensure_installed = {} ---@type string[]
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
           -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-          if server_opts.mason == false or not vim.tbl_contains(available, server) then
+          if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
             setup(server)
           else
             ensure_installed[#ensure_installed + 1] = server
@@ -190,8 +256,18 @@ return {
         end
       end
 
-      require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
-      require("mason-lspconfig").setup_handlers({ setup })
+      if have_mason then
+        mlsp.setup({ ensure_installed = ensure_installed })
+        mlsp.setup_handlers({ setup })
+      end
+
+      if Util.lsp_get_config("denols") and Util.lsp_get_config("tsserver") then
+        local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
+        Util.lsp_disable("tsserver", is_deno)
+        Util.lsp_disable("denols", function(root_dir)
+          return not is_deno(root_dir)
+        end)
+      end
     end,
   },
 
@@ -204,7 +280,10 @@ return {
     opts = function()
       local nls = require("null-ls")
       return {
+        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
         sources = {
+          nls.builtins.formatting.fish_indent,
+          nls.builtins.diagnostics.fish,
           nls.builtins.hover.printenv,
           nls.builtins.formatting.prettier,
           nls.builtins.formatting.stylua,
@@ -226,6 +305,7 @@ return {
               end,
             },
           }),
+          require("typescript.extensions.null-ls.code-actions"),
         },
       }
     end,
@@ -256,14 +336,21 @@ return {
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}
-    config = function(plugin, opts)
+    config = function(_, opts)
       require("mason").setup(opts)
       local mr = require("mason-registry")
-      for _, tool in ipairs(opts.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
+      local function ensure_installed()
+        for _, tool in ipairs(opts.ensure_installed) do
+          local p = mr.get_package(tool)
+          if not p:is_installed() then
+            p:install()
+          end
         end
+      end
+      if mr.refresh then
+        mr.refresh(ensure_installed)
+      else
+        ensure_installed()
       end
     end,
   },

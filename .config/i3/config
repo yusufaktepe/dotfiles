@@ -80,13 +80,11 @@ bindsym $mod+F1 $exec ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessio
 bindsym $mod+F2 $exec ifterm -h -i vifm -e vifm-tab
 bindsym $mod+F3 $exec ifwin -e 'vivaldi-stable --start-maximized'
 bindsym $mod+F4 $exec ifwin -e firefox
-bindsym $mod+F5 $exec ifwin -e brave
-bindsym $mod+F6 $exec ifwin -e google-chrome-stable
+bindsym $mod+F5 $exec ifwin -e google-chrome-stable
 bindsym $mod+Shift+F2 $exec ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 $exec vivaldi-stable --start-maximized --incognito
 bindsym $mod+Shift+F4 $exec firefox --private
-bindsym $mod+Shift+F5 $exec brave --incognito
-bindsym $mod+Shift+F6 $exec google-chrome-stable --incognito
+bindsym $mod+Shift+F5 $exec google-chrome-stable --incognito
 bindsym $mod+m $exec ifwin -e telegram-desktop -c telegramdesktop
 
 ## Caps+
@@ -102,6 +100,10 @@ bindsym $caps+c $exec crow-translate
 bindsym $caps+v $exec ifwin -e code
 bindsym $caps+o $exec ifwin -p electron -e obsidian
 bindsym $mod+$caps+c $exec ifwin -s -e gcolor3
+
+bindsym --release $caps+gbreve     $exec xdotool key --clearmodifiers parenleft
+bindsym --release $caps+udiaeresis $exec xdotool key --clearmodifiers parenright
+bindsym --release $caps+comma $exec xdotool key --clearmodifiers bar
 
 bindsym $mod+Shift+d $exec xo d
 bindsym $mod+Shift+e $exec xo c
@@ -160,6 +162,7 @@ bindsym --release $mod+Ctrl+KP_Add $exec [ $(picom-trans -c -g) -ge 20 ] && pico
 bindsym --release $mod+Ctrl+KP_Subtract $exec [ $(picom-trans -c -g) -ge 20 ] && picom-trans -c -10
 
 bindsym --release KP_Insert $exec mpvscratch
+
 #=====================================================================
 
 # change focus

@@ -44,14 +44,18 @@ return {
         numbers = function(opts)
           return string.format("%s", opts.raise(opts.ordinal))
         end,
+        -- stylua: ignore
+        close_command = function(n) require("mini.bufremove").delete(n, false) end,
+        -- stylua: ignore
+        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
         diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
         diagnostics_indicator = function(_, _, diag)
           local icons = require("user.icons").diagnostics
           local ret = (diag.error and icons.Error .. diag.error .. " " or "")
             .. (diag.warning and icons.Warn .. diag.warning or "")
           return vim.trim(ret)
         end,
-        always_show_bufferline = false,
         show_buffer_close_icons = false,
         show_close_icon = false,
         show_duplicate_prefix = false,
@@ -72,14 +76,14 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    opts = function(plugin)
+    opts = function()
       local icons = require("user.icons")
 
       return {
         options = {
           theme = "auto",
           globalstatus = true,
-          disabled_filetypes = { statusline = { "dashboard", "lazy", "alpha" } },
+          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
           component_separators = "",
           section_separators = "",
         },
@@ -96,7 +100,7 @@ return {
           lualine_b = { "branch" },
           lualine_c = {
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 0 },
+            { "filename", path = 0, symbols = { modified = "  ", readonly = "", unnamed = "" } },
             -- stylua: ignore
             -- {
             --   function() return require("nvim-navic").get_location() end,
@@ -134,7 +138,7 @@ return {
           lualine_y = { "location" },
           lualine_z = { "%P/%L" },
         },
-        extensions = { "neo-tree", "toggleterm" },
+        extensions = { "neo-tree", "lazy", "toggleterm" },
       }
     end,
   },
@@ -147,7 +151,7 @@ return {
     opts = {
       -- char = "▏",
       char = "│",
-      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
       disable_with_nolist = true,
       -- use_treesitter = true,
       -- show_current_context = true,
@@ -197,12 +201,12 @@ return {
 
       dashboard.section.header.val = vim.split(logo, "\n")
       dashboard.section.buttons.val = {
-        dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
+        dashboard.button("f", " " .. " Find file", ":Telescope find_files <CR>"),
         dashboard.button("n", " " .. " New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
+        dashboard.button("r", " " .. " Recent files", ":Telescope oldfiles <CR>"),
         dashboard.button("g", " " .. " Find text", ":Telescope live_grep <CR>"),
         dashboard.button("c", " " .. " Config", ":e $MYVIMRC <CR>"),
-        dashboard.button("s", "󰑓 " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
+        dashboard.button("s", " " .. " Restore Session", [[:lua require("persistence").load() <cr>]]),
         dashboard.button("l", "󰒲 " .. " Lazy", ":Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", ":qa<CR>"),
       }
@@ -210,9 +214,9 @@ return {
         button.opts.hl = "AlphaButtons"
         button.opts.hl_shortcut = "AlphaShortcut"
       end
-      dashboard.section.footer.opts.hl = "Type"
       dashboard.section.header.opts.hl = "AlphaHeader"
       dashboard.section.buttons.opts.hl = "AlphaButtons"
+      dashboard.section.footer.opts.hl = "AlphaFooter"
       dashboard.opts.layout[1].val = 8
       return dashboard
     end,
@@ -282,8 +286,8 @@ return {
         tmux = true,
       },
       on_open = function()
-          vim.o.list = false
-          vim.g.miniindentscope_disable = true
+        vim.o.list = false
+        vim.g.miniindentscope_disable = true
       end,
       on_close = function()
         if vim.opt.list:get() then
