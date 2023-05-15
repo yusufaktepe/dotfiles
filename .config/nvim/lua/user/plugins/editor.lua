@@ -79,7 +79,7 @@ return {
       { '<M-">', "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal" },
       { '<M-">', "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal", mode = "t" },
     },
-    config = true,
+    opts = {},
   },
 
   -- search/replace in multiple files
@@ -341,7 +341,7 @@ return {
   {
     "axieax/urlview.nvim",
     cmd = "UrlView",
-    config = true
+    opts = {},
   },
 
   -- easily jump to any location and enhanced f/t motions for Leap

@@ -29,7 +29,7 @@ autocmd("TextYankPost", {
 -- Resize splits if window got resized
 autocmd({ "VimResized" }, {
   callback = function()
-    vim.cmd("tabdo wincmd =")
+    vim.cmd("wincmd =")
   end,
 })
 
@@ -102,26 +102,37 @@ autocmd("FileType", {
   end,
 })
 
+autocmd("FileType", {
+  pattern = "Trouble",
+  callback = function()
+    vim.keymap.set(
+      "n", "s",
+      "wt):silent !xdg-open https://github.com/koalaman/shellcheck/wiki/SC<C-r><C-w><cr>0",
+      { desc = "Trouble: Open shellcheck wiki", buffer = 0, silent = true }
+    )
+  end
+})
+
 -- Show cursor line only in active window
 -- https://github.com/folke/dot/blob/master/nvim/lua/config/autocmds.lua
-autocmd({ "InsertLeave", "WinEnter" }, {
-  callback = function()
-    local ok, cl = pcall(vim.api.nvim_win_get_var, 0, "auto-cursorline")
-    if ok and cl then
-      vim.wo.cursorline = true
-      vim.api.nvim_win_del_var(0, "auto-cursorline")
-    end
-  end,
-})
-autocmd({ "InsertEnter", "WinLeave" }, {
-  callback = function()
-    local cl = vim.wo.cursorline
-    if cl then
-      vim.api.nvim_win_set_var(0, "auto-cursorline", cl)
-      vim.wo.cursorline = false
-    end
-  end,
-})
+-- autocmd({ "InsertLeave", "WinEnter" }, {
+--   callback = function()
+--     local ok, cl = pcall(vim.api.nvim_win_get_var, 0, "auto-cursorline")
+--     if ok and cl then
+--       vim.wo.cursorline = true
+--       vim.api.nvim_win_del_var(0, "auto-cursorline")
+--     end
+--   end,
+-- })
+-- autocmd({ "InsertEnter", "WinLeave" }, {
+--   callback = function()
+--     local cl = vim.wo.cursorline
+--     if cl then
+--       vim.api.nvim_win_set_var(0, "auto-cursorline", cl)
+--       vim.wo.cursorline = false
+--     end
+--   end,
+-- })
 
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 autocmd("BufWritePre", {

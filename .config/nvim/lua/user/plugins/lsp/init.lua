@@ -69,7 +69,7 @@ return {
       ---@type lspconfig.options
       servers = {
         bashls = {
-          cmd_env = { SHELLCHECK_PATH = '' }, -- use null-ls
+          -- cmd_env = { SHELLCHECK_PATH = '' }, -- use null-ls
         },
         cssls = {},
         clangd = {},
@@ -295,9 +295,9 @@ return {
           nls.builtins.formatting.shellharden,
           nls.builtins.formatting.shfmt,
           nls.builtins.code_actions.shellcheck,
-          nls.builtins.diagnostics.shellcheck.with({
-            diagnostics_format = "[SC#{c}] #{m} https://github.com/koalaman/shellcheck/wiki/SC#{c}",
-          }),
+          -- nls.builtins.diagnostics.shellcheck.with({
+          --   diagnostics_format = "[SC#{c}] #{m} https://github.com/koalaman/shellcheck/wiki/SC#{c}",
+          -- }),
           nls.builtins.code_actions.gitsigns.with({
             config = {
               filter_actions = function(title)

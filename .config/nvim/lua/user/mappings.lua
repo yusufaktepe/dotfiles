@@ -216,6 +216,7 @@ map("c", "W!!", "<esc>:lua require('user.util').sudo_write()<cr>", { desc = "Wri
 map("i", "<C-h>", "<C-w>")
 map("c", "<C-h>", "<C-w>", { silent = false })
 map("i", "<C-Del>", "<C-o>de")
+map("i", "<S-Del>", "<C-o>dw")
 
 -- trq fixes
 map("", "İ", "I")
