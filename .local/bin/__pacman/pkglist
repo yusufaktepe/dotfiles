@@ -26,7 +26,7 @@ mklist() {
 }
 
 case $1 in
-	*aur*|*full*) yay -S --needed - < "$1" ;;
+	*aur*|*full*) paru -S --needed - < "$1" ;;
 	"") mklist ;;
 	*) sudo pacman -S --needed - < "$1" ;;
 esac

@@ -106,3 +106,6 @@
 [url "ssh://aur@aur.archlinux.org/"]
 	insteadOf = "aur:"
 
+[url "https://gitlab.archlinux.org/archlinux/packaging/packages/"]
+	insteadOf = "p:"
+

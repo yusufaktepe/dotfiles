@@ -8,6 +8,9 @@ local function map(mode, lhs, rhs, opts)
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
     opts = opts or {}
     opts.silent = opts.silent ~= false
+    if opts.remap and not vim.g.vscode then
+      opts.remap = nil
+    end
     vim.keymap.set(mode, lhs, rhs, opts)
   end
 end
@@ -55,10 +58,10 @@ map("n", "<leader>dd", 'gg"_dG', { desc = "Clear file" })
 map("n", "<C-c>", "<cmd>normal! ciw<cr>i", { desc = "Change word (ciw)" })
 
 -- Move to window using the <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
 map("t", "<C-h>", "<cmd>wincmd h<CR>")
 map("t", "<C-j>", "<cmd>wincmd j<CR>")
@@ -147,12 +150,12 @@ if vim.fn.has("nvim-0.9.0") == 1 then
 end
 
 -- Windows
-map("n", "<leader>ww", "<C-W>p", { desc = "Win: Jump other" })
-map("n", "<leader>wd", "<C-W>c", { desc = "Win: Delete" })
-map("n", "<leader>wr", "<cmd>vnew<cr>", { desc = "Win: New right" })
-map("n", "<leader>wb", "<cmd>new<cr>", { desc = "Win: New below" })
-map("n", "<leader>wR", "<C-W>v", { desc = "Win: Split right" })
-map("n", "<leader>wB", "<C-W>s", { desc = "Win: Split below" })
+map("n", "<leader>ww", "<C-W>p", { desc = "Win: Jump other", remap = true })
+map("n", "<leader>wd", "<C-W>c", { desc = "Win: Delete", remap = true })
+map("n", "<leader>wr", "<cmd>vnew<cr>", { desc = "Win: New right", remap = true })
+map("n", "<leader>wb", "<cmd>new<cr>", { desc = "Win: New below", remap = true })
+map("n", "<leader>wR", "<C-W>v", { desc = "Win: Split right", remap = true })
+map("n", "<leader>wB", "<C-W>s", { desc = "Win: Split below", remap = true })
 
 -- Tabs
 map("n", "<M-CR>", "<cmd>tabnew<cr>", { desc = "Tab: New" })

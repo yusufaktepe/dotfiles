@@ -20,6 +20,7 @@ alias wget='wget -qc --show-progress'
 alias reboot='mpvc quit 2>/dev/null; systemctl reboot'
 alias b='bash'
 alias s='sleep 2;'
+alias drive='grive -P -p ~/Shared/Drive'
 
 for p in iotop ps_mem updatedb; { alias $p="sudo $p" ;}; unset p
 

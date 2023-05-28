@@ -39,6 +39,8 @@ if [ -d "$chosen" ]; then
 		xdg-open "$chosen" >/dev/null 2>&1
 	fi
 elif [ -f "$chosen" ]; then
+	cd "${chosen%/*}" || exit
+
 	if [ -n "$termexec" ]; then
 		$EDITOR "$chosen"
 	else
