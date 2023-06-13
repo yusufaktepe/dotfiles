@@ -33,8 +33,8 @@ cabbrev("Q", "q")
 cabbrev("X", "x")
 
 -- Better up/down
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- Better indenting
 map("v", "<", "<gv")
@@ -62,13 +62,6 @@ map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
-
-map("t", "<C-h>", "<cmd>wincmd h<CR>")
-map("t", "<C-j>", "<cmd>wincmd j<CR>")
-map("t", "<C-k>", "<cmd>wincmd k<CR>")
-map("t", "<C-l>", "<cmd>wincmd l<CR>")
-map("t", "<C-w>", [[<C-\><C-n><C-w>]])
-map("t", "jk", [[<C-\><C-n>]])
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -148,6 +141,17 @@ map("n", "<leader>uL", Util.toggle_list, { desc = "Toggle listchars" })
 if vim.fn.has("nvim-0.9.0") == 1 then
   map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 end
+
+-- Terminal Mappings
+map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to left window"})
+map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to lower window"})
+map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to upper window"})
+map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to right window"})
+map("t", '<C-/>', "<cmd>close<cr>", { desc = "Hide Terminal"})
+map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+map("t", "<C-w>", [[<C-\><C-n><C-w>]])
+map("t", "jk", [[<C-\><C-n>]])
 
 -- Windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Win: Jump other", remap = true })

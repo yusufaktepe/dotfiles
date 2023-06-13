@@ -36,6 +36,8 @@ return {
       end
     end,
     opts = {
+      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+      open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
       close_if_last_window = true,
       filesystem = {
         bind_to_cwd = false,
@@ -85,6 +87,8 @@ return {
   -- search/replace in multiple files
   {
     "nvim-pack/nvim-spectre",
+    cmd = "Spectre",
+    opts = { open_cmd = "noswapfile vnew" },
     -- stylua: ignore
     keys = {
       { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
@@ -471,7 +475,13 @@ return {
   {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
-    opts = { delay = 200 },
+    opts = {
+      delay = 200,
+      large_file_cutoff = 2000,
+      large_file_overrides = {
+        providers = { "lsp" },
+      },
+    },
     config = function(_, opts)
       require("illuminate").configure(opts)
 
@@ -540,7 +550,10 @@ return {
           if require("trouble").is_open() then
             require("trouble").previous({ skip_groups = true, jump = true })
           else
-            vim.cmd.cprev()
+            local ok, err = pcall(vim.cmd.cprev)
+            if not ok then
+              vim.notify(err, vim.log.levels.ERROR)
+            end
           end
         end,
         desc = "Previous trouble/quickfix item",
@@ -551,7 +564,10 @@ return {
           if require("trouble").is_open() then
             require("trouble").next({ skip_groups = true, jump = true })
           else
-            vim.cmd.cnext()
+            local ok, err = pcall(vim.cmd.cnext)
+            if not ok then
+              vim.notify(err, vim.log.levels.ERROR)
+            end
           end
         end,
         desc = "Next trouble/quickfix item",
