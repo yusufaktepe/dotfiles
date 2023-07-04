@@ -5,5 +5,5 @@ _fzf() {
 		--preview-window=65%:wrap:hidden --bind 'space:toggle-preview'
 }
 
-paru -Slq | _fzf "$1" | xargs -ro paru -S --needed
+paru -Slq | _fzf "$1" | xargs -ro paru -S --needed --rebuild
 

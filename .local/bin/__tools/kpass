@@ -10,7 +10,7 @@ if pidof -q keepassxc; then
 	if [ "$WM_CLASS" = KeePassXC ]; then
 		wmctrl -c :ACTIVE:
 	else
-		keepassxc && wmctrl -ax KeePassXC
+		keepassxc && wmctrl -x -a KeePassXC
 	fi
 else
 	setsid -f keepassxc \

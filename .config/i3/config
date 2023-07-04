@@ -83,7 +83,7 @@ bindsym $mod+F4 $exec ifwin -e firefox
 bindsym $mod+F5 $exec ifwin -e google-chrome-stable
 bindsym $mod+Shift+F2 $exec ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 $exec vivaldi-stable --start-maximized --incognito
-bindsym $mod+Shift+F4 $exec firefox --private
+bindsym $mod+Shift+F4 $exec firefox --private-window
 bindsym $mod+Shift+F5 $exec google-chrome-stable --incognito
 bindsym $mod+m $exec ifwin -e telegram-desktop -c telegramdesktop
 

@@ -1,7 +1,8 @@
 #!/bin/sh
 
-brightness=$(light -G)
-brightness=${brightness%.*}
+IFS=, read _ _ _ brightness _ <<-+++
+    "$(brightnessctl --machine-readable info)"
++++
 
-echo "$brightness%"
+printf '%s\n' "$brightness"
 
