@@ -1,0 +1,39 @@
+#!/bin/bash
+
+nmcon() {
+    nmcli connection "$@" >/dev/null
+
+    if [ "$1" = up ]; then
+        Txt='VPN activated'; Icon=network-vpn
+    else
+        Txt='VPN deactivated'; Icon=network-wireless
+    fi
+
+    notify-send -a system -i "$Icon" "$Txt" "$2"
+}
+
+mapfile -t Cons < <(nmcli -t -f NAME,TYPE con show)
+
+for Con in "${Cons[@]}"; do
+    [ "${Con##*:}" = vpn ] && List+=("${Con%%:*}")
+done
+
+[ -n "${List[0]}" ] || exit
+
+[ "${Cons[0]##*:}" = vpn ] && IsActive=true
+
+Selected=$(printf '%s\n' "${List[@]}" | rofi -dmenu -no-custom -p VPN ${IsActive:+-u 0})
+
+[ -n "$Selected" ] && {
+    if [ "$IsActive" = true ]; then
+        if [ "${List[0]}" = "$Selected" ]; then
+            nmcon down "$Selected"
+        else
+            nmcon down "${List[0]}"
+            nmcon up "$Selected"
+        fi
+    else
+            nmcon up "$Selected"
+    fi
+}
+

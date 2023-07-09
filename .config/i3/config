@@ -110,6 +110,7 @@ bindsym $mod+Shift+e $exec xo c
 bindsym $mod+Shift+p $exec mpv-resume
 bindsym $mod+Shift+F8 $exec sudo -A systemctl restart NetworkManager
 bindsym $mod+F8 $exec ifterm -t -i blockterm_nmtui -e nmtui-connect
+bindsym $mod+$alt+F8 $exec rofi-vpn
 
 # Pause players & switch to ws0:
 bindsym $mod+Shift+Delete $exec smc pauseall; workspace 0
