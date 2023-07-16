@@ -109,10 +109,16 @@ map("i", ";", ";<c-g>u")
 -- Save file
 -- map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
+--keywordprg
+map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
+
 -- Quit
 map("n", "Q", "<cmd>confirm q<cr>", { desc = "Quit with confirm" })
 map("n", "<M-q>", "<cmd>qall<cr>", { desc = "Quit all" })
 map("n", "ZQ", "<cmd>confirm qall<cr>", { desc = "Quit all, bring up a prompt when buffers have been changed" })
+
+-- Lazy
+map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- Quickfix
 map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Open Location List" })

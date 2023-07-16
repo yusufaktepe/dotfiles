@@ -9,12 +9,6 @@ return {
       vim.g.nord_bold = false
 
       require("nord").set()
-
-      -- Leap highlighting
-      vim.api.nvim_set_hl(0, "LeapBackdrop", { link = "Comment" }) -- Grey out the search area
-      vim.api.nvim_set_hl(0, "LeapLabelPrimary", { bold = true, fg = "#EBCB8B" })
-      vim.api.nvim_set_hl(0, "LeapLabelSecondary", { bold = true, fg = "#B48EAD" })
-      vim.api.nvim_set_hl(0, "LeapMatch", { bold = true, bg = "#EBCB8B", fg = "#8b96ac" })
     end,
   },
   -- {

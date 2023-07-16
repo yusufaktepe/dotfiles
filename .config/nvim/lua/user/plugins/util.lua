@@ -25,9 +25,6 @@ return {
   -- library used by other plugins
   { "nvim-lua/plenary.nvim", lazy = true },
 
-  -- makes some plugins dot-repeatable like leap
-  { "tpope/vim-repeat", event = "VeryLazy" },
-
   -- indentation detection
   -- { "Darazaki/indent-o-matic", dependencies = { "lukas-reineke/indent-blankline.nvim" } },
   { "tpope/vim-sleuth", dependencies = { "lukas-reineke/indent-blankline.nvim" } },
