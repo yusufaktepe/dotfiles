@@ -1,10 +1,12 @@
 #!/bin/bash
 
+IP=192.168.1.11
+GATEWAY=192.168.1.1
 DNS=${1:-1.1.1.1,1.0.0.1}
 
 command -V nmcli >/dev/null || exit 1
 
-Con=$(nmcli -t -f NAME con show --active)
+read -r Con <<< "$(nmcli -t -f NAME con show --active)"
 
 [[ -z $Con ]] && { printf '%s\n' "No active connection!"; exit 1 ;}
 
@@ -15,6 +17,11 @@ Con=$(nmcli -t -f NAME con show --active)
 	nmcli networking off && nmcli networking on
 
 	printf '%s\n' "Custom DNS disabled."; exit
+}
+
+[[ "$1" == static ]] && {
+	nmcli con mod "$Con" ipv4.addresses $IP/24
+	nmcli con mod "$Con" ipv4.gateway $GATEWAY
 }
 
 shopt -s extglob

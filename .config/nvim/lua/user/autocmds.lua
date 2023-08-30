@@ -29,7 +29,9 @@ autocmd("TextYankPost", {
 -- Resize splits if window got resized
 autocmd({ "VimResized" }, {
   callback = function()
+    local current_tab = vim.fn.tabpagenr()
     vim.cmd("wincmd =")
+    vim.cmd("tabnext " .. current_tab)
   end,
 })
 

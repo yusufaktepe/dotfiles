@@ -48,6 +48,8 @@ case "$1" in
 					vol spotifyd down
 				elif pidof -q spotify; then
 					vol spotify down
+				elif pidof -q strawberry; then
+					vol strawberry down
 				else
 					playerctl volume 0.05-
 				fi
@@ -59,6 +61,8 @@ case "$1" in
 					vol spotifyd up
 				elif pidof -q spotify; then
 					vol spotify up
+				elif pidof -q strawberry; then
+					vol strawberry up
 				else
 					playerctl volume 0.05+
 				fi

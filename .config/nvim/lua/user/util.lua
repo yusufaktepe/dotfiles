@@ -177,6 +177,20 @@ function M.toggle_list()
   end
 end
 
+local nu = { number = true, relativenumber = true }
+function M.toggle_number()
+  if vim.opt_local.number:get() or vim.opt_local.relativenumber:get() then
+    nu = { number = vim.opt_local.number:get(), relativenumber = vim.opt_local.relativenumber:get() }
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    Util.warn("Disabled line numbers", { title = "Option" })
+  else
+    vim.opt_local.number = nu.number
+    vim.opt_local.relativenumber = nu.relativenumber
+    Util.info("Enabled line numbers", { title = "Option" })
+  end
+end
+
 local enabled = true
 function M.toggle_diagnostics()
   enabled = not enabled

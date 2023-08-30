@@ -45,6 +45,7 @@
 	up          = pull --rebase=preserve
 	unstage     = reset HEAD --
 	undo-commit = reset --soft HEAD^
+	orig        = checkout HEAD --
 	diff-copy   = !git diff | xclip -selection c
 	diff-paste  = !xclip -selection c -o | git apply -3
 

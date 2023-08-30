@@ -127,6 +127,7 @@ return {
       { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "[G]it [c]ommits" },
       { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "[G]it [s]tatus" },
       -- search
+      { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Regi[s]ters" },
       { "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "[S]earch [a]utocommands" },
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[S]earch [b]uffer" },
       { "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "[S]earch [c]ommand history" },
@@ -142,8 +143,10 @@ return {
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "[S]earch [m]arks" },
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "[S]earch [o]ptions" },
       { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "[S]earch [R]esume" },
-      { "<leader>sw", Util.telescope("grep_string"), desc = "[S]earch current [w]ord (root dir)" },
-      { "<leader>sW", Util.telescope("grep_string", { cwd = false }), desc = "[S]earch current [W]ord (cwd)" },
+      { "<leader>sw", Util.telescope("grep_string", { word_match = "-w" }), desc = "[S]earch current [w]ord (root dir)" },
+      { "<leader>sW", Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "[S]earch current [W]ord (cwd)" },
+      { "<leader>sw", Util.telescope("grep_string"), mode = "v", desc = "[S]earch Selected [w]ord (root dir)" },
+      { "<leader>sW", Util.telescope("grep_string", { cwd = false }), mode = "v", desc = "[S]earh selected [W]ord  (cwd)" },
       { "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "[S]earch [C]olorscheme with preview" },
       {
         "<leader>ss",
