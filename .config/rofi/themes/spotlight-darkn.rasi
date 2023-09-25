@@ -42,6 +42,10 @@ entry {
   placeholder-color: @fg2;
 }
 
+prompt {
+  padding:           0px 8px 0px 0px;
+}
+
 message {
   border:            2px 0 0;
   border-color:      @bg1;
