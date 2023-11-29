@@ -1,38 +1,57 @@
 #!/usr/bin/env bash
 
-Cur=${1:-BTC|ETH|BNB|MATIC|AVAX|LUNA|SOL}
-Fiat=USDT
-Api=https://api.binance.com/api/v1/ticker/price
+# Cur=${1:-BTCUSDT|ETHUSDT|SOLUSDT|XRPUSDT}
+# Api=https://api.binance.com/api/v1/ticker/price
+# Api=https://fapi.binance.com/fapi/v1/ticker/price
+Cur=${1:-BTC_USDT|ETH_USDT|GROK_USDT|SEI_USDT}
+Api=https://contract.mexc.com/api/v1/contract/ticker
+# Fiat=USDT
 
 shopt -s nocasematch extglob
 
 while read -ra Rate; do
-	if [[ ${Rate[*]} =~ ^($Cur)($Fiat).*$ ]]; then
-		Coin=${Rate[0]%USDT}
-		Price=${Rate[1]}
+	if [[ ${Rate[*]} =~ ^($Cur)($Fiat)[[:space:]].*$ ]]; then
+		if [[ $Api == *binance* ]]; then
+			Coin=${Rate[0]%USDT}
+			Price=${Rate[1]}
+		else # MEXC
+			Coin=${Rate[0]%_USDT}
+			Price=${Rate[2]}
+		fi
+
 		Price=${Price%%+(0)}
 
-		Rates+=("$(printf '%s = %8s\n' "$Coin" "${Price/%.}")")
+		Rates+=("$(printf '%s = %8s\n' "$Coin" "${Price/%./}")")
 	fi
-done < <(curl -s $Api | jq -r '.[] | (.symbol + " " + .price)')
+done < <(
+	if [[ $Api == *binance* ]]; then
+		curl -s $Api | jq -r '.[] | (.symbol + " " + .price)' 2>/dev/null
+	else
+		curl -s $Api | jq -r '.data.[] | .symbol + " = " + (.lastPrice|tostring)' 2>/dev/null
+	fi
+)
 
 BG='%{B#bb406769}'
 BG_Alt='%{B#bb076678}'
 # BG='%{B#375355}'
 # BG_Alt='%{B#0D5361}'
 
-AL='%{A3:xdg-open https\://www.binance.com/en/trade/'
-AR='?layout=pro\&theme=dark\&type=spot:}'
+if [[ $Api == *binance* ]]; then
+	AL='%{A3:xdg-open https\://www.binance.com/en/trade/'
+	AR='?layout=pro\&theme=dark\&type=spot:}'
+else
+	AL='%{A3:xdg-open https\://futures.mexc.com/exchange/'
+	AR='?type=linear_swap:}'
+fi
 
 while read -r Index; do
 	[ -z "$Index" ] && break
 
 	[ -z "${Rates[1]}" ] && printf '%s%s %s %s%s' \
-		"$AL${Index%% =*}_$Fiat$AR" "$BG" "${Index##*= }" "%{B-}" "%{A}" && break
+		"$AL${Index%% =*}_${Fiat:-USDT}$AR" "$BG" "${Index##*= }" "%{B-}" "%{A}" && break
 
-	printf '%s%s %s %s%s ' "$AL${Index%% =*}_$Fiat$AR" "$BG" "$Index" "%{B-}" "%{A}"
+	printf '%s%s %s %s%s ' "$AL${Index%% =*}_${Fiat:-USDT}$AR" "$BG" "$Index" "%{B-}" "%{A}"
 	read -r Index
 	[ -n "$Index" ] && printf '%s%s %s %s%s ' \
-		"$AL${Index%% =*}_$Fiat$AR" "$BG_Alt" "$Index" "%{B-}" "%{A}"
+		"$AL${Index%% =*}_${Fiat:-USDT}$AR" "$BG_Alt" "$Index" "%{B-}" "%{A}"
 done < <(printf '%s\n' "${Rates[@]}")
-
