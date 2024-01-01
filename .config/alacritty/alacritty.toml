@@ -1,0 +1,46 @@
+import = ["~/.config/alacritty/colors/onenord.toml"]
+live_config_reload = true
+
+[cursor]
+vi_mode_style = "Block"
+
+[env]
+RPS1 = ""
+
+[font]
+size = 9.0
+
+[font.normal]
+family = "alacritty"
+
+[font.offset]
+x = 0
+y = 1
+
+[window]
+opacity = 0.92
+
+[window.dimensions]
+columns = 80
+lines = 24
+
+[window.padding]
+x = 2
+y = 2
+
+[keyboard]
+bindings = [
+    {  key  =  "K",             mods  =  "Control|Shift",  mode =  "~Alt",  action  =  "ScrollLineUp"     },
+    {  key  =  "J",             mods  =  "Control|Shift",  mode =  "~Alt",  action  =  "ScrollLineDown"   },
+    {  key  =  "Up",            mods  =  "Control|Shift",                   action  =  "ScrollLineUp"     },
+    {  key  =  "Down",          mods  =  "Control|Shift",                   action  =  "ScrollLineDown"   },
+    {  key  =  "0",             mods  =  "Control",                         action  =  "ResetFontSize"    },
+    {  key  =  "Numpad0",       mods  =  "Control",                         action  =  "ResetFontSize"    },
+    {  key  =  "Return",        mods  =  "Super|Shift",                     action  =  "CreateNewWindow"  },
+    {  key  =  "NumpadDivide",                             mode =  "Vi",    action  =  "SearchForward"    },
+    {  key  =  "NumpadDivide",  mods  =  "Shift",          mode =  "Vi",    action  =  "SearchBackward"   },
+    {  key  =  "NumpadEnter",                              mode =  "~Alt",  chars   =  "\n"               },
+    {  key  =  "Return",        mods  =  "Shift",                           chars   =  "\u001B[13;2u"     },
+    {  key  =  "Return",        mods  =  "Control",                         chars   =  "\u001B[13;5u"     },
+]
+
