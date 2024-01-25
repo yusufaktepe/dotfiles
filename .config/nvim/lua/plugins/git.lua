@@ -5,8 +5,8 @@ return {
     lazy = true,
     cmd = { "G", "Git", "GBrowse", "Gdiffsplit", "Ghdiffsplit", "Gvdiffsplit" },
     keys = {
-      { "<leader>gd", "<cmd>Gvdiffsplit<cr>", desc = "[G]it [d]iff split" },
-      { "<leader>gb", "<cmd>G blame<cr>", desc = "[G]it [b]lame", mode = { "n", "v" } },
+      { "<leader>gd", "<cmd>Gvdiffsplit<cr>", desc = "Git diff split" },
+      { "<leader>gb", "<cmd>G blame<cr>", desc = "Git blame", mode = { "n", "v" } },
     },
   },
 
@@ -27,7 +27,7 @@ return {
             vim.cmd("DiffviewOpen") -- No open Diffview exists: open a new one
           end
         end,
-        desc = "[G]it [D]iffView",
+        desc = "Git DiffView",
       },
     },
   },

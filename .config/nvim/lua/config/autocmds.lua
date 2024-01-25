@@ -1,3 +1,7 @@
+-- Autocmds are automatically loaded on the VeryLazy event
+-- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
+-- Add any additional autocmds here
+
 -- Simplify autocmd creation
 local augid = vim.api.nvim_create_augroup("user", { clear = true })
 local autocmd = function(event, opts)
@@ -16,41 +20,6 @@ end
 --   end,
 -- })
 
--- Check if we need to reload the file when it changed
-autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
-
--- Highlight on yank
-autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
-
--- Resize splits if window got resized
-autocmd({ "VimResized" }, {
-  callback = function()
-    local current_tab = vim.fn.tabpagenr()
-    vim.cmd("wincmd =")
-    vim.cmd("tabnext " .. current_tab)
-  end,
-})
-
--- Go to last loc when opening a buffer
--- autocmd("BufReadPost", {
---   callback = function()
---     local exclude = { "gitcommit" }
---     local buf = vim.api.nvim_get_current_buf()
---     if vim.tbl_contains(exclude, vim.bo[buf].filetype) then
---       return
---     end
---     local mark = vim.api.nvim_buf_get_mark(buf, '"')
---     local lcount = vim.api.nvim_buf_line_count(buf)
---     if mark[1] > 0 and mark[1] <= lcount then
---       pcall(vim.api.nvim_win_set_cursor, 0, mark)
---     end
---   end,
--- })
-
 -- Suppress readonly warning
 autocmd("BufEnter", { pattern = "/etc/*,/usr/*", command = "set noro" })
 
@@ -61,7 +30,7 @@ autocmd("BufEnter", {
     vim.opt.backup = false
     vim.opt.writebackup = false
     vim.opt.undofile = false
-    vim.opt.shada = ''
+    vim.opt.shada = ""
   end,
 })
 autocmd("BufEnter", { pattern = "*.zsh_history,/tmp/dir*", command = "set clipboard=" })
@@ -75,52 +44,19 @@ autocmd("VimLeave", { pattern = "*.tex", command = "!texclear %" })
 
 -- Disable auto-comment
 autocmd("FileType", {
-  command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o"
-})
-
--- Close some filetypes with <q>
-autocmd("FileType", {
-  pattern = {
-    "PlenaryTestPopup",
-    "help",
-    "lspinfo",
-    "man",
-    "notify",
-    "qf",
-    "spectre_panel",
-    "startuptime",
-    "tsplayground",
-    "checkhealth",
-    "neotest-output",
-    "neotest-summary",
-    "neotest-output-panel",
-    "fugitiveblame",
-    "TelescopePrompt",
-  },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close!<cr>", { buffer = event.buf, silent = true })
-  end,
-})
-
--- Wrap and check for spell in text filetypes
-autocmd("FileType", {
-  pattern = { "gitcommit", "markdown" },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
+  command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
 })
 
 autocmd("FileType", {
   pattern = "Trouble",
   callback = function()
     vim.keymap.set(
-      "n", "s",
+      "n",
+      "s",
       "wt):silent !xdg-open https://github.com/koalaman/shellcheck/wiki/SC<C-r><C-w><cr>0",
       { desc = "Trouble: Open shellcheck wiki", buffer = 0, silent = true }
     )
-  end
+  end,
 })
 
 -- Show cursor line only in active window
@@ -143,14 +79,3 @@ autocmd("FileType", {
 --     end
 --   end,
 -- })
-
--- Auto create dir when saving a file, in case some intermediate directory does not exist
-autocmd("BufWritePre", {
-  callback = function(event)
-    if event.match:match("^%w%w+://") then
-      return
-    end
-    local file = vim.loop.fs_realpath(event.match) or event.match
-    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
-  end,
-})

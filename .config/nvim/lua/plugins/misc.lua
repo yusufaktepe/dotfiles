@@ -1,5 +1,9 @@
 return {
 
+  -- indentation detection
+  { "Darazaki/indent-o-matic" },
+  -- { "tpope/vim-sleuth" },
+
   -- personal wiki
   {
     "vimwiki/vimwiki",
@@ -71,8 +75,13 @@ return {
 
   -- system
   {
-    "tpope/vim-eunuch",
-    cmd = { "Chmod", "Delete", "Edit", "Grep", "Mkdir", "Move", "Rename", "Unlink", "Wall", "Write" },
+    "chrisgrieser/nvim-genghis",
+    dependencies = "stevearc/dressing.nvim",
+    cmd = {
+      "New", "Duplicate", "NewFromSelection", "Rename", "Move", "Trash",
+      "CopyFilename", "CopyFilepath", "CopyRelativePath", "CopyDirectoryPath",
+      "CopyRelativeDirectoryPath", "Chmodx"
+    },
   },
 
   -- edit gpg encrypted files
