@@ -84,6 +84,6 @@ function swap_sid_secondary_sid()
 end
 
 -- mp.add_key_binding("UP", "switch-secondary", switch_secondary)
-mp.add_key_binding("KP3", "swap-sid-seconday-sid", swap_sid_secondary_sid)
+mp.add_key_binding("KP_PGDWN", "swap-sid-seconday-sid", swap_sid_secondary_sid)
 
 mp.add_timeout(1.5, initialize) -- initialize after mpv has loaded the file
