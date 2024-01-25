@@ -4,7 +4,7 @@
 pidof -q alacritty && msg=(msg create-window --working-directory "$PWD")
 
 case $1 in
-	--class) exec alacritty "${msg[@]}" --class Alacritty,"$2" "${@:3}" ;;
+	--class) exec alacritty "${msg[@]}" --class "$2",Alacritty "${@:3}" ;;
 	*) exec alacritty "${msg[@]}" "$@" ;;
 esac
 

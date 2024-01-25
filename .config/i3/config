@@ -77,7 +77,7 @@ bindsym $caps+Shift+a $exec dunstctl context
 
 # #---Start Applications---# #
 bindsym $mod+F1 $exec ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
-bindsym $mod+F2 $exec ifterm -h -i vifm -e vifm-tab
+bindsym $mod+F2 $exec vifm-tab
 bindsym $mod+F3 $exec ifwin -e 'vivaldi-stable --start-maximized'
 bindsym $mod+F4 $exec ifwin -e firefox
 bindsym $mod+F5 $exec ifwin -e google-chrome-stable
@@ -402,7 +402,7 @@ for_window [instance="Places" class="firefox"] floating enable border normal, re
 for_window [instance="Browser|Update" class="firefox|Tor Browser"] floating enable border normal
 for_window [instance="Toolkit" class="firefox"] floating enable sticky enable border none
 # for_window [instance="(?i)crx_" class="(?i)Vivaldi|-chrome"] floating enable sticky enable
-for_window [class="Crow Translate"] floating enable sticky enable, resize set 861 392, move absolute position center
+for_window [class="crow-translate"] floating enable sticky enable, resize set 861 392, move absolute position center
 for_window [class="(?i)gsimplecal"] floating enable, move position +1651+24
 for_window [class="KeePassXC"] floating enable, move absolute position center
 #_ Dialogs
@@ -440,12 +440,12 @@ for_window [instance="dropdown_*"] move position center
 # See ../X11/xinitrc for rest of the autostarts
 
 exec_always $N launch_polybar
-# $exec kpass
+$exec kpass
 $exec "sleep 2; vivaldi-stable --start-maximized"
 $exec "sleep 5; ifterm -h -i vifm -e vifm-tab"
 # $exec "sleep 7; telegram-desktop"
 $exec "sleep 9; crypto_bar"
-$exec "sleep 10; spotify"
+# $exec "sleep 10; spotify"
 $exec "sleep 7; wmctrl -x -r 'vifm.Alacritty' -b remove,demands_attention"
 # $exec "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
 
