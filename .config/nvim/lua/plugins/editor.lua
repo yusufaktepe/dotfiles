@@ -116,7 +116,7 @@ return {
         "debugloop/telescope-undo.nvim",
         keys = {
           { "<F5>", "<cmd>Telescope undo<cr>", desc = "Search undo history" },
-          { "<leader>su", "<cmd>Telescope undo<cr>", desc = "[S]earch [u]ndo history" },
+          { "<leader>su", "<cmd>Telescope undo<cr>", desc = "Search undo history" },
         },
         config = function()
           require("telescope").setup({

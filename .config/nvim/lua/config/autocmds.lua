@@ -47,17 +47,18 @@ autocmd("FileType", {
   command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
 })
 
-autocmd("FileType", {
-  pattern = "Trouble",
-  callback = function()
-    vim.keymap.set(
-      "n",
-      "s",
-      "wt):silent !xdg-open https://github.com/koalaman/shellcheck/wiki/SC<C-r><C-w><cr>0",
-      { desc = "Trouble: Open shellcheck wiki", buffer = 0, silent = true }
-    )
-  end,
-})
+-- use 'c' mapping instead
+-- autocmd("FileType", {
+--   pattern = "Trouble",
+--   callback = function()
+--     vim.keymap.set(
+--       "n",
+--       "s",
+--       "wt):silent !xdg-open https://github.com/koalaman/shellcheck/wiki/SC<C-r><C-w><cr>0",
+--       { desc = "Trouble: Open shellcheck wiki", buffer = 0, silent = true }
+--     )
+--   end,
+-- })
 
 -- Show cursor line only in active window
 -- https://github.com/folke/dot/blob/master/nvim/lua/config/autocmds.lua

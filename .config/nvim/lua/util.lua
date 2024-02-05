@@ -7,16 +7,22 @@ function M.toggle_colorcolumn()
   local value = vim.api.nvim_get_option_value("colorcolumn", {})
   if value == "" then
     vim.api.nvim_set_option_value("colorcolumn", "80", {})
-    vim.o.list = true
-    vim.g.miniindentscope_disable = false
-    if Util.has("mini.indentscope") then
-      local opts = Util.opts("mini.indentscope")
-      require("mini.indentscope").setup(opts)
-    end
+    -- vim.o.list = true
+    -- vim.g.miniindentscope_disable = false
+    -- if Util.has("mini.indentscope") then
+    --   local opts = Util.opts("mini.indentscope")
+    --   require("mini.indentscope").setup(opts)
+    -- end
+    -- if Util.has("indent-blankline.nvim") then
+    --   require("ibl").setup_buffer(0, { enabled = true, })
+    -- end
   else
     vim.api.nvim_set_option_value("colorcolumn", "", {})
-    vim.o.list = false
-    vim.g.miniindentscope_disable = true
+    -- vim.o.list = false
+    -- vim.g.miniindentscope_disable = true
+    -- if Util.has("indent-blankline.nvim") then
+    --   require("ibl").setup_buffer(0, { enabled = false, })
+    -- end
   end
 end
 

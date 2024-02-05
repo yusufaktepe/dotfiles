@@ -49,7 +49,7 @@ return {
     cmd = { "CccHighlighterToggle", "CccHighlighterEnable", "CccPick", "CccConvert" },
     ft = { "css", "javascript" },
     keys = {
-      { "<leader>uh", "<cmd>CccHighlighterToggle<cr>", desc = "Toggle color [h]ighlight" },
+      { "<leader>uh", "<cmd>CccHighlighterToggle<cr>", desc = "Toggle color highlight" },
     },
     opts = {
       highlighter = {
@@ -76,7 +76,11 @@ return {
   -- system
   {
     "chrisgrieser/nvim-genghis",
-    dependencies = "stevearc/dressing.nvim",
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "hrsh7th/nvim-cmp",
+      "hrsh7th/cmp-omni",
+    },
     cmd = {
       "New", "Duplicate", "NewFromSelection", "Rename", "Move", "Trash",
       "CopyFilename", "CopyFilepath", "CopyRelativePath", "CopyDirectoryPath",
