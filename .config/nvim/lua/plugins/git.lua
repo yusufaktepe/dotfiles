@@ -51,12 +51,16 @@ return {
 
   -- create gists
   {
-    "mattn/gist-vim",
-    dependencies = { "mattn/webapi-vim" },
-    cmd = "Gist",
-    config = function()
-      vim.g.gist_token_file = "~/Repos/.backup/secrets/gist_token"
-      vim.g.gist_post_private = 1
-    end,
+    "Rawnly/gist.nvim",
+    dependencies = {
+      -- `GistsList` opens the selected gif in a terminal buffer,
+      -- nvim-unception uses neovim remote rpc functionality to open the gist in an actual buffer
+      -- and prevents neovim buffer inception
+      "samjwill/nvim-unception",
+      init = function()
+        vim.g.unception_block_while_host_edits = true
+      end
+    },
+    cmd = { "GistCreate", "GistCreateFromFile", "GistsList" },
   },
 }
