@@ -467,7 +467,7 @@
     format = ""
 
 [volume]
-    appname = volume
+    appname = volbright
     history_ignore = yes
     fullscreen = show
 

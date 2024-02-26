@@ -18,7 +18,7 @@ notify() {
 	fi
 
 	dunstify \
-		-a volume \
+		-a volbright \
 		-i "$icon" \
 		-t 1500 \
 		-h int:value:"$vol" \

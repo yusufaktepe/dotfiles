@@ -10,10 +10,25 @@ update_bar() {
 	fi
 }
 
+notify() {
+	IFS=, read -r _ _ _ brightness _ <<-+++
+		"$(brightnessctl --machine-readable info)"
+	+++
+
+	dunstify \
+		-a volbright \
+		-i "display-brightness" \
+		-t 1500 \
+		-h int:value:"$brightness" \
+		-h string:synchronous:brightness \
+		-r 1000 \
+		"$brightness"
+}
+
 case $1 in
-	inc) brightnessctl set "+${2:-5}%" && update_bar ;;
-	dec) brightnessctl set "${2:-5}%-" && update_bar ;;
-	set) brightnessctl set "${2:-27}%" && update_bar ;;
+	inc) brightnessctl set "+${2:-5}%" >/dev/null && { notify; update_bar ;} ;;
+	dec) brightnessctl set "${2:-5}%-" >/dev/null && { notify; update_bar ;} ;;
+	set) brightnessctl set "${2:-27}%" >/dev/null && { notify; update_bar ;} ;;
 	off)
 		xset dpms force off
 		KBL=/sys/class/leds/tpacpi::kbd_backlight/brightness

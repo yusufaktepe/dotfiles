@@ -1,0 +1,22 @@
+#!/bin/sh
+# Temporarily hide terminal when launching GUI apps.
+# Dependencies: xdotool OR xdo
+# Usage:
+#   swallow CMD
+
+if hash xdo 2>/dev/null; then
+    AW=$(xdo id)
+    xdo hide
+    "$@" >/dev/null 2>&1
+    xdo show "$AW"
+elif hash xdotool 2>/dev/null; then
+    AW=$(xdo id)
+    AW=$(xdotool getactivewindow)
+    xdotool windowunmap --sync "$AW"
+    "$@" >/dev/null 2>&1
+    xdotool windowmap --sync "$AW"
+else
+    printf 'Err: %s\n' "'xdotool' or 'xdo' should be installed."
+    return 1
+fi
+

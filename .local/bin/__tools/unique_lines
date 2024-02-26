@@ -1,0 +1,19 @@
+#!/bin/sh
+# Alternative to `awk '!Line[$0]++'`, which prints unique lines
+
+IFS_Old=$IFS
+IFS='
+'
+set --
+
+while IFS= read -r Line; do
+	case $IFS$*$IFS in
+		*"$IFS$Line$IFS"*) ;; # Seen
+		*) set -- "$@" "$Line" ;; # Unique
+	esac
+done
+
+printf '%s\n' "$@"
+
+IFS=$IFS_Old
+

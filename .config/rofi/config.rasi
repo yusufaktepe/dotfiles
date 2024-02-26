@@ -55,6 +55,7 @@ configuration {
 /*	application-fallback-icon: ;*/
 /*	refilter-timeout-limit: 300;*/
 /*	xserver-i300-workaround: false;*/
+/*	completer-mode: "recursivebrowser";*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 	display-window: "";
 /*	display-windowcd: ;*/
@@ -64,8 +65,9 @@ configuration {
 	display-combi: "";
 /*	display-keys: ;*/
 /*	display-filebrowser: ;*/
-/*	display-blocks: ;*/
+/*	display-recursivebrowser: ;*/
 	display-calc: "";
+/*	display-blocks: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
 /*	kb-secondary-paste: "Control+v,Insert";*/
 /*	kb-secondary-copy: "Control+c";*/

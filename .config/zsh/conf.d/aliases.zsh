@@ -57,7 +57,7 @@ alias http-serve='python -m http.server'
 # Colorize commands
 # alias ls='ls --group-directories-first --time-style=long-iso --color=auto -F'
 # alias la='ls -lah'
-alias ls='eza --group-directories-first --time-style=long-iso --icons -Fg'
+alias ls='eza --group-directories-first --time-style=long-iso --icons -F -g'
 alias ll='ls -l --git'
 alias la='ls -la --git'
 alias grep='grep --color=auto --exclude-dir=".git" --exclude-dir="node_modules"'
