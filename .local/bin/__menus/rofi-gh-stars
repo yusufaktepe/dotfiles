@@ -1,36 +1,47 @@
 #!/bin/sh
 
-Cache=~/.cache/gh-starred.list
+Cache=${XDG_CACHE_HOME:-$HOME/.cache}/gh-stars.json
+User=yusufaktepe
 
-mk_list() { gh repo-list --type=starred | sed -r 's/\s+\S+$//' > $Cache ;}
-
-[ -f $Cache ] || {
-	if gh extension list | grep -q gh-repo-list; then
-		mk_list
-	else
-		notify-send -a system -i github \
-			"${0##*/}" "<i>gh-repo-list</i> extension is not installed."
-		exit
-	fi
+mk_list() {
+    [ -e "$Cache" ] || :>"$Cache"
+    gh stars --cache-file "$Cache" --user $User --limit -1 --json --find "*" >/dev/null
 }
 
+if [ ! -e "$Cache" ]; then
+    if gh extension list | grep -q 'Link-/gh-stars'; then
+        mk_list
+    else
+        notify-send -a system -i github \
+            "${0##*/}" "<i>Link-/gh-stars</i> extension is not installed."
+        exit
+    fi
+fi
+
 Repo=$(
-	column -t $Cache |
-		rofi -dmenu -p '' -theme-str 'window {width: 60%;}' \
-		-kb-custom-1 Alt+r -kb-custom-2 Alt+i  -kb-custom-3 Alt+p -kb-custom-4 Alt+c
+    jq -r '.[] | " " + (.stargazers_count|tostring) + "⠀ " + .full_name + "⠀ " + .description' "$Cache" |
+    column -s '⠀' -t |
+    sort -u | sort -rnk2 |
+    rofi -dmenu -p '' -theme-str 'window {width: 100%;}' \
+        -kb-custom-1 Alt+r \
+        -kb-custom-2 Alt+i \
+        -kb-custom-3 Alt+p \
+        -kb-custom-4 Alt+c
 )
 Ret=$?
 [ -z "$Repo" ] && exit
 
-read -r _ Repo _ <<-+++
-	$Repo
+read -r _ _ _ Repo _ <<-+++
+    $Repo
 +++
 
+Repo=https://github.com/$Repo
+
 case $Ret in
-	10) mk_list; exec $0 ;;
-	11) setsid -f xdg-open "$Repo/issues" >/dev/null 2>&1 ;;
-	12) setsid -f xdg-open "$Repo/pulls" >/dev/null 2>&1 ;;
-	13) printf '%s' "$Repo" | clip ;;
-	0) setsid -f xdg-open "$Repo" >/dev/null 2>&1 ;;
+    10) rm "$Cache"; mk_list; exec $0 ;;
+    11) setsid -f xdg-open "$Repo/issues" >/dev/null 2>&1 ;;
+    12) setsid -f xdg-open "$Repo/pulls" >/dev/null 2>&1 ;;
+    13) printf '%s' "$Repo" | clip ;;
+    0) setsid -f xdg-open "$Repo" >/dev/null 2>&1 ;;
 esac
 

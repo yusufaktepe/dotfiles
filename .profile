@@ -12,7 +12,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 # Defaults
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
-export TERMINAL="critty"
+export TERMINAL="terminal"
 export TERMINS="$TERMINAL --class"
 export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"

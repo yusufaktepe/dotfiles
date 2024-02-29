@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-# Cur=${1:-BTCUSDT|ETHUSDT|SOLUSDT|XRPUSDT}
-# Api=https://api.binance.com/api/v1/ticker/price
+# Binance
+Cur=${1:-BTCUSDT|ETHUSDT|AVAXUSDT|SEIUSDT|AAVEUSDT|ARBUSDT}
+Api=https://api.binance.com/api/v1/ticker/price
 # Api=https://fapi.binance.com/fapi/v1/ticker/price
-Cur=${1:-BTC_USDT|ETH_USDT|SOL_USDT|AVAX_USDT|SEI_USDT|ETH_BTC}
+# MEXC
+# Cur=${1:-BTC_USDT|ETH_USDT|MATIC_USDT|AVAX_USDT|WLD_USDT|SEI_USDT}
 # Api=https://contract.mexc.com/api/v1/contract/ticker
-Api=https://www.mexc.com/open/api/v2/market/ticker
+# Api=https://www.mexc.com/open/api/v2/market/ticker
 # Fiat=USDT
 
 shopt -s nocasematch extglob
@@ -27,7 +29,6 @@ while read -ra Rate; do
 	if [[ ${Rate[*]} =~ ^($Cur)($Fiat)[[:space:]].*$ ]]; then
 		if [[ $Exchange == Binance* ]]; then
 			Coin=${Rate[0]%USDT}
-			Coin=${Coin/%BTC/\/B}
 			Price=${Rate[1]}
 		else # MEXC
 			Coin=${Rate[0]%_USDT}

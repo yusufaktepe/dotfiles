@@ -1,0 +1,4 @@
+#!/bin/sh
+
+pkill -f "'wttr.in/' | less -RS" || $TERMINS Blockterm_weather -e sh -c "curl -s 'wttr.in/' | less -RS"
+

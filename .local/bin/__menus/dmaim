@@ -8,7 +8,7 @@ notify() {
 		xargs -r -I '{}' xdg-open {} >/dev/null 2>&1 &
 }
 
-notify_clip() { notify-send -a system -i clipboard "Screenshot copied to clipboard." ;}
+notify_clip() { notify-send -a system -i clipboard "${1:-Screenshot copied to clipboard.}" ;}
 
 opts="\
 [1] Selected area
@@ -17,9 +17,10 @@ opts="\
 [4] Selected area (copy)
 [5] Current window (copy)
 [6] Fullscreen (copy)
+[7] Selected qr code (copy)
 "
 
-case "$(printf '%s' "$opts" | dmenu -l 6 -i -p "Screenshot")" in
+case "$(printf '%s' "$opts" | dmenu -l 7 -i -p "Screenshot")" in
 	"[1] Selected area")
 		Shot="$Dir/ss-selected-$Date.png"
 		maim -usl -b 2 -c 0.35,0.55,0.85,0.25 "$Shot" &&
@@ -41,5 +42,11 @@ case "$(printf '%s' "$opts" | dmenu -l 6 -i -p "Screenshot")" in
 	"[6] Fullscreen (copy)")
 		maim -u | xclip -selection clipboard -t image/png
 		notify_clip ;;
+	"[7] Selected qr code (copy)")
+		TmpQR=$(mktemp --suffix=.png "/tmp/dmaim_qr.XXXX")
+		maim -usl -b 2 -c 0.35,0.55,0.85,0.25 "$TmpQR" 2>/dev/null || exit
+		mispipe "zbarimg -q --raw $TmpQR" "xclip -selection clipboard" &&
+		notify_clip "Decoded data copied to clipboard."
+		rm "$TmpQR" ;;
 esac
 

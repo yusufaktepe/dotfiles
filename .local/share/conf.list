@@ -1,4 +1,4 @@
-alacritty            ~/.config/alacritty/alacritty.yml
+alacritty            ~/.config/alacritty/alacritty.toml
 bashrc               ~/.config/bash/.bashrc
 conf.list            ~/.local/share/conf.list
 dir.list             ~/.local/share/dir.list
@@ -13,6 +13,7 @@ gtk3_settings        ~/.config/gtk-3.0/settings.ini
 i3                   ~/.config/i3/config
 inputrc              ~/.config/bash/inputrc
 pacman_makepkg       ~/.config/pacman/makepkg.conf
+kitty                ~/.config/kitty/kitty.conf
 mimeapps             ~/.config/mimeapps.list
 mpv                  ~/.config/mpv/mpv.conf
 mpv_input            ~/.config/mpv/input.conf

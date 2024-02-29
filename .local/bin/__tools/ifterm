@@ -1,5 +1,7 @@
 #!/bin/sh
 
+Terminal=kitty
+
 AW=$(xdotool getactivewindow 2>/dev/null)
 AW_INS=$(xprop -id "$AW" WM_CLASS 2>/dev/null | cut -d\" -f2)
 
@@ -18,7 +20,7 @@ shift $((OPTIND-1))
 [ -z "$Exec" ] && exit 1
 [ -z "$Ins" ] && Ins=$Exec
 
-if wmctrl -lx | grep -iq "$Ins.*$TERMINAL"; then
+if wmctrl -lx | grep -iq "$Ins.*$Terminal"; then
 	if [ "$AW_INS" = "$Ins" ]; then
 		if [ "$Scratchpad" ]; then
 			i3-msg -q "[instance=\"(?i)$Ins\"] move scratchpad"

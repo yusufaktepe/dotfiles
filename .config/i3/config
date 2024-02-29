@@ -447,7 +447,7 @@ $exec "sleep 5; ifterm -h -i vifm -e vifm-tab"
 # $exec "sleep 7; telegram-desktop"
 $exec "sleep 9; crypto_bar"
 # $exec "sleep 10; spotify"
-$exec "sleep 7; wmctrl -x -r 'vifm.Alacritty' -b remove,demands_attention"
+$exec "sleep 7; wmctrl -x -r 'vifm.kitty' -b remove,demands_attention"
 # $exec "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
 
 #=====================================================================

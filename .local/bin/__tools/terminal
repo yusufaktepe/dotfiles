@@ -1,0 +1,27 @@
+#!/bin/bash
+
+Terminal=kitty
+
+_alacritty() {
+    # If alacritty is running, create a new window in the same process
+    pidof -q alacritty && msg=(msg create-window --working-directory "$PWD")
+
+    case $1 in
+        --class)
+            exec alacritty "${msg[@]}" --class Alacritty,"$2" "${@:3}" ;;
+        *)
+            exec alacritty "${msg[@]}" "$@" ;;
+    esac
+}
+
+_kitty() {
+    case $1 in
+        --name|--class)
+            exec kitty -1 --wait-for-single-instance-window-close --name "$2" "${@:3}" ;;
+        *)
+            exec kitty -1 --wait-for-single-instance-window-close --name kitty "$@" ;;
+    esac
+}
+
+_$Terminal "$@"
+
