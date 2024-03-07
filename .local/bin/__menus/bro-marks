@@ -25,7 +25,7 @@ def ancestors: while (. | length >= 2; del(.[
     0: 90
 ]) + "'$Separator'" + "'$Span'" + .url + "'$EndSpan'"
 '
-	jq -r "$jq_script" < "$Bookmarks" | grep -v 'javascript:'
+	jq -r "$jq_script" < "$Bookmarks" | grep -v 'javascript:' | sort -u
 }
 
 quickmarks() {

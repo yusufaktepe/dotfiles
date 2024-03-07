@@ -2,6 +2,8 @@
 
 cd ~/.config/mpv/watch_later || exit
 
+Prompt="󱜅"
+
 quit() {
 	IFS='#' read -r _ ID <<< "$(xprop -root _NET_ACTIVE_WINDOW)"
 	IFS='= ' read -r _ PID <<< "$(xprop -id $ID _NET_WM_PID)"
@@ -54,7 +56,7 @@ print_hist() {
 	}
 }
 
-Selected=$(print_hist | rofi -dmenu -i -p '' -kb-custom-1 Alt+d)
+Selected=$(print_hist | rofi -dmenu -i -p "$Prompt" -kb-custom-1 Alt+d)
 Ret=$?
 
 [[ -n "$Selected" ]] || exit

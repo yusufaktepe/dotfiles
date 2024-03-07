@@ -5,7 +5,15 @@ User=yusufaktepe
 
 mk_list() {
     [ -e "$Cache" ] || :>"$Cache"
-    gh stars --cache-file "$Cache" --user $User --limit -1 --json --find "*" >/dev/null
+    gh stars --cache-file "$Cache" --user $User --limit -1 --json --find "*" >/dev/null &
+    PID=$!
+    # shellcheck disable=SC2064
+    trap "kill $PID 2>/dev/null" EXIT
+    while kill -0 $PID 2>/dev/null; do
+        notify-send -a system -t 2000 -r 2001 -i github "Updating GitHub stars list..."
+        sleep 1
+    done
+    trap - EXIT
 }
 
 if [ ! -e "$Cache" ]; then

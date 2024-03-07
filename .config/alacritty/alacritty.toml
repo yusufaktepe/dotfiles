@@ -11,7 +11,7 @@ RPS1 = ""
 size = 9.0
 
 [font.normal]
-family = "alacritty"
+family = "JetBrainsMono Nerd Font Mono"
 
 [font.offset]
 x = 0

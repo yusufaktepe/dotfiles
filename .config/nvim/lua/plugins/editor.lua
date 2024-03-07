@@ -19,6 +19,8 @@ return {
       { "<leader>fB", Util.telescope("files", { cwd = "~/.local/bin", prompt_title = 'Find script' }), desc = "Find Bin Files" },
       { "<leader>fN", Util.telescope("files", { cwd = "~/Repos/notes", prompt_title = 'Find notes' }), desc = "Find Notes" },
       { "<leader>fp", Util.telescope("find_files", { cwd = require("lazy.core.config").options.root, }), desc = "Find plugin file", },
+      { "<leader>%",  Util.telescope("current_buffer_fuzzy_find", { winblend = 10, previewer = false, }), desc = "[%] Fuzzily search in current buffer'", },
+      { "<leader>s/", Util.telescope("live_grep", { grep_open_files = true, prompt_title = 'Live Grep in Open Files', }), desc = "[S]earch [/] in Open Files", },
     },
     opts = {
       defaults = {
@@ -131,6 +133,7 @@ return {
                 },
                 layout_strategy = "vertical",
                 layout_config = {
+                  preview_cutoff = 0,
                   preview_height = 0.6,
                 },
                 -- mappings = {

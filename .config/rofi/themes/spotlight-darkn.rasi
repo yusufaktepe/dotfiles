@@ -12,7 +12,7 @@
   fg2:               #DEDEDE80;
   urgent:            #BF616A90;
 
-  font:              "Hack Nerd Font 12";
+  font:              "mono 12";
   background-color:  transparent;
   text-color:        @fg0;
 
@@ -34,7 +34,7 @@ inputbar {
   children:          [ prompt, entry ];
 }
 
-entry, element-icon, element-text {
+entry, element-icon, element-text, prompt {
   vertical-align:    0.5;
 }
 
@@ -42,9 +42,9 @@ entry {
   placeholder-color: @fg2;
 }
 
-prompt {
-  padding:           0px 8px 0px 0px;
-}
+/* prompt { */
+/*   padding:           0px 8px 0px 0px; */
+/* } */
 
 message {
   border:            2px 0 0;

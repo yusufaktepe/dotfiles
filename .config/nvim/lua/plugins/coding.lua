@@ -73,6 +73,23 @@ return {
         cmp_autopairs.on_confirm_done()
       )
     end,
+    keys = {
+      {
+        "<leader>up",
+        function()
+          local Util = require("lazy.core.util")
+          local autopairs = require("nvim-autopairs")
+          if autopairs.state.disabled then
+            autopairs.enable()
+            Util.info("Enabled auto pairs", { title = "Option" })
+          else
+            autopairs.disable()
+            Util.warn("Disabled auto pairs", { title = "Option" })
+          end
+        end,
+        desc = "Toggle auto pairs",
+      },
+    },
   },
 
   -- Incremental LSP renaming

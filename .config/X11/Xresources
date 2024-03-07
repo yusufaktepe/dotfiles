@@ -27,7 +27,7 @@ XTerm.vt100.saveLines: 10000
 XTerm.vt100.geometry: 80x24
 
 ! Font
-XTerm.vt100.faceName: Hack Nerd Font Mono:size=13.8:antialias=true
+XTerm.vt100.faceName: JetBrainsMono Nerd Font Mono:size=13.8:antialias=true
 
 ! Zoom font sizes
 XTerm*faceSize1: 10

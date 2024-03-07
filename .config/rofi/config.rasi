@@ -1,6 +1,6 @@
 configuration {
 	modi: "window,combi,run";
-	font: "Hack Nerd Font 12";
+	font: "mono 12";
 	location: 2;
 	yoffset: 24;
 /*	xoffset: 0;*/
@@ -9,7 +9,7 @@ configuration {
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host} [-p {port}]";*/
-	run-command: "sh -c '{cmd}'";
+	run-command: "sh -c {cmd}";
 /*	run-list-command: "";*/
 /*	run-shell-command: "{terminal} -e {cmd}";*/
 /*	window-command: "wmctrl -i -R {window}";*/
