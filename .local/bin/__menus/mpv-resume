@@ -47,13 +47,13 @@ done < <(find . -type f -printf "%T+ %P\n" | sort -r)
 [[ -z "$HistFile" ]] && exit
 
 print_hist() {
-	for HistItem in "${Hist[@]}"; {
+	for HistItem in "${Hist[@]}"; do
 		if [[ $HistItem =~ ^/[[:alnum:]] ]]; then
 			printf '%b\n' "${HistItem##*/}\0icon\x1fvideo"
 		else
 			printf '%b\n' "$HistItem\0icon\x1fyoutube"
 		fi
-	}
+	done
 }
 
 Selected=$(print_hist | rofi -dmenu -i -p "$Prompt" -kb-custom-1 Alt+d)
@@ -61,7 +61,7 @@ Ret=$?
 
 [[ -n "$Selected" ]] || exit
 
-for HistItem in "${Hist[@]}"; {
+for HistItem in "${Hist[@]}"; do
 	[[ $HistItem == *"$Selected" ]] && {
 		[[ $Ret -eq 10 ]] && {
 			find . -type f -exec grep -Fqm 1 "$HistItem" {} \; -delete
@@ -77,5 +77,5 @@ for HistItem in "${Hist[@]}"; {
 		fi
 		break
 	}
-}
+done
 

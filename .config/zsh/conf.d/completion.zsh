@@ -64,5 +64,5 @@ _whex() {
 	compadd "$@" -a packages
 }
 compdef _whex whex
-compdef _exec bashx
+compdef _exec bashx swallow
 

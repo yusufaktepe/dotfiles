@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+#--: Binance
+#------------------------------------------------------------------------------
+# Api=https://api.binance.com/api/v1/ticker/price
+# Api=https://fapi.binance.com/fapi/v1/ticker/price
+#------------------------------------------------------------------------------
+#--: KuCoin
+# Api=https://api.kucoin.com/api/v1/market/allTickers
+# Api=https://api-futures.kucoin.com/api/v1/contracts/active
+#------------------------------------------------------------------------------
+#--: MEXC
+# Api=https://www.mexc.com/open/api/v2/market/ticker
+# Api=https://contract.mexc.com/api/v1/contract/ticker
+#------------------------------------------------------------------------------
+#--: Bybit
+# Api="https://api.bybit.com/v5/market/tickers?category=spot"
+# Api="https://api.bybit.com/v5/market/tickers?category=linear"
+#------------------------------------------------------------------------------
+#--: Gate.io
+Api=https://api.gateio.ws/api/v4/spot/tickers
+# Api=https://api.gateio.ws/api/v4/futures/usdt/contracts
+
+shopt -s nocasematch extglob
+
+if [[ $Api == */api.binance* ]]; then
+    Exchange=Binance
+elif [[ $Api == */fapi.binance* ]]; then
+    Exchange=BinanceF
+elif [[ $Api == */api.kucoin* ]]; then
+    Exchange=KuCoin
+    CurSep=-
+elif [[ $Api == */api-futures.kucoin* ]]; then
+    Exchange=KuCoinF
+    CurSuf=M
+elif [[ $Api == */www.mexc* ]]; then
+    Exchange=MEXC
+    CurSep=_
+elif [[ $Api == */contract.mexc* ]]; then
+    Exchange=MEXCF
+    CurSep=_
+elif [[ $Api == */api.bybit.*spot ]]; then
+    Exchange=Bybit
+elif [[ $Api == */api.bybit.*linear ]]; then
+    Exchange=BybitF
+elif [[ $Api == */api.gateio.*spot* ]]; then
+    Exchange=Gateio
+    CurSep=_
+elif [[ $Api == */api.gateio.*futures* ]]; then
+    Exchange=GateioF
+    CurSep=_
+fi
+
+tickers() {
+    if [[ $Exchange == Binance* ]]; then
+        curl -s "$Api" | jq -r '.[] | (.symbol + " " + .price)'
+    elif [ "$Exchange" = KuCoin ]; then
+        curl -s "$Api" | jq -r '.data.ticker[] | (.symbol + " = " + .last)'
+    elif [ "$Exchange" = KuCoinF ]; then
+        curl -s "$Api" | jq -r '.data[] | .symbol + " = " + (.lastTradePrice|tostring)'
+    elif [ "$Exchange" = MEXC ]; then
+        curl -s "$Api" | jq -r '.data[] | .symbol + " = " + .last'
+    elif [ "$Exchange" = MEXCF ]; then
+        curl -s "$Api" | jq -r '.data.[] | .symbol + " = " + (.lastPrice|tostring)'
+    elif [[ $Exchange == Bybit* ]]; then
+        curl -s "$Api" | jq -r '.result.list[] | .symbol + " = " + .lastPrice'
+    elif [ "$Exchange" = Gateio ]; then
+        curl -s "$Api" | jq -r '.[] | .currency_pair + " = " + .last'
+    elif [ "$Exchange" = GateioF ]; then
+        curl -s "$Api" | jq -r '.[] | .name + " = " + .last_price'
+    fi 2>/dev/null
+}
+
+[ "$1" = -l ] && tickers
+

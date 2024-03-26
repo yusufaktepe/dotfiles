@@ -1,24 +1,31 @@
 #!/usr/bin/env bash
 
-Cur=${1:-BTC|ETH|BNB|MATIC|SOL|AVAX|ADA|LUNA}
+Cur=${1:-BTC|ETH|SOL|AVAX|INJ}
 Fiat=${2:-USDT}
-Api=https://api.binance.com/api/v1/ticker/price
+
+source crypto_tickers
 
 shopt -s nocasematch extglob
 
 while read -ra Rate; do
-	if [[ ${Rate[*]} =~ ^($Cur)($Fiat).*$ ]]; then
-		Coin=${Rate[0]}
-		Price=${Rate[1]}
-		Price=${Price%%+(0)}
+    if [[ ${Rate[*]} =~ ^($Cur)$CurSep($Fiat)$CurSuf.*$ ]]; then
+        Coin=${Rate[0]%%$CurSep$Fiat$CurSuf}
+        [[ $Exchange == Binance* ]] && Price=${Rate[1]} || Price=${Rate[2]}
 
-		if [ "$NOTIFICATION" = true ]; then
-			Rates+=("$(printf '%-9s\t= %-10s\t\n' "$Coin" "${Price/%.}")")
-		else
-			Rates+=("$(printf '%-9s = %s\n' "$Coin" "${Price/%.}")")
-		fi
-	fi
-done < <(curl -s $Api | jq -r '.[] | (.symbol + " " + .price)' 2>/dev/null)
+        [[ $Price == *.* ]] && Price=${Price%%+(0)}
+        [[ $Price =~ ^0.* ]] && Price=.${Price#0.}
 
-printf '%s\n' "${Rates[@]}"
+        if [ "$NOTIFICATION" = true ]; then
+            Rates+=("$(printf '%-9s\t= %-10s\t\n' "$Coin" "${Price/%.}")")
+        else
+            Rates+=("$(printf '%-9s = %s\n' "$Coin" "${Price/%.}")")
+        fi
+    fi
+done < <(tickers)
+
+if [ "$SORT" = true ]; then
+    printf '%s\n' "${Rates[@]}" | sort -grk3
+else
+    printf '%s\n' "${Rates[@]}"
+fi
 

@@ -10,8 +10,8 @@ mk_list() {
     # shellcheck disable=SC2064
     trap "kill $PID 2>/dev/null" EXIT
     while kill -0 $PID 2>/dev/null; do
-        notify-send -a system -t 2000 -r 2001 -i github "Updating GitHub stars list..."
-        sleep 1
+        notify-send -a system -t 1000 -r 2001 -i github "Updating GitHub stars list..."
+        sleep 0.9
     done
     trap - EXIT
 }

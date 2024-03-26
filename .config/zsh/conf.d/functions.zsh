@@ -159,6 +159,15 @@ rpeat() { n=$1; shift; while [[ $(( n -= 1 )) -ge 0 ]]; do "$@"; sleep ${T:-3}; 
 tyco() { [ -n "$1" ] && find . -type f -name "*.$1" | wc -l ;}
 tyrm() { [ -n "$1" ] && find . -type f -name "*.$1" -exec trash-put {} \; ;}
 
-enc() { for f in "$@"; do gpg -e "$f"; done ;}
+enc() { for f in "$@"; do gpg --yes -e "$f"; done ;}
 dec() { for f in "$@"; do gpg -d "$f" > "${f%.gpg}"; done ;}
+
+
+# pacman() {
+#     case $1 in
+#         -S|-D|-S[^sih]*|-R*|-U*)
+#             sudo /usr/bin/pacman "$@" ;;
+#         *)  /bin/pacman "$@" ;;
+#     esac
+# }
 

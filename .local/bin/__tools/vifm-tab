@@ -17,9 +17,11 @@ if [ -n "$(vifm --server-list)" ]; then
 	AW=$(xdotool getactivewindow 2>/dev/null)
 	AW_INS=$(xprop -id "$AW" WM_CLASS 2>/dev/null | cut -d\" -f2)
 
-	[ "$AW_INS" != vifm ] &&
-		i3-msg -q '[instance="(?i)vifm"] focus' ||
+	if [ "$AW_INS" != vifm ]; then
+		i3-msg -q '[instance="(?i)vifm"] focus'
+	else
 		i3-msg -q 'workspace back_and_forth'
+	fi
 
 	[ -n "$Cmd" ] && vifm --server-name $VifmIns --remote -c "$Cmd"
 else

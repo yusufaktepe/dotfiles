@@ -39,7 +39,7 @@ bindings = [
     {  key  =  "Return",        mods  =  "Super|Shift",                     action  =  "CreateNewWindow"  },
     {  key  =  "NumpadDivide",                             mode =  "Vi",    action  =  "SearchForward"    },
     {  key  =  "NumpadDivide",  mods  =  "Shift",          mode =  "Vi",    action  =  "SearchBackward"   },
-    # {  key  =  "NumpadEnter",                              mode =  "~Alt",  chars   =  "\n"               },
+    {  key  =  "NumpadEnter",                              mode =  "~Alt",  chars   =  "\r"               },
     {  key  =  "Return",        mods  =  "Shift",                           chars   =  "\u001B[13;2u"     },
     {  key  =  "Return",        mods  =  "Control",                         chars   =  "\u001B[13;5u"     },
 ]

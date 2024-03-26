@@ -2,60 +2,81 @@
 
 notify() {
 	if [ "$1" = app ]; then
-		vol=$(pactl list sink-inputs | tac |
-			sed -n "/binary = \"$2\"/,/^Sink Input/p" |
-			grep -oP '[0-9]*(\.[0-9]*)?(?=%)' | head -n 1)
+		Vol=$(
+			pactl list sink-inputs | tac |
+			sed -n "/binary = \"$2.*\"/,/^Sink Input/p" |
+			grep -oP '[0-9]*(\.[0-9]*)?(?=%)' | head -n 1
+		)
 	else
-		vol=$(pamixer --get-volume-human)
-		vol=${vol%\%}
+		Vol=$(pamixer --get-volume-human)
+		Vol=${Vol%\%}
 	fi
 
-	if [ "$vol" = muted ]; then icon=audio-volume-muted
-	elif [ "$vol" -ge 70 ]; then icon=audio-volume-high
-	elif [ "$vol" -ge 40 ]; then icon=audio-volume-medium
-	elif [ "$vol" -gt 0 ]; then icon=audio-volume-low
-	else icon=audio-volume-low
+	if [ "$Vol" = muted ]; then Icon=audio-volume-muted
+	elif [ "$Vol" -ge 70 ]; then Icon=audio-volume-high
+	elif [ "$Vol" -ge 40 ]; then Icon=audio-volume-medium
+	elif [ "$Vol" -gt 0 ]; then Icon=audio-volume-low
+	else Icon=audio-volume-low
 	fi
 
 	dunstify \
 		-a volbright \
-		-i "$icon" \
+		-i "$Icon" \
 		-t 1500 \
-		-h int:value:"$vol" \
+		-h int:value:"$Vol" \
 		-h string:synchronous:volume \
 		-r 1000 \
-		"${2:-Volume}: $vol"
+		"${2:-Volume}: $Vol"
 }
 
 app() {
 	[ -z "$1" ] && exit 1
 
-	input=$(pactl list sink-inputs | tac |
-		sed -n "/binary = \"$1\"/,/^Sink Input/p")
-	[ -z "$input" ] && exit 1
+	Input=$(
+		pactl list sink-inputs | tac |
+		sed -n "/binary = \"$1.*\"/,/^Sink Input/p"
+	)
+	[ -z "$Input" ] && exit 1
 
-	sink=$(echo "$input" | grep -m 1 -oP '^Sink Input #\K[^"]+')
-	vol=$(echo "$input" | grep -oP '[0-9]*(\.[0-9]*)?(?=%)' | head -n 1)
+	Sink=$(echo "$Input" | grep -m 1 -oP '^Sink Input #\K[^"]+')
+	Vol=$(echo "$Input" | grep -oP '[0-9]*(\.[0-9]*)?(?=%)' | head -n 1)
 
 	case $2 in
-		down) pactl set-sink-input-volume "$sink" -"${3:-5}%"
+		down)
+			pactl set-sink-input-volume "$Sink" -"${3:-5}%"
 			notify app "$1" ;;
-		up) { [ "$vol" -le 95 ] &&
-			pactl set-sink-input-volume "$sink" +"${3:-5}%" ;} ||
-			pactl set-sink-input-volume "$sink" 100%
+		up)
+			if [ "$Vol" -le 95 ]; then
+				pactl set-sink-input-volume "$Sink" +"${3:-5}%"
+			elif [ "$Vol" -gt 95 ] && [ "$Vol" -lt 100 ]; then
+				pactl set-sink-input-volume "$Sink" 100%
+			elif [ "$Vol" -le 148 ]; then
+				pactl set-sink-input-volume "$Sink" +"${3:-5}%"
+			elif [ "$Vol" -gt 148 ] && [ "$Vol" -lt 153 ]; then
+				pactl set-sink-input-volume "$Sink" 153%
+			fi
 			notify app "$1" ;;
-		*) notify app "$1" ;;
+		*)
+			notify app "$1" ;;
 	esac
 }
 
 case $1 in
-	down)   pamixer -d "${2:-5}"; notify ;;
-	up)     pamixer -i "${2:-5}"; notify ;;
-	toggle) pamixer -t; notify ;;
-	mute)   pamixer -m; notify ;;
-	unmute) pamixer -u; notify ;;
-	set)    pamixer --allow-boost --set-volume "$2"; notify ;;
-	get|"") pamixer --get-volume-human ;;
-	*)      app "$@" ;;
+	down)
+		pamixer --set-limit 150 --allow-boost -d "${2:-5}"; notify ;;
+	up)
+		pamixer --set-limit 150 --allow-boost -i "${2:-5}"; notify ;;
+	toggle)
+		pamixer -t; notify ;;
+	mute)
+		pamixer -m; notify ;;
+	unmute)
+		pamixer -u; notify ;;
+	set)
+		pamixer --set-limit 150 --allow-boost --set-volume "$2"; notify ;;
+	get|"")
+		pamixer --get-volume-human ;;
+	*)
+		app "$@" ;;
 esac
 

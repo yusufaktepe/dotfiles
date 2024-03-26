@@ -56,6 +56,7 @@ set $calc LC_NUMERIC=en_US.UTF-8 rofi -show calc -modi calc -no-show-match \
 bindsym $mod+d $exec rofi -show combi
 bindsym $mod+c $exec $calc
 bindsym $mod+i $exec rofimoji
+bindsym $mod+Shift+i $exec rofimoji -f nerd_font
 bindsym XF86Calculator $exec $calc
 bindsym $caps+d $exec brbw
 bindsym $caps+f $exec rofi-finder
@@ -141,6 +142,8 @@ bindsym XF86AudioLowerVolume $exec vol down
 bindsym XF86AudioRaiseVolume $exec vol up
 bindsym Shift+XF86AudioLowerVolume $exec smc vol down
 bindsym Shift+XF86AudioRaiseVolume $exec smc vol up
+bindsym Ctrl+XF86AudioLowerVolume $exec vol vivaldi down
+bindsym Ctrl+XF86AudioRaiseVolume $exec vol vivaldi up
 bindsym XF86AudioMicMute     $exec toggle audio
 bindsym $mod+XF86AudioLowerVolume $exec ifwin -t -e pavucontrol
 bindsym $mod+XF86AudioRaiseVolume $exec ifterm -t -i blockterm_pulsemixer -e pulsemixer
@@ -443,7 +446,7 @@ for_window [instance="dropdown_*"] move position center
 exec_always $N launch_polybar
 $exec kpass
 $exec "sleep 2; vivaldi-stable --start-maximized"
-$exec "sleep 5; ifterm -h -i vifm -e vifm-tab"
+$exec "sleep 5; vifm-tab"
 # $exec "sleep 7; telegram-desktop"
 $exec "sleep 9; crypto_bar"
 # $exec "sleep 10; spotify"

@@ -25,7 +25,11 @@ return {
   -- },
   {
     "rmehri01/onenord.nvim",
+    lazy = false,
+    priority = 1000,
     opts = {
+      -- borders = false,
+      -- fade_nc = true,
       styles = {
         comments = "italic",
       },
