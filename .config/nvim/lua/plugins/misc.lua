@@ -1,8 +1,8 @@
 return {
 
   -- indentation detection
-  -- { "Darazaki/indent-o-matic" },
-  { "tpope/vim-sleuth" },
+  { "Darazaki/indent-o-matic" },
+  -- { "tpope/vim-sleuth" },
 
   -- personal wiki
   {

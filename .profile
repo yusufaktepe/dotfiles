@@ -47,7 +47,8 @@ export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 
 # Adds `~/.local/bin` and all subdirectories to $PATH
 Path=$(find "$HOME/.local/bin" -name '.*' -prune -o -type d -printf %p:)
-export PATH="$PATH:$GOPATH/bin:${Path%%:}"
+Path_bob=$XDG_DATA_HOME/bob/nvim-bin
+export PATH="$Path_bob:$PATH:$GOPATH/bin:${Path%%:}"
 
 # Others
 export SUDO_ASKPASS="$XDG_BIN_HOME/menus/rofi-askpass"
