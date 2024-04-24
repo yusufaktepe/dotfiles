@@ -4,6 +4,9 @@ return {
   { "Darazaki/indent-o-matic" },
   -- { "tpope/vim-sleuth" },
 
+  -- auto indent with <TAB> when cursor at the first column
+  { "vidocqh/auto-indent.nvim" },
+
   -- personal wiki
   {
     "vimwiki/vimwiki",

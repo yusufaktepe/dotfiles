@@ -1,0 +1,61 @@
+[options]
+lazy-load=1
+sort=1
+sort-key=MTIME
+browse=1
+max-depth=1
+hide-info-box=1
+scale-mode-screen-fraction=1
+thumbnail-size=256x256
+disable-backends=poppler,libav,archive,archive_cbx
+
+[keybindings]
+             p  { goto_file_relative(-1); }
+             n  { goto_file_relative(1); }
+             g  { goto_file_byindex(0) }
+             G  { goto_file_byindex(-1) }
+      <Return>  { montage_mode_enter(); }
+             m  { toggle_mark(); }
+             M  { command(-xargs -r -I '{}' realpath {}); }
+             |  { flip_horizontally(); }
+             _  { flip_vertically(); }
+     <greater>  { rotate_right(); }
+        <less>  { rotate_left(); }
+             q  { command(-xargs -r -I '{}' realpath {}); quit(); }
+      <Escape>  { command(-xargs -r -I '{}' realpath {}); quit(); }
+             w  { command(pqiv_handler setbg); }
+             a  { command(pqiv_handler cover); }
+             g  { command(pqiv_handler gimp); }
+        <Alt>i  { command(pqiv_handler info); }
+        <Alt>r  { command(pqiv_handler rotate); }
+        <Alt>R  { command(pqiv_handler Rotate); }
+        <Alt>f  { command(pqiv_handler flop); }
+             c  { command(pqiv_handler clip); }
+             y  { command(pqiv_handler path); }
+        <Alt>c  { command(pqiv_handler cp); }
+        <Alt>m  { command(pqiv_handler mv); }
+      <Delete>  { command(pqiv_handler del); }
+             d  { command(pqiv_handler del); }
+
+@MONTAGE {
+             f  { montage_mode_follow(asdgqwertzxcvb); }
+             p  { montage_mode_shift_x(-1); }
+             n  { montage_mode_shift_x(1); }
+             g  { goto_file_byindex(0) }
+             G  { goto_file_byindex(-1) }
+             m  { toggle_mark(); }
+             M  { command(-xargs -r -I '{}' realpath {}); }
+             q  { command(-xargs -r -I '{}' realpath {}); quit(); }
+             w  { command(pqiv_handler setbg); }
+             a  { command(pqiv_handler cover); }
+             g  { command(pqiv_handler gimp); }
+        <Alt>i  { command(pqiv_handler info); }
+             c  { command(pqiv_handler clip); }
+             y  { command(pqiv_handler path); }
+        <Alt>c  { command(pqiv_handler cp); }
+        <Alt>m  { command(pqiv_handler mv); }
+      <Delete>  { command(pqiv_handler del); }
+             d  { command(pqiv_handler del); }
+}
+
+# vim:ft=dosini

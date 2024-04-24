@@ -138,14 +138,16 @@ return {
   },
   {
     "nvimdev/dashboard-nvim",
+    commit = "354e7bd", -- TODO: https://github.com/nvimdev/dashboard-nvim/issues/443
     event = "VimEnter",
     opts = function()
       local logo = [[
-    NN   NN EEEEEEE  OOOOO  VV     VV IIIII MM    MM   
-    NNN  NN EE      OO   OO VV     VV  III  MMM  MMM   
-    NN N NN EEEEE   OO   OO  VV   VV   III  MM MM MM   
-    NN  NNN EE      OO   OO   VV VV    III  MM    MM   
-    NN   NN EEEEEEE  OOOO0     VVV    IIIII MM    MM   
+ ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+ ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+ ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+ ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+ ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+ ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
       ]]
 
       logo = string.rep("\n", 8) .. logo .. "\n\n"
@@ -161,7 +163,7 @@ return {
           header = vim.split(logo, "\n"),
           -- stylua: ignore
           center = {
-            { action = LazyVim.telescope("files"),                                    desc = " Find File",       icon = " ", key = "f" },
+            { action = LazyVim.telescope("files"),                                 desc = " Find File",       icon = " ", key = "f" },
             { action = "ene | startinsert",                                        desc = " New File",        icon = " ", key = "n" },
             { action = "Telescope oldfiles",                                       desc = " Recent Files",    icon = " ", key = "r" },
             { action = "Telescope live_grep",                                      desc = " Find Text",       icon = " ", key = "g" },
@@ -174,7 +176,8 @@ return {
           footer = function()
             local stats = require("lazy").stats()
             local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-            return { "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
+            local version = vim.split(vim.fn.execute('version'), '\n')[3]:sub(7,16)
+            return { "⚡ Neovim " .. "[" .. version .. "] loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
           end,
         },
       }

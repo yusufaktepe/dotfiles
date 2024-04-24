@@ -1,0 +1,36 @@
+#!/bin/sh
+
+File=$(realpath "$2")
+
+_dirs() {
+	printf '..\n../..\n'
+	sed "s/\s.*#.*$//;/^\s*$/d" "$XDG_DATA_HOME/dir.list" | awk '{print $2}'
+}
+
+case "$1" in
+    cover) convert "$File" -resize 500x500\> -quality 80% cover.jpg ;;
+    setbg) setbg "$File" & ;;
+    rotate) convert -rotate 90 "$File" "$File" ;;
+    Rotate) convert -rotate -90 "$File" "$File" ;;
+    flop) convert -flop "$File" "$File" ;;
+    gimp) setsid -f gimp "$File" >/dev/null 2>&1 ;;
+    info) rofi -dmenu -p 'File information' -mesg "$(mediainfo "$File")" ;;
+    clip) xclip -selection clipboard -target image/png "$File" ;;
+    cp)
+        DestDir=$(_dirs | dmenu -l 20 -i -p "Copy file(s) to where?" | sed "s|~|$HOME|g")
+        [ -z "$DestDir" ] && exit
+        cp "$File" "$DestDir" &&
+            notify-send -a system -i "$File" "$File copied to $DestDir" & ;;
+    mv)
+        DestDir=$(_dirs | dmenu -l 20 -i -p "Move file(s) to where?" | sed "s|~|$HOME|g")
+        [ -z "$DestDir" ] && exit
+        mv "$File" "$DestDir" &&
+            notify-send -a system -i "$File" "$File moved to $DestDir" & ;;
+    path)
+        printf '%s' "$File" | xclip -selection clipboard &&
+            notify-send -a system "Image path copied to clipboard" & ;;
+    del)
+        [ "$(printf "No\nYes" | dmenu -i -p "Really delete $File?")" = "Yes" ] &&
+            rm "$File" && notify-send -a system "$File deleted." ;;
+esac 2>/dev/null
+

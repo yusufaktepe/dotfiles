@@ -68,6 +68,8 @@ filextype {*.svg},<image/svg+xml> inkscape %f %i
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.tif,*.tiff,*.xpm,*.ico},<image/*>
 	\ {View in qimgv}
 	\ qimgv %c 2>/dev/null | vifm-select &,
+	\ {View in pqiv}
+	\ pqiv %c 2>/dev/null | vifm-select &,
 	\ {View in sxiv}
 	\ sxivr -d %c -o | vifm-select &,
 	\ {Edit with GIMP}
@@ -273,7 +275,8 @@ fileviewer *.json
 fileviewer {*.gpg},<application/pgp-encrypted>
 	\ gpg -qd -- %c,
 
-fileviewer */,.*/,../ tree -aCL 1 -I .git --dirsfirst %c
+" fileviewer */,.*/,../ tree -aCL 1 -I .git --dirsfirst %c
+fileviewer */,.*/,../ eza -A --group-directories-first --no-quotes --color=always --icons=always --tree --level=1 %c
 
 fileviewer .*[!/],*[!/]
 	\ highlight -O xterm256 -s pablo --force %c,
