@@ -61,8 +61,10 @@ bindsym XF86Calculator $exec $calc
 bindsym $caps+d $exec brbw
 bindsym $caps+f $exec rofi-finder
 # bindsym XF86Launch2 $exec rofi -show combi
-bindsym XF86Launch9 $exec rofitr
+bindsym XF86Launch9 $exec rofitr !
 bindsym $caps+t $exec rofitr -s
+bindsym $agr+space $exec rofitr !d
+bindsym $mod$caps+g $exec rofi-gh-stars
 
 # #---Clipboard management---# #
 bindsym Ctrl+quotedbl $exec gpaste
@@ -89,6 +91,8 @@ bindsym $mod+Shift+F4 $exec firefox --private-window
 bindsym $mod+Shift+F5 $exec google-chrome-stable --incognito
 bindsym $mod+Shift+F6 $exec brave --incognito
 bindsym $mod+m $exec ifwin -e telegram-desktop -c telegramdesktop
+
+bindsym Ctrl+space $exec rofi-keyword
 
 ## Caps+
 bindsym $caps+e $exec nv
@@ -127,6 +131,7 @@ bindsym $caps+F3 $exec ifterm -t -i blockterm_ncdu -e 'ncdu --color dark --exclu
 bindsym XF86MonBrightnessUp $exec brightness inc 2.90
 bindsym XF86MonBrightnessDown $exec brightness dec 2.90
 bindsym --release $mod+BackSpace $exec "sleep 1; brightness off; numlockx off"
+bindsym --release KP_Prior $exec "sleep 1; brightness off; numlockx off"
 
 bindsym XF86Display $exec arandr && setbg
 # bindsym XF86TouchpadOff $exec toggle touchpad
@@ -371,11 +376,11 @@ for_window [workspace="$ws1|$ws2|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
 # assign [window_role="browser"]                 $ws1
-assign [class="(?i)Vivaldi|Brave-browser"]       $ws1
+assign [class="(?i)Vivaldi"]                     $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
 # assign [instance="Neovim"]                       $ws3
-assign [class="(?i)Opera|firefox"]               $ws4
+assign [class="(?i)Opera|firefox|Brave-browser"] $ws4
 assign [class="Code|obsidian"]                   $ws5
 assign [class="(?i)telegram"]                    $ws6
 assign [class="Audacity"]                        $ws7
@@ -434,6 +439,7 @@ no_focus [instance="webcam"]
 for_window [instance="dropdown_*"] floating enable, move scratchpad, sticky enable, scratchpad show
 for_window [instance="dropdown_tmuxi"] border pixel 3, resize set 970 585
 for_window [instance="dropdown_*"] move position center
+for_window [instance="keybkm"] floating enable border pixel 0, resize set 216 50, move position 1703 1049
 
 # switch to workspace with urgent window automatically
 #for_window [urgent=latest] focus
@@ -447,11 +453,11 @@ exec_always $N launch_polybar
 $exec kpass
 $exec "sleep 2; vivaldi-stable --start-maximized"
 $exec "sleep 5; vifm-tab"
-# $exec "sleep 7; telegram-desktop"
+$exec "sleep 7; telegram-desktop"
 $exec "sleep 9; crypto_bar"
 # $exec "sleep 10; spotify"
-$exec "sleep 7; wmctrl -x -r 'vifm.kitty' -b remove,demands_attention"
-# $exec "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
+$exec "sleep 7; wmctrl -x -r 'vifm' -b remove,demands_attention"
+$exec "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
 
 #=====================================================================
 # Colors

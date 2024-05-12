@@ -33,7 +33,7 @@ autocmd("BufEnter", {
     vim.opt.shada = ""
   end,
 })
-autocmd("BufEnter", { pattern = "*.zsh_history,/tmp/dir*", command = "set clipboard=" })
+autocmd("BufEnter", { pattern = "*.zsh_history,/tmp/dir*", command = "set wrap clipboard=" })
 autocmd("BufEnter", { pattern = "/tmp/*gpaste*", command = "set cmdheight=0 | map Q ZZ" })
 
 autocmd("BufWritePost", { pattern = "*Xresources,*Xdefaults", command = "!xrdb %" })

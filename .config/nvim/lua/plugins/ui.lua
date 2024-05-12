@@ -138,8 +138,7 @@ return {
   },
   {
     "nvimdev/dashboard-nvim",
-    commit = "354e7bd", -- TODO: https://github.com/nvimdev/dashboard-nvim/issues/443
-    event = "VimEnter",
+    lazy = false, -- As https://github.com/nvimdev/dashboard-nvim/pull/450, dashboard-nvim shouldn't be lazy-loaded to properly handle stdin.
     opts = function()
       local logo = [[
  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗

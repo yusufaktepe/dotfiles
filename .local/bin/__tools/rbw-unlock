@@ -3,10 +3,13 @@
 # $ rbw config set pinentry pinentry-tty
 
 BW_PASS=$(pass services/vault.bitwarden.com | head -n1) \
+BW_OTP=$(pass otp services/vault.bitwarden.com) \
 expect -c "
-	spawn rbw unlock
-	expect \"Master Password: \"
-	send \"$::env(BW_PASS)\r\"
-	interact
+    spawn rbw unlock
+    expect \"Master Password: \"
+    send \"$::env(BW_PASS)\r\"
+    expect \"Authenticator App: \"
+    send \"$::env(BW_OTP)\r\"
+    interact
 " >/dev/null
 
