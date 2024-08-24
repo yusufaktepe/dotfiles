@@ -48,7 +48,7 @@ disable-backends=poppler,libav,archive,archive_cbx
              q  { command(-xargs -r -I '{}' realpath {}); quit(); }
              w  { command(pqiv_handler setbg); }
              a  { command(pqiv_handler cover); }
-             g  { command(pqiv_handler gimp); }
+        <Alt>g  { command(pqiv_handler gimp); }
         <Alt>i  { command(pqiv_handler info); }
              c  { command(pqiv_handler clip); }
              y  { command(pqiv_handler path); }

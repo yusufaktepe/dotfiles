@@ -42,7 +42,7 @@ while read -ra HistFiles; do
 			break
 		done < "$HistFile"
 	}
-done < <(find . -type f -printf "%T+ %P\n" | sort -r)
+done < <(find . ! -name '.git*' -type f -printf "%T+ %P\n" | sort -r)
 
 [[ -z "$HistFile" ]] && exit
 

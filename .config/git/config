@@ -28,9 +28,12 @@
 	f           = fetch
 	g           = grep --break --heading --line-number
 	last        = show --stat HEAD
-	lg          = log --graph --abbrev-commit --date=relative \
-			--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset \
-			%s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	# lg          = log --graph --abbrev-commit --date=relative \
+	# 		--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset \
+	# 		%s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+	lg          = !command -v serie >/dev/null && serie || \
+		git log --graph --abbrev-commit --date=relative \
+		--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	lgdel       = log --diff-filter=D --summary
 	ls          = ls-files
 	p           = push

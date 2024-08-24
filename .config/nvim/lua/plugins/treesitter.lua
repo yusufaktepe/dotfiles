@@ -29,6 +29,7 @@ return {
         "luap",
         "markdown",
         "markdown_inline",
+        "printf",
         "make",
         "meson",
         "ninja",

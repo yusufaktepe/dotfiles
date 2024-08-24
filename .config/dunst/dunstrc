@@ -487,6 +487,13 @@
 #    appname = "some_volume_notifiers"
 #    set_stack_tag = "volume"
 #
+
+[ignore_stg]
+   appname = Firefox
+   summary = "Simple Tab Groups"
+   skip_display = true
+   history_ignore = yes
+
 [ignore]
     summary = "*Windscribe*"
     format = ""

@@ -25,13 +25,27 @@ notify() {
 		"$brightness"
 }
 
+kboff() {
+	LKB=/sys/class/leds/tpacpi::kbd_backlight/brightness
+	LPWR=/sys/class/leds/tpacpi::power/brightness
+
+	for L in $LKB $LPWR; do
+		[ -e "$L" ] || continue
+		read -r StatusL < "$L"
+		[ $StatusL != 0 ] && printf 0 > "$L"
+	done
+	for LC in /sys/class/leds/*capslock/brightness; do
+		[ -e "$LC" ] || continue
+		printf 1 > "$LC"; printf 0 > "$LC"
+	done
+}
+
+
 case $1 in
 	inc) brightnessctl set "+${2:-5}%" >/dev/null && { notify; update_bar ;} ;;
 	dec) brightnessctl set "${2:-5}%-" >/dev/null && { notify; update_bar ;} ;;
 	set) brightnessctl set "${2:-27}%" >/dev/null && { notify; update_bar ;} ;;
-	off)
-		xset dpms force off
-		KBL=/sys/class/leds/tpacpi::kbd_backlight/brightness
-		[ -e "$KBL" ] && { printf 0 > $KBL; capsloff ;} ;;
+	kboff) kboff ;;
+	off) xset dpms force off; kboff ;;
 esac
 

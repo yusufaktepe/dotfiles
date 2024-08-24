@@ -4,7 +4,7 @@ List=$XDG_CACHE_HOME/rofi-finder.list
 ListIgnore=$XDG_DATA_HOME/rofi/finder_ignore
 
 mklist() {
-	locate "/home/*" "/data/*" |
+	locate /home/* |
 		grep -Ev "($(tr -d '\t\n' < "$ListIgnore" | sed "s|~|$HOME|g"))" > "$List"
 }
 
@@ -21,7 +21,7 @@ menu() {
 
 Sys=false
 case $1 in
-	sys) Selected=$(locate '/etc/*' '/usr/*' | menu) ;;
+	sys) Selected=$(fd . /etc /usr | menu) ;;
 	"") Selected=$(menu < "$List") ;;
 esac
 Ret=$?

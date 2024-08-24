@@ -2,8 +2,8 @@
 
 #--: Binance
 #------------------------------------------------------------------------------
-# Cur=${1:-BTCUSDT|ETHUSDT|AVAXUSDT|SEIUSDT|AAVEUSDT|ARBUSDT}
-# Api=https://api.binance.com/api/v1/ticker/price
+Cur=${1:-BTCUSDT|ETHUSDT|SEIUSDT|CHRUSDT|INJUSDT|VANRYUSDT}
+Api=https://api.binance.com/api/v1/ticker/price
 # Api=https://fapi.binance.com/fapi/v1/ticker/price
 #------------------------------------------------------------------------------
 #--: KuCoin
@@ -23,8 +23,8 @@
 # Api="https://api.bybit.com/v5/market/tickers?category=linear"
 #------------------------------------------------------------------------------
 #--: Gate.io
-Cur=${1:-BTC_USDT|ETH_USDT|SNX_USDT|AVAX_USDT|ARB_USDT|VANRY_USDT}
-Api=https://api.gateio.ws/api/v4/spot/tickers
+# Cur=${1:-BTC_USDT|ETH_USDT|SNX_USDT|AVAX_USDT|ARB_USDT|VANRY_USDT}
+# Api=https://api.gateio.ws/api/v4/spot/tickers
 # Api=https://api.gateio.ws/api/v4/futures/usdt/contracts
 # Fiat=USDT
 

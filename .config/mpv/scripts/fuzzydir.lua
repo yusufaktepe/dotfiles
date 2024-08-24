@@ -15,8 +15,12 @@
 --[[
     Configuration:
 
+    # enabled
+
+    Determines whether the script is enabled or not
+
     # max_search_depth
-    
+
     Determines the max depth of recursive search, should be >= 1
 
     Examples for "sub-file-paths = **":
@@ -25,7 +29,7 @@
 
     Please be careful when setting this value too high as it can result in awful performance or even stack overflow
 
-    
+
     # discovery_threshold
 
     fuzzydir will skip paths which contain more than discovery_threshold directories in them
@@ -37,15 +41,28 @@
     - video.mp4
 
     Use 0 to disable this behavior completely
+
+
+    # use_powershell
+
+    fuzzydir will use PowerShell to traverse directories when it's available
+
+    Can be faster in some cases, but can also be significantly slower
 ]]
 
-local max_search_depth = 3
-local discovery_threshold = 10
+local msg = require 'mp.msg'
+local utils = require 'mp.utils'
+local options = require 'mp.options'
+
+o = {
+    enabled = true,
+    max_search_depth = 3,
+    discovery_threshold = 10,
+    use_powershell = false,
+}
+options.read_options(o, _, function() end)
 
 ----------
-
-local utils = require "mp.utils"
-local msg = require "mp.msg"
 
 local default_audio_paths = mp.get_property_native("options/audio-file-paths")
 local default_sub_paths = mp.get_property_native("options/sub-file-paths")
@@ -128,12 +145,15 @@ end
 
 -- Platform-dependent optimization
 
-local powershell_version = call_command({
-    "powershell",
-    "-NoProfile",
-    "-Command",
-    "$Host.Version.Major",
-})
+local powershell_version = nil
+if o.use_powershell then
+    powershell_version = call_command({
+        "powershell",
+        "-NoProfile",
+        "-Command",
+        "$Host.Version.Major",
+    })
+end
 if powershell_version ~= nil then
     powershell_version = tonumber(powershell_version[1])
 end
@@ -145,7 +165,7 @@ msg.debug("PowerShell version", powershell_version)
 function fast_readdir(path)
     if powershell_version >= 3 then
         msg.trace("Scanning", path, "with PowerShell")
-        return call_command({
+        result = call_command({
             "powershell",
             "-NoProfile",
             "-Command",
@@ -157,10 +177,14 @@ function fast_readdir(path)
                 Write-Host ""
             } ]],
         })
+        msg.trace("Finished scanning", path, "with PowerShell")
+        return result
     end
 
     msg.trace("Scanning", path, "with default readdir")
-    return utils.readdir(path, "dirs")
+    result = utils.readdir(path, "dirs")
+    msg.trace("Finished scanning", path, "with default readdir")
+    return result
 end
 
 -- Platform-dependent optimization end
@@ -168,7 +192,7 @@ end
 function traverse(search_path, current_path, level, cache)
     local full_path = utils.join_path(search_path, current_path)
 
-    if level > max_search_depth then
+    if level > o.max_search_depth then
         msg.trace("Traversed too deep, skipping scan for", full_path)
         return {}
     end
@@ -184,7 +208,7 @@ function traverse(search_path, current_path, level, cache)
     if discovered_paths == nil then
         -- noop
         msg.debug("Unable to scan " .. full_path .. ", skipping")
-    elseif discovery_threshold > 0 and #discovered_paths > discovery_threshold then
+    elseif o.discovery_threshold > 0 and #discovered_paths > o.discovery_threshold then
         -- noop
         msg.debug("Too many directories in " .. full_path .. ", skipping")
     else
@@ -227,7 +251,8 @@ function explode(raw_paths, search_path, cache)
 end
 
 function explode_all()
-    msg.debug("max_search_depth = ".. max_search_depth .. ", discovery_threshold = " .. discovery_threshold)
+    if not o.enabled then return end
+    msg.debug("max_search_depth = ".. o.max_search_depth .. ", discovery_threshold = " .. o.discovery_threshold)
 
     local video_path = mp.get_property("path")
     local search_path, _ = utils.split_path(video_path)
@@ -240,10 +265,16 @@ function explode_all()
     foreach(audio_paths, function(it) msg.debug("Adding to audio-file-paths:", it) end)
     mp.set_property_native("options/audio-file-paths", audio_paths)
 
+    msg.verbose("Done expanding audio-file-paths")
+
     foreach(default_sub_paths, function(it) msg.debug("sub-file-paths:", it) end)
     local sub_paths = explode(default_sub_paths, search_path, cache)
     foreach(sub_paths, function(it) msg.debug("Adding to sub-file-paths:", it) end)
     mp.set_property_native("options/sub-file-paths", sub_paths)
+
+    msg.verbose("Done expanding sub-file-paths")
+
+    msg.debug("Done expanding paths")
 end
 
 mp.add_hook("on_load", 50, explode_all)

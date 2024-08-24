@@ -11,10 +11,10 @@ Lock=$XDG_DATA_HOME/backgrounds/lock.png
 
 	# resize
 	[ "$(identify -format "%wx%h" "$1")" != "$res" ] &&
-		convert "$Wall" -resize "$res"\>\! "$Wall"
+		magick "$Wall" -resize "$res"\>\! "$Wall"
 
 	# dim for lockscreen
-	convert "$Wall" -fill black -colorize 40% "$Lock"
+	magick "$Wall" -fill black -colorize 40% "$Lock"
 
 	notify-send -a system -i "$Wall" "Wallpaper changed."
 }

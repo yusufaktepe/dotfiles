@@ -15,6 +15,7 @@ kb_bind[9]='t'
 kb_bind[10]='y'
 kb_bind[11]='c'
 kb_bind[12]='d'
+kb_bind[13]='r'
 
 kb_act[1]="bro-open vivaldi-stable --start-maximized"
 kb_act[2]="bro-open firefox"
@@ -28,6 +29,7 @@ kb_act[9]="bro-open tor-browser --allow-remote"
 kb_act[10]="bro-open mpv"
 kb_act[11]="bro-open mpv -c"
 kb_act[12]="bro-open dmenuhandler"
+kb_act[13]="bro-open rbw"
 
 # kb_msg[1]='vivaldi'
 # kb_msg[2]='opera'

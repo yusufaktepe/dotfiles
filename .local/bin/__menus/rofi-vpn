@@ -9,7 +9,7 @@ nmcon() {
         Txt='VPN deactivated'; Icon=network-wireless
     fi
 
-    notify-send -a system -i "$Icon" "$Txt" "$2"
+    notify-send -r 2002 -a system -i "$Icon" "$Txt" "$2"
 }
 
 mapfile -t Cons < <(nmcli -t -f NAME,TYPE con show)

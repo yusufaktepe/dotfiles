@@ -54,13 +54,6 @@ return {
     },
   },
 
-  -- Incremental LSP renaming
-  {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    opts = {},
-  },
-
   -- alignment
   { "junegunn/vim-easy-align", cmd = "EasyAlign" },
 

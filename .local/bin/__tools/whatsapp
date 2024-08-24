@@ -1,4 +1,21 @@
 #!/bin/sh
 
-xdg-open "https://web.whatsapp.com/send?phone=${1}&text&app_absent=0"
+WA_CLASS="web.whatsapp.com__send"
+URL="https://web.whatsapp.com/send?phone=${1:-$PHONE}&text&app_absent=0"
+
+IFS=\" read -r _ AW _ _ <<-+++
+    $(xprop -id "$(xdotool getactivewindow 2>/dev/null)" WM_CLASS 2>/dev/null)
++++
+
+if wmctrl -lx | grep -iq "$WA_CLASS"; then
+    if [ "$AW" = "$WA_CLASS" ]; then
+        # i3-msg -q kill
+        # i3-msg -q "[instance=\"$WA_CLASS\"] move scratchpad"
+        i3-msg -q 'workspace back_and_forth'
+    else
+        i3-msg -q "[instance=\"$WA_CLASS\"] focus"
+    fi
+else
+    setsid -f vivaldi --app="$URL" >/dev/null 2>&1
+fi
 

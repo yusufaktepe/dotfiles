@@ -5,13 +5,19 @@ PROMPT=''
 
 kb_bind[1]='q'
 kb_bind[2]='g'
-kb_bind[3]='minus'
+kb_bind[3]='p'
+kb_bind[4]='minus'
+kb_bind[5]='y'
 
 kb_act[1]="autotype mail"
 kb_act[2]="autotype mail2"
-kb_act[3]="autotype sep"
+kb_act[3]="autotype mail3"
+kb_act[4]="autotype sep"
+kb_act[5]="autotype name"
 
 kb_msg[1]='mail'
 kb_msg[2]='mail2'
-kb_msg[3]='sep'
+kb_msg[3]='mail3'
+kb_msg[4]='sep'
+kb_msg[5]='name'
 

@@ -34,8 +34,9 @@ application/vnd.rar=engrampa.desktop
 x-scheme-handler/magnet=org.qbittorrent.qBittorrent.desktop
 application/x-bittorrent=org.qbittorrent.qBittorrent.desktop
 x-scheme-handler/mailto=mailto.desktop
-x-scheme-handler/tg=userapp-Telegram Desktop-DICSH1.desktop
+x-scheme-handler/tg=org.telegram.desktop.desktop
 x-scheme-handler/whatsapp=whatsapp.desktop
+x-scheme-handler/tonsite=org.telegram.desktop.desktop
 
 [Added Associations]
 x-scheme-handler/http=vivaldi-stable.desktop;firefox.desktop;vivaldi-snapshot.desktop;

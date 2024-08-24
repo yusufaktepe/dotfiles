@@ -21,6 +21,7 @@ export FM="vifm-tab"
 # Man Pager
 export MANPAGER="nvimpager -p"
 export MANWIDTH=174
+export NVIMPAGER_NVIM=/bin/nvim # issue with nvimpager 'exec -a'
 
 # Output format for GNU time
 export TIME=$'$ \033[3;31m%C\033[0m\nreal\t%e\nuser\t%U\nsys\t%S\ncpu\t%P'
@@ -48,7 +49,7 @@ export TERMINFO_DIRS="$XDG_DATA_HOME/terminfo:/usr/share/terminfo"
 # Adds `~/.local/bin` and all subdirectories to $PATH
 Path=$(find "$HOME/.local/bin" -name '.*' -prune -o -type d -printf %p:)
 Path_bob=$XDG_DATA_HOME/bob/nvim-bin
-export PATH="$Path_bob:$PATH:$GOPATH/bin:${Path%%:}"
+export PATH="$Path_bob:$PATH:$GOPATH/bin:$CARGO_HOME/bin:${Path%%:}"
 
 # Others
 export SUDO_ASKPASS="$XDG_BIN_HOME/menus/rofi-askpass"

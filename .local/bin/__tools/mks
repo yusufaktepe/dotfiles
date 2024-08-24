@@ -1,0 +1,11 @@
+#!/bin/sh
+
+Script="$XDG_BIN_HOME/__scratch/$1"
+
+[ ! -f "$Script" ] && {
+    printf '%s\n\n' "#!/bin/bash" >> "$Script"
+    chmod u+x "$Script"
+}
+
+$EDITOR +$ "$Script"
+

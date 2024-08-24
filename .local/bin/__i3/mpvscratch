@@ -8,8 +8,6 @@ if [ "$AW_CLASS" = mpv ]; then
 	mpvc pa
 	i3-msg -q move scratchpad
 else
-	KBL=/sys/class/leds/tpacpi::kbd_backlight/brightness
-	[ -e "$KBL" ] && { printf 0 > $KBL; capsloff ;}
 	playerctl pause
 	i3-msg -q '[class="mpv"] focus'
 	mpvc run set fullscreen yes

@@ -44,6 +44,7 @@ alias ka='killall'
 alias yt='yt-dlp --embed-metadata -i'
 alias yta='yt -x -f bestaudio/best'
 alias YT='youtube-viewer'
+alias gdl='gallery-dl --cookies-from-browser vivaldi'
 
 alias publicip='curl -sf ifconfig.co'
 alias lspath='printf "%b\n" "${PATH//:/\\n}"'

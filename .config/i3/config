@@ -81,12 +81,12 @@ bindsym $caps+Shift+a $exec dunstctl context
 # #---Start Applications---# #
 bindsym $mod+F1 $exec ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 $exec vifm-tab
-bindsym $mod+F3 $exec ifwin -e 'vivaldi-stable --start-maximized'
+bindsym $mod+F3 $exec ifwin -e 'vivaldi --start-maximized'
 bindsym $mod+F4 $exec ifwin -e firefox
 bindsym $mod+F5 $exec ifwin -e google-chrome-stable
 bindsym $mod+F6 $exec ifwin -e brave
 bindsym $mod+Shift+F2 $exec ifwin -e pcmanfm-qt
-bindsym $mod+Shift+F3 $exec vivaldi-stable --start-maximized --incognito
+bindsym $mod+Shift+F3 $exec vivaldi --start-maximized --incognito
 bindsym $mod+Shift+F4 $exec firefox --private-window
 bindsym $mod+Shift+F5 $exec google-chrome-stable --incognito
 bindsym $mod+Shift+F6 $exec brave --incognito
@@ -107,6 +107,7 @@ bindsym $caps+c $exec crow-translate
 bindsym $caps+v $exec ifwin -e code
 bindsym $caps+o $exec ifwin -p electron -e obsidian
 bindsym $mod+$caps+c $exec ifwin -s -e gcolor3
+bindsym $mod+odiaeresis $exec whatsapp
 
 bindsym --release $caps+gbreve     $exec xdotool key --clearmodifiers parenleft
 bindsym --release $caps+udiaeresis $exec xdotool key --clearmodifiers parenright
@@ -214,6 +215,9 @@ bindsym $mod+Shift+F11 fullscreen toggle global
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+e layout toggle tabbed split
 bindsym $mod+w layout stacking
+
+# promote the focused window by swapping it with the largest window
+bindsym $mod+Ctrl+space $exec i3-promote-window.py
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -388,11 +392,13 @@ assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
 assign [class="(?i)thunderbird"]                 $ws8
 assign [class="qBittorrent"]                     $ws9
 assign [class="cantata|strawberry"]              $ws10
-for_window [class="Spotify"] move --no-auto-back-and-forth to workspace   $ws10
+for_window [instance="web.whatsapp.com*"] move --no-auto-back-and-forth to workspace $ws6
+for_window [class="Spotify"] move --no-auto-back-and-forth to workspace $ws10
 
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
-for_window [class="Catfish|flameshot|Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|Yad|zenity"] floating enable
+for_window [class="(?i)nm-connection-editor" title="Editing.*" ] resize set 603 580
+for_window [class="Catfish|flameshot|(?i)Gcolor3|(?i)Gnome-calc|Gnome-disks|GParted|Yad|zenity"] floating enable
 for_window [class="Lxappearance|(?i)Qalculate|qt5ct|qt6ct|Lightdm-settings|Engrampa|Gucharmap|Uget-gtk"] floating enable border normal
 for_window [class="(?i)megasync" window_type=normal title="^(?!Stream*|Transfer*)"] floating enable, move position +964+20
 # for_window [class="(?i)telegram"] floating enable sticky enable, resize set 800 480, move position center
@@ -423,6 +429,8 @@ for_window [title="^Confirm File Replacing$"] move position center
 for_window [title="^Picture in picture$"] resize set 850 479, move position 1069 601
 for_window [class="Dragon-drop"] sticky enable
 for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, move position center
+# for_window [instance="web.whatsapp.com*"] resize set 1134 830, move position center, sticky enable
+for_window [instance="web.whatsapp.com*"] floating disable
 #_ Floating instances
 for_window [instance="blockterm_*"] floating enable border pixel 2
 for_window [instance="Blockterm_*"] floating enable border pixel 3, resize set 1920 1056, move position center
@@ -451,7 +459,7 @@ for_window [instance="keybkm"] floating enable border pixel 0, resize set 216 50
 
 exec_always $N launch_polybar
 $exec kpass
-$exec "sleep 2; vivaldi-stable --start-maximized"
+$exec "sleep 2; vivaldi --start-maximized"
 $exec "sleep 5; vifm-tab"
 $exec "sleep 7; telegram-desktop"
 $exec "sleep 9; crypto_bar"
@@ -515,6 +523,7 @@ client.background       $black
 # workspace $ws9 gaps inner 0
 # workspace $ws9 gaps outer 0
 workspace $ws10 gaps inner 16
+workspace $ws6 gaps inner 16
 
 # Smart gaps (gaps used if only more than one container on the workspace)
 # smart_gaps on

@@ -8,11 +8,11 @@ _dirs() {
 }
 
 case "$1" in
-    cover) convert "$File" -resize 500x500\> -quality 80% cover.jpg ;;
+    cover) magick "$File" -resize 500x500\> -quality 80% cover.jpg ;;
     setbg) setbg "$File" & ;;
-    rotate) convert -rotate 90 "$File" "$File" ;;
-    Rotate) convert -rotate -90 "$File" "$File" ;;
-    flop) convert -flop "$File" "$File" ;;
+    rotate) magick -rotate 90 "$File" "$File" ;;
+    Rotate) magick -rotate -90 "$File" "$File" ;;
+    flop) magick -flop "$File" "$File" ;;
     gimp) setsid -f gimp "$File" >/dev/null 2>&1 ;;
     info) rofi -dmenu -p 'File information' -mesg "$(mediainfo "$File")" ;;
     clip) xclip -selection clipboard -target image/png "$File" ;;
