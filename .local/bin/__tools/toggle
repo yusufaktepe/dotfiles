@@ -3,7 +3,7 @@
 ns() { dunstify -r 1003 -a toggle "$@" ;}
 
 input_device() {
-	device=$(xinput --list --name-only | grep -i "$1")
+	device=$(xinput --list --name-only | grep -i "$1") device=${device#∼ }
 	state=$(xinput list-props "$device" | grep "Device Enabled" | grep -o "[01]$")
 
 	if [ "$state" = 1 ]; then
@@ -92,6 +92,23 @@ case $1 in
 		else
 			transmission-daemon --logfile /dev/null
 			ns -i transmission "Transmission" "Daemon started."
+		fi
+	;;
+	warp)
+		if systemctl --no-pager status warp-svc.service >/dev/null; then
+			warp-cli disconnect >/dev/null
+			sudo systemctl stop warp-svc.service
+			ns -i network-vpn-disconnected-symbolic "WARP disabled"
+		else
+			sudo systemctl start warp-svc.service
+			until warp-cli status >/dev/null 2>&1; do sleep .4; done
+			warp-cli connect >/dev/null
+			WARP_Status=$(curl -s https://www.cloudflare.com/cdn-cgi/trace/ | awk -F= '/^warp/ {print $2}')
+			if [ "$WARP_Status" = on ]; then
+				ns -i network-vpn-symbolic "WARP enabled"
+			else
+				ns -i network-vpn-disconnected-symbolic "Failed to enable WARP"
+			fi
 		fi
 	;;
 	webcam)

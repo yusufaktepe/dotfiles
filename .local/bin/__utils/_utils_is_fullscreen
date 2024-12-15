@@ -1,0 +1,11 @@
+#!/bin/bash
+
+WID=$(xprop -root _NET_ACTIVE_WINDOW)
+WID=${WID##* }
+
+WM_STATE=$(xprop -id "$WID" _NET_WM_STATE)
+
+# shellcheck disable=SC2015
+[[ $WM_STATE == *_NET_WM_STATE_FULLSCREEN* ]] &&
+    printf '%s\n' "FULLSCREEN=true" ||
+    printf '%s\n' "FULLSCREEN=false"

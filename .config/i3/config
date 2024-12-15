@@ -463,9 +463,10 @@ $exec "sleep 2; vivaldi --start-maximized"
 $exec "sleep 5; vifm-tab"
 $exec "sleep 7; telegram-desktop"
 $exec "sleep 9; crypto_bar"
-# $exec "sleep 10; spotify"
+$exec "sleep 10; spotify"
 $exec "sleep 7; wmctrl -x -r 'vifm' -b remove,demands_attention"
 $exec "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
+$exec "sleep 11; wmctrl -x -r 'spotify' -b remove,demands_attention"
 
 #=====================================================================
 # Colors

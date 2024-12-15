@@ -30,7 +30,7 @@ Repo=$(
     jq -r '.[] | " " + (.stargazers_count|tostring) + "⠀ " + .full_name + "⠀ " + .description' "$Cache" |
     column -s '⠀' -t |
     sort -u | sort -rnk2 |
-    rofi -dmenu -p '' -theme-str 'window {width: 100%;}' \
+    rofi -dmenu -i -p '' -theme-str 'window {width: 100%;}' \
         -kb-custom-1 Alt+r \
         -kb-custom-2 Alt+i \
         -kb-custom-3 Alt+p \

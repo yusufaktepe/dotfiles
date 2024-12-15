@@ -12,6 +12,7 @@ kb_bind[6]='w'
 kb_bind[7]='S'
 kb_bind[8]='C'
 kb_bind[9]='d'
+kb_bind[10]='W'
 
 kb_act[1]="pkill picom || picom -b"
 kb_act[2]="toggle redshift"
@@ -22,6 +23,7 @@ kb_act[6]="toggle webcam"
 kb_act[7]="toggle syncthing"
 kb_act[8]="pkill picom; sleep .4; picom -b"
 kb_act[9]="pkill dunst; notify-send -a system 'restart dunst'"
+kb_act[10]="toggle warp"
 
 kb_msg[1]=' picom'
 kb_msg[2]=' redshift'
@@ -32,4 +34,5 @@ kb_msg[6]=' webcam'
 kb_msg[7]=' syncthing'
 kb_msg[8]=' picom'
 kb_msg[9]=' dunst'
+kb_msg[10]=' warp'
 

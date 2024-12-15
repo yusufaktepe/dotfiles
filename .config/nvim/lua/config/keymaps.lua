@@ -1,8 +1,6 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-local Util = require("lazyvim.util")
-local util = require("util")
 
 local map = vim.keymap.set
 
@@ -22,6 +20,11 @@ cabbrev("WQ", "wq")
 cabbrev("Wq", "wq")
 cabbrev("Q", "q")
 cabbrev("X", "x")
+
+-- map("n", "<Up>", "<c-w>k")
+-- map("n", "<Down>", "<c-w>j")
+-- map("n", "<Left>", "<c-w>h")
+-- map("n", "<Right>", "<c-w>l")
 
 -- Perform dot commands over visual blocks
 map("v", ".", "<cmd>normal .<cr>")
@@ -43,9 +46,20 @@ map("n", "<M-q>", "<cmd>qall<cr>", { desc = "Quit all" })
 map("n", "ZQ", "<cmd>confirm qall<cr>", { desc = "Quit all, bring up a prompt when buffers have been changed" })
 
 -- Toggle options
-map("n", "<leader>W", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>uo", util.toggle_colorcolumn, { desc = "Toggle colorcolumn" })
-map("n", "<leader>ua", util.toggle_list, { desc = "Toggle listchars" })
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>W")
+Snacks.toggle({
+    name = "Color Column",
+    get = function()
+      return vim.api.nvim_get_option_value("colorcolumn", {}) == "80"
+    end,
+    set = function(state)
+      if state then
+        vim.api.nvim_set_option_value("colorcolumn", "80", {})
+      else
+        vim.api.nvim_set_option_value("colorcolumn", "", {})
+      end
+    end,
+  }):map("<leader>uo")
 
 -- Terminal Mappings
 map("t", "<C-w>", [[<C-\><C-n><C-w>]])
@@ -81,11 +95,9 @@ map(
 )
 
 -- Yank path of current file to system clipboard
-map(
-  "n", "<leader>yp",
-  "<cmd>let @+ = expand('%:p')<CR>:echom 'Copied ' . @+<cr>",
-  { silent = true, desc = "Yank path of file to clipboard" }
-)
+map("n", "<leader>y", function()
+  vim.fn.setreg(vim.v.register, vim.fn.expand("%:p") .. ":" .. vim.fn.line("."))
+end, { desc = "Copy filename+line to clipboard" })
 
 -- Reload file with ISO 8859-9 encoding
 map("n", "<F12>", "<cmd>e ++enc=iso8859-9<cr>", { desc = "Reload file with ISO 8859-9 encoding" })
@@ -112,7 +124,8 @@ map(
 )
 
 -- Write file with sudo
-map("c", "W!!", "<esc>:lua require('util').sudo_write()<cr>", { desc = "Write with sudo!"})
+-- map("c", "W!!", "<esc>:lua require('util').sudo_write()<cr>", { desc = "Write with sudo!"})
+map("c", "W!!", "<esc>:SudaWrite<cr>", { desc = "Write with sudo!"})
 
 -- Ctrl-Backspace to remove last word
 map("i", "<C-h>", "<C-w>")
@@ -151,6 +164,8 @@ map(
 -- Show changes for the current buffer
 command("DiffOrig", "vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis | wincmd l")
 
--- Toggle `list`
-command("ToggleList", util.toggle_list)
+command("New", "Genghis createNewFile")
+command("Dup", "Genghis duplicateFile")
+command("Ren", "Genghis renameFile")
+command("Chmodx", "Genghis chmodx")
 

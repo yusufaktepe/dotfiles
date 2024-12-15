@@ -52,7 +52,7 @@ return {
     cmd = { "CccHighlighterToggle", "CccHighlighterEnable", "CccPick", "CccConvert" },
     ft = { "css", "javascript" },
     keys = {
-      { "<leader>uh", "<cmd>CccHighlighterToggle<cr>", desc = "Toggle color highlight" },
+      { "<leader>uH", "<cmd>CccHighlighterToggle<cr>", desc = "Toggle color highlight" },
     },
     opts = {
       highlighter = {
@@ -79,16 +79,17 @@ return {
   -- system
   {
     "chrisgrieser/nvim-genghis",
-    dependencies = {
-      "stevearc/dressing.nvim",
-      "hrsh7th/nvim-cmp",
-      "hrsh7th/cmp-omni",
-    },
-    cmd = {
-      "New", "Duplicate", "NewFromSelection", "Rename", "Move", "Trash",
-      "CopyFilename", "CopyFilepath", "CopyRelativePath", "CopyDirectoryPath",
-      "CopyRelativeDirectoryPath", "Chmodx"
-    },
+    cmd = "Genghis",
+    opts = {},
+  },
+
+  {
+    "lambdalisue/vim-suda",
+    event = { { event = "BufEnter", pattern = { "/etc/*", "/usr/*" } } },
+    init = function()
+      vim.g.suda_smart_edit = 1
+    end,
+    cmd = { "SudaRead", "SudaWrite"}
   },
 
   -- edit gpg encrypted files

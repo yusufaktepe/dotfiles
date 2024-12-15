@@ -1,6 +1,11 @@
 -- Autocmds are automatically loaded on the VeryLazy event
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
+--
 -- Add any additional autocmds here
+-- with `vim.api.nvim_create_autocmd`
+--
+-- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
+-- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 -- Simplify autocmd creation
 local augid = vim.api.nvim_create_augroup("user", { clear = true })
@@ -48,34 +53,32 @@ autocmd("FileType", {
 })
 
 -- use 'c' mapping instead
--- autocmd("FileType", {
---   pattern = "Trouble",
---   callback = function()
---     vim.keymap.set(
---       "n",
---       "s",
---       "wt):silent !xdg-open https://github.com/koalaman/shellcheck/wiki/SC<C-r><C-w><cr>0",
---       { desc = "Trouble: Open shellcheck wiki", buffer = 0, silent = true }
---     )
---   end,
--- })
+autocmd("FileType", {
+  pattern = "trouble",
+  callback = function()
+    vim.keymap.set(
+      "n",
+      "c",
+      "wt):silent !xdg-open https://www.shellcheck.net/wiki/SC<C-r><C-w><cr>0",
+      { desc = "Trouble: Open shellcheck wiki", buffer = 0, silent = true }
+    )
+  end,
+})
 
 -- Show cursor line only in active window
 -- https://github.com/folke/dot/blob/master/nvim/lua/config/autocmds.lua
 -- autocmd({ "InsertLeave", "WinEnter" }, {
 --   callback = function()
---     local ok, cl = pcall(vim.api.nvim_win_get_var, 0, "auto-cursorline")
---     if ok and cl then
+--     if vim.w.auto_cursorline then
 --       vim.wo.cursorline = true
---       vim.api.nvim_win_del_var(0, "auto-cursorline")
+--       vim.w.auto_cursorline = nil
 --     end
 --   end,
 -- })
 -- autocmd({ "InsertEnter", "WinLeave" }, {
 --   callback = function()
---     local cl = vim.wo.cursorline
---     if cl then
---       vim.api.nvim_win_set_var(0, "auto-cursorline", cl)
+--     if vim.wo.cursorline then
+--       vim.w.auto_cursorline = true
 --       vim.wo.cursorline = false
 --     end
 --   end,

@@ -26,6 +26,13 @@ case "$1" in
 		fi
 	;;
 	toggle|t)
+		eval "$(_utils_wmclass)"
+		eval "$(_utils_is_fullscreen)"
+
+		[ "$FULLSCREEN" = true ] && {
+			[ "$WM_CLASS" = mpv ] && { mpvc toggle; return ;}
+		}
+
 		if pidof -q mpd; then
 			mpc toggle && update_bar
 		else

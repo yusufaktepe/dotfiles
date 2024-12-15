@@ -1,0 +1,10 @@
+#!/bin/sh
+
+WID=$(xprop -root _NET_ACTIVE_WINDOW)
+WID=${WID##* }
+
+IFS=\" read -r _ WM_INSTANCE _ WM_CLASS <<-+++
+    $(xprop -id "$WID" WM_CLASS)
++++
+
+printf '%s\n%s\n' "WM_INSTANCE=$WM_INSTANCE" "WM_CLASS=$WM_CLASS"

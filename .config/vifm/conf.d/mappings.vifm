@@ -72,7 +72,7 @@ nnoremap <silent> o :file &<cr>
 mmap o <cr>
 
 " Edit file
-if $DISPLAY
+if $DISPLAY != ''
 	nnoremap <silent> E :!nv %f 2>/dev/null &<cr>
 else
 	nnoremap <silent> E :edit<cr>

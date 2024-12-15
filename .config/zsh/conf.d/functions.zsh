@@ -38,6 +38,7 @@ foreach widget (
 	zcw_fzf-history
 	zcw_prefix-sudo
 	zcw_toggle-fg
+    zcw_kitty-ctrl-l
 ) {
 	eval zle -N $widget
 }
@@ -103,6 +104,12 @@ zcw_globalias() {
 	zle _expand_alias
 	zle expand-word
 	zle self-insert
+}
+
+zcw_kitty-ctrl-l() {
+	builtin print -rn -- $'\r\e[0J\e[H\e[22J' >"$TTY"
+	builtin zle .reset-prompt
+	builtin zle -R
 }
 
 # Prefix current command line with `sudo`

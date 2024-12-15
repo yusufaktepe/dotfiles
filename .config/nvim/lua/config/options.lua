@@ -4,12 +4,12 @@
 
 local opt = vim.opt
 
--- Enable LazyVim auto format
-vim.g.autoformat = false
-opt.clipboard = "unnamed,unnamedplus"
+vim.g.autoformat = false -- LazyVim auto format
+vim.g.snacks_animate = false -- Snacks animations
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamed,unnamedplus"
 opt.list = true
 opt.relativenumber = false
-opt.scrolloff = 99 -- Lines of context
+opt.scrolloff = 11 -- Lines of context
 opt.spelllang = { "en", "tr" }
 opt.fillchars = opt.fillchars - "diff"
 opt.fileencodings = "ucs-bom,utf-8,default,iso8859-9,latin1"

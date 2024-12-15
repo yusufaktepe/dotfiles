@@ -130,3 +130,5 @@ bindkey -s '^f' 'f\n'
 bindkey -s '^o' 'fcd\n'
 bindkey -s '^[f' 'vifm-tab\n'
 
+[[ ${TERM##*-} == kitty ]] && bindkey '^l' zcw_kitty-ctrl-l
+

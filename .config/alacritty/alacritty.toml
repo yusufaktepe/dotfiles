@@ -1,5 +1,3 @@
-import = ["~/.config/alacritty/colors/onenord.toml"]
-live_config_reload = true
 
 [cursor]
 vi_mode_style = "Block"
@@ -43,4 +41,8 @@ bindings = [
     {  key  =  "Return",        mods  =  "Shift",                           chars   =  "\u001B[13;2u"     },
     {  key  =  "Return",        mods  =  "Control",                         chars   =  "\u001B[13;5u"     },
 ]
+
+[general]
+live_config_reload = true
+import = ["~/.config/alacritty/colors/onenord.toml"]
 
