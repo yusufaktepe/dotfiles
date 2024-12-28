@@ -38,7 +38,7 @@ autocmd("BufEnter", {
     vim.opt.shada = ""
   end,
 })
-autocmd("BufEnter", { pattern = "*.zsh_history,/tmp/dir*", command = "set wrap clipboard=" })
+autocmd("BufEnter", { pattern = "*.zsh_history,/tmp/dir*", command = "set wrap clipboard= | normal zz" })
 autocmd("BufEnter", { pattern = "/tmp/*gpaste*", command = "set cmdheight=0 | map Q ZZ" })
 
 autocmd("BufWritePost", { pattern = "*Xresources,*Xdefaults", command = "!xrdb %" })
@@ -50,6 +50,17 @@ autocmd("VimLeave", { pattern = "*.tex", command = "!texclear %" })
 -- Disable auto-comment
 autocmd("FileType", {
   command = "setlocal formatoptions-=c formatoptions-=r formatoptions-=o",
+})
+
+-- Set FileType for new files w/o ext.
+autocmd("BufEnter", {
+  callback = function()
+    vim.schedule(function()
+      if vim.bo.filetype == "" then
+        vim.bo.filetype = "sh"
+      end
+    end)
+  end,
 })
 
 -- use 'c' mapping instead

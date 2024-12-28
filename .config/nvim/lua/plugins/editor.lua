@@ -9,6 +9,23 @@ return {
           ["Z"] = "expand_all_nodes",
         },
       },
+      source_selector = {
+        winbar = true,
+        show_scrolled_off_parent_node = true,
+        content_layout = "center",
+      },
+      buffers = {
+        display_name = "󰈚 Bufs",
+        show_unloaded = true,
+      },
+      event_handlers = {
+        {
+          event = "file_open_requested",
+          handler = function()
+            require("neo-tree.command").execute({ action = "close" })
+          end
+        },
+      },
     },
   },
 
@@ -16,6 +33,13 @@ return {
     "folke/which-key.nvim",
     opts = {
       preset = "modern",
+    },
+  },
+
+  {
+    "folke/trouble.nvim",
+    opts = {
+      focus = true,
     },
   },
 

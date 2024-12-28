@@ -87,8 +87,10 @@ while read -ra Rate; do
 			Price=${Rate[2]}
 		fi
 
+		[[ $Coin =~ ^1000 ]] && { Coin=${Coin#1000}; Price=${Price:0:6} ;}
 		[[ $Price == *.* ]] && Price=${Price%%+(0)}
 		[[ $Price =~ ^0.* ]] && Price=.${Price#0.}
+		# [[ ${#Price} -gt 5 ]] && Price=${Price:0:5}
 
 		Rates+=("$(printf '%s = %8s\n' "$Coin" "${Price%.}")")
 	fi

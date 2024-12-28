@@ -21,6 +21,8 @@ cabbrev("Wq", "wq")
 cabbrev("Q", "q")
 cabbrev("X", "x")
 
+cabbrev("H", "tab help")
+
 -- map("n", "<Up>", "<c-w>k")
 -- map("n", "<Down>", "<c-w>j")
 -- map("n", "<Left>", "<c-w>h")
@@ -32,8 +34,8 @@ map("v", ".", "<cmd>normal .<cr>")
 -- Do not copy deleted text with 'c' & 'x' in normal mode
 map("n", "c", '"_c')
 map("n", "C", '"_C')
-map("n", "x", '"_x')
-map("n", "X", '"_X')
+map({"n", "v"}, "x", '"_x')
+map({"n", "v"}, "X", '"_X')
 
 map("n", "<leader>dd", 'gg"_dG', { desc = "Clear file" })
 
@@ -168,4 +170,5 @@ command("New", "Genghis createNewFile")
 command("Dup", "Genghis duplicateFile")
 command("Ren", "Genghis renameFile")
 command("Chmodx", "Genghis chmodx")
+command("KiwiIndex", "lua require(\"kiwi\").open_wiki_index()")
 

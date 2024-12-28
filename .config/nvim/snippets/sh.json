@@ -1,0 +1,42 @@
+{
+  "printf": {
+    "prefix": "printf",
+    "body": [
+      "printf '%s\\n' \"$0\""
+    ]
+  },
+  "here-doc (POSIX)": {
+    "prefix": "here",
+    "body": [
+      "IFS=${1:'\"'} read -r ${2:VAR} <<-+++",
+      "    \\$($0)",
+      "+++\n"
+    ]
+  },
+  "array:reverse": {
+    "prefix": "array:reverse",
+    "body": [
+      "shopt -s extdebug",
+      "printf '%s\\n' \"\\${${1:ARRAY}[@]}\"",
+      "shopt -u extdebug\n"
+    ]
+  },
+  "array:random": {
+    "prefix": "array:random",
+    "body": [
+      "printf '%s\\n' \"\\${${1:ARRAY}[RANDOM % \\$#]}\""
+    ]
+  },
+  "array:first-n": {
+    "prefix": "array:first-n-element",
+    "body": [
+      "printf '%s\\n' \"\\${${1:ARRAY}[@]:0:${2:n}}\""
+    ]
+  },
+  "array:last-n": {
+    "prefix": "array:last-n-element",
+    "body": [
+      "printf '%s\\n' \"\\${${1:ARRAY}[@]: -${2:n}}\""
+    ]
+  }
+}

@@ -2,13 +2,14 @@ return {
 
   {
     "saghen/blink.cmp",
-    opts = function(_, opts)
-      opts.completion = vim.tbl_deep_extend("force", opts.completion, {
-        list = {
-          selection = 'auto_insert',
-        },
-      })
-    end,
+    opts = {
+      keymap = { preset = 'super-tab' },
+      -- completion = {
+      --   trigger = {
+      --     show_on_trigger_character = false
+      --   },
+      -- },
+    },
   },
 
   -- alignment
@@ -16,8 +17,8 @@ return {
     "echasnovski/mini.align",
     opts = {},
     keys = {
-      { "ga", mode = { "n", "v" } },
-      { "gA", mode = { "n", "v" } },
+      { "ga", mode = { "n", "v" }, desc = "Align" },
+      { "gA", mode = { "n", "v" }, desc = "Align with preview" },
     },
   },
 

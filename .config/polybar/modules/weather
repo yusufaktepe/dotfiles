@@ -1,4 +1,5 @@
 #!/bin/sh
 
-pkill -f "'wttr.in/' | less -RS" || $TERMINS Blockterm_weather -e sh -c "curl -s 'wttr.in/' | less -RS"
+# pkill -f "'wttr.in/' | less -RS" || $TERMINS Blockterm_weather -e sh -c "curl -s 'wttr.in/' | less -RS"
+curl -s "wttr.in/$CITY" | sed "s/[ \t]*$//" | ansifilter --ignore-csi --pango --font=mono --font-size=12 | rofi -theme-str 'window {width: 70%;}' -markup -e -
 

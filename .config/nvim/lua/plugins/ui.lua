@@ -141,7 +141,7 @@ return {
           --   end,
           -- },
         },
-        extensions = { "neo-tree", "lazy" },
+        extensions = { "neo-tree", "lazy", "fzf" },
       }
 
       -- do not add trouble symbols if aerial is enabled
@@ -192,4 +192,10 @@ return {
       },
     },
   },
+
+  {
+    'Aasim-A/scrollEOF.nvim',
+    event = { 'CursorMoved', 'WinScrolled' },
+    opts = {},
+  }
 }

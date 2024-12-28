@@ -1,5 +1,7 @@
 return {
 
+  -- { "LazyVim/LazyVim", version = false },
+
   -- indentation detection
   { "Darazaki/indent-o-matic" },
   -- { "tpope/vim-sleuth" },
@@ -8,18 +10,30 @@ return {
   { "vidocqh/auto-indent.nvim" },
 
   -- personal wiki
+  -- {
+  --   "vimwiki/vimwiki",
+  --   cmd = "VimwikiIndex",
+  --   init = function()
+  --     vim.g.vimwiki_list = {
+  --       {
+  --         path = "~/Repos/notes",
+  --         syntax = "markdown",
+  --         ext = ".md",
+  --       },
+  --     }
+  --   end,
+  -- },
+
   {
-    "vimwiki/vimwiki",
-    cmd = "VimwikiIndex",
-    init = function()
-      vim.g.vimwiki_list = {
-        {
-          path = "~/Repos/notes",
-          syntax = "markdown",
-          ext = ".md",
-        },
-      }
-    end,
+    "serenevoid/kiwi.nvim",
+    cmd = "KiwiIndex",
+    opts = {
+      { name = "personal", path = vim.env.HOME .. "/Repos/notes" },
+    },
+    keys = {
+      { "<leader>N", "<cmd>lua require(\"kiwi\").open_wiki_index()<cr>", desc = "Open Wiki index" },
+      { "<F13>", ":lua require(\"kiwi\").todo.toggle()<cr>", silent = true, desc = "Toggle Markdown Task" }
+    },
   },
 
   -- markdown preview
