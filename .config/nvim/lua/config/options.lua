@@ -4,6 +4,7 @@
 
 local opt = vim.opt
 
+vim.g.mkdp_browser = "vivaldi-app"
 vim.g.autoformat = false -- LazyVim auto format
 vim.g.snacks_animate = false -- Snacks animations
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamed,unnamedplus"
@@ -26,29 +27,34 @@ opt.dict:append("/usr/share/dict/words")
 -- end
 opt.listchars = {
   -- tab = '│ ', -- characters to be used to show a tab
-  tab = '  ',
-  trail = '·', -- character to show for trailing spaces
-  nbsp = '␣', -- character to show for a non-breakable space character
-  extends = '›', -- character to show in the last column, when 'wrap' is off
-  precedes = '‹', -- character to show in the first visible column
+  tab = "  ",
+  trail = "·", -- character to show for trailing spaces
+  nbsp = "␣", -- character to show for a non-breakable space character
+  extends = "›", -- character to show in the last column, when 'wrap' is off
+  precedes = "‹", -- character to show in the first visible column
 }
 
 opt.tabstop = 4 -- insert spaces for a tab
 opt.softtabstop = 4 -- number of spaces inserted for tabulation replacement
 opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
 
-
 -- Add filetype mappings
-vim.filetype.add {
+vim.filetype.add({
   extension = {
-    tex = "tex", zir = "zir", cr = "crystal", rasi = "css",
-    me = "groff", ms = "groff", mom = "groff", man = "groff",
+    tex = "tex",
+    zir = "zir",
+    cr = "crystal",
+    rasi = "css",
+    me = "groff",
+    ms = "groff",
+    mom = "groff",
+    man = "groff",
   },
   pattern = {
     ["[jt]sconfig.*.json"] = "jsonc",
     ["/tmp/zsh.*"] = "bash",
   },
-}
+})
 
 -- Root
 if vim.env.SUDO_USER ~= nil then
@@ -58,4 +64,3 @@ if vim.env.SUDO_USER ~= nil then
   opt.undofile = false
   opt.shada = ""
 end
-

@@ -17,6 +17,7 @@ export TERMINS="$TERMINAL --class"
 export TERMCMD="$TERMINAL"
 export BROWSER="vivaldi-stable"
 export FM="vifm-tab"
+export ZK_NOTEBOOK_DIR="$HOME/notes"
 
 # Man Pager
 export MANPAGER="nvimpager -p"

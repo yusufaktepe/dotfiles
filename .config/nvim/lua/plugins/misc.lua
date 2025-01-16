@@ -1,6 +1,6 @@
 return {
 
-  -- { "LazyVim/LazyVim", version = false },
+  { "LazyVim/LazyVim", version = false },
 
   -- indentation detection
   { "Darazaki/indent-o-matic" },
@@ -24,17 +24,17 @@ return {
   --   end,
   -- },
 
-  {
-    "serenevoid/kiwi.nvim",
-    cmd = "KiwiIndex",
-    opts = {
-      { name = "personal", path = vim.env.HOME .. "/Repos/notes" },
-    },
-    keys = {
-      { "<leader>N", "<cmd>lua require(\"kiwi\").open_wiki_index()<cr>", desc = "Open Wiki index" },
-      { "<F13>", ":lua require(\"kiwi\").todo.toggle()<cr>", silent = true, desc = "Toggle Markdown Task" }
-    },
-  },
+  -- {
+  --   "serenevoid/kiwi.nvim",
+  --   cmd = "KiwiIndex",
+  --   opts = {
+  --     { name = "personal", path = vim.env.HOME .. "/Repos/notes" },
+  --   },
+  --   keys = {
+  --     { "<leader>N", "<cmd>lua require(\"kiwi\").open_wiki_index()<cr>", desc = "Open Wiki index" },
+  --     { "<F13>", ":lua require(\"kiwi\").todo.toggle()<cr>", silent = true, desc = "Toggle Markdown Task" }
+  --   },
+  -- },
 
   -- markdown preview
   -- {
@@ -56,8 +56,14 @@ return {
   --   },
   --   opts = {
   --     theme = "dark",
-  --     app = "browser",
+  --     -- app = "browser",
+  --     app = "vivaldi-app",
   --   },
+  -- },
+
+  -- {
+  --   "MeanderingProgrammer/render-markdown.nvim",
+  --   enabled = false
   -- },
 
   -- colorizer
@@ -117,5 +123,15 @@ return {
     config = function()
       vim.g.vifm_exec = "VIFM=~/.config/vifm/sessions/select vifm"
     end
+  },
+
+  {
+    "hat0uma/csvview.nvim",
+    opts = {
+      view = {
+        display_mode = "border",
+      },
+    },
+    cmd = { "CsvViewToggle", "CsvViewEnable", "CsvViewDisable" },
   },
 }

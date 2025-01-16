@@ -38,8 +38,16 @@ autocmd("BufEnter", {
     vim.opt.shada = ""
   end,
 })
-autocmd("BufEnter", { pattern = "*.zsh_history,/tmp/dir*", command = "set wrap clipboard= | normal zz" })
-autocmd("BufEnter", { pattern = "/tmp/*gpaste*", command = "set cmdheight=0 | map Q ZZ" })
+autocmd("BufEnter", {
+  pattern = { "*.zsh_history", "/tmp/dir*" },
+  callback = function()
+    vim.cmd("normal zz")
+    vim.defer_fn(function()
+      vim.opt.clipboard = ""
+    end, 1000)
+  end,
+})
+autocmd("BufEnter", { pattern = "/tmp/*gpaste*", command = "map Q ZZ | set ft=text" })
 
 autocmd("BufWritePost", { pattern = "*Xresources,*Xdefaults", command = "!xrdb %" })
 autocmd("BufWritePost", { pattern = "~/.config/fontconfig/*", command = "!fc-cache" })
@@ -62,6 +70,13 @@ autocmd("BufEnter", {
     end)
   end,
 })
+
+-- autocmd("FileType", {
+--   pattern = "markdown",
+--   callback = function()
+--     vim.diagnostic.enable(false)
+--   end,
+-- })
 
 -- use 'c' mapping instead
 autocmd("FileType", {

@@ -37,7 +37,9 @@ font pango:mono 12
 
 # kill focused window
 set $killrule [con_id="__focused__" instance="^(?!dropdown_).*$"]
-bindsym $mod+q $killrule kill
+# BUG: zen-browser session restore bug
+bindsym $mod+q $killrule kill, [con_id=__focused__ class="zen"] exec --no-startup-id xdo close
+# bindsym --release $mod+q $exec winclose
 bindsym $mod+Shift+q $killrule $exec kill -9 `xdotool getwindowfocus getwindowpid`
 bindsym --release $mod+Ctrl+x $exec xkill
 
@@ -61,13 +63,13 @@ bindsym XF86Calculator $exec $calc
 bindsym $caps+d $exec brbw
 bindsym $caps+f $exec rofi-finder
 # bindsym XF86Launch2 $exec rofi -show combi
-bindsym XF86Launch9 $exec rofitr !
-bindsym $caps+t $exec rofitr -s
-bindsym $agr+space $exec rofitr !d
+bindsym XF86Launch9 $exec rofitrans !
+bindsym $caps+t $exec rofitrans -s
+bindsym $agr+space $exec rofitrans !d
 bindsym $mod$caps+g $exec rofi-gh-stars
 
 # #---Clipboard management---# #
-bindsym Ctrl+quotedbl $exec gpaste
+bindsym Ctrl+quotedbl $exec gpaste -H history
 bindsym $caps+quotedbl $exec gpaste --clear
 bindsym Ctrl+$caps+quotedbl $exec "pkill gpaste-daemon; gpaste-client daemon"
 bindsym $mod+Shift+Insert $exec gpaste --seltoclip
@@ -82,12 +84,12 @@ bindsym $caps+Shift+a $exec dunstctl context
 bindsym $mod+F1 $exec ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 $exec vifm-tab
 bindsym $mod+F3 $exec ifwin -e 'vivaldi --start-maximized'
-bindsym $mod+F4 $exec ifwin -e firefox
+bindsym $mod+F4 $exec ifwin -c zen -p zen-bin -e zen-browser
 bindsym $mod+F5 $exec ifwin -e google-chrome-stable
 bindsym $mod+F6 $exec ifwin -e brave
 bindsym $mod+Shift+F2 $exec ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 $exec vivaldi --start-maximized --incognito
-bindsym $mod+Shift+F4 $exec firefox --private-window
+bindsym $mod+Shift+F4 $exec zen-browser --private-window
 bindsym $mod+Shift+F5 $exec google-chrome-stable --incognito
 bindsym $mod+Shift+F6 $exec brave --incognito
 bindsym $mod+m $exec ifwin -e telegram-desktop -c telegramdesktop
@@ -322,6 +324,8 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 bindsym $mod+Home        workspace $ws1
 bindsym $mod+End         workspace $ws10
+bindsym $caps+h          workspace $ws1
+bindsym $caps+l          workspace $ws10
 bindsym $mod+Shift+Home  move container to workspace $ws1
 bindsym $mod+Shift+End   move container to workspace $ws10
 bindsym $mod+Prior       workspace prev
@@ -384,7 +388,7 @@ assign [class="(?i)Vivaldi"]                     $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
 assign [instance="^(ranger|vifm)$"]              $ws2
 # assign [instance="Neovim"]                       $ws3
-assign [class="(?i)Opera|firefox|Brave-browser"] $ws4
+assign [class="(?i)Opera|firefox|Brave-browser|zen"] $ws4
 assign [class="Code|obsidian"]                   $ws5
 assign [class="(?i)telegram"]                    $ws6
 assign [class="Audacity"]                        $ws7
@@ -412,9 +416,9 @@ for_window [class="smplayer" title="^( - |)SMPlayer$"] floating enable sticky en
 for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 1100 800, move position center
 for_window [class="qBittorrent"] move position center
 for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 1100 800, move position center
-for_window [instance="Places" class="firefox"] floating enable border normal, resize set 1100 800, move position center
-for_window [instance="Browser|Update" class="firefox|Tor Browser"] floating enable border normal
-for_window [instance="Toolkit" class="firefox"] floating enable sticky enable border none
+for_window [instance="Places" class="firefox|zen"] floating enable border normal, resize set 1100 800, move position center
+for_window [instance="Browser|Update" class="firefox|Tor Browser|zen"] floating enable border normal
+for_window [instance="Toolkit" class="firefox|zen"] floating enable sticky enable border none
 # for_window [instance="(?i)crx_" class="(?i)Vivaldi|-chrome"] floating enable sticky enable
 for_window [class="crow-translate"] floating enable sticky enable, resize set 861 392, move absolute position center
 for_window [class="(?i)gsimplecal"] floating enable, move position +1651+24
@@ -431,6 +435,7 @@ for_window [class="Dragon-drop"] sticky enable
 for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, move position center
 # for_window [instance="web.whatsapp.com*"] resize set 1134 830, move position center, sticky enable
 for_window [instance="web.whatsapp.com*"] floating disable
+for_window [instance="localhost__page*"] resize set 958 1054, move position 961 25, sticky enable
 #_ Floating instances
 for_window [instance="blockterm_*"] floating enable border pixel 2
 for_window [instance="Blockterm_*"] floating enable border pixel 3, resize set 1920 1056, move position center
@@ -627,7 +632,7 @@ bindsym $caps+Escape $exec rofi-bind -f $bind-modes/session
 bindsym $caps+b      $exec rofi-bind -f $bind-modes/bro-open
 bindsym $mod+Shift+t $exec rofi-bind -f $bind-modes/toggle
 bindsym $caps+a      $exec rofi-bind -f $bind-modes/keystroke
-bindsym $caps+w      $exec rofi-bind -f $bind-modes/vimwiki
+bindsym $caps+w      $exec rofi-bind -f $bind-modes/notes
 bindsym $caps+p      $exec rofi-bind -f $bind-modes/paste
 
 #=====================================================================

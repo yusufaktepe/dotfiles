@@ -12,6 +12,7 @@ gui:
     skipRewordInEditorWarning: false
     sidePanelWidth: 0.3333
     expandFocusedSidePanel: false
+    expandedSidePanelWeight: 2
     mainPanelSplitMode: flexible
     enlargedSideViewLocation: left
     language: auto
@@ -28,14 +29,28 @@ gui:
     showIcons: false
     nerdFontsVersion: ""
     showFileIcons: true
+    commitAuthorShortLength: 2
+    commitAuthorLongLength: 17
+    commitHashLength: 8
     showBranchCommitHash: false
+    showDivergenceFromBaseBranch: none
     commandLogSize: 8
     splitDiff: auto
-    windowSize: ""
+    windowSize: normal
     border: rounded
     animateExplosion: true
     portraitMode: auto
     filterMode: substring
+    spinner:
+        frames:
+            - '|'
+            - /
+            - '-'
+            - \
+        rate: 50
+    statusPanelView: dashboard
+    switchToFilesAfterStashPop: true
+    switchToFilesAfterStashApply: true
 git:
     paging:
         colorArg: always
@@ -49,6 +64,7 @@ git:
     merging:
         manualCommit: false
         args: ""
+        squashMergeMessage: Squash merge {{selectedRef}} into {{currentBranch}}
     mainBranches:
         - master
         - main
@@ -56,11 +72,15 @@ git:
     autoFetch: true
     autoRefresh: true
     fetchAll: true
+    autoStageResolvedConflicts: true
     branchLogCmd: git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
     allBranchesLogCmd: git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
+    allBranchesLogCmds: []
     overrideGpg: false
     disableForcePushing: false
+    commitPrefix: null
     commitPrefixes: {}
+    branchPrefix: ""
     parseEmoji: false
     log:
         order: topo-order
@@ -75,6 +95,10 @@ refresher:
     fetchInterval: 60
 confirmOnQuit: false
 quitOnTopLevelReturn: false
+disableStartupPopups: false
+services: {}
+notARepository: skip
+promptToReturnFromSubprocess: true
 keybinding:
     universal:
         quit: q
@@ -110,7 +134,7 @@ keybinding:
         nextMatch: "n"
         prevMatch: "N"
         startSearch: /
-        optionMenu: <disabled>
+        optionMenu: x
         optionMenu-alt1: '?'
         select: <space>
         goInto: <enter>
@@ -126,7 +150,7 @@ keybinding:
         scrollDownMain-alt1: J
         scrollUpMain-alt2: <c-u>
         scrollDownMain-alt2: <c-d>
-        executeCustomCommand: ':'
+        executeShellCommand: ':'
         createRebaseOptionsMenu: m
         pushFiles: P
         pullFiles: p
@@ -148,6 +172,8 @@ keybinding:
         toggleWhitespaceInDiffView: <c-w>
         increaseContextInDiffView: '}'
         decreaseContextInDiffView: '{'
+        increaseRenameSimilarityThreshold: )
+        decreaseRenameSimilarityThreshold: (
         openDiffTool: <c-t>
     status:
         checkForUpdate: u
@@ -233,15 +259,13 @@ keybinding:
         bulkMenu: b
     commitMessage:
         commitMenu: <c-o>
-disableStartupPopups: false
+# os:
+#     edit: 'nv {{filename}}'
+#     editPreset: "nvim-remote"
 customCommands:
-  - key: "b"
-    command: "gh browse"
-    context: "files"
-  - key: "b"
-    command: 'gh browse "{{.SelectedLocalCommit.Sha}}"'
-    context: "commits"
-services: {}
-notARepository: skip
-promptToReturnFromSubprocess: true
-
+    - key: "b"
+      command: "gh browse"
+      context: "files"
+    - key: "b"
+      command: 'gh browse "{{.SelectedLocalCommit.Sha}}"'
+      context: "commits"

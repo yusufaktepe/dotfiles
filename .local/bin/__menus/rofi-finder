@@ -22,7 +22,8 @@ menu() {
 Sys=false
 case $1 in
 	sys) Selected=$(fd . /etc /usr | menu) ;;
-	"") Selected=$(menu < "$List") ;;
+	# "") Selected=$(menu < "$List") ;;
+	"") Selected=$(fd -H . "$HOME" | grep -Ev "($(tr -d '\t\n' < "$ListIgnore" | sed "s|~|$HOME|g"))" | sort | menu)  ;;
 esac
 Ret=$?
 

@@ -16,6 +16,8 @@ return {
   --   event = "LspAttach",
   --   opts = {
   --     scope = "line",
+  --     -- placement = "inline",
+  --     -- inline_padding_left = 4,
   --     -- show_sign = true,
   --     -- show_borders = true,
   --   }

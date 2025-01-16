@@ -1,4 +1,19 @@
 return {
+
+  {
+    "ibhagwan/fzf-lua",
+    opts = function(_, opts)
+      local config = require("fzf-lua.config")
+      local actions = require("fzf-lua.actions")
+      config.defaults.actions.files["alt-enter"] = actions.file_tabedit
+
+      opts.winopts = {
+        backdrop = 100,
+      }
+      return opts
+    end,
+  },
+
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
@@ -32,7 +47,12 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      preset = "modern",
+      -- preset = "modern",
+      preset = "classic",
+      win = {
+        border = { "─", "─", "─", " ", " ", " ", " ", " " },
+        title_pos = "left",
+      },
     },
   },
 

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+setsid -f vivaldi --app="$1" >/dev/null 2>&1
+

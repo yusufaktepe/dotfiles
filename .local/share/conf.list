@@ -47,6 +47,7 @@ xres_colors          ~/.config/X11/colors/nord
 xresources           ~/.config/X11/Xresources
 youtube-dl           ~/.config/youtube-dl/config
 zathura              ~/.config/zathura/zathurarc
+zk                   ~/.config/zk/config.toml
 zsh_aliases          ~/.config/zsh/conf.d/aliases.zsh
 zsh_appearance       ~/.config/zsh/conf.d/appearance.zsh
 zsh_completion       ~/.config/zsh/conf.d/completion.zsh
