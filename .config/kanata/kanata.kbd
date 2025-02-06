@@ -1,0 +1,186 @@
+#|
+  kanata config
+  See:
+    https://jtroo.github.io/config.html
+    https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs#L172
+
+  my keyboard layout (for reference)
+ ┏━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━┳━━━━━━━┓
+ ┃ esc  ┃  f1  ┃  f2  ┃  f3  ┃  f4  ┃  f5  ┃  f6  ┃  f7  ┃  f8  ┃  f9  ┃  f10 ┃  f11 ┃  f12 ┃ home ┃ end  ┃ ins  ┃ del   ┃
+ ┣━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━━┫
+ ┃ grv  ┃   1  ┃   2  ┃  3   ┃  4   ┃  5   ┃  6   ┃  7   ┃  8   ┃  9   ┃  0   ┃  *   ┃  -   ┃           bspc             ┃
+ ┣━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+ ┃ tab  ┃   q  ┃   w  ┃  e   ┃  r   ┃  t   ┃  y   ┃  u   ┃  ı   ┃  o   ┃  p   ┃  ğ   ┃  ü   ┃                            ┃
+ ┣━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━┫           ret              ┃
+ ┃ caps ┃   a  ┃   s  ┃  d   ┃  f   ┃  g   ┃  h   ┃  j   ┃  k   ┃  l   ┃  ş   ┃  i   ┃  ,   ┃                            ┃
+ ┣━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+ ┃ lsft ┃   <  ┃   z  ┃  x   ┃  c   ┃  v   ┃  b   ┃  n   ┃  m   ┃  ö   ┃  ç   ┃  .   ┃              rsft                 ┃
+ ┣━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━╋━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┫
+ ┃ lctl ┃ wkup ┃ lmet ┃ lalt ┃             spc                  ┃ ralt ┃ ssrq ┃ rctl ┃    pgdn    ┃    up    ┃   pgup    ┃
+ ┗━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━┻━━━━━━┻━━━━━━╋━━━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━━┫
+                                                                                     ┃    left    ┃   down   ┃   right   ┃
+                                                                                     ┗━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━┛
+
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _         _
+  _    _    _    _              _              _    _    _         _    _
+
+|#
+
+(defcfg
+  process-unmapped-keys yes
+  danger-enable-cmd yes
+  linux-x11-repeat-delay-rate 300,50
+  log-layer-changes no
+  concurrent-tap-hold yes ;; testing
+  ;; override-release-on-activation yes
+  ;; linux-unicode-termination space
+  ;; alias-to-trigger-on-load Startup
+)
+
+(deflocalkeys-linux
+  *  12
+  -  13
+  ı  23
+  ğ  26
+  ü  27
+  ş  39
+  İ  40 ;; kanata doesn't allow using i in deflocalkeys, as it is a default key name.
+  ,  43
+  <  86
+  ö  51
+  ç  52
+  .  53
+)
+
+(defsrc ;; turkish-iso105
+ esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end ins del
+ grv  1    2    3    4    5    6    7    8    9    0    *    -    bspc
+ tab  q    w    e    r    t    y    u    ı    o    p    ğ    ü
+ caps a    s    d    f    g    h    j    k    l    ş    İ    ,    ret
+ lsft <    z    x    c    v    b    n    m    ö    ç    .         rsft
+ lctl wkup lmet lalt            spc           ralt ssrq rctl      pgup pgdn
+)
+
+(deflayer trq
+ @esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end ins del
+ @grv  1    2    3    4    5    6    7    8    9    0    *    -    bspc
+ @tab  @q   w    e    r    t    y    u    ı    o    p    ğ    ü
+ @cap  @a   s    d    f    g    h    j    k    l    @ş   İ    ,    ret
+ @lsft <    z    x    c    v    b    n    m    ö    ç    .         @rsft
+ @lctl @wkup @lmet @lalt         spc        @ralt @ssrq @rctl      pgup pgdn
+)
+
+;; (deflayer us
+;;  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end ins del
+;;  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;;  tab  q    w    e    r    t    y    u    i    o    p    [    ]
+;;  caps a    s    d    f    g    h    j    k    l    ;    '    \    ret
+;;  lsft <    z    x    c    v    b    n    m    ,    .    /         rsft
+;;  lctl wkup lmet lalt            spc           ralt ssrq rctl      pgup pgdn
+;; )
+
+(defvar
+  tap-timeout-letter 150
+  tap-timeout 200
+  hold-timeout 200
+)
+
+(defvirtualkeys
+  ;; for double-tabbed tap-hold add: (macro 5 (on-press tap-vkey relf24))
+  ;; https://github.com/jtroo/kanata/issues/1441#issuecomment-2561718295
+  ;; relf24 (release-key f24)
+
+  ;; turn off the Caps LED immediately:
+  led0 (cmd-log none error sh -c "$HOME/.local/bin/__private/ledturner --input /dev/input/event5 --caps 0")
+)
+
+(deftemplate switch-tap-timing (stap-timeout hold-action)
+  (switch
+    ((key-timing 1 less-than $stap-timeout)) _ break
+    () (multi f24 (tap-hold $stap-timeout $hold-timeout _ $hold-action)) break
+  )
+)
+
+(defalias
+  _led0 (macro 5 (on-release tap-vkey led0))
+  _esc (multi esc @_led0)
+  _hyper  (multi lmet lalt lctl @_led0 reverse-release-order)                         ;; `reverse-release-order` may not be required
+  _hyper_esc (multi lmet lalt lctl lsft reverse-release-order)                        ;; `reverse-release-order` may not be required
+
+  cap  (multi f24 (tap-hold $tap-timeout $hold-timeout @_esc @_hyper))                ;; tap:Esc hold:_hyper
+  esc  (multi f24 (tap-hold $tap-timeout $hold-timeout esc @_hyper_esc))              ;; tap:Esc hold:_hyper_esc
+
+  lmet (tap-hold-press $tap-timeout $hold-timeout A-esc lmet)                         ;; tap:Alt+Escape
+  lalt (multi f24 (tap-hold-press $tap-timeout $hold-timeout MediaPlayPause lalt))    ;; tap:MediaPlayPause
+  ralt (multi f24 (tap-hold-press $tap-timeout $hold-timeout kana ralt))              ;; tap:Hiragana_Katakana
+  lsft (multi f24 (tap-hold-press $tap-timeout $hold-timeout RA-7 lsft))              ;; tap:{
+  rsft (multi f24 (tap-hold-press $tap-timeout $hold-timeout RA-0 rsft))              ;; tap:}
+  lctl (multi f24 (tap-hold-press $tap-timeout $hold-timeout RA-8 lctl))              ;; tap:[
+  rctl (multi f24 (tap-hold-press $tap-timeout $hold-timeout RA-9 rctl))              ;; tap:]
+  ssrq (multi f24 (tap-hold-press $tap-timeout $hold-timeout M-f rmet))               ;; tap:Meta+f hold:Meta [[PrtSc]]
+  wkup (tap-hold-press $tap-timeout $hold-timeout RA-bksl wkup)
+
+  grv  (multi f24 (tap-hold-press $tap-timeout $hold-timeout grv lsft))               ;; tap:" hold:Shift
+
+  ;; NOTE: With tap-hold + letter keys, double-tap-hold to repeat the key
+
+  a (t! switch-tap-timing $tap-timeout-letter ralt)
+  q (t! switch-tap-timing $tap-timeout-letter (layer-while-held sym))
+  ş (t! switch-tap-timing $tap-timeout-letter (layer-while-held şym))
+
+  ;; startup (cmd sh -c "$HOME/.local/bin/__private/capslockw.py off")
+  ;; cmenu (arbitrary-code 156)
+  tab (tap-hold $tap-timeout $hold-timeout tab (layer-while-held laytab))
+
+  ;; pgup
+  ;; pgdn
+)
+
+(deflayermap (sym) ;; q
+  grv  RA-\ ;; " = `
+  3    RA-3 ;; 3 = #
+  4    RA-4 ;; 4 = $
+  7    RA-7 ;; 7 = {
+  8    RA-8 ;; 8 = [
+  9    RA-9 ;; 9 = ]
+  0    RA-0 ;; 7 = }
+  *    RA-* ;; * = \
+  o    RA-7 ;; p = {
+  p    RA-0 ;; p = }
+  ğ    RA-8 ;; ğ = [
+  ü    RA-9 ;; ü = ]
+  ş    RA-4 ;; ş = $
+  İ    S-2  ;; i = '
+  bksl RA-* ;; , = \
+  /    S-7  ;; . = /
+  ö    ,
+  ç    .
+  eql  (unicode "—")
+)
+(deflayermap (şym) ;; ş
+  grv  RA-\ ;; " = `
+  q    RA-q ;; q = @
+  ğ    RA-7 ;; ğ = {
+  ü    RA-0 ;; ü = }
+  İ    S-8  ;; i = (
+  bksl S-9  ;; , = )
+  ö    <    ;; ö = <
+  ç    S-<  ;; ç = >
+  <    RA-< ;; < = |
+)
+
+(deflayermap (laytab)
+  esc M-del
+  caps @_hyper_esc
+  h home
+  l end
+  j pgdn
+  k pgup
+  e (mwheel-up 50 120)
+  d (mwheel-down 50 120)
+)
+

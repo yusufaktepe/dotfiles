@@ -16,7 +16,7 @@ default-title = "Untitled"
 
 # Template used to generate a note's filename, without extension.
 # filename = "{{id}}"
-filename = "{{format-date now '%Y-%m-%d_%H-%M'}}_{{slug title}}"
+filename = "{{slug title}}"
 
 # The file extension used for the notes.
 extension = "md"
@@ -83,6 +83,14 @@ paths = ["journal"]
 filename = "{{format-date now '%Y-%m-%d'}}"
 extension = "md"
 template = "daily.md"
+
+[group.idea]
+paths = ["ideas"]
+
+[group.idea.note]
+filename = "{{format-date now '%Y-%m-%d_%H-%M'}}_{{slug title}}"
+extension = "md"
+template = "idea.md"
 
 # MARKDOWN SETTINGS
 [format.markdown]

@@ -1,11 +1,14 @@
 ~/
-	(.cache
+	(.android
+	|.cache
 	|.cert
 	|.gnupg
 	|.icons
 	|.mozilla
 	|.pki
+	|.thunderbird
 	|.ssh
+	|.zen
 	)|
 ~/.config/
 	(BraveSoftware
@@ -14,12 +17,14 @@
 	|dconf
 	|doublecmd/logs
 	|GIMP
+	|go
 	|google-chrome
 	|BraveSoftware
 	|Exodus
 	|Hardcode-Tray
 	|inkscape
 	|keybase
+	|LosslessCut
 	|libreoffice
 	|light
 	|menus
@@ -33,6 +38,7 @@
 	|vivaldi
 	)|
 .local/state/|
+.local/pipx/|
 .local/lib/
 	(node_modules
 	|go
@@ -44,6 +50,7 @@
 	)|
 .local/share/
 	(audacity
+	|bob
 	|cantata
 	|data
 	|desktop*
@@ -77,6 +84,7 @@
 	|mime*
 	|recent*
 	)|
+.vscode|
 /data/.cache/|
 /data/backup/
 	(clonezilla

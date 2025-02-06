@@ -101,7 +101,7 @@ bindkey '^Y' zcw_copybuffer             # [Ctrl-y] - copy current BUFFER to clip
 # bindkey '^D' zcw_exit-zsh             # [Ctrl-d] - exit; even if the command line is full
 bindkey '^Z' zcw_toggle-fg              # [Ctrl-z] - toggle background jobs
 bindkey '\ec' zcw_fzf-cd                # [Alt-c]  - cd into the selected directory
-bindkey '^R' zcw_fzf-history            # [Ctrl-r] - select command from history into the command line
+bindkey '^K' zcw_fzf-history            # [Ctrl-r] - select command from history into the command line
 bindkey -M vicmd '^E' edit-command-line # [VIN|Ctrl-e] - edit command line with $EDITOR
 bindkey -M vicmd '^[s' zcw_prefix-sudo  # [VIN|Alt-s] to add sudo prefix
 bindkey -M vicmd "^[ " zcw_globalias    # [VIN|Alt-Space] to expand alias

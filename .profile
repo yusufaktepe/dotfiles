@@ -29,6 +29,7 @@ export TIME=$'$ \033[3;31m%C\033[0m\nreal\t%e\nuser\t%U\nsys\t%S\ncpu\t%P'
 
 # Keep $HOME clean
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+export XCOMPOSEFILE="$XDG_CONFIG_HOME/X11/XCompose"
 
 export PYLINTHOME="$XDG_CACHE_HOME/pylint"
 

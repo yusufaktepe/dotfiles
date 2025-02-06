@@ -13,6 +13,7 @@ gtk3_settings        ~/.config/gtk-3.0/settings.ini
 i3                   ~/.config/i3/config
 inputrc              ~/.config/bash/inputrc
 pacman_makepkg       ~/.config/pacman/makepkg.conf
+kanata               ~/.config/kanata/kanata.kbd
 kitty                ~/.config/kitty/kitty.conf
 mimeapps             ~/.config/mimeapps.list
 mpv                  ~/.config/mpv/mpv.conf

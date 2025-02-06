@@ -48,6 +48,7 @@ autocmd("BufEnter", {
   end,
 })
 autocmd("BufEnter", { pattern = "/tmp/*gpaste*", command = "map Q ZZ | set ft=text" })
+autocmd("BufEnter", { pattern = "*.kbd", command = "set ft=lisp | set commentstring=;;\\ %s" })
 
 autocmd("BufWritePost", { pattern = "*Xresources,*Xdefaults", command = "!xrdb %" })
 autocmd("BufWritePost", { pattern = "~/.config/fontconfig/*", command = "!fc-cache" })
@@ -61,15 +62,15 @@ autocmd("FileType", {
 })
 
 -- Set FileType for new files w/o ext.
-autocmd("BufEnter", {
-  callback = function()
-    vim.schedule(function()
-      if vim.bo.filetype == "" then
-        vim.bo.filetype = "sh"
-      end
-    end)
-  end,
-})
+-- autocmd("BufEnter", {
+--   callback = function()
+--     vim.schedule(function()
+--       if vim.bo.filetype == "" then
+--         vim.bo.filetype = "sh"
+--       end
+--     end)
+--   end,
+-- })
 
 -- autocmd("FileType", {
 --   pattern = "markdown",

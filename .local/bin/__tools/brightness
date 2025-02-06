@@ -32,12 +32,23 @@ kboff() {
 	for L in $LKB $LPWR; do
 		[ -e "$L" ] || continue
 		read -r StatusL < "$L"
-		[ $StatusL != 0 ] && printf 0 > "$L"
+		[ "$StatusL" != 0 ] && printf 0 > "$L"
 	done
-	for LC in /sys/class/leds/*capslock/brightness; do
-		[ -e "$LC" ] || continue
-		printf 1 > "$LC"; printf 0 > "$LC"
-	done
+
+	# pidof -q kanata && {
+	# 	if [ "$XDG_SESSION_TYPE" = x11 ]; then
+	# 		numlockx on; numlockx off
+	# 	else 
+	# 		# capslockw.py --force-led off
+	# 		ledturner --input /dev/input/event5 --caps 0
+	# 	fi
+	# 	return
+	# }
+
+	# for LC in /sys/class/leds/*capslock/brightness; do
+	# 	[ -e "$LC" ] || continue
+	# 	printf 1 > "$LC"; printf 0 > "$LC"
+	# done
 }
 
 
@@ -46,6 +57,6 @@ case $1 in
 	dec) brightnessctl set "${2:-5}%-" >/dev/null && { notify; update_bar ;} ;;
 	set) brightnessctl set "${2:-27}%" >/dev/null && { notify; update_bar ;} ;;
 	kboff) kboff ;;
-	off) xset dpms force off; kboff ;;
+	off) kboff; xset dpms force off ;;
 esac
 

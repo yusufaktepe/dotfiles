@@ -1,7 +1,10 @@
 #!/bin/sh
 
+SDir=~/.config/mpv/scripts
+
 setsid -f mpv \
 	--load-scripts=no \
+	--scripts=${SDir}/inputevent.lua:${SDir}/evafast.lua:${SDir}/is_fullscreen.lua \
 	--input-ipc-server=/tmp/mpvsocketYT \
 	--really-quiet \
 	--volume=60 \

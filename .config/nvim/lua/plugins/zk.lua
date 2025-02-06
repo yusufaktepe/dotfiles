@@ -33,7 +33,7 @@ return {
         function()
           require("zk.commands").get("ZkCd")()
         end,
-        desc = "Change Directory",
+        desc = "cd $ZK_NOTEBOOK_DIR",
       },
       {
         "<leader>zr",
@@ -58,7 +58,10 @@ return {
       {
         "<leader>zm",
         function()
-          require("zk.commands").get("ZkNotes")({ sort = { "created" }, match = { vim.fn.input("Match: ") } })
+          local match = vim.fn.input("Match: ")
+          if match ~= "" then
+            require("zk.commands").get("ZkNotes")({ sort = { "created" }, match = { match } })
+          end
         end,
         desc = "Match given query",
       },
@@ -72,16 +75,26 @@ return {
       {
         "<leader>zn",
         function()
-          require("zk.commands").get("ZkNew")({ dir = "ideas", title = vim.fn.input("Title: ") })
+          local title = vim.fn.input("Title: ")
+          if title ~= "" then
+            require("zk.commands").get("ZkNew")({ dir = "ideas", title = title })
+          end
         end,
         desc = "New Note",
       },
       {
         "<leader>zz",
         function()
-          require("zk.commands").get("ZkNotes")({ sort = { "modified" } })
+          require("zk.commands").get("ZkNotes")({ excludeHrefs = { "journal" }, sort = { "modified" } })
         end,
         desc = "Search",
+      },
+      {
+        "<leader>zJ",
+        function()
+          require("zk.commands").get("ZkNotes")({ hrefs = { "journal" }, sort = { "modified" } })
+        end,
+        desc = "Search journal",
       },
       {
         "<leader>zt",

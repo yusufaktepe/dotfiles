@@ -1,4 +1,15 @@
 #!/bin/sh
+# superseded by kanata + ledturner
+
+pidof -q kanata && {
+	# if [ "$XDG_SESSION_TYPE" = x11 ]; then
+	# 	numlockx on; numlockx off
+	# else
+		# capslockw.py --force-led off
+		ledturner --input /dev/input/event5 --caps 0
+	# fi
+	exit 0
+}
 
 for f in /sys/class/leds/*capslock/brightness; do
 	printf 1 > "$f"; printf 0 > "$f"

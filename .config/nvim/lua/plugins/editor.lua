@@ -7,10 +7,27 @@ return {
       local actions = require("fzf-lua.actions")
       config.defaults.actions.files["alt-enter"] = actions.file_tabedit
 
-      opts.winopts = {
-        backdrop = 100,
+      local hls = {
+        bg    = "PmenuSbar",
+        sel   = "PmenuSel",
+        title = "IncSearch"
       }
-      return opts
+
+      return vim.tbl_deep_extend("force", opts, {
+        "borderless-full",
+        defaults = {
+          prompt = " ",
+        },
+        winopts = {
+          backdrop = 100,
+        },
+        fzf_colors = {
+          ["gutter"] = { "bg", hls.bg },
+          ["bg"]     = { "bg", hls.bg },
+          ["bg+"]    = { "bg", hls.sel },
+          ["fg+"]    = { "fg", hls.sel },
+        },
+      })
     end,
   },
 
@@ -47,12 +64,13 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      -- preset = "modern",
-      preset = "classic",
-      win = {
-        border = { "─", "─", "─", " ", " ", " ", " ", " " },
-        title_pos = "left",
-      },
+      preset = "helix",
+      -- icons = { separator = "│", },
+      -- preset = "classic",
+      -- win = {
+      --   border = { "─", "─", "─", " ", " ", " ", " ", " " },
+      --   title_pos = "left",
+      -- },
     },
   },
 

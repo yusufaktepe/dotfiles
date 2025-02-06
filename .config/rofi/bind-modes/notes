@@ -1,14 +1,31 @@
 #!/bin/bash
 # shellcheck disable=2034
 
-PROMPT=''
+PROMPT=' zk'
+
+zk_new() {
+    title=$(rofi -dmenu -p ' Title:') &&
+    ifterm -t -i blockterm_zk-new -e "zk new --no-input $ZK_NOTEBOOK_DIR/$1 --title $title"
+}
 
 kb_bind[1]='w'
-kb_bind[2]='t'
+kb_bind[2]='j'
+kb_bind[3]='J'
+kb_bind[4]='i'
+kb_bind[5]='n'
+kb_bind[6]='t'
 
-kb_act[1]="setsid -f $TERMINAL -e $EDITOR -c ZkNotes"
-kb_act[2]="setsid -f $TERMINAL -e $EDITOR +$ ~/notes/todo.md"
+kb_act[1]="setsid -f $TERMINAL -e $EDITOR -c \"ZkNotes { excludeHrefs = {'journal'} }\""
+kb_act[2]="ifterm -t -i blockterm_zk-daily -e 'zk daily'"
+kb_act[3]="setsid -f $TERMINAL -e $EDITOR -c \"ZkNotes { hrefs = {'journal'} }\""
+kb_act[4]="zk_new ideas"
+kb_act[5]="zk_new"
+kb_act[6]="ifterm -t -i blockterm_zk-journal -e 'zk edit todo.md'"
 
-kb_msg[1]='ZkNotes'
-kb_msg[2]='ToDo'
+kb_msg[1]=' Notes'
+kb_msg[2]=' Journal'
+kb_msg[3]=' Journal'
+kb_msg[4]=' Idea'
+kb_msg[5]='󱞁 Note'
+kb_msg[6]=' ToDo'
 

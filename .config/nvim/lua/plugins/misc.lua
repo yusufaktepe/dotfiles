@@ -107,7 +107,9 @@ return {
     "lambdalisue/vim-suda",
     event = { { event = "BufEnter", pattern = { "/etc/*", "/usr/*" } } },
     init = function()
-      vim.g.suda_smart_edit = 1
+      if not vim.opt.diff:get() then
+        vim.g.suda_smart_edit = 1
+      end
     end,
     cmd = { "SudaRead", "SudaWrite"}
   },

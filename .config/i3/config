@@ -7,7 +7,8 @@
 # Set mod keys (Mod1=<Alt>, Mod4=<Super>, Mod3=<Hyper_L>, Mod5=<AltGr>)
 set $mod  Mod4
 set $alt  Mod1
-set $caps Mod3
+# kanata:
+set $caps Mod4+Mod1+Ctrl
 set $agr  Mod5
 
 floating_modifier $mod
@@ -32,13 +33,16 @@ hide_edge_borders none
 # change borders
 bindsym $mod+Ctrl+b border toggle
 
+# Display the PIP window over all fullscreen windows
+# popup_during_fullscreen all
+
 # Font used by titles & bar -unless otherwise stated in the bar{} block-
 font pango:mono 12
 
 # kill focused window
 set $killrule [con_id="__focused__" instance="^(?!dropdown_).*$"]
-# BUG: zen-browser session restore bug
-bindsym $mod+q $killrule kill, [con_id=__focused__ class="zen"] exec --no-startup-id xdo close
+# bindsym $mod+q $killrule kill, [con_id=__focused__ class="zen"] exec --no-startup-id xdo close
+bindsym $mod+q $killrule kill
 # bindsym --release $mod+q $exec winclose
 bindsym $mod+Shift+q $killrule $exec kill -9 `xdotool getwindowfocus getwindowpid`
 bindsym --release $mod+Ctrl+x $exec xkill
@@ -59,19 +63,20 @@ bindsym $mod+d $exec rofi -show combi
 bindsym $mod+c $exec $calc
 bindsym $mod+i $exec rofimoji
 bindsym $mod+Shift+i $exec rofimoji -f nerd_font
+bindsym $mod+$alt+u $exec rofimoji -f all
 bindsym XF86Calculator $exec $calc
 bindsym $caps+d $exec brbw
 bindsym $caps+f $exec rofi-finder
 # bindsym XF86Launch2 $exec rofi -show combi
-bindsym XF86Launch9 $exec rofitrans !
+bindsym Hiragana_Katakana $exec rofitrans !
 bindsym $caps+t $exec rofitrans -s
 bindsym $agr+space $exec rofitrans !d
-bindsym $mod$caps+g $exec rofi-gh-stars
+bindsym $caps+Shift+g $exec rofi-gh-stars
 
 # #---Clipboard management---# #
 bindsym Ctrl+quotedbl $exec gpaste -H history
 bindsym $caps+quotedbl $exec gpaste --clear
-bindsym Ctrl+$caps+quotedbl $exec "pkill gpaste-daemon; gpaste-client daemon"
+bindsym $caps+Shift+quotedbl $exec "pkill gpaste-daemon; gpaste-client daemon"
 bindsym $mod+Shift+Insert $exec gpaste --seltoclip
 
 # #---Dunst---# #
@@ -107,13 +112,13 @@ bindsym $caps+7 $exec vbox_instance Win7
 # bindsym $caps+w $exec libreoffice --writer
 bindsym $caps+c $exec crow-translate
 bindsym $caps+v $exec ifwin -e code
-bindsym $caps+o $exec ifwin -p electron -e obsidian
-bindsym $mod+$caps+c $exec ifwin -s -e gcolor3
+# bindsym $caps+o $exec ifwin -p electron -e obsidian
+bindsym $caps+Shift+c $exec ifwin -s -e gcolor3
 bindsym $mod+odiaeresis $exec whatsapp
 
-bindsym --release $caps+gbreve     $exec xdotool key --clearmodifiers parenleft
-bindsym --release $caps+udiaeresis $exec xdotool key --clearmodifiers parenright
-bindsym --release $caps+comma $exec xdotool key --clearmodifiers bar
+# bindsym --release $caps+gbreve     $exec xdotool key --clearmodifiers parenleft
+# bindsym --release $caps+udiaeresis $exec xdotool key --clearmodifiers parenright
+# bindsym --release $caps+comma $exec xdotool key --clearmodifiers bar
 
 bindsym $mod+Shift+d $exec xo d
 bindsym $mod+Shift+e $exec xo c
@@ -126,9 +131,9 @@ bindsym $mod+$alt+F8 $exec rofi-vpn
 bindsym $mod+Shift+Delete $exec smc pauseall; workspace 0
 
 ## System Monitor
-bindsym $caps+F1 $exec ifterm -t -i blockterm_htop -e htop
-bindsym $caps+F2 $exec ifterm -t -i blockterm_psmem -e 'sudo -A ps_mem | less -RS +G'
-bindsym $caps+F3 $exec ifterm -t -i blockterm_ncdu -e 'ncdu --color dark --exclude vifm/fuse ~/'
+bindsym $caps+Shift+F1 $exec ifterm -t -i blockterm_htop -e htop
+bindsym $caps+Shift+F2 $exec ifterm -t -i blockterm_psmem -e 'sudo -A ps_mem | less -RS +G'
+bindsym $caps+Shift+F3 $exec ifterm -t -i blockterm_ncdu -e 'ncdu --color dark --exclude vifm/fuse ~/'
 
 ## Function Buttons
 bindsym XF86MonBrightnessUp $exec brightness inc 2.90
@@ -250,10 +255,14 @@ bindsym $mod+Shift+b floating enable; sticky enable; \
 	$exec "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1 600"
 bindsym $mod+Shift+n floating enable; sticky enable; \
 	$exec "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1069 600"
+bindsym $mod+Shift+m floating enable; sticky enable; \
+	$exec "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1069 25"
 bindsym $mod+Ctrl+Shift+b floating enable; sticky enable; \
 	$exec "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1 797"
 bindsym $mod+Ctrl+Shift+n floating enable; sticky enable; \
 	$exec "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1418 797"
+bindsym $mod+Ctrl+Shift+m floating enable; sticky enable; \
+	$exec "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1418 25"
 
 # Resize
 set $distance 10 px or 10 ppt
@@ -355,8 +364,8 @@ bindsym $mod+x [urgent=latest] focus
 
 # Hide/unhide the bar
 bindsym $mod+b $exec polybar-msg cmd toggle
-bindsym $mod+$caps+b $exec crypto_bar
-bindsym $mod+$caps+t $exec crypto_bar top
+bindsym $caps+Shift+b $exec crypto_bar
+bindsym $caps+Shift+t $exec crypto_bar top
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload ;; $exec "notify-send -a system -i configuration -t 1500 i3 'Config reloaded'"
@@ -383,21 +392,19 @@ bindsym --whole-window --border $mod+Ctrl+button3 $exec maimshot -s
 for_window [workspace="$ws1|$ws2|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
-# assign [window_role="browser"]                 $ws1
-assign [class="(?i)Vivaldi"]                     $ws1
-assign [class="(?i)Pcmanfm|Doublecmd"]           $ws2
-assign [instance="^(ranger|vifm)$"]              $ws2
-# assign [instance="Neovim"]                       $ws3
+# assign [window_role="browser"]                       $ws1
+assign [class="(?i)Vivaldi"]                         $ws1
+assign [class="(?i)Pcmanfm|Doublecmd"]               $ws2
+assign [instance="^(ranger|vifm)$"]                  $ws2
+# assign [instance="Neovim"]                           $ws3
 assign [class="(?i)Opera|firefox|Brave-browser|zen"] $ws4
-assign [class="Code|obsidian"]                   $ws5
-assign [class="(?i)telegram"]                    $ws6
-assign [class="Audacity"]                        $ws7
-assign [class="(?i)VirtualBox" title="(?i)Win7"] $ws8
-assign [class="(?i)thunderbird"]                 $ws8
-assign [class="qBittorrent"]                     $ws9
-assign [class="cantata|strawberry"]              $ws10
+assign [class="Code|obsidian"]                       $ws5
+assign [class="(?i)telegram"]                        $ws6
+assign [class="Audacity"]                            $ws7
+assign [class="(?i)thunderbird"]                     $ws8
+assign [class="qBittorrent"]                         $ws9
+assign [class="Spotify|cantata|strawberry"]          $ws10
 for_window [instance="web.whatsapp.com*"] move --no-auto-back-and-forth to workspace $ws6
-for_window [class="Spotify"] move --no-auto-back-and-forth to workspace $ws10
 
 ## Window Rules
 for_window [class="(?i)nm-connection-editor|(?i)blueman|(?i)pinentry|(?i)recordmydesktop|(?i)qemu-system"] floating enable
