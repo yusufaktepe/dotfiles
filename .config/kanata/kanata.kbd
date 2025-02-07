@@ -84,9 +84,9 @@
 ;; )
 
 (defvar
-  tap-timeout-letter 150
   tap-timeout 200
   hold-timeout 200
+  tap-timeout-letter 150
 )
 
 (defvirtualkeys
@@ -105,26 +105,30 @@
   )
 )
 
+(deftemplate tholdp (tap-action hold-action)
+  (multi f24 (tap-hold-press $tap-timeout $hold-timeout $tap-action $hold-action))
+)
+
 (defalias
   _led0 (macro 5 (on-release tap-vkey led0))
   _esc (multi esc @_led0)
-  _hyper  (multi lmet lalt lctl @_led0 reverse-release-order)                         ;; `reverse-release-order` may not be required
-  _hyper_esc (multi lmet lalt lctl lsft reverse-release-order)                        ;; `reverse-release-order` may not be required
+  _hyper  (multi lmet lalt lctl @_led0 reverse-release-order)    ;; `reverse-release-order` may not be required
+  _hyper_esc (multi lmet lalt lctl lsft reverse-release-order)   ;; `reverse-release-order` may not be required
 
-  cap  (multi f24 (tap-hold $tap-timeout $hold-timeout @_esc @_hyper))                ;; tap:Esc hold:_hyper
-  esc  (multi f24 (tap-hold $tap-timeout $hold-timeout esc @_hyper_esc))              ;; tap:Esc hold:_hyper_esc
+  cap  (t! tholdp @_esc @_hyper)     ;; tap:Esc hold:_hyper
+  esc  (multi f24 (tap-hold $tap-timeout $hold-timeout esc @_hyper_esc))   ;; tap:Esc hold:_hyper_esc | NOTE: bc. tap-hold-press issue
 
-  lmet (tap-hold-press $tap-timeout $hold-timeout A-esc lmet)                         ;; tap:Alt+Escape
-  lalt (multi f24 (tap-hold-press $tap-timeout $hold-timeout MediaPlayPause lalt))    ;; tap:MediaPlayPause
-  ralt (multi f24 (tap-hold-press $tap-timeout $hold-timeout kana ralt))              ;; tap:Hiragana_Katakana
-  lsft (multi f24 (tap-hold-press $tap-timeout $hold-timeout RA-7 lsft))              ;; tap:{
-  rsft (multi f24 (tap-hold-press $tap-timeout $hold-timeout RA-0 rsft))              ;; tap:}
-  lctl (multi f24 (tap-hold-press $tap-timeout $hold-timeout RA-8 lctl))              ;; tap:[
-  rctl (multi f24 (tap-hold-press $tap-timeout $hold-timeout RA-9 rctl))              ;; tap:]
-  ssrq (multi f24 (tap-hold-press $tap-timeout $hold-timeout M-f rmet))               ;; tap:Meta+f hold:Meta [[PrtSc]]
-  wkup (tap-hold-press $tap-timeout $hold-timeout RA-bksl wkup)
-
-  grv  (multi f24 (tap-hold-press $tap-timeout $hold-timeout grv lsft))               ;; tap:" hold:Shift
+  lmet (t! tholdp A-esc lmet)                    ;; tap:Alt+Escape
+  lalt (t! tholdp MediaPlayPause lalt)           ;; tap:MediaPlayPause
+  ralt (t! tholdp kana ralt)                     ;; tap:Hiragana_Katakana
+  lsft (t! tholdp RA-7 lsft)                     ;; tap:{
+  rsft (t! tholdp RA-0 rsft)                     ;; tap:}
+  lctl (t! tholdp RA-8 lctl)                     ;; tap:[
+  rctl (t! tholdp RA-9 rctl)                     ;; tap:]
+  ssrq (t! tholdp M-f rmet)                      ;; tap:Meta+f hold:Meta [[PrtSc]]
+  wkup (t! tholdp RA-bksl wkup)                  ;; tap ` hold:wkup
+  tab  (t! tholdp tab (layer-while-held laytab))
+  grv  (t! tholdp grv lsft)                      ;; tap:" hold:Shift
 
   ;; NOTE: With tap-hold + letter keys, double-tap-hold to repeat the key
 
@@ -134,7 +138,6 @@
 
   ;; startup (cmd sh -c "$HOME/.local/bin/__private/capslockw.py off")
   ;; cmenu (arbitrary-code 156)
-  tab (tap-hold $tap-timeout $hold-timeout tab (layer-while-held laytab))
 
   ;; pgup
   ;; pgdn
@@ -160,6 +163,7 @@
   ö    ,
   ç    .
   eql  (unicode "—")
+  _    use-defsrc ;; map all unmapped keys in this layer that are defined in defsrc.
 )
 (deflayermap (şym) ;; ş
   grv  RA-\ ;; " = `
