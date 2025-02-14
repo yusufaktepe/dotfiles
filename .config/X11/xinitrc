@@ -20,11 +20,13 @@ fi
 dunst &
 nm-applet &
 redshift &
-remaps &
+# remaps &
+xset r rate 300 50 &
 numlockx &
 gpaste-client daemon &
 rbw-unlock &
 # unclutter --ignore-scrolling --jitter 50 --exclude-root --not vivaldi -b &
 # (sleep 30; syncthing -no-browser) &
+printf 0 > /sys/class/leds/tpacpi::power/brightness &
 
 exec "${1:-i3}"

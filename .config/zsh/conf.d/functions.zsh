@@ -169,6 +169,7 @@ tyrm() { [ -n "$1" ] && find . -type f -name "*.$1" -exec trash-put {} \; ;}
 enc() { for f in "$@"; do gpg --yes -e "$f"; done ;}
 dec() { for f in "$@"; do gpg -d "$f" > "${f%.gpg}"; done ;}
 
+git() { command git "${@:-status}" ;}
 
 # pacman() {
 #     case $1 in

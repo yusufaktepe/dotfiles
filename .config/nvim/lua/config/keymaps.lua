@@ -49,6 +49,7 @@ map("n", "ZQ", "<cmd>confirm qall<cr>", { desc = "Quit all, bring up a prompt wh
 
 -- Toggle options
 Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>W")
+Snacks.toggle.option("cursorcolumn", { name = "Cursorcolumn" }):map("<leader>uO")
 Snacks.toggle({
     name = "Color Column",
     get = function()

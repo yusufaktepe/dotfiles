@@ -1,6 +1,6 @@
 return {
 
-  { "LazyVim/LazyVim", version = false },
+  -- { "LazyVim/LazyVim", version = false },
 
   -- indentation detection
   { "Darazaki/indent-o-matic" },

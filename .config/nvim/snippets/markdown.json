@@ -4,5 +4,11 @@
     "body": [
       "- [ ] ${1:todo}"
     ]
+  },
+  "details": {
+    "prefix": "details",
+    "body": [
+      "<details><summary>${1:summary}</summary>\n${0}\n</details>"
+    ]
   }
 }

@@ -42,7 +42,7 @@ font pango:mono 12
 # kill focused window
 set $killrule [con_id="__focused__" instance="^(?!dropdown_).*$"]
 # bindsym $mod+q $killrule kill, [con_id=__focused__ class="zen"] exec --no-startup-id xdo close
-bindsym $mod+q $killrule kill
+bindsym $mod+q $killrule kill, [con_id=__focused__ title="root"] $exec rofi-bind -f $bind-modes/session
 # bindsym --release $mod+q $exec winclose
 bindsym $mod+Shift+q $killrule $exec kill -9 `xdotool getwindowfocus getwindowpid`
 bindsym --release $mod+Ctrl+x $exec xkill
@@ -67,17 +67,14 @@ bindsym $mod+$alt+u $exec rofimoji -f all
 bindsym XF86Calculator $exec $calc
 bindsym $caps+d $exec brbw
 bindsym $caps+f $exec rofi-finder
-# bindsym XF86Launch2 $exec rofi -show combi
 bindsym Hiragana_Katakana $exec rofitrans !
 bindsym $caps+t $exec rofitrans -s
 bindsym $agr+space $exec rofitrans !d
 bindsym $caps+Shift+g $exec rofi-gh-stars
 
 # #---Clipboard management---# #
-bindsym Ctrl+quotedbl $exec gpaste -H history
-bindsym $caps+quotedbl $exec gpaste --clear
-bindsym $caps+Shift+quotedbl $exec "pkill gpaste-daemon; gpaste-client daemon"
-bindsym $mod+Shift+Insert $exec gpaste --seltoclip
+bindsym $alt+quotedbl $exec gpaste -H history
+bindsym $alt+Shift+quotedbl $exec gpaste --clear
 
 # #---Dunst---# #
 bindsym $caps+space $exec dunstctl close-all
