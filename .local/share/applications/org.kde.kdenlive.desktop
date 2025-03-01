@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Kdenlive
+GenericName=Video Editor
+Comment=Nonlinear video editor by KDE
+Type=Application
+Exec=QT_SCALE_FACTOR=1.2 kdenlive %F
+Icon=kdenlive
+StartupWMClass=kdenlive
+X-DocPath=kdenlive/index.html
+MimeType=application/x-kdenlive;
+Categories=Qt;KDE;AudioVideo;AudioVideoEditing;
+Keywords=editing;video;audio;mlt;kde;
+X-DBUS-ServiceName=org.kde.kdenlive

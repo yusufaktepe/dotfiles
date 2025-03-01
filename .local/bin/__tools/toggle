@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ns() { dunstify -r 1003 -a toggle "$@" ;}
+ns() { notify-send -r 1003 -a toggle "$@" ;}
 
 input_device() {
 	device=$(xinput --list --name-only | grep -i "$1") device=${device#∼ }

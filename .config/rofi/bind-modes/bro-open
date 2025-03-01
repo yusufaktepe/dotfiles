@@ -18,11 +18,11 @@ kb_bind[12]='d'
 kb_bind[13]='r'
 
 kb_act[1]="bro-open vivaldi-stable --start-maximized"
-kb_act[2]="bro-open zen-browser"
+kb_act[2]="bro-open firefox"
 kb_act[3]="bro-open google-chrome-stable"
 kb_act[4]="bro-open brave"
 kb_act[5]="bro-open vivaldi-stable --start-maximized --incognito"
-kb_act[6]="bro-open zen-browser --private-window"
+kb_act[6]="bro-open firefox --private-window"
 kb_act[7]="bro-open google-chrome-stable --incognito"
 kb_act[8]="bro-open brave --incognito"
 kb_act[9]="bro-open tor-browser --allow-remote"

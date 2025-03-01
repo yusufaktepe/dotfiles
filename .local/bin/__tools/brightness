@@ -15,7 +15,7 @@ notify() {
 		"$(brightnessctl --machine-readable info)"
 	+++
 
-	dunstify \
+	notify-send \
 		-a volbright \
 		-i "display-brightness" \
 		-t 1500 \

@@ -19,7 +19,7 @@ notify() {
 	else Icon=audio-volume-low
 	fi
 
-	dunstify \
+	notify-send \
 		-a volbright \
 		-i "$Icon" \
 		-t 1500 \

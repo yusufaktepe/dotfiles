@@ -14,7 +14,7 @@ get_url() {
 	AW_CLASS=$(xdotool getactivewindow getwindowclassname 2>/dev/null)
 
 	case $AW_CLASS in
-		Vivaldi*|*chrom*|Opera*|firefox*|Tor*|Brave*)
+		Vivaldi*|*chrom*|Opera*|firefox*|Tor*|Brave*|zen)
 			printf '' | xclip
 			xdotool key --delay 100 --clearmodifiers Ctrl+l Right Shift+Home Escape
 			URL=$(xclip -r -o | grep_url) ;;

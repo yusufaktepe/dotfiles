@@ -5,7 +5,7 @@ PROMPT=' zk'
 
 zk_new() {
     title=$(rofi -dmenu -p ' Title:') &&
-    ifterm -t -i blockterm_zk-new -e "zk new --no-input $ZK_NOTEBOOK_DIR/$1 --title $title"
+    ifterm -t -i blockterm_zk-new -e "zk new --no-input $ZK_NOTEBOOK_DIR/$1 --title \"$title\""
 }
 
 kb_bind[1]='w'

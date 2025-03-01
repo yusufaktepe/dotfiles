@@ -25,7 +25,7 @@ while :; do
 		if (( $(printf '%s\n' "${P##* } $Expr" | bc -l) )); then
 			Expr=${Expr/<=/▼} Expr=${Expr/>=/▲}
 
-			dunstify -a crypto -t 15000 -r 2001 -i money-manager-ex \
+			notify-send -a crypto -t 15000 -r 2001 -i money-manager-ex \
 				-h string:bgcolor:$Color "${P/=*/$Expr}"
 
 			if [ -n "$Alarm" ] && [ -z "$Rang" ]; then

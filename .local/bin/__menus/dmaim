@@ -4,7 +4,7 @@ Dir=$HOME/Pictures/Screenshots
 Date=$(date +%Y-%m-%d_%H-%M-%S)
 
 notify() {
-	dunstify -a system -i "$Shot" -A "$Shot",Open "Screenshot captured." |
+	notify-send -a system -i "$Shot" -A "$Shot",Open "Screenshot captured." |
 		xargs -r -I '{}' xdg-open {} >/dev/null 2>&1 &
 }
 

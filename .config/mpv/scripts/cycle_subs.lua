@@ -5,8 +5,14 @@ local function get_sub_tracks()
     local sub_tracks = {}
 
     for _, track in ipairs(tracks) do
-        if track.type == "sub" and track.lang then
-            sub_tracks[track.lang] = track.id
+        -- Skip forced subtitles
+        if track.type == "sub" and track.lang and not track.forced then
+            -- Only set the language if it's not already set to prioritize the first non-forced occurrence
+            if (track.lang == "tur" or track.lang == "tr") and not sub_tracks["tur"] then
+                sub_tracks["tur"] = track.id
+            elseif (track.lang == "eng" or track.lang == "en") and not sub_tracks["eng"] then
+                sub_tracks["eng"] = track.id
+            end
         end
     end
 
@@ -17,9 +23,9 @@ local function cycle_subtitles()
     local sub_tracks = get_sub_tracks()
     local current_sid = mp.get_property_number("sid", 0)
 
-    if (sub_tracks["tur"] or sub_tracks["tr"]) and (sub_tracks["eng"] or sub_tracks["en"]) then
-        local tur_id = sub_tracks["tur"] or sub_tracks["tr"]
-        local eng_id = sub_tracks["eng"] or sub_tracks["en"]
+    if (sub_tracks["tur"]) and (sub_tracks["eng"]) then
+        local tur_id = sub_tracks["tur"]
+        local eng_id = sub_tracks["eng"]
 
         if current_sid == eng_id then
             mp.set_property("sid", tur_id)
@@ -29,6 +35,6 @@ local function cycle_subtitles()
     end
 end
 
--- Bind the function to a key (e.g., "y")
+-- Bind the function to a key (e.g., "KP_PGDWN")
 mp.add_key_binding("KP_PGDWN", "cycle_subtitles", cycle_subtitles)
 

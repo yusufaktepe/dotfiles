@@ -1,7 +1,7 @@
 #|
   kanata config
   See:
-    https://jtroo.github.io/config.html
+    https://github.com/jtroo/kanata/blob/main/docs/config.adoc
     https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs#L172
 
   my keyboard layout (for reference)
@@ -41,6 +41,8 @@
   ;; linux-unicode-termination space
   ;; alias-to-trigger-on-load startup
 )
+
+;; (include local.kbd)
 
 (deflocalkeys-linux
   *  12
@@ -102,11 +104,11 @@
   led0 (cmd-log none error sh -c "$HOME/.local/bin/noled")
 )
 
-(deftemplate switch-tap-hold (sth-timeout hold-action)
+(deftemplate switch-tap-hold (st-timeout sh-timeout hold-action)
   (switch
     ;; https://github.com/jtroo/kanata/discussions/1455
-    ((key-timing 1 less-than $sth-timeout)) _ break
-    () (multi f24 (tap-hold $sth-timeout $hold-timeout _ $hold-action)) break
+    ((key-timing 3 less-than $st-timeout)) _ break
+    () (multi f24 (tap-hold-release $st-timeout $sh-timeout _ $hold-action)) break
   )
 )
 
@@ -130,29 +132,30 @@
   _led0 (macro 5 (on-release tap-vkey led0))
   _esc (multi esc @_led0)
   _hyper  (multi lmet lalt lctl @_led0 reverse-release-order)    ;; `reverse-release-order` may not be required
-  _hyper_esc (multi lmet lalt lctl lsft reverse-release-order)   ;; `reverse-release-order` may not be required
+  _hyper_esc (multi lmet lalt lctl lsft)
 
   cap  (t! tholdp @_esc @_hyper)     ;; tap:Esc hold:_hyper
   ;; esc  (multi f24 (tap-hold $tap-timeout $hold-timeout esc @_hyper_esc))   ;; tap:Esc hold:_hyper_esc | NOTE: bc. tap-hold-press issue
-  esc  (t! switch-tap-hold $tap-timeout-nonmod @_hyper_esc)
+  esc  (t! tholdp esc @_hyper_esc)
 
-  lmet (t! thold A-esc lmet)                                              ;; tap:Alt+Escape | use tap-hold to A-esc work
-  ssrq (t! thold M-f rmet)                                                ;; tap:Meta+f hold:Meta [[PrtSc]]
+  ;; tap-hold-press & f24 causes issue with lmet + touchpad double-tap
+  lmet (tap-hold-press $tap-timeout $hold-timeout M-spc lmet)             ;; tap:Meta+space
+  ssrq (tap-hold-press $tap-timeout $hold-timeout M-f rmet)               ;; tap:Meta+f hold:Meta [[PrtSc]]
   lalt (t! tholdp MediaPlayPause lalt)                                    ;; tap:MediaPlayPause
   ralt (t! tholdp kana ralt)                                              ;; tap:Hiragana_Katakana
   lsft (t! tholdp RA-7 lsft)                                              ;; tap:{
   rsft (t! tholdp RA-0 rsft)                                              ;; tap:}
   lctl (t! tholdp RA-8 lctl)                                              ;; tap:[
   rctl (t! tholdp RA-9 rctl)                                              ;; tap:]
-  wkup (t! tholdp RA-bksl wkup)                                           ;; tap:` hold:wkup
-  tab  (t! switch-tap-hold $tap-timeout-nonmod (layer-while-held laytab)) ;; tap:tab hold:layer>laytab
-  grv  (t! switch-tap-hold $tap-timeout-nonmod lsft)                      ;; tap:" hold:Shift
+  wkup (t! tholdp C-grv wkup)                                             ;; tap:Ctrl+" hold:wkup
+  tab  (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout (layer-while-held laytab)) ;; tap:tab hold:layer>laytab
+  grv  (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout lsft)                      ;; tap:" hold:Shift
 
   ;; NOTE: With tap-hold + letter keys, double-tap-hold to repeat the key
 
-  a (t! switch-tap-hold $tap-timeout-nonmod ralt)
-  q (t! switch-tap-hold $tap-timeout-nonmod (layer-while-held sym))
-  ş (t! switch-tap-hold $tap-timeout-nonmod (layer-while-held şym))
+  a (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout ralt)
+  q (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout (layer-while-held sym))
+  ş (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout (layer-while-held şym))
 
   ;; startup (cmd-log none error sh -c "$HOME/.local/bin/__private/capslockw.py off")
   ;; cmenu (arbitrary-code 156)
@@ -170,6 +173,8 @@
   9    RA-9 ;; 9 = ]
   0    RA-0 ;; 7 = }
   *    RA-* ;; * = \
+  u    S-8  ;; u = (
+  ı    S-9  ;; ı = )
   o    RA-7 ;; p = {
   p    RA-0 ;; p = }
   ğ    RA-8 ;; ğ = [
@@ -183,6 +188,8 @@
   lsft S-8 ;; lsft = (
   rsft S-9 ;; rsft = )
   eql  (unicode "—")
+  ;; g    @gmail
+  ;; y    @ymail
   _    use-defsrc ;; map all unmapped keys in this layer that are defined in defsrc.
 )
 (deflayermap (şym) ;; ş

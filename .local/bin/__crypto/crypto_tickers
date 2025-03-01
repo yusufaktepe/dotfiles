@@ -2,7 +2,7 @@
 
 #--: Binance
 #------------------------------------------------------------------------------
-# Api=https://api.binance.com/api/v1/ticker/price
+Api=https://api.binance.com/api/v1/ticker/price
 # Api=https://fapi.binance.com/fapi/v1/ticker/price
 #------------------------------------------------------------------------------
 #--: KuCoin
@@ -18,7 +18,7 @@
 # Api="https://api.bybit.com/v5/market/tickers?category=linear"
 #------------------------------------------------------------------------------
 #--: Gate.io
-Api=https://api.gateio.ws/api/v4/spot/tickers
+# Api=https://api.gateio.ws/api/v4/spot/tickers
 # Api=https://api.gateio.ws/api/v4/futures/usdt/contracts
 
 shopt -s nocasematch extglob

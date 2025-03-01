@@ -73,8 +73,8 @@ bindsym $agr+space $exec rofitrans !d
 bindsym $caps+Shift+g $exec rofi-gh-stars
 
 # #---Clipboard management---# #
-bindsym $alt+quotedbl $exec gpaste -H history
-bindsym $alt+Shift+quotedbl $exec gpaste --clear
+bindsym Ctrl+quotedbl $exec gpaste -H history
+bindsym Ctrl+Shift+quotedbl $exec gpaste --clear
 
 # #---Dunst---# #
 bindsym $caps+space $exec dunstctl close-all
@@ -86,12 +86,12 @@ bindsym $caps+Shift+a $exec dunstctl context
 bindsym $mod+F1 $exec ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 $exec vifm-tab
 bindsym $mod+F3 $exec ifwin -e 'vivaldi --start-maximized'
-bindsym $mod+F4 $exec ifwin -c zen -p zen-bin -e zen-browser
+bindsym $mod+F4 $exec ifwin -e firefox
 bindsym $mod+F5 $exec ifwin -e google-chrome-stable
 bindsym $mod+F6 $exec ifwin -e brave
 bindsym $mod+Shift+F2 $exec ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 $exec vivaldi --start-maximized --incognito
-bindsym $mod+Shift+F4 $exec zen-browser --private-window
+bindsym $mod+Shift+F4 $exec firefox --private-window
 bindsym $mod+Shift+F5 $exec google-chrome-stable --incognito
 bindsym $mod+Shift+F6 $exec brave --incognito
 bindsym $mod+m $exec ifwin -e telegram-desktop -c telegramdesktop
@@ -394,13 +394,13 @@ assign [class="(?i)Vivaldi"]                         $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]               $ws2
 assign [instance="^(ranger|vifm)$"]                  $ws2
 # assign [instance="Neovim"]                           $ws3
-assign [class="(?i)Opera|firefox|Brave-browser|zen"] $ws4
+assign [class="(?i)^(Opera|firefox|Brave-browser|zen)$"] $ws4
 assign [class="Code|obsidian"]                       $ws5
 assign [class="(?i)telegram"]                        $ws6
 assign [class="Audacity"]                            $ws7
 assign [class="(?i)thunderbird"]                     $ws8
 assign [class="qBittorrent"]                         $ws9
-assign [class="Spotify|cantata|strawberry"]          $ws10
+assign [class="Spotify|cantata|Strawberry"]          $ws10
 for_window [instance="web.whatsapp.com*"] move --no-auto-back-and-forth to workspace $ws6
 
 ## Window Rules
@@ -468,6 +468,7 @@ for_window [instance="keybkm"] floating enable border pixel 0, resize set 216 50
 
 exec_always $N launch_polybar
 $exec kpass
+$exec net_monitor
 $exec "sleep 2; vivaldi --start-maximized"
 $exec "sleep 5; vifm-tab"
 $exec "sleep 7; telegram-desktop"

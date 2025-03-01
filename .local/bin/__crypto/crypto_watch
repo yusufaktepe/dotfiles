@@ -17,7 +17,7 @@ while :; do
 
 	[ -z "${P//[[:space:]]}" ] && sleep 5 && continue
 
-	dunstify -a crypto -t 15000 -r 2000 -i money-manager-ex "$P"
+	notify-send -a crypto -t 15000 -r 2000 -i money-manager-ex "$P"
 	sleep 5
 done
 
