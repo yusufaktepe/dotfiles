@@ -1,4 +1,5 @@
 #!/bin/sh
+# TODO: use wpctl
 
 notify() {
 	if [ "$1" = app ]; then

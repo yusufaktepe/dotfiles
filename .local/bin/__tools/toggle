@@ -18,7 +18,7 @@ input_device() {
 case $1 in
 	audio)
 		CURRENT_PROFILE=$(pactl list sinks | awk '/Active Port:/{print $3}')
-		SINK=$(pacmd list-sinks | awk '/* index:/{print $3}')
+		SINK=$(pactl list short sinks | cut -f2)
 
 		if [ "$CURRENT_PROFILE" = "analog-output-speaker" ]; then
 			pactl set-sink-port "$SINK" "analog-output-headphones"

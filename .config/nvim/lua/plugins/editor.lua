@@ -64,13 +64,13 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      preset = "helix",
+      -- preset = "helix",
       -- icons = { separator = "│", },
-      -- preset = "classic",
-      -- win = {
-      --   border = { "─", "─", "─", " ", " ", " ", " ", " " },
-      --   title_pos = "left",
-      -- },
+      preset = "classic",
+      win = {
+        border = { "─", "─", "─", " ", " ", " ", " ", " " },
+        title_pos = "left",
+      },
     },
   },
 

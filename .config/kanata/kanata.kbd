@@ -22,11 +22,11 @@
                                                                                      ┗━━━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━━┛
 
  _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
- _    _    _    _    _    _    _    _    _    _    _    _    _    _
- _    _    _    _    _    _    _    _    _    _    _    _    _
- _    _    _    _    _    _    _    _    _    _    _    _    _    _
- _    _    _    _    _    _    _    _    _    _    _    _         _
- _    _    _    _              _              _    _    _         _    _    _
+ _    _    _    _    _    _    _    _    _    _    _    _    _    _                   _    _    _    _
+ _    _    _    _    _    _    _    _    _    _    _    _    _                        _    _    _
+ _    _    _    _    _    _    _    _    _    _    _    _    _    _                   _    _    _    _
+ _    _    _    _    _    _    _    _    _    _    _    _         _                   _    _    _
+ _    _    _    _              _              _    _    _         _    _    _         _         _    _
                                                                   _    _    _
 |#
 
@@ -60,32 +60,32 @@
 )
 
 (defsrc ;; turkish-iso105
- esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end ins del  ;;                bspc
- grv  1    2    3    4    5    6    7    8    9    0    *    -    bspc              ;; nlk  kp/  kp*  kp-
- tab  q    w    e    r    t    y    u    ı    o    p    ğ    ü                      ;; kp7  kp8  kp9
- caps a    s    d    f    g    h    j    k    l    ş    İ    ,    ret               ;; kp4  kp5  kp6  kp+
- lsft <    z    x    c    v    b    n    m    ö    ç    .         rsft              ;; kp1  kp2  kp3
- lctl wkup lmet lalt            spc           ralt ssrq rctl      pgup  up  pgdn    ;; kp0       kp.  kprt
+ esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end ins del
+ grv  1    2    3    4    5    6    7    8    9    0    *    -    bspc                nlk  kp/  kp*  kp-
+ tab  q    w    e    r    t    y    u    ı    o    p    ğ    ü                        kp7  kp8  kp9
+ caps a    s    d    f    g    h    j    k    l    ş    İ    ,    ret                 kp4  kp5  kp6  kp+
+ lsft <    z    x    c    v    b    n    m    ö    ç    .         rsft                kp1  kp2  kp3
+ lctl wkup lmet lalt            spc           ralt ssrq rctl      pgup  up  pgdn      kp0       kp.  kprt
                                                                   left down right
 )
 
 (deflayer trq
  @esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end ins del
- @grv  1    2    3    4    5    6    7    8    9    0    *    -    bspc
- @tab  @q   w    e    r    t    y    u    ı    o    p    ğ    ü
- @cap  @a   s    d    f    g    h    j    k    l    @ş   İ    ,    ret
- @lsft <    z    x    c    v    b    n    m    ö    ç    .         @rsft
- @lctl @wkup @lmet @lalt         spc        @ralt @ssrq @rctl      pgup  up  pgdn
+ @grv  1    2    3    4    5    6    7    8    9    0    *    -    bspc               nlk  kp/  kp*  kp-
+ @tab  @q   w    e    r    t    y    u    ı    o    p    ğ    ü                       @kp7 kp8  kp9
+ @cap  @a   s    d    f    g    h    j    k    l    @ş   İ    ,    ret                kp4  kp5  kp6  kp+
+ @lsft <    z    x    c    v    b    n    m    ö    ç    .         @rsft              kp1  kp2  kp3
+ @lctl @wkup @lmet @lalt         @space        @ralt @ssrq @rctl   pgup  up  pgdn     kp0       kp.  kprt
                                                                    left down right
 )
 
 ;; (deflayer usq
 ;;  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  home end ins del
-;;  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-;;  tab  q    w    e    r    t    y    u    i    o    p    [    ]
-;;  caps a    s    d    f    g    h    j    k    l    ;    '    \    ret
-;;  lsft <    z    x    c    v    b    n    m    ,    .    /         rsft
-;;  lctl wkup lmet lalt            spc           ralt ssrq rctl      pgup  up  pgdn
+;;  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc                ;; nlk  kp/  kp*  kp-
+;;  tab  q    w    e    r    t    y    u    i    o    p    [    ]                        ;; kp7  kp8  kp9
+;;  caps a    s    d    f    g    h    j    k    l    ;    '    \    ret                 ;; kp4  kp5  kp6  kp+
+;;  lsft <    z    x    c    v    b    n    m    ,    .    /         rsft                ;; kp1  kp2  kp3
+;;  lctl wkup lmet lalt            spc           ralt ssrq rctl      pgup  up  pgdn      ;; kp0       kp.  kprt
 ;;                                                                   left down right
 ;; )
 
@@ -132,11 +132,12 @@
   _led0 (macro 5 (on-release tap-vkey led0))
   _esc (multi esc @_led0)
   _hyper  (multi lmet lalt lctl @_led0 reverse-release-order)    ;; `reverse-release-order` may not be required
-  _hyper_esc (multi lmet lalt lctl lsft)
+  _Shyper (multi lmet lalt lctl lsft)
 
   cap  (t! tholdp @_esc @_hyper)     ;; tap:Esc hold:_hyper
-  ;; esc  (multi f24 (tap-hold $tap-timeout $hold-timeout esc @_hyper_esc))   ;; tap:Esc hold:_hyper_esc | NOTE: bc. tap-hold-press issue
-  esc  (t! tholdp esc @_hyper_esc)
+  ;; esc  (multi f24 (tap-hold $tap-timeout $hold-timeout esc @_Shyper))   ;; tap:Esc hold:_Shyper | NOTE: bc. tap-hold-press issue
+  esc  (t! tholdp esc @_Shyper)
+  space (tap-hold-release-timeout 140 500 spc @_Shyper spc)
 
   ;; tap-hold-press & f24 causes issue with lmet + touchpad double-tap
   lmet (tap-hold-press $tap-timeout $hold-timeout M-spc lmet)             ;; tap:Meta+space
@@ -153,15 +154,30 @@
 
   ;; NOTE: With tap-hold + letter keys, double-tap-hold to repeat the key
 
-  a (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout ralt)
-  q (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout (layer-while-held sym))
-  ş (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout (layer-while-held şym))
+  a (t! switch-tap-hold $tap-timeout-nonmod 500 ralt)
+  q (t! switch-tap-hold $tap-timeout-nonmod 500 (layer-while-held sym))
+  ş (t! switch-tap-hold $tap-timeout-nonmod 500 (layer-while-held şym))
 
-  ;; startup (cmd-log none error sh -c "$HOME/.local/bin/__private/capslockw.py off")
+  ;; startup (cmd-log none error sh -c "notify-send -a system -i keyboard -r 2002 'kanata' 'keyboard remapper is started.'")
   ;; cmenu (arbitrary-code 156)
 
-  ;; pgup
-  ;; pgdn
+  kp7 (t! switch-tap-hold $tap-timeout-nonmod 500 (layer-while-held bypass))
+)
+
+(defchordsv2
+  (f1 f2) M-del 200 first-release ()
+  ;; (w e) esc 50 all-released ()
+  ;; (i o) bspc 50 all-released ()
+  ;; (x c) tab 50 all-released ()
+  ;; (, .) ret 50 all-released ()
+  ;; (j k) (switch
+  ;;         ((input-history real k 1)) esc break ()
+  ;;         (macro k j) break
+  ;;       ) 150 all-released ()
+)
+
+(deflayermap (bypass)
+  _ use-defsrc
 )
 
 (deflayermap (sym) ;; q
@@ -208,12 +224,19 @@
 
 (deflayermap (laytab)
   esc M-del
-  caps @_hyper_esc
-  h home
-  l end
-  j pgdn
-  k pgup
+  caps @_Shyper
+
+  g C-home
+  f C-end
+
+  w (mwheel-up 50 50)
+  s (mwheel-down 50 50)
   e (mwheel-up 50 120)
   d (mwheel-down 50 120)
+
+  h home
+  l end
+  j (mwheel-down 50 240)
+  k (mwheel-up 50 240)
 )
 

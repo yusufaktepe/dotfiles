@@ -61,10 +61,36 @@ return {
   --   },
   -- },
 
-  -- {
-  --   "MeanderingProgrammer/render-markdown.nvim",
-  --   enabled = false
-  -- },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    -- enabled = false
+    opts = {
+      code = {
+        width = "block",
+        language_pad = 1,
+        left_pad = 1,
+        right_pad = 1,
+        highlight = 'CursorLine',
+        highlight_inline = 'CursorLine'
+      },
+      heading = {
+        width = "block",
+        left_pad = 1,
+        right_pad = 1,
+        sign = false,
+        icons = {},
+        -- backgrounds = {
+        --   'RenderMarkdownH2Bg',
+        -- },
+        -- foreground = {
+        --   'RenderMarkdownH2',
+        -- },
+      },
+      checkbox = {
+        enabled = true,
+      },
+    },
+  },
 
   -- colorizer
   {
@@ -136,4 +162,6 @@ return {
     },
     cmd = { "CsvViewToggle", "CsvViewEnable", "CsvViewDisable" },
   },
+
+  { "nvzone/showkeys", cmd = "ShowkeysToggle" },
 }

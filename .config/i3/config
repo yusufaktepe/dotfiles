@@ -86,12 +86,12 @@ bindsym $caps+Shift+a $exec dunstctl context
 bindsym $mod+F1 $exec ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 $exec vifm-tab
 bindsym $mod+F3 $exec ifwin -e 'vivaldi --start-maximized'
-bindsym $mod+F4 $exec ifwin -e firefox
+bindsym $mod+F4 $exec ifwin -e zen
 bindsym $mod+F5 $exec ifwin -e google-chrome-stable
 bindsym $mod+F6 $exec ifwin -e brave
 bindsym $mod+Shift+F2 $exec ifwin -e pcmanfm-qt
 bindsym $mod+Shift+F3 $exec vivaldi --start-maximized --incognito
-bindsym $mod+Shift+F4 $exec firefox --private-window
+bindsym $mod+Shift+F4 $exec zen --private-window
 bindsym $mod+Shift+F5 $exec google-chrome-stable --incognito
 bindsym $mod+Shift+F6 $exec brave --incognito
 bindsym $mod+m $exec ifwin -e telegram-desktop -c telegramdesktop
@@ -394,7 +394,7 @@ assign [class="(?i)Vivaldi"]                         $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]               $ws2
 assign [instance="^(ranger|vifm)$"]                  $ws2
 # assign [instance="Neovim"]                           $ws3
-assign [class="(?i)^(Opera|firefox|Brave-browser|zen)$"] $ws4
+assign [class="(?i)^(firefox|Brave-browser|zen-browser$)"] $ws4
 assign [class="Code|obsidian"]                       $ws5
 assign [class="(?i)telegram"]                        $ws6
 assign [class="Audacity"]                            $ws7
@@ -436,7 +436,9 @@ for_window [window_role="PictureInPicture"] floating enable border none
 for_window [title="^Confirm File Replacing$"] move position center
 for_window [title="^Picture in picture$"] resize set 850 479, move position 1069 601
 for_window [class="Dragon-drop"] sticky enable
+for_window [class="(?i)gimp"] border pixel 1, move position center
 for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, move position center
+for_window [class="(?i)gimp" window_role="(?i)gimp-action.*"] resize set 886 558, move position center
 # for_window [instance="web.whatsapp.com*"] resize set 1134 830, move position center, sticky enable
 for_window [instance="web.whatsapp.com*"] floating disable
 for_window [instance="localhost__page*"] resize set 958 1054, move position 961 25, sticky enable

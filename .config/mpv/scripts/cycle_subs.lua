@@ -6,14 +6,16 @@ local function get_sub_tracks()
 
     for _, track in ipairs(tracks) do
         -- Skip forced subtitles
-        if track.type == "sub" and track.lang and not track.forced then
+        -- if track.type == "sub" and track.lang and not track.forced then
             -- Only set the language if it's not already set to prioritize the first non-forced occurrence
             if (track.lang == "tur" or track.lang == "tr") and not sub_tracks["tur"] then
+            -- if (track.lang == "tur" or track.lang == "tr") then
                 sub_tracks["tur"] = track.id
             elseif (track.lang == "eng" or track.lang == "en") and not sub_tracks["eng"] then
+            -- elseif (track.lang == "eng" or track.lang == "en") then
                 sub_tracks["eng"] = track.id
             end
-        end
+        -- end
     end
 
     return sub_tracks

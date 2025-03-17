@@ -5,8 +5,8 @@
 
 w3mimgdisplay=/usr/lib/w3m/w3mimgdisplay
 FileName=$1
-FontH=14 # Size of one terminal row
-FontW=8  # Size of one terminal column
+FontH=22 # Size of one terminal row
+FontW=18  # Size of one terminal column
 Columns=$(tput cols)
 Lines=$(tput lines)
 
