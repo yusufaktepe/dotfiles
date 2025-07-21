@@ -36,7 +36,10 @@ if pgrep -x "$Proc?" >/dev/null; then
 			i3-msg -q 'workspace back_and_forth'
 		fi
 	else
-		i3-msg -q "[class=\"(?i)$Class\"] focus"
+		case "$Class" in
+			vivaldi*) i3-msg -q "[instance=\"(?i)$Class\"] focus" ;;
+			*) i3-msg -q "[class=\"(?i)$Class\"] focus" ;;
+		esac
 	fi
 else
 		[ "$Exec" != "$ExecArgs" ] && Exec="$Exec $ExecArgs"

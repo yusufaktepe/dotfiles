@@ -268,7 +268,7 @@ fileviewer *.djvu
 	\ djvutxt %c | fmt -w %pw,
 	\ exiftool %c,
 
-fileviewer *.json
+fileviewer *.json,*.jsonl
 	\ jq --color-output . %c,
 	\ python -m json.tool -- %c,
 

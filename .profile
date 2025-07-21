@@ -67,6 +67,7 @@ export QT_LOGGING_RULES="*=false"
 export MOZ_USE_XINPUT2=1 # Firefox one-to-one trackpad scrolling
 export XDG_SESSION_TYPE=x11
 export GDK_BACKEND=x11
+export PIPENV_VENV_IN_PROJECT=1
 
 # Less Colors
 export LESS=-R

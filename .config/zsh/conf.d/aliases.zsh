@@ -25,7 +25,6 @@ alias drive='grive -P -p ~/Shared/Drive'
 for p in iotop ps_mem updatedb; { alias $p="sudo $p" ;}; unset p
 
 alias didi='sudo dd bs=4M oflag=sync status=progress'
-alias magit='nvim -c MagitOnly'
 alias mkd='mkdir -pv'
 alias fcd='cd "$(VIFM=~/.config/vifm/sessions/select vifm --choose-dir - .)"'
 alias gr='cd "$(git rev-parse --show-toplevel)"'
@@ -35,7 +34,7 @@ alias cpru='cpr -u'
 alias mvr='rsync -avzzPh --remove-source-files'
 alias dirsync='rsync -avzzPhu --delete'
 
-alias e='$EDITOR' v='$EDITOR'
+alias v='$EDITOR'
 alias f='VIFM=~/.config/vifm/sessions/shell vifm'
 alias g='git'
 alias p='sudo pacman'
@@ -54,6 +53,7 @@ alias mksrci='makepkg --printsrcinfo > .SRCINFO'
 # alias paclog='grep -E "\] (install|upgrad|remov)ed" /var/log/pacman.log | less +G'
 alias pacmanlog='paclog $(printf " --action %s" {install,{up,down}grade,remove})'
 alias http-serve='python -m http.server'
+alias tt='i3-msg -q "[con_id=__focused__] resize set 1918 575" 2>/dev/null; :'
 
 # Colorize commands
 # alias ls='ls --group-directories-first --time-style=long-iso --color=auto -F'

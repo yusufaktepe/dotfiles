@@ -1,0 +1,18 @@
+#!/bin/bash
+
+grep_url() { grep -Eo 'https?://([a-zA-Z0-9.-]+\.)?spotify\.com[/?][^ ]*' ;}
+
+for Clipboard in p c; do
+    Clip=$(xclip -r -o -sel $Clipboard 2>/dev/null | grep_url)
+    [ -n "$Clip" ] && {
+        URL=$Clip
+        printf '%s\n  ' ":: Using URL from clipboard."
+        zotify "$URL"
+        exit
+    }
+done
+
+printf '%s\n   ' "URL:"
+read -r URL
+grep_url <<< "$URL" >/dev/null && zotify "$URL"
+

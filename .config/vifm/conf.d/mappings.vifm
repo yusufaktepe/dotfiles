@@ -208,6 +208,16 @@ nnoremap <c-f9> 9gt
 nnoremap <c-f10> 10gt
 nnoremap <c-f11> 11gt
 nnoremap <c-f12> 12gt
+nnoremap <a-1> 1gt
+nnoremap <a-2> 2gt
+nnoremap <a-3> 3gt
+nnoremap <a-4> 4gt
+nnoremap <a-5> 5gt
+nnoremap <a-6> 6gt
+nnoremap <a-7> 7gt
+nnoremap <a-8> 8gt
+nnoremap <a-9> 9gt
+nnoremap <a-0> 10gt
 
 " *Commander-like mappings
 nnoremap <silent> <f1> :help<cr>

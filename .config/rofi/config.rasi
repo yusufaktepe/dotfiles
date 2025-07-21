@@ -24,6 +24,7 @@ configuration {
 	icon-theme: "Papirus-Dark";
 	drun-match-fields: "name,generic,exec";
 /*	drun-categories: ;*/
+/*	drun-exclude-categories: ;*/
 /*	drun-show-actions: false;*/
 /*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
 /*	drun-url-launcher: "xdg-open";*/
@@ -64,6 +65,7 @@ configuration {
 /*	refilter-timeout-limit: 300;*/
 /*	xserver-i300-workaround: false;*/
 /*	completer-mode: "filebrowser";*/
+/*	imdkit: true;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 	display-window: "";
 /*	display-windowcd: ;*/
@@ -148,6 +150,8 @@ configuration {
 	kb-select-10: "Super+0,Control+0";
 /*	kb-entry-history-up: "Control+Up";*/
 /*	kb-entry-history-down: "Control+Down";*/
+/*	kb-matcher-up: "Super+equal";*/
+/*	kb-mather-down: "Super+minus";*/
 /*	ml-row-left: "ScrollLeft";*/
 /*	ml-row-right: "ScrollRight";*/
 /*	ml-row-up: "ScrollUp";*/

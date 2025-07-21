@@ -1,6 +1,9 @@
 #!/bin/bash
 
-pidof -q mpv || exit
+pidof -q mpv || {
+	wmctrl -lx | grep -q "viki.com" && viki
+	exit
+}
 
 AW_CLASS=$(xdotool getactivewindow getwindowclassname 2>/dev/null)
 

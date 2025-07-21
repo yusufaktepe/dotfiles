@@ -90,9 +90,9 @@
 ;; )
 
 (defvar
-  tap-timeout 200
-  hold-timeout 200
-  tap-timeout-nonmod 150
+  trt 200
+  ht 200
+  trt-nonmod 150
 )
 
 (defvirtualkeys
@@ -115,14 +115,14 @@
 (deftemplate tholdp (tap-action hold-action)
   (multi
     f24
-    (tap-hold-press $tap-timeout $hold-timeout $tap-action $hold-action)
+    (tap-hold-press $trt $ht $tap-action $hold-action)
   )
 )
 
 (deftemplate thold (tap-action hold-action)
   (multi
     f24
-    (tap-hold $tap-timeout $hold-timeout $tap-action $hold-action)
+    (tap-hold $trt $ht $tap-action $hold-action)
     (macro 5 (on-press tap-vkey relf24)) ;; BUG: meta + touchpad double-tap doesn't work without relf24
   )
 )
@@ -135,33 +135,33 @@
   _Shyper (multi lmet lalt lctl lsft)
 
   cap  (t! tholdp @_esc @_hyper)     ;; tap:Esc hold:_hyper
-  ;; esc  (multi f24 (tap-hold $tap-timeout $hold-timeout esc @_Shyper))   ;; tap:Esc hold:_Shyper | NOTE: bc. tap-hold-press issue
+  ;; esc  (multi f24 (tap-hold $trt $ht esc @_Shyper))   ;; tap:Esc hold:_Shyper | NOTE: bc. tap-hold-press issue
   esc  (t! tholdp esc @_Shyper)
   space (tap-hold-release-timeout 140 500 spc @_Shyper spc)
 
   ;; tap-hold-press & f24 causes issue with lmet + touchpad double-tap
-  lmet (tap-hold-press $tap-timeout $hold-timeout M-spc lmet)             ;; tap:Meta+space
-  ssrq (tap-hold-press $tap-timeout $hold-timeout M-f rmet)               ;; tap:Meta+f hold:Meta [[PrtSc]]
-  lalt (t! tholdp MediaPlayPause lalt)                                    ;; tap:MediaPlayPause
-  ralt (t! tholdp kana ralt)                                              ;; tap:Hiragana_Katakana
-  lsft (t! tholdp RA-7 lsft)                                              ;; tap:{
-  rsft (t! tholdp RA-0 rsft)                                              ;; tap:}
-  lctl (t! tholdp RA-8 lctl)                                              ;; tap:[
-  rctl (t! tholdp RA-9 rctl)                                              ;; tap:]
-  wkup (t! tholdp C-grv wkup)                                             ;; tap:Ctrl+" hold:wkup
-  tab  (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout (layer-while-held laytab)) ;; tap:tab hold:layer>laytab
-  grv  (t! switch-tap-hold $tap-timeout-nonmod $hold-timeout lsft)                      ;; tap:" hold:Shift
+  lmet (tap-hold-press $trt $ht M-spc lmet)                           ;; tap:Meta+space
+  ssrq (tap-hold-press $trt $ht M-f rmet)                             ;; tap:Meta+f hold:Meta [[PrtSc]]
+  lalt (t! tholdp MediaPlayPause lalt)                                ;; tap:MediaPlayPause
+  ralt (t! tholdp kana ralt)                                          ;; tap:Hiragana_Katakana
+  lsft (t! tholdp RA-7 lsft)                                          ;; tap:{
+  rsft (t! tholdp RA-0 rsft)                                          ;; tap:}
+  lctl (t! tholdp RA-8 lctl)                                          ;; tap:[
+  rctl (t! tholdp RA-9 rctl)                                          ;; tap:]
+  wkup (t! tholdp C-grv wkup)                                         ;; tap:Ctrl+" hold:wkup
+  tab  (t! switch-tap-hold $trt-nonmod $ht (layer-while-held laytab)) ;; tap:tab hold:layer>laytab
+  grv  (t! switch-tap-hold $trt-nonmod $ht lsft)                      ;; tap:" hold:Shift
 
   ;; NOTE: With tap-hold + letter keys, double-tap-hold to repeat the key
 
-  a (t! switch-tap-hold $tap-timeout-nonmod 500 ralt)
-  q (t! switch-tap-hold $tap-timeout-nonmod 500 (layer-while-held sym))
-  ş (t! switch-tap-hold $tap-timeout-nonmod 500 (layer-while-held şym))
+  a (t! switch-tap-hold $trt-nonmod 500 ralt)
+  q (t! switch-tap-hold $trt-nonmod 500 (layer-while-held sym))
+  ş (t! switch-tap-hold $trt-nonmod 500 (layer-while-held şym))
 
   ;; startup (cmd-log none error sh -c "notify-send -a system -i keyboard -r 2002 'kanata' 'keyboard remapper is started.'")
   ;; cmenu (arbitrary-code 156)
 
-  kp7 (t! switch-tap-hold $tap-timeout-nonmod 500 (layer-while-held bypass))
+  kp7 (t! switch-tap-hold $trt-nonmod 500 (layer-while-held bypass))
 )
 
 (defchordsv2
@@ -206,9 +206,10 @@
   eql  (unicode "—")
   ;; g    @gmail
   ;; y    @ymail
-  _    use-defsrc ;; map all unmapped keys in this layer that are defined in defsrc.
+  _    use-defsrc
 )
 (deflayermap (şym) ;; ş
+  d    del
   grv  RA-\ ;; " = `
   q    RA-q ;; q = @
   ğ    RA-7 ;; ğ = {
@@ -220,6 +221,7 @@
   <    RA-< ;; < = |
   lsft S-8 ;; lsft = (
   rsft S-9 ;; rsft = )
+  _    use-defsrc
 )
 
 (deflayermap (laytab)
@@ -238,5 +240,7 @@
   l end
   j (mwheel-down 50 240)
   k (mwheel-up 50 240)
+
+  _ use-defsrc
 )
 

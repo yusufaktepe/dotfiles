@@ -9,6 +9,7 @@ set $mod  Mod4
 set $alt  Mod1
 # kanata:
 set $caps Mod4+Mod1+Ctrl
+set $spc  Shift+Mod4+Mod1+Ctrl
 set $agr  Mod5
 
 floating_modifier $mod
@@ -85,8 +86,8 @@ bindsym $caps+Shift+a $exec dunstctl context
 # #---Start Applications---# #
 bindsym $mod+F1 $exec ifterm -t -i blockterm_vifm -e 'VIFM=~/.config/vifm/sessions/shell vifm'
 bindsym $mod+F2 $exec vifm-tab
-bindsym $mod+F3 $exec ifwin -e 'vivaldi --start-maximized'
-bindsym $mod+F4 $exec ifwin -e zen
+bindsym $mod+F3 $exec ifwin -e 'vivaldi --start-maximized' -c vivaldi-stable
+bindsym $mod+F4 $exec ifwin -e zen -c zen-browser
 bindsym $mod+F5 $exec ifwin -e google-chrome-stable
 bindsym $mod+F6 $exec ifwin -e brave
 bindsym $mod+Shift+F2 $exec ifwin -e pcmanfm-qt
@@ -397,7 +398,7 @@ assign [instance="^(ranger|vifm)$"]                  $ws2
 assign [class="(?i)^(firefox|Brave-browser|zen-browser$)"] $ws4
 assign [class="Code|obsidian"]                       $ws5
 assign [class="(?i)telegram"]                        $ws6
-assign [class="Audacity"]                            $ws7
+assign [class="Audacity|(?i)gimp"]                   $ws7
 assign [class="(?i)thunderbird"]                     $ws8
 assign [class="qBittorrent"]                         $ws9
 assign [class="Spotify|cantata|Strawberry"]          $ws10
@@ -420,9 +421,9 @@ for_window [class="smplayer" title="^( - |)SMPlayer$"] floating enable sticky en
 for_window [class="smplayer" title="^Choose a (file|directory)$"] resize set 1100 800, move position center
 for_window [class="qBittorrent"] move position center
 for_window [class="qBittorrent" title="Open Torrent Files|Choose save path"] resize set 1100 800, move position center
-for_window [instance="Places" class="firefox|zen"] floating enable border normal, resize set 1100 800, move position center
-for_window [instance="Browser|Update" class="firefox|Tor Browser|zen"] floating enable border normal
-for_window [instance="Toolkit" class="firefox|zen"] floating enable sticky enable border none
+for_window [instance="Places" class="firefox|zen.*"] floating enable border normal, resize set 1100 800, move position center
+for_window [instance="Browser|Update" class="firefox|Tor Browser|zen.*"] floating enable border normal
+for_window [instance="Toolkit" class="firefox|zen.*"] floating enable sticky enable border none
 # for_window [instance="(?i)crx_" class="(?i)Vivaldi|-chrome"] floating enable sticky enable
 for_window [class="crow-translate"] floating enable sticky enable, resize set 861 392, move absolute position center
 for_window [class="(?i)gsimplecal"] floating enable, move position +1651+24
@@ -441,6 +442,7 @@ for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, m
 for_window [class="(?i)gimp" window_role="(?i)gimp-action.*"] resize set 886 558, move position center
 # for_window [instance="web.whatsapp.com*"] resize set 1134 830, move position center, sticky enable
 for_window [instance="web.whatsapp.com*"] floating disable
+for_window [instance="www.viki.com"] floating disable, fullscreen enable, move --no-auto-back-and-forth to workspace $ws5
 for_window [instance="localhost__page*"] resize set 958 1054, move position 961 25, sticky enable
 #_ Floating instances
 for_window [instance="blockterm_*"] floating enable border pixel 2
@@ -473,8 +475,8 @@ $exec kpass
 $exec net_monitor
 $exec "sleep 2; vivaldi --start-maximized"
 $exec "sleep 5; vifm-tab"
-$exec "sleep 7; telegram-desktop"
-$exec "sleep 9; crypto_bar"
+$exec "sleep 7; Telegram"
+# $exec "sleep 9; crypto_bar"
 $exec "sleep 10; spotify"
 $exec "sleep 7; wmctrl -x -r 'vifm' -b remove,demands_attention"
 $exec "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
