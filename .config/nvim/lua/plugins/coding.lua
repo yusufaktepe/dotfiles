@@ -19,7 +19,7 @@ return {
   },
 
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     enabled = false,
   },
 
@@ -33,7 +33,7 @@ return {
 
   -- alignment
   {
-    "echasnovski/mini.align",
+    "nvim-mini/mini.align",
     opts = {},
     keys = {
       { "ga", mode = { "n", "v" }, desc = "Align" },

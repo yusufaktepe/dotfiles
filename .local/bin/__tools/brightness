@@ -49,13 +49,17 @@ kboff() {
 	# 	[ -e "$LC" ] || continue
 	# 	printf 1 > "$LC"; printf 0 > "$LC"
 	# done
+
+	return 0
 }
 
 
 case $1 in
 	inc) brightnessctl set "+${2:-5}%" >/dev/null && { notify; update_bar ;} ;;
 	dec) brightnessctl set "${2:-5}%-" >/dev/null && { notify; update_bar ;} ;;
-	set) brightnessctl set "${2:-27}%" >/dev/null && { notify; update_bar ;} ;;
+	set) brightnessctl set "${2:-29}%" >/dev/null && { notify; update_bar ;} ;;
+	day)   brightnessctl set 29% >/dev/null && { notify; update_bar ;} ;;
+	night) brightnessctl set 19% >/dev/null && { notify; update_bar ;} ;;
 	kboff) kboff ;;
 	off) kboff; xset dpms force off ;;
 esac

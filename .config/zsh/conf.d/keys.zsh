@@ -68,6 +68,8 @@ bindkey ' ' magic-space # [Space] - do history expansion
 bindkey '^[[1;5C' forward-word    # st:[Ctrl-Right] - move forward one word
 bindkey '^[[1;5D' backward-word   # st:[Ctrl-Left] - move backward one word
 
+bindkey '^A' beginning-of-line
+
 bindkey '^[[3;5~' kill-word # [Ctrl-Delete]
 
 bindkey '^P' history-substring-search-up   # [Ctrl-p]

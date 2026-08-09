@@ -4,8 +4,10 @@ Dir=$HOME/Pictures/Screenshots
 Date=$(date +%Y-%m-%d_%H-%M-%S)
 
 notify() {
-	notify-send -a system -i "$Shot" -A "$Shot",Open "Screenshot captured." |
-		xargs -r -I '{}' xdg-open {} >/dev/null 2>&1 &
+	notify-send -a system -i "$Shot" -A "Open=$Shot" "Screenshot captured." |
+		while read -r Action; do
+			[ "$Action" = Open ] && { xdg-open "$Shot"  >/dev/null 2>&1 ;}
+		done
 }
 
 notify_clip() { notify-send -a system -i clipboard "${1:-Screenshot copied to clipboard.}" ;}

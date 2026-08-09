@@ -34,6 +34,23 @@ case $1 in
 			ns -i audio-speakers "PulseAudio" "<b>Speaker</b> activated."
 		fi
 	;;
+	bth*)
+		MAC="00:25:D1:45:07:95"
+		CURRENT_PROFILE=$(pactl list sinks | awk '/Active Port:/ {a=$3} END{print a}')
+
+		if [ "$CURRENT_PROFILE" = "headset-output" ]; then
+			bluetoothctl disconnect $MAC
+			ns -i audio-speakers "PulseAudio" "<b>Speaker</b> activated."
+		else
+			bluetoothctl connect $MAC || {
+				sudo modprobe -r btusb
+				sudo modprobe btusb
+				sleep .4;
+				bluetoothctl connect $MAC
+			}
+			ns -i audio-headphones "PulseAudio" "<b>Headphone</b> activated."
+		fi >/dev/null 2>&1
+	;;
 	net)
 		case $2 in
 			w|wifi) { [ "$(nmcli radio wifi)" = enabled ] &&
@@ -71,7 +88,7 @@ case $1 in
 			pkill syncthing
 			ns -i syncthing "Syncthing" "Sync stopped."
 		else
-			setsid -f syncthing -no-browser >/dev/null 2>&1
+			setsid -f syncthing serve --no-browser >/dev/null 2>&1
 			ns -i syncthing "Syncthing" "Started to sync."
 		fi
 	;;
@@ -103,8 +120,9 @@ case $1 in
 			sudo systemctl start warp-svc.service
 			until warp-cli status >/dev/null 2>&1; do sleep .4; done
 			warp-cli connect >/dev/null
-			WARP_Status=$(curl -s https://www.cloudflare.com/cdn-cgi/trace/ | awk -F= '/^warp/ {print $2}')
-			if [ "$WARP_Status" = on ]; then
+			sleep 1
+			WARP_Status=$(warp-cli status | awk '/Network:/{print $2}')
+			if [ "$WARP_Status" = healthy ]; then
 				ns -i network-vpn-symbolic "WARP enabled"
 			else
 				ns -i network-vpn-disconnected-symbolic "Failed to enable WARP"

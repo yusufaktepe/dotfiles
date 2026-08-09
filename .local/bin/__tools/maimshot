@@ -8,8 +8,10 @@ Date=$(date +%Y-%m-%d_%H-%M-%S)
 [ -n "${2##*[!1-9]*}" ] && Cmd="maim -d $2" || Cmd="maim"
 
 notify() {
-	notify-send -a system -i "$Shot" -A "$Shot",Open "Screenshot captured." |
-		xargs -r -I '{}' xdg-open {} >/dev/null 2>&1 &
+	notify-send -a system -i "$Shot" -A "Open=$Shot" "Screenshot captured." |
+		while read -r Action; do
+			[ "$Action" = Open ] && { xdg-open "$Shot"  >/dev/null 2>&1 ;}
+		done
 }
 
 case "$1" in
@@ -25,7 +27,7 @@ case "$1" in
 		Shot="$Dir/ss-selected-$Date.png"
 		notify-send -a system -t 2000 "Select an area for the screenshot"
 		$Cmd -usl -b 2 -c 0.35,0.55,0.85,0.25 "$Shot" && {
-			notify
+			notify &
 			xclip -selection clipboard -t image/png < "$Shot"
 		} ;;
 esac

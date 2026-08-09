@@ -75,7 +75,7 @@
  @tab  @q   w    e    r    t    y    u    ı    o    p    ğ    ü                       @kp7 kp8  kp9
  @cap  @a   s    d    f    g    h    j    k    l    @ş   İ    ,    ret                kp4  kp5  kp6  kp+
  @lsft <    z    x    c    v    b    n    m    ö    ç    .         @rsft              kp1  kp2  kp3
- @lctl @wkup @lmet @lalt         @space        @ralt @ssrq @rctl   pgup  up  pgdn     kp0       kp.  kprt
+ @lctl @wkup @lmet @lalt         spc        @ralt @ssrq @rctl   pgup  up  pgdn     kp0       kp.  kprt
                                                                    left down right
 )
 
@@ -96,9 +96,11 @@
 )
 
 (defvirtualkeys
-  ;; for double-tabbed tap-hold add: (macro 5 (on-press tap-vkey relf24))
+  ;; for double-tabbed tap-hold add: (macro 5 (on-press tap-vkey relf22))
   ;; https://github.com/jtroo/kanata/issues/1441#issuecomment-2561718295
-  relf24 (release-key f24)
+  ;; after this f24 doesn't work:
+  ;;   https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/commit/1af7a3e2c82aff83ed30e1f5cee35c63c96e9080
+  relf22 (release-key f22)
 
   ;; turn off the Caps LED immediately:
   led0 (cmd-log none error sh -c "$HOME/.local/bin/noled")
@@ -108,38 +110,38 @@
   (switch
     ;; https://github.com/jtroo/kanata/discussions/1455
     ((key-timing 3 less-than $st-timeout)) _ break
-    () (multi f24 (tap-hold-release $st-timeout $sh-timeout _ $hold-action)) break
+    () (multi f22 (tap-hold-release $st-timeout $sh-timeout _ $hold-action)) break
   )
 )
 
 (deftemplate tholdp (tap-action hold-action)
   (multi
-    f24
+    f22
     (tap-hold-press $trt $ht $tap-action $hold-action)
   )
 )
 
 (deftemplate thold (tap-action hold-action)
   (multi
-    f24
+    f22
     (tap-hold $trt $ht $tap-action $hold-action)
-    (macro 5 (on-press tap-vkey relf24)) ;; BUG: meta + touchpad double-tap doesn't work without relf24
+    (macro 5 (on-press tap-vkey relf22)) ;; BUG: meta + touchpad double-tap doesn't work without relf22
   )
 )
 
 (defalias
-  ;; _relf24 (macro 5 (on-press tap-vkey relf24))
+  ;; _relf22 (macro 5 (on-press tap-vkey relf22))
   _led0 (macro 5 (on-release tap-vkey led0))
   _esc (multi esc @_led0)
   _hyper  (multi lmet lalt lctl @_led0 reverse-release-order)    ;; `reverse-release-order` may not be required
   _Shyper (multi lmet lalt lctl lsft)
 
   cap  (t! tholdp @_esc @_hyper)     ;; tap:Esc hold:_hyper
-  ;; esc  (multi f24 (tap-hold $trt $ht esc @_Shyper))   ;; tap:Esc hold:_Shyper | NOTE: bc. tap-hold-press issue
+  ;; esc  (multi f22 (tap-hold $trt $ht esc @_Shyper))   ;; tap:Esc hold:_Shyper | NOTE: bc. tap-hold-press issue
   esc  (t! tholdp esc @_Shyper)
-  space (tap-hold-release-timeout 140 500 spc @_Shyper spc)
+  ;; space (tap-hold-release-timeout 140 500 spc @_Shyper spc)
 
-  ;; tap-hold-press & f24 causes issue with lmet + touchpad double-tap
+  ;; tap-hold-press & f22 causes issue with lmet + touchpad double-tap
   lmet (tap-hold-press $trt $ht M-spc lmet)                           ;; tap:Meta+space
   ssrq (tap-hold-press $trt $ht M-f rmet)                             ;; tap:Meta+f hold:Meta [[PrtSc]]
   lalt (t! tholdp MediaPlayPause lalt)                                ;; tap:MediaPlayPause
@@ -166,6 +168,8 @@
 
 (defchordsv2
   (f1 f2) M-del 200 first-release ()
+  (f3 f4) (cmd-log none error sh -c "$HOME/.local/bin/__tools/toggle btheadset") 200 first-release ()
+  (lsft rsft) (cmd-log none error sh -c "$HOME/.local/bin/__private/wasian") 500 first-release ()
   ;; (w e) esc 50 all-released ()
   ;; (i o) bspc 50 all-released ()
   ;; (x c) tab 50 all-released ()

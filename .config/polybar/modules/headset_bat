@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+# bluetoothctl info | awk -F '[()]' '/Battery Per/ {print $2}'
+
+MAC="00:25:D1:45:07:95"
+
+IFS='()' read -r _ Bat <<-+++
+    $(bluetoothctl info | grep 'Battery Percentage')
++++
+# IFS='()' read -r _ Bat _ <<-+++
+#     $(expect -c "spawn bluetoothctl; send info\rexit\r; interact" | grep 'Battery Percentage')
+# +++
+
+[ -z "$Bat" ] && exit
+
+[ "$Bat" = 0 ] && {
+    bluetoothctl disconnect $MAC
+    bluetoothctl connect $MAC
+} > /dev/null 2>&1 || printf '%s\n' "$Bat"
+

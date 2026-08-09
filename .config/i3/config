@@ -95,7 +95,7 @@ bindsym $mod+Shift+F3 $exec vivaldi --start-maximized --incognito
 bindsym $mod+Shift+F4 $exec zen --private-window
 bindsym $mod+Shift+F5 $exec google-chrome-stable --incognito
 bindsym $mod+Shift+F6 $exec brave --incognito
-bindsym $mod+m $exec ifwin -e telegram-desktop -c telegramdesktop
+bindsym $mod+m $exec ifwin -e Telegram -c telegramdesktop
 
 bindsym Ctrl+space $exec rofi-keyword
 
@@ -108,7 +108,7 @@ bindsym $caps+s $exec ifwin -e spotify
 bindsym $caps+q $exec ifwin -e qbittorrent
 bindsym $caps+7 $exec vbox_instance Win7
 # bindsym $caps+w $exec libreoffice --writer
-bindsym $caps+c $exec crow-translate
+# bindsym $caps+c $exec ifwin -e tradingview
 bindsym $caps+v $exec ifwin -e code
 # bindsym $caps+o $exec ifwin -p electron -e obsidian
 bindsym $caps+Shift+c $exec ifwin -s -e gcolor3
@@ -219,7 +219,7 @@ bindsym $mod+Shift+F11 fullscreen toggle global
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+e layout toggle tabbed split
-bindsym $mod+w layout stacking
+bindsym $mod+w layout tabbed
 
 # promote the focused window by swapping it with the largest window
 bindsym $mod+Ctrl+space $exec i3-promote-window.py
@@ -255,12 +255,18 @@ bindsym $mod+Shift+n floating enable; sticky enable; \
 	$exec "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1069 600"
 bindsym $mod+Shift+m floating enable; sticky enable; \
 	$exec "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1069 25"
+bindsym $mod+Shift+Odiaeresis floating enable; sticky enable; \
+	$exec "xdotool windowsize $AW 850 479; xdotool windowmove $AW 1 25"
 bindsym $mod+Ctrl+Shift+b floating enable; sticky enable; \
 	$exec "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1 797"
 bindsym $mod+Ctrl+Shift+n floating enable; sticky enable; \
 	$exec "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1418 797"
 bindsym $mod+Ctrl+Shift+m floating enable; sticky enable; \
 	$exec "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1418 25"
+bindsym $mod+Ctrl+Shift+odiaeresis floating enable; sticky enable; \
+	$exec "xdotool windowsize $AW 501 282; xdotool windowmove $AW 1 25"
+bindsym $mod+$alt+b floating enable; sticky enable; \
+	$exec "xdotool windowsize $AW 1020 579; xdotool windowmove $AW 1 500"
 
 # Resize
 set $distance 10 px or 10 ppt
@@ -387,10 +393,11 @@ bindsym --whole-window --border $mod+Ctrl+button3 $exec maimshot -s
 #=====================================================================
 
 ## Set some workspaces to tabbed by default
-for_window [workspace="$ws1|$ws2|$ws9|$ws10"] layout tabbed
+for_window [workspace="$ws1|$ws2|$ws7|$ws9|$ws10"] layout tabbed
 
 ## Assign applications to workspaces
 # assign [window_role="browser"]                       $ws1
+assign [class="(?i)tradingview"]                     
 assign [class="(?i)Vivaldi"]                         $ws1
 assign [class="(?i)Pcmanfm|Doublecmd"]               $ws2
 assign [instance="^(ranger|vifm)$"]                  $ws2
@@ -398,7 +405,7 @@ assign [instance="^(ranger|vifm)$"]                  $ws2
 assign [class="(?i)^(firefox|Brave-browser|zen-browser$)"] $ws4
 assign [class="Code|obsidian"]                       $ws5
 assign [class="(?i)telegram"]                        $ws6
-assign [class="Audacity|(?i)gimp"]                   $ws7
+assign [class="Audacity|(?i)gimp|winboat"]           $ws7
 assign [class="(?i)thunderbird"]                     $ws8
 assign [class="qBittorrent"]                         $ws9
 assign [class="Spotify|cantata|Strawberry"]          $ws10
@@ -412,8 +419,8 @@ for_window [class="Lxappearance|(?i)Qalculate|qt5ct|qt6ct|Lightdm-settings|Engra
 for_window [class="(?i)megasync" window_type=normal title="^(?!Stream*|Transfer*)"] floating enable, move position +964+20
 # for_window [class="(?i)telegram"] floating enable sticky enable, resize set 800 480, move position center
 for_window [class="Lxappearance"] resize set 840 660, move position center
-for_window [class="(?i)pavucontrol"] floating enable
-for_window [class="(?i)pavucontrol" instance="pavucontrol-bar"] move down $height px
+for_window [class="(?i)p?vucontrol"] floating enable
+for_window [class="(?i)p?vucontrol" instance="pavucontrol-bar"] move down $height px
 for_window [class="(?i)VirtualBox" title="(?i)Manager"] floating enable
 #for_window [class="(?i)VirtualBox"] floating enable
 for_window [class="mpv|vlc"] floating enable sticky enable
@@ -438,11 +445,13 @@ for_window [title="^Confirm File Replacing$"] move position center
 for_window [title="^Picture in picture$"] resize set 850 479, move position 1069 601
 for_window [class="Dragon-drop"] sticky enable
 for_window [class="(?i)gimp"] border pixel 1, move position center
+for_window [class="Code"] border none
 for_window [class="(?i)gimp" window_role="(?i)gimp-file"] resize set 1100 800, move position center
 for_window [class="(?i)gimp" window_role="(?i)gimp-action.*"] resize set 886 558, move position center
 # for_window [instance="web.whatsapp.com*"] resize set 1134 830, move position center, sticky enable
 for_window [instance="web.whatsapp.com*"] floating disable
-for_window [instance="www.viki.com"] floating disable, fullscreen enable, move --no-auto-back-and-forth to workspace $ws5
+for_window [instance="www.viki.com|kisskh.co|onetouchtv.xyz"] floating disable
+for_window [instance="www.viki.com|kisskh.co|onetouchtv.xyz"] floating disable, fullscreen enable, move --no-auto-back-and-forth to workspace $ws5
 for_window [instance="localhost__page*"] resize set 958 1054, move position 961 25, sticky enable
 #_ Floating instances
 for_window [instance="blockterm_*"] floating enable border pixel 2
@@ -472,14 +481,14 @@ for_window [instance="keybkm"] floating enable border pixel 0, resize set 216 50
 
 exec_always $N launch_polybar
 $exec kpass
-$exec net_monitor
+# $exec net_monitor
 $exec "sleep 2; vivaldi --start-maximized"
 $exec "sleep 5; vifm-tab"
 $exec "sleep 7; Telegram"
 # $exec "sleep 9; crypto_bar"
 $exec "sleep 10; spotify"
 $exec "sleep 7; wmctrl -x -r 'vifm' -b remove,demands_attention"
-$exec "sleep 9; wmctrl -x -r 'telegram-desktop' -b remove,demands_attention"
+$exec "sleep 9; wmctrl -x -r 'TelegramDesktop' -b remove,demands_attention"
 $exec "sleep 11; wmctrl -x -r 'spotify' -b remove,demands_attention"
 
 #=====================================================================

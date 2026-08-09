@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason.nvim",
     opts = {
       ui = {
         -- border = "single",

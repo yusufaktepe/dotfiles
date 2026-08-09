@@ -68,6 +68,7 @@
 
 [pull]
 	ff = only
+	autoSetupRemote = true
 
 [push]
 	default = simple

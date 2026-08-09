@@ -178,11 +178,13 @@
     #   %a  appname
     #   %s  summary
     #   %b  body
+    #   %c  category
+    #   %S  stack_tag
     #   %i  iconname (including its path)
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     #   %n  progress value if set without any extra characters
-    #   %%  Literal %
+    #   %%  literal %
     # Markup is allowed
     format = "<b>%s</b>\n%b"
 
@@ -214,6 +216,13 @@
 
     # Display indicators for URLs (U) and actions (A).
     show_indicators = yes
+
+    # When set to true (recommended), you can use POSIX regular expressions for filtering rules.
+    # If this is set to false (not recommended), dunst will use fnmatch(3) for matching strings.
+    # Dunst doesn't pass any flags to fnmatch, so you cannot make use of extended patterns.
+    #
+    # Note that this will eventually be true by default.
+    enable_posix_regex = false
 
     ### Icons ###
 
@@ -321,6 +330,7 @@
     # * open_url: If the notification has exactly one url, open it. If there are multiple
     #             ones, open the context menu.
     # * close_current: Close current notification.
+    # * remove_current: Remove current notification from history.
     # * close_all: Close all notifications.
     # * context: Open context menu for the notification.
     # * context_all: Open context menu for all notifications.
@@ -340,6 +350,15 @@
     # where there are multiple screens with very different dpi values.
     per_monitor_dpi = false
 
+    # Pause notification timeout when mouse hovers over the notification window.
+    # When enabled, notifications won't timeout while the mouse pointer is over
+    # them. The timeout resumes when the pointer leaves the window.
+    # Only works on Wayland.
+    pause_on_mouse_over = false
+
+    # Use PCRE regular expressions for filtering rules.
+    # This setting overrides enable_posix_regex.
+    enable_pcre_regex = false
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
@@ -443,6 +462,8 @@
 #        If the notification is already drawn, it won't get undrawn.
 # pushback: same as delay, but when switching into fullscreen, the notification will get
 #           withdrawn from screen again and will get delayed like a new notification
+# suppress: withdraw the displayed notification when entering fullscreen and never show
+#           the new notifications that arrive during fullscreen mode
 [fullscreen_delay_everything]
     fullscreen = pushback
 [fullscreen_show_critical]
